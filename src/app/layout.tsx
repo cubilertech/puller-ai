@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./style.scss";
+import "./globals.css";
 
 import { ThemeProvider } from "@mui/material";
 import { customTheme } from "@/theme/CustomTheme";
