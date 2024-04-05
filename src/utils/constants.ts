@@ -7,6 +7,8 @@ export const icons = {
   annotation: "/Images/icons/annotation-icon.svg",
   bell: "/Images/icons/bell-icon.svg",
   ellipse: "/Images/icons/ellipse-icon.svg",
+  plus: "/Images/icons/plus-icon.svg",
+  minus: "/Images/icons/minus-icon.svg",
 };
 
 export const PagesType = {

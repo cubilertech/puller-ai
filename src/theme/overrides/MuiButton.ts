@@ -8,7 +8,7 @@ export const MuiButton = (theme: Theme) => {
       styleOverrides: {
         root: {
           "&.MuiButton-sizeSmall": {
-            height: "40px",
+            height: "30px",
           },
           "&.MuiButton-sizeMedium": {
             height: "44px",
@@ -16,7 +16,7 @@ export const MuiButton = (theme: Theme) => {
           "&.MuiButton-sizeLarge": {
             height: "45px",
           },
-          maxWidth: "458px",
+          // maxWidth: "458px",
           padding: "10px",
           borderRadius: "16px",
           textTransform: "none" as const,
@@ -39,7 +39,7 @@ export const MuiButton = (theme: Theme) => {
           color: palette.base.white,
           borderRadius: "8px",
           border: "none",
-          background: "#FFFFFF4D",
+          background: "#7c7586",
           backdropFilter: "blur(8px)",
           "&:hover": {
             color: palette.base.white,

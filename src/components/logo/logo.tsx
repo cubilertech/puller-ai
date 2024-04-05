@@ -30,12 +30,13 @@ const Logo: FC<logoProps> = ({ variant }) => {
           </Box>
         </>
       ) : (
-        <Image
-          width={186}
-          height={63}
-          src={"./logo/Logo.svg"}
-          alt="logo-icon"
-        />
+        <Box
+          sx={{
+            marginRight: "35px",
+          }}
+        >
+          <Icon width={186} height={63} icon="logo" />
+        </Box>
       )}
     </>
   );

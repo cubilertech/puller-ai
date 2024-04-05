@@ -34,6 +34,8 @@ const SideNavbar = () => {
             "linear-gradient(143deg, rgba(57, 57, 57, 0.60) -3.54%, rgba(97, 97, 97, 0.60) 99.99%)",
           "& .MuiDrawer-paper": {
             width: drawerWidth,
+            marginRight: drawerWidth,
+
             boxSizing: "border-box",
             borderRight:
               "1px solid var(--Vision-pro-01, rgba(255, 255, 255, 0.37))",
@@ -64,7 +66,7 @@ const SideNavbar = () => {
                 src={"./logo/Logo.svg"}
                 alt="logo"
               /> */}
-              <Logo />
+              <Logo variant="default" />
             </Box>
 
             <Box>
@@ -128,7 +130,6 @@ const SideNavbar = () => {
                 ].map((text, index) => (
                   <ListItem key={text.name}>
                     <MuiListItemButton
-                    
                       sx={{
                         display: "flex",
                         gap: "12px",

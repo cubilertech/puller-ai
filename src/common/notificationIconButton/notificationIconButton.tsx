@@ -22,7 +22,7 @@ const NotificationIconButton: FC<IconButtonProps> = ({
   ...props
 }) => {
   return (
-    <div className="container">
+    <div className="container1">
       <MuiIconButton sx={{ position: "relative" }} {...props}>
         {isNotice && (
           <Box sx={{ position: "absolute", top: "8px", right: "8px" }}>
