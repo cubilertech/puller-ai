@@ -1,44 +1,38 @@
 import { TypographyOptions } from "@mui/material/styles/createTypography";
 
 export const typography: TypographyOptions = {
-  fontFamily: "Nexa",
+  fontFamily: "Inter",
   h1: {
-    // fontFamily: "Nexa",
     fontSize: "56px",
     lineHeight: "normal",
     // fontKerning: "0%",
     fontWeight: 700,
   },
   h2: {
-    // fontFamily: "Nexa",
     fontSize: "48px",
     lineHeight: "normal",
     // fontKerning: "0%",
     fontWeight: 700,
   },
   h3: {
-    fontFamily: "Nexa",
     fontSize: "40px",
     lineHeight: "normal",
     // fontKerning: "0%",
     fontWeight: 700,
   },
   h4: {
-    fontFamily: "Nexa",
     fontSize: "32px",
     lineHeight: "normal",
     // fontKerning: "0%",
     fontWeight: 700,
   },
   h5: {
-    fontFamily: "Nexa",
     fontSize: "24px",
     lineHeight: "normal",
     // fontKerning: "0%",
     fontWeight: 700,
   },
   h6: {
-    fontFamily: "Nexa",
     fontSize: "16px",
     lineHeight: "normal",
     // fontKerning: "0%",
@@ -130,6 +124,7 @@ declare module "@mui/material/Typography" {
     "text-xs-semibold": true;
     "text-xs-medium": true;
     "text-xs-regular": true;
+    "text-xs": true;
   }
 }
 declare module "@mui/material/styles" {

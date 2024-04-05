@@ -130,6 +130,7 @@ const SideNavbar = () => {
                 ].map((text, index) => (
                   <ListItem key={text.name}>
                     <MuiListItemButton
+                    
                       sx={{
                         display: "flex",
                         gap: "12px",
