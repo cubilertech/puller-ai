@@ -17,7 +17,6 @@ const TopNavBar = () => {
           bgcolor: "rgba(102, 112, 133, 0.60)",
         }}
       >
-        <IconButton icon={"/next.svg"} />
       </Box>
     </>
   );

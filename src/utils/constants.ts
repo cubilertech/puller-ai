@@ -1,6 +1,6 @@
 
 export const icons = {
     arrowLeft: "/next.svg",
-    arrowRight: "",
+    logo: "/Images/logos/logo.svg",
   };
   
