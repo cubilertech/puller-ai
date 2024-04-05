@@ -1,16 +1,15 @@
-import CustomLink from "@/components/Link/link";
-import Paper from "@/components/Paper/paper";
-import { palette } from "@/theme/Palette";
-import { Button, Typography } from "@mui/material";
+import Button from "@/components/Button/Button";
+import CreateRequestPage from "@/modules/createRequestPage/CreateRequestPage";
 import Image from "next/image";
+import Paper from "@/components/Paper/paper";
+import TopNavBar from "@/components/TopNavBar/topNavBar";
+import { IconButton } from "@/components/IconButton";
+import Logo from "@/components/logo/logo";
 
 export default function Home() {
   return (
-    <Paper type="light-bg-border">
-      <p style={{ padding: "10px", margin: "100px" }}>Hello wrold</p>
-      <p style={{ padding: "10px", margin: "100px" }}>Hello wrold</p>
-      <p style={{ padding: "10px", margin: "100px" }}>Hello wrold</p>
-      <p style={{ padding: "10px", margin: "100px" }}>Hello wrold</p>
-    </Paper>
+    <>
+      <TopNavBar />
+    </>
   );
 }

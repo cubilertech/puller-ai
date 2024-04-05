@@ -1,7 +1,8 @@
 "use client";
 import { customTheme } from "@/theme/CustomTheme";
 import { Box, Button as MuiButton } from "@mui/material";
-import { FC } from "react";
+import { FC, ReactNode } from "react";
+import "./Button.css";
 
 interface ButtonProps {
   size?: "small" | "medium" | "large";
@@ -11,6 +12,8 @@ interface ButtonProps {
   disabled?: boolean;
   fullWidth?: boolean;
   textTransform?: "capitalize" | "lowercase" | "uppercase" | "inherit";
+  endIcon?: ReactNode;
+  startIcon?: ReactNode;
 }
 
 const Button: FC<ButtonProps> = ({
@@ -20,20 +23,26 @@ const Button: FC<ButtonProps> = ({
   disabled,
   fullWidth,
   onClick,
-  ...rest
+  startIcon,
+  endIcon,
+  ...props
 }) => {
   return (
-    <MuiButton
-      {...rest}
-      size={size}
-      type="button"
-      onClick={onClick}
-      variant={variant}
-      disabled={disabled}
-      fullWidth={fullWidth}
-    >
-      {label}
-    </MuiButton>
+    <div className={variant === "outlined" ? "container" : ""}>
+      <MuiButton
+        {...props}
+        size={size}
+        type="button"
+        onClick={onClick}
+        variant={variant}
+        disabled={disabled}
+        fullWidth={fullWidth}
+        endIcon={endIcon}
+        startIcon={startIcon}
+      >
+        {label}
+      </MuiButton>
+    </div>
   );
 };
 
