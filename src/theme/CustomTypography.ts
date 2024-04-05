@@ -323,6 +323,12 @@ export const CustomTypography = {
     fontWeight: 700,
     letterSpacing: "",
   },
+  "text-xs": {
+    fontFamily: "Inter",
+    fontSize: "11px",
+    fontWeight: 400,
+    lineHeight: "140%",
+  },
   "text-xs-regular": {
     fontFamily: "Inter",
     fontSize: "12px",
