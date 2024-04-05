@@ -18,7 +18,7 @@ export const MuiIconButton = (theme: Theme) => {
           borderRadius: "100%",
           border: `1px solid var(--vison-pro-stock, ${palette.base.white})`,
           background:
-            "var(--Vision-pro-01, linear-gradient(143deg, rgba(255, 255, 255, 0.22) -3.54%, rgba(114, 114, 114, 0.25) 95.15%))",
+            "var(--Vision-pro-01, linear-gradient(143deg, rgba(255, 255, 255, 0.22) -5.54%, rgba(114, 114, 114, 0.25) 35.15%))",
           backdropFilter: "blur(8px)",
         },
       },
