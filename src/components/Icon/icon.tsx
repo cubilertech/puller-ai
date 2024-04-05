@@ -27,6 +27,6 @@ const Icon: React.FC<IconProps> = ({ icon, width, height, ...props }) => {
       width={width ?? 18}
       height={height ?? 18}
     />
-  ) : null;
+  ) : <></>;
 };
 export default Icon;
