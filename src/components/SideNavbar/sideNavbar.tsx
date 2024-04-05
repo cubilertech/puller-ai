@@ -20,16 +20,12 @@ const SideNavbar = () => {
   return (
     <Box
       sx={{
-        borderRight:
-          "1px solid var(--Vision-pro-01, rgba(255, 255, 255, 0.37))",
-
-        background:
-          "linear-gradient(143deg, rgba(57, 57, 57, 0.60) -3.54%, rgba(97, 97, 97, 0.60) 99.99%)",
+        width: drawerWidth,
       }}
     >
       <Drawer
         sx={{
-          width: drawerWidth,
+          position: "static",
           flexShrink: 0,
           borderRight:
             "1px solid var(--Vision-pro-01, rgba(255, 255, 255, 0.37))",
