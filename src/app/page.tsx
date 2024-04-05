@@ -5,11 +5,14 @@ import Paper from "@/components/Paper/paper";
 import TopNavBar from "@/components/TopNavBar/topNavBar";
 import { SideNavbar } from "@/components/SideNavbar";
 import { Box } from "@mui/material";
+import { IconButton } from "@/components/IconButton";
+import Logo from "@/components/logo/logo";
 
 export default function Home() {
   return (
     <>
       <SideNavbar />
+      <TopNavBar />
     </>
   );
 }

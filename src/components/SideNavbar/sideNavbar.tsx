@@ -14,6 +14,7 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import Image from "next/image";
 import MuiListItemButton from "@/theme/overrides/listItemButton";
+import Logo from "../logo/logo";
 
 const SideNavbar = () => {
   const drawerWidth = 240;
@@ -57,12 +58,13 @@ const SideNavbar = () => {
         >
           <Box>
             <Box sx={{ display: "flex", justifyContent: "center", mt: "20px" }}>
-              <Image
+              {/* <Image
                 width={186}
                 height={63}
                 src={"./logo/Logo.svg"}
                 alt="logo"
-              />
+              /> */}
+              <Logo />
             </Box>
 
             <Box>
