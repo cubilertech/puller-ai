@@ -1,10 +1,14 @@
 import { Box } from "@mui/material";
-import React from "react";
+import React, { FC, ReactNode } from "react";
 import TopNavBar from "../TopNavBar/topNavBar";
 import { InputArea } from "../inputArea";
 import { PageHeader } from "../PageHeader";
 
-const AppLayout = () => {
+interface MyComponentProps {
+  children: ReactNode;
+}
+
+const AppLayout: FC<MyComponentProps> = ({ children }) => {
   return (
     <Box
       sx={{
@@ -12,14 +16,7 @@ const AppLayout = () => {
       }}
     >
       <TopNavBar />
-      <Box
-        sx={{
-          padding: "1rem 2rem 1rem",
-        }}
-      >
-        <PageHeader />
-        <InputArea />
-      </Box>
+      {children}
     </Box>
   );
 };

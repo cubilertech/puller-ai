@@ -3,12 +3,22 @@ import { PageHeader } from "@/components/PageHeader";
 import { Box } from "@mui/material";
 import { SideNavbar } from "@/components/SideNavbar";
 import AppLayout from "@/components/appLayout/appLayout";
+import { InputArea } from "@/components/inputArea";
 
 export default function CreateRequest() {
   return (
     <Box>
       <SideNavbar />
-      <AppLayout />
+      <AppLayout>
+        <Box
+          sx={{
+            padding: "1rem 2rem 1rem",
+          }}
+        >
+          <PageHeader />
+          <InputArea />
+        </Box>
+      </AppLayout>
     </Box>
   );
 }
