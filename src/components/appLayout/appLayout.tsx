@@ -1,8 +1,8 @@
 import { Box } from "@mui/material";
 import React from "react";
 import TopNavBar from "../TopNavBar/topNavBar";
-import Logo from "../logo/logo";
 import { InputArea } from "../inputArea";
+import { PageHeader } from "../PageHeader";
 
 const AppLayout = () => {
   return (
@@ -17,6 +17,7 @@ const AppLayout = () => {
           padding: "1rem 2rem 1rem",
         }}
       >
+        <PageHeader />
         <InputArea />
       </Box>
     </Box>

@@ -19,7 +19,7 @@ const PageHeader: FC = () => {
           alignItems: "center",
           width: "100%",
           color: "white",
-          px: 4,
+          // px: 4,
         }}
       >
         <Typography variant="display-xs-semibold">
@@ -35,7 +35,12 @@ const PageHeader: FC = () => {
         <Box>
           {firstRoute === PagesType.CREATE_REQUEST || "" ? (
             <Box sx={{ width: "242px" }}>
-              <Button variant="contained" fullWidth label="Request History" />
+              <Button
+                variant="contained"
+                size="medium"
+                fullWidth
+                label="Request History"
+              />
             </Box>
           ) : (
             ""
