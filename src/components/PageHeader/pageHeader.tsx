@@ -36,7 +36,7 @@ const PageHeader: FC = () => {
           {firstRoute === PagesType.CREATE_REQUEST || "" ? (
             <Box sx={{ width: "242px" }}>
               <Button
-                variant="contained"
+                variant="outlined"
                 size="medium"
                 fullWidth
                 label="Request History"
