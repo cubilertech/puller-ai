@@ -13,6 +13,7 @@ const AppLayout: FC<MyComponentProps> = ({ children }) => {
     <Box
       sx={{
         marginLeft: "240px",
+        minHeight: "100vh",
       }}
     >
       <TopNavBar />

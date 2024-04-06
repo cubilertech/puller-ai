@@ -29,6 +29,8 @@ const PageHeader: FC = () => {
             ? "Recent Requests"
             : firstRoute === PagesType.YOUR_RESULTS
             ? "Your Results"
+            : firstRoute === PagesType.PREVIEW_DATA
+            ? "Preview Data"
             : "Create a Request"}
         </Typography>
 
