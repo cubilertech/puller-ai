@@ -17,6 +17,7 @@ const SimpleCard: FC<SimpleCardProps> = ({ title, discription }) => {
         maxWidth: "278px",
         height: "212px",
         overflow: "hidden",
+        cursor: "pointer",
       }}
     >
       <Box

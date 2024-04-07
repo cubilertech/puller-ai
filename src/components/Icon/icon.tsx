@@ -1,8 +1,7 @@
-"use client";
 import { icons } from "@/utils/constants";
 import { IconTypes } from "@/utils/types";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { FC } from "react";
 
 export interface IconProps {
   icon: IconTypes;
@@ -10,25 +9,23 @@ export interface IconProps {
   height?: number;
 }
 
-const Icon: React.FC<IconProps> = ({ icon, width, height, ...props }) => {
-  const [currentIcon, setCurrentIcon] = useState<string | undefined>(undefined);
+const Icon: FC<IconProps> = ({ icon, width = 18, height = 18, ...props }) => {
+  const iconPath = icons[icon];
 
-  useEffect(() => {
-    if (icons[icon]) {
-      setCurrentIcon(icons[icon]);
-    }
-  }, [icon]);
+  if (!iconPath) {
+    console.error(`Icon "${icon}" not found`);
+    return null;
+  }
 
-  return currentIcon ? (
+  return (
     <Image
       {...props}
-      src={currentIcon}
+      src={iconPath}
       alt="icon"
-      width={width ?? 18}
-      height={height ?? 18}
+      width={width}
+      height={height}
     />
-  ) : (
-    <></>
   );
 };
+
 export default Icon;

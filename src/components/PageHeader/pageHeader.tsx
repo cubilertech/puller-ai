@@ -4,6 +4,7 @@ import { FC } from "react";
 import { Button } from "../Button";
 import { usePathname } from "next/navigation";
 import { PagesType } from "@/utils/constants";
+import CustomLink from "../Link/link";
 
 const PageHeader: FC = () => {
   const route = usePathname();
@@ -19,7 +20,6 @@ const PageHeader: FC = () => {
           alignItems: "center",
           width: "100%",
           color: "white",
-          // px: 4,
         }}
       >
         <Typography variant="display-xs-semibold">
@@ -35,12 +35,14 @@ const PageHeader: FC = () => {
         <Box>
           {firstRoute === PagesType.CREATE_REQUEST || "" ? (
             <Box sx={{ width: "242px" }}>
-              <Button
-                variant="outlined"
-                size="medium"
-                fullWidth
-                label="Request History"
-              />
+              <CustomLink href="/recentRequests">
+                <Button
+                  variant="outlined"
+                  size="medium"
+                  fullWidth
+                  label="Request History"
+                />
+              </CustomLink>
             </Box>
           ) : (
             ""

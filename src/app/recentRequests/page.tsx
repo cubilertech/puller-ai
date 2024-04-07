@@ -7,8 +7,8 @@ import { Box } from "@mui/material";
 export default function RecentRequests() {
   return (
     <Box>
-      <TopNavBar />
       <SideNavbar />
+      <TopNavBar />
       <Box ml={35}>
         <RecentRequestPage />
       </Box>

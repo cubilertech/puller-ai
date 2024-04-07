@@ -1,5 +1,4 @@
 export const icons = {
-  arrowLeft: "/next.svg",
   logo: "/Images/logos/logo.svg",
   outlinedBookMark: "/Images/Icons/outlined-bookMark.svg",
   logoTitle: "/Images/logos/logo-text.svg",
@@ -11,6 +10,7 @@ export const icons = {
   minus: "/Images/Icons/minus-icon.svg",
   importIcon: "/Images/Icons/eye-icon.svg",
   eyeIcon: "/Images/Icons/import-icon.svg",
+  arrowLeftIcon: "/Images/Icons/arrow-left.svg",
 };
 
 export const PagesType = {

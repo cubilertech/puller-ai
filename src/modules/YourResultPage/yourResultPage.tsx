@@ -50,7 +50,7 @@ const YourResultsPage: FC = () => {
                 display: "flex",
                 gap: 2,
                 flexDirection: "column",
-                maxHeight: "76vh",
+                maxHeight: "70vh",
                 overflowY: "auto",
                 "-ms-overflow-style":
                   "none" /* Hide scrollbar in IE and Edge */,
