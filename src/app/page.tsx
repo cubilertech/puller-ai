@@ -1,5 +1,5 @@
 import Button from "@/components/Button/Button";
-import CreateRequestPage from "@/modules/createRequestPage/CreateRequestPage";
+import CreateRequestPage from "@/modules/CreateRequestPage/CreateRequestPage";
 import Image from "next/image";
 import Paper from "@/components/Paper/paper";
 import TopNavBar from "@/components/TopNavBar/topNavBar";

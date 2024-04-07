@@ -19,7 +19,6 @@ const PageHeader: FC = () => {
           alignItems: "center",
           width: "100%",
           color: "white",
-          px: 4,
         }}
       >
         <Typography variant="display-xs-semibold">
