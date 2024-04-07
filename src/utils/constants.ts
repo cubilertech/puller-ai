@@ -4,11 +4,11 @@ export const icons = {
   outlinedBookMark: "/Images/Icons/outlined-bookMark.svg",
   logoTitle: "/Images/logos/logo-text.svg",
   logoIcon: "/Images/logos/logo-icon.svg",
-  annotation: "/Images/icons/annotation-icon.svg",
-  bell: "/Images/icons/bell-icon.svg",
-  ellipse: "/Images/icons/ellipse-icon.svg",
-  plus: "/Images/icons/plus-icon.svg",
-  minus: "/Images/icons/minus-icon.svg",
+  annotation: "/Images/Icons/annotation-icon.svg",
+  bell: "/Images/Icons/bell-icon.svg",
+  ellipse: "/Images/Icons/ellipse-icon.svg",
+  plus: "/Images/Icons/plus-icon.svg",
+  minus: "/Images/Icons/minus-icon.svg",
 };
 
 export const PagesType = {
