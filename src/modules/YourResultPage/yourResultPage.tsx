@@ -64,6 +64,7 @@ const YourResultsPage: FC = () => {
               {SingleCardDomyData.map((item) => (
                 <Box mr={-10} width={"100%"}>
                   <SimpleCard
+                    isFor="Results"
                     title={item.title}
                     discription={item.discription}
                   />

@@ -6,15 +6,16 @@ import { Icon } from "../Icon";
 interface SimpleCardProps {
   title: string;
   discription: string;
+  isFor: "Results" | "Requests";
 }
 
-const SimpleCard: FC<SimpleCardProps> = ({ title, discription }) => {
+const SimpleCard: FC<SimpleCardProps> = ({ title, discription, isFor }) => {
   return (
     <Paper
       type="light-border"
       sx={{
         padding: "24px 20px",
-        maxWidth: "278px",
+        maxWidth: isFor === "Results" ? "100%" : "278px",
         height: "212px",
         overflow: "hidden",
         cursor: "pointer",

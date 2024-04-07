@@ -4,6 +4,7 @@ import { Box, Typography } from "@mui/material";
 import { CardData } from "@/utils/types";
 import { IconButton } from "../IconButton";
 import { Button } from "../Button";
+import Divider from "../Divider/divider";
 
 interface ResultCardProps {
   data: CardData;
@@ -87,11 +88,11 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
             <Typography variant="text-sm-semibold">{data.sources}</Typography>
           </Box>
         </Box>
-
+        <Box py={2}>
+          <Divider variant="fullWidth" type="dark" />
+        </Box>
         <Box
           sx={{
-            mt: 1,
-            pt: 1,
             width: "100%",
             display: "flex",
             flexDirection: "column",
@@ -103,28 +104,41 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
         </Box>
         <Box
           sx={{
-            mt: 12,
             display: "flex",
-            gap: 2,
-            justifyContent: "flex-end",
-            pt: 2,
+            flexDirection: "column",
+            textAlign: "end",
+            justifyContent: "end",
+            width: "100%",
+            height: "32%"
           }}
         >
-          <Box width={"242px"}>
-            <Button
-              label="Download Package"
-              fullWidth
-              size="large"
-              variant="outlined"
-            />
+          <Box py={2}>
+            <Divider variant="fullWidth" type="dark" />
           </Box>
-          <Box width={"242px"}>
-            <Button
-              label="Advanced Actions"
-              fullWidth
-              size="large"
-              variant="contained"
-            />
+          <Box
+            sx={{
+              display: "flex",
+              gap: 2,
+              justifyContent: "flex-end",
+              pt: 2,
+            }}
+          >
+            <Box width={"242px"}>
+              <Button
+                label="Download Package"
+                fullWidth
+                size="large"
+                variant="outlined"
+              />
+            </Box>
+            <Box width={"242px"}>
+              <Button
+                label="Advanced Actions"
+                fullWidth
+                size="large"
+                variant="contained"
+              />
+            </Box>
           </Box>
         </Box>
       </Paper>

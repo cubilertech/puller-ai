@@ -25,7 +25,7 @@ const RecentRequestPage: FC = () => {
         >
           {SingleCardDomyData.map((item) => (
             <CustomLink href="/yourResults">
-              <SimpleCard title={item.title} discription={item.discription} />
+              <SimpleCard isFor="Requests" title={item.title} discription={item.discription} />
             </CustomLink>
           ))}
         </Grid>
