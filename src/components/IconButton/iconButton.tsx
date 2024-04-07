@@ -8,7 +8,8 @@ interface IconButtonProps {
   icon?: IconTypes;
   text?: string;
   iconWidth?: number; // Explicit type for icon width
-  iconHeight?: number; // Explicit type for icon height
+  iconHeight?: number;
+  fullWidth?: boolean; // Explicit type for icon height
 }
 
 const IconButton: FC<IconButtonProps> = ({
@@ -16,6 +17,7 @@ const IconButton: FC<IconButtonProps> = ({
   text,
   iconWidth = 40,
   iconHeight = 40,
+  fullWidth,
   ...props
 }) => {
   return (
