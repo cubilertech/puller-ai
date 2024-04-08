@@ -15,6 +15,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import Image from "next/image";
 import MuiListItemButton from "@/theme/overrides/listItemButton";
 import Logo from "../logo/logo";
+import { Icon } from "../Icon";
 
 const SideNavbar = () => {
   const drawerWidth = 240;
@@ -60,12 +61,6 @@ const SideNavbar = () => {
         >
           <Box>
             <Box sx={{ display: "flex", justifyContent: "center", mt: "20px" }}>
-              {/* <Image
-                width={186}
-                height={63}
-                src={"./logo/Logo.svg"}
-                alt="logo"
-              /> */}
               <Logo variant="default" />
             </Box>
 
@@ -74,58 +69,23 @@ const SideNavbar = () => {
                 {[
                   {
                     name: "Request",
-                    img: (
-                      <Image
-                        width={18}
-                        height={18}
-                        src="./images/icons/request-icon.svg"
-                        alt=""
-                      />
-                    ),
+                    img: <Icon width={18} height={18} icon="requestIcon" />,
                   },
                   {
                     name: "Pulls",
-                    img: (
-                      <Image
-                        width={18}
-                        height={18}
-                        src="./images/icons/pulls-icon.svg"
-                        alt=""
-                      />
-                    ),
+                    img: <Icon width={18} height={18} icon="pullsIcon" />,
                   },
                   {
                     name: "Retrivers",
-                    img: (
-                      <Image
-                        width={18}
-                        height={18}
-                        src="./images/icons/retrivers-icon.svg"
-                        alt=""
-                      />
-                    ),
+                    img: <Icon width={18} height={18} icon="retriversIcon" />,
                   },
                   {
                     name: "Alerts",
-                    img: (
-                      <Image
-                        width={18}
-                        height={18}
-                        src="./images/icons/alerts-icon.svg"
-                        alt=""
-                      />
-                    ),
+                    img: <Icon width={18} height={18} icon="alertsIcon" />,
                   },
                   {
                     name: "Advanced",
-                    img: (
-                      <Image
-                        width={18}
-                        height={18}
-                        src="./images/icons/advanced-icon.svg"
-                        alt=""
-                      />
-                    ),
+                    img: <Icon width={18} height={18} icon="advancedIcon" />,
                   },
                 ].map((text, index) => (
                   <ListItem key={text.name}>
@@ -168,14 +128,7 @@ const SideNavbar = () => {
               {[
                 {
                   name: "Administration",
-                  img: (
-                    <Image
-                      width={18}
-                      height={18}
-                      src="./images/icons/admin-icon.svg"
-                      alt=""
-                    />
-                  ),
+                  img: <Icon width={18} height={18} icon="adminIcon" />,
                 },
               ].map((text, index) => (
                 <ListItem key={text.name}>
