@@ -11,6 +11,7 @@ interface IconButtonProps {
   iconWidth?: number; // Explicit type for icon width
   iconHeight?: number;
   fullWidth?: boolean; // Explicit type for icon height
+  disabled?: boolean;
 }
 
 const IconButton: FC<IconButtonProps> = ({
@@ -19,6 +20,7 @@ const IconButton: FC<IconButtonProps> = ({
   iconWidth = 40,
   iconHeight = 40,
   fullWidth,
+  disabled = false,
   ...props
 }) => {
   return (
@@ -29,7 +31,9 @@ const IconButton: FC<IconButtonProps> = ({
           width: fullWidth ? "100%" : "auto",
         }}
       >
-        {icon && <Icon icon={icon} width={iconWidth} height={iconHeight} />}
+        {icon && (
+          <Icon disabled icon={icon} width={iconWidth} height={iconHeight} />
+        )}
         <Typography>{text}</Typography>
       </MuiIconButton>
     </div>
