@@ -8,13 +8,14 @@ import { Box } from "@mui/material";
 import { IconButton } from "@/components/IconButton";
 import Logo from "@/components/logo/logo";
 import { InputArea } from "@/components/inputArea";
-import AppLayout from "@/components/appLayout/appLayout";
+import AppLayout from "@/common/appLayout/appLayout";
 
 export default function Home() {
   return (
     <>
-      <SideNavbar />
-      <AppLayout />
+      <AppLayout>
+        <CreateRequestPage />
+      </AppLayout>
     </>
   );
 }

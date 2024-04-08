@@ -1,0 +1,35 @@
+/* App.css */
+.app-layout {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "sidebar topbar"
+    "sidebar content";
+  height: 100vh;
+}
+
+.sidebar {
+  grid-area: sidebar;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 240px; /* Adjust width as needed */
+}
+
+.topbar {
+  grid-area: topbar;
+  position: fixed;
+  top: 0;
+  left: 240px; /* Sidebar width */
+  right: 0;
+  height: 60px; /* Adjust height as needed */
+}
+
+.content {
+  grid-area: content;
+  margin-top: 60px; /* Top bar height */
+  margin-left: 240px; /* Sidebar width */
+  padding: 20px; /* Adjust padding as needed */
+}

@@ -1,12 +1,11 @@
 import { Box } from "@mui/material";
 import { SideNavbar } from "@/components/SideNavbar";
-import AppLayout from "@/components/appLayout/appLayout";
+import AppLayout from "@/common/appLayout/appLayout";
 
 export default function CreateRequest() {
   return (
     <>
-      <SideNavbar />
-      <AppLayout />
+      <CreateRequest />
     </>
   );
 }
