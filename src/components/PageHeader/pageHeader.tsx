@@ -2,55 +2,79 @@
 import { Box, Typography } from "@mui/material";
 import { FC } from "react";
 import { Button } from "../Button";
-import { usePathname } from "next/navigation";
-import { PagesType } from "@/utils/constants";
-import CustomLink from "../Link/link";
+import { palette } from "@/theme/Palette";
 
-const PageHeader: FC = () => {
-  const route = usePathname();
-  const routeParts = route.replace(/^\//, "").split("/");
-  const firstRoute = routeParts[0];
+interface PageHeaderProps {
+  type: "Recent" | "Results" | "create" | "Validate";
+}
 
-  return (
-    <>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          width: "100%",
-          color: "white",
-        }}
-      >
-        <Typography variant="display-xs-semibold">
-          {firstRoute === PagesType.CREATE_REQUEST
-            ? "Create a Request"
-            : firstRoute === PagesType.RECENT_REQUESTS
-            ? "Recent Requests"
-            : firstRoute === PagesType.YOUR_RESULTS
-            ? "Your Results"
-            : "Create a Request"}
-        </Typography>
-
-        <Box>
-          {firstRoute === PagesType.CREATE_REQUEST || "" ? (
-            <Box sx={{ width: "242px" }}>
-              <CustomLink href="/recentRequests">
-                <Button
-                  variant="outlined"
-                  size="medium"
-                  fullWidth
-                  label="Request History"
-                />
-              </CustomLink>
-            </Box>
-          ) : (
-            ""
-          )}
+const PageHeader: FC<PageHeaderProps> = ({ type }) => {
+  switch (type) {
+    case "Recent":
+      return (
+        <Box
+          sx={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+          }}
+        >
+          <Typography variant="display-xs-semibold" color={palette.base.white}>
+            Recent Requests
+          </Typography>
+          <Box></Box>
         </Box>
-      </Box>
-    </>
-  );
+      );
+    case "Results":
+      return (
+        <Box
+          sx={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+          }}
+        >
+          <Typography variant="display-xs-semibold" color={palette.base.white}>
+            Your Results
+          </Typography>
+          <Box></Box>
+        </Box>
+      );
+    case "create":
+      return (
+        <Box
+          sx={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+          }}
+        >
+          <Typography variant="display-xs-semibold" color={palette.base.white}>
+            Create a Request
+          </Typography>
+          <Box width={242}>
+            <Button variant="outlined" fullWidth label="Request History" />
+          </Box>
+        </Box>
+      );
+    case "Validate":
+      return (
+        <Box
+          sx={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+          }}
+        >
+          <Typography variant="display-xs-semibold" color={palette.base.white}>
+            Validate Request
+          </Typography>
+          <Box width={242}>
+            <Button variant="outlined" label="SQL" />
+          </Box>
+        </Box>
+      );
+  }
 };
 
 export default PageHeader;
