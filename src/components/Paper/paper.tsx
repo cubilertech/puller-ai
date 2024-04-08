@@ -37,7 +37,6 @@ const Paper: FC<PaperProps> = ({ type, children, sx, ...props }) => {
               m: 1,
               borderRadius: "16px",
               border: "2px solid var(--Vision-pro-02, #393939)",
-              opacity: "0.5",
               background:
                 "linear-gradient(143deg, rgba(255, 255, 255, 0.11) -3.54%, rgba(114, 114, 114, 0.13) 95.15%)",
               backdropFilter: "blur(20px)",
