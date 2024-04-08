@@ -9,12 +9,20 @@ import { IconButton } from "@/components/IconButton";
 import Logo from "@/components/logo/logo";
 import { InputArea } from "@/components/inputArea";
 import AppLayout from "@/common/appLayout/appLayout";
+import Tooltip from "@/components/Tooltip/tooltip";
 
 export default function Home() {
   return (
     <>
       <AppLayout>
-        <CreateRequestPage />
+        {/* <CreateRequestPage /> */}
+
+        <Tooltip
+          title="test"
+          description="tooltip test data this is a description"
+        >
+          <Box>test</Box>
+        </Tooltip>
       </AppLayout>
     </>
   );
