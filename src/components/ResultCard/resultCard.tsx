@@ -109,7 +109,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
             textAlign: "end",
             justifyContent: "end",
             width: "100%",
-            height: "32%"
+            height: "32%",
           }}
         >
           <Box py={2}>

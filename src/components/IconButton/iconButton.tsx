@@ -3,6 +3,7 @@ import { IconButton as MuiIconButton, Typography } from "@mui/material";
 import Image from "next/image";
 import { IconTypes } from "@/utils/types";
 import { Icon } from "../Icon";
+import "./iconButton.css";
 
 interface IconButtonProps {
   icon?: IconTypes;
@@ -21,8 +22,13 @@ const IconButton: FC<IconButtonProps> = ({
   ...props
 }) => {
   return (
-    <div className="container">
-      <MuiIconButton {...props}>
+    <div className="icon-btn-container">
+      <MuiIconButton
+        {...props}
+        sx={{
+          width: fullWidth ? "100%" : "auto",
+        }}
+      >
         {icon && <Icon icon={icon} width={iconWidth} height={iconHeight} />}
         <Typography>{text}</Typography>
       </MuiIconButton>
