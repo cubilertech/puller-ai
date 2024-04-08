@@ -10,7 +10,7 @@ const RecentRequestPage: FC = () => {
   return (
     <>
       <Box sx={{ mt: 4 }}>
-        <PageHeader />
+        <PageHeader type="Recent" />
 
         <Grid
           container

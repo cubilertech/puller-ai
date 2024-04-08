@@ -4,7 +4,7 @@ import { TextareaAutosize } from "@mui/material";
 const CreateRequestPage = () => {
   return (
     <>
-      <SideNavbar />;
+      <SideNavbar />
     </>
   );
 };

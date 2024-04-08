@@ -15,6 +15,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import Image from "next/image";
 import MuiListItemButton from "@/theme/overrides/listItemButton";
 import Logo from "../logo/logo";
+import CustomLink from "../Link/link";
 
 const SideNavbar = () => {
   const drawerWidth = 240;
@@ -82,6 +83,7 @@ const SideNavbar = () => {
                         alt=""
                       />
                     ),
+                    link: "/create",
                   },
                   {
                     name: "Pulls",
@@ -93,6 +95,7 @@ const SideNavbar = () => {
                         alt=""
                       />
                     ),
+                    link: "/pulls",
                   },
                   {
                     name: "Retrivers",
@@ -104,6 +107,7 @@ const SideNavbar = () => {
                         alt=""
                       />
                     ),
+                    link: "/retrivers",
                   },
                   {
                     name: "Alerts",
@@ -115,6 +119,7 @@ const SideNavbar = () => {
                         alt=""
                       />
                     ),
+                    link: "/alerts",
                   },
                   {
                     name: "Advanced",
@@ -126,37 +131,40 @@ const SideNavbar = () => {
                         alt=""
                       />
                     ),
+                    link: "/advanced",
                   },
                 ].map((text, index) => (
                   <ListItem key={text.name}>
-                    <MuiListItemButton
-                      sx={{
-                        display: "flex",
-                        gap: "12px",
-                        ":hover": {
-                          borderRadius: "8px",
-                          border:
-                            "1px solid var(--Vision-pro-01, rgba(255, 255, 255, 0.37))",
-                          background:
-                            "var(--buttons, rgba(255, 255, 255, 0.30))",
-                          backdropFilter: "blur(8px)",
-                        },
-                      }}
-                    >
-                      <ListItemIcon
+                    <CustomLink href={text.link}>
+                      <MuiListItemButton
                         sx={{
-                          minWidth: 0,
+                          display: "flex",
+                          gap: "12px",
+                          ":hover": {
+                            borderRadius: "8px",
+                            border:
+                              "1px solid var(--Vision-pro-01, rgba(255, 255, 255, 0.37))",
+                            background:
+                              "var(--buttons, rgba(255, 255, 255, 0.30))",
+                            backdropFilter: "blur(8px)",
+                          },
                         }}
                       >
-                        {text.img}
-                      </ListItemIcon>
-                      <ListItemText
-                        sx={{
-                          fontSize: "14px",
-                        }}
-                        primary={text.name}
-                      />
-                    </MuiListItemButton>
+                        <ListItemIcon
+                          sx={{
+                            minWidth: 0,
+                          }}
+                        >
+                          {text.img}
+                        </ListItemIcon>
+                        <ListItemText
+                          sx={{
+                            fontSize: "14px",
+                          }}
+                          primary={text.name}
+                        />
+                      </MuiListItemButton>
+                    </CustomLink>
                   </ListItem>
                 ))}
               </List>
