@@ -14,9 +14,9 @@ export const icons = {
 };
 
 export const PagesType = {
-  RECENT_REQUESTS: "recentRequests",
-  YOUR_RESULTS: "yourResults",
-  CREATE_REQUEST: "createRequest",
+  RECENT_REQUESTS: "Recent",
+  YOUR_RESULTS: "Results",
+  CREATE_REQUEST: "create",
 };
 
 
