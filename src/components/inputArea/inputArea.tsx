@@ -12,7 +12,7 @@ const InputArea = () => {
           flexDirection: "column",
           justifyContent: "space-between",
           mt: 2,
-          height: "70vh",
+          height: "65vh",
         }}
       >
         <Paper

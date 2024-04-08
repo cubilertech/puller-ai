@@ -25,11 +25,18 @@
   left: 240px; /* Sidebar width */
   right: 0;
   height: 60px; /* Adjust height as needed */
+  z-index: 2;
 }
 
 .content {
   grid-area: content;
-  margin-top: 60px; /* Top bar height */
+  margin-top: 86px; /* Top bar height */
   margin-left: 240px; /* Sidebar width */
   padding: 20px; /* Adjust padding as needed */
+  overflow: scroll;
+  overflow-x: hidden;
 }
+
+/* .content::-webkit-scrollbar {
+  display: none;
+} */

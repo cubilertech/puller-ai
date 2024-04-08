@@ -10,7 +10,7 @@ const CreateRequestPage = () => {
         padding: "1rem 2rem 1rem",
       }}
     >
-      <PageHeader />
+      <PageHeader type="create" />
       <InputArea />
     </Box>
   );
