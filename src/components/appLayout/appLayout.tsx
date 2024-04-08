@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import React from "react";
 import TopNavBar from "../TopNavBar/topNavBar";
-import { InputArea } from "../inputArea";
+import { PannelArea } from "../../modules/PannelArea";
 import { PageHeader } from "../PageHeader";
 
 const AppLayout = () => {
@@ -18,7 +18,7 @@ const AppLayout = () => {
         }}
       >
         <PageHeader />
-        <InputArea />
+        <PannelArea />
       </Box>
     </Box>
   );

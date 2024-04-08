@@ -15,12 +15,11 @@ const Loader: FC<LoaderProps> = ({ varient }) => {
         <Box
           sx={{
             display: "flex",
-            gap: "20px",
             flexDirection: "column",
             alignItems: "center",
           }}
         >
-          <Icon icon="logo" width={200} height={220} />
+          <Icon icon="logoIcon" width={240} height={260} />
           <Typography variant="display-xs-medium" color={palette.base.white}>
             Processing..
           </Typography>
