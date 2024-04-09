@@ -1,16 +1,15 @@
+"use client";
+
 import {
   Box,
   Checkbox,
   Divider,
-  FormControl,
   Input,
-  InputLabel,
-  Menu,
   MenuItem,
   Select,
   Typography,
 } from "@mui/material";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Paper } from "../Paper";
 import { Button } from "../Button";
 import { CircleOutlined } from "@mui/icons-material";
@@ -27,6 +26,18 @@ interface optionbarProps {
 }
 
 const OptionsBar: FC<optionbarProps> = ({ variant }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  // Event handler to handle the opening of the Select
+  const handleOpen = () => {
+    setIsOpen(true);
+  };
+
+  // Event handler to handle the closing of the Select
+  const handleClose = () => {
+    setIsOpen(false);
+  };
+
   if (variant === "input")
     return (
       <Box
@@ -89,7 +100,6 @@ const OptionsBar: FC<optionbarProps> = ({ variant }) => {
         </Paper>
       </Box>
     );
-  //   if (variant === "square-checkbox" || variant === "round-checkbox" ||)
   else
     return (
       <Box
@@ -230,31 +240,40 @@ const OptionsBar: FC<optionbarProps> = ({ variant }) => {
           )}
 
           {variant === "dropdown" && (
-            <Box>
-              <Paper
-                type="light-border"
-                sx={{
-                  padding: "3px",
-                  borderRadius: "8px",
-                }}
-              >
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              <Box>
                 <Select
                   labelId="demo-controlled-open-select-label"
                   variant="standard"
                   fullWidth
                   disableUnderline
                   defaultValue={10}
+                  open={isOpen}
+                  onOpen={handleOpen}
+                  onClose={handleClose}
                   sx={{
-                    border: "none", // Remove borders
-                    bgcolor: "transparent",
-                    color: "white", // Set transparent background color
+                    border: "2px solid rgba(196, 196, 196, 0.60)",
+                    // borderTop: "none",
+                    width: "14rem",
+                    background:
+                      "linear-gradient(143deg, rgba(255, 255, 255, 0.15) -3.54%, rgba(114, 114, 114, 0.17) 95.15%)",
+                    color: "white",
+                    boxShadow: "none",
+                    borderRadius: isOpen ? 0 : "8px",
+                    borderTopRightRadius: "8px",
+                    borderTopLeftRadius: "8px",
                     "&:focus": {
-                      // Remove focus outline
                       bgcolor: "transparent",
                     },
-                    boxShadow: "none",
-                    ".MuiOutlinedInput-notchedOutline": { border: 0 },
-                    padding: " 0 10px",
+                    padding: "0 10px",
+                    borderBottom: isOpen
+                      ? "0"
+                      : "2px solid rgba(196, 196, 196, 0.60)",
                   }}
                   MenuProps={{
                     PaperProps: {
@@ -263,14 +282,13 @@ const OptionsBar: FC<optionbarProps> = ({ variant }) => {
                         borderTop: "none",
                         background:
                           "linear-gradient(143deg, rgba(255, 255, 255, 0.15) -3.54%, rgba(114, 114, 114, 0.17) 95.15%)",
-                        color: "white", // Set transparent background color
+                        color: "white",
                         boxShadow: "none",
                         borderRadius: 0,
                         borderBottomRightRadius: "8px",
                         borderBottomLeftRadius: "8px",
                       },
                     },
-               
                     anchorOrigin: {
                       vertical: "bottom",
                       horizontal: "left",
@@ -281,14 +299,31 @@ const OptionsBar: FC<optionbarProps> = ({ variant }) => {
                     },
                   }}
                 >
-                  <MenuItem value="">
+                  <MenuItem
+                    sx={{
+                      width: "13.8rem",
+                      px: 1,
+                    }}
+                    value=""
+                  >
                     <em>None</em>
                   </MenuItem>
-                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={10}>
+                    <Typography
+                      variant="text-md-regular"
+                      sx={{
+                        width: "100%",
+                        pr: 1,
+                      }}
+                    >
+                      Ten
+                    </Typography>
+                  </MenuItem>
                   <MenuItem value={20}>Twenty</MenuItem>
                   <MenuItem value={30}>Thirty</MenuItem>
                 </Select>
-              </Paper>
+              </Box>
+              {/* </Paper> */}
             </Box>
           )}
 
@@ -377,10 +412,9 @@ const OptionsBar: FC<optionbarProps> = ({ variant }) => {
                   fullWidth
                   disableUnderline
                   sx={{
-                    border: "none", // Remove borders
-                    bgcolor: "transparent", // Set transparent background color
+                    border: "none",
+                    bgcolor: "transparent",
                     "&:focus": {
-                      // Remove focus outline
                       bgcolor: "transparent",
                     },
                     boxShadow: "none",
