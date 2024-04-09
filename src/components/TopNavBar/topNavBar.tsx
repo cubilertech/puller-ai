@@ -25,23 +25,24 @@ const TopNavBar = () => {
         }}
       >
         <Box sx={{ ml: 4 }}>
-          {firstRoute === PagesType.RECENT_REQUESTS && (
-            <CustomLink href="/createRequest">
-              <Typography
-                variant="text-md-bold"
-                sx={{
-                  color: palette.base.white,
-                  display: "flex",
-                  gap: 1,
-                  textAlign: "center",
-                  cursor: "pointer",
-                }}
-              >
-                <Icon icon="arrowLeftIcon" height={24} width={24} />
-                Back
-              </Typography>
-            </CustomLink>
-          )}
+          {firstRoute === PagesType.RECENT_REQUESTS ||
+            (firstRoute === PagesType.PREVIEW_DATA && (
+              <CustomLink href="/createRequest">
+                <Typography
+                  variant="text-md-bold"
+                  sx={{
+                    color: palette.base.white,
+                    display: "flex",
+                    gap: 1,
+                    textAlign: "center",
+                    cursor: "pointer",
+                  }}
+                >
+                  <Icon icon="arrowLeftIcon" height={24} width={24} />
+                  Back
+                </Typography>
+              </CustomLink>
+            ))}
         </Box>
         <Box
           sx={{

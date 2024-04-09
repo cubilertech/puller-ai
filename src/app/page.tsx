@@ -1,13 +1,19 @@
 import { Box } from "@mui/material";
-import Tooltip from "@/components/Tooltip/tooltip";
-import AppLayout from "@/common/AppLayout/appLayout";
-import CreateRequestPage from "@/modules/CreateRequestPage/CreateRequestPage";
+import { IconButton } from "@/components/IconButton";
+import Logo from "@/components/logo/logo";
+import AppLayout from "@/components/appLayout/appLayout";
+import CreateRequest from "./createRequest/page";
+import { PageHeader } from "@/components/PageHeader";
 
 export default function Home() {
   return (
     <>
       <AppLayout>
-        <CreateRequestPage />
+        <Box
+          sx={{
+            padding: "1rem 2rem 1rem",
+          }}
+        ></Box>
       </AppLayout>
     </>
   );

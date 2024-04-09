@@ -16,6 +16,7 @@ import Image from "next/image";
 import MuiListItemButton from "@/theme/overrides/listItemButton";
 import Logo from "../logo/logo";
 import { Icon } from "../Icon";
+import Link from "next/link";
 
 const SideNavbar = () => {
   const drawerWidth = 240;
@@ -70,53 +71,60 @@ const SideNavbar = () => {
                   {
                     name: "Request",
                     img: <Icon width={18} height={18} icon="requestIcon" />,
+                    link: "/create",
                   },
                   {
                     name: "Pulls",
                     img: <Icon width={18} height={18} icon="pullsIcon" />,
+                    link: "/create",
                   },
                   {
                     name: "Retrivers",
                     img: <Icon width={18} height={18} icon="retriversIcon" />,
+                    link: "/create",
                   },
                   {
                     name: "Alerts",
                     img: <Icon width={18} height={18} icon="alertsIcon" />,
+                    link: "/create",
                   },
                   {
                     name: "Advanced",
                     img: <Icon width={18} height={18} icon="advancedIcon" />,
+                    link: "/create",
                   },
                 ].map((text, index) => (
                   <ListItem key={text.name}>
-                    <MuiListItemButton
-                      sx={{
-                        display: "flex",
-                        gap: "12px",
-                        ":hover": {
-                          borderRadius: "8px",
-                          border:
-                            "1px solid var(--Vision-pro-01, rgba(255, 255, 255, 0.37))",
-                          background:
-                            "var(--buttons, rgba(255, 255, 255, 0.30))",
-                          backdropFilter: "blur(8px)",
-                        },
-                      }}
-                    >
-                      <ListItemIcon
+                    <Link href={text.link} style={{ width: "100%" }}>
+                      <MuiListItemButton
                         sx={{
-                          minWidth: 0,
+                          display: "flex",
+                          gap: "12px",
+                          ":hover": {
+                            borderRadius: "8px",
+                            border:
+                              "1px solid var(--Vision-pro-01, rgba(255, 255, 255, 0.37))",
+                            background:
+                              "var(--buttons, rgba(255, 255, 255, 0.30))",
+                            backdropFilter: "blur(8px)",
+                          },
                         }}
                       >
-                        {text.img}
-                      </ListItemIcon>
-                      <ListItemText
-                        sx={{
-                          fontSize: "14px",
-                        }}
-                        primary={text.name}
-                      />
-                    </MuiListItemButton>
+                        <ListItemIcon
+                          sx={{
+                            minWidth: 0,
+                          }}
+                        >
+                          {text.img}
+                        </ListItemIcon>
+                        <ListItemText
+                          sx={{
+                            fontSize: "14px",
+                          }}
+                          primary={text.name}
+                        />
+                      </MuiListItemButton>
+                    </Link>
                   </ListItem>
                 ))}
               </List>
