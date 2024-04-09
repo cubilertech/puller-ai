@@ -5,7 +5,7 @@ import { Button } from "../Button";
 import { palette } from "@/theme/Palette";
 
 interface PageHeaderProps {
-  type: "Recent" | "Results" | "create" | "Validate";
+  type: "Recent" | "Results" | "create" | "Validate" | "Preview";
 }
 
 const PageHeader: FC<PageHeaderProps> = ({ type }) => {
@@ -72,6 +72,21 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
           <Box width={242}>
             <Button variant="outlined" label="SQL" />
           </Box>
+        </Box>
+      );
+    case "Preview":
+      return (
+        <Box
+          sx={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+          }}
+        >
+          <Typography variant="display-xs-semibold" color={palette.base.white}>
+            Preview Data
+          </Typography>
+          <Box></Box>
         </Box>
       );
   }

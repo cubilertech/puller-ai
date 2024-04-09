@@ -1,12 +1,19 @@
+"use client";
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
 import { ResultCard } from "@/components/ResultCard";
 import SimpleCard from "@/components/SimpleCard/simpleCard";
 import { SingleCardDomyData } from "@/utils/constants";
 import { Box } from "@mui/material";
+import { useRouter } from "next/navigation";
 import { FC } from "react";
 
 const YourResultsPage: FC = () => {
+  const route = useRouter();
+
+  const handleOpenNotes = () => {
+    route.push("/recent");
+  };
   const data = {
     main_title: "Element X Performance by Store and SKU",
     main_discription:
@@ -24,16 +31,17 @@ const YourResultsPage: FC = () => {
   };
   return (
     <>
-      <Box mt={4}>
-        <PageHeader />
+      <Box sx={{ width: "98%", m: "auto", mt: 1 }}>
+        <PageHeader type="Results" />
 
-        <Box sx={{ display: "flex", gap: 2, mt: 3, width: "98%" }}>
+        <Box sx={{ display: "flex", gap: 2, pt: 3, width: "100%" }}>
           <Box width={"80%"}>
             <ResultCard data={data} />
           </Box>
 
           <Box sx={{ display: "flex", flexDirection: "column", width: "20%" }}>
             <Paper
+              onClick={() => handleOpenNotes()}
               type="light-border"
               sx={{
                 padding: 2,

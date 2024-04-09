@@ -8,15 +8,18 @@ import { Loader } from "../../components/Loader";
 import Divider from "../../components/Divider/divider";
 import { palette } from "@/theme/Palette";
 import OptionsBar from "@/components/optionsBar/optionsBar";
+import { useRouter } from "next/navigation";
 
 interface PannelAreaProps {
   content?: {
     response: string;
     original: string;
   };
+  handleUpdate?: () => void;
 }
 
-const PannelArea: FC<PannelAreaProps> = ({ content }) => {
+const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
+  const route = useRouter();
   const [isLoading, setisLoading] = useState(false);
   const [isOpenSelectBar, setisOpenSelectBar] = useState(false);
 
@@ -25,8 +28,10 @@ const PannelArea: FC<PannelAreaProps> = ({ content }) => {
 
     setTimeout(() => {
       setisLoading(false);
+      route.push("/validate");
     }, 8000);
   };
+
   const handleOpenSelectBar = () => {
     setisOpenSelectBar(true);
   };
@@ -38,9 +43,9 @@ const PannelArea: FC<PannelAreaProps> = ({ content }) => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-end",
-          mt: 2,
-          height: "78vh",
+          height: "75vh",
           width: "100%",
+          gap: 2,
         }}
       >
         <Box
@@ -48,16 +53,14 @@ const PannelArea: FC<PannelAreaProps> = ({ content }) => {
             display: "flex",
             width: "100%",
             alignItems: "flex-end",
-            height: "80%",
+            height: "100%",
           }}
         >
           <Paper
             type="dark-border"
             sx={{
-              // flexGrow: "1",
               height: content ? "fit-content" : "100%",
               margin: 0,
-              marginBottom: "1rem",
               padding: content ? 1 : 0,
               width: isOpenSelectBar ? "76%" : "100%",
             }}
@@ -137,7 +140,12 @@ const PannelArea: FC<PannelAreaProps> = ({ content }) => {
               ""
             )}
           </Paper>
-          {isOpenSelectBar && <OptionsBar variant="dropdown" />}
+          {isOpenSelectBar && (
+            <OptionsBar
+              variant="input"
+              handleUpdate={handleUpdate ? () => handleUpdate() : undefined}
+            />
+          )}
         </Box>
         {content ? (
           ""

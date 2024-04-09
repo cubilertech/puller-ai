@@ -32,8 +32,8 @@
   grid-area: content;
   margin-top: 86px; /* Top bar height */
   margin-left: 240px; /* Sidebar width */
-  padding: 20px; /* Adjust padding as needed */
-  overflow: scroll;
+  padding: 15px; /* Adjust padding as needed */
+  overflow: auto;
   overflow-x: hidden;
 }
 

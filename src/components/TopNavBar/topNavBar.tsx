@@ -6,11 +6,13 @@ import { usePathname } from "next/navigation";
 import { PagesType } from "@/utils/constants";
 import CustomLink from "../Link/link";
 import NotificationIconButton from "@/common/notificationIconButton/notificationIconButton";
+import RoundedButton from "@/common/RoundedButton/roundedButton";
 
 const TopNavBar = () => {
   const route = usePathname();
   const routeParts = route.replace(/^\//, "").split("/");
   const firstRoute = routeParts[0];
+  console.log(firstRoute, PagesType.RECENT_REQUESTS, "route");
   return (
     <>
       <Box
@@ -25,24 +27,41 @@ const TopNavBar = () => {
         }}
       >
         <Box sx={{ ml: 4 }}>
-          {firstRoute === PagesType.RECENT_REQUESTS ||
-            (firstRoute === PagesType.PREVIEW_DATA && (
-              <CustomLink href="/createRequest">
-                <Typography
-                  variant="text-md-bold"
-                  sx={{
-                    color: palette.base.white,
-                    display: "flex",
-                    gap: 1,
-                    textAlign: "center",
-                    cursor: "pointer",
-                  }}
-                >
-                  <Icon icon="arrowLeftIcon" height={24} width={24} />
-                  Back
-                </Typography>
-              </CustomLink>
-            ))}
+          {firstRoute === PagesType.PREVIEW_DATA ? (
+            <CustomLink href={"/results"}>
+              <Typography
+                variant="text-md-bold"
+                sx={{
+                  color: palette.base.white,
+                  display: "flex",
+                  gap: 1,
+                  textAlign: "center",
+                  cursor: "pointer",
+                }}
+              >
+                <Icon icon="arrowLeftIcon" height={24} width={24} />
+                Back
+              </Typography>
+            </CustomLink>
+          ) : firstRoute === PagesType.RECENT_REQUESTS ? (
+            <CustomLink href={"/create"}>
+              <Typography
+                variant="text-md-bold"
+                sx={{
+                  color: palette.base.white,
+                  display: "flex",
+                  gap: 1,
+                  textAlign: "center",
+                  cursor: "pointer",
+                }}
+              >
+                <Icon icon="arrowLeftIcon" height={24} width={24} />
+                Back
+              </Typography>
+            </CustomLink>
+          ) : (
+            ""
+          )}
         </Box>
         <Box
           sx={{
@@ -62,6 +81,10 @@ const TopNavBar = () => {
             iconHeight={28}
             iconWidth={28}
             isNotice
+          />
+          <RoundedButton
+            variant="select"
+            selectData={{ avatar: "/Images/Icons/avatar.svg", name: "Mav" }}
           />
         </Box>
       </Box>

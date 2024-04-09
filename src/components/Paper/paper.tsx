@@ -6,14 +6,16 @@ interface PaperProps {
   type: "light-border" | "dark-border" | "light-bg-border";
   children?: ReactNode;
   sx?: CSSProperties;
+  onClick?: () => void;
 }
 
-const Paper: FC<PaperProps> = ({ type, children, sx, ...props }) => {
+const Paper: FC<PaperProps> = ({ type, children, sx, onClick, ...props }) => {
   switch (type) {
     case "light-border":
       return (
         <>
           <MuiPaper
+            onClick={onClick}
             {...props}
             sx={{
               borderRadius: "16px",
@@ -32,6 +34,7 @@ const Paper: FC<PaperProps> = ({ type, children, sx, ...props }) => {
       return (
         <>
           <MuiPaper
+            onClick={onClick}
             {...props}
             sx={{
               m: 1,
@@ -51,6 +54,7 @@ const Paper: FC<PaperProps> = ({ type, children, sx, ...props }) => {
       return (
         <>
           <MuiPaper
+            onClick={onClick}
             {...props}
             sx={{
               borderRadius: "16px",

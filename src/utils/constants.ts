@@ -21,10 +21,10 @@ export const icons = {
 };
 
 export const PagesType = {
-  RECENT_REQUESTS: "recentRequests",
+  RECENT_REQUESTS: "recent",
   YOUR_RESULTS: "yourResults",
   CREATE_REQUEST: "createRequest",
-  PREVIEW_DATA: "previewData",
+  PREVIEW_DATA: "preview",
 };
 
 export const SingleCardDomyData = [

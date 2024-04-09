@@ -1,17 +1,14 @@
 import { PageHeader } from "@/components/PageHeader";
-import { SideNavbar } from "@/components/SideNavbar";
-import { Box, TextareaAutosize } from "@mui/material";
+import { Box } from "@mui/material";
 import { PannelArea } from "../PannelArea";
 
 const CreateRequestPage = () => {
   return (
-    <Box
-      sx={{
-        padding: "1rem 2rem 1rem",
-      }}
-    >
+    <Box sx={{ px: 1.2, pt: 1 }}>
       <PageHeader type="create" />
-      <PannelArea />
+      <Box sx={{ pt: 2, width: "97%", m: "auto" }}>
+        <PannelArea />
+      </Box>
     </Box>
   );
 };
