@@ -7,7 +7,7 @@ export default function CreateRequest() {
   return (
     <>
       <SideNavbar />
-      <ValidateRequestPage  />
+      <ValidateRequestPage />
     </>
   );
 }

@@ -1,7 +1,7 @@
 import { PageHeader } from "@/components/PageHeader";
 import { SideNavbar } from "@/components/SideNavbar";
-import { InputArea } from "@/components/inputArea";
 import { Box, TextareaAutosize } from "@mui/material";
+import { PannelArea } from "../PannelArea";
 
 const CreateRequestPage = () => {
   return (
@@ -11,7 +11,7 @@ const CreateRequestPage = () => {
       }}
     >
       <PageHeader type="create" />
-      <InputArea />
+      <PannelArea />
     </Box>
   );
 };
