@@ -6,7 +6,7 @@ import "./Button.css";
 
 interface ButtonProps {
   size?: "small" | "medium" | "large";
-  label: string;
+  label?: string;
   onClick?: () => void;
   variant: "contained" | "outlined" | "text";
   disabled?: boolean;
@@ -14,6 +14,7 @@ interface ButtonProps {
   textTransform?: "capitalize" | "lowercase" | "uppercase" | "inherit";
   endIcon?: ReactNode;
   startIcon?: ReactNode;
+  children?: ReactNode;
 }
 
 const Button: FC<ButtonProps> = ({
@@ -25,6 +26,7 @@ const Button: FC<ButtonProps> = ({
   onClick,
   startIcon,
   endIcon,
+  children,
   ...props
 }) => {
   return (
@@ -40,7 +42,7 @@ const Button: FC<ButtonProps> = ({
         endIcon={endIcon}
         startIcon={startIcon}
       >
-        {label}
+        {label || children}
       </MuiButton>
     </div>
   );
