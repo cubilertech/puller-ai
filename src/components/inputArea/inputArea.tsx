@@ -11,8 +11,8 @@ const InputArea = () => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          mt: "0.5rem",
-          height: "75vh",
+          mt: 2,
+          height: "65vh",
         }}
       >
         <Paper
@@ -65,7 +65,7 @@ const InputArea = () => {
                     variant="outlined"
                     label="Prompt"
                     fullWidth
-                    endIcon={<Icon icon="plus" height={2} width={8} />}
+                    endIcon={<Icon icon="plus" height={8} width={8} />}
                   />
                 </Box>
 
@@ -75,7 +75,7 @@ const InputArea = () => {
                     size="small"
                     variant="outlined"
                     label="Source"
-                    endIcon={<Icon icon="minus" height={2} width={8} />}
+                    endIcon={<Icon icon="minus" height={8} width={8} />}
                   />
                 </Box>
               </Box>

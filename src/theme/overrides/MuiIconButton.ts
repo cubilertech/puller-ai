@@ -15,10 +15,10 @@ export const MuiIconButton = (theme: Theme) => {
           "&.MuiButton-sizeLarge": {
             height: "45px",
           },
-          borderRadius: "100%",
+          borderRadius: "8px",
           border: `1px solid var(--vison-pro-stock, ${palette.base.white})`,
-          background:
-            "var(--Vision-pro-01, linear-gradient(143deg, rgba(255, 255, 255, 0.22) -5.54%, rgba(114, 114, 114, 0.25) 35.15%))",
+          background: "rgb(115,129,133)",
+
           backdropFilter: "blur(8px)",
         },
       },

@@ -15,12 +15,11 @@ const Loader: FC<LoaderProps> = ({ varient }) => {
         <Box
           sx={{
             display: "flex",
-            gap: "20px",
             flexDirection: "column",
             alignItems: "center",
           }}
         >
-          <Icon icon="logo" width={200} height={220} />
+          <Icon icon="logoIcon" width={240} height={260} />
           <Typography variant="display-xs-medium" color={palette.base.white}>
             Processing..
           </Typography>
@@ -28,17 +27,18 @@ const Loader: FC<LoaderProps> = ({ varient }) => {
       );
     case "paper":
       return (
-        <Paper type="light-border">
+        <Paper type="light-border" sx={{ width: "100%", height: "100%" }}>
           <Box
             sx={{
               display: "flex",
-              gap: "20px",
               flexDirection: "column",
-              p: 20,
               alignItems: "center",
+              justifyContent: "center",
+              width: "100%",
+              height: "100%",
             }}
           >
-            <Icon icon="logo" width={200} height={220} />
+            <Icon icon="logoIcon" width={260} height={280} />
             <Typography variant="display-xs-medium" color={palette.base.white}>
               Processing..
             </Typography>

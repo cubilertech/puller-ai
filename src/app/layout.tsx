@@ -20,7 +20,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <ThemeProvider theme={customTheme}>
-        <body className={inter.className}>{children}</body>
+        <body className={inter.className}>
+          <div className="main-container">{children}</div>
+        </body>
       </ThemeProvider>
     </html>
   );

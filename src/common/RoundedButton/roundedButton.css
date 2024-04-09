@@ -1,13 +1,13 @@
-.icon-btn-container {
+.container-round-btn {
   padding: 1px;
   background: linear-gradient(
     to bottom right,
     rgba(255, 255, 255, 0.7),
-    rgba(255, 255, 255, 0.4),
-    rgba(255, 255, 255, 0.4),
-    rgba(255, 255, 255, 0.4),
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.1),
     rgba(255, 255, 255, 0.7)
   );
-  border-radius: 8px;
+  border-radius: 50px;
   width: fit-content;
 }
