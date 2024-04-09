@@ -17,6 +17,7 @@ export const icons = {
   advancedIcon: "Images/Icons/advanced-icon.svg",
   retriversIcon: "Images/Icons/retrivers-icon.svg",
   alertsIcon: "Images/Icons/alerts-icon.svg",
+  arrowDown: "Images/Icons/arrow-down.svg",
 };
 
 export const PagesType = {

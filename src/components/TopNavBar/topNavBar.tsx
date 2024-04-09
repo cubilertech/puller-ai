@@ -2,7 +2,7 @@
 import { palette } from "@/theme/Palette";
 import { Box, Typography } from "@mui/material";
 import { Icon } from "../Icon";
-import NotificationIconButton from "@/common/notificationIconButton/notificationIconButton";
+import NotificationIconButton from "@/common/NotificationIconButton/notificationIconButton";
 import { usePathname } from "next/navigation";
 import { PagesType } from "@/utils/constants";
 import CustomLink from "../Link/link";
