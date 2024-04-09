@@ -1,6 +1,7 @@
+"use client";
 import { palette } from "@/theme/Palette";
-import { Box, Button, Typography } from "@mui/material";
-import { FC } from "react";
+import { Box, Button, Menu, MenuItem, Typography } from "@mui/material";
+import { FC, useState } from "react";
 
 import "./roundedButton.css";
 import { UserProps } from "@/utils/types";
@@ -13,6 +14,16 @@ interface buttonProps {
 }
 
 const RoundedButton: FC<buttonProps> = ({ variant, selectData }) => {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
   const isImage =
     variant === "select" && selectData?.avatar
       ? selectData.avatar
@@ -52,6 +63,7 @@ const RoundedButton: FC<buttonProps> = ({ variant, selectData }) => {
               px: 4,
             }}
             variant="outlined"
+            onClick={handleMenuOpen}
           >
             <Box
               sx={{
@@ -72,6 +84,38 @@ const RoundedButton: FC<buttonProps> = ({ variant, selectData }) => {
               <Icon icon="arrowDown" />
             </Box>
           </Button>
+          <Menu
+            sx={{
+              width: 252,
+            }}
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={handleMenuClose}
+            anchorOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            transformOrigin={{
+              vertical: "top",
+              horizontal: "right",
+            }}
+            PaperProps={{
+              style: {
+                width: 122,
+                // marginLeft: 32,
+                marginTop: 45,
+                borderRadius: "8px",
+                border: "2px solid rgba(196, 196, 196, 0.60)",
+                background:
+                  "linear-gradient(142.96deg, rgba(68,74,89,255) -3.54%,  rgba(68,74,89,255) 7.55%, rgba(55,61,74,255) 95.15%)",
+                backdropFilter: "blur(20px)",
+                paddingTop: 0,
+                paddingBottom: 0,
+              },
+            }}
+          >
+            <MenuItem>Logout</MenuItem>
+          </Menu>
         </div>
       );
   }
