@@ -1,4 +1,5 @@
 "use client";
+import CustomLink from "@/components/Link/link";
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
 import { ResultCard } from "@/components/ResultCard";
@@ -22,7 +23,7 @@ const YourResultsPage: FC = () => {
     fileSize: "23 mb",
     fileStructured: "Prototype",
     fileTimestamps: "20 Feb, 2024",
-    fileCaveats: "Caveat by See More",
+    fileCaveats: "Caveat by",
     fileCaveatsURL: "",
     sources: "From Passage",
     title: "Key Observations",
@@ -71,11 +72,13 @@ const YourResultsPage: FC = () => {
             >
               {SingleCardDomyData.map((item, i) => (
                 <Box mr={-10} width={"100%"} key={i}>
-                  <SimpleCard
-                    isFor="Results"
-                    title={item.title}
-                    discription={item.discription}
-                  />
+                  <CustomLink href="/preview">
+                    <SimpleCard
+                      isFor="Results"
+                      title={item.title}
+                      discription={item.discription}
+                    />
+                  </CustomLink>
                 </Box>
               ))}
             </Box>

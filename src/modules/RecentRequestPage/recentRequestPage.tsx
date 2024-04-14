@@ -9,7 +9,7 @@ import { FC } from "react";
 const RecentRequestPage: FC = () => {
   return (
     <>
-      <Box sx={{ mt: 4 }}>
+      <Box p={2}>
         <PageHeader type="Recent" />
 
         <Grid
@@ -17,7 +17,7 @@ const RecentRequestPage: FC = () => {
           gap={2}
           sx={{
             mt: 3,
-            maxHeight: "80vh",
+            maxHeight: "78vh",
             overflow: "auto",
             scrollbarWidth: "none",
             width: "100%",

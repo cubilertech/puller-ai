@@ -92,7 +92,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
           <Box sx={{ display: "flex", gap: 1 }}>
             <Typography variant="text-sm-regular">File Caveats:</Typography>
             <Typography variant="text-sm-semibold">
-              {data.fileCaveats}
+              {data.fileCaveats} <CustomLink href="/" variant="border">See More</CustomLink>
             </Typography>
           </Box>
           <Box sx={{ display: "flex", gap: 1 }}>
