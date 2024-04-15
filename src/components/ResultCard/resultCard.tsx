@@ -5,6 +5,7 @@ import { CardData } from "@/utils/types";
 import { IconButton } from "../IconButton";
 import { Button } from "../Button";
 import Divider from "../Divider/divider";
+import CustomLink from "../Link/link";
 
 interface ResultCardProps {
   data: CardData;
@@ -13,7 +14,16 @@ interface ResultCardProps {
 const ResultCard: FC<ResultCardProps> = ({ data }) => {
   return (
     <>
-      <Paper type="light-border" sx={{ padding: 3, height: "100%" }}>
+      <Paper
+        type="light-border"
+        sx={{
+          padding: 3,
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          gap: 1,
+        }}
+      >
         <Box
           sx={{
             width: "100%",
@@ -33,17 +43,19 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
                 fullWidth
               />
             </Box>
-            <Box width={"36px"}>
-              <IconButton
-                icon="eyeIcon"
-                iconHeight={16}
-                iconWidth={16}
-                fullWidth
-              />
-            </Box>
+            <CustomLink href="/preview">
+              <Box width={"36px"}>
+                <IconButton
+                  icon="eyeIcon"
+                  iconHeight={16}
+                  iconWidth={16}
+                  fullWidth
+                />
+              </Box>
+            </CustomLink>
           </Box>
         </Box>
-        <Box sx={{ mt: 2, maxWidth: "568px" }}>
+        <Box sx={{ maxWidth: "568px" }}>
           <Typography variant="text-md-regular">
             {data.main_discription}
           </Typography>
@@ -53,7 +65,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
             display: "flex",
             flexDirection: "column",
             gap: 1,
-            mt: 5,
+            mt: 2,
             alignItems: "start",
             width: "100%",
           }}
@@ -80,7 +92,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
           <Box sx={{ display: "flex", gap: 1 }}>
             <Typography variant="text-sm-regular">File Caveats:</Typography>
             <Typography variant="text-sm-semibold">
-              {data.fileCaveats}
+              {data.fileCaveats} <CustomLink href="/" variant="border">See More</CustomLink>
             </Typography>
           </Box>
           <Box sx={{ display: "flex", gap: 1 }}>
@@ -112,7 +124,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
             height: "32%",
           }}
         >
-          <Box py={2}>
+          <Box pb={2} pt={"6%"}>
             <Divider variant="fullWidth" type="dark" />
           </Box>
           <Box

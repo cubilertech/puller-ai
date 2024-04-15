@@ -3,9 +3,11 @@ import { Box, Typography } from "@mui/material";
 import { FC } from "react";
 import { Button } from "../Button";
 import { palette } from "@/theme/Palette";
+import RoundedButton from "@/common/RoundedButton/roundedButton";
+import CustomLink from "../Link/link";
 
 interface PageHeaderProps {
-  type: "Recent" | "Results" | "create" | "Validate";
+  type: "Recent" | "Results" | "create" | "Validate" | "Preview";
 }
 
 const PageHeader: FC<PageHeaderProps> = ({ type }) => {
@@ -52,9 +54,11 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
           <Typography variant="display-xs-semibold" color={palette.base.white}>
             Create a Request
           </Typography>
-          <Box width={242}>
-            <Button variant="outlined" fullWidth label="Request History" />
-          </Box>
+          <CustomLink href="/recent">
+            <Box width={242}>
+              <Button variant="outlined" fullWidth label="Request History" />
+            </Box>
+          </CustomLink>
         </Box>
       );
     case "Validate":
@@ -69,9 +73,24 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
           <Typography variant="display-xs-semibold" color={palette.base.white}>
             Validate Request
           </Typography>
-          <Box width={242}>
-            <Button variant="outlined" label="SQL" />
+          <Box pr={5}>
+            <RoundedButton variant="button" />
           </Box>
+        </Box>
+      );
+    case "Preview":
+      return (
+        <Box
+          sx={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+          }}
+        >
+          <Typography variant="display-xs-semibold" color={palette.base.white}>
+            Preview Data
+          </Typography>
+          <Box></Box>
         </Box>
       );
   }

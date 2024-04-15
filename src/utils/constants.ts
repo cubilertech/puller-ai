@@ -18,13 +18,15 @@ export const icons = {
   retriversIcon: "Images/Icons/retrivers-icon.svg",
   alertsIcon: "Images/Icons/alerts-icon.svg",
   arrowDown: "Images/Icons/arrow-down.svg",
+  paginationLeft: "Images/Icons/arrow-left-icon.svg",
+  paginationRight: "Images/Icons/arrow-right-icon.svg",
 };
 
 export const PagesType = {
-  RECENT_REQUESTS: "recentRequests",
+  RECENT_REQUESTS: "recent",
   YOUR_RESULTS: "yourResults",
   CREATE_REQUEST: "createRequest",
-  PREVIEW_DATA: "previewData",
+  PREVIEW_DATA: "preview",
 };
 
 export const SingleCardDomyData = [

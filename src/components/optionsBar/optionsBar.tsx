@@ -23,9 +23,10 @@ interface optionbarProps {
     | "round-checkbox"
     | "dropdown"
     | "options-dropdown";
+  handleUpdate?: () => void | undefined;
 }
 
-const OptionsBar: FC<optionbarProps> = ({ variant }) => {
+const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   // Event handler to handle the opening of the Select
@@ -43,9 +44,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant }) => {
       <Box
         sx={{
           width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
+          height: "100%",
         }}
       >
         <Paper
@@ -54,7 +53,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant }) => {
             display: "flex",
             flexDirection: "column",
             padding: "1rem",
-            minHeight: "calc(100vh - 22vh)",
+            height: "98.8%",
             justifyContent: "space-between",
           }}
         >
@@ -94,7 +93,11 @@ const OptionsBar: FC<optionbarProps> = ({ variant }) => {
                 mt: "1rem",
               }}
             >
-              <Button label="Update" variant="contained" />
+              <Button
+                onClick={handleUpdate}
+                label="Update"
+                variant="contained"
+              />
             </Box>
           </Box>
         </Paper>
