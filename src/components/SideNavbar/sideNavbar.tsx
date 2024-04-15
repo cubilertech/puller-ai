@@ -75,22 +75,22 @@ const SideNavbar = () => {
                   {
                     name: "Pulls",
                     img: <Icon width={18} height={18} icon="pullsIcon" />,
-                    link: "/request/preview",
+                    link: "/pulls",
                   },
                   {
                     name: "Retrivers",
                     img: <Icon width={18} height={18} icon="retriversIcon" />,
-                    link: "/create",
+                    link: "/retrivers",
                   },
                   {
                     name: "Alerts",
                     img: <Icon width={18} height={18} icon="alertsIcon" />,
-                    link: "/create",
+                    link: "/alerts",
                   },
                   {
                     name: "Advanced",
                     img: <Icon width={18} height={18} icon="advancedIcon" />,
-                    link: "/create",
+                    link: "/advanced",
                   },
                 ].map((text, index) => (
                   <ListItem key={text.name}>
