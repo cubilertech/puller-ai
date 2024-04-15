@@ -16,7 +16,7 @@ const ValidateRequestPage: FC = () => {
 
     setTimeout(() => {
       setisProccessing(false);
-      route.push("/results");
+      route.push("/request/results");
     }, 8000);
   };
   const content = {

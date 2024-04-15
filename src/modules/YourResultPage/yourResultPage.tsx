@@ -13,7 +13,7 @@ const YourResultsPage: FC = () => {
   const route = useRouter();
 
   const handleOpenNotes = () => {
-    route.push("/recent");
+    route.push("/request/recent");
   };
   const data = {
     main_title: "Element X Performance by Store and SKU",
@@ -72,7 +72,7 @@ const YourResultsPage: FC = () => {
             >
               {SingleCardDomyData.map((item, i) => (
                 <Box mr={-10} width={"100%"} key={i}>
-                  <CustomLink href="/preview">
+                  <CustomLink href="/request/preview">
                     <SimpleCard
                       isFor="Results"
                       title={item.title}

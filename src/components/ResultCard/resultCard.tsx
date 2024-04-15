@@ -44,7 +44,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
                 fullWidth
               />
             </Box>
-            <CustomLink href="/preview">
+            <CustomLink href="/request/preview">
               <Box width={"36px"}>
                 <IconButton
                   icon="eyeIcon"
