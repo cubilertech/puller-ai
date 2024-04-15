@@ -1,5 +1,6 @@
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
+import DataTable from "@/components/table/table";
 import { Box, Typography } from "@mui/material";
 import { FC } from "react";
 
@@ -40,7 +41,9 @@ const PreviewDataPage: FC = () => {
               line items by Customer ID
             </Typography>
           </Paper>
-          <Paper type="light-border"></Paper>
+          <Paper type="light-border">
+            <DataTable />
+          </Paper>
         </Box>
       </Box>
     </>

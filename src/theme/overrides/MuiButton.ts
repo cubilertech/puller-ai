@@ -21,6 +21,7 @@ export const MuiButton = (theme: Theme) => {
           borderRadius: "16px",
           textTransform: "none" as const,
           zIndex: 4,
+          border: "none",
         },
         contained: {
           borderRadius: "8px",
@@ -40,11 +41,12 @@ export const MuiButton = (theme: Theme) => {
           borderRadius: "8px",
           border: "none",
           background: "#7c7586",
-          backdropFilter: "blur(8px)",
+          // backdropFilter: "blur(8px)",
           "&:hover": {
-            color: palette.base.white,
+            // color: palette.base.white,
             border: "none",
-            backgroundColor: "#FFFFFF4D 30%, rgba(255, 255, 255, 0.40)",
+            background: "#7c7586",
+            // backgroundColor: "#rgba(255, 255, 255, 0.3)",
           },
         },
         text: {
