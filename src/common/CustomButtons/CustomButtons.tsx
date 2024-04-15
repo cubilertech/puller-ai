@@ -12,9 +12,15 @@ interface buttonProps {
   variant: "select" | "rounded-SQL" | "smallbutton";
   text?: string;
   selectData?: UserProps;
+  onClick?: () => void;
 }
 
-const CustomButton: FC<buttonProps> = ({ variant, selectData, text }) => {
+const CustomButton: FC<buttonProps> = ({
+  variant,
+  selectData,
+  text,
+  onClick,
+}) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -46,6 +52,7 @@ const CustomButton: FC<buttonProps> = ({ variant, selectData, text }) => {
               m: 0,
               mt: -0.6,
             }}
+            onClick={onClick}
             variant="outlined"
           >
             <Typography variant="text-xs" sx={{ color: "#e6e6e6" }}>
@@ -67,6 +74,7 @@ const CustomButton: FC<buttonProps> = ({ variant, selectData, text }) => {
               py: 2,
               px: 4,
             }}
+            onClick={onClick}
             variant="outlined"
           >
             <Typography variant="text-md-bold">SQL</Typography>

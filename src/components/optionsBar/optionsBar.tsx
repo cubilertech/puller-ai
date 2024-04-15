@@ -2,10 +2,7 @@ import {
   Box,
   Checkbox,
   Divider,
-  FormControl,
   Input,
-  InputLabel,
-  Menu,
   MenuItem,
   Select,
   Typography,
@@ -51,6 +48,8 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate }) => {
               display: "flex",
               flexDirection: "column",
               gap: "1rem",
+              overflow: "auto",
+              scrollbarColor: "none",
             }}
           >
             <Typography color={"#fff"} variant="text-md-regular">
