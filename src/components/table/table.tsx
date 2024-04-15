@@ -300,7 +300,6 @@ const DataTable = () => {
         <Box
           sx={{
             display: "flex",
-            //   justifyContent: "space-around",
             gap: "1rem",
             alignItems: "center",
           }}
@@ -350,19 +349,64 @@ const DataTable = () => {
             variant="text"
             disabled={page === 0}
           >
-            <Icon icon="arrowLeftIcon" />
+            <Icon icon="paginationLeft" />
           </Button>
-          <Button variant="text" label="1" onClick={() => setPage(0)} />
-          <Button variant="text" label="2" onClick={() => setPage(1)} />
-          <Button variant="text" label="3" onClick={() => setPage(2)} />
+          <Button
+            sx={{
+              ":hover": {
+                backgroundColor: "#5D92FE",
+              },
+            }}
+            variant="text"
+            label="1"
+            onClick={() => setPage(0)}
+          />
+          <Button
+            sx={{
+              ":hover": {
+                backgroundColor: "#5D92FE",
+              },
+            }}
+            variant="text"
+            label="2"
+            onClick={() => setPage(1)}
+          />
+          <Button
+            sx={{
+              ":hover": {
+                backgroundColor: "#5D92FE",
+              },
+            }}
+            variant="text"
+            label="3"
+            onClick={() => setPage(2)}
+          />
+          <Typography>...</Typography>
+          <Button
+            sx={{
+              ":hover": {
+                backgroundColor: "#5D92FE",
+              },
+            }}
+            variant="text"
+            label="10"
+            onClick={() => setPage(10)}
+          />
 
           <Button
             onClick={() => setPage((page) => page + 1)}
-            label="+"
+            label=""
             variant="text"
             disabled={page === Math.ceil(tabelData.length / rowsPerPage) - 1}
+            sx={{
+              width: 32,
+              height: 32,
+              ":hover": {
+                backgroundColor: "transparent",
+              },
+            }}
           >
-            <Icon icon="plus" />
+            <Icon icon="paginationRight" />
           </Button>
         </Box>
       </Box>
