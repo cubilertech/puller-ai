@@ -63,6 +63,45 @@ const Icon: FC<IconProps> = ({
       />
     );
   }
+  if (icon === "paginationLeft") {
+    return disabled ? (
+      <Image
+        {...props}
+        src={"Images/Icons/disabled-arrow-left-icon.svg"}
+        alt="icon"
+        width={width}
+        height={height}
+      />
+    ) : (
+      <Image
+        {...props}
+        src={"Images/Icons/arrow-left-icon.svg"}
+        alt="icon"
+        width={width}
+        height={height}
+      />
+    );
+  }
+
+  if (icon === "paginationRight") {
+    return disabled ? (
+      <Image
+        {...props}
+        src={"Images/Icons/disabled-arrow-right-icon.svg"}
+        alt="icon"
+        width={width}
+        height={height}
+      />
+    ) : (
+      <Image
+        {...props}
+        src={"Images/Icons/arrow-right-icon.svg"}
+        alt="icon"
+        width={width}
+        height={height}
+      />
+    );
+  }
 
   return (
     <Image {...props} src={iconPath} alt="icon" width={width} height={height} />

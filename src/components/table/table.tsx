@@ -19,36 +19,6 @@ import { Button } from "../Button";
 import { ArrowUpward } from "@mui/icons-material";
 
 const DataTable = () => {
-  const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
-
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [selectedRows, setSelectedRows] = useState<number>(1);
-
-  const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMenuItemClick = (value: number) => {
-    setSelectedRows(value);
-    setAnchorEl(null);
-  };
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const handleChangePage = (
-    event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
-    newPage: number
-  ) => {
-    setPage(newPage);
-  };
-  const handleChangeRowsPerPage = (event: ChangeEvent<HTMLInputElement>) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
   const tabelData = [
     {
       id: "1",
@@ -192,6 +162,27 @@ const DataTable = () => {
     },
   ];
 
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const [activePage, setActivePage] = useState<number>(0);
+  const totalPages = Math.ceil(tabelData.length / rowsPerPage);
+
+  const handlePageChange = (page: number) => {
+    setActivePage(page);
+    setPage(page);
+  };
+
+  const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   return (
     <Box
       sx={{
@@ -210,35 +201,75 @@ const DataTable = () => {
                   border: "none",
                 }}
               >
-                Title
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    gap: "10px",
+                  }}
+                >
+                  Title <Icon icon="arrowDown" width={12} height={12} />
+                </Box>
               </TableCell>
               <TableCell
                 sx={{
                   border: "none",
                 }}
               >
-                Title
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    gap: "10px",
+                  }}
+                >
+                  Title <Icon icon="arrowDown" width={12} height={12} />
+                </Box>
               </TableCell>
               <TableCell
                 sx={{
                   border: "none",
                 }}
               >
-                Title
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    gap: "10px",
+                  }}
+                >
+                  Title <Icon icon="arrowDown" width={12} height={12} />
+                </Box>
               </TableCell>
               <TableCell
                 sx={{
                   border: "none",
                 }}
               >
-                Title
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    gap: "10px",
+                  }}
+                >
+                  Title <Icon icon="arrowDown" width={12} height={12} />
+                </Box>
               </TableCell>
               <TableCell
                 sx={{
                   border: "none",
                 }}
               >
-                Title
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "flex-start",
+                    gap: "10px",
+                  }}
+                >
+                  Title <Icon icon="arrowDown" width={12} height={12} />
+                </Box>
               </TableCell>
             </TableRow>
           </TableHead>
@@ -321,7 +352,14 @@ const DataTable = () => {
                 onClose={handleClose}
               >
                 {[1, 3, 5, 10].map((value) => (
-                  <MenuItem key={value} onClick={() => setRowsPerPage(value)}>
+                  <MenuItem
+                    key={value}
+                    onClick={() => {
+                      setRowsPerPage(value);
+                      setPage(0);
+                      setActivePage(0);
+                    }}
+                  >
                     {value}
                   </MenuItem>
                 ))}
@@ -343,69 +381,69 @@ const DataTable = () => {
           }}
         >
           <Button
-            onClick={() => setPage((page) => page - 1)}
+            onClick={() => handlePageChange(page - 1)}
             label=""
             variant="text"
             disabled={page === 0}
+            sx={{
+              minWidth: 32,
+              width: "32px !important ",
+              height: "32px !important ",
+              border:
+                page === 0
+                  ? "1px solid rgba(225,225,225,0.4)"
+                  : "1px solid white",
+              ":hover": {
+                backgroundColor: "transparent",
+                opacity: 1,
+              },
+            }}
           >
-            <Icon icon="paginationLeft" />
+            <Icon icon="paginationLeft" disabled={page === 0} />
           </Button>
-          <Button
-            sx={{
-              ":hover": {
-                backgroundColor: "#5D92FE",
-              },
-            }}
-            variant="text"
-            label="1"
-            onClick={() => setPage(0)}
-          />
-          <Button
-            sx={{
-              ":hover": {
-                backgroundColor: "#5D92FE",
-              },
-            }}
-            variant="text"
-            label="2"
-            onClick={() => setPage(1)}
-          />
-          <Button
-            sx={{
-              ":hover": {
-                backgroundColor: "#5D92FE",
-              },
-            }}
-            variant="text"
-            label="3"
-            onClick={() => setPage(2)}
-          />
-          <Typography>...</Typography>
-          <Button
-            sx={{
-              ":hover": {
-                backgroundColor: "#5D92FE",
-              },
-            }}
-            variant="text"
-            label="10"
-            onClick={() => setPage(10)}
-          />
+
+          {[...Array(totalPages).keys()].map((pageNumber) => (
+            <Button
+              key={pageNumber}
+              variant="text"
+              label={(pageNumber + 1).toString()}
+              onClick={() => handlePageChange(pageNumber)}
+              sx={{
+                minWidth: 32,
+                width: "32px !important ",
+                height: "32px !important ",
+                backgroundColor:
+                  activePage === pageNumber ? "#5D92FE" : "inherit",
+                ":hover": {
+                  backgroundColor: "#5D92FE",
+                },
+              }}
+            />
+          ))}
 
           <Button
-            onClick={() => setPage((page) => page + 1)}
+            onClick={() => handlePageChange(page + 1)}
             label=""
             variant="text"
             disabled={page === Math.ceil(tabelData.length / rowsPerPage) - 1}
             sx={{
-              width: 32,
-              height: 32,
+              minWidth: 32,
+              width: "32px !important ",
+              height: "32px !important ",
+              border:
+                page === Math.ceil(tabelData.length / rowsPerPage) - 1
+                  ? "1px solid rgba(225,225,225,0.4)"
+                  : "1px solid white",
               ":hover": {
                 backgroundColor: "transparent",
+                opacity: 1,
               },
             }}
           >
-            <Icon icon="paginationRight" />
+            <Icon
+              icon="paginationRight"
+              disabled={page === Math.ceil(tabelData.length / rowsPerPage) - 1}
+            />
           </Button>
         </Box>
       </Box>
