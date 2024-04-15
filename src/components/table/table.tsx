@@ -289,15 +289,6 @@ const DataTable = () => {
         </Table>
       </TableContainer>
 
-      {/* <TablePagination
-        rowsPerPageOptions={[1, 2, 3]}
-        component="div"
-        count={tabelData.length}
-        rowsPerPage={rowsPerPage}
-        page={page}
-        onPageChange={handleChangePage}
-        onRowsPerPageChange={handleChangeRowsPerPage}
-      /> */}
       <Box
         sx={{
           display: "flex",
@@ -315,30 +306,23 @@ const DataTable = () => {
           }}
         >
           <Box>
-            {/* <Button label="Show 1" variant="outlined" endIcon={<ArrowUpward />}>
-              <Select>
-                <MenuItem onClick={() => setRowsPerPage(1)}>1</MenuItem>
-                <MenuItem onClick={() => setRowsPerPage(2)}>2</MenuItem>
-                <MenuItem onClick={() => setRowsPerPage(3)}>3</MenuItem>
-                <MenuItem onClick={() => setRowsPerPage(4)}>4</MenuItem>
-              </Select>
-            </Button> */}
-            {/* <RowsPerPageButton /> */}
-
             <>
               <Button
                 onClick={handleButtonClick}
                 endIcon={<ArrowUpward />}
                 variant="outlined"
+                size="small"
               >
-                Show {rowsPerPage}
+                <Typography variant="text-xs-medium">
+                  Show {rowsPerPage}
+                </Typography>
               </Button>
               <Menu
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                {[1, 2, 3, 4].map((value) => (
+                {[1, 3, 5, 10].map((value) => (
                   <MenuItem key={value} onClick={() => setRowsPerPage(value)}>
                     {value}
                   </MenuItem>
@@ -346,7 +330,7 @@ const DataTable = () => {
               </Menu>
             </>
           </Box>
-          <Typography variant="text-md-regular">
+          <Typography variant="text-xs-medium" color={"#C8C8C8"}>
             Showing {page * rowsPerPage + 1} to{" "}
             {Math.min((page + 1) * rowsPerPage, tabelData.length)} of{" "}
             {tabelData.length} entries
@@ -362,11 +346,11 @@ const DataTable = () => {
         >
           <Button
             onClick={() => setPage((page) => page - 1)}
-            label="-"
-            variant="contained"
+            label=""
+            variant="text"
             disabled={page === 0}
           >
-            <Icon icon="minus" />
+            <Icon icon="arrowLeftIcon" />
           </Button>
           <Button variant="text" label="1" onClick={() => setPage(0)} />
           <Button variant="text" label="2" onClick={() => setPage(1)} />
@@ -375,7 +359,7 @@ const DataTable = () => {
           <Button
             onClick={() => setPage((page) => page + 1)}
             label="+"
-            variant="contained"
+            variant="text"
             disabled={page === Math.ceil(tabelData.length / rowsPerPage) - 1}
           >
             <Icon icon="plus" />
@@ -387,221 +371,3 @@ const DataTable = () => {
 };
 
 export default DataTable;
-
-// const RowsPerPageButton: React.FC = () => {
-//   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-//   const [selectedRows, setSelectedRows] = useState<number>(1);
-
-//   const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-//     setAnchorEl(event.currentTarget);
-//   };
-
-//   const handleMenuItemClick = (value: number) => {
-//     setSelectedRows(value);
-//     setAnchorEl(null);
-//   };
-
-//   const handleClose = () => {
-//     setAnchorEl(null);
-//   };
-
-//   return (
-//     <>
-//       <Button
-//         onClick={handleButtonClick}
-//         endIcon={<ArrowUpward />}
-//         variant="outlined"
-//       >
-//         Show {selectedRows}
-//       </Button>
-//       <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
-//         {[1, 2, 3, 4].map((value) => (
-//           <MenuItem key={value} onClick={() => value}>
-//             {value}
-//           </MenuItem>
-//         ))}
-//       </Menu>
-//     </>
-//   );
-// };
-
-// import {
-//   Box,
-//   Table,
-//   TableBody,
-//   TableCell,
-//   TableContainer,
-//   TablePagination,
-//   TableRow,
-//   Typography,
-// } from "@mui/material";
-// import { Button } from "../Button";
-// import { ArrowUpward } from "@mui/icons-material";
-// import { IconButton } from "../IconButton";
-// import { Icon } from "../Icon";
-
-// const tabelData = [
-//   {
-//     id: "1234d",
-//     email: "test@test.com",
-//     lastInteract: "019128182198",
-//     timestamp: "3/11/24",
-//     totalTxns: "23000",
-//   },
-//   {
-//     id: "122323",
-//     email: "test@2test.com",
-//     lastInteract: "01322119128182198",
-//     timestamp: "2/21/22",
-//     totalTxns: "2322",
-//   },
-//   {
-//     id: "12333",
-//     email: "test3@3test3.com",
-//     lastInteract: "3338182198",
-//     timestamp: "3/13/23",
-//     totalTxns: "23333",
-//   },
-// ];
-
-// const DataTable = () => {
-//   return (
-//     <Box
-//       sx={{
-//         display: "flex",
-//         flexDirection: "column",
-//         justifyContent: "space-between",
-//         height: "100%",
-//       }}
-//     >
-//       <TableContainer sx={{ bgcolor: "transparent", border: "none" }}>
-//         <Table>
-//           <TableBody>
-//             <TableRow>
-//               <TableCell
-//                 sx={{
-//                   border: "none",
-//                 }}
-//               >
-//                 Customer ID
-//               </TableCell>
-//               <TableCell
-//                 sx={{
-//                   border: "none",
-//                 }}
-//               >
-//                 Email
-//               </TableCell>
-//               <TableCell
-//                 sx={{
-//                   border: "none",
-//                 }}
-//               >
-//                 Last Interact
-//               </TableCell>
-//               <TableCell
-//                 sx={{
-//                   border: "none",
-//                 }}
-//               >
-//                 Timestamp
-//               </TableCell>
-//               <TableCell
-//                 sx={{
-//                   border: "none",
-//                 }}
-//               >
-//                 Total TXNS
-//               </TableCell>
-//             </TableRow>
-
-//             {tabelData.map((item) => (
-//               <TableRow key={item.id}>
-//                 <TableCell
-//                   sx={{
-//                     border: "none",
-//                   }}
-//                 >
-//                   {item.id}
-//                 </TableCell>
-//                 <TableCell
-//                   sx={{
-//                     border: "none",
-//                   }}
-//                 >
-//                   {item.email}
-//                 </TableCell>
-//                 <TableCell
-//                   sx={{
-//                     border: "none",
-//                   }}
-//                 >
-//                   {item.lastInteract}
-//                 </TableCell>
-//                 <TableCell
-//                   sx={{
-//                     border: "none",
-//                   }}
-//                 >
-//                   {item.timestamp}
-//                 </TableCell>
-//                 <TableCell
-//                   sx={{
-//                     border: "none",
-//                   }}
-//                 >
-//                   {item.totalTxns}
-//                 </TableCell>
-//               </TableRow>
-//             ))}
-//           </TableBody>
-//         </Table>
-//       </TableContainer>
-//     </Box>
-//   );
-// };
-
-// export default DataTable;
-
-// <Box
-//   sx={{
-//     display: "flex",
-//     justifyContent: "space-between",
-//     alignItems: "center",
-//     padding: "1rem",
-//   }}
-// >
-//   <Box
-//     sx={{
-//       display: "flex",
-//       //   justifyContent: "space-around",
-//       gap: "1rem",
-//       alignItems: "center",
-//     }}
-//   >
-//     <Box>
-//       <Button
-//         label="Show 10"
-//         variant="outlined"
-//         endIcon={<ArrowUpward />}
-//       />
-//     </Box>
-//     <Typography variant="text-md-regular">
-//       Showing 1 to 10 of 552 entries
-//     </Typography>
-//   </Box>
-
-//   <Box
-//     sx={{
-//       display: "flex",
-//       alignItems: "center",
-//       gap: "10px",
-//     }}
-//   >
-//     <Icon icon="minus" />
-//     <Button variant="text" label="1" />
-//     <Button variant="text" label="2" />
-//     <Button variant="text" label="3" />
-//     <Icon icon="plus" />
-//   </Box>
-// </Box>
