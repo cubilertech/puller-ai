@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 body {
-  font-family: Inter;
   color: black;
   background: linear-gradient(41.16deg, #ad00fe -4.78%, #00e0ee 100%),
     /* Gradient */ rgba(0, 0, 0, 0.4); /* Semi-transparent black */

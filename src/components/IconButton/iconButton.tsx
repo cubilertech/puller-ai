@@ -1,5 +1,9 @@
 import { FC } from "react";
-import { IconButton as MuiIconButton, Typography } from "@mui/material";
+import {
+  IconButton as MuiIconButton,
+  SxProps,
+  Typography,
+} from "@mui/material";
 import Image from "next/image";
 import { IconTypes } from "@/utils/types";
 import { Icon } from "../Icon";
@@ -12,6 +16,7 @@ interface IconButtonProps {
   iconHeight?: number;
   fullWidth?: boolean; // Explicit type for icon height
   disabled?: boolean;
+  sx?: SxProps;
 }
 
 const IconButton: FC<IconButtonProps> = ({
@@ -21,6 +26,7 @@ const IconButton: FC<IconButtonProps> = ({
   iconHeight = 40,
   fullWidth,
   disabled = false,
+  sx,
   ...props
 }) => {
   return (
@@ -29,6 +35,7 @@ const IconButton: FC<IconButtonProps> = ({
         {...props}
         sx={{
           width: fullWidth ? "100%" : "auto",
+          ...sx,
         }}
       >
         {icon && (

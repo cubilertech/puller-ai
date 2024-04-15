@@ -3,8 +3,8 @@ import { Box, Typography } from "@mui/material";
 import { FC } from "react";
 import { Button } from "../Button";
 import { palette } from "@/theme/Palette";
-import RoundedButton from "@/common/RoundedButton/roundedButton";
 import CustomLink from "../Link/link";
+import CustomButton from "@/common/CustomButtons/CustomButtons";
 
 interface PageHeaderProps {
   type: "Recent" | "Results" | "create" | "Validate" | "Preview";
@@ -19,6 +19,7 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
             display: "flex",
             width: "100%",
             justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
           <Typography variant="display-xs-semibold" color={palette.base.white}>
@@ -34,6 +35,7 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
             display: "flex",
             width: "100%",
             justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
           <Typography variant="display-xs-semibold" color={palette.base.white}>
@@ -49,6 +51,7 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
             display: "flex",
             width: "100%",
             justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
           <Typography variant="display-xs-semibold" color={palette.base.white}>
@@ -68,13 +71,14 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
             display: "flex",
             width: "100%",
             justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
           <Typography variant="display-xs-semibold" color={palette.base.white}>
             Validate Request
           </Typography>
           <Box pr={5}>
-            <RoundedButton variant="button" />
+            <CustomButton variant="rounded-SQL" />
           </Box>
         </Box>
       );
@@ -85,6 +89,7 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
             display: "flex",
             width: "100%",
             justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
           <Typography variant="display-xs-semibold" color={palette.base.white}>

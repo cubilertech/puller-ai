@@ -3,17 +3,18 @@ import { palette } from "@/theme/Palette";
 import { Box, Button, Menu, MenuItem, Typography } from "@mui/material";
 import { FC, useState } from "react";
 
-import "./roundedButton.css";
+import "./CustomButtons.css";
 import { UserProps } from "@/utils/types";
 import Image from "next/image";
 import { Icon } from "@/components/Icon";
 
 interface buttonProps {
-  variant: "select" | "button";
+  variant: "select" | "rounded-SQL" | "smallbutton";
+  text?: string;
   selectData?: UserProps;
 }
 
-const RoundedButton: FC<buttonProps> = ({ variant, selectData }) => {
+const CustomButton: FC<buttonProps> = ({ variant, selectData, text }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleMenuOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -30,7 +31,30 @@ const RoundedButton: FC<buttonProps> = ({ variant, selectData }) => {
       : "/default-avatar.png";
 
   switch (variant) {
-    case "button":
+    case "smallbutton":
+      return (
+        <div className="container-btn-small">
+          <Button
+            sx={{
+              borderRadius: "8px",
+              backgroundColor: "#7a8089",
+              height: "22px !important",
+              width: "40px !important",
+              pr: 0,
+              pl: 0,
+              pt: 1.2,
+              m: 0,
+              mt: -0.6,
+            }}
+            variant="outlined"
+          >
+            <Typography variant="text-xs" sx={{ color: "#e6e6e6" }}>
+              {text}
+            </Typography>
+          </Button>
+        </div>
+      );
+    case "rounded-SQL":
       return (
         <div className="container-round-btn">
           <Button
@@ -121,4 +145,4 @@ const RoundedButton: FC<buttonProps> = ({ variant, selectData }) => {
   }
 };
 
-export default RoundedButton;
+export default CustomButton;
