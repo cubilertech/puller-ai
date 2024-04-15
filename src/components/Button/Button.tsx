@@ -1,6 +1,4 @@
-"use client";
-import { customTheme } from "@/theme/CustomTheme";
-import { Box, Button as MuiButton } from "@mui/material";
+import { Box, Button as MuiButton, SxProps } from "@mui/material";
 import { FC, ReactNode } from "react";
 import "./Button.css";
 
@@ -15,6 +13,7 @@ interface ButtonProps {
   endIcon?: ReactNode;
   startIcon?: ReactNode;
   children?: ReactNode;
+  sx?: SxProps;
 }
 
 const Button: FC<ButtonProps> = ({
@@ -27,6 +26,7 @@ const Button: FC<ButtonProps> = ({
   startIcon,
   endIcon,
   children,
+  sx,
   ...props
 }) => {
   return (
@@ -41,6 +41,7 @@ const Button: FC<ButtonProps> = ({
         fullWidth={fullWidth}
         endIcon={endIcon}
         startIcon={startIcon}
+        sx={sx}
       >
         {label || children}
       </MuiButton>
