@@ -194,7 +194,14 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                       label="Prompt"
                       disabled={isLoading}
                       fullWidth
-                      endIcon={<Icon icon="plus" height={2} width={8} />}
+                      endIcon={
+                        <Icon
+                          icon="plus"
+                          height={2}
+                          width={8}
+                          disabled={isLoading}
+                        />
+                      }
                     />
                   </Box>
 
@@ -205,7 +212,14 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                       disabled={isLoading}
                       variant="outlined"
                       label="Source"
-                      endIcon={<Icon icon="minus" height={2} width={8} />}
+                      endIcon={
+                        <Icon
+                          icon="minus"
+                          height={2}
+                          width={8}
+                          disabled={isLoading}
+                        />
+                      }
                     />
                   </Box>
                 </Box>

@@ -30,7 +30,15 @@ const Button: FC<ButtonProps> = ({
   ...props
 }) => {
   return (
-    <div className={variant === "outlined" ? "btn-container" : ""}>
+    <div
+      className={
+        variant === "outlined"
+          ? "btn-container"
+          : variant === "contained"
+          ? "contained-container"
+          : ""
+      }
+    >
       <MuiButton
         {...props}
         size={size}
