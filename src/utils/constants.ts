@@ -18,6 +18,8 @@ export const icons = {
   retriversIcon: "Images/Icons/retrivers-icon.svg",
   alertsIcon: "Images/Icons/alerts-icon.svg",
   arrowDown: "Images/Icons/arrow-down.svg",
+  paginationLeft: "Images/Icons/arrow-left-icon.svg",
+  paginationRight: "Images/Icons/arrow-right-icon.svg",
 };
 
 export const PagesType = {
