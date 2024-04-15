@@ -1,5 +1,4 @@
 import { Theme } from "@mui/material/styles";
-import { customTheme } from "../CustomTheme";
 import { palette } from "../Palette";
 
 export const MuiButton = (theme: Theme) => {
@@ -16,7 +15,7 @@ export const MuiButton = (theme: Theme) => {
           "&.MuiButton-sizeLarge": {
             height: "45px",
           },
-          // maxWidth: "458px",
+          minWidth: "34px",
           padding: "10px",
           borderRadius: "16px",
           textTransform: "none" as const,
@@ -41,12 +40,9 @@ export const MuiButton = (theme: Theme) => {
           borderRadius: "8px",
           border: "none",
           background: "#7c7586",
-          // backdropFilter: "blur(8px)",
           "&:hover": {
-            // color: palette.base.white,
             border: "none",
             background: "#7c7586",
-            // backgroundColor: "#rgba(255, 255, 255, 0.3)",
           },
         },
         text: {

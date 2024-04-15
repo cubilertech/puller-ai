@@ -348,7 +348,7 @@ const DataTable = () => {
             variant="text"
             disabled={page === 0}
           >
-            <Icon icon="paginationLeft" />
+            <Icon icon="paginationLeft"  />
           </Button>
           <Button
             sx={{

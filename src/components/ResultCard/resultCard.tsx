@@ -6,6 +6,7 @@ import { IconButton } from "../IconButton";
 import { Button } from "../Button";
 import Divider from "../Divider/divider";
 import CustomLink from "../Link/link";
+import CustomButton from "@/common/CustomButtons/CustomButtons";
 
 interface ResultCardProps {
   data: CardData;
@@ -64,14 +65,15 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
           sx={{
             display: "flex",
             flexDirection: "column",
-            gap: 1,
+            gap: 1.5,
             mt: 2,
             alignItems: "start",
             width: "100%",
           }}
         >
-          <Box sx={{ display: "flex", gap: 1 }}>
+          <Box sx={{ display: "flex", gap: 1, mb: -0.6 }}>
             <Typography variant="text-sm-regular">File Type:</Typography>
+            <CustomButton variant="smallbutton" text="CSV" />
           </Box>
           <Box sx={{ display: "flex", gap: 1 }}>
             <Typography variant="text-sm-regular">File Size:</Typography>
@@ -92,7 +94,10 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
           <Box sx={{ display: "flex", gap: 1 }}>
             <Typography variant="text-sm-regular">File Caveats:</Typography>
             <Typography variant="text-sm-semibold">
-              {data.fileCaveats} <CustomLink href="/" variant="border">See More</CustomLink>
+              {data.fileCaveats}{" "}
+              <CustomLink href="/" variant="border">
+                See More
+              </CustomLink>
             </Typography>
           </Box>
           <Box sx={{ display: "flex", gap: 1 }}>
