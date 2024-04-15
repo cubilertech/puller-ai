@@ -1,16 +1,22 @@
 "use client";
 import { Box, Typography } from "@mui/material";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Button } from "../Button";
 import { palette } from "@/theme/Palette";
 import CustomLink from "../Link/link";
 import CustomButton from "@/common/CustomButtons/CustomButtons";
+import SQL_EditorModal from "@/modals/sql_EditorModal/sqlEditorModal";
 
 interface PageHeaderProps {
   type: "Recent" | "Results" | "create" | "Validate" | "Preview";
 }
 
 const PageHeader: FC<PageHeaderProps> = ({ type }) => {
+  const [openSQL_Editor, setopenSQL_Editor] = useState(false);
+
+  const handleOpenCloseSQL_Editor = () => {
+    setopenSQL_Editor(!openSQL_Editor);
+  };
   switch (type) {
     case "Recent":
       return (
@@ -66,21 +72,52 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
       );
     case "Validate":
       return (
-        <Box
-          sx={{
-            display: "flex",
-            width: "100%",
-            justifyContent: "space-between",
-            alignItems: "center",
-          }}
-        >
-          <Typography variant="display-xs-semibold" color={palette.base.white}>
-            Validate Request
-          </Typography>
-          <Box pr={5}>
-            <CustomButton variant="rounded-SQL" />
+        <>
+          <Box
+            sx={{
+              display: "flex",
+              width: "100%",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Typography
+              variant="display-xs-semibold"
+              color={palette.base.white}
+            >
+              Validate Request
+            </Typography>
+            <Box pr={5}>
+              <CustomButton
+                variant="rounded-SQL"
+                onClick={() => handleOpenCloseSQL_Editor()}
+              />
+            </Box>
           </Box>
-        </Box>
+          <SQL_EditorModal
+            open={openSQL_Editor}
+            handleClose={handleOpenCloseSQL_Editor}
+            code={`
+            SELECT 
+            Store_ID, 
+            DATE_TRUNC(TXN_DATE, 'week') AS Week, 
+            SUM(TXN_AMT) AS Total_Sales
+          FROM 
+            TXN_SZNAL
+          WHERE 
+            PROD_ID IN (1234, 5678) AND
+            TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND
+            TXN_DATE <= DATE_TRUNC(CURRENT_DATE(), 'week')
+          GROUP BY 
+            Store_ID, 
+            Week
+          ORDER BY 
+            Week, 
+            Store_ID;
+          
+          `}
+          />
+        </>
       );
     case "Preview":
       return (

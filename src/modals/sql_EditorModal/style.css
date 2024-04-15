@@ -1,0 +1,35 @@
+/* custom-monaco-theme.css */
+.monaco-editor .monaco-editor-background {
+  background-color: transparent !important; /* Transparent background color */
+  color: white; /* Editor text color */
+}
+
+.monaco-editor .monaco-editor .mtk1 {
+  /* Token color for comment */
+  background-color: transparent !important;
+  /* color: #6a9955;  */
+}
+
+/* .monaco-editor .monaco-editor .mtk2 {
+  /* Token color for string 
+  background-color: transparent !important;
+  color: #ce9178; /* String text color
+} */
+
+/* custom-monaco-theme.css */
+.monaco-editor .mtk1 {
+  /* Token color for keywords */
+  color: #007acc; /* Blue color for keywords */
+}
+
+.monaco-editor .mtk2 {
+  /* Token color for functions */
+  color: #ffa500; /* Orange color for functions */
+}
+
+.monaco-editor .mtk3 {
+  /* Token color for literals */
+  color: #ff0000; /* Red color for literals */
+}
+
+/* Add more CSS rules for other editor elements as needed */
