@@ -163,7 +163,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
               >
                 <Paper
                   type="dark-border"
-                  sx={{ padding: "0.5rem 1rem 2rem", margin: 0 }}
+                  sx={{ padding: "0.5rem 1rem", margin: 0, minHeight: "5rem" }}
                 >
                   <Input
                     multiline
