@@ -5,7 +5,7 @@ import "./Button.css";
 interface ButtonProps {
   size?: "small" | "medium" | "large";
   label?: string;
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   variant: "contained" | "outlined" | "text";
   disabled?: boolean;
   fullWidth?: boolean;
