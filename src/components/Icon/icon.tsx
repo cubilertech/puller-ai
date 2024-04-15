@@ -2,7 +2,6 @@ import { icons } from "@/utils/constants";
 import { IconTypes } from "@/utils/types";
 import Image from "next/image";
 import { FC } from "react";
-import AddIcon from "@mui/icons-material/Add";
 
 export interface IconProps {
   icon: IconTypes;

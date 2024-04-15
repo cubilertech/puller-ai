@@ -18,7 +18,6 @@ export const MuiIconButton = (theme: Theme) => {
           borderRadius: "8px",
           border: `1px solid var(--vison-pro-stock, ${palette.base.white})`,
           background: "rgb(115,129,133)",
-
           backdropFilter: "blur(8px)",
         },
       },

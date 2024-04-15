@@ -1,6 +1,5 @@
 export const CustomTypography = {
   "display-2xl-regular": {
-    fontFamily: "Inter",
     fontSize: "72px",
     lineHeight: "90px",
     fontKerning: "0%",
@@ -8,7 +7,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "display-2xl-medium": {
-    fontFamily: "Inter",
     fontSize: "72px",
     lineHeight: "90px",
     fontKerning: "0%",
@@ -16,7 +14,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "display-2xl-semibold": {
-    fontFamily: "Inter",
     fontSize: "72px",
     lineHeight: "90px",
     fontKerning: "0%",
@@ -24,7 +21,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "display-2xl-bold": {
-    fontFamily: "Inter",
     fontSize: "72px",
     lineHeight: "90px",
     fontKerning: "0%",
@@ -32,7 +28,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "display-xl-regular": {
-    fontFamily: "Inter",
     fontSize: "60px",
     lineHeight: "72px",
     fontKerning: "0%",
@@ -41,7 +36,6 @@ export const CustomTypography = {
   },
 
   "display-xl-medium": {
-    fontFamily: "Inter",
     fontSize: "60px",
     lineHeight: "72px",
     fontKerning: "0%",
@@ -49,7 +43,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "display-xl-semibold": {
-    fontFamily: "Inter",
     fontSize: "60px",
     lineHeight: "72px",
     fontKerning: "0%",
@@ -57,7 +50,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "display-xl-bold": {
-    fontFamily: "Inter",
     fontSize: "60px",
     lineHeight: "72px",
     fontKerning: "0%",
@@ -66,7 +58,6 @@ export const CustomTypography = {
   },
 
   "display-lg-regular": {
-    fontFamily: "Inter",
     fontSize: "48px",
     lineHeight: "60px",
     fontKerning: "0%",
@@ -74,7 +65,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "display-lg-medium": {
-    fontFamily: "Inter",
     fontSize: "48px",
     lineHeight: "60px",
     fontKerning: "0%",
@@ -82,7 +72,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "display-lg-semibold": {
-    fontFamily: "Inter",
     fontSize: "48px",
     lineHeight: "60px",
     fontKerning: "0%",
@@ -90,7 +79,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "display-lg-bold": {
-    fontFamily: "Inter",
     fontSize: "48px",
     lineHeight: "60px",
     fontKerning: "0%",
@@ -98,7 +86,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "display-md-regular": {
-    fontFamily: "Inter",
     fontSize: "36px",
     lineHeight: "44px",
     fontKerning: "0%",
@@ -106,7 +93,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "display-md-medium": {
-    fontFamily: "Inter",
     fontSize: "36px",
     lineHeight: "44px",
     fontKerning: "0%",
@@ -114,7 +100,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "display-md-semibold": {
-    fontFamily: "Inter",
     fontSize: "36px",
     lineHeight: "44px",
     fontKerning: "0%",
@@ -122,7 +107,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "display-md-bold": {
-    fontFamily: "Inter",
     fontSize: "36px",
     lineHeight: "44px",
     fontKerning: "0%",
@@ -130,7 +114,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "display-sm-regular": {
-    fontFamily: "Inter",
     fontSize: "30px",
     lineHeight: "38px",
     fontKerning: "0%",
@@ -138,7 +121,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "display-sm-medium": {
-    fontFamily: "Inter",
     fontSize: "30px",
     lineHeight: "38px",
     fontKerning: "0%",
@@ -146,7 +128,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "display-sm-semibold": {
-    fontFamily: "Inter",
     fontSize: "30px",
     lineHeight: "38px",
     fontKerning: "0%",
@@ -154,7 +135,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "display-sm-bold": {
-    fontFamily: "Inter",
     fontSize: "30px",
     lineHeight: "38px",
     fontKerning: "0%",
@@ -163,7 +143,6 @@ export const CustomTypography = {
   },
 
   "display-xs-regular": {
-    fontFamily: "Inter",
     fontSize: "24px",
     lineHeight: "32px",
     fontKerning: "0%",
@@ -171,7 +150,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "display-xs-medium": {
-    fontFamily: "Inter",
     fontSize: "24px",
     lineHeight: "32px",
     fontKerning: "0%",
@@ -179,7 +157,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "display-xs-semibold": {
-    fontFamily: "Inter",
     fontSize: "24px",
     lineHeight: "32px",
     fontKerning: "0%",
@@ -187,7 +164,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "display-xs-bold": {
-    fontFamily: "Inter",
     fontSize: "24px",
     lineHeight: "32px",
     fontKerning: "0%",
@@ -195,7 +171,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "display-xs": {
-    fontFamily: "Inter",
     fontSize: "22px",
     lineHeight: "32px",
     fontKerning: "0%",
@@ -203,7 +178,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "text-xl-regular": {
-    fontFamily: "Inter",
     fontSize: "20px",
     lineHeight: "30px",
     fontKerning: "0%",
@@ -211,7 +185,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "text-xl-medium": {
-    fontFamily: "Inter",
     fontSize: "20px",
     lineHeight: "30px",
     fontKerning: "0%",
@@ -219,7 +192,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "text-xl-semibold": {
-    fontFamily: "Inter",
     fontSize: "20px",
     lineHeight: "30px",
     fontKerning: "0%",
@@ -227,7 +199,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "text-xl-bold": {
-    fontFamily: "Inter",
     fontSize: "20px",
     lineHeight: "30px",
     fontKerning: "0%",
@@ -235,7 +206,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "text-lg-regular": {
-    fontFamily: "Inter",
     fontSize: "18px",
     lineHeight: "28px",
     fontKerning: "0%",
@@ -243,7 +213,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "text-lg-medium": {
-    fontFamily: "Inter",
     fontSize: "18px",
     lineHeight: "28px",
     fontKerning: "0%",
@@ -251,7 +220,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "text-lg-semibold": {
-    fontFamily: "Inter",
     fontSize: "18px",
     lineHeight: "28px",
     fontKerning: "0%",
@@ -259,7 +227,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "text-lg-bold": {
-    fontFamily: "Inter",
     fontSize: "18px",
     lineHeight: "28px",
     fontKerning: "0%",
@@ -267,7 +234,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "text-md-regular": {
-    fontFamily: "Inter",
     fontSize: "16px",
     lineHeight: "24px",
     fontKerning: "0%",
@@ -275,7 +241,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "text-md-medium": {
-    fontFamily: "Inter",
     fontSize: "16px",
     lineHeight: "24px",
     fontKerning: "0%",
@@ -283,7 +248,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "text-md-semibold": {
-    fontFamily: "Inter",
     fontSize: "16px",
     lineHeight: "24px",
     fontKerning: "0%",
@@ -291,7 +255,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "text-md-bold": {
-    fontFamily: "Inter",
     fontSize: "16px",
     lineHeight: "24px",
     fontKerning: "0%",
@@ -300,7 +263,6 @@ export const CustomTypography = {
   },
 
   "text-sm-regular": {
-    fontFamily: "Inter",
     fontSize: "14px",
     lineHeight: "20px",
     fontKerning: "0%",
@@ -308,7 +270,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "text-sm-medium": {
-    fontFamily: "Inter",
     fontSize: "14px",
     lineHeight: "20px",
     fontKerning: "0%",
@@ -316,7 +277,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "text-sm-semibold": {
-    fontFamily: "Inter",
     fontSize: "14px",
     lineHeight: "20px",
     fontKerning: "0%",
@@ -324,7 +284,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "text-sm-bold": {
-    fontFamily: "Inter",
     fontSize: "14px",
     lineHeight: "20px",
     fontKerning: "0%",
@@ -332,19 +291,16 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "text-xs": {
-    fontFamily: "Inter",
     fontSize: "11px",
     fontWeight: 400,
     lineHeight: "140%",
   },
   "text-sm": {
-    fontFamily: "Inter",
     fontSize: "13px",
     fontWeight: 400,
     lineHeight: "140%",
   },
   "text-xs-regular": {
-    fontFamily: "Inter",
     fontSize: "12px",
     lineHeight: "22px",
     fontKerning: "0%",
@@ -352,7 +308,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "text-xs-medium": {
-    fontFamily: "Inter",
     fontSize: "12px",
     lineHeight: "28px",
     fontKerning: "0%",
@@ -360,7 +315,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "text-xs-semibold": {
-    fontFamily: "Inter",
     fontSize: "12px",
     lineHeight: "28px",
     fontKerning: "0%",
@@ -368,7 +322,6 @@ export const CustomTypography = {
     letterSpacing: "",
   },
   "text-xs-bold": {
-    fontFamily: "Inter",
     fontSize: "12px",
     lineHeight: "28px",
     fontKerning: "0%",

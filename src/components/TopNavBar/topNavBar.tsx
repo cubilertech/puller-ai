@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { PagesType } from "@/utils/constants";
 import CustomLink from "../Link/link";
 import NotificationIconButton from "@/common/notificationIconButton/notificationIconButton";
-import RoundedButton from "@/common/RoundedButton/roundedButton";
+import CustomButton from "@/common/CustomButtons/CustomButtons";
 
 const TopNavBar = () => {
   const route = usePathname();
@@ -82,7 +82,7 @@ const TopNavBar = () => {
             iconWidth={28}
             isNotice
           />
-          <RoundedButton
+          <CustomButton
             variant="select"
             selectData={{ avatar: "/Images/Icons/avatar.svg", name: "Mav" }}
           />

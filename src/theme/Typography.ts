@@ -1,7 +1,6 @@
 import { TypographyOptions } from "@mui/material/styles/createTypography";
 
 export const typography: TypographyOptions = {
-  fontFamily: "Inter",
   h1: {
     fontSize: "56px",
     lineHeight: "normal",
