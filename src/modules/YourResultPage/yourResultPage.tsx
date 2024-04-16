@@ -1,4 +1,5 @@
 "use client";
+import LoaderComponent from "@/common/LoaderComponent/LoaderComponent";
 import CustomLink from "@/components/Link/link";
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
@@ -7,9 +8,22 @@ import SimpleCard from "@/components/SimpleCard/simpleCard";
 import { SingleCardDomyData } from "@/utils/constants";
 import { Box } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 
 const YourResultsPage: FC = () => {
+  const [isLoading, setIsLoading] = useState(true);
+
+  const toggleStateWithTimeout = () => {
+    setIsLoading(true); // Set state to true initially
+
+    setTimeout(() => {
+      setIsLoading(false); // Set state to false after 5 seconds
+    }, 5000); // 5000 milliseconds = 5 seconds
+  };
+
+  useEffect(() => {
+    toggleStateWithTimeout();
+  }, []);
   const route = useRouter();
 
   const handleOpenNotes = () => {
@@ -30,13 +44,16 @@ const YourResultsPage: FC = () => {
     discription:
       "Overall, the incremental performance of SKUs introduced within the past year have added 23% lift in Flyease tech product SKU transactions (sales). This was largely driven by the FYT2 product. This represents the strongest launch of a new product with Flyease since inception, masked in part by the decline of several older SKUs. Seasonality mirrored historical performance.",
   };
-  return (
+
+  return isLoading ? (
+    <LoaderComponent />
+  ) : (
     <>
       <Box sx={{ width: "98%", m: "auto", mt: 1 }}>
         <PageHeader type="Results" />
 
         <Box sx={{ display: "flex", gap: 2, pt: 3, width: "100%" }}>
-          <Box width={"80%"}>
+          <Box width={"80%"} height={"77vh"}>
             <ResultCard data={data} />
           </Box>
 
@@ -59,7 +76,7 @@ const YourResultsPage: FC = () => {
                 display: "flex",
                 gap: 2,
                 flexDirection: "column",
-                maxHeight: "70vh",
+                maxHeight: "67vh",
                 overflowY: "auto",
                 "-ms-overflow-style":
                   "none" /* Hide scrollbar in IE and Edge */,
