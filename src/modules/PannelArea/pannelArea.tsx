@@ -129,6 +129,9 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                   </Box>
                   <Box sx={{ width: "122px" }}>
                     <Button
+                      sx={{
+                        width: "122px",
+                      }}
                       onClick={handleOpenSelectBar}
                       label="Run Query"
                       variant="contained"
