@@ -208,7 +208,7 @@ const DataTable = () => {
                     gap: "10px",
                   }}
                 >
-                  Title <Icon icon="arrowDown" width={12} height={12} />
+                  Title
                 </Box>
               </TableCell>
               <TableCell
