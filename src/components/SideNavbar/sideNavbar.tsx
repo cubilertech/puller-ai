@@ -1,24 +1,23 @@
+"use client";
 import {
   Box,
-  Divider,
   Drawer,
   List,
   ListItem,
-  ListItemButton,
   ListItemIcon,
   ListItemText,
-  Toolbar,
 } from "@mui/material";
 
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
-import Image from "next/image";
 import MuiListItemButton from "@/theme/overrides/listItemButton";
 import Logo from "../logo/logo";
 import { Icon } from "../Icon";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const SideNavbar = () => {
+  const pathname = usePathname();
+
+  const path = pathname.split("/")[1];
   const drawerWidth = 240;
   return (
     <Box
@@ -71,27 +70,27 @@ const SideNavbar = () => {
                   {
                     name: "Request",
                     img: <Icon width={18} height={18} icon="requestIcon" />,
-                    link: "/create",
+                    link: "/request",
                   },
                   {
                     name: "Pulls",
                     img: <Icon width={18} height={18} icon="pullsIcon" />,
-                    link: "/create",
+                    link: "/pulls",
                   },
                   {
                     name: "Retrivers",
                     img: <Icon width={18} height={18} icon="retriversIcon" />,
-                    link: "/create",
+                    link: "/retrivers",
                   },
                   {
                     name: "Alerts",
                     img: <Icon width={18} height={18} icon="alertsIcon" />,
-                    link: "/create",
+                    link: "/alerts",
                   },
                   {
                     name: "Advanced",
                     img: <Icon width={18} height={18} icon="advancedIcon" />,
-                    link: "/create",
+                    link: "/advanced",
                   },
                 ].map((text, index) => (
                   <ListItem key={text.name}>
@@ -100,13 +99,20 @@ const SideNavbar = () => {
                         sx={{
                           display: "flex",
                           gap: "12px",
+                          border:
+                            path === text.name
+                              ? "1px solid #8f8f94"
+                              : "1px solid transparent",
+                          background:
+                            path === text.name.toLowerCase()
+                              ? "var(--buttons, rgba(255, 255, 255, 0.30))"
+                              : "",
                           // bgcolor: "red",
                           ":hover": {
                             // borderRadius: "8px",
                             // border:
                             //   "1px solid var(--Vision-pro-01, rgba(255, 255, 255, 0.37))",
                             // border: "1px solid #8f8f94",
-
                             // background:
                             //   "var(--buttons, rgba(255, 255, 255, 0.30))",
                             // backdropFilter: "blur(8px)",

@@ -35,6 +35,9 @@ const IconButton: FC<IconButtonProps> = ({
         {...props}
         sx={{
           width: fullWidth ? "100%" : "auto",
+          ":hover": {
+            backgroundColor: "rgb(95,112,125)",
+          },
           ...sx,
         }}
       >

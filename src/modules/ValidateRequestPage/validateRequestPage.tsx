@@ -12,12 +12,7 @@ const ValidateRequestPage: FC = () => {
   const [isProccessing, setisProccessing] = useState(false);
 
   const handleUpdate = () => {
-    setisProccessing(true);
-
-    setTimeout(() => {
-      setisProccessing(false);
-      route.push("/results");
-    }, 8000);
+    route.push("/request/results");
   };
   const content = {
     response:

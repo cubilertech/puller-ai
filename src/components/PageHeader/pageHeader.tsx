@@ -63,7 +63,7 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
           <Typography variant="display-xs-semibold" color={palette.base.white}>
             Create a Request
           </Typography>
-          <CustomLink href="/recent">
+          <CustomLink href="/request/recent">
             <Box width={242}>
               <Button variant="outlined" fullWidth label="Request History" />
             </Box>

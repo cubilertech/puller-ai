@@ -44,7 +44,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
                 fullWidth
               />
             </Box>
-            <CustomLink href="/preview">
+            <CustomLink href="/request/preview">
               <Box width={"36px"}>
                 <IconButton
                   icon="eyeIcon"
@@ -126,7 +126,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
             textAlign: "end",
             justifyContent: "end",
             width: "100%",
-            height: "32%",
+            height: "20%",
           }}
         >
           <Box pb={2} pt={"6%"}>

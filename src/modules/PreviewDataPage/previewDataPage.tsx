@@ -1,6 +1,6 @@
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import Summary from "@/components/Summary/summary";
 import DataTable from "@/components/table/table";
 import { FC } from "react";

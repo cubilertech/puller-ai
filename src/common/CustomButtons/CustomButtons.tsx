@@ -51,6 +51,9 @@ const CustomButton: FC<buttonProps> = ({
               pt: 1.2,
               m: 0,
               mt: -0.6,
+              ":hover": {
+                backgroundColor: "rgb(95,112,125)",
+              },
             }}
             onClick={onClick}
             variant="outlined"
@@ -73,6 +76,9 @@ const CustomButton: FC<buttonProps> = ({
               height: 40,
               py: 2,
               px: 4,
+              ":hover": {
+                backgroundColor: "rgb(95,112,125)",
+              },
             }}
             onClick={onClick}
             variant="outlined"
@@ -93,6 +99,9 @@ const CustomButton: FC<buttonProps> = ({
               height: 48,
               py: 2,
               px: 4,
+              ":hover": {
+                backgroundColor: "rgb(95,112,125)",
+              },
             }}
             variant="outlined"
             onClick={handleMenuOpen}
@@ -102,7 +111,7 @@ const CustomButton: FC<buttonProps> = ({
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                gap: "1rem",
+                gap: "10px",
               }}
             >
               <Image

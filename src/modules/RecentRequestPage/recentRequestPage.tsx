@@ -24,7 +24,7 @@ const RecentRequestPage: FC = () => {
           }}
         >
           {SingleCardDomyData.map((item, index) => (
-            <CustomLink href="/preview" key={index}>
+            <CustomLink href="/request/preview" key={index}>
               <SimpleCard
                 isFor="Requests"
                 title={item.title}

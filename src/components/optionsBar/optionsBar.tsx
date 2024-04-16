@@ -78,11 +78,23 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate }) => {
               type="dark-border"
               sx={{
                 minHeight: "10rem",
-                padding: "1rem",
+                padding: "0.5rem 1rem",
+                display: "flex",
+                maxHeight: "15rem",
                 margin: 0,
               }}
             >
-              <Input multiline fullWidth disableUnderline />
+              <Input
+                sx={{
+                  boxSizing: "border-box",
+                  minHeight: "100%",
+                  alignItems: "flex-start",
+                  overflowY: "auto",
+                }}
+                multiline
+                fullWidth
+                disableUnderline
+              />
             </Paper>
           </Box>
 

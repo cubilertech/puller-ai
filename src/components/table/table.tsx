@@ -14,9 +14,9 @@ import {
   TableRow,
   Typography,
 } from "@mui/material";
-import { Icon } from "../Icon";
 import { Button } from "../Button";
 import { ArrowUpward } from "@mui/icons-material";
+import { Icon } from "../Icon";
 
 const DataTable = () => {
   const tabelData = [
@@ -208,7 +208,7 @@ const DataTable = () => {
                     gap: "10px",
                   }}
                 >
-                  Title <Icon icon="arrowDown" width={12} height={12} />
+                  Title
                 </Box>
               </TableCell>
               <TableCell

@@ -28,7 +28,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
 
     setTimeout(() => {
       setisLoading(false);
-      route.push("/validate");
+      route.push("/request/validate");
     }, 8000);
   };
 
@@ -129,6 +129,9 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                   </Box>
                   <Box sx={{ width: "122px" }}>
                     <Button
+                      sx={{
+                        width: "122px",
+                      }}
                       onClick={handleOpenSelectBar}
                       label="Run Query"
                       variant="contained"
@@ -163,7 +166,13 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
               >
                 <Paper
                   type="dark-border"
-                  sx={{ padding: "0.5rem 1rem", margin: 0, minHeight: "5rem" }}
+                  sx={{
+                    padding: "0.5rem ",
+                    margin: 0,
+                    minHeight: "5rem",
+                    display: "flex",
+                    maxHeight: "15rem",
+                  }}
                 >
                   <Input
                     multiline
@@ -171,6 +180,12 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                     disableUnderline
                     disabled={isLoading}
                     placeholder="Type your data request (prompt) here..."
+                    sx={{
+                      boxSizing: "border-box",
+                      minHeight: "100%",
+                      alignItems: "flex-start",
+                      overflowY: "auto",
+                    }}
                   />
                 </Paper>
               </Box>
