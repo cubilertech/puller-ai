@@ -42,7 +42,7 @@ export const MuiButton = (theme: Theme) => {
           background: "#7c7586",
           "&:hover": {
             border: "none",
-            background: "#7c7586",
+            backgroundColor: "rgb(95,112,125)",
           },
         },
         text: {
