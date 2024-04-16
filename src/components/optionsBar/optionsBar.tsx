@@ -62,6 +62,8 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate }) => {
               display: "flex",
               flexDirection: "column",
               gap: "1rem",
+              overflow: "auto",
+              scrollbarColor: "none",
             }}
           >
             <Typography color={"#fff"} variant="text-md-regular">
