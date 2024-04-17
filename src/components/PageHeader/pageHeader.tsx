@@ -8,7 +8,7 @@ import CustomButton from "@/common/CustomButtons/CustomButtons";
 import SQL_EditorModal from "@/modals/sql_EditorModal/sqlEditorModal";
 
 interface PageHeaderProps {
-  type: "Recent" | "Results" | "create" | "Validate" | "Preview";
+  type: "Recent" | "Results" | "create" | "Validate" | "Preview" | "Template";
 }
 
 const PageHeader: FC<PageHeaderProps> = ({ type }) => {
@@ -131,6 +131,22 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
         >
           <Typography variant="display-xs-semibold" color={palette.base.white}>
             Preview Data
+          </Typography>
+          <Box></Box>
+        </Box>
+      );
+    case "Template":
+      return (
+        <Box
+          sx={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Typography variant="display-xs-semibold" color={palette.base.white}>
+            Templates
           </Typography>
           <Box></Box>
         </Box>

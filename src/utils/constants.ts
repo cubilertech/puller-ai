@@ -20,6 +20,8 @@ export const icons = {
   arrowDown: "/Images/Icons/arrow-down.svg",
   paginationLeft: "/Images/Icons/arrow-left-icon.svg",
   paginationRight: "/Images/Icons/arrow-right-icon.svg",
+  search: "/Images/Icons/search-icon.svg",
+  actions: "/Images/Icons/actions-icon.svg",
 };
 
 export const PagesType = {
