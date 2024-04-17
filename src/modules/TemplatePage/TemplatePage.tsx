@@ -8,22 +8,33 @@ import React, { useState } from "react";
 import "./Input.css";
 import Image from "next/image";
 
+const data = Array.from({ length: 10 }, (_, index) => ({
+  image: "/images/blank-square.svg",
+  heading: `Template ${index + 1}`,
+  subHeading: `Maker by User ${index + 1}`,
+  subHeading2: `Retrievers ${index + 1} bot will help to geth...`,
+}));
+
 const TemplatePage = () => {
   const [isActive, setIsActive] = useState("public");
 
   return (
-    <Box display={"flex"} flexDirection={"column"}>
+    <Box display={"flex"} flexDirection={"column"} p={"1rem"}>
       <PageHeader type="Template" />
       <Box
         sx={{
-          mt: "1rem",
+          mt: "2rem",
           flexGrow: "1",
         }}
       >
         <Paper
           sx={{
             padding: "1rem",
-            minHeight: "77vh",
+            height: "calc(100vh - 220px)",
+            paddingBottom: "2rem",
+            display: "flex",
+            flexDirection: "column",
+            // overflowY: "hidden",
           }}
           type="light-border"
         >
@@ -31,6 +42,9 @@ const TemplatePage = () => {
             sx={{
               display: "flex",
               justifyContent: "space-between",
+              alignItems: "baseline",
+              mb: "1rem",
+              height: "5%",
             }}
           >
             <Box
@@ -103,36 +117,46 @@ const TemplatePage = () => {
               </div>
             </Box>
           </Box>
-
-          <Box mt={"1.5rem"}>
-            <Paper
-              type="light-border"
-              sx={{
-                padding: "1rem",
-                display: "flex",
-                justifyContent: "space-between",
-                border: 0,
-              }}
-            >
-              <Box display={"flex"} alignItems={"center"} gap={"1rem"}>
-                <Image
-                  src={"/images/blank-square.svg"}
-                  alt="pic"
-                  width={64}
-                  height={64}
-                />
-                <Box display={"flex"} flexDirection={"column"}>
-                  <Typography variant="text-md-regular">Template 1</Typography>
-                  <Typography variant="text-xs-regular">
-                    Maker by Rafat
-                  </Typography>
-                  <Typography variant="text-xs-regular">
-                    Retrievers 3 bot will help to geth...
-                  </Typography>
-                </Box>
+          <Box
+            sx={{
+              overflowY: "auto",
+              maxHeight: "94%",
+              "&::-webkit-scrollbar": {
+                display: "none", // Hide the scrollbar
+              },
+              scrollbarWidth: "none", // Firefox scrollbar
+              "-ms-overflow-style": "none",
+            }}
+          >
+            {data.map((card, i) => (
+              <Box key={i} mt={"1.5rem"} sx={{}}>
+                <Paper
+                  type="light-border"
+                  sx={{
+                    padding: "1rem",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    border: 0,
+                  }}
+                >
+                  <Box display={"flex"} alignItems={"center"} gap={"1rem"}>
+                    <Image src={card.image} alt="pic" width={64} height={64} />
+                    <Box display={"flex"} flexDirection={"column"}>
+                      <Typography variant="text-md-regular">
+                        {card.heading}
+                      </Typography>
+                      <Typography variant="text-xs-regular">
+                        {card.subHeading}
+                      </Typography>
+                      <Typography variant="text-xs-regular">
+                        {card.subHeading2}
+                      </Typography>
+                    </Box>
+                  </Box>
+                  <Icon icon="actions" width={42} height={24} />
+                </Paper>
               </Box>
-              <Icon icon="actions" width={42} height={24} />
-            </Paper>
+            ))}
           </Box>
         </Paper>
       </Box>
