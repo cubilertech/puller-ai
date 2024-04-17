@@ -53,11 +53,23 @@ const YourResultsPage: FC = () => {
         <PageHeader type="Results" />
 
         <Box sx={{ display: "flex", gap: 2, pt: 3, width: "100%" }}>
-          <Box width={"80%"} height={"77vh"}>
+          <Box
+            width={"80%"}
+            sx={{
+              height: "calc(100vh - 200px)",
+            }}
+          >
             <ResultCard data={data} />
           </Box>
 
-          <Box sx={{ display: "flex", flexDirection: "column", width: "20%" }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              width: "20%",
+              height: "calc(100vh - 205px)",
+            }}
+          >
             <Paper
               onClick={() => handleOpenNotes()}
               type="light-border"
@@ -67,6 +79,7 @@ const YourResultsPage: FC = () => {
                 borderRadius: "8px",
                 textAlign: "center",
                 cursor: "pointer",
+                // height: "100%",
               }}
             >
               Puller AI Notes
@@ -76,7 +89,8 @@ const YourResultsPage: FC = () => {
                 display: "flex",
                 gap: 2,
                 flexDirection: "column",
-                maxHeight: "67vh",
+                // maxHeight: "67vh",
+                height: "100%",
                 overflowY: "auto",
                 "-ms-overflow-style":
                   "none" /* Hide scrollbar in IE and Edge */,

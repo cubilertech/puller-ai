@@ -43,7 +43,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-end",
-          height: "75vh",
+          height: "calc(100vh - 200px)",
           width: "100%",
           gap: 2,
         }}
@@ -53,7 +53,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
             display: "flex",
             width: "100%",
             alignItems: "flex-end",
-            height: "100%",
+            flexGrow: "1",
           }}
         >
           <Paper
