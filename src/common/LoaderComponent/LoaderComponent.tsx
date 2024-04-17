@@ -9,19 +9,19 @@ const LoaderComponent = () => {
       justifyContent={"center"}
       alignItems={"center"}
       sx={{
-        height: "80vh",
+        height: "100%",
         margin: 0,
         padding: 0,
         width: "100%",
       }}
     >
       <Paper
-        type="dark-border"
+        type="light-border"
         sx={{
-          height: "100%",
+          height: "516px",
           margin: 0,
           padding: 0,
-          width: "80%",
+          width: "704px",
         }}
       >
         <Box
