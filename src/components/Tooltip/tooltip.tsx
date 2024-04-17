@@ -1,8 +1,10 @@
 import { MuiToolTip } from "@/theme/overrides/tooltip";
 import { Box, Tooltip as MuiTooltip, Typography } from "@mui/material";
 import { FC, ReactElement, ReactNode } from "react";
+import { Icon } from "../Icon";
 
 interface TooltipProps {
+  variant: "info" | "status";
   title?: string;
   description?: string;
   children: ReactElement;
@@ -12,35 +14,90 @@ const Tooltip: FC<TooltipProps> = ({
   title,
   description,
   children,
+  variant,
   ...props
 }) => {
-  return (
-    <div>
-      <MuiTooltip
-        placement="top"
-        title={
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              gap: "0.5rem",
-            }}
+  switch (variant) {
+    case "info":
+      return (
+        <div>
+          <MuiTooltip
+            placement="top"
+            title={
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "0.5rem",
+                }}
+              >
+                <Typography
+                  variant="text-md-regular"
+                  color={"rgba(230, 230, 230, 1)"}
+                >
+                  {title}
+                </Typography>
+                <Typography variant="text-sm">{description}</Typography>
+              </Box>
+            }
+            {...props}
           >
-            <Typography
-              variant="text-md-regular"
-              color={"rgba(230, 230, 230, 1)"}
-            >
-              {title}
-            </Typography>
-            <Typography variant="text-sm">{description}</Typography>
-          </Box>
-        }
-        {...props}
-      >
-        {children}
-      </MuiTooltip>
-    </div>
-  );
+            {children}
+          </MuiTooltip>
+        </div>
+      );
+    case "status":
+      return (
+        <div>
+          <MuiTooltip
+            placement="bottom-start"
+            title={
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  gap: "0.5rem",
+                }}
+              >
+                {" "}
+                <Typography
+                  variant="text-md-semibold"
+                  display={"flex"}
+                  gap={"1rem"}
+                >
+                  <Icon icon="live" /> Live
+                </Typography>
+                <Typography
+                  variant="text-md-semibold"
+                  display={"flex"}
+                  gap={"1rem"}
+                >
+                  <Icon icon="issues" /> Issues
+                </Typography>
+                <Typography
+                  variant="text-md-semibold"
+                  display={"flex"}
+                  gap={"1rem"}
+                >
+                  <Icon icon="blocked" /> Blocked
+                </Typography>
+                <Typography
+                  variant="text-md-semibold"
+                  display={"flex"}
+                  gap={"1rem"}
+                >
+                  <Icon icon="needPermissions" /> Need Permissions
+                </Typography>
+                <Typography variant="text-sm">{description}</Typography>
+              </Box>
+            }
+            {...props}
+          >
+            {children}
+          </MuiTooltip>
+        </div>
+      );
+  }
 };
 
 export default Tooltip;

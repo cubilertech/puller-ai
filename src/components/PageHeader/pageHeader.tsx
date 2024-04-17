@@ -9,6 +9,7 @@ import SQL_EditorModal from "@/modals/sql_EditorModal/sqlEditorModal";
 import { Icon } from "../Icon";
 import { useRouter } from "next/navigation";
 import { Paper } from "../Paper";
+import Tooltip from "../Tooltip/tooltip";
 
 interface PageHeaderProps {
   type:
@@ -173,28 +174,65 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
             alignItems: "center",
           }}
         >
-          <Typography
-            variant="display-xs-semibold"
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: "1rem",
-            }}
-            color={palette.base.white}
-          >
-            Retrivers <Icon icon="info" />
-          </Typography>
+          <Box>
+            <Tooltip variant="status">
+              <Typography
+                variant="display-xs-semibold"
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "1rem",
+                }}
+                color={palette.base.white}
+              >
+                Retrivers <Icon icon="info" />
+              </Typography>
+            </Tooltip>
+          </Box>
           {/* <Paper
             sx={{
+              position: "absolute",
+              top: 180,
+              left: 283,
               width: 268,
               height: 172,
+              zIndex: 1,
               display: "flex",
               flexDirection: "column",
               gap: "0.5rem",
+              padding: "1.5rem",
             }}
             type="light-bg-border"
           >
-            <Typography></Typography>
+            <Typography
+              variant="text-md-semibold"
+              display={"flex"}
+              gap={"1rem"}
+            >
+              <Icon icon="live" /> Live
+            </Typography>
+
+            <Typography
+              variant="text-md-semibold"
+              display={"flex"}
+              gap={"1rem"}
+            >
+              <Icon icon="issues" /> Issues
+            </Typography>
+            <Typography
+              variant="text-md-semibold"
+              display={"flex"}
+              gap={"1rem"}
+            >
+              <Icon icon="blocked" /> Blocked
+            </Typography>
+            <Typography
+              variant="text-md-semibold"
+              display={"flex"}
+              gap={"1rem"}
+            >
+              <Icon icon="needPermissions" /> Need Permissions
+            </Typography>
           </Paper> */}
           <Box>
             <Button
