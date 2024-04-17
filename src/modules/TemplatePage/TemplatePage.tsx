@@ -34,7 +34,6 @@ const TemplatePage = () => {
             paddingBottom: "2rem",
             display: "flex",
             flexDirection: "column",
-            // overflowY: "hidden",
           }}
           type="light-border"
         >
@@ -43,7 +42,7 @@ const TemplatePage = () => {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "baseline",
-              // m: "1rem",
+              mb: "1rem",
               height: "5%",
             }}
           >
@@ -122,9 +121,9 @@ const TemplatePage = () => {
               overflowY: "auto",
               maxHeight: "94%",
               "&::-webkit-scrollbar": {
-                display: "none", // Hide the scrollbar
+                display: "none",
               },
-              scrollbarWidth: "none", // Firefox scrollbar
+              scrollbarWidth: "none",
               "-ms-overflow-style": "none",
             }}
           >
