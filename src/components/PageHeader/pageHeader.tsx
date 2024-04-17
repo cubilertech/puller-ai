@@ -7,6 +7,8 @@ import CustomLink from "../Link/link";
 import CustomButton from "@/common/CustomButtons/CustomButtons";
 import SQL_EditorModal from "@/modals/sql_EditorModal/sqlEditorModal";
 import { Icon } from "../Icon";
+import { useRouter } from "next/navigation";
+import { Paper } from "../Paper";
 
 interface PageHeaderProps {
   type:
@@ -16,11 +18,13 @@ interface PageHeaderProps {
     | "Validate"
     | "Preview"
     | "Template"
-    | "Retrivers";
+    | "Retrivers"
+    | "New Retriver";
 }
 
 const PageHeader: FC<PageHeaderProps> = ({ type }) => {
   const [openSQL_Editor, setopenSQL_Editor] = useState(false);
+  const router = useRouter();
 
   const handleOpenCloseSQL_Editor = () => {
     setopenSQL_Editor(!openSQL_Editor);
@@ -180,9 +184,49 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
           >
             Retrivers <Icon icon="info" />
           </Typography>
+          {/* <Paper
+            sx={{
+              width: 268,
+              height: 172,
+              display: "flex",
+              flexDirection: "column",
+              gap: "0.5rem",
+            }}
+            type="light-bg-border"
+          >
+            <Typography></Typography>
+          </Paper> */}
           <Box>
-            <Button variant="outlined" label="Create Retriever" />{" "}
+            <Button
+              variant="outlined"
+              label="Create Retriever"
+              onClick={() => router.push("/retrivers/new")}
+            />
           </Box>
+        </Box>
+      );
+    case "New Retriver":
+      return (
+        <Box
+          sx={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Typography
+            variant="display-xs-semibold"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: "1rem",
+            }}
+            color={palette.base.white}
+          >
+            Select New Retriever Type
+          </Typography>
+          <Box></Box>
         </Box>
       );
   }

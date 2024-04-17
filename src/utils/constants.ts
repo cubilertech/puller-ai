@@ -37,6 +37,9 @@ export const icons = {
   blocked: "/Images/Icons/blocked-icon.svg",
   issues: "/Images/Icons/issues-icon.svg",
   needPermissions: "/Images/Icons/need-permissions-icon.svg",
+  connectApps: "/Images/Icons/connect-apps-icon.svg",
+  apiKey: "/Images/Icons/api-key-icon.svg",
+  upload: "/Images/Icons/upload-icon.svg",
 };
 
 export const PagesType = {

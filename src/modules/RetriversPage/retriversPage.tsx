@@ -144,7 +144,29 @@ const RetriversPage = () => {
         {data.map((card, i) => (
           <RetriverCard
             description={card.description}
-            icon={card.icon}
+            icon={
+              card.icon === "snowflake"
+                ? "snowflake"
+                : card.icon === "segment"
+                  ? "segment"
+                  : card.icon === "lytics"
+                    ? "lytics"
+                    : card.icon === "dataRoom"
+                      ? "dataRoom"
+                      : card.icon === "dbtCore"
+                        ? "dbtCore"
+                        : card.icon === "sfCrm"
+                          ? "sfCrm"
+                          : card.icon === "clReport"
+                            ? "clReport"
+                            : card.icon === "nielsen"
+                              ? "nielsen"
+                              : card.icon === "googleAnalytics"
+                                ? "googleAnalytics"
+                                : card.icon === "clickstream"
+                                  ? "clickstream"
+                                  : "snowflake"
+            }
             status={
               card.status === "live"
                 ? "live"
