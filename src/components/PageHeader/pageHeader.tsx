@@ -6,9 +6,17 @@ import { palette } from "@/theme/Palette";
 import CustomLink from "../Link/link";
 import CustomButton from "@/common/CustomButtons/CustomButtons";
 import SQL_EditorModal from "@/modals/sql_EditorModal/sqlEditorModal";
+import { Icon } from "../Icon";
 
 interface PageHeaderProps {
-  type: "Recent" | "Results" | "create" | "Validate" | "Preview" | "Template";
+  type:
+    | "Recent"
+    | "Results"
+    | "create"
+    | "Validate"
+    | "Preview"
+    | "Template"
+    | "Retrivers";
 }
 
 const PageHeader: FC<PageHeaderProps> = ({ type }) => {
@@ -149,6 +157,32 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
             Templates
           </Typography>
           <Box></Box>
+        </Box>
+      );
+    case "Retrivers":
+      return (
+        <Box
+          sx={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Typography
+            variant="display-xs-semibold"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: "1rem",
+            }}
+            color={palette.base.white}
+          >
+            Retrivers <Icon icon="info" />
+          </Typography>
+          <Box>
+            <Button variant="outlined" label="Create Retriever" />{" "}
+          </Box>
         </Box>
       );
   }

@@ -22,6 +22,21 @@ export const icons = {
   paginationRight: "/Images/Icons/arrow-right-icon.svg",
   search: "/Images/Icons/search-icon.svg",
   actions: "/Images/Icons/actions-icon.svg",
+  info: "/Images/Icons/info-icon.svg",
+  snowflake: "/Images/Icons/snowflake-icon.svg",
+  segment: "/Images/Icons/segment-icon.svg",
+  lytics: "/Images/Icons/lytics-icon.svg",
+  dataRoom: "/Images/Icons/data-room-icon.svg",
+  dbtCore: "/Images/Icons/dbt-core-icon.svg",
+  sfCrm: "/Images/Icons/sf-crm-icon.svg",
+  clReport: "/Images/Icons/cl-report-icon.svg",
+  nielsen: "/Images/Icons/nielson-icon.svg",
+  googleAnalytics: "/Images/Icons/google-analytics-icon.svg",
+  clickstream: "/Images/Icons/clickstream-icon.svg",
+  live: "/Images/Icons/live-icon.svg",
+  blocked: "/Images/Icons/blocked-icon.svg",
+  issues: "/Images/Icons/issues-icon.svg",
+  needPermissions: "/Images/Icons/need-permissions-icon.svg",
 };
 
 export const PagesType = {
