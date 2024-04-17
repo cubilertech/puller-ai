@@ -29,7 +29,7 @@ const TemplatePage = () => {
       >
         <Paper
           sx={{
-            padding: "1rem",
+            padding: "2rem",
             height: "calc(100vh - 220px)",
             paddingBottom: "2rem",
             display: "flex",
@@ -43,7 +43,7 @@ const TemplatePage = () => {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "baseline",
-              mb: "1rem",
+              // m: "1rem",
               height: "5%",
             }}
           >
