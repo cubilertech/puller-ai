@@ -48,7 +48,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate }) => {
         }}
       >
         <Paper
-          type="dark-border"
+          type="light-border"
           sx={{
             display: "flex",
             flexDirection: "column",
@@ -75,7 +75,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate }) => {
             </Typography>
 
             <Paper
-              type="dark-border"
+              type="light-border"
               sx={{
                 minHeight: "10rem",
                 padding: "0.5rem 1rem",

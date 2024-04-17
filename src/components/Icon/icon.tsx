@@ -28,7 +28,7 @@ const Icon: FC<IconProps> = ({
     return disabled ? (
       <Image
         {...props}
-        src={"Images/Icons/disabled-plus-icon.svg"}
+        src={"/Images/Icons/disabled-plus-icon.svg"}
         alt="icon"
         width={width}
         height={height}
@@ -36,7 +36,7 @@ const Icon: FC<IconProps> = ({
     ) : (
       <Image
         {...props}
-        src={"Images/Icons/plus-icon.svg"}
+        src={"/Images/Icons/plus-icon.svg"}
         alt="icon"
         width={width}
         height={height}
@@ -48,7 +48,7 @@ const Icon: FC<IconProps> = ({
     return disabled ? (
       <Image
         {...props}
-        src={"Images/Icons/disabled-minus-icon.svg"}
+        src={"/Images/Icons/disabled-minus-icon.svg"}
         alt="icon"
         width={width}
         height={height}
@@ -56,7 +56,7 @@ const Icon: FC<IconProps> = ({
     ) : (
       <Image
         {...props}
-        src={"Images/Icons/minus-icon.svg"}
+        src={"/Images/Icons/minus-icon.svg"}
         alt="icon"
         width={width}
         height={height}
@@ -67,7 +67,7 @@ const Icon: FC<IconProps> = ({
     return disabled ? (
       <Image
         {...props}
-        src={"Images/Icons/disabled-arrow-left-icon.svg"}
+        src={"/Images/Icons/disabled-arrow-left-icon.svg"}
         alt="icon"
         width={width}
         height={height}
@@ -75,7 +75,7 @@ const Icon: FC<IconProps> = ({
     ) : (
       <Image
         {...props}
-        src={"Images/Icons/arrow-left-icon.svg"}
+        src={"/Images/Icons/arrow-left-icon.svg"}
         alt="icon"
         width={width}
         height={height}
@@ -87,7 +87,7 @@ const Icon: FC<IconProps> = ({
     return disabled ? (
       <Image
         {...props}
-        src={"Images/Icons/disabled-arrow-right-icon.svg"}
+        src={"/Images/Icons/disabled-arrow-right-icon.svg"}
         alt="icon"
         width={width}
         height={height}
@@ -95,7 +95,7 @@ const Icon: FC<IconProps> = ({
     ) : (
       <Image
         {...props}
-        src={"Images/Icons/arrow-right-icon.svg"}
+        src={"/Images/Icons/arrow-right-icon.svg"}
         alt="icon"
         width={width}
         height={height}

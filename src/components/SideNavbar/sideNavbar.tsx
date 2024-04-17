@@ -105,11 +105,9 @@ const SideNavbar = () => {
                               : "1px solid transparent",
                           background:
                             path === text.name.toLowerCase()
-                              ? "var(--buttons, rgba(255, 255, 255, 0.30))"
+                              ? "rgb(118,119,124)"
                               : "",
-                          // bgcolor: "red",
                           ":hover": {
-                            // borderRadius: "8px",
                             // border:
                             //   "1px solid var(--Vision-pro-01, rgba(255, 255, 255, 0.37))",
                             // border: "1px solid #8f8f94",
@@ -126,6 +124,7 @@ const SideNavbar = () => {
                         >
                           {text.img}
                         </ListItemIcon>
+
                         <ListItemText
                           sx={{
                             fontSize: "14px",
