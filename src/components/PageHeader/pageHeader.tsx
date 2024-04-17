@@ -24,6 +24,7 @@ interface PageHeaderProps {
 }
 
 const PageHeader: FC<PageHeaderProps> = ({ type }) => {
+  const [isHovered, setIsHovered] = useState(false);
   const [openSQL_Editor, setopenSQL_Editor] = useState(false);
   const router = useRouter();
 
@@ -184,56 +185,13 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
                   gap: "1rem",
                 }}
                 color={palette.base.white}
+                onMouseOver={() => setIsHovered(true)}
+                onMouseOut={() => setIsHovered(false)}
               >
-                Retrivers <Icon icon="info" />
+                Retrivers <Icon icon={isHovered ? "infoHover" : "info"} />
               </Typography>
             </Tooltip>
           </Box>
-          {/* <Paper
-            sx={{
-              position: "absolute",
-              top: 180,
-              left: 283,
-              width: 268,
-              height: 172,
-              zIndex: 1,
-              display: "flex",
-              flexDirection: "column",
-              gap: "0.5rem",
-              padding: "1.5rem",
-            }}
-            type="light-bg-border"
-          >
-            <Typography
-              variant="text-md-semibold"
-              display={"flex"}
-              gap={"1rem"}
-            >
-              <Icon icon="live" /> Live
-            </Typography>
-
-            <Typography
-              variant="text-md-semibold"
-              display={"flex"}
-              gap={"1rem"}
-            >
-              <Icon icon="issues" /> Issues
-            </Typography>
-            <Typography
-              variant="text-md-semibold"
-              display={"flex"}
-              gap={"1rem"}
-            >
-              <Icon icon="blocked" /> Blocked
-            </Typography>
-            <Typography
-              variant="text-md-semibold"
-              display={"flex"}
-              gap={"1rem"}
-            >
-              <Icon icon="needPermissions" /> Need Permissions
-            </Typography>
-          </Paper> */}
           <Box>
             <Button
               variant="outlined"
