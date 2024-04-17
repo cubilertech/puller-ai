@@ -106,7 +106,9 @@ const SideNavbar = () => {
                           background:
                             path === text.name.toLowerCase()
                               ? "rgb(118,119,124)"
-                              : "",
+                              : path === "" && index === 0
+                                ? "rgb(118,119,124)"
+                                : "",
                           ":hover": {
                             // border:
                             //   "1px solid var(--Vision-pro-01, rgba(255, 255, 255, 0.37))",
