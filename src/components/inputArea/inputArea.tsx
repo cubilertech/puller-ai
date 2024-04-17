@@ -16,7 +16,7 @@ const InputArea = () => {
         }}
       >
         <Paper
-          type="dark-border"
+          type="light-border-2"
           sx={{
             flexGrow: "1",
             margin: 0,

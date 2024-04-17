@@ -59,6 +59,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
           <Paper
             type="dark-border"
             sx={{
+              border: "1px solid rgb(52,51,65)",
               height: content ? "fit-content" : "100%",
               margin: 0,
               padding: content ? 1 : 0,
