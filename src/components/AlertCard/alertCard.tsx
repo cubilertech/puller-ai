@@ -38,7 +38,7 @@ const AlertCard: FC<alertCardProps> = ({
             borderBottomRightRadius: index === dataLength - 1 ? "14px" : 0,
           }}
         >
-          <Divider sx={{ bgcolor: "rgb(61,64,70)" }} />
+          <Divider sx={{ bgcolor: "rgba(71, 84, 103, 0.0)" }} />
           <Box
             padding={"1rem"}
             display={"flex"}
@@ -57,7 +57,7 @@ const AlertCard: FC<alertCardProps> = ({
               <Typography variant="text-sm">{time}</Typography>
             </Box>
           </Box>
-          <Divider sx={{ bgcolor: "rgb(61,64,70)" }} />
+          <Divider sx={{ bgcolor: "rgba(71, 84, 103, 0.1)" }} />
         </Box>
       );
     case "option":
