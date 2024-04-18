@@ -163,14 +163,18 @@ const CustomButton: FC<buttonProps> = ({
       return (
         <div className="round-btn-container">
           <Button
+            variant="text"
             sx={{
               borderRadius: "100%",
-              bgcolor: "rgb(100,104,115)",
-              p: "1rem",
-              width: "20px",
-              height: "20px,",
+              bgcolor: "rgb(90,93,105)",
+              p: 0,
+              minWidth: 20,
+              width: "20px !important",
+              height: "20px !important",
               ":hover": {
                 borderRadius: "100%",
+
+                backgroundColor: "rgb(95,112,125)",
               },
             }}
           >
