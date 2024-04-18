@@ -18,6 +18,8 @@ const Summary: FC<Summary> = ({ heading, description }) => {
     <Paper
       type="light-border"
       sx={{
+        maxWidth: "100%",
+        wordBreak: "break-all",
         padding: "1rem",
         alignSelf: "stretch",
         display: "flex",
