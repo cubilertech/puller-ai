@@ -1,10 +1,13 @@
+"use client";
 import { Button } from "@/components/Button";
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
 import InputArea from "@/components/inputArea/inputArea";
 import { Box, Input, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 const CreateAlertPage = () => {
+  const router = useRouter();
   return (
     <Box
       sx={{
@@ -66,7 +69,12 @@ const CreateAlertPage = () => {
         </Paper>
       </Box>
       <Box width={180}>
-        <Button variant="outlined" label="Create Alert" fullWidth />
+        <Button
+          variant="outlined"
+          label="Create Alert"
+          fullWidth
+          onClick={() => router.push("/alerts/feedback")}
+        />
       </Box>
     </Box>
   );
