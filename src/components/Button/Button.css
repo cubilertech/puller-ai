@@ -13,7 +13,7 @@
     rgba(255, 255, 255, 0.7)
   );
   border-radius: 8px;
-  width: fit-content;
+  width: 100%;
 }
 
 .contained-container {

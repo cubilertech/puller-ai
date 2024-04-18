@@ -38,7 +38,7 @@ const AlertCard: FC<alertCardProps> = ({
             borderBottomRightRadius: index === dataLength - 1 ? "14px" : 0,
           }}
         >
-          <Divider sx={{ bgcolor: "rgb(62,64,71)" }} />
+          <Divider sx={{ bgcolor: "rgb(61,64,70)" }} />
           <Box
             padding={"1rem"}
             display={"flex"}
@@ -57,7 +57,7 @@ const AlertCard: FC<alertCardProps> = ({
               <Typography variant="text-sm">{time}</Typography>
             </Box>
           </Box>
-          <Divider sx={{ bgcolor: "rgb(62,64,71)" }} />
+          <Divider sx={{ bgcolor: "rgb(61,64,70)" }} />
         </Box>
       );
     case "option":
@@ -81,17 +81,24 @@ const AlertCard: FC<alertCardProps> = ({
             <Image src={avatar} alt="avatar" width={48} height={48} />
             <Box display={"flex"} flexDirection={"column"} gap={"0.5rem"}>
               <Typography variant="text-md-semibold">{description}</Typography>
-              <Button
+              <Box
                 sx={{
-                  minHeight: 32,
-                  minWidth: 170,
                   width: 170,
                   height: "32px !important",
-                  p: 0,
                 }}
-                variant="outlined"
-                label="Explore segmentation"
-              />
+              >
+                <Button
+                  sx={{
+                    minHeight: 32,
+                    height: "32px !important",
+                    minWidth: 170,
+
+                    p: 0,
+                  }}
+                  variant="outlined"
+                  label="Explore segmentation"
+                />
+              </Box>
               <Typography variant="text-sm">{time}</Typography>
             </Box>
           </Box>
