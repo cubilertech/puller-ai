@@ -23,6 +23,7 @@ export const icons = {
   search: "/Images/Icons/search-icon.svg",
   actions: "/Images/Icons/actions-icon.svg",
   info: "/Images/Icons/info-icon.svg",
+  infoHover: "/Images/Icons/info-hover-icon.svg",
   snowflake: "/Images/Icons/snowflake-icon.svg",
   segment: "/Images/Icons/segment-icon.svg",
   lytics: "/Images/Icons/lytics-icon.svg",
