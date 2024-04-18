@@ -6,6 +6,7 @@ import "./style.css";
 import { Paper } from "@/components/Paper";
 import { Button } from "@/components/Button";
 import { Close } from "@mui/icons-material";
+import Divider from "@/components/Divider/divider";
 
 const modalStyle = {
   position: "absolute",
@@ -14,7 +15,7 @@ const modalStyle = {
   transform: "translate(-50%, -50%)",
   width: "fit-content",
   bgcolor: "transparnet",
-  border: "2px solid #000",
+  border: "none",
   boxShadow: 24,
 };
 
@@ -37,6 +38,29 @@ const SQL_EditorModal: FC<SQL_EditorModalProps> = ({
     setFormattedCode(format(code, { language: "mysql" }));
   }, []);
 
+  // Function to prepend line numbers to each line of the code
+  const addLineNumbers = (code: string) => {
+    return code.split("\n").map((line, index) => (
+      <div key={index} style={{ display: "flex", alignItems: "center" }}>
+        <div
+          style={{
+            width: "30px", // Adjust as needed
+            marginRight: "10px", // Adjust as needed
+            textAlign: "right",
+            paddingRight: "5px",
+            color: "#98A2B3", // Adjust as needed
+          }}
+        >
+          {index + 1}
+        </div>
+        <div>{line}</div>
+      </div>
+    ));
+  };
+
+  // Add line numbers to the formatted code
+  const codeWithLineNumbers = addLineNumbers(formattedCode);
+
   return (
     <Modal
       open={open}
@@ -45,7 +69,7 @@ const SQL_EditorModal: FC<SQL_EditorModalProps> = ({
       aria-describedby="modal-modal-description"
     >
       <Box sx={modalStyle}>
-        <Paper type="dark-border" sx={{ padding: 3 }}>
+        <Paper type="dark-border" sx={{ padding: 3, height: "626px"}}>
           <Box
             sx={{
               display: "flex",
@@ -69,20 +93,24 @@ const SQL_EditorModal: FC<SQL_EditorModalProps> = ({
               <Close />
             </Button>
           </Box>
-          <MonacoEditor
-            width="800"
-            height="600"
-            language="javascript"
-            theme="custom-monaco-theme"
-            value={formattedCode}
-            options={{
-              readOnly: true,
-              minimap: {
-                enabled: false,
-              },
-              scrollBeyondLastLine: false,
+          <Divider variant="fullWidth" type="light" />
+          <Box
+            sx={{
+              width: "600px",
+              mt: 1,
+              maxHeight: "500px",
+              overflow: "auto",
+              scrollbarWidth: "none",
             }}
-          />
+          >
+            {/* Display formatted code with line numbers in a Typography component */}
+            <Typography
+              component="div"
+              sx={{ whiteSpace: "pre-wrap", lineHeight: "30px" }}
+            >
+              {codeWithLineNumbers}
+            </Typography>
+          </Box>
         </Paper>
       </Box>
     </Modal>
