@@ -75,7 +75,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate }) => {
             </Typography>
 
             <Paper
-              type="light-border"
+              type="dark-border"
               sx={{
                 minHeight: "10rem",
                 padding: "0.5rem 1rem",
