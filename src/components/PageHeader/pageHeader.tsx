@@ -20,7 +20,8 @@ interface PageHeaderProps {
     | "Preview"
     | "Template"
     | "Retrivers"
-    | "New Retriver";
+    | "New Retriver"
+    | "Select Retriver";
 }
 
 const PageHeader: FC<PageHeaderProps> = ({ type }) => {
@@ -194,6 +195,9 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
           </Box>
           <Box>
             <Button
+              sx={{
+                width: 220,
+              }}
               variant="outlined"
               label="Create Retriever"
               onClick={() => router.push("/retrivers/new")}
@@ -223,6 +227,39 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
             Select New Retriever Type
           </Typography>
           <Box></Box>
+        </Box>
+      );
+    case "Select Retriver":
+      return (
+        <Box
+          sx={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Typography
+            variant="display-xs-semibold"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: "1rem",
+            }}
+            color={palette.base.white}
+          >
+            Select a Retriever
+          </Typography>
+          <Box>
+            <Button
+              sx={{
+                width: 220,
+              }}
+              variant="outlined"
+              label="Continue"
+              onClick={() => router.push("/alerts/select-retriever/create")}
+            />
+          </Box>
         </Box>
       );
   }
