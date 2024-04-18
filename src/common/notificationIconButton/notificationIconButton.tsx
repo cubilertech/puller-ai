@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Box, IconButton as MuiIconButton } from "@mui/material";
+import { Box, IconButton as MuiIconButton, Typography } from "@mui/material";
 import { Icon } from "@/components/Icon";
 import { IconTypes } from "@/utils/types";
 import "./notificationIconButton.css";
@@ -22,7 +22,10 @@ const NotificationIconButton: FC<IconButtonProps> = ({
 }) => {
   return (
     <div className="container1">
-      <MuiIconButton sx={{ position: "relative", borderRadius: "100%" }} {...props}>
+      <MuiIconButton
+        sx={{ position: "relative", borderRadius: "100%" }}
+        {...props}
+      >
         {isNotice && (
           <Box sx={{ position: "absolute", top: "8px", right: "8px" }}>
             <Icon icon="ellipse" width={12} height={12} />
@@ -30,6 +33,7 @@ const NotificationIconButton: FC<IconButtonProps> = ({
         )}
 
         {icon && <Icon icon={icon} width={iconWidth} height={iconHeight} />}
+        {text && <Typography variant="text-xxs-bold">{text}</Typography>}
       </MuiIconButton>
     </div>
   );

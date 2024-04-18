@@ -328,4 +328,11 @@ export const CustomTypography = {
     fontWeight: 700,
     letterSpacing: "",
   },
+  "text-xxs-bold": {
+    fontSize: "10px",
+    lineHeight: "26px",
+    fontKerning: "0%",
+    fontWeight: 700,
+    letterSpacing: "",
+  },
 };

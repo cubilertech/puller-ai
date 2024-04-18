@@ -20,7 +20,8 @@ interface PageHeaderProps {
     | "Preview"
     | "Template"
     | "Retrivers"
-    | "New Retriver";
+    | "New Retriver"
+    | "Alerts";
 }
 
 const PageHeader: FC<PageHeaderProps> = ({ type }) => {
@@ -223,6 +224,39 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
             Select New Retriever Type
           </Typography>
           <Box></Box>
+        </Box>
+      );
+    case "Alerts":
+      return (
+        <Box
+          sx={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Typography
+            variant="display-xs-semibold"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: "1rem",
+            }}
+            color={palette.base.white}
+          >
+            Alerts
+          </Typography>
+          <Box>
+            <Button
+              variant="outlined"
+              label="Create Alert"
+              sx={{
+                width: 220,
+              }}
+              onClick={() => router.push("/alerts/create-retriever")}
+            />
+          </Box>
         </Box>
       );
   }
