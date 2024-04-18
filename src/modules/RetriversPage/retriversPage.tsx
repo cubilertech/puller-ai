@@ -131,8 +131,8 @@ const RetriversPage = () => {
           justifyItems: "center",
           width: "100%",
           height: "fit-content",
-          gap: "2rem",
-          justifyContent: "space-evenly",
+          gap: "1rem",
+          justifyContent: "space-between",
           overflowY: "scroll",
           "&::-webkit-scrollbar": {
             display: "none",

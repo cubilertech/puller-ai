@@ -32,6 +32,7 @@ const TemplatePage = () => {
             padding: "2rem",
             height: "calc(100vh - 220px)",
             paddingBottom: "2rem",
+            paddingTop: "2rem",
             display: "flex",
             flexDirection: "column",
           }}
@@ -42,7 +43,7 @@ const TemplatePage = () => {
               display: "flex",
               justifyContent: "space-between",
               alignItems: "baseline",
-              mb: "1rem",
+              mb: "2rem",
               height: "5%",
             }}
           >
