@@ -32,7 +32,7 @@ const AlertCard: FC<alertCardProps> = ({
         <Box
           display={"flex"}
           flexDirection={"column"}
-          bgcolor={"rgb(64,76,89)"}
+          bgcolor={"rgba(71, 84, 103, 0.3)"}
           sx={{
             borderBottomLeftRadius: index === dataLength - 1 ? "14px" : 0,
             borderBottomRightRadius: index === dataLength - 1 ? "14px" : 0,
@@ -65,7 +65,7 @@ const AlertCard: FC<alertCardProps> = ({
         <Box
           display={"flex"}
           flexDirection={"column"}
-          bgcolor={"rgb(64,76,89)"}
+          bgcolor={"rgba(71, 84, 103, 0.3)"}
           sx={{
             borderBottomLeftRadius: index === dataLength - 1 ? "14px" : 0,
             borderBottomRightRadius: index === dataLength - 1 ? "14px" : 0,

@@ -81,7 +81,10 @@ const AlertsPage = () => {
           sx={{
             width: "100%",
             minHeight: "2rem",
-            bgcolor: "rgb(65,74,86)",
+            // bgcolor: "rgb(61,75,84)",
+            background:
+              "linear-gradient(142.96deg, rgba(255, 255, 255, 0.148) -3.54%, rgba(114, 114, 114, 0.168) 95.15%)",
+
             padding: "1rem 1rem 0",
             borderTopLeftRadius: "14px",
             borderTopRightRadius: "14px",
