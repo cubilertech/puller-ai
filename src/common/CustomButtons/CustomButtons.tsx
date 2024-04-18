@@ -9,7 +9,7 @@ import Image from "next/image";
 import { Icon } from "@/components/Icon";
 
 interface buttonProps {
-  variant: "select" | "rounded-SQL" | "smallbutton";
+  variant: "select" | "rounded-SQL" | "smallbutton" | "round";
   text?: string;
   selectData?: UserProps;
   onClick?: () => void;
@@ -157,6 +157,29 @@ const CustomButton: FC<buttonProps> = ({
           >
             <MenuItem>Logout</MenuItem>
           </Menu>
+        </div>
+      );
+    case "round":
+      return (
+        <div className="round-btn-container">
+          <Button
+            variant="text"
+            sx={{
+              borderRadius: "100%",
+              bgcolor: "rgb(90,93,105)",
+              p: 0,
+              minWidth: 20,
+              width: "20px !important",
+              height: "20px !important",
+              ":hover": {
+                borderRadius: "100%",
+
+                backgroundColor: "rgb(95,112,125)",
+              },
+            }}
+          >
+            {text}
+          </Button>
         </div>
       );
   }

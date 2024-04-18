@@ -1,11 +1,11 @@
 import AppLayout from "@/common/appLayout/appLayout";
-import { Typography } from "@mui/material";
+import AlertsPage from "@/modules/AlertsPage/alertsPage";
 
 const page = () => {
   return (
     <>
       <AppLayout>
-        <Typography variant="display-2xl-bold">Alerts</Typography>
+        <AlertsPage />
       </AppLayout>
     </>
   );
