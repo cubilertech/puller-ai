@@ -22,7 +22,8 @@ interface PageHeaderProps {
     | "Retrivers"
     | "New Retriver"
     | "Select Retriver"
-    | "Alerts";
+    | "Alerts"
+    | "Create Alert";
 }
 
 const PageHeader: FC<PageHeaderProps> = ({ type }) => {
@@ -258,7 +259,7 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
               }}
               variant="outlined"
               label="Continue"
-              onClick={() => router.push("/alerts/select-retriever/create")}
+              onClick={() => router.push("/alerts/create")}
             />
           </Box>
         </Box>
@@ -295,6 +296,30 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
               onClick={() => router.push("/alerts/select-retriever")}
             />
           </Box>
+        </Box>
+      );
+    case "Create Alert":
+      return (
+        <Box
+          sx={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Typography
+            variant="display-xs-semibold"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: "1rem",
+            }}
+            color={palette.base.white}
+          >
+            Create Alert for {`"Retriever 2"`}
+          </Typography>
+          <Box></Box>
         </Box>
       );
   }
