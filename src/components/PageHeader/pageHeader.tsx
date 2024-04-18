@@ -292,7 +292,7 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
               sx={{
                 width: 220,
               }}
-              onClick={() => router.push("/alerts/create-retriever")}
+              onClick={() => router.push("/alerts/select-retriever")}
             />
           </Box>
         </Box>
