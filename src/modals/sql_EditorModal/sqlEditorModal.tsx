@@ -36,27 +36,68 @@ const SQL_EditorModal: FC<SQL_EditorModalProps> = ({
   // Function to format the code using Prettier
   useEffect(() => {
     setFormattedCode(format(code, { language: "mysql" }));
-  }, []);
+  }, [code]);
+// Function to add line numbers to the code and color individual words
+const addLineNumbers = (code: string) => {
+  return code.split("\n").map((line, index) => {
+    const words = line.split(/(\b)/); // Split line into words preserving word boundaries
 
-  // Function to prepend line numbers to each line of the code
-  const addLineNumbers = (code: string) => {
-    return code.split("\n").map((line, index) => (
+    // Map each word to its appropriate color
+    const coloredWords = words.map((word, wordIndex) => {
+      let color = '#98A2B3'; // Default color
+
+      // Check if the word ends with "("
+      const endsWithParenthesis = word.endsWith("(");
+
+      // Check if the word is within a string
+      const inString = line.includes(word) && line.trim().startsWith('"') && line.trim().endsWith('"');
+
+      // Check if the word is a variable (assuming variables start with $ or _)
+      const isVariable = !inString && !endsWithParenthesis && /\b(\$|_)?[a-zA-Z][$\w]*\b/.test(word);
+      // Check if the word is a number
+      const isNumber = !inString && !endsWithParenthesis && /^\s*\d+(\.\d+)?\s*$/.test(word);
+
+      if (inString) {
+        color = '#c6807c'; // Change color for words within a string
+      } else if (isVariable) {
+        color = 'blue'; // Change color for variables
+      } else if (isNumber) {
+        color = 'green'; // Change color for numbers
+      }
+
+      if (endsWithParenthesis) {
+        // If the word ends with "(", we only change the color of the word itself
+        const wordWithoutParenthesis = word.substring(0, word.length - 1); // Remove the parenthesis
+        return (
+          <span key={wordIndex}>
+            <span style={{ color }}>{wordWithoutParenthesis}</span>
+            {"("}
+          </span>
+        );
+      }
+
+      return <span key={wordIndex} style={{ color }}>{word}</span>;
+    });
+
+    // Return the line with colored words
+    return (
       <div key={index} style={{ display: "flex", alignItems: "center" }}>
         <div
           style={{
-            width: "30px", // Adjust as needed
-            marginRight: "10px", // Adjust as needed
+            width: "30px",
+            marginRight: "10px",
             textAlign: "right",
             paddingRight: "5px",
-            color: "#98A2B3", // Adjust as needed
+            color: "#98A2B3",
           }}
         >
           {index + 1}
         </div>
-        <div>{line}</div>
+        <div>{coloredWords}</div>
       </div>
-    ));
-  };
+    );
+  });
+};
 
   // Add line numbers to the formatted code
   const codeWithLineNumbers = addLineNumbers(formattedCode);
@@ -69,7 +110,7 @@ const SQL_EditorModal: FC<SQL_EditorModalProps> = ({
       aria-describedby="modal-modal-description"
     >
       <Box sx={modalStyle}>
-        <Paper type="dark-border" sx={{ padding: 3, height: "626px"}}>
+        <Paper type="dark-border" sx={{ padding: 3, height: "626px" }}>
           <Box
             sx={{
               display: "flex",
@@ -103,7 +144,7 @@ const SQL_EditorModal: FC<SQL_EditorModalProps> = ({
               scrollbarWidth: "none",
             }}
           >
-            {/* Display formatted code with line numbers in a Typography component */}
+            {/* Display formatted code with line numbers */}
             <Typography
               component="div"
               sx={{ whiteSpace: "pre-wrap", lineHeight: "30px" }}
