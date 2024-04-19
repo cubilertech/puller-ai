@@ -23,7 +23,8 @@ interface PageHeaderProps {
     | "New Retriver"
     | "Select Retriver"
     | "Alerts"
-    | "Create Alert";
+    | "Create Alert"
+    | "Connect App";
 }
 
 const PageHeader: FC<PageHeaderProps> = ({ type }) => {
@@ -318,6 +319,30 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
             color={palette.base.white}
           >
             Create Alert for {`"Retriever 2"`}
+          </Typography>
+          <Box></Box>
+        </Box>
+      );
+    case "Connect App":
+      return (
+        <Box
+          sx={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Typography
+            variant="display-xs-semibold"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: "1rem",
+            }}
+            color={palette.base.white}
+          >
+            Connect App
           </Typography>
           <Box></Box>
         </Box>
