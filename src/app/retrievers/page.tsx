@@ -1,11 +1,11 @@
 import AppLayout from "@/common/appLayout/appLayout";
-import RetriversPage from "@/modules/RetriversPage/retrieversPage";
+import RetrieversPage from "@/modules/RetrieversPage/retrieversPage";
 
 const Retrivers = () => {
   return (
     <>
       <AppLayout>
-        <RetriversPage />
+        <RetrieversPage />
       </AppLayout>
     </>
   );

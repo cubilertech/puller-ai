@@ -111,7 +111,7 @@ const data = [
   },
 ];
 
-const RetriversPage = () => {
+const RetrieversPage = () => {
   return (
     <Box
       sx={{
@@ -187,4 +187,4 @@ const RetriversPage = () => {
   );
 };
 
-export default RetriversPage;
+export default RetrieversPage;
