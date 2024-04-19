@@ -1,14 +1,20 @@
+"use client";
 import { Typography } from "@mui/material";
 import { Icon } from "../Icon";
 import { Paper } from "../Paper";
-import { FC } from "react";
+import { FC, MouseEvent } from "react";
 
 interface RectangleCardProps {
   icon: "connectApps" | "apiKey" | "upload";
   title: string;
+  onClick?: () => void;
 }
 
-const RectangleCardWithIcon: FC<RectangleCardProps> = ({ icon, title }) => {
+const RectangleCardWithIcon: FC<RectangleCardProps> = ({
+  icon,
+  title,
+  onClick,
+}) => {
   return (
     <Paper
       type="light-border"
@@ -21,6 +27,7 @@ const RectangleCardWithIcon: FC<RectangleCardProps> = ({ icon, title }) => {
         gap: "1.8rem",
         paddingLeft: "15px",
       }}
+      onClick={onClick}
     >
       <Icon icon={icon} height={64} width={64} />
       <Typography variant="text-md-semibold">{title}</Typography>
