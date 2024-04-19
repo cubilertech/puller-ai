@@ -107,7 +107,7 @@ const UploadRetrieverPage = () => {
                   sx={{
                     border: "2px solid rgba(196, 196, 196, 0.6)",
                     borderRadius: "8px",
-                    padding: "0.1rem 0.5rem",
+                    padding: "0.5rem",
                   }}
                 />
               </Box>
