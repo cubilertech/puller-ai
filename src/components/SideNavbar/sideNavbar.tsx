@@ -80,7 +80,7 @@ const SideNavbar = () => {
                   {
                     name: "Retrievers",
                     img: <Icon width={18} height={18} icon="retrieversIcon" />,
-                    link: "/retreivers",
+                    link: "/retrievers",
                   },
                   {
                     name: "Alerts",
