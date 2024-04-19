@@ -5,10 +5,12 @@ import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
 import UploadCard from "@/components/UploadCard/uploadCard";
 import { Box, Divider, Input, Typography } from "@mui/material";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const data = [1, 2, 3];
 const UploadRetrieverPage = () => {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -99,10 +101,20 @@ const UploadRetrieverPage = () => {
 
         <Box display={"flex"} justifyContent={"flex-end"} gap={"1rem"}>
           <Box width={242} height={44}>
-            <Button label="Go Back" variant="outlined" fullWidth />
+            <Button
+              label="Go Back"
+              variant="outlined"
+              fullWidth
+              onClick={() => router.back()}
+            />
           </Box>
           <Box width={242} height={44}>
-            <Button label="Create Retriever" variant="contained" fullWidth />
+            <Button
+              label="Create Retriever"
+              variant="contained"
+              fullWidth
+              onClick={() => router.push("/retrivers/feedback")}
+            />
           </Box>
         </Box>
       </Paper>
