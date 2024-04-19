@@ -81,7 +81,6 @@ const AlertsPage = () => {
           sx={{
             width: "100%",
             minHeight: "2rem",
-            // bgcolor: "rgb(61,75,84)",
             background:
               "linear-gradient(142.96deg, rgba(255, 255, 255, 0.148) -3.54%, rgba(114, 114, 114, 0.168) 95.15%)",
 
@@ -95,11 +94,12 @@ const AlertsPage = () => {
           <Box
             onClick={() => setIsActive("all")}
             sx={{
-              // width: "30px",
               padding: " 0 1rem",
-              // bgcolor: "red",
               borderBottom:
                 isActive === "all" ? "2px solid rgb(252,252,253)" : "",
+              ":hover": {
+                cursor: "pointer",
+              },
             }}
           >
             <Typography
@@ -121,6 +121,9 @@ const AlertsPage = () => {
             sx={{
               borderBottom:
                 isActive === "unread" ? "2px solid rgb(252,252,253)" : "",
+              ":hover": {
+                cursor: "pointer",
+              },
             }}
           >
             <Typography
