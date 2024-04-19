@@ -9,6 +9,7 @@ import Divider from "../../components/Divider/divider";
 import { palette } from "@/theme/Palette";
 import OptionsBar from "@/components/optionsBar/optionsBar";
 import { useRouter } from "next/navigation";
+import Tooltip from "@/components/Tooltip/tooltip";
 
 interface PannelAreaProps {
   content?: {
@@ -80,19 +81,25 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
               </Box>
             ) : content ? (
               <>
-                <Typography
-                  variant="display-xs"
-                  sx={{
-                    width: "98%",
-                    pr: 5,
-                    pt: 1,
-                    m: "auto",
-                    textAlign: "start",
-                  }}
-                  component="p"
+                <Tooltip
+                  title="Seasonal Transactions"
+                  description="“TXN_SZNAL” table . This query uses a table called Transactions that contains the following columns:"
                 >
-                  {content.response}
-                </Typography>
+                  <Typography
+                    onClick={handleOpenSelectBar}
+                    variant="display-xs"
+                    sx={{
+                      width: "98%",
+                      pr: 5,
+                      pt: 1,
+                      m: "auto",
+                      textAlign: "start",
+                    }}
+                    component="p"
+                  >
+                    {content.response}
+                  </Typography>
+                </Tooltip>
                 <Box pt={2} pb={1}>
                   <Divider type="dark" variant="fullWidth" />
                 </Box>
@@ -133,7 +140,8 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                       sx={{
                         width: "122px",
                       }}
-                      onClick={handleOpenSelectBar}
+                      onClick={handleUpdate}
+                      // onClick={handleOpenSelectBar}
                       label="Run Query"
                       variant="contained"
                     />
