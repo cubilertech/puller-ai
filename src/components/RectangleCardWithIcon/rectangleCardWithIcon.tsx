@@ -1,5 +1,5 @@
 "use client";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Icon } from "../Icon";
 import { Paper } from "../Paper";
 import { FC, MouseEvent } from "react";
@@ -16,22 +16,30 @@ const RectangleCardWithIcon: FC<RectangleCardProps> = ({
   onClick,
 }) => {
   return (
-    <Paper
-      type="light-border"
+    <Box
       sx={{
-        width: "350px",
-        height: "92px",
-        display: "flex",
-        justifyContent: "flex-start",
-        alignItems: "center",
-        gap: "1.8rem",
-        paddingLeft: "15px",
+        ":hover": {
+          cursor: "pointer",
+        },
       }}
-      onClick={onClick}
     >
-      <Icon icon={icon} height={64} width={64} />
-      <Typography variant="text-md-semibold">{title}</Typography>
-    </Paper>
+      <Paper
+        type="light-border"
+        sx={{
+          width: "350px",
+          height: "92px",
+          display: "flex",
+          justifyContent: "flex-start",
+          alignItems: "center",
+          gap: "1.8rem",
+          paddingLeft: "15px",
+        }}
+        onClick={onClick}
+      >
+        <Icon icon={icon} height={64} width={64} />
+        <Typography variant="text-md-semibold">{title}</Typography>
+      </Paper>
+    </Box>
   );
 };
 

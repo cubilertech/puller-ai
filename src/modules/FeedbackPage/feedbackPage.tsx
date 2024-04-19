@@ -4,8 +4,13 @@ import { Paper } from "@/components/Paper";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { FC } from "react";
 
-const FeedbackPage = () => {
+interface FeedbackProps {
+  type: "retriever" | "alert";
+}
+
+const FeedbackPage: FC<FeedbackProps> = ({ type }) => {
   const router = useRouter();
   return (
     <Box
@@ -21,6 +26,11 @@ const FeedbackPage = () => {
           width: 704,
           height: 516,
           padding: "4rem",
+          display: "flex",
+          flexDirection: "column",
+          gap: "2rem",
+          justifyContent: "center",
+          alignItems: "center",
         }}
         type="light-border"
       >
@@ -43,27 +53,39 @@ const FeedbackPage = () => {
               textAlign: "center",
             }}
           >
-            This retriever will alert you when sales go up by 30% in a given
-            week. Your alert is now active.
+            {type === "alert"
+              ? "This retriever will alert you when sales go up by 30% in a given week. Your alert is now active."
+              : "This retriever has created successfully. You can use this retriever from Retrievers List."}
           </Typography>
         </Box>
-        <Box display={"flex"} gap={"2rem"} mt={"5rem"}>
-          <Box width={280}>
-            <Button
-              fullWidth
-              variant="outlined"
-              label="Go to Alerts Log"
-              onClick={() => router.push("/alerts")}
-            />
+        {type === "alert" ? (
+          <Box display={"flex"} gap={"1rem"} mt={"1rem"}>
+            <Box width={280}>
+              <Button
+                fullWidth
+                variant="outlined"
+                label="Go to Alerts Log"
+                onClick={() => router.push("/alerts")}
+              />
+            </Box>
+            <Box width={280}>
+              <Button
+                fullWidth
+                variant="contained"
+                label="Go to Alerts Managment"
+              />
+            </Box>
           </Box>
-          <Box width={280}>
+        ) : (
+          <Box width={280} height={44}>
             <Button
-              fullWidth
               variant="contained"
-              label="Go to Alerts Managment"
+              label="Go to Retrievers"
+              fullWidth
+              onClick={() => router.push("/retrivers")}
             />
           </Box>
-        </Box>
+        )}
       </Paper>
     </Box>
   );
