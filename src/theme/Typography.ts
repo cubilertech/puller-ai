@@ -127,6 +127,7 @@ declare module "@mui/material/Typography" {
     "text-xxs-bold": true;
     "text-sm": true;
     "display-xs": true;
+    "text-xxs-regular": true;
   }
 }
 declare module "@mui/material/styles" {

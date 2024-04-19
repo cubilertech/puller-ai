@@ -41,6 +41,8 @@ export const icons = {
   connectApps: "/Images/Icons/connect-apps-icon.svg",
   apiKey: "/Images/Icons/api-key-icon.svg",
   upload: "/Images/Icons/upload-icon.svg",
+  cloudUpload: "/Images/Icons/cloud-upload-icon.svg",
+  folder: "/Images/Icons/folder-icon.svg",
 };
 
 export const PagesType = {

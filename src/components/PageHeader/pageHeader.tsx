@@ -24,7 +24,8 @@ interface PageHeaderProps {
     | "Select Retriver"
     | "Alerts"
     | "Create Alert"
-    | "Connect App";
+    | "Connect App"
+    | "Custom Retrievers";
 }
 
 const PageHeader: FC<PageHeaderProps> = ({ type }) => {
@@ -343,6 +344,30 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
             color={palette.base.white}
           >
             Connect App
+          </Typography>
+          <Box></Box>
+        </Box>
+      );
+    case "Custom Retrievers":
+      return (
+        <Box
+          sx={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Typography
+            variant="display-xs-semibold"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: "1rem",
+            }}
+            color={palette.base.white}
+          >
+            Custom Retrievers
           </Typography>
           <Box></Box>
         </Box>
