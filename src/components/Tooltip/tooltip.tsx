@@ -15,7 +15,7 @@ const Tooltip: FC<TooltipProps> = ({
   ...props
 }) => {
   return (
-    <div>
+    <>
       <MuiTooltip
         placement="top"
         title={
@@ -37,9 +37,9 @@ const Tooltip: FC<TooltipProps> = ({
         }
         {...props}
       >
-        {children}
+        <span>{children}</span>
       </MuiTooltip>
-    </div>
+    </>
   );
 };
 

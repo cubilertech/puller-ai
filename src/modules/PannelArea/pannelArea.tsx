@@ -36,6 +36,9 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
   const handleOpenSelectBar = () => {
     setisOpenSelectBar(true);
   };
+  const handleCloseSelectBar = () => {
+    setisOpenSelectBar(false);
+  };
 
   return (
     <>
@@ -81,12 +84,8 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
               </Box>
             ) : content ? (
               <>
-                <Tooltip
-                  title="Seasonal Transactions"
-                  description="“TXN_SZNAL” table . This query uses a table called Transactions that contains the following columns:"
-                >
+                <Box display={"flex"}>
                   <Typography
-                    onClick={handleOpenSelectBar}
                     variant="display-xs"
                     sx={{
                       width: "98%",
@@ -97,9 +96,36 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                     }}
                     component="p"
                   >
-                    {content.response}
+                    The data request will give you transaction level data
+                    <Tooltip
+                      title="Seasonal Transactions"
+                      description="“TXN_SZNAL” table . This query uses a table called Transactions that contains the following columns:"
+                    >
+                      <Typography
+                        variant="display-xs"
+                        onClick={handleOpenSelectBar}
+                        sx={{
+                          borderRadius: "8px",
+                          bgcolor: isOpenSelectBar ? "rgb(91,93,107)" : "",
+                          mx: "5px",
+                          pb: "3px",
+                          ":hover": {
+                            bgcolor: "rgb(91,93,107)",
+                          },
+                        }}
+                      >
+                        {" "}
+                        (from the TXN_SZNAL table){" "}
+                      </Typography>
+                    </Tooltip>
+                    for the past 52 weeks, ending March 15, 2024, grouped by
+                    week and by Store ID. It only covers product SKUs that
+                    include Flyease technology, which is determined from INT DB
+                    for Product ID values 1234 and 5678
+                    {/* {content.response} */}
                   </Typography>
-                </Tooltip>
+                </Box>
+
                 <Box pt={2} pb={1}>
                   <Divider type="dark" variant="fullWidth" />
                 </Box>
@@ -139,6 +165,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                     <Button
                       sx={{
                         width: "122px",
+                        height: "38px !important",
                       }}
                       onClick={handleUpdate}
                       // onClick={handleOpenSelectBar}
@@ -154,6 +181,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
           </Paper>
           {isOpenSelectBar && (
             <OptionsBar
+              close={handleCloseSelectBar}
               variant="input"
               handleUpdate={handleUpdate ? () => handleUpdate() : undefined}
             />
@@ -194,7 +222,20 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                       minHeight: "100%",
                       alignItems: "flex-start",
                       overflowY: "auto",
+                      padding: "0.5rem",
+                      "&::placeholder": {
+                        fontStyle: "italic",
+                        color: "#6a0505", // Adjust placeholder text color as needed
+                      },
                     }}
+                    inputProps={{
+                      style: {
+                        fontSize: "16px",
+                        color: "#ffffff",
+                        fontStyle: "italic",
+                      },
+                    }}
+                    autoFocus
                   />
                 </Paper>
               </Box>
@@ -209,6 +250,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                     display: "flex",
                     alignItems: "center",
                     gap: "1rem",
+                    ml: "4px",
                   }}
                 >
                   <Box width={163}>
@@ -252,7 +294,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                   {isLoading ? (
                     ""
                   ) : (
-                    <Box width={155}>
+                    <Box width={155} mr={"4px"}>
                       <Button
                         onClick={handleAvailable}
                         fullWidth

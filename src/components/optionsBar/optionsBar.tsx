@@ -13,6 +13,7 @@ import { FC, useState } from "react";
 import { Paper } from "../Paper";
 import { Button } from "../Button";
 import { CircleOutlined } from "@mui/icons-material";
+import CloseIcon from "@mui/icons-material/Close";
 
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
@@ -24,10 +25,12 @@ interface optionbarProps {
     | "dropdown"
     | "options-dropdown";
   handleUpdate?: () => void | undefined;
+  close?: () => void | undefined;
 }
 
-const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate }) => {
+const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isShown, setIsShown] = useState(true);
 
   // Event handler to handle the opening of the Select
   const handleOpen = () => {
@@ -41,82 +44,96 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate }) => {
 
   if (variant === "input")
     return (
-      <Box
-        sx={{
-          width: "100%",
-          height: "100%",
-          ml: "1rem",
-        }}
-      >
-        <Paper
-          type="light-border"
+      isShown && (
+        <Box
           sx={{
-            display: "flex",
-            flexDirection: "column",
-            padding: "1rem",
-            height: "98.8%",
-            justifyContent: "space-between",
+            width: "100%",
+            height: "100%",
+            ml: "1rem",
           }}
         >
-          <Box
+          <Paper
+            type="light-border"
             sx={{
               display: "flex",
               flexDirection: "column",
-              gap: "1rem",
-              overflow: "auto",
-              scrollbarColor: "none",
+              padding: "1rem",
+              height: "98.8%",
+              justifyContent: "space-between",
             }}
           >
-            <Typography color={"#fff"} variant="text-md-regular">
-              Seasonal Transactions
-            </Typography>
-            <Typography color={"#fff"} variant="text-sm-regular">
-              “TXN_SZNAL” table . This query uses a table
-              called Transactions that contains the following columns:
-            </Typography>
-
-            <Paper
-              type="dark-border"
-              sx={{
-                minHeight: "10rem",
-                padding: "0.5rem 1rem",
-                display: "flex",
-                maxHeight: "15rem",
-                margin: 0,
-              }}
-            >
-              <Input
-                sx={{
-                  boxSizing: "border-box",
-                  minHeight: "100%",
-                  alignItems: "flex-start",
-                  overflowY: "auto",
-                }}
-                multiline
-                fullWidth
-                disableUnderline
-              />
-            </Paper>
-          </Box>
-
-          <Box>
-            <Divider />
             <Box
               sx={{
                 display: "flex",
-                justifyContent: "flex-end",
-                mt: "1rem",
+                flexDirection: "column",
+                gap: "1rem",
+                overflow: "auto",
+                scrollbarColor: "none",
               }}
             >
-              <Button
-                // onClick={handleUpdate}
-                label="Update"
-                variant="contained"
-              />
+              <Box onClick={close}>
+                <CloseIcon
+                  sx={{
+                    position: "absolute",
+                    right: 15,
+                    width: 20,
+                    ":hover": {
+                      cursor: "pointer",
+                    },
+                  }}
+                />
+              </Box>
+              <Typography color={"#fff"} variant="text-md-regular">
+                Seasonal Transactions
+              </Typography>
+              <Typography color={"#fff"} variant="text-sm-regular">
+                “TXN_SZNAL” table . This query uses a table
+                called Transactions that contains the following columns:
+              </Typography>
+
+              <Paper
+                type="dark-border"
+                sx={{
+                  minHeight: "10rem",
+                  padding: "0.5rem 1rem",
+                  display: "flex",
+                  maxHeight: "15rem",
+                  margin: 0,
+                }}
+              >
+                <Input
+                  sx={{
+                    boxSizing: "border-box",
+                    minHeight: "100%",
+                    alignItems: "flex-start",
+                    overflowY: "auto",
+                  }}
+                  multiline
+                  fullWidth
+                  disableUnderline
+                />
+              </Paper>
             </Box>
-          </Box>
-        </Paper>
-      </Box>
+
+            <Box>
+              <Divider />
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "flex-end",
+                  mt: "1rem",
+                }}
+              >
+                <Button
+                  // onClick={handleUpdate}
+                  label="Update"
+                  variant="contained"
+                />
+              </Box>
+            </Box>
+          </Paper>
+        </Box>
+      )
     );
   else
     return (
