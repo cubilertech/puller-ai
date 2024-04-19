@@ -12,6 +12,8 @@ const TopNavBar = () => {
   const route = usePathname();
   const routeParts = route.replace(/^\//, "").split("/");
   const firstRoute = routeParts[0];
+  const isBack =
+    routeParts.includes("preview") || routeParts.includes("connect");
   console.log(firstRoute, PagesType.RECENT_REQUESTS, "route");
   return (
     <>
@@ -27,7 +29,7 @@ const TopNavBar = () => {
         }}
       >
         <Box sx={{ ml: 4 }}>
-          {firstRoute === PagesType.PREVIEW_DATA ? (
+          {isBack ? (
             <CustomLink href={"/results"}>
               <Typography
                 variant="text-md-bold"

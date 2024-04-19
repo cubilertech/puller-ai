@@ -48,6 +48,7 @@ export const PagesType = {
   YOUR_RESULTS: "yourResults",
   CREATE_REQUEST: "createRequest",
   PREVIEW_DATA: "preview",
+  CONNECT_APP: "connect",
 };
 
 export const SingleCardDomyData = [
