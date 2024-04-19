@@ -45,6 +45,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate }) => {
         sx={{
           width: "100%",
           height: "100%",
+          ml: "1rem",
         }}
       >
         <Paper
