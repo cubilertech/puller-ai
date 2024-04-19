@@ -7,6 +7,7 @@ import { Box, Input, InputAdornment, Typography } from "@mui/material";
 import React, { useState } from "react";
 import "./Input.css";
 import Image from "next/image";
+import Searchbar from "@/components/SideNavbar/searchbar";
 
 const data = Array.from({ length: 10 }, (_, index) => ({
   image: "/images/blank-square.svg",
@@ -95,27 +96,7 @@ const TemplatePage = () => {
               </Box>
             </Box>
 
-            <Box>
-              <div className="input-container">
-                <Input
-                  placeholder="Search ..."
-                  disableUnderline
-                  sx={{
-                    backgroundColor: "rgb(115,130,133)",
-                    zIndex: 2,
-                    border: 0,
-                    padding: "10px 16px 10px 16px",
-                    height: 40,
-                    borderRadius: "8px",
-                  }}
-                  startAdornment={
-                    <InputAdornment position="start">
-                      <Icon icon="search" />{" "}
-                    </InputAdornment>
-                  }
-                />
-              </div>
-            </Box>
+            <Searchbar width={230} height={40} />
           </Box>
           <Box
             sx={{
