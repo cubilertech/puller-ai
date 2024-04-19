@@ -78,9 +78,9 @@ const SideNavbar = () => {
                     link: "/pulls",
                   },
                   {
-                    name: "Retrivers",
-                    img: <Icon width={18} height={18} icon="retriversIcon" />,
-                    link: "/retrivers",
+                    name: "Retrievers",
+                    img: <Icon width={18} height={18} icon="retrieversIcon" />,
+                    link: "/retreivers",
                   },
                   {
                     name: "Alerts",
