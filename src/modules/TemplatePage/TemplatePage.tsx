@@ -7,7 +7,7 @@ import { Box, Input, InputAdornment, Typography } from "@mui/material";
 import React, { useState } from "react";
 import "./Input.css";
 import Image from "next/image";
-import Searchbar from "@/components/SideNavbar/searchbar";
+import Searchbar from "@/components/Searchbar/searchbar";
 
 const data = Array.from({ length: 10 }, (_, index) => ({
   image: "/images/blank-square.svg",

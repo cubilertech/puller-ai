@@ -16,7 +16,11 @@ const CreateNewRetriverPage = () => {
           onClick={() => router.push("/retrivers/connect")}
         />
         <RectangleCardWithIcon icon="apiKey" title="Get API Key" />
-        <RectangleCardWithIcon icon="upload" title="Uplaod Data" />
+        <RectangleCardWithIcon
+          icon="upload"
+          title="Uplaod Data"
+          onClick={() => router.push("/retrivers/upload")}
+        />
       </Box>
     </Box>
   );

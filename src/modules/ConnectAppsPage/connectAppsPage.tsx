@@ -2,7 +2,7 @@
 import { Button } from "@/components/Button";
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
-import Searchbar from "@/components/SideNavbar/searchbar";
+import Searchbar from "@/components/Searchbar/searchbar";
 import { Box, Divider, Input, InputAdornment, Typography } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
