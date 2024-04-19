@@ -1,10 +1,11 @@
+"use client";
 import { Button } from "@/components/Button";
-import { Icon } from "@/components/Icon";
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
 import Searchbar from "@/components/SideNavbar/searchbar";
 import { Box, Divider, Input, InputAdornment, Typography } from "@mui/material";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 const data = [
   {
@@ -65,6 +66,7 @@ const data = [
 ];
 
 const ConnectAppsPage = () => {
+  const router = useRouter();
   return (
     <Box
       sx={{
@@ -105,6 +107,7 @@ const ConnectAppsPage = () => {
               height: "44",
             }}
             label="Create Retriever"
+            onClick={() => router.push("/retrivers/feedback")}
           />
         </Box>
 

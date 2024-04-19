@@ -2,7 +2,7 @@
 import { palette } from "@/theme/Palette";
 import { Box, Typography } from "@mui/material";
 import { Icon } from "../Icon";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { PagesType } from "@/utils/constants";
 import CustomLink from "../Link/link";
 import NotificationIconButton from "@/common/notificationIconButton/notificationIconButton";
@@ -10,6 +10,7 @@ import CustomButton from "@/common/CustomButtons/CustomButtons";
 
 const TopNavBar = () => {
   const route = usePathname();
+  const router = useRouter();
   const routeParts = route.replace(/^\//, "").split("/");
   const firstRoute = routeParts[0];
   const isBack =
@@ -30,7 +31,7 @@ const TopNavBar = () => {
       >
         <Box sx={{ ml: 4 }}>
           {isBack ? (
-            <CustomLink href={"/results"}>
+            <Box onClick={() => router.back()}>
               <Typography
                 variant="text-md-bold"
                 sx={{
@@ -44,7 +45,7 @@ const TopNavBar = () => {
                 <Icon icon="arrowLeftIcon" height={24} width={24} />
                 Back
               </Typography>
-            </CustomLink>
+            </Box>
           ) : firstRoute === PagesType.RECENT_REQUESTS ? (
             <CustomLink href={"/create"}>
               <Typography
