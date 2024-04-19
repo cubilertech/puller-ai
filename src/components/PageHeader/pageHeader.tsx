@@ -204,7 +204,7 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
               }}
               variant="outlined"
               label="Create Retriever"
-              onClick={() => router.push("/retrivers/new")}
+              onClick={() => router.push("/retrievers/new")}
             />
           </Box>
         </Box>

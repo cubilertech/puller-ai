@@ -15,7 +15,7 @@ export const icons = {
   pullsIcon: "/Images/Icons/pulls-icon.svg",
   adminIcon: "/Images/Icons/admin-icon.svg",
   advancedIcon: "/Images/Icons/advanced-icon.svg",
-  retrieversIcon: "/Images/Icons/retrivers-icon.svg",
+  retrieversIcon: "/Images/Icons/retrievers-icon.svg",
   alertsIcon: "/Images/Icons/alerts-icon.svg",
   arrowDown: "/Images/Icons/arrow-down.svg",
   paginationLeft: "/Images/Icons/arrow-left-icon.svg",

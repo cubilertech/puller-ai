@@ -107,7 +107,7 @@ const ConnectAppsPage = () => {
               height: "44",
             }}
             label="Create Retriever"
-            onClick={() => router.push("/retrivers/feedback")}
+            onClick={() => router.push("/retrievers/feedback")}
           />
         </Box>
 

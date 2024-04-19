@@ -1,5 +1,5 @@
 import AppLayout from "@/common/appLayout/appLayout";
-import RetriversPage from "@/modules/RetriversPage/retriversPage";
+import RetriversPage from "@/modules/RetriversPage/retrieversPage";
 
 const Retrivers = () => {
   return (

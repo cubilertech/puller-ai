@@ -13,13 +13,13 @@ const CreateNewRetriverPage = () => {
         <RectangleCardWithIcon
           icon="connectApps"
           title="Connect Apps"
-          onClick={() => router.push("/retrivers/connect")}
+          onClick={() => router.push("/retrievers/connect")}
         />
         <RectangleCardWithIcon icon="apiKey" title="Get API Key" />
         <RectangleCardWithIcon
           icon="upload"
           title="Uplaod Data"
-          onClick={() => router.push("/retrivers/upload")}
+          onClick={() => router.push("/retrievers/upload")}
         />
       </Box>
     </Box>

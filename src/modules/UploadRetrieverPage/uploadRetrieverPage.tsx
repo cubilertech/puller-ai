@@ -113,7 +113,7 @@ const UploadRetrieverPage = () => {
               label="Create Retriever"
               variant="contained"
               fullWidth
-              onClick={() => router.push("/retrivers/feedback")}
+              onClick={() => router.push("/retrievers/feedback")}
             />
           </Box>
         </Box>

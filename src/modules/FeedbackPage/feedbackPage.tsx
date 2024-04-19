@@ -82,7 +82,7 @@ const FeedbackPage: FC<FeedbackProps> = ({ type }) => {
               variant="contained"
               label="Go to Retrievers"
               fullWidth
-              onClick={() => router.push("/retrivers")}
+              onClick={() => router.push("/retrievers")}
             />
           </Box>
         )}
