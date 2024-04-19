@@ -50,6 +50,8 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
             width: "100%",
             height: "100%",
             ml: "1rem",
+            overflow: "auto",
+            scrollbarWidth: "none",
           }}
         >
           <Paper
@@ -60,6 +62,8 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
               padding: "1rem",
               height: "98.8%",
               justifyContent: "space-between",
+              overflow: "auto",
+              scrollbarWidth: "none",
             }}
           >
             <Box
@@ -68,7 +72,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
                 flexDirection: "column",
                 gap: "1rem",
                 overflow: "auto",
-                scrollbarColor: "none",
+                scrollbarWidth: "none",
               }}
             >
               <Box onClick={close}>
