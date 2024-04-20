@@ -1,0 +1,29 @@
+@keyframes typing {
+  0% {
+    content: "Processing";
+  }
+  33% {
+    content: "Processing.";
+  }
+  66% {
+    content: "Processing..";
+  }
+  100% {
+    content: "Processing...";
+  }
+}
+
+.typing-animation {
+  min-width: 12rem;
+}
+
+.typing-animation::before {
+  content: "Processing";
+  animation: typing 1s steps(16) infinite;
+  overflow: hidden;
+  white-space: nowrap;
+  min-width: 10rem;
+  margin-left: 2.3rem;
+
+  /* padding: 3rem; */
+}

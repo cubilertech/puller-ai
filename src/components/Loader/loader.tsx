@@ -3,6 +3,7 @@ import { FC } from "react";
 import { Icon } from "../Icon";
 import { Paper } from "../Paper";
 import { palette } from "@/theme/Palette";
+import "./loader.css";
 
 interface LoaderProps {
   varient: "simple" | "paper";
@@ -20,9 +21,14 @@ const Loader: FC<LoaderProps> = ({ varient }) => {
           }}
         >
           <Icon icon="logoIcon" width={240} height={260} />
-          <Typography variant="display-xs-medium" color={palette.base.white}>
+          {/* <Typography variant="display-xs-medium" color={palette.base.white}>
             Processing..
-          </Typography>
+          </Typography> */}
+          <Typography
+            variant="display-xs-medium"
+            className="typing-animation"
+          ></Typography>
+          {/* <div className="typing-animation"></div> */}
         </Box>
       );
     case "paper":
