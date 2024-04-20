@@ -115,6 +115,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
                   multiline
                   fullWidth
                   disableUnderline
+                  autoFocus
                 />
               </Paper>
             </Box>
