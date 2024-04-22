@@ -13,6 +13,18 @@ interface ResultCardProps {
 }
 
 const ResultCard: FC<ResultCardProps> = ({ data }) => {
+  const handleDownload = () => {
+    // Create a link element
+    const link = document.createElement("a");
+    link.href = "../../../public/download.txt"; // Replace with the actual file URL
+    link.download = "download.txt"; // Specify the desired filename
+
+    // Simulate a click event on the link
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <>
       <Paper
@@ -163,6 +175,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
                 fullWidth
                 size="large"
                 variant="outlined"
+                onClick={handleDownload}
               />
             </Box>
             <Box width={"242px"}>
