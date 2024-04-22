@@ -30,7 +30,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
     setTimeout(() => {
       setisLoading(false);
       route.push("/request/validate");
-    }, 8000);
+    }, 2000);
   };
 
   const handleOpenSelectBar = () => {
@@ -96,7 +96,8 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                     }}
                     component="p"
                   >
-                    The data request will give you transaction level data
+                    The data request will give you transaction level data (from
+                    the
                     <Tooltip
                       title="Seasonal Transactions"
                       description="“TXN_SZNAL” table . This query uses a table called Transactions that contains the following columns:"
@@ -115,10 +116,10 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                         }}
                       >
                         {" "}
-                        (from the TXN_SZNAL table){" "}
+                        TXN_SZNAL table
                       </Typography>
                     </Tooltip>
-                    for the past 52 weeks, ending March 15, 2024, grouped by
+                    ) for the past 52 weeks, ending March 15, 2024, grouped by
                     week and by Store ID. It only covers product SKUs that
                     include Flyease technology, which is determined from INT DB
                     for Product ID values 1234 and 5678
