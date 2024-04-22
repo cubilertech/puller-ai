@@ -164,7 +164,7 @@ export const CustomTypography = {
 
   "display-xs-regular": {
     fontSize: "24px",
-    lineHeight: "32px",
+    lineHeight: "40px",
     fontKerning: "0%",
     fontWeight: 400,
     fontFamily: "Inter",
@@ -172,7 +172,7 @@ export const CustomTypography = {
   },
   "display-xs-medium": {
     fontSize: "24px",
-    lineHeight: "32px",
+    lineHeight: "40px",
     fontKerning: "0%",
     fontWeight: 500,
     letterSpacing: "",
@@ -180,7 +180,7 @@ export const CustomTypography = {
   },
   "display-xs-semibold": {
     fontSize: "24px",
-    lineHeight: "32px",
+    lineHeight: "40px",
     fontKerning: "0%",
     fontWeight: 600,
     letterSpacing: "",
@@ -188,7 +188,7 @@ export const CustomTypography = {
   },
   "display-xs-bold": {
     fontSize: "24px",
-    lineHeight: "32px",
+    lineHeight: "40px",
     fontKerning: "0%",
     fontWeight: 700,
     letterSpacing: "",
@@ -196,7 +196,7 @@ export const CustomTypography = {
   },
   "display-xs": {
     fontSize: "22px",
-    lineHeight: "32px",
+    lineHeight: "48px",
     fontKerning: "0%",
     fontWeight: 400,
     letterSpacing: "",
@@ -340,12 +340,12 @@ export const CustomTypography = {
   "text-sm": {
     fontSize: "13px",
     fontWeight: 400,
-    lineHeight: "140%",
+    lineHeight: "19.5px",
     fontFamily: "Inter",
   },
   "text-xs-regular": {
     fontSize: "12px",
-    lineHeight: "22px",
+    lineHeight: "15.6px",
     fontKerning: "0%",
     fontWeight: 400,
     letterSpacing: "",
@@ -353,7 +353,7 @@ export const CustomTypography = {
   },
   "text-xs-medium": {
     fontSize: "12px",
-    lineHeight: "28px",
+    lineHeight: "15.6px",
     fontKerning: "0%",
     fontWeight: 500,
     letterSpacing: "",
@@ -361,7 +361,7 @@ export const CustomTypography = {
   },
   "text-xs-semibold": {
     fontSize: "12px",
-    lineHeight: "28px",
+    lineHeight: "15.6px",
     fontKerning: "0%",
     fontWeight: 600,
     letterSpacing: "",
@@ -369,7 +369,7 @@ export const CustomTypography = {
   },
   "text-xs-bold": {
     fontSize: "12px",
-    lineHeight: "28px",
+    lineHeight: "15.6px",
     fontKerning: "0%",
     fontWeight: 700,
     letterSpacing: "",
@@ -385,7 +385,7 @@ export const CustomTypography = {
   },
   "text-xxs-regular": {
     fontSize: "11px",
-    lineHeight: "26px",
+    lineHeight: "15.4px",
     fontKerning: "0%",
     fontWeight: 400,
     letterSpacing: "",
