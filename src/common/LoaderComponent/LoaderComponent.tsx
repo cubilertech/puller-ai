@@ -18,10 +18,10 @@ const LoaderComponent = () => {
       <Paper
         type="light-border"
         sx={{
-          height: "516px",
+          height: { xl: "516px", lg: "350px", md: "216px" },
           margin: 0,
           padding: 0,
-          width: "704px",
+          width: { xl: "704px", lg: "504px", md: "403px" },
         }}
       >
         <Box

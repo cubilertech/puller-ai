@@ -1,7 +1,7 @@
 "use client";
 import { Button } from "@/components/Button";
 import { Paper } from "@/components/Paper";
-import { Box, Typography } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FC } from "react";
@@ -12,6 +12,7 @@ interface FeedbackProps {
 
 const FeedbackPage: FC<FeedbackProps> = ({ type }) => {
   const router = useRouter();
+  const isLg = useMediaQuery("(max-width:1500px)");
   return (
     <Box
       sx={{
@@ -23,8 +24,8 @@ const FeedbackPage: FC<FeedbackProps> = ({ type }) => {
     >
       <Paper
         sx={{
-          width: 704,
-          height: 516,
+          height: { xl: "516px", lg: "350px", md: "216px" },
+          width: { xl: "704px", lg: "504px", md: "403px" },
           padding: "4rem",
           display: "flex",
           flexDirection: "column",
@@ -43,12 +44,14 @@ const FeedbackPage: FC<FeedbackProps> = ({ type }) => {
           <Image
             src={"/Images/success-logo.svg"}
             alt="success"
-            width={120}
-            height={120}
+            width={isLg ? 80 : 120}
+            height={isLg ? 80 : 120}
           />
-          <Typography variant="display-xs-bold">Success</Typography>
+          <Typography variant={isLg ? "text-lg-bold" : "display-xs-bold"}>
+            Success
+          </Typography>
           <Typography
-            variant="text-lg-regular"
+            variant={isLg ? "text-sm-regular" : "text-lg-regular"}
             sx={{
               textAlign: "center",
             }}
@@ -60,7 +63,7 @@ const FeedbackPage: FC<FeedbackProps> = ({ type }) => {
         </Box>
         {type === "alert" ? (
           <Box display={"flex"} gap={"1rem"} mt={"1rem"}>
-            <Box width={280}>
+            <Box width={{ xl: "280px", lg: "150px" }}>
               <Button
                 fullWidth
                 variant="outlined"
@@ -68,7 +71,7 @@ const FeedbackPage: FC<FeedbackProps> = ({ type }) => {
                 onClick={() => router.push("/alerts")}
               />
             </Box>
-            <Box width={280}>
+            <Box width={{ xl: "280px", lg: "150px" }}>
               <Button
                 fullWidth
                 variant="contained"
@@ -77,7 +80,7 @@ const FeedbackPage: FC<FeedbackProps> = ({ type }) => {
             </Box>
           </Box>
         ) : (
-          <Box width={280} height={44}>
+          <Box width={{ xl: "280px", lg: "180px" }} height={44}>
             <Button
               variant="contained"
               label="Go to Retrievers"
