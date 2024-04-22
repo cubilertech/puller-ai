@@ -92,6 +92,11 @@ const SideNavbar = () => {
                     img: <Icon width={18} height={18} icon="advancedIcon" />,
                     link: "/advanced",
                   },
+                  {
+                    name: "Graph",
+                    img: <Icon width={18} height={18} icon="advancedIcon" />,
+                    link: "/graph",
+                  },
                 ].map((text, index) => (
                   <ListItem key={text.name}>
                     <Link href={text.link} style={{ width: "100%" }}>

@@ -8,7 +8,14 @@ import CustomButton from "@/common/CustomButtons/CustomButtons";
 import SQL_EditorModal from "@/modals/sql_EditorModal/sqlEditorModal";
 
 interface PageHeaderProps {
-  type: "Recent" | "Results" | "create" | "Validate" | "Preview" | "Template";
+  type:
+    | "Recent"
+    | "Results"
+    | "create"
+    | "Validate"
+    | "Preview"
+    | "Template"
+    | "graph";
 }
 
 const PageHeader: FC<PageHeaderProps> = ({ type }) => {
@@ -151,6 +158,23 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
           <Box></Box>
         </Box>
       );
+    case "graph":
+      return (
+        <Box
+          sx={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Typography variant="display-xs-semibold" color={palette.base.white}>
+            Graph
+          </Typography>
+          <Box></Box>
+        </Box>
+      );
+      break;
   }
 };
 
