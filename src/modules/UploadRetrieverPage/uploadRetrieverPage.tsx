@@ -94,7 +94,23 @@ const UploadRetrieverPage = () => {
             mb={"2rem"}
           >
             {data.map((item, index) => (
-              <UploadCard key={index} />
+              <Box
+                display={"flex"}
+                flexDirection={"column"}
+                key={index}
+                gap={"1rem"}
+              >
+                <UploadCard />
+                <Input
+                  disableUnderline
+                  placeholder="Add additional context here"
+                  sx={{
+                    border: "2px solid rgba(196, 196, 196, 0.6)",
+                    borderRadius: "8px",
+                    padding: "0.1rem 0.5rem",
+                  }}
+                />
+              </Box>
             ))}
           </Box>
         )}

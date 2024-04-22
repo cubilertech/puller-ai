@@ -82,6 +82,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
             ) : content ? (
               <>
                 <Tooltip
+                  variant="info"
                   title="Seasonal Transactions"
                   description="“TXN_SZNAL” table . This query uses a table called Transactions that contains the following columns:"
                 >
