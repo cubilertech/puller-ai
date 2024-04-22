@@ -44,9 +44,11 @@ const Paper: FC<PaperProps> = ({ type, children, sx, onClick, ...props }) => {
             sx={{
               m: 1,
               borderRadius: "16px",
-              border: "2px solid var(--Vision-pro-02, #393939)",
+              border:
+                "2px solid linear-gradient(142.96deg, rgba(57, 57, 57, 0.6) -3.54%, rgba(97, 97, 97, 0.6) 99.99%)",
               background:
                 "linear-gradient(143deg, rgba(255, 255, 255, 0.11) -3.54%, rgba(114, 114, 114, 0.13) 95.15%)",
+
               backdropFilter: "blur(20px)",
               ...sx,
             }}
@@ -101,7 +103,7 @@ const Paper: FC<PaperProps> = ({ type, children, sx, onClick, ...props }) => {
             {...props}
             sx={{
               borderRadius: "16px",
-              border: "1px solid rgb(51,50,65)",
+              border: "20px solid rgba(97, 97, 97, 0.6)",
               background:
                 "linear-gradient(143deg, rgba(255, 255, 255, 0.07) -3.54%, rgba(114, 114, 114, 0.08) 95.15%)",
               backdropFilter: "blur(20px)",
