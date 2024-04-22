@@ -26,13 +26,14 @@ const RectangleCardWithIcon: FC<RectangleCardProps> = ({
       <Paper
         type="light-border"
         sx={{
-          width: "350px",
-          height: "92px",
+          width: { xl: "350px", lg: "280px" },
+          height: { xl: "92px", lg: "92px" },
           display: "flex",
           justifyContent: "flex-start",
           alignItems: "center",
           gap: "1.8rem",
           paddingLeft: "15px",
+          borderRadius: "8px",
         }}
         onClick={onClick}
       >

@@ -9,6 +9,7 @@ const UploadCard = () => {
         display: "flex",
         flexDirection: "column",
         padding: "1rem",
+        borderRadius: "8px",
       }}
       type="light-border"
     >

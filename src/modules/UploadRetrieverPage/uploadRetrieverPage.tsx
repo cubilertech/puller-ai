@@ -20,7 +20,7 @@ const UploadRetrieverPage = () => {
         height: "calc(100vh - 130px)",
         display: "flex",
         flexDirection: "column",
-        gap: "2rem",
+        gap: "1rem",
         scrollbarWidth: "none",
         overflowY: "none",
       }}
@@ -35,7 +35,7 @@ const UploadRetrieverPage = () => {
           overflowY: "auto",
           scrollbarWidth: "none",
           minHeight: "25rem",
-          height: isOpen ? "calc(100vh - 230px)" : "calc(100vh - 400px)",
+          height: isOpen ? "calc(100vh - 250px)" : "calc(100vh - 400px)",
         }}
         type="light-border"
       >
@@ -51,7 +51,7 @@ const UploadRetrieverPage = () => {
             fullWidth
             placeholder="Enter Name"
             sx={{
-              borderRadius: "10px",
+              borderRadius: "8px",
               padding: "0.5rem 1rem",
               border: "2px solid rgba(196, 196, 196, 0.6)",
             }}
@@ -64,7 +64,7 @@ const UploadRetrieverPage = () => {
             border: "2px solid rgba(196, 196, 196, 0.6)",
             minHeight: "10rem",
             height: "50%",
-            borderRadius: "10px",
+            borderRadius: "8px",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",

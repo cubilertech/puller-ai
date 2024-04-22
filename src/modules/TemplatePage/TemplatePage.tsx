@@ -118,9 +118,15 @@ const TemplatePage = () => {
                     display: "flex",
                     justifyContent: "space-between",
                     border: 0,
+                    borderRadius: "8px",
                   }}
                 >
-                  <Box display={"flex"} alignItems={"center"} gap={"1rem"}>
+                  <Box
+                    display={"flex"}
+                    alignItems={"center"}
+                    gap={"1rem"}
+                    borderRadius={"8px"}
+                  >
                     <Image src={card.image} alt="pic" width={64} height={64} />
                     <Box display={"flex"} flexDirection={"column"}>
                       <Typography variant="text-md-regular">

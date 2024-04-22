@@ -15,7 +15,8 @@ const Searchbar: FC<SearchbarProps> = ({ width = 220, height = 40 }) => {
           placeholder="Search ..."
           disableUnderline
           sx={{
-            background: "rgba(255, 255, 255, 0.2)",
+            // background: "rgba(255, 255, 255, 0.2)",
+            background: "rgb(115,130,133)",
             zIndex: 2,
             border: 0,
             padding: "10px 16px 10px 16px",
