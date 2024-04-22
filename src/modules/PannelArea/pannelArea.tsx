@@ -64,6 +64,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
             type="dark-border"
             sx={{
               border: "1px solid rgb(52,51,65)",
+
               height: content ? "fit-content" : "100%",
               margin: 0,
               padding: content ? 1 : 0,
@@ -93,6 +94,9 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                       pt: 1,
                       m: "auto",
                       textAlign: "start",
+                      color: isOpenSelectBar
+                        ? "rgba(151, 151, 161, 1)"
+                        : "rgba(255, 255, 255, 1)",
                     }}
                     component="p"
                   >
@@ -107,7 +111,8 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                         onClick={handleOpenSelectBar}
                         sx={{
                           borderRadius: "8px",
-                          bgcolor: isOpenSelectBar ? "rgb(91,93,107)" : "",
+                          bgcolor: isOpenSelectBar ? "rgb(255,255,255)" : "",
+                          color: isOpenSelectBar ? " rgba(42, 39, 62, 1)" : "",
                           mx: "5px",
                           pb: "3px",
                           ":hover": {
@@ -210,6 +215,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                     minHeight: "5rem",
                     display: "flex",
                     maxHeight: "15rem",
+                    borderRadius: "8px",
                   }}
                 >
                   <Input
@@ -220,6 +226,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                     placeholder="Type your data request (prompt) here..."
                     sx={{
                       boxSizing: "border-box",
+                      borderRadius: "8px",
                       minHeight: "100%",
                       alignItems: "flex-start",
                       overflowY: "auto",
