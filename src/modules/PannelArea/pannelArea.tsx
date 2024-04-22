@@ -30,11 +30,14 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
     setTimeout(() => {
       setisLoading(false);
       route.push("/request/validate");
-    }, 8000);
+    }, 2000);
   };
 
   const handleOpenSelectBar = () => {
     setisOpenSelectBar(true);
+  };
+  const handleCloseSelectBar = () => {
+    setisOpenSelectBar(false);
   };
 
   return (
@@ -55,16 +58,18 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
             width: "100%",
             alignItems: "flex-end",
             flexGrow: "1",
+            justifyContent: "space-between",
           }}
         >
           <Paper
             type="dark-border"
             sx={{
               border: "1px solid rgb(52,51,65)",
+
               height: content ? "fit-content" : "100%",
               margin: 0,
               padding: content ? 1 : 0,
-              width: isOpenSelectBar ? "76%" : "100%",
+              width: isOpenSelectBar ? "80%" : "100%",
             }}
           >
             {isLoading ? (
@@ -81,13 +86,8 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
               </Box>
             ) : content ? (
               <>
-                <Tooltip
-                  variant="info"
-                  title="Seasonal Transactions"
-                  description="“TXN_SZNAL” table . This query uses a table called Transactions that contains the following columns:"
-                >
+                <Box display={"flex"}>
                   <Typography
-                    onClick={handleOpenSelectBar}
                     variant="display-xs"
                     sx={{
                       width: "98%",
@@ -95,12 +95,45 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                       pt: 1,
                       m: "auto",
                       textAlign: "start",
+                      color: isOpenSelectBar
+                        ? "rgba(151, 151, 161, 1)"
+                        : "rgba(255, 255, 255, 1)",
                     }}
                     component="p"
                   >
-                    {content.response}
+                    The data request will give you transaction level data (from
+                    the
+                    <Tooltip
+                      variant="info"
+                      title="Seasonal Transactions"
+                      description="“TXN_SZNAL” table . This query uses a table called Transactions that contains the following columns:"
+                    >
+                      <Typography
+                        variant="display-xs"
+                        onClick={handleOpenSelectBar}
+                        sx={{
+                          borderRadius: "8px",
+                          bgcolor: isOpenSelectBar ? "rgb(255,255,255)" : "",
+                          color: isOpenSelectBar ? " rgba(42, 39, 62, 1)" : "",
+                          mx: "5px",
+                          pb: "3px",
+                          ":hover": {
+                            bgcolor: "rgb(91,93,107)",
+                          },
+                        }}
+                      >
+                        {" "}
+                        TXN_SZNAL table
+                      </Typography>
+                    </Tooltip>
+                    ) for the past 52 weeks, ending March 15, 2024, grouped by
+                    week and by Store ID. It only covers product SKUs that
+                    include Flyease technology, which is determined from INT DB
+                    for Product ID values 1234 and 5678
+                    {/* {content.response} */}
                   </Typography>
-                </Tooltip>
+                </Box>
+
                 <Box pt={2} pb={1}>
                   <Divider type="dark" variant="fullWidth" />
                 </Box>
@@ -140,6 +173,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                     <Button
                       sx={{
                         width: "122px",
+                        height: "38px !important",
                       }}
                       onClick={handleUpdate}
                       // onClick={handleOpenSelectBar}
@@ -155,6 +189,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
           </Paper>
           {isOpenSelectBar && (
             <OptionsBar
+              close={handleCloseSelectBar}
               variant="input"
               handleUpdate={handleUpdate ? () => handleUpdate() : undefined}
             />
@@ -182,6 +217,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                     minHeight: "5rem",
                     display: "flex",
                     maxHeight: "15rem",
+                    borderRadius: "8px",
                   }}
                 >
                   <Input
@@ -192,10 +228,24 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                     placeholder="Type your data request (prompt) here..."
                     sx={{
                       boxSizing: "border-box",
+                      borderRadius: "8px",
                       minHeight: "100%",
                       alignItems: "flex-start",
                       overflowY: "auto",
+                      padding: "0.5rem",
+                      "&::placeholder": {
+                        fontStyle: "italic",
+                        color: "#6a0505", // Adjust placeholder text color as needed
+                      },
                     }}
+                    inputProps={{
+                      style: {
+                        fontSize: "16px",
+                        color: "#ffffff",
+                        fontStyle: "italic",
+                      },
+                    }}
+                    autoFocus
                   />
                 </Paper>
               </Box>
@@ -210,6 +260,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                     display: "flex",
                     alignItems: "center",
                     gap: "1rem",
+                    ml: "4px",
                   }}
                 >
                   <Box width={163}>
@@ -253,7 +304,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                   {isLoading ? (
                     ""
                   ) : (
-                    <Box width={155}>
+                    <Box width={155} mr={"4px"}>
                       <Button
                         onClick={handleAvailable}
                         fullWidth

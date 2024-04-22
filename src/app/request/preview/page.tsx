@@ -2,6 +2,7 @@
 import LoaderComponent from "@/common/LoaderComponent/LoaderComponent";
 import AppLayout from "@/common/appLayout/appLayout";
 import PreviewDataPage from "@/modules/PreviewDataPage/previewDataPage";
+import { Box } from "@mui/material";
 import { useEffect, useState } from "react";
 
 const PreviewData = () => {
@@ -21,11 +22,13 @@ const PreviewData = () => {
 
   return (
     <>
-      <AppLayout>
-        {isLoading ? <LoaderComponent /> : <PreviewDataPage />}
-      </AppLayout>
+      <AppLayout>{isLoading ? <LoaderComponent /> : <Box></Box>}</AppLayout>
     </>
   );
 };
+
+{
+  /* <PreviewDataPage />; */
+}
 
 export default PreviewData;

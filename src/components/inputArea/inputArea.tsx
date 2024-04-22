@@ -15,14 +15,6 @@ const InputArea = () => {
           height: "65vh",
         }}
       >
-        <Paper
-          type="light-border-2"
-          sx={{
-            flexGrow: "1",
-            margin: 0,
-            marginBottom: "1rem",
-          }}
-        ></Paper>
         <Paper type="light-border">
           <Box
             sx={{
