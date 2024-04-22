@@ -60,7 +60,13 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
             alignItems: "center",
           }}
         >
-          <Typography variant="display-xs-semibold" color={palette.base.white}>
+          <Typography
+            variant="display-xs-semibold"
+            color={palette.base.white}
+            sx={{
+              fontFamily: "Inter",
+            }}
+          >
             Create a Request
           </Typography>
           <CustomLink href="/request/recent">
