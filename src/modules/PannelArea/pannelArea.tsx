@@ -58,6 +58,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
             width: "100%",
             alignItems: "flex-end",
             flexGrow: "1",
+            justifyContent: "space-between",
           }}
         >
           <Paper
@@ -68,7 +69,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
               height: content ? "fit-content" : "100%",
               margin: 0,
               padding: content ? 1 : 0,
-              width: isOpenSelectBar ? "76%" : "100%",
+              width: isOpenSelectBar ? "80%" : "100%",
             }}
           >
             {isLoading ? (

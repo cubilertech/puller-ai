@@ -47,7 +47,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
       isShown && (
         <Box
           sx={{
-            width: "100%",
+            width: "20%",
             height: "100%",
             ml: "1rem",
             overflow: "auto",
