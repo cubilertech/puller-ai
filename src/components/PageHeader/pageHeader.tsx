@@ -203,7 +203,7 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
                 onMouseOver={() => setIsHovered(true)}
                 onMouseOut={() => setIsHovered(false)}
               >
-                Retrivers <Icon icon={isHovered ? "infoHover" : "info"} />
+                Retrievers <Icon icon={isHovered ? "infoHover" : "info"} />
               </Typography>
             </Tooltip>
           </Box>
@@ -230,7 +230,7 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
           }}
         >
           <Typography
-            variant="display-xs-semibold"
+            variant="display-xs-bold"
             sx={{
               display: "flex",
               alignItems: "center",
