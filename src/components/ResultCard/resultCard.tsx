@@ -64,16 +64,16 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
                   fullWidth
                 />
               </Box>
-              <CustomLink href="/request/preview">
-                <Box width={"36px"}>
-                  <IconButton
-                    icon="eyeIcon"
-                    iconHeight={16}
-                    iconWidth={16}
-                    fullWidth
-                  />
-                </Box>
-              </CustomLink>
+              {/* <CustomLink href="/request/preview"> */}
+              <Box width={"36px"}>
+                <IconButton
+                  icon="eyeIcon"
+                  iconHeight={16}
+                  iconWidth={16}
+                  fullWidth
+                />
+              </Box>
+              {/* </CustomLink> */}
             </Box>
           </Box>
           <Box sx={{ maxWidth: "568px" }}>

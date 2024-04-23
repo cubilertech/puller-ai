@@ -103,13 +103,13 @@ const YourResultsPage: FC = () => {
             >
               {SingleCardDomyData.map((item, i) => (
                 <Box mr={-10} width={"100%"} key={i}>
-                  <CustomLink href="/request/preview">
-                    <SimpleCard
-                      isFor="Results"
-                      title={item.title}
-                      discription={item.discription}
-                    />
-                  </CustomLink>
+                  {/* <CustomLink href="/request/preview"> */}
+                  <SimpleCard
+                    isFor="Results"
+                    title={item.title}
+                    discription={item.discription}
+                  />
+                  {/* </CustomLink> */}
                 </Box>
               ))}
             </Box>
