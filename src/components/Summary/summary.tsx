@@ -19,8 +19,9 @@ const Summary: FC<Summary> = ({ heading, description }) => {
       type="light-border"
       sx={{
         maxWidth: "100%",
-        wordBreak: "break-all",
-        padding: "1rem",
+        // wordBreak: "break-all",
+        wordWrap: "break-word",
+        padding: "2rem",
         alignSelf: "stretch",
         display: "flex",
         flexDirection: "column",
@@ -28,7 +29,7 @@ const Summary: FC<Summary> = ({ heading, description }) => {
     >
       <Typography variant="text-md-semibold"> {heading} </Typography>
       <br />
-      <Typography variant="text-sm-regular">{description}</Typography>
+      <Typography variant="text-xxs-regular">{description}</Typography>
     </Paper>
   );
 };

@@ -2,8 +2,14 @@
 import { Button } from "@/components/Button";
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
-import Searchbar from "@/components/Searchbar/searchbar";
-import { Box, Divider, Input, InputAdornment, Typography } from "@mui/material";
+import Input from "@/components/Input/input";
+import {
+  Box,
+  Divider,
+  Input as MuiInput,
+  InputAdornment,
+  Typography,
+} from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -99,7 +105,12 @@ const ConnectAppsPage = () => {
             alignItems: "center",
           }}
         >
-          <Searchbar width={409} height={44} />
+          <Input
+            placeholder="Search..."
+            icon="search"
+            width={409}
+            height={44}
+          />
           <Button
             variant="contained"
             sx={{

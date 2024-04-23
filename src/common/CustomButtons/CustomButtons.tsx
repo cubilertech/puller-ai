@@ -83,7 +83,7 @@ const CustomButton: FC<buttonProps> = ({
             onClick={onClick}
             variant="outlined"
           >
-            <Typography variant="text-md-bold">SQL</Typography>
+            <Typography variant="text-md-bold">{text}</Typography>
           </Button>
         </div>
       );

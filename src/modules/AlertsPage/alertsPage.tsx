@@ -59,7 +59,7 @@ const AlertsPage = () => {
   return (
     <Box
       sx={{
-        padding: "2rem",
+        padding: "1.5rem",
         display: "flex",
         flexDirection: "column",
         gap: "2rem",

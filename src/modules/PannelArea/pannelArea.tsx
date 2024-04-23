@@ -3,7 +3,7 @@ import { Box, Input, Typography } from "@mui/material";
 import { Paper } from "../../components/Paper";
 import { Button } from "../../components/Button";
 import { Icon } from "../../components/Icon";
-import { FC, useState } from "react";
+import { FC, useCallback, useRef, useState } from "react";
 import { Loader } from "../../components/Loader";
 import Divider from "../../components/Divider/divider";
 import { palette } from "@/theme/Palette";
@@ -82,7 +82,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                   height: "100%",
                 }}
               >
-                <Loader varient="simple" type="Processing" />
+                <Loader type="Processing" varient="simple" />
               </Box>
             ) : content ? (
               <>

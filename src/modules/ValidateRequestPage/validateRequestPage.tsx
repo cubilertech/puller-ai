@@ -33,7 +33,7 @@ const ValidateRequestPage: FC = () => {
           }}
         >
           <Box sx={{ width: "60%", height: "70%" }}>
-            <Loader varient="paper" />
+            <Loader type="Processing" varient="paper" />
           </Box>
         </Box>
       ) : (
