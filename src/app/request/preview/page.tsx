@@ -13,7 +13,7 @@ const PreviewData = () => {
 
     setTimeout(() => {
       setIsLoading(false); // Set state to false after 5 seconds
-    }, 5000); // 5000 milliseconds = 5 seconds
+    }, 4000); // 4000 milliseconds = 5 seconds
   };
 
   useEffect(() => {
