@@ -21,7 +21,7 @@ const NotificationIconButton: FC<IconButtonProps> = ({
   ...props
 }) => {
   return (
-    <div className="container1">
+    <div className="container-notification">
       <MuiIconButton
         sx={{ position: "relative", borderRadius: "100%" }}
         {...props}
