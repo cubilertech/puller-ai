@@ -1,27 +1,16 @@
 "use client";
-import { Box, Input, Typography } from "@mui/material";
+import { Box, Input } from "@mui/material";
 import { Paper } from "../../components/Paper";
-import { Button } from "../../components/Button";
-import { Icon } from "../../components/Icon";
-import { FC, useState } from "react";
-import { Loader } from "../../components/Loader";
-import Divider from "../../components/Divider/divider";
-import { palette } from "@/theme/Palette";
-import OptionsBar from "@/components/optionsBar/optionsBar";
+import React, { useCallback, useRef, useState, FC } from "react";
 import { useRouter } from "next/navigation";
-import TextUpdaterNode from "./TextUpdaterNode.js";
-import "./text-updater-node.css";
-import { useCallback } from "react";
 import ReactFlow, {
-  MiniMap,
-  Controls,
   Background,
   useNodesState,
   useEdgesState,
   addEdge,
-  applyNodeChanges,
 } from "reactflow";
 import "reactflow/dist/style.css";
+import ContextMenu from "./contextMenu";
 interface PanelAreaProps {
   content?: {
     response: string;
@@ -64,24 +53,15 @@ const rfStyle = {
 
 const PanelArea: FC<PanelAreaProps> = ({ content, handleUpdate }) => {
   const route = useRouter();
-  const [nodes, setNodes] = useNodesState(initialNodes);
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-
-  const onNodesChange = useCallback(
-    (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
-    [setNodes],
-  );
+  const [menu, setMenu] = useState(null);
+  const ref = useRef(null);
 
   const onConnect = useCallback(
     (params) => setEdges((eds) => addEdge(params, eds)),
     [setEdges],
   );
-
-  const nodeTypes = {
-    textUpdater: (props) => (
-      <TextUpdaterNode {...props} onLabelChange={onLabelChange} />
-    ),
-  };
 
   const handleNodeLabelChange = (id: string, label: string) => {
     // Update the label of the node with the given id
@@ -99,11 +79,30 @@ const PanelArea: FC<PanelAreaProps> = ({ content, handleUpdate }) => {
     });
     // Update the nodes state with the modified nodes array
     setNodes(updatedNodes);
+    setMenu(null);
   };
 
   const onLabelChange = (id: string, label: string) => {
-    // handleNodeLabelChange(id, label);
+    // handleNodeLabe ge(id, label);
   };
+
+  const onNodeClick = useCallback(
+    (event, node) => {
+      const pane = ref.current.getBoundingClientRect();
+      setMenu({
+        id: node.id,
+        label: node.data.label,
+        top: event.clientY < pane.height - 200 && event.clientY,
+        left: event.clientX < pane.width - 200 && event.clientX,
+        right: event.clientX >= pane.width - 200 && pane.width - event.clientX,
+        bottom:
+          event.clientY >= pane.height - 200 && pane.height - event.clientY,
+      });
+    },
+    [setMenu],
+  );
+
+  const onPaneClick = useCallback(() => setMenu(null), [setMenu]);
 
   return (
     <>
@@ -136,15 +135,25 @@ const PanelArea: FC<PanelAreaProps> = ({ content, handleUpdate }) => {
             }}
           >
             <ReactFlow
+              ref={ref}
               nodes={nodes}
               edges={edges}
               onNodesChange={onNodesChange}
               onEdgesChange={onEdgesChange}
               onConnect={onConnect}
-              nodeTypes={nodeTypes}
+              // onPaneClick={onPaneClick}
+              // onNodeContextMenu={onNodeContextMenu}
+              onNodeClick={onNodeClick}
               fitView
-              style={rfStyle}
-            />
+            >
+              <Background />
+              {menu && (
+                <ContextMenu
+                  handleNodeLabelChange={handleNodeLabelChange}
+                  {...menu}
+                />
+              )}
+            </ReactFlow>
           </Paper>
         </Box>
         <Paper type="light-border">
