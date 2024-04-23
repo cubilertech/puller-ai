@@ -25,7 +25,8 @@ interface PageHeaderProps {
     | "Alerts"
     | "Create Alert"
     | "Connect App"
-    | "Custom Retrievers";
+    | "Custom Retrievers"
+    | "Retriever Detail";
 }
 
 const PageHeader: FC<PageHeaderProps> = ({ type }) => {
@@ -380,6 +381,46 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
             Custom Retrievers
           </Typography>
           <Box></Box>
+        </Box>
+      );
+    case "Retriever Detail":
+      return (
+        <Box
+          sx={{
+            display: "flex",
+            width: "100%",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <Typography
+            variant="display-xs-semibold"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: "1rem",
+            }}
+            color={palette.base.white}
+          >
+            Alerts
+          </Typography>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              gap: "1rem",
+            }}
+          >
+            <Box width={180}>
+              <Button label="Add Context" variant="outlined" fullWidth />
+            </Box>
+            <Box width={180}>
+              <Button label="Request Access" variant="outlined" fullWidth />
+            </Box>
+            <Box width={180}>
+              <Button label="Create Alert" variant="outlined" fullWidth />
+            </Box>
+          </Box>
         </Box>
       );
   }
