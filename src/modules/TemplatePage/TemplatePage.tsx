@@ -3,7 +3,7 @@
 import { Icon } from "@/components/Icon";
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
-import { Box, Input, InputAdornment, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import React, { useState } from "react";
 import "./Input.css";
 import Image from "next/image";
@@ -14,6 +14,12 @@ const data = Array.from({ length: 10 }, (_, index) => ({
   heading: `Template ${index + 1}`,
   subHeading: `Maker by User ${index + 1}`,
   subHeading2: `Retrievers ${index + 1} bot will help to geth...`,
+}));
+const data1 = Array.from({ length: 10 }, (_, index) => ({
+  image: "/images/blank-square.svg",
+  heading: `Template 2 ${index + 1}`,
+  subHeading: `Maker by User 2${index + 1}`,
+  subHeading2: `Retrievers 2${index + 1} bot will help to geth...`,
 }));
 
 const TemplatePage = () => {
@@ -109,7 +115,7 @@ const TemplatePage = () => {
               "-ms-overflow-style": "none",
             }}
           >
-            {data.map((card, i) => (
+            {(isActive === "private" ? data : data1).map((card, i) => (
               <Box key={i} mt={"1.5rem"} sx={{}}>
                 <Paper
                   type="light-border"

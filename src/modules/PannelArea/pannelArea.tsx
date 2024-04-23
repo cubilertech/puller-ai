@@ -82,7 +82,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                   height: "100%",
                 }}
               >
-                <Loader varient="simple" />
+                <Loader varient="simple" type="Processing" />
               </Box>
             ) : content ? (
               <>

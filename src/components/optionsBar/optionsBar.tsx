@@ -140,6 +140,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
               >
                 <Button
                   // onClick={handleUpdate}
+                  sx={{ height: "38px !important" }}
                   label="Update"
                   variant="contained"
                 />

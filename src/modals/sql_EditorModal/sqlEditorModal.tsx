@@ -99,7 +99,7 @@ const SQL_EditorModal: FC<SQL_EditorModalProps> = ({
             sx={{
               width: "100%",
               mt: 1,
-              maxHeight: "90%",
+              maxHeight: "87%",
               overflow: "auto",
               scrollbarWidth: "none",
             }}
