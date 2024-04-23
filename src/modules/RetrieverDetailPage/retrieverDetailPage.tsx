@@ -19,8 +19,17 @@ const RetrieverDetailPage = () => {
         sx={{
           width: "100%",
           height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          padding: "1rem",
         }}
-      ></Paper>
+      >
+        <Box
+          display={"flex"}
+          alignItems={"center"}
+          justifyContent={"flex-start"}
+        ></Box>
+      </Paper>
     </Box>
   );
 };
