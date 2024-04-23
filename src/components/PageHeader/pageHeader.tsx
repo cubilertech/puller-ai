@@ -10,6 +10,7 @@ import { Icon } from "../Icon";
 import { useRouter } from "next/navigation";
 import { Paper } from "../Paper";
 import Tooltip from "../Tooltip/tooltip";
+import GraphModal from "@/modals/graphModal/graphModal";
 
 interface PageHeaderProps {
   type:
@@ -32,10 +33,14 @@ interface PageHeaderProps {
 const PageHeader: FC<PageHeaderProps> = ({ type }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [openSQL_Editor, setopenSQL_Editor] = useState(false);
+  const [openGraph, setOpenGraph] = useState(false);
   const router = useRouter();
 
   const handleOpenCloseSQL_Editor = () => {
     setopenSQL_Editor(!openSQL_Editor);
+  };
+  const handleOpenGraph = () => {
+    setOpenGraph(!openGraph);
   };
   switch (type) {
     case "Recent":
@@ -113,8 +118,14 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
             >
               Validate Request
             </Typography>
-            <Box pr={5}>
+            <Box pr={5} display={"flex"} gap={"1rem"}>
               <CustomButton
+                text="Graph"
+                variant="rounded-SQL"
+                onClick={() => handleOpenGraph()}
+              />
+              <CustomButton
+                text="SQL"
                 variant="rounded-SQL"
                 onClick={() => handleOpenCloseSQL_Editor()}
               />
@@ -147,6 +158,7 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
           
           `}
           />
+          <GraphModal open={openGraph} handleClose={handleOpenGraph} />
         </>
       );
     case "Preview":
