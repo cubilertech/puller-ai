@@ -23,14 +23,10 @@ const PreviewData = () => {
   return (
     <>
       <AppLayout>
-        {isLoading ? <LoaderComponent type="Loading" /> : <Box></Box>}
+        {isLoading ? <LoaderComponent type="Loading" /> : <PreviewDataPage />}
       </AppLayout>
     </>
   );
 };
-
-{
-  /* <PreviewDataPage />; */
-}
 
 export default PreviewData;
