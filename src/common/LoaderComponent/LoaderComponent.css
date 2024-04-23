@@ -1,0 +1,16 @@
+.loader-container {
+  opacity: 0; /* Initially hide the loader */
+}
+
+.fade-in {
+  animation: fadeInAnimation 0.5s ease forwards; /* Apply fade-in animation */
+}
+
+@keyframes fadeInAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

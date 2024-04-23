@@ -46,7 +46,7 @@ const YourResultsPage: FC = () => {
   };
 
   return isLoading ? (
-    <LoaderComponent />
+    <LoaderComponent type="Processing" />
   ) : (
     <>
       <Box sx={{ width: "98%", m: "auto", mt: 1 }}>
@@ -103,13 +103,13 @@ const YourResultsPage: FC = () => {
             >
               {SingleCardDomyData.map((item, i) => (
                 <Box mr={-10} width={"100%"} key={i}>
-                  <CustomLink href="/request/preview">
-                    <SimpleCard
-                      isFor="Results"
-                      title={item.title}
-                      discription={item.discription}
-                    />
-                  </CustomLink>
+                  {/* <CustomLink href="/request/preview"> */}
+                  <SimpleCard
+                    isFor="Results"
+                    title={item.title}
+                    discription={item.discription}
+                  />
+                  {/* </CustomLink> */}
                 </Box>
               ))}
             </Box>

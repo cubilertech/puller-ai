@@ -14,7 +14,9 @@ const TopNavBar = () => {
   const routeParts = route.replace(/^\//, "").split("/");
   const firstRoute = routeParts[0];
   const isBack =
-    routeParts.includes("preview") || routeParts.includes("connect");
+    routeParts.includes("preview") ||
+    routeParts.includes("connect") ||
+    routeParts.includes("recent");
   console.log(firstRoute, PagesType.RECENT_REQUESTS, "route");
   return (
     <>
