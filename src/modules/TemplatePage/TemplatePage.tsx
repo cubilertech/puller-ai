@@ -26,7 +26,7 @@ const TemplatePage = () => {
   const [isActive, setIsActive] = useState("public");
 
   return (
-    <Box display={"flex"} flexDirection={"column"} p={"1rem"}>
+    <Box display={"flex"} flexDirection={"column"} px={"1rem"} pt={"0.6rem"}>
       <PageHeader type="Template" />
       <Box
         sx={{
@@ -36,9 +36,9 @@ const TemplatePage = () => {
       >
         <Paper
           sx={{
-            padding: "2rem",
+            padding: "1.5rem",
             height: "calc(100vh - 220px)",
-            paddingBottom: "2rem",
+            paddingBottom: "1rem",
             paddingTop: "2rem",
             display: "flex",
             flexDirection: "column",
@@ -121,7 +121,7 @@ const TemplatePage = () => {
             }}
           >
             {(isActive === "private" ? data : data1).map((card, i) => (
-              <Box key={i} mt={"1.5rem"} sx={{}}>
+              <Box key={i} mt={i === 0 ? "" :"1.5rem"} sx={{}}>
                 <Paper
                   type="light-border"
                   sx={{

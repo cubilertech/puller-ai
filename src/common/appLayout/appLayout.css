@@ -35,8 +35,5 @@
   padding: 15px; /* Adjust padding as needed */
   overflow: auto;
   overflow-x: hidden;
+  height: 89%;
 }
-
-/* .content::-webkit-scrollbar {
-  display: none;
-} */
