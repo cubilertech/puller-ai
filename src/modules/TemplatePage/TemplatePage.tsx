@@ -3,11 +3,16 @@
 import { Icon } from "@/components/Icon";
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
-import { Box, Input, InputAdornment, Typography } from "@mui/material";
+import {
+  Box,
+  Input as MuiInput,
+  InputAdornment,
+  Typography,
+} from "@mui/material";
 import React, { useState } from "react";
 import "./Input.css";
 import Image from "next/image";
-import Searchbar from "@/components/Searchbar/searchbar";
+import Input from "@/components/Input/input";
 
 const data = Array.from({ length: 10 }, (_, index) => ({
   image: "/images/blank-square.svg",
@@ -96,7 +101,12 @@ const TemplatePage = () => {
               </Box>
             </Box>
 
-            <Searchbar width={230} height={40} />
+            <Input
+              placeholder="Search..."
+              icon="search"
+              width={230}
+              height={40}
+            />
           </Box>
           <Box
             sx={{
