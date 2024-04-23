@@ -1,8 +1,17 @@
+"use client";
+import React, { FC, useState } from "react";
 import { Loader } from "@/components/Loader";
 import { Paper } from "@/components/Paper";
 import { Box } from "@mui/material";
+import "./LoaderComponent.css"; // Import CSS file for animations
 
-const LoaderComponent = () => {
+interface LoaderComponentProps {
+  type: "Loading" | "Processing";
+}
+
+const LoaderComponent: FC<LoaderComponentProps> = ({ type }) => {
+  const [showLoader, setShowLoader] = useState(true);
+
   return (
     <Box
       display={"flex"}
@@ -14,6 +23,7 @@ const LoaderComponent = () => {
         padding: 0,
         width: "100%",
       }}
+      className={`loader-container ${showLoader ? "fade-in" : ""}`}
     >
       <Paper
         type="light-border"
@@ -33,7 +43,10 @@ const LoaderComponent = () => {
             height: "100%",
           }}
         >
-          <Loader varient="simple" />
+          <Loader
+            type={type === "Loading" ? "Loading" : "Processing"}
+            varient="simple"
+          />
         </Box>
       </Paper>
     </Box>

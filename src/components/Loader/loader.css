@@ -24,6 +24,31 @@
   white-space: nowrap;
   min-width: 10rem;
   margin-left: 2.3rem;
+}
+@keyframes typing2 {
+  0% {
+    content: "Loading";
+  }
+  33% {
+    content: "Loading.";
+  }
+  66% {
+    content: "Loading..";
+  }
+  100% {
+    content: "Loading...";
+  }
+}
 
-  /* padding: 3rem; */
+.typing2-animation {
+  min-width: 12rem;
+}
+
+.typing2-animation::before {
+  content: "Loading";
+  animation: typing2 1s steps(16) infinite;
+  overflow: hidden;
+  white-space: nowrap;
+  min-width: 10rem;
+  margin-left: 3.1rem;
 }

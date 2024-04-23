@@ -46,7 +46,7 @@ const YourResultsPage: FC = () => {
   };
 
   return isLoading ? (
-    <LoaderComponent />
+    <LoaderComponent type="Processing" />
   ) : (
     <>
       <Box sx={{ width: "98%", m: "auto", mt: 1 }}>

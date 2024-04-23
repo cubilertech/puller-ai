@@ -7,9 +7,10 @@ import "./loader.css";
 
 interface LoaderProps {
   varient: "simple" | "paper";
+  type: "Loading" | "Processing";
 }
 
-const Loader: FC<LoaderProps> = ({ varient }) => {
+const Loader: FC<LoaderProps> = ({ varient, type }) => {
   switch (varient) {
     case "simple":
       return (
@@ -21,14 +22,13 @@ const Loader: FC<LoaderProps> = ({ varient }) => {
           }}
         >
           <Icon icon="logoIcon" width={240} height={260} />
-          {/* <Typography variant="display-xs-medium" color={palette.base.white}>
-            Processing..
-          </Typography> */}
+
           <Typography
             variant="display-xs-medium"
-            className="typing-animation"
+            className={
+              type === "Loading" ? "typing2-animation" : "typing-animation"
+            }
           ></Typography>
-          {/* <div className="typing-animation"></div> */}
         </Box>
       );
     case "paper":
