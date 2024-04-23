@@ -47,7 +47,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
       isShown && (
         <Box
           sx={{
-            width: "20%",
+            width: { lg: "24%", md: "30%", sm: "40%" },
             height: "100%",
             ml: "1rem",
             overflow: "auto",
@@ -75,21 +75,29 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
                 scrollbarWidth: "none",
               }}
             >
-              <Box onClick={close}>
-                <CloseIcon
-                  sx={{
-                    position: "absolute",
-                    right: 15,
-                    width: 20,
-                    ":hover": {
-                      cursor: "pointer",
-                    },
-                  }}
-                />
+              <Box
+                sx={{
+                  display: "flex",
+                  width: "100%",
+                  justifyContent: "space-between",
+                }}
+              >
+                <Typography color={"#fff"} variant="text-md-regular">
+                  Seasonal Transactions
+                </Typography>
+                <Box onClick={close}>
+                  <CloseIcon
+                    sx={{
+                      position: "absolute",
+                      right: 15,
+                      width: 20,
+                      ":hover": {
+                        cursor: "pointer",
+                      },
+                    }}
+                  />
+                </Box>
               </Box>
-              <Typography color={"#fff"} variant="text-md-regular">
-                Seasonal Transactions
-              </Typography>
               <Typography color={"#fff"} variant="text-sm-regular">
                 “TXN_SZNAL” table . This query uses a table
                 called Transactions that contains the following columns:
@@ -103,6 +111,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
                   display: "flex",
                   maxHeight: "15rem",
                   margin: 0,
+                  border: "2px solid rgba(57, 57, 57, 0.6)",
                 }}
               >
                 <Input

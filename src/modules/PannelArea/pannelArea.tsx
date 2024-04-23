@@ -26,10 +26,9 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
 
   const handleAvailable = () => {
     setisLoading(true);
-
+    route.push("/request/validate");
     setTimeout(() => {
       setisLoading(false);
-      route.push("/request/validate");
     }, 2000);
   };
 
@@ -65,11 +64,12 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
             type="dark-border"
             sx={{
               border: "1px solid rgb(52,51,65)",
-
               height: content ? "fit-content" : "100%",
               margin: 0,
               padding: content ? 1 : 0,
-              width: isOpenSelectBar ? "80%" : "100%",
+              width: isOpenSelectBar
+                ? { lg: "76%", md: "70%", xs: "60%" }
+                : "100%",
             }}
           >
             {isLoading ? (
@@ -158,7 +158,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                     <Typography variant="text-xs-bold">Original</Typography>
                     <Typography
                       variant="text-xs-regular"
-                      color={palette.gray[400]}
+                      color={palette.gray[300]}
                       style={{
                         whiteSpace: "nowrap",
                         overflow: "hidden",

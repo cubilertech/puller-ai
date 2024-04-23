@@ -33,8 +33,7 @@ const Button: FC<ButtonProps> = ({
     <div
       className={
         variant === "outlined"
-          ? // ? "btn-container"
-            ""
+          ? "btn-container"
           : variant === "contained"
             ? "contained-container"
             : ""

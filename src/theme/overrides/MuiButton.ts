@@ -28,10 +28,10 @@ export const MuiButton = (theme: Theme) => {
             "1px solid linear-gradient(to right, #FFFFFF 0%,#FFFFFF 40%,#FFFFFF 40%, #FFFFFF 60%,#FFFFFF 60%,#FFFFFF 100%)#FFF)",
           background: "#5D92FE",
           color: palette.base.white,
-          backdropFilter: "blur(8px)",
-
+          boxShadow: "none",
           "&:hover": {
             color: palette.base.white,
+            boxShadow: "none",
             background: "rgba(105,65,198,255)",
           },
         },
@@ -40,12 +40,12 @@ export const MuiButton = (theme: Theme) => {
           borderRadius: "8px",
           border: "none",
           // background: "#7c7586",
-          background: "rgba(255, 255, 255, 0.3)",
+          background: "#627177",
 
           "&:hover": {
             border: "none",
             // backgroundColor: "rgb(95,112,125)",
-            background: "rgba(255, 255, 255, 0.3)",
+            background: "#8f9b9e",
           },
         },
         text: {
