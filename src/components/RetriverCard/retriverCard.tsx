@@ -1,7 +1,9 @@
+"use client";
 import { Box, Typography } from "@mui/material";
 import { Paper } from "../Paper";
 import { Icon } from "../Icon";
 import { FC } from "react";
+import { useRouter } from "next/navigation";
 
 interface retriverCardProps {
   status: "live" | "blocked" | "needPermissions" | "issues";
@@ -26,6 +28,7 @@ const RetriverCard: FC<retriverCardProps> = ({
   status,
   title,
 }) => {
+  const router = useRouter();
   return (
     <Paper
       type="light-border"
@@ -35,6 +38,7 @@ const RetriverCard: FC<retriverCardProps> = ({
         // height: "226px",
         textAlign: "center",
       }}
+      onClick={() => router.push("/alerts/retriever-detail")}
     >
       <Box
         display={"flex"}
