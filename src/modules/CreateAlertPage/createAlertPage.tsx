@@ -2,7 +2,6 @@
 import { Button } from "@/components/Button";
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
-import InputArea from "@/components/inputArea/inputArea";
 import { Box, Input, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 
@@ -42,6 +41,7 @@ const CreateAlertPage = () => {
                 margin: 0,
                 background: "transparent !important ",
                 border: "2px solid rgba(196, 196, 196, 0.6) !important",
+                borderRadius: "8px",
               }}
             >
               <Input
@@ -51,7 +51,7 @@ const CreateAlertPage = () => {
                 placeholder="Type your data request (prompt) here..."
                 sx={{
                   boxSizing: "border-box",
-                  minHeight: "100%",
+                  minHeight: "7rem",
                   alignItems: "flex-start",
                   overflowY: "auto",
                 }}
