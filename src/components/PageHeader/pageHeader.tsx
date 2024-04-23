@@ -158,7 +158,7 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
           
           `}
           />
-          <GraphModal open={openGraph} handleClose={handleOpenGraph} />
+          <GraphModal open={openGraph} handleClose={() => handleOpenGraph()} />
         </>
       );
     case "Preview":

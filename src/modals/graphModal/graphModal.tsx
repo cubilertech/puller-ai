@@ -10,7 +10,8 @@ import ReactFlow, {
   addEdge,
 } from "reactflow";
 import "reactflow/dist/style.css";
-// import ContextMenu from "./contextMenu";
+import ContextMenu from "./contextMenu";
+import CloseIcon from "@mui/icons-material/Close";
 
 interface GraphModalProps {
   open: boolean;
@@ -30,6 +31,12 @@ const modalStyle = {
 };
 
 const GraphModal: FC<GraphModalProps> = ({ open, handleClose }) => {
+  const [openUpdateName, setOpenUpdateName] = useState(false);
+
+  const handleCloseUpdateName = () => {
+    setOpenUpdateName(!openUpdateName);
+  };
+
   const initialNodes = [
     {
       id: "node-1",
@@ -97,8 +104,8 @@ const GraphModal: FC<GraphModalProps> = ({ open, handleClose }) => {
   };
 
   const onNodeClick = useCallback(
-    (event, node) => {
-      const pane = ref.current.getBoundingClientRect();
+    (event: any, node: any) => {
+      const pane = ref?.current?.getBoundingClientRect();
       setMenu({
         id: node.id,
         label: node.data.label,
@@ -108,6 +115,7 @@ const GraphModal: FC<GraphModalProps> = ({ open, handleClose }) => {
         bottom:
           event.clientY >= pane.height - 200 && pane.height - event.clientY,
       });
+      setOpenUpdateName(true);
     },
     [setMenu]
   );
@@ -119,10 +127,22 @@ const GraphModal: FC<GraphModalProps> = ({ open, handleClose }) => {
         <Paper
           type="light-border"
           sx={{
-            height: "50rem",
+            height: "80vh",
             width: "80vw",
+            zIndex: 1,
           }}
         >
+          <Box
+            zIndex={5}
+            sx={{
+              cursor: "pointer",
+              position: "absolute",
+              right: "2%",
+              top: "2%",
+            }}
+          >
+            <CloseIcon onClick={() => handleClose()} />
+          </Box>
           <ReactFlow
             ref={ref}
             nodes={nodes}
@@ -142,6 +162,14 @@ const GraphModal: FC<GraphModalProps> = ({ open, handleClose }) => {
                 {...menu}
               />
             )} */}
+            {menu && (
+              <ContextMenu
+                handleNodeLabelChange={handleNodeLabelChange}
+                {...menu}
+                open={openUpdateName}
+                onClose={handleCloseUpdateName}
+              />
+            )}
           </ReactFlow>
         </Paper>
       </Box>
