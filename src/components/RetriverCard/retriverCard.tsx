@@ -1,7 +1,9 @@
+"use client";
 import { Box, Typography } from "@mui/material";
 import { Paper } from "../Paper";
 import { Icon } from "../Icon";
 import { FC } from "react";
+import { useRouter } from "next/navigation";
 
 interface retriverCardProps {
   status: "live" | "blocked" | "needPermissions" | "issues";
@@ -26,34 +28,44 @@ const RetriverCard: FC<retriverCardProps> = ({
   status,
   title,
 }) => {
+  const router = useRouter();
   return (
-    <Paper
-      type="light-border"
+    <Box
       sx={{
-        padding: "1.5rem",
-        width: "100%",
-        // height: "226px",
-        textAlign: "center",
+        ":hover": {
+          cursor: "pointer",
+        },
       }}
     >
-      <Box
-        display={"flex"}
-        flexDirection={"column"}
-        gap={"1rem"}
-        alignItems={"center"}
+      <Paper
+        type="light-border"
+        sx={{
+          padding: "1.5rem",
+          width: "100%",
+          // height: "226px",
+          textAlign: "center",
+        }}
+        onClick={() => router.push("/alerts/retriever-detail")}
       >
-        <Box position={"relative"}>
-          <Icon icon={icon} width={64} height={64} />
-          <Box position={"absolute"} top={"-3px"} right={"-3px"}>
-            <Icon icon={status} width={12} height={12} />
+        <Box
+          display={"flex"}
+          flexDirection={"column"}
+          gap={"1rem"}
+          alignItems={"center"}
+        >
+          <Box position={"relative"}>
+            <Icon icon={icon} width={64} height={64} />
+            <Box position={"absolute"} top={"-3px"} right={"-3px"}>
+              <Icon icon={status} width={12} height={12} />
+            </Box>
           </Box>
+          <Typography variant="text-md-semibold">
+            {title.charAt(0).toUpperCase() + title.slice(1)}
+          </Typography>
+          <Typography variant="text-sm">{description}</Typography>
         </Box>
-        <Typography variant="text-md-semibold">
-          {title.charAt(0).toUpperCase() + title.slice(1)}
-        </Typography>
-        <Typography variant="text-sm">{description}</Typography>
-      </Box>
-    </Paper>
+      </Paper>
+    </Box>
   );
 };
 

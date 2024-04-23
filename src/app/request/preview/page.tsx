@@ -22,7 +22,9 @@ const PreviewData = () => {
 
   return (
     <>
-      <AppLayout>{isLoading ? <LoaderComponent /> : <Box></Box>}</AppLayout>
+      <AppLayout>
+        {isLoading ? <LoaderComponent type="Loading" /> : <Box></Box>}
+      </AppLayout>
     </>
   );
 };

@@ -20,7 +20,11 @@ const Page = () => {
   }, []);
   return (
     <AppLayout>
-      {isLoading ? <LoaderComponent /> : <FeedbackPage type="retriever" />}
+      {isLoading ? (
+        <LoaderComponent type="Loading" />
+      ) : (
+        <FeedbackPage type="retriever" />
+      )}
     </AppLayout>
   );
 };
