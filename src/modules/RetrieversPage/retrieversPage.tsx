@@ -115,7 +115,7 @@ const RetrieversPage = () => {
   return (
     <Box
       sx={{
-        padding: "1.2rem",
+        padding: "1.2rem 1rem",
         pb: 0,
         display: "flex",
         flexDirection: "column",
