@@ -30,7 +30,7 @@ const TemplatePage = () => {
       display={"flex"}
       flexDirection={"column"}
       px={"1rem"}
-      pt={"2rem"}
+      pt={"1.5rem"}
       gap={"1.5rem"}
       height={"100%"}
     >
@@ -123,7 +123,7 @@ const TemplatePage = () => {
             }}
           >
             {(isActive === "private" ? data : data1).map((card, i) => (
-              <Box key={i} mt={i === 0 ? "" : "1.5rem"} sx={{}}>
+              <Box key={i} mt={i === 0 ? "" : "1rem"} sx={{}}>
                 <Paper
                   type="light-border"
                   sx={{
