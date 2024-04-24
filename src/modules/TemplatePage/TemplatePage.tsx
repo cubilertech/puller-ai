@@ -5,7 +5,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
 import { Box, Typography } from "@mui/material";
 import React, { useState } from "react";
-import "./Input.css";
+// import "./Input.css";
 import Image from "next/image";
 import Input from "@/components/Input/input";
 

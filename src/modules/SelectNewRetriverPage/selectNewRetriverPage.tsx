@@ -4,10 +4,10 @@ import RectangleCardWithIcon from "@/components/RectangleCardWithIcon/rectangleC
 import { Box, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 
-const CreateNewRetriverPage = () => {
+const SelectNewRetriverPage = () => {
   const router = useRouter();
   return (
-    <Box p={"2rem"} display={"flex"} flexDirection={"column"} gap={"2rem"}>
+    <Box p={"1rem"} display={"flex"} flexDirection={"column"} gap={"2rem"}>
       <PageHeader type="New Retriver" />
       <Box display={"flex"} gap={"2rem"}>
         <RectangleCardWithIcon
@@ -26,4 +26,4 @@ const CreateNewRetriverPage = () => {
   );
 };
 
-export default CreateNewRetriverPage;
+export default SelectNewRetriverPage;
