@@ -33,6 +33,30 @@ const data = [
   },
   {
     image: "/Images/avatar-2.svg",
+    name: "Darcel Ballentine",
+    product: "Pattern Top with Knot ",
+    price: 210.98,
+    time: "30 mins ago",
+    type: "user",
+  },
+  {
+    image: "/Images/avatar-2.svg",
+    name: "Darcel Ballentine",
+    product: "Pattern Top with Knot ",
+    price: 210.98,
+    time: "30 mins ago",
+    type: "user",
+  },
+  {
+    image: "/Images/avatar-2.svg",
+    name: "Darcel Ballentine",
+    product: "Pattern Top with Knot ",
+    price: 210.98,
+    time: "30 mins ago",
+    type: "user",
+  },
+  {
+    image: "/Images/avatar-2.svg",
     product: "Pattern Top with Knot ",
     name: "Darcel Ballentine",
     price: 210.98,
@@ -56,7 +80,7 @@ const data = [
 
 const AlertsPage = () => {
   const [isActive, setIsActive] = useState("all");
-  return (
+    return (
     <Box
       sx={{
         padding: "1.5rem",

@@ -10,10 +10,14 @@ const AppLayout = ({ children }: { children: ReactNode }) => {
       <div className="sidebar">
         <SideNavbar />
       </div>
-      <div className="topbar">
-        <TopNavBar />
+      <div className="right-container">
+        <div className="topbar">
+          <TopNavBar />
+        </div>
+        <div className="content">
+          <div className="children-container">{children}</div>
+        </div>
       </div>
-      <div className="content">{children}</div>
     </div>
   );
 };
