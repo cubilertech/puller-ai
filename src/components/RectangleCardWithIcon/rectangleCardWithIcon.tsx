@@ -6,7 +6,7 @@ import { FC } from "react";
 import "./rectangleCardWithIcon.css";
 
 interface RectangleCardProps {
-  icon: "connectApps" | "apiKey" | "upload";
+  icon: "connectApps" | "apiKey" | "upload" | "cpu";
   title: string;
   onClick?: () => void;
 }

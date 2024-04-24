@@ -43,6 +43,7 @@ export const icons = {
   upload: "/Images/Icons/upload-icon.svg",
   cloudUpload: "/Images/Icons/cloud-upload-icon.svg",
   folder: "/Images/Icons/folder-icon.svg",
+  cpu: "/Images/Icons/cpu-icon.svg",
 };
 
 export const PagesType = {
