@@ -18,7 +18,7 @@ const UploadRetrieverPage = () => {
       sx={{
         padding: "1.2rem 1rem",
         pb: 0,
-        height: "calc(100vh - 130px)",
+        height: "100%",
         display: "flex",
         flexDirection: "column",
         gap: "1rem",

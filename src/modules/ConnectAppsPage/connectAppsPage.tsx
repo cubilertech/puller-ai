@@ -77,7 +77,7 @@ const ConnectAppsPage = () => {
     <Box
       sx={{
         padding: "2rem",
-        height: "calc(100vh - 130px)",
+        height: "100%",
         display: "flex",
         flexDirection: "column",
         gap: "2rem",

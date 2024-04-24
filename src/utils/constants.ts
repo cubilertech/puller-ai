@@ -43,6 +43,7 @@ export const icons = {
   upload: "/Images/Icons/upload-icon.svg",
   cloudUpload: "/Images/Icons/cloud-upload-icon.svg",
   folder: "/Images/Icons/folder-icon.svg",
+  cpu: "/Images/Icons/cpu-icon.svg",
 };
 
 export const PagesType = {
@@ -188,3 +189,111 @@ export const SingleCardDomyData = [
   },
 ];
 export const isClient = typeof window !== 'undefined';
+
+export const Selcect_RetrieverData = [
+  {
+    icon: "snowflake",
+    status: "needPermissions",
+    title: "snowflake 1",
+    description:
+      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+  },
+  {
+    icon: "snowflake",
+    status: "needPermissions",
+    title: "snowflake 3",
+    description:
+      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+  },
+  {
+    icon: "segment",
+    status: "needPermissions",
+    title: "Segment",
+    description:
+      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+  },
+  {
+    icon: "lytics",
+    status: "needPermissions",
+    title: "Lytics",
+    description:
+      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+  },
+  {
+    icon: "dataRoom",
+    status: "needPermissions",
+    title: "Data room 1",
+    description:
+      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+  },
+  {
+    icon: "snowflake",
+    status: "needPermissions",
+    title: "snowflake 2",
+    description:
+      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+  },
+  {
+    icon: "dbtCore",
+    status: "needPermissions",
+    title: "dbt Core",
+    description:
+      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+  },
+  {
+    icon: "sfCrm",
+    status: "needPermissions",
+    title: "SF CRM",
+    description:
+      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+  },
+  {
+    icon: "clReport",
+    status: "needPermissions",
+    title: "Cl Report 23",
+    description:
+      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+  },
+  {
+    icon: "nielsen",
+    status: "needPermissions",
+    title: "Nielsen",
+    description:
+      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+  },
+  {
+    icon: "googleAnalytics",
+    status: "needPermissions",
+    title: "Google Analytics",
+    description:
+      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+  },
+  {
+    icon: "clickstream",
+    status: "needPermissions",
+    title: "clickstream",
+    description:
+      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+  },
+  {
+    icon: "clickstream",
+    status: "needPermissions",
+    title: "PowerBI Link",
+    description:
+      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+  },
+  {
+    icon: "clickstream",
+    status: "needPermissions",
+    title: "IRI Panel",
+    description:
+      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+  },
+  {
+    icon: "clickstream",
+    status: "needPermissions",
+    title: "Transact POS",
+    description:
+      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+  },
+];

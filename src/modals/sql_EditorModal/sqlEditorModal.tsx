@@ -1,20 +1,19 @@
 import { Box, Modal, Typography } from "@mui/material";
 import { FC, useEffect, useState } from "react";
-import MonacoEditor from "react-monaco-editor";
 import { format } from "sql-formatter";
 import "./style.css";
 import { Paper } from "@/components/Paper";
 import { Button } from "@/components/Button";
-import { Close, Height } from "@mui/icons-material";
+import { Close } from "@mui/icons-material";
 import Divider from "@/components/Divider/divider";
 
 const modalStyle = {
   position: "absolute",
-  top: "40%",
+  top: "50%",
   left: "53%",
   transform: "translate(-50%, -50%)",
-  width: "60vw",
-  height: "50vh",
+  width: "65vw",
+  height: "65vh",
   bgcolor: "transparnet",
   border: "none",
   boxShadow: 24,
@@ -70,7 +69,7 @@ const SQL_EditorModal: FC<SQL_EditorModalProps> = ({
       aria-describedby="modal-modal-description"
     >
       <Box sx={modalStyle}>
-        <Paper type="dark-border" sx={{ padding: 3, height: "60vh" }}>
+        <Paper type="dark-border" sx={{ padding: 3, height: "64vh" }}>
           <Box
             sx={{
               display: "flex",
@@ -99,7 +98,7 @@ const SQL_EditorModal: FC<SQL_EditorModalProps> = ({
             sx={{
               width: "100%",
               mt: 1,
-              maxHeight: "87%",
+              maxHeight: "86%",
               overflow: "auto",
               scrollbarWidth: "none",
             }}

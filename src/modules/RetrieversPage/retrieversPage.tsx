@@ -115,11 +115,12 @@ const RetrieversPage = () => {
   return (
     <Box
       sx={{
-        padding: "2rem",
+        padding: "1.2rem",
+        pb: 0,
         display: "flex",
         flexDirection: "column",
-        gap: "2rem",
-        height: "calc(100vh - 130px)",
+        gap: "3rem",
+        height: "100%",
       }}
     >
       <PageHeader type="Retrivers" />
