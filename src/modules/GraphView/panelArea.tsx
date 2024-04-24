@@ -1,7 +1,7 @@
 "use client";
 import { Box, Input } from "@mui/material";
 import { Paper } from "../../components/Paper";
-import React, { useCallback, useRef, useState, FC } from "react";
+import React, { FC } from "react";
 import { useRouter } from "next/navigation";
 
 interface PanelAreaProps {

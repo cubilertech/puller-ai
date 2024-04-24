@@ -57,35 +57,49 @@ export default function ContextMenu(props: any) {
               width: "100%",
             }}
           >
-            <Typography variant="text-sm">Update Node</Typography>
+            <Typography variant="text-sm">Update {props.label}</Typography>
             <Close onClick={() => props.onClose()} />
           </Box>
 
-          <TextareaAutosize
-            style={{
+          <Box
+            sx={{
+              maxHeight: "20rem",
               width: "100%",
-              backgroundColor: "transparent",
-              border: "none",
+              overflowY: "auto",
+              scrollbarWidth: "thin",
             }}
-            placeholder="Enter New Label"
-            onChange={(event) => {
-              try {
-                const parsedValue = JSON.parse(event.target.value);
-                setValue(parsedValue);
-              } catch (error) {
-                console.error("Invalid JSON input:", error);
-              }
-            }}
-            value={JSON.stringify(value, null, 2)}
-          />
-
-          <Box width={180}>
-            <Button
-              variant="contained"
-              label="Update Node"
-              fullWidth
-              onClick={() => updateNode()}
+          >
+            <TextareaAutosize
+              style={{
+                width: "100%",
+                backgroundColor: "transparent",
+                border: "none",
+                resize: "none",
+              }}
+              placeholder="Enter New Label"
+              onChange={(event) => {
+                try {
+                  const parsedValue = JSON.parse(event.target.value);
+                  setValue(parsedValue);
+                } catch (error) {
+                  console.error("Invalid JSON input:", error);
+                }
+              }}
+              value={JSON.stringify(value, null, 2)}
             />
+          </Box>
+          <Box display={"flex"} justifyContent={"flex-end"} width={"100%"}>
+            <Box width={100} height={38}>
+              <Button
+                variant="contained"
+                label="Update"
+                fullWidth
+                sx={{
+                  height: "38px !important",
+                }}
+                onClick={() => updateNode()}
+              />
+            </Box>
           </Box>
         </Paper>
       </Box>
