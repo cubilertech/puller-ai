@@ -107,7 +107,6 @@ const AlertsPage = () => {
             minHeight: "2rem",
             background:
               "linear-gradient(142.96deg, rgba(255, 255, 255, 0.148) -3.54%, rgba(114, 114, 114, 0.168) 95.15%)",
-
             padding: "1rem 1rem 0",
             borderTopLeftRadius: "14px",
             borderTopRightRadius: "14px",
@@ -165,8 +164,10 @@ const AlertsPage = () => {
         </Box>
         <Box
           sx={{
-            overflowY: "scroll",
             height: "90%",
+            borderRadius: "16px",
+            overflow: "hidden",
+            overflowY: "scroll",
             "&::-webkit-scrollbar": {
               display: "none",
             },

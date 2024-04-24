@@ -2,6 +2,7 @@ import { Box, Divider, Typography } from "@mui/material";
 import Image from "next/image";
 import { FC } from "react";
 import { Button } from "../Button";
+import "./alertCard.css";
 
 interface alertCardProps {
   name?: string;
@@ -37,6 +38,7 @@ const AlertCard: FC<alertCardProps> = ({
             borderBottomLeftRadius: index === dataLength - 1 ? "14px" : 0,
             borderBottomRightRadius: index === dataLength - 1 ? "14px" : 0,
           }}
+          className="alert-card"
         >
           <Divider sx={{ bgcolor: "rgba(71, 84, 103, 0.0)" }} />
           <Box
@@ -70,6 +72,7 @@ const AlertCard: FC<alertCardProps> = ({
             borderBottomLeftRadius: index === dataLength - 1 ? "14px" : 0,
             borderBottomRightRadius: index === dataLength - 1 ? "14px" : 0,
           }}
+          className="alert-card"
         >
           <Divider sx={{ bgcolor: "rgb(62,64,71)" }} />
           <Box
@@ -103,7 +106,7 @@ const AlertCard: FC<alertCardProps> = ({
             </Box>
           </Box>
 
-          <Divider sx={{ bgcolor: "rgb(62,64,71)" }} />
+          {/* <Divider sx={{ bgcolor: "rgb(62,64,71)" }} /> */}
         </Box>
       );
   }

@@ -56,12 +56,4 @@ const UploadCard = () => {
   );
 };
 
-
-
-
-
-
-
-a
-
 export default UploadCard;

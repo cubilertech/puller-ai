@@ -1,0 +1,11 @@
+.alert-card {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(71, 84, 103, 0.3);
+  transition: background-color 0.4s ease-out;
+}
+
+.alert-card:hover {
+  cursor: pointer;
+  background-color: rgba(78, 95, 149, 0.9);
+}
