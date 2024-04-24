@@ -26,8 +26,8 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
 
   const handleAvailable = () => {
     setisLoading(true);
-    route.push("/request/validate");
     setTimeout(() => {
+      route.push("/request/validate");
       setisLoading(false);
     }, 2000);
   };

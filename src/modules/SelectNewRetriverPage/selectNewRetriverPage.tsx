@@ -1,7 +1,7 @@
 "use client";
 import { PageHeader } from "@/components/PageHeader";
 import RectangleCardWithIcon from "@/components/RectangleCardWithIcon/rectangleCardWithIcon";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { useRouter } from "next/navigation";
 
 const SelectNewRetriverPage = () => {
