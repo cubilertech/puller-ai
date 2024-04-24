@@ -16,7 +16,8 @@ const UploadRetrieverPage = () => {
   return (
     <Box
       sx={{
-        padding: "2rem",
+        padding: "1.2rem 1rem",
+        pb: 0,
         height: "calc(100vh - 130px)",
         display: "flex",
         flexDirection: "column",
@@ -26,114 +27,121 @@ const UploadRetrieverPage = () => {
       }}
     >
       <PageHeader type="Custom Retrievers" />
-      <Paper
+      <Box
         sx={{
-          padding: "2rem",
-          display: "flex",
-          flexDirection: "column",
-          gap: "1rem",
           overflowY: "auto",
           scrollbarWidth: "none",
-          minHeight: "25rem",
-          height: isOpen ? "calc(100vh - 250px)" : "calc(100vh - 400px)",
+          width: "100%",
+          height: "100%",
         }}
-        type="light-border"
       >
-        <Box
-          display={"flex"}
-          flexDirection={"column"}
-          alignItems={"flex-start"}
-          gap={"0.5rem"}
-        >
-          <Typography variant="text-sm-medium">Name</Typography>
-          <Input
-            disableUnderline
-            fullWidth
-            placeholder="Enter Name"
-            sx={{
-              borderRadius: "8px",
-              padding: "0.5rem 1rem",
-              border: "2px solid rgba(196, 196, 196, 0.6)",
-            }}
-          />
-        </Box>
-
-        <Box
-          onClick={() => setIsOpen(!isOpen)}
+        <Paper
           sx={{
-            border: "2px solid rgba(196, 196, 196, 0.6)",
-            minHeight: "10rem",
-            height: "50%",
-            borderRadius: "8px",
+            padding: "2rem",
             display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
             flexDirection: "column",
             gap: "1rem",
+            minHeight: "25rem",
+            height: "fit-content",
           }}
+          type="light-border"
         >
-          <Icon icon="cloudUpload" width={40} height={40} />
-          <Typography variant="text-sm-medium">
-            <Typography variant="text-sm-bold">Click to upload</Typography> or
-            drag and drop
-          </Typography>
-        </Box>
-
-        {!isOpen ? (
-          <Divider
-            sx={{
-              backgroundColor: "rgb(215,215,215)",
-              mt: "10px",
-            }}
-          />
-        ) : (
           <Box
-            display={"grid"}
-            gridTemplateColumns={"1fr 1fr 1fr"}
-            gap={"2rem"}
-            mb={"2rem"}
+            display={"flex"}
+            flexDirection={"column"}
+            alignItems={"flex-start"}
+            gap={"0.5rem"}
           >
-            {data.map((item, index) => (
-              <Box
-                display={"flex"}
-                flexDirection={"column"}
-                key={index}
-                gap={"1rem"}
-              >
-                <UploadCard />
-                <Input
-                  disableUnderline
-                  placeholder="Add additional context here"
-                  sx={{
-                    border: "2px solid rgba(196, 196, 196, 0.6)",
-                    borderRadius: "8px",
-                    padding: "0.1rem 0.5rem",
-                  }}
-                />
-              </Box>
-            ))}
+            <Typography variant="text-sm-medium">Name</Typography>
+            <Input
+              disableUnderline
+              fullWidth
+              placeholder="Enter Name"
+              sx={{
+                borderRadius: "8px",
+                padding: "0.5rem 1rem",
+                border: "2px solid rgba(196, 196, 196, 0.6)",
+              }}
+            />
           </Box>
-        )}
 
-        <Box display={"flex"} justifyContent={"flex-end"} gap={"1rem"}>
-          <Box width={242} height={44}>
-            <Button
-              label="Go Back"
-              variant="outlined"
-              fullWidth
-              onClick={() => router.back()}
-            />
+          <Box
+            onClick={() => setIsOpen(!isOpen)}
+            sx={{
+              border: "2px solid rgba(196, 196, 196, 0.6)",
+              minHeight: "10rem",
+              height: "50%",
+              borderRadius: "8px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              flexDirection: "column",
+              gap: "1rem",
+            }}
+          >
+            <Icon icon="cloudUpload" width={40} height={40} />
+            <Typography variant="text-sm-medium">
+              <Typography variant="text-sm-bold">Click to upload</Typography> or
+              drag and drop
+            </Typography>
           </Box>
-          <Box width={242} height={44}>
-            <Button
-              label="Create Retriever"
-              variant="contained"
-              fullWidth
-              onClick={() => router.push("/retrievers/feedback")}
+
+          {!isOpen ? (
+            <Divider
+              sx={{
+                backgroundColor: "rgb(215,215,215)",
+                mt: "10px",
+              }}
             />
+          ) : (
+            <Box
+              display={"grid"}
+              gridTemplateColumns={"1fr 1fr 1fr"}
+              gap={"1.4rem"}
+              mb={"2rem"}
+            >
+              {data.map((item, index) => (
+                <Box
+                  display={"flex"}
+                  flexDirection={"column"}
+                  key={index}
+                  gap={"1rem"}
+                >
+                  <UploadCard />
+                  <Input
+                    disableUnderline
+                    placeholder="Add additional context here"
+                    sx={{
+                      border: "2px solid rgba(196, 196, 196, 0.6)",
+                      borderRadius: "8px",
+                      padding: "0.1rem 0.5rem",
+                    }}
+                  />
+                </Box>
+              ))}
+            </Box>
+          )}
+
+          <Box display={"flex"} justifyContent={"flex-end"} gap={"1rem"}>
+            <Box width={242} height={44}>
+              <Button
+                label="Go Back"
+                variant="outlined"
+                fullWidth
+                onClick={() => router.back()}
+              />
+            </Box>
+            <Box width={242} height={44}>
+              <Button
+                label="Create Retriever"
+                variant="contained"
+                fullWidth
+                onClick={() => router.push("/retrievers/feedback")}
+              />
+            </Box>
           </Box>
-        </Box>
-      </Paper>
+        </Paper>
+      </Box>
     </Box>
   );
 };
