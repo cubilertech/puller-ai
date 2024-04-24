@@ -35,7 +35,7 @@ const TemplatePage = () => {
       height={"100%"}
     >
       <PageHeader type="Template" />
-      <Box height={"90%"}>
+      <Box height={"85%"}>
         <Paper
           sx={{
             padding: "1.5rem",
