@@ -66,7 +66,7 @@ export default function ContextMenu(props: any) {
               maxHeight: "20rem",
               width: "100%",
               overflowY: "auto",
-              scrollbarWidth: "thin",
+              scrollbarWidth: "none",
             }}
           >
             <TextareaAutosize
@@ -75,6 +75,7 @@ export default function ContextMenu(props: any) {
                 backgroundColor: "transparent",
                 border: "none",
                 resize: "none",
+                outline: "none",
               }}
               placeholder="Enter New Label"
               onChange={(event) => {
