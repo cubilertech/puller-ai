@@ -2,6 +2,7 @@ import { Box, Input as MuiInput, InputAdornment } from "@mui/material";
 import { Icon } from "../Icon";
 import { FC } from "react";
 import { IconTypes } from "@/utils/types";
+import "./Input.css";
 
 interface SearchbarProps {
   width?: number;
