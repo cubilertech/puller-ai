@@ -10,10 +10,10 @@ const CreateAlertPage = () => {
   return (
     <Box
       sx={{
-        padding: "2rem",
+        padding: "2rem 1rem",
         display: "flex",
         flexDirection: "column",
-        gap: "2rem",
+        gap: "1rem",
         alignItems: "flex-end",
       }}
     >
@@ -29,7 +29,7 @@ const CreateAlertPage = () => {
           }}
           type="light-border"
         >
-          <Box display={"flex"} flexDirection={"column"} gap={"1rem"}>
+          <Box display={"flex"} flexDirection={"column"} gap={"0.5rem"}>
             <Typography variant="text-md-semibold">Alert Name 1</Typography>
             <Paper
               type="light-border"
@@ -54,6 +54,7 @@ const CreateAlertPage = () => {
                   minHeight: "7rem",
                   alignItems: "flex-start",
                   overflowY: "auto",
+                  padding: "0.5rem 0 ",
                 }}
               />
             </Paper>
@@ -68,7 +69,7 @@ const CreateAlertPage = () => {
           </Box>
         </Paper>
       </Box>
-      <Box width={180}>
+      <Box width={180} mt={"2rem"}>
         <Button
           variant="outlined"
           label="Create Alert"
