@@ -43,6 +43,15 @@ const GraphModal: FC<GraphModalProps> = ({ open, handleClose }) => {
       type: "textUpdater",
       position: { x: 0, y: 0 },
       data: { value: 123, label: "Node 1" },
+      variables: [
+        {
+          id: "var0",
+          model: "model0",
+          name: "number of top customers",
+          type: "int",
+          value: 100.0,
+        },
+      ],
     },
     {
       id: "node-2",
@@ -50,6 +59,15 @@ const GraphModal: FC<GraphModalProps> = ({ open, handleClose }) => {
       targetPosition: "top",
       position: { x: 0, y: 200 },
       data: { label: "Node 2" },
+      variables: [
+        {
+          id: "var1",
+          model: "model1",
+          name: "number of top buyers",
+          type: "float",
+          value: 200.2,
+        },
+      ],
     },
     {
       id: "node-3",
@@ -57,6 +75,22 @@ const GraphModal: FC<GraphModalProps> = ({ open, handleClose }) => {
       targetPosition: "top",
       position: { x: 200, y: 200 },
       data: { label: "node 3" },
+      variables: [
+        {
+          id: "var2",
+          model: "model2",
+          name: "number of top people",
+          type: "int",
+          value: 300.0,
+          a: "b",
+          c: "d",
+          e: "f",
+          g: "h",
+          i: "j",
+          k: "l",
+          m: "n",
+        },
+      ],
     },
   ];
 
@@ -80,16 +114,13 @@ const GraphModal: FC<GraphModalProps> = ({ open, handleClose }) => {
     [setEdges]
   );
 
-  const handleNodeLabelChange = (id: string, label: string) => {
+  const handleNodeLabelChange = (id: string, label: any) => {
     // Update the label of the node with the given id
     const updatedNodes = nodes.map((node) => {
       if (node.id === id) {
         return {
           ...node,
-          data: {
-            ...node.data,
-            label: label,
-          },
+          variables: label,
         };
       }
       return node;
@@ -99,16 +130,13 @@ const GraphModal: FC<GraphModalProps> = ({ open, handleClose }) => {
     setMenu(null);
   };
 
-  const onLabelChange = (id: string, label: string) => {
-    // handleNodeLabe ge(id, label);
-  };
-
   const onNodeClick = useCallback(
     (event: any, node: any) => {
       const pane = ref?.current?.getBoundingClientRect();
       setMenu({
         id: node.id,
         label: node.data.label,
+        variables: node.variables,
         top: event.clientY < pane.height - 200 && event.clientY,
         left: event.clientX < pane.width - 200 && event.clientX,
         right: event.clientX >= pane.width - 200 && pane.width - event.clientX,
@@ -150,18 +178,11 @@ const GraphModal: FC<GraphModalProps> = ({ open, handleClose }) => {
             onNodesChange={onNodesChange}
             onEdgesChange={onEdgesChange}
             onConnect={onConnect}
-            // onPaneClick={onPaneClick}
-            // onNodeContextMenu={onNodeContextMenu}
             onNodeClick={onNodeClick}
             fitView
           >
             <Background />
-            {/* {menu && (
-              <ContextMenu
-                handleNodeLabelChange={handleNodeLabelChange}
-                {...menu}
-              />
-            )} */}
+
             {menu && (
               <ContextMenu
                 handleNodeLabelChange={handleNodeLabelChange}

@@ -53,12 +53,7 @@ const YourResultsPage: FC = () => {
         <PageHeader type="Results" />
 
         <Box sx={{ display: "flex", gap: 2, pt: 3, width: "100%" }}>
-          <Box
-            width={"80%"}
-            sx={{
-              height: "calc(100vh - 200px)",
-            }}
-          >
+          <Box width={"80%"} height={"100%"}>
             <ResultCard data={data} />
           </Box>
 

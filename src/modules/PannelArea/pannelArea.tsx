@@ -3,13 +3,15 @@ import { Box, Input, Typography } from "@mui/material";
 import { Paper } from "../../components/Paper";
 import { Button } from "../../components/Button";
 import { Icon } from "../../components/Icon";
-import { FC, useCallback, useRef, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Loader } from "../../components/Loader";
 import Divider from "../../components/Divider/divider";
 import { palette } from "@/theme/Palette";
 import OptionsBar from "@/components/optionsBar/optionsBar";
 import { useRouter } from "next/navigation";
 import Tooltip from "@/components/Tooltip/tooltip";
+import { isClient } from "@/utils/constants";
+import { CustomInput } from "./input";
 
 interface PannelAreaProps {
   content?: {
@@ -28,7 +30,6 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
     setisLoading(true);
     setTimeout(() => {
       route.push("/request/validate");
-      setisLoading(false);
     }, 2000);
   };
 
@@ -220,32 +221,16 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                     borderRadius: "8px",
                   }}
                 >
-                  <Input
-                    multiline
-                    fullWidth
-                    disableUnderline
-                    disabled={isLoading}
-                    placeholder="Type your data request (prompt) here..."
-                    sx={{
-                      boxSizing: "border-box",
-                      borderRadius: "8px",
-                      minHeight: "100%",
-                      alignItems: "flex-start",
-                      overflowY: "auto",
-                      padding: "0.5rem",
-                      "&::placeholder": {
-                        fontStyle: "italic",
-                        color: "#6a0505", // Adjust placeholder text color as needed
-                      },
+                  <span
+                    style={{
+                      display: "contents",
+                      maxHeight: "10rem",
+                      overflow: "auto",
                     }}
-                    inputProps={{
-                      style: {
-                        fontSize: "16px",
-                        color: "#ffffff",
-                      },
-                    }}
-                    autoFocus
-                  />
+                  >
+                    <CustomInput />
+     
+                  </span>
                 </Paper>
               </Box>
               <Box

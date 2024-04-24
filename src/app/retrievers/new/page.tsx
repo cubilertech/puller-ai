@@ -1,11 +1,11 @@
 import AppLayout from "@/common/appLayout/appLayout";
-import CreateNewRetriverPage from "@/modules/CreateNewRetriverPage/createNewRetriverPage";
+import SelectNewRetriverPage from "@/modules/SelectNewRetriverPage/selectNewRetriverPage";
 
 const NewRetriver = () => {
   return (
     <>
       <AppLayout>
-        <CreateNewRetriverPage />
+        <SelectNewRetriverPage />
       </AppLayout>
     </>
   );

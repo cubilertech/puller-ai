@@ -5,7 +5,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
 import { Box, Typography } from "@mui/material";
 import React, { useState } from "react";
-import "./Input.css";
+// import "./Input.css";
 import Image from "next/image";
 import Input from "@/components/Input/input";
 
@@ -26,18 +26,20 @@ const TemplatePage = () => {
   const [isActive, setIsActive] = useState("public");
 
   return (
-    <Box display={"flex"} flexDirection={"column"} px={"1rem"} pt={"0.6rem"}>
+    <Box
+      display={"flex"}
+      flexDirection={"column"}
+      px={"1rem"}
+      pt={"1.5rem"}
+      gap={"1.5rem"}
+      height={"100%"}
+    >
       <PageHeader type="Template" />
-      <Box
-        sx={{
-          mt: "2rem",
-          flexGrow: "1",
-        }}
-      >
+      <Box height={"85%"}>
         <Paper
           sx={{
             padding: "1.5rem",
-            height: "calc(100vh - 220px)",
+            height: "100%",
             paddingBottom: "1rem",
             paddingTop: "2rem",
             display: "flex",
@@ -121,7 +123,7 @@ const TemplatePage = () => {
             }}
           >
             {(isActive === "private" ? data : data1).map((card, i) => (
-              <Box key={i} mt={i === 0 ? "" :"1.5rem"} sx={{}}>
+              <Box key={i} mt={i === 0 ? "" : "1rem"} sx={{}}>
                 <Paper
                   type="light-border"
                   sx={{

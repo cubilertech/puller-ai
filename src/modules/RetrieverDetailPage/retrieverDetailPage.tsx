@@ -11,11 +11,11 @@ const RetrieverDetailPage = () => {
   return (
     <Box
       sx={{
-        padding: "2rem",
-        height: "calc(100vh - 120px)",
+        padding: "2rem 1.2rem",
+        height: "100%",
         display: "flex",
         flexDirection: "column",
-        gap: "2rem",
+        gap: "1.4rem",
       }}
     >
       <PageHeader type="Retriever Detail" />
@@ -93,10 +93,14 @@ const RetrieverDetailPage = () => {
                   gap={"1rem"}
                   alignItems={"flex-start"}
                 >
-                  <Typography variant="text-sm">12/02/2024</Typography>
-                  <Typography variant="text-sm">|</Typography>
+                  <Typography color={"#E6E6E6"} variant="text-sm">
+                    12/02/2024
+                  </Typography>
+                  <Typography color={"#E6E6E6"} variant="text-sm">
+                    |
+                  </Typography>
                   <Box display={"flex"} flexDirection={"column"} gap={"0.5rem"}>
-                    <Typography variant="text-sm">
+                    <Typography color={"#E6E6E6"} variant="text-sm">
                       Aliquam a dui vel justo fringilla euismod id id enim. Nunc
                       non semper tellus. Pellentesque
                     </Typography>
@@ -124,8 +128,12 @@ const RetrieverDetailPage = () => {
                   gap={"1rem"}
                   alignItems={"flex-start"}
                 >
-                  <Typography variant="text-sm">12/02/2024</Typography>
-                  <Typography variant="text-sm">|</Typography>
+                  <Typography color={"#E6E6E6"} variant="text-sm">
+                    12/02/2024
+                  </Typography>
+                  <Typography color={"#E6E6E6"} variant="text-sm">
+                    |
+                  </Typography>
                   <Box
                     display={"flex"}
                     flexDirection={"column"}
@@ -135,7 +143,7 @@ const RetrieverDetailPage = () => {
                     <Typography variant="text-md-regular">
                       Title of the notification
                     </Typography>
-                    <Typography variant="text-sm">
+                    <Typography color={"#E6E6E6"} variant="text-sm">
                       Aliquam a dui vel justo fringilla euismod id id enim. Nunc
                       non semper tellus. Pellentesque
                     </Typography>

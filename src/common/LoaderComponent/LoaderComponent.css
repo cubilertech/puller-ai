@@ -6,6 +6,11 @@
   animation: fadeInAnimation 0.5s ease forwards; /* Apply fade-in animation */
 }
 
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
 @keyframes fadeInAnimation {
   from {
     opacity: 0;

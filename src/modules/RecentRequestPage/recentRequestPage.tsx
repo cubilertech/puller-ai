@@ -14,7 +14,7 @@ const RecentRequestPage: FC = () => {
           gap={2}
           sx={{
             mt: 3,
-            maxHeight: "90%",
+            maxHeight: "100%",
             overflow: "auto",
             scrollbarWidth: "none",
             width: "100%",

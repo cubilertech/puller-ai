@@ -35,7 +35,6 @@ const SideNavbar = () => {
             "linear-gradient(143deg, rgba(57, 57, 57, 0.60) -3.54%, rgba(97, 97, 97, 0.60) 99.99%)",
           "& .MuiDrawer-paper": {
             width: drawerWidth,
-            marginRight: drawerWidth,
 
             boxSizing: "border-box",
             borderRight:

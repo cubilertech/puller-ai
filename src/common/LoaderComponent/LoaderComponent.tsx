@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
 import { Loader } from "@/components/Loader";
 import { Paper } from "@/components/Paper";
 import { Box } from "@mui/material";
@@ -12,6 +12,14 @@ interface LoaderComponentProps {
 const LoaderComponent: FC<LoaderComponentProps> = ({ type }) => {
   const [showLoader, setShowLoader] = useState(true);
 
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLoader(false);
+    }, 4000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <Box
       display={"flex"}
@@ -23,7 +31,7 @@ const LoaderComponent: FC<LoaderComponentProps> = ({ type }) => {
         padding: 0,
         width: "100%",
       }}
-      className={`loader-container ${showLoader ? "fade-in" : ""}`}
+      className={`loader-container ${showLoader ? "fade-in" : "fade-out"}`}
     >
       <Paper
         type="light-border"

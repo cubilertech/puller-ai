@@ -2,10 +2,11 @@
 import { Box, Typography } from "@mui/material";
 import { Icon } from "../Icon";
 import { Paper } from "../Paper";
-import { FC, MouseEvent } from "react";
+import { FC } from "react";
+import "./rectangleCardWithIcon.css";
 
 interface RectangleCardProps {
-  icon: "connectApps" | "apiKey" | "upload";
+  icon: "connectApps" | "apiKey" | "upload" | "cpu";
   title: string;
   onClick?: () => void;
 }
@@ -16,13 +17,7 @@ const RectangleCardWithIcon: FC<RectangleCardProps> = ({
   onClick,
 }) => {
   return (
-    <Box
-      sx={{
-        ":hover": {
-          cursor: "pointer",
-        },
-      }}
-    >
+    <>
       <Paper
         type="light-border"
         sx={{
@@ -34,13 +29,41 @@ const RectangleCardWithIcon: FC<RectangleCardProps> = ({
           gap: "1.8rem",
           paddingLeft: "15px",
           borderRadius: "8px",
+          ":hover": {
+            cursor: "pointer",
+            background:
+              "linear-gradient(142.96deg, rgba(93, 146, 254, 0.148) -3.54%, rgba(93, 146, 254, 0.168) 95.15%)",
+            "& .child": {
+              background: "rgba(93, 146, 254, 0.3)",
+            },
+          },
         }}
         onClick={onClick}
       >
-        <Icon icon={icon} height={64} width={64} />
+        <div className="rectangle-card-container">
+          <Box
+            sx={{
+              background: "rgb(112,112,129)",
+              width: 60,
+              height: 60,
+              borderRadius: "8px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              pointerEvents: "none",
+              ":hover": {
+                background: "rgba(93, 146, 254, 0.3)",
+              },
+            }}
+            className="child"
+          >
+            <Icon icon={icon} height={30} width={30} />
+          </Box>
+        </div>
+
         <Typography variant="text-md-semibold">{title}</Typography>
       </Paper>
-    </Box>
+    </>
   );
 };
 

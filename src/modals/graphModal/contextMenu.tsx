@@ -1,12 +1,11 @@
-import React, { useState } from "react";
-import TextField from "@mui/material/TextField";
+"use client";
+import React, { useState, useEffect } from "react";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
 import { Paper } from "@/components/Paper";
 import { Button } from "@/components/Button";
-import Input from "@/components/Input/input";
 import { Close } from "@mui/icons-material";
-import { Typography } from "@mui/material";
+import { TextareaAutosize, Typography } from "@mui/material";
 
 const style = {
   position: "absolute",
@@ -15,12 +14,20 @@ const style = {
   transform: "translate(-50%, -50%)",
   boxShadow: 24,
 };
+
 export default function ContextMenu(props: any) {
   const id = "simple-popper";
-  const [value, setValue] = useState(props.label);
+  const [value, setValue] = useState(props.variables);
+
+  useEffect(() => {
+    // Update the local state when props.variables change
+    setValue(props.variables);
+  }, [props.variables]);
+
   const updateNode = () => {
     props.handleNodeLabelChange(props.id, value);
   };
+
   return (
     <Modal
       open={props.open}
@@ -30,8 +37,9 @@ export default function ContextMenu(props: any) {
     >
       <Box sx={style}>
         <Paper
-          type="light-border"
+          type="light-bg-border"
           sx={{
+            width: "35rem",
             padding: "1rem",
             display: "flex",
             flexDirection: "column",
@@ -49,21 +57,49 @@ export default function ContextMenu(props: any) {
               width: "100%",
             }}
           >
-            <Typography variant="text-sm">Update Node</Typography>
+            <Typography variant="text-sm">Update {props.label}</Typography>
             <Close onClick={() => props.onClose()} />
           </Box>
-          <Input
-            placeholder="Enter New Label"
-            onChange={(eve) => setValue(eve.target.value)}
-            value={value}
-          />
-          <Box width={180}>
-            <Button
-              variant="contained"
-              label="Update Node"
-              fullWidth
-              onClick={() => updateNode()}
+
+          <Box
+            sx={{
+              maxHeight: "20rem",
+              width: "100%",
+              overflowY: "auto",
+              scrollbarWidth: "thin",
+            }}
+          >
+            <TextareaAutosize
+              style={{
+                width: "100%",
+                backgroundColor: "transparent",
+                border: "none",
+                resize: "none",
+              }}
+              placeholder="Enter New Label"
+              onChange={(event) => {
+                try {
+                  const parsedValue = JSON.parse(event.target.value);
+                  setValue(parsedValue);
+                } catch (error) {
+                  console.error("Invalid JSON input:", error);
+                }
+              }}
+              value={JSON.stringify(value, null, 2)}
             />
+          </Box>
+          <Box display={"flex"} justifyContent={"flex-end"} width={"100%"}>
+            <Box width={100} height={38}>
+              <Button
+                variant="contained"
+                label="Update"
+                fullWidth
+                sx={{
+                  height: "38px !important",
+                }}
+                onClick={() => updateNode()}
+              />
+            </Box>
           </Box>
         </Paper>
       </Box>

@@ -12,8 +12,8 @@ const modalStyle = {
   top: "50%",
   left: "53%",
   transform: "translate(-50%, -50%)",
-  width: "65vw",
-  height: "65vh",
+  width: "70vw",
+  height: "70vh",
   bgcolor: "transparnet",
   border: "none",
   boxShadow: 24,
@@ -69,7 +69,7 @@ const SQL_EditorModal: FC<SQL_EditorModalProps> = ({
       aria-describedby="modal-modal-description"
     >
       <Box sx={modalStyle}>
-        <Paper type="dark-border" sx={{ padding: 3, height: "75vh" }}>
+        <Paper type="dark-border" sx={{ padding: 3, height: "69vh" }}>
           <Box
             sx={{
               display: "flex",

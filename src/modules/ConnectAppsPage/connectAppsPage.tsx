@@ -76,18 +76,18 @@ const ConnectAppsPage = () => {
   return (
     <Box
       sx={{
-        padding: "2rem",
-        height: "calc(100vh - 130px)",
+        padding: "1.2rem 1rem",
+        height: "100%",
         display: "flex",
         flexDirection: "column",
-        gap: "2rem",
+        gap: "1.2rem",
       }}
     >
       <PageHeader type="Connect App" />
       <Paper
         type="light-border"
         sx={{
-          height: "calc(100vh - 220px)",
+          height: "calc(100vh - 210px)",
           display: "flex",
           flexDirection: "column",
         }}

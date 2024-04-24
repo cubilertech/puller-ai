@@ -1,8 +1,9 @@
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, Divider, Typography, useMediaQuery } from "@mui/material";
 import { Paper } from "../Paper";
 import { Icon } from "../Icon";
 
 const UploadCard = () => {
+  const isMobile = useMediaQuery("(max-width: 1200px)");
   return (
     <Paper
       sx={{
@@ -25,12 +26,31 @@ const UploadCard = () => {
           my: "10px",
         }}
       />
-      <Box display={"flex"} justifyContent={"space-between"}>
-        <Box display={"flex"} alignItems={"center"} gap={"1rem"}>
-          <Icon icon="folder" width={24} height={24} />
-          <Typography variant="text-sm-medium">Cl_insight_2021.pdf</Typography>
+      <Box display={"flex"} justifyContent={"space-between"} gap={1}>
+        <Box
+          display={"flex"}
+          sx={{ alignItems: { md: "center", xs: "flex-start" } }}
+          gap={isMobile ? "0.5rem" : "0.8rem"}
+        >
+          <Box mt={"2px"}>
+            <Icon
+              icon="folder"
+              width={isMobile ? 18 : 24}
+              height={isMobile ? 18 : 24}
+            />
+          </Box>
+
+          <Typography
+            variant={isMobile ? "text-xs-medium" : "text-sm-medium"}
+            sx={{ minWidth: "80px", wordWrap: "break-word" }}
+          >
+            Cl_insight_2021.pdf
+          </Typography>
         </Box>
-        <Typography variant="text-sm-medium">(10mb)</Typography>
+
+        <Typography variant={isMobile ? "text-xs-medium" : "text-sm-medium"}>
+          (10mb)
+        </Typography>
       </Box>
     </Paper>
   );
