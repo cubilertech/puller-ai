@@ -13,10 +13,12 @@
 .topbar {
   height: 88px;
   z-index: 999;
+  width: 100%;
 }
 
 .right-container {
   width: 100%;
+  overflow-x: hidden;
 }
 
 .content {

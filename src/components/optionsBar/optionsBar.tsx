@@ -87,9 +87,9 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
                 <Box onClick={close}>
                   <CloseIcon
                     sx={{
-                      position: "absolute",
-                      right: 15,
-                      width: 20,
+                      // position: "absolute",
+                      // right: 15,
+                      // width: 20,
                       ":hover": {
                         cursor: "pointer",
                       },

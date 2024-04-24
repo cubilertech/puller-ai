@@ -3,8 +3,8 @@ import { Input, TextField } from "@mui/material";
 export const CustomInput = () => {
   return (
     <textarea
-    //   disableUnderline
-  
+      //   disableUnderline
+
       autoFocus
       placeholder="Type your data request (prompt) here..."
       style={{
@@ -12,6 +12,8 @@ export const CustomInput = () => {
         borderRadius: "8px",
         width: "100%",
         minHeight: "100%",
+        maxHeight: "8rem",
+        height: "5rem",
         alignItems: "flex-start",
         overflowY: "auto",
         resize: "none",
