@@ -242,7 +242,6 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                       style: {
                         fontSize: "16px",
                         color: "#ffffff",
-                        fontStyle: "italic",
                       },
                     }}
                     autoFocus

@@ -69,7 +69,7 @@ const SQL_EditorModal: FC<SQL_EditorModalProps> = ({
       aria-describedby="modal-modal-description"
     >
       <Box sx={modalStyle}>
-        <Paper type="dark-border" sx={{ padding: 3, height: "64vh" }}>
+        <Paper type="dark-border" sx={{ padding: 3, height: "75vh" }}>
           <Box
             sx={{
               display: "flex",
