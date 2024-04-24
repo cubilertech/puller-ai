@@ -9,7 +9,11 @@ const SelectNewRetriverPage = () => {
   return (
     <Box p={"1rem"} display={"flex"} flexDirection={"column"} gap={"2rem"}>
       <PageHeader type="New Retriver" />
-      <Box display={"flex"} gap={"2rem"}>
+      <Box
+        display={"flex"}
+        gap={"2rem"}
+        flexDirection={{ md: "row", xs: "column" }}
+      >
         <RectangleCardWithIcon
           icon="connectApps"
           title="Connect Apps"
