@@ -21,6 +21,7 @@ const FeedbackPage: FC<FeedbackProps> = ({ type }) => {
         justifyContent: "center",
         alignItems: "center",
       }}
+      className="fade-in"
     >
       <Paper
         sx={{

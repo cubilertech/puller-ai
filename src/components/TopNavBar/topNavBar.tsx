@@ -17,7 +17,6 @@ const TopNavBar = () => {
     routeParts.includes("preview") ||
     routeParts.includes("connect") ||
     routeParts.includes("recent");
-  console.log(firstRoute, PagesType.RECENT_REQUESTS, "route");
   return (
     <>
       <Box
