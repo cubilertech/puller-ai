@@ -13,10 +13,11 @@ interface FeedbackProps {
 const FeedbackPage: FC<FeedbackProps> = ({ type }) => {
   const router = useRouter();
   const isLg = useMediaQuery("(max-width:1500px)");
+
   return (
     <Box
       sx={{
-        height: "calc(100vh - 130px)",
+        height: "100%",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -36,6 +37,7 @@ const FeedbackPage: FC<FeedbackProps> = ({ type }) => {
         }}
         type="light-border"
       >
+        {/* Success logo and message */}
         <Box
           display={"flex"}
           flexDirection={"column"}
@@ -62,6 +64,8 @@ const FeedbackPage: FC<FeedbackProps> = ({ type }) => {
               : "This retriever has created successfully. You can use this retriever from Retrievers List."}
           </Typography>
         </Box>
+
+        {/* Alert Success Buttons */}
         {type === "alert" ? (
           <Box display={"flex"} gap={"1rem"} mt={"1rem"}>
             <Box width={{ xl: "280px", lg: "150px" }}>
@@ -81,6 +85,7 @@ const FeedbackPage: FC<FeedbackProps> = ({ type }) => {
             </Box>
           </Box>
         ) : (
+          // Retriever Success Button
           <Box width={{ xl: "280px", lg: "180px" }} height={44}>
             <Button
               variant="contained"

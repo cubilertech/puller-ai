@@ -42,23 +42,26 @@ const RetriverCard: FC<retriverCardProps> = ({
         sx={{
           padding: "1.5rem",
           width: "100%",
-          // height: "226px",
           textAlign: "center",
         }}
         onClick={() => router.push("/alerts/retriever-detail")}
       >
+        {/* Content Container */}
         <Box
           display={"flex"}
           flexDirection={"column"}
           gap={"1rem"}
           alignItems={"center"}
         >
+          {/* Icon Box */}
           <Box position={"relative"}>
             <Icon icon={icon} width={64} height={64} />
             <Box position={"absolute"} top={"-3px"} right={"-3px"}>
               <Icon icon={status} width={12} height={12} />
             </Box>
           </Box>
+
+          {/* Title & description */}
           <Typography variant="text-md-semibold">
             {title.charAt(0).toUpperCase() + title.slice(1)}
           </Typography>

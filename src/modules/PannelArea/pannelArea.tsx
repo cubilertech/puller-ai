@@ -3,14 +3,13 @@ import { Box, Input, Typography } from "@mui/material";
 import { Paper } from "../../components/Paper";
 import { Button } from "../../components/Button";
 import { Icon } from "../../components/Icon";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { Loader } from "../../components/Loader";
 import Divider from "../../components/Divider/divider";
 import { palette } from "@/theme/Palette";
 import OptionsBar from "@/components/optionsBar/optionsBar";
 import { useRouter } from "next/navigation";
 import Tooltip from "@/components/Tooltip/tooltip";
-import { isClient } from "@/utils/constants";
 import { CustomInput } from "./input";
 
 interface PannelAreaProps {
@@ -229,35 +228,6 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                     }}
                   >
                     <CustomInput />
-                    {/* <Input
-                      multiline
-                      fullWidth
-                      disableUnderline
-                      autoFocus
-                      disabled={isLoading}
-                      placeholder="Type your data request (prompt) here..."
-                      value={inputValue}
-                      onChange={handleInputChange}
-                      sx={{
-                        boxSizing: "border-box",
-                        borderRadius: "8px",
-                        minHeight: "100%",
-                        alignItems: "flex-start",
-                        overflowY: "auto",
-                        padding: "0.5rem",
-                        "&::placeholder": {
-                          fontStyle: "italic",
-                          color: "#6a0505",
-                        },
-                      }}
-                      inputProps={{
-                        style: {
-                          fontSize: "16px",
-                          color: "#ffffff",
-                          fontStyle: "italic",
-                        },
-                      }}
-                    /> */}
                   </span>
                 </Paper>
               </Box>

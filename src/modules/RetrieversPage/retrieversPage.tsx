@@ -1,122 +1,13 @@
 import { PageHeader } from "@/components/PageHeader";
 import RetriverCard from "@/components/RetriverCard/retriverCard";
-import SimpleCard from "@/components/SimpleCard/simpleCard";
+import { RETRIEVER_DATA } from "@/utils/constants";
 import { Box } from "@mui/material";
-
-const data = [
-  {
-    icon: "snowflake",
-    status: "live",
-    title: "snowflake 1",
-    description:
-      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
-  },
-  {
-    icon: "snowflake",
-    status: "live",
-    title: "snowflake 3",
-    description:
-      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
-  },
-  {
-    icon: "segment",
-    status: "live",
-    title: "Segment",
-    description:
-      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
-  },
-  {
-    icon: "lytics",
-    status: "live",
-    title: "Lytics",
-    description:
-      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
-  },
-  {
-    icon: "dataRoom",
-    status: "live",
-    title: "Data room 1",
-    description:
-      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
-  },
-  {
-    icon: "snowflake",
-    status: "live",
-    title: "snowflake 2",
-    description:
-      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
-  },
-  {
-    icon: "dbtCore",
-    status: "live",
-    title: "dbt Core",
-    description:
-      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
-  },
-  {
-    icon: "sfCrm",
-    status: "issues",
-    title: "SF CRM",
-    description:
-      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
-  },
-  {
-    icon: "clReport",
-    status: "issues",
-    title: "Cl Report 23",
-    description:
-      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
-  },
-  {
-    icon: "nielsen",
-    status: "issues",
-    title: "Nielsen",
-    description:
-      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
-  },
-  {
-    icon: "googleAnalytics",
-    status: "issues",
-    title: "Google Analytics",
-    description:
-      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
-  },
-  {
-    icon: "clickstream",
-    status: "blocked",
-    title: "clickstream",
-    description:
-      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
-  },
-  {
-    icon: "clickstream",
-    status: "blocked",
-    title: "PowerBI Link",
-    description:
-      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
-  },
-  {
-    icon: "clickstream",
-    status: "needPermissions",
-    title: "IRI Panel",
-    description:
-      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
-  },
-  {
-    icon: "clickstream",
-    status: "needPermissions",
-    title: "Transact POS",
-    description:
-      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
-  },
-];
 
 const RetrieversPage = () => {
   return (
     <Box
       sx={{
         padding: "1.2rem 1rem",
-        pb: 0,
         display: "flex",
         flexDirection: "column",
         gap: "3rem",
@@ -124,6 +15,7 @@ const RetrieversPage = () => {
       }}
     >
       <PageHeader type="Retrivers" />
+      {/* Grid Layout */}
       <Box
         sx={{
           display: "grid",
@@ -134,15 +26,11 @@ const RetrieversPage = () => {
           height: "fit-content",
           gap: "1rem",
           justifyContent: "space-between",
-          overflowY: "scroll",
-          "&::-webkit-scrollbar": {
-            display: "none",
-          },
+          overflowY: "auto",
           scrollbarWidth: "none",
-          "-ms-overflow-style": "none",
         }}
       >
-        {data.map((card, i) => (
+        {RETRIEVER_DATA.map((card, i) => (
           <RetriverCard
             description={card.description}
             icon={

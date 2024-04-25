@@ -3,12 +3,11 @@ import { Button } from "@/components/Button";
 import { Icon } from "@/components/Icon";
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
-import UploadCard from "@/components/UploadCard/uploadCard";
+import UploadBox from "@/components/UplaodBox/uploadBox";
 import { Box, Divider, Input, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const data = [1, 2, 3];
 const UploadRetrieverPage = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
@@ -27,6 +26,8 @@ const UploadRetrieverPage = () => {
       }}
     >
       <PageHeader type="Custom Retrievers" />
+
+      {/* Main Container */}
       <Box
         sx={{
           overflowY: "auto",
@@ -46,6 +47,7 @@ const UploadRetrieverPage = () => {
           }}
           type="light-border"
         >
+          {/* Name Label & Input */}
           <Box
             display={"flex"}
             flexDirection={"column"}
@@ -65,6 +67,7 @@ const UploadRetrieverPage = () => {
             />
           </Box>
 
+          {/* Uplaod Area */}
           <Box
             onClick={() => setIsOpen(!isOpen)}
             sx={{
@@ -94,34 +97,11 @@ const UploadRetrieverPage = () => {
               }}
             />
           ) : (
-            <Box
-              display={"grid"}
-              gridTemplateColumns={"1fr 1fr 1fr"}
-              gap={"1.4rem"}
-              mb={"2rem"}
-            >
-              {data.map((item, index) => (
-                <Box
-                  display={"flex"}
-                  flexDirection={"column"}
-                  key={index}
-                  gap={"1rem"}
-                >
-                  <UploadCard />
-                  <Input
-                    disableUnderline
-                    placeholder="Add additional context here"
-                    sx={{
-                      border: "2px solid rgba(196, 196, 196, 0.6)",
-                      borderRadius: "8px",
-                      padding: "0.1rem 0.5rem",
-                    }}
-                  />
-                </Box>
-              ))}
-            </Box>
+            // Upload Cards & Inputs
+            <UploadBox />
           )}
 
+          {/* Back & Create Buttons */}
           <Box display={"flex"} justifyContent={"flex-end"} gap={"1rem"}>
             <Box width={242} height={44}>
               <Button

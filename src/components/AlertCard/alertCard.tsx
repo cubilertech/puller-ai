@@ -30,6 +30,7 @@ const AlertCard: FC<alertCardProps> = ({
   switch (type) {
     case "user":
       return (
+        // Card Container
         <Box
           display={"flex"}
           flexDirection={"column"}
@@ -41,6 +42,7 @@ const AlertCard: FC<alertCardProps> = ({
           className="alert-card"
         >
           <Divider sx={{ bgcolor: "rgba(71, 84, 103, 0.0)" }} />
+          {/* Layout Container for user notification */}
           <Box
             padding={"1rem"}
             display={"flex"}
@@ -64,6 +66,7 @@ const AlertCard: FC<alertCardProps> = ({
       );
     case "option":
       return (
+        // Card Container
         <Box
           display={"flex"}
           flexDirection={"column"}
@@ -75,6 +78,7 @@ const AlertCard: FC<alertCardProps> = ({
           className="alert-card"
         >
           <Divider sx={{ bgcolor: "rgb(62,64,71)" }} />
+          {/* Layout Container for option notification */}
           <Box
             padding={"1rem"}
             display={"flex"}

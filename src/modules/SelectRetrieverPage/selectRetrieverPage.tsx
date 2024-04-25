@@ -15,6 +15,8 @@ const SelectRetrieverPage = () => {
       }}
     >
       <PageHeader type="Select Retriver" />
+
+      {/* Grid Layout */}
       <Box
         sx={{
           display: "grid",
@@ -25,17 +27,14 @@ const SelectRetrieverPage = () => {
           height: "fit-content",
           gap: "1rem",
           justifyContent: "space-between",
-          overflowY: "scroll",
-          "&::-webkit-scrollbar": {
-            display: "none",
-          },
+          overflowY: "auto",
           scrollbarWidth: "none",
-          "-ms-overflow-style": "none",
         }}
       >
         {Selcect_RetrieverData.map((card, i) => (
           <RetriverCard
             description={card.description}
+            // icon={card.icon && card.icon}
             icon={
               card.icon === "snowflake"
                 ? "snowflake"

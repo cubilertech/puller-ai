@@ -15,12 +15,14 @@ const SimpleCard: FC<SimpleCardProps> = ({ title, discription, isFor }) => {
       type="light-border"
       sx={{
         padding: "20px",
-        maxWidth: isFor === "Results" ? "100%" : "278px",
+        maxWidth: "100%",
         height: "212px",
         cursor: "pointer",
+        justifyContent: "center",
       }}
     >
       <Box sx={{ width: "100%", height: "100%", overflow: "hidden" }}>
+        {/* Card Header & Icon */}
         <Box
           sx={{
             display: "flex",
@@ -32,6 +34,7 @@ const SimpleCard: FC<SimpleCardProps> = ({ title, discription, isFor }) => {
           <Icon icon="outlinedBookMark" width={24} height={24} />
         </Box>
 
+        {/* Card Description */}
         <Typography
           variant="text-xs"
           sx={{

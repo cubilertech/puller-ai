@@ -188,7 +188,7 @@ export const SingleCardDomyData = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet justo ipsum. Sed accumsan quam vitae est varius fringilla. Pellentesque placerat vestibulum lorem sed porta. Nullam mattis tristique iaculis. Nullam pulvinar sit amet risus pretium auctor. Etiam quis massa pulvinar, aliquam quam vitae, tempus sem. Donec elementum pulvinar odio.",
   },
 ];
-export const isClient = typeof window !== 'undefined';
+export const isClient = typeof window !== "undefined";
 
 export const Selcect_RetrieverData = [
   {
@@ -297,3 +297,271 @@ export const Selcect_RetrieverData = [
       "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
   },
 ];
+
+export const ALERT_DATA = [
+  {
+    image: "/Images/avatar-1.svg",
+    name: "James Eusobio",
+    product: "Blue Jeans Polos Slim Fit ",
+    price: 199.0,
+    time: "23 mins ago",
+    type: "user",
+  },
+  {
+    image: "/Images/avatar-2.svg",
+    name: "Darcel Ballentine",
+    product: "Pattern Top with Knot ",
+    price: 210.98,
+    time: "30 mins ago",
+    type: "user",
+  },
+  {
+    image: "/Images/avatar-2.svg",
+    name: "Darcel Ballentine",
+    product: "Pattern Top with Knot ",
+    price: 210.98,
+    time: "30 mins ago",
+    type: "user",
+  },
+  {
+    image: "/Images/avatar-2.svg",
+    name: "Darcel Ballentine",
+    product: "Pattern Top with Knot ",
+    price: 210.98,
+    time: "30 mins ago",
+    type: "user",
+  },
+  {
+    image: "/Images/avatar-2.svg",
+    name: "Darcel Ballentine",
+    product: "Pattern Top with Knot ",
+    price: 210.98,
+    time: "30 mins ago",
+    type: "user",
+  },
+  {
+    image: "/Images/avatar-2.svg",
+    name: "Darcel Ballentine",
+    product: "Pattern Top with Knot ",
+    price: 210.98,
+    time: "30 mins ago",
+    type: "user",
+  },
+  {
+    image: "/Images/avatar-2.svg",
+    product: "Pattern Top with Knot ",
+    name: "Darcel Ballentine",
+    price: 210.98,
+    time: "30 mins ago",
+    type: "user",
+  },
+  {
+    image: "/Images/avatar-2.svg",
+    product: "Pattern Top with Knot ",
+    name: "Darcel Ballentine",
+    price: 210.98,
+    time: "30 mins ago",
+    type: "user",
+  },
+  {
+    image: "/Images/avatar-3.svg",
+    description: "Personalize your comunication with Customer Segmentation",
+    time: "April 25",
+  },
+];
+
+export const RETRIEVER_DATA = [
+  {
+    icon: "snowflake",
+    status: "live",
+    title: "snowflake 1",
+    description:
+      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+  },
+  {
+    icon: "snowflake",
+    status: "live",
+    title: "snowflake 3",
+    description:
+      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+  },
+  {
+    icon: "segment",
+    status: "live",
+    title: "Segment",
+    description:
+      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+  },
+  {
+    icon: "lytics",
+    status: "live",
+    title: "Lytics",
+    description:
+      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+  },
+  {
+    icon: "dataRoom",
+    status: "live",
+    title: "Data room 1",
+    description:
+      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+  },
+  {
+    icon: "snowflake",
+    status: "live",
+    title: "snowflake 2",
+    description:
+      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+  },
+  {
+    icon: "dbtCore",
+    status: "live",
+    title: "dbt Core",
+    description:
+      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+  },
+  {
+    icon: "sfCrm",
+    status: "issues",
+    title: "SF CRM",
+    description:
+      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+  },
+  {
+    icon: "clReport",
+    status: "issues",
+    title: "Cl Report 23",
+    description:
+      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+  },
+  {
+    icon: "nielsen",
+    status: "issues",
+    title: "Nielsen",
+    description:
+      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+  },
+  {
+    icon: "googleAnalytics",
+    status: "issues",
+    title: "Google Analytics",
+    description:
+      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+  },
+  {
+    icon: "clickstream",
+    status: "blocked",
+    title: "clickstream",
+    description:
+      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+  },
+  {
+    icon: "clickstream",
+    status: "blocked",
+    title: "PowerBI Link",
+    description:
+      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+  },
+  {
+    icon: "clickstream",
+    status: "needPermissions",
+    title: "IRI Panel",
+    description:
+      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+  },
+  {
+    icon: "clickstream",
+    status: "needPermissions",
+    title: "Transact POS",
+    description:
+      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+  },
+];
+
+export const CONNECT_APP_DATA = [
+  {
+    image: "/Images/blank-square.svg",
+    name: "dbt Core",
+    isConnected: false,
+  },
+  {
+    image: "/Images/blank-square.svg",
+    name: "Amazon Redshift",
+    isConnected: false,
+  },
+  {
+    image: "/Images/blank-square.svg",
+    name: "Snowflake",
+    isConnected: true,
+  },
+  {
+    image: "/Images/blank-square.svg",
+    name: "Amazon Redshift",
+    isConnected: false,
+  },
+  {
+    image: "/Images/blank-square.svg",
+    name: "Amazon Redshift",
+    isConnected: false,
+  },
+  {
+    image: "/Images/blank-square.svg",
+    name: "Snowflake",
+    isConnected: true,
+  },
+  {
+    image: "/Images/blank-square.svg",
+    name: "Amazon Redshift",
+    isConnected: false,
+  },
+  {
+    image: "/Images/blank-square.svg",
+    name: "Amazon Redshift",
+    isConnected: false,
+  },
+  {
+    image: "/Images/blank-square.svg",
+    name: "Snowflake",
+    isConnected: true,
+  },
+  {
+    image: "/Images/blank-square.svg",
+    name: "Amazon Redshift",
+    isConnected: false,
+  },
+  {
+    image: "/Images/blank-square.svg",
+    name: "Snowflake",
+    isConnected: true,
+  },
+];
+
+export const TEMPLATE_PUBLIC_DATA = Array.from({ length: 10 }, (_, index) => ({
+  image: "/images/blank-square.svg",
+  heading: `Template ${index + 1}`,
+  subHeading: `Maker by User ${index + 1}`,
+  subHeading2: `Retrievers ${index + 1} bot will help to geth...`,
+}));
+
+export const TEMPLATE_PRIVATE_DATA = Array.from({ length: 10 }, (_, index) => ({
+  image: "/images/blank-square.svg",
+  heading: `Template 2 ${index + 1}`,
+  subHeading: `Maker by User 2${index + 1}`,
+  subHeading2: `Retrievers 2${index + 1} bot will help to geth...`,
+}));
+
+export const RESULTS_DATA = {
+  main_title: "Element X Performance by Store and SKU",
+  main_discription:
+    "Can I get data to understand how Flyease technology products have been performing this past year? I want to be able to pivot by SKU or by store, to understand transactional data by week.",
+  fileType: "CSV",
+  fileSize: "23 mb",
+  fileStructured: "Prototype",
+  fileTimestamps: "20 Feb, 2024",
+  fileCaveats: "Caveat by",
+  fileCaveatsURL: "",
+  sources: "From Passage",
+  title: "Key Observations",
+  discription:
+    "Overall, the incremental performance of SKUs introduced within the past year have added 23% lift in Flyease tech product SKU transactions (sales). This was largely driven by the FYT2 product. This represents the strongest launch of a new product with Flyease since inception, masked in part by the decline of several older SKUs. Seasonality mirrored historical performance.",
+};

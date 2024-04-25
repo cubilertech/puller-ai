@@ -7,6 +7,8 @@ import { useEffect, useState } from "react";
 const Page = () => {
   const [isLoading, setIsLoading] = useState(true);
 
+  // Display Loader on initial render
+
   const toggleStateWithTimeout = () => {
     setIsLoading(true); // Set state to true initially
 

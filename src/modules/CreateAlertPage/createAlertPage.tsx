@@ -19,6 +19,7 @@ const CreateAlertPage = () => {
     >
       <PageHeader type="Create Alert" />
 
+      {/* Input container */}
       <Box width={"100%"}>
         <Paper
           sx={{
@@ -38,7 +39,6 @@ const CreateAlertPage = () => {
                 padding: "0.5rem 1rem",
                 display: "flex",
                 maxHeight: "15rem",
-                margin: 0,
                 background: "transparent !important ",
                 border: "2px solid rgba(196, 196, 196, 0.6) !important",
                 borderRadius: "8px",
@@ -69,6 +69,8 @@ const CreateAlertPage = () => {
           </Box>
         </Paper>
       </Box>
+
+      {/* Create Alert Button */}
       <Box width={180} mt={"2rem"}>
         <Button
           variant="outlined"

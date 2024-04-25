@@ -12,6 +12,7 @@ interface LoaderComponentProps {
 const LoaderComponent: FC<LoaderComponentProps> = ({ type }) => {
   const [showLoader, setShowLoader] = useState(true);
 
+  // Delay for animation to get off
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowLoader(false);

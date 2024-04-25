@@ -21,3 +21,16 @@ export interface UserProps {
   name: string;
   avatar: string;
 }
+
+export interface ConnectItem {
+  image: string;
+  name: string;
+  isConnected: boolean;
+}
+
+export interface TemplateCardTypes {
+  image: string;
+  heading: string;
+  subHeading: string;
+  subHeading2: string;
+}
