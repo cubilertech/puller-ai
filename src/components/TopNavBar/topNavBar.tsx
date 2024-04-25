@@ -16,7 +16,9 @@ const TopNavBar = () => {
   const isBack =
     routeParts.includes("preview") ||
     routeParts.includes("connect") ||
-    routeParts.includes("recent");
+    routeParts.includes("recent") ||
+    routeParts.includes("retriever-detail");
+
   return (
     <>
       <Box

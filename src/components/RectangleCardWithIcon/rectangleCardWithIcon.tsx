@@ -21,7 +21,8 @@ const RectangleCardWithIcon: FC<RectangleCardProps> = ({
       <Paper
         type="light-border"
         sx={{
-          width: { xl: "350px", lg: "280px" },
+          // width: { xl: "350px", lg: "280px" },
+          width: "100%",
           height: { xl: "92px", lg: "92px" },
           display: "flex",
           justifyContent: "flex-start",
