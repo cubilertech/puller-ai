@@ -1,14 +1,15 @@
-import { Input, TextField } from "@mui/material";
-import { FC, useState } from "react";
+import { FC } from "react";
 
 interface CustomInputProps {
   onChange?: (event: any) => void;
+  disabled: boolean;
 }
 
-export const CustomInput: FC<CustomInputProps> = ({ onChange }) => {
+export const CustomInput: FC<CustomInputProps> = ({ onChange, disabled }) => {
   return (
     <textarea
       autoFocus
+      disabled={disabled}
       placeholder="Type your data request (prompt) here..."
       style={{
         boxSizing: "border-box",

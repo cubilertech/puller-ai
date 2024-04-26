@@ -48,7 +48,10 @@ const InputAreaComponent: FC<InputAreaComponentPorps> = ({
                 overflow: "auto",
               }}
             >
-              <CustomInput onChange={(event) => onChangeInput(event)} />
+              <CustomInput
+                disabled={isLoading}
+                onChange={(event) => onChangeInput(event)}
+              />
             </span>
           </Paper>
         </Box>
