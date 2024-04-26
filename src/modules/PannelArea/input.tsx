@@ -1,10 +1,13 @@
 import { Input, TextField } from "@mui/material";
+import { FC, useState } from "react";
 
-export const CustomInput = () => {
+interface CustomInputProps {
+  onChange?: () => void;
+}
+
+export const CustomInput: FC<CustomInputProps> = ({ onChange }) => {
   return (
     <textarea
-      //   disableUnderline
-
       autoFocus
       placeholder="Type your data request (prompt) here..."
       style={{
@@ -21,6 +24,7 @@ export const CustomInput = () => {
         background: "transparent",
         outline: 0,
       }}
+      onChange={onChange}
     />
   );
 };

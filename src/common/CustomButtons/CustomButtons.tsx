@@ -81,6 +81,7 @@ const CustomButton: FC<buttonProps> = ({
                 // backgroundColor: "rgb(95,112,125)",
                 background:
                   "linear-gradient(54deg, rgba(108,33,177,1) 16%, rgba(26,138,169,1) 100%)",
+                borderRadius: "50px",
               },
             }}
             onClick={onClick}

@@ -48,7 +48,10 @@ export const MuiButton = (theme: Theme) => {
           "&:hover": {
             border: "none",
             // backgroundColor: "rgb(95,112,125)",
-            background: "#8f9b9e",
+            // background: "#8f9b9e",
+            background:
+              "linear-gradient(54deg, rgba(108,33,177,1) 16%, rgba(26,138,169,1) 100%)",
+            borderRadius: "8px",
           },
         },
         text: {

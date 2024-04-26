@@ -8,6 +8,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import "./optionsBar.css";
 import DropdownSelect from "../DropdownSelect/dropdownSelect";
+import { usePathname } from "next/navigation";
 
 interface optionbarProps {
   variant:
@@ -23,7 +24,7 @@ interface optionbarProps {
 const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
   const [isShown, setIsShown] = useState(true);
 
-  const data = [1, 2, 3, 4];
+  const data = ["HELP_TICKET_CREATE", "SIGN_UP", "TXN_EVENT", "SITE_LOGIN"];
 
   if (variant === "input")
     return (
@@ -146,7 +147,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
             display: "flex",
             flexDirection: "column",
             padding: "1rem",
-            minHeight: "calc(100vh - 22vh)",
+            minHeight: "calc(100vh - 27vh)",
             justifyContent: "space-between",
           }}
         >
@@ -158,8 +159,21 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
                 gap: "1rem",
               }}
             >
-              <Typography color={"#fff"} variant="text-md-regular">
-                Data Type
+              <Typography
+                color={"#fff"}
+                variant="text-md-regular"
+                sx={{ display: "flex", justifyContent: "space-between" }}
+              >
+                Data Type{" "}
+                <Box onClick={close}>
+                  <CloseIcon
+                    sx={{
+                      ":hover": {
+                        cursor: "pointer",
+                      },
+                    }}
+                  />
+                </Box>
               </Typography>
               <Typography color={"#fff"} variant="text-sm-regular">
                 “TXN_SZNAL” table . This query uses a table
@@ -185,7 +199,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
                       borderRadius: "8px",
                     }}
                   >
-                    <Typography variant="text-md-regular">Data</Typography>
+                    <Typography variant="text-md-regular">{item}</Typography>
                     <Checkbox
                       icon={
                         variant === "round-checkbox" ? (
@@ -212,8 +226,21 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
                 gap: "1rem",
               }}
             >
-              <Typography color={"#fff"} variant="text-md-regular">
-                Data Type
+              <Typography
+                color={"#fff"}
+                variant="text-md-regular"
+                sx={{ display: "flex", justifyContent: "space-between" }}
+              >
+                Data Type{" "}
+                <Box onClick={close}>
+                  <CloseIcon
+                    sx={{
+                      ":hover": {
+                        cursor: "pointer",
+                      },
+                    }}
+                  />
+                </Box>
               </Typography>
               <Typography color={"#fff"} variant="text-sm-regular">
                 “TXN_SZNAL” table . This query uses a table
@@ -232,8 +259,21 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
                 gap: "1rem",
               }}
             >
-              <Typography color={"#fff"} variant="text-md-regular">
-                Data Type
+              <Typography
+                color={"#fff"}
+                variant="text-md-regular"
+                sx={{ display: "flex", justifyContent: "space-between" }}
+              >
+                Data Type{" "}
+                <Box onClick={close}>
+                  <CloseIcon
+                    sx={{
+                      ":hover": {
+                        cursor: "pointer",
+                      },
+                    }}
+                  />
+                </Box>
               </Typography>
               <Typography color={"#fff"} variant="text-sm-regular">
                 “TXN_SZNAL” table . This query uses a table

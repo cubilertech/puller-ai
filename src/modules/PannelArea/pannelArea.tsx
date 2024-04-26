@@ -8,7 +8,7 @@ import { Loader } from "../../components/Loader";
 import Divider from "../../components/Divider/divider";
 import { palette } from "@/theme/Palette";
 import OptionsBar from "@/components/optionsBar/optionsBar";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Tooltip from "@/components/Tooltip/tooltip";
 import { CustomInput } from "./input";
 import CustomLink from "@/components/Link/link";
@@ -26,6 +26,10 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
   const [isLoading, setisLoading] = useState(false);
   const [isOpenSelectBar, setisOpenSelectBar] = useState(false);
 
+  const routename = usePathname();
+  const routeParts = routename.replace(/^\//, "").split("/");
+  const isValidate = routeParts.includes("validate");
+
   const handleAvailable = () => {
     setisLoading(true);
     setTimeout(() => {
@@ -38,6 +42,11 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
   };
   const handleCloseSelectBar = () => {
     setisOpenSelectBar(false);
+  };
+  const [isTextareaFilled, setIsTextareaFilled] = useState(false);
+
+  const handleTextareaChange = (event: any) => {
+    setIsTextareaFilled(event.target.value.trim().length > 0);
   };
 
   return (
@@ -70,6 +79,8 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
               width: isOpenSelectBar
                 ? { lg: "76%", md: "70%", xs: "60%" }
                 : "100%",
+              height: "100%",
+              justifyContent: "flex-end",
             }}
           >
             <Paper
@@ -77,11 +88,10 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
               sx={{
                 border: "1px solid rgb(52,51,65)",
                 height: content ? "fit-content" : "100%",
+                // height: "100%",
                 margin: 0,
                 padding: content ? 1 : 0,
-                // width: isOpenSelectBar
-                //   ? { lg: "76%", md: "70%", xs: "60%" }
-                //   : "100%",
+                width: "100%",
               }}
             >
               {isLoading ? (
@@ -157,7 +167,6 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                         by week and by Store ID. It only covers product SKUs
                         that include Flyease technology, which is determined
                         from INT DB for Product ID values 1234 and 5678
-                        {/* {content.response} */}
                       </Typography>
                     </Box>
 
@@ -190,7 +199,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                             whiteSpace: "nowrap",
                             overflow: "hidden",
                             textOverflow: "ellipsis",
-                            maxWidth: "100%", // You can adjust the width as needed
+                            maxWidth: "100%",
                           }}
                         >
                           {content.original}
@@ -203,7 +212,6 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                             height: "38px !important",
                           }}
                           onClick={handleUpdate}
-                          // onClick={handleOpenSelectBar}
                           label="Run Query"
                           variant="contained"
                         />
@@ -215,35 +223,38 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                 ""
               )}
             </Paper>
-            <Paper
-              type="dark-border"
-              sx={{
-                // width: isOpenSelectBar
-                //   ? { lg: "76%", md: "70%", xs: "60%" }
-                //   : "100%",
-                borderRadius: "8px",
-                padding: "0.6rem",
-                margin: 0,
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Typography variant="text-sm" color={palette.gray[300]}>
-                This query is estimated to take X minutes and will be
-                approximatley X size.{" "}
-                <span style={{ textDecoration: "underline" }}>
-                  <CustomLink color="#90919b" variant="simple" href="#">
-                    Need to optimize?
-                  </CustomLink>
-                </span>
-              </Typography>
-            </Paper>
+            {isValidate && (
+              <Paper
+                type="dark-border"
+                sx={{
+                  // width: isOpenSelectBar
+                  //   ? { lg: "76%", md: "70%", xs: "60%" }
+                  //   : "100%",
+                  borderRadius: "8px",
+                  padding: "0.6rem",
+                  margin: 0,
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Typography variant="text-sm" color={palette.gray[300]}>
+                  This query is estimated to take X minutes and will be
+                  approximatley X size.{" "}
+                  <span style={{ textDecoration: "underline" }}>
+                    <CustomLink color="#90919b" variant="simple" href="#">
+                      Need to optimize?
+                    </CustomLink>
+                  </span>
+                </Typography>
+              </Paper>
+            )}
           </Box>
+
           {isOpenSelectBar && (
             <OptionsBar
               close={handleCloseSelectBar}
-              variant="input"
+              variant="square-checkbox"
               handleUpdate={handleUpdate ? () => handleUpdate() : undefined}
             />
           )}
@@ -280,7 +291,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                       overflow: "auto",
                     }}
                   >
-                    <CustomInput />
+                    <CustomInput onChange={() => handleTextareaChange(event)} />
                   </span>
                 </Paper>
               </Box>
@@ -290,19 +301,57 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                   justifyContent: "space-between",
                 }}
               >
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "1rem",
-                    ml: "4px",
-                  }}
-                >
+                {!isTextareaFilled || isLoading ? (
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "1rem",
+                      ml: "4px",
+                    }}
+                  >
+                    <Box width={163}>
+                      <Button
+                        size="small"
+                        variant="outlined"
+                        label="Prompt"
+                        disabled={isLoading}
+                        fullWidth
+                        endIcon={
+                          <Icon
+                            icon="plus"
+                            height={2}
+                            width={8}
+                            disabled={isLoading}
+                          />
+                        }
+                      />
+                    </Box>
+
+                    <Box width={82}>
+                      <Button
+                        fullWidth
+                        size="small"
+                        disabled={isLoading}
+                        variant="outlined"
+                        label="Source"
+                        endIcon={
+                          <Icon
+                            icon="minus"
+                            height={2}
+                            width={8}
+                            disabled={isLoading}
+                          />
+                        }
+                      />
+                    </Box>
+                  </Box>
+                ) : (
                   <Box width={163}>
                     <Button
                       size="small"
                       variant="outlined"
-                      label="Prompt"
+                      label="Manage Sources"
                       disabled={isLoading}
                       fullWidth
                       endIcon={
@@ -315,26 +364,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                       }
                     />
                   </Box>
-
-                  <Box width={82}>
-                    <Button
-                      fullWidth
-                      size="small"
-                      disabled={isLoading}
-                      variant="outlined"
-                      label="Source"
-                      endIcon={
-                        <Icon
-                          icon="minus"
-                          height={2}
-                          width={8}
-                          disabled={isLoading}
-                        />
-                      }
-                    />
-                  </Box>
-                </Box>
-
+                )}
                 <Box>
                   {isLoading ? (
                     ""

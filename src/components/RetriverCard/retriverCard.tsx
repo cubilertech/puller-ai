@@ -4,6 +4,7 @@ import { Paper } from "../Paper";
 import { Icon } from "../Icon";
 import { FC } from "react";
 import { useRouter } from "next/navigation";
+import "./retrieverCard.css";
 
 interface retriverCardProps {
   status: "live" | "blocked" | "needPermissions" | "issues";
@@ -34,15 +35,25 @@ const RetriverCard: FC<retriverCardProps> = ({
       sx={{
         ":hover": {
           cursor: "pointer",
+          backgroundColor: "rgb(47,61,92)",
         },
       }}
     >
       <Paper
         type="light-border"
         sx={{
+          backgroundColor: "transparent",
           padding: "1.5rem",
           width: "100%",
           textAlign: "center",
+          ":hover": {
+            cursor: "pointer",
+            background:
+              "linear-gradient(142.96deg, rgba(93, 146, 254, 0.148) -3.54%, rgba(93, 146, 254, 0.168) 95.15%)",
+            "& .child": {
+              background: "rgba(93, 146, 254, 0.3)",
+            },
+          },
         }}
         onClick={() => router.push("/alerts/retriever-detail")}
       >
@@ -54,12 +65,31 @@ const RetriverCard: FC<retriverCardProps> = ({
           alignItems={"center"}
         >
           {/* Icon Box */}
-          <Box position={"relative"}>
-            <Icon icon={icon} width={64} height={64} />
-            <Box position={"absolute"} top={"-3px"} right={"-3px"}>
-              <Icon icon={status} width={12} height={12} />
+          <div className="retriever-card-container">
+            <Box position={"relative"}>
+              <Box
+                sx={{
+                  background: "rgb(112,112,129)",
+                  width: 60,
+                  height: 60,
+                  borderRadius: "8px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  pointerEvents: "none",
+                  ":hover": {
+                    background: "rgba(93, 146, 254, 0.3)",
+                  },
+                }}
+                className="child"
+              >
+                <Icon icon={icon} height={30} width={30} />
+              </Box>
+              <Box position={"absolute"} top={"-3px"} right={"-3px"}>
+                <Icon icon={status} width={12} height={12} />
+              </Box>
             </Box>
-          </Box>
+          </div>
 
           {/* Title & description */}
           <Typography variant="text-md-semibold">
