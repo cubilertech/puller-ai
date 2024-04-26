@@ -1,4 +1,4 @@
-import { Box, Button as MuiButton, SxProps } from "@mui/material";
+import { Button as MuiButton, SxProps } from "@mui/material";
 import { FC, ReactNode } from "react";
 import "./Button.css";
 

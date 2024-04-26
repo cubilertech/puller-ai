@@ -32,9 +32,12 @@ export const MuiButton = (theme: Theme) => {
           "&:hover": {
             color: palette.base.white,
             boxShadow: "none",
-            background: "rgba(105,65,198,255)",
+            background:
+              "linear-gradient(54deg, rgba(108,33,177,1) 16%, rgba(26,138,169,1) 100%)",
+            borderRadius: "8px",
           },
         },
+
         outlined: {
           color: palette.base.white,
           borderRadius: "8px",

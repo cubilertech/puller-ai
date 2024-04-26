@@ -5,18 +5,20 @@ interface CustomLinkProps {
   href: string;
   children: ReactNode;
   variant?: "border" | "simple";
+  color?: string;
 }
 
 const CustomLink: FC<CustomLinkProps> = ({
   href,
   children,
   variant = "simple",
+  color = "#54A6FF",
   ...props
 }) => {
   switch (variant) {
     case "simple":
       return (
-        <Link href={href} {...props} style={{ color: "#54A6FF" }}>
+        <Link href={href} {...props} style={{ color: color }}>
           {children}
         </Link>
       );

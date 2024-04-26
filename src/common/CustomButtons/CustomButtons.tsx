@@ -76,8 +76,11 @@ const CustomButton: FC<buttonProps> = ({
               height: 40,
               py: 2,
               px: 4,
+              transition: "background 3.3s ease",
               ":hover": {
-                backgroundColor: "rgb(95,112,125)",
+                // backgroundColor: "rgb(95,112,125)",
+                background:
+                  "linear-gradient(54deg, rgba(108,33,177,1) 16%, rgba(26,138,169,1) 100%)",
               },
             }}
             onClick={onClick}

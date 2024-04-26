@@ -97,7 +97,72 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
           </Typography>
           <CustomLink href="/request/recent">
             <Box width={242}>
-              <Button variant="outlined" fullWidth label="Request History" />
+              {/* <Button
+                variant="text"
+                fullWidth
+                label="Request History"
+                sx={{
+                  "@keyframes exitGradient": {
+                    "0%": {
+                      background:
+                        "linear-gradient(54deg, rgba(108,33,177,1) 16%, rgba(26,138,169,1) 100%)",
+                    },
+                    "100%": {
+                      background:
+                        "linear-gradient(to top left, rgba(108,33,177,1), transparent)",
+                    },
+                  },
+                  color: "#5d92fe",
+                  border: "1px solid #5d92fe",
+                  transition: "background-color 0.3s ease",
+                  borderRadius: "8px",
+                  "&:hover": {
+                    color: palette.base.white,
+                    background: "rgba(105,65,198,255)",
+                    borderRadius: "8px",
+                  },
+                  "&:hover, &:focus": {
+                    border: "1px solid transparent",
+                    borderRadius: "8px",
+                  },
+                  "&:not(:hover)": {
+                    animation: "exitGradient 0.3s ease ",
+                  },
+                }}
+              /> */}
+              <Button
+                variant="text"
+                fullWidth
+                label="Request History"
+                sx={{
+                  "@keyframes exitGradient": {
+                    "0%": {
+                      background:
+                        "linear-gradient(126deg, rgba(108,33,177,1) 16%, rgba(26,138,169,1) 100%)",
+                    },
+                    "100%": {
+                      background:
+                        "linear-gradient(to top left, rgba(108,33,177,1), transparent)",
+                    },
+                  },
+                  color: "#5d92fe",
+                  border: "1px solid #5d92fe",
+                  transition: "background-color 0.3s ease",
+                  borderRadius: "8px",
+                  "&:hover": {
+                    color: palette.base.white,
+                    background: "rgba(105,65,198,255)",
+                    borderRadius: "8px",
+                  },
+                  "&:hover, &:focus": {
+                    border: "1px solid transparent",
+                    borderRadius: "8px",
+                  },
+                  "&:not(:hover)": {
+                    animation: "exitGradient 0.3s ease ",
+                  },
+                }}
+              />
             </Box>
           </CustomLink>
         </Box>
