@@ -1,6 +1,7 @@
 import { Box, Typography } from "@mui/material";
-import { FC, useState } from "react";
+import { FC } from "react";
 import Input from "../Input/input";
+import { ACTIVE_TYPES } from "@/utils/constants";
 
 interface TemplateTopbarProps {
   isActive: string;
@@ -24,7 +25,7 @@ const TemplateTopbar: FC<TemplateTopbarProps> = ({ isActive, setIsActive }) => {
         }}
       >
         <Box
-          onClick={() => setIsActive("public")}
+          onClick={() => setIsActive(ACTIVE_TYPES.PUBLIC)}
           sx={{
             borderBottom:
               isActive === "public"
@@ -45,7 +46,7 @@ const TemplateTopbar: FC<TemplateTopbarProps> = ({ isActive, setIsActive }) => {
         </Box>
 
         <Box
-          onClick={() => setIsActive("private")}
+          onClick={() => setIsActive(ACTIVE_TYPES.PRIVATE)}
           sx={{
             borderBottom:
               isActive === "private"

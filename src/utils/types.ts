@@ -1,7 +1,12 @@
-import { userAgent } from "next/server";
-import { PagesType, icons } from "./constants";
+import { ACTIVE_TYPES, icons } from "./constants";
 
 export type IconTypes = keyof typeof icons;
+export interface ActiveTypeProps {
+  ALL: "all";
+  UNREAD: "unread";
+  PUBLIC: "public";
+  PRIVATE: "private";
+}
 
 export interface CardData {
   main_title: string;

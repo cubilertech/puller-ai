@@ -5,9 +5,10 @@ import { Box } from "@mui/material";
 import React, { useState } from "react";
 import TemplateTopbar from "@/components/TemplateTopbar/templateTopbar";
 import TemplateCardList from "@/components/TemplateCardList/templateCardList";
+import { ACTIVE_TYPES } from "@/utils/constants";
 
 const TemplatePage = () => {
-  const [isActive, setIsActive] = useState("public");
+  const [isActive, setIsActive] = useState(ACTIVE_TYPES.PUBLIC);
 
   return (
     <Box

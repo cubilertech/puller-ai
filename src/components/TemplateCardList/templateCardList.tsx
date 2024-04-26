@@ -1,10 +1,14 @@
-import { TEMPLATE_PRIVATE_DATA, TEMPLATE_PUBLIC_DATA } from "@/utils/constants";
+import {
+  ACTIVE_TYPES,
+  TEMPLATE_PRIVATE_DATA,
+  TEMPLATE_PUBLIC_DATA,
+} from "@/utils/constants";
 import { Box } from "@mui/material";
 import TemplateCard from "../TemplateCard/templateCard";
 import { FC } from "react";
 
 interface TemplateCardListProps {
-  isActive: "private" | "public";
+  isActive: string;
 }
 
 const TemplateCardList: FC<TemplateCardListProps> = ({ isActive }) => {
@@ -16,7 +20,7 @@ const TemplateCardList: FC<TemplateCardListProps> = ({ isActive }) => {
         scrollbarWidth: "none",
       }}
     >
-      {(isActive === "private"
+      {(isActive === ACTIVE_TYPES.PRIVATE
         ? TEMPLATE_PRIVATE_DATA
         : TEMPLATE_PUBLIC_DATA
       ).map((card, index) => (

@@ -369,6 +369,45 @@ export const ALERT_DATA = [
     time: "April 25",
   },
 ];
+export const UNREAD_ALERT_DATA = [
+  {
+    image: "/Images/avatar-2.svg",
+    name: "Darcel Ballentine",
+    product: "Pattern Top with Knot ",
+    price: 210.98,
+    time: "30 mins ago",
+    type: "user",
+  },
+  {
+    image: "/Images/avatar-3.svg",
+    description: "Personalize your comunication with Customer Segmentation",
+    time: "April 25",
+  },
+  {
+    image: "/Images/avatar-2.svg",
+    name: "Darcel Ballentine",
+    product: "Pattern Top with Knot ",
+    price: 210.98,
+    time: "30 mins ago",
+    type: "user",
+  },
+  {
+    image: "/Images/avatar-2.svg",
+    name: "Darcel Ballentine",
+    product: "Pattern Top with Knot ",
+    price: 210.98,
+    time: "30 mins ago",
+    type: "user",
+  },
+  {
+    image: "/Images/avatar-2.svg",
+    product: "Pattern Top with Knot ",
+    name: "Darcel Ballentine",
+    price: 210.98,
+    time: "30 mins ago",
+    type: "user",
+  },
+];
 
 export const RETRIEVER_DATA = [
   {
@@ -564,4 +603,10 @@ export const RESULTS_DATA = {
   title: "Key Observations",
   discription:
     "Overall, the incremental performance of SKUs introduced within the past year have added 23% lift in Flyease tech product SKU transactions (sales). This was largely driven by the FYT2 product. This represents the strongest launch of a new product with Flyease since inception, masked in part by the decline of several older SKUs. Seasonality mirrored historical performance.",
+};
+export const ACTIVE_TYPES = {
+  ALL: "all",
+  UNREAD: "unread",
+  PUBLIC: "public",
+  PRIVATE: "private",
 };

@@ -3,12 +3,15 @@ import CustomButton from "@/common/CustomButtons/CustomButtons";
 import AlertCard from "@/components/AlertCard/alertCard";
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
-import { ALERT_DATA } from "@/utils/constants";
+import { ACTIVE_TYPES, ALERT_DATA, UNREAD_ALERT_DATA } from "@/utils/constants";
 import { Box, Typography } from "@mui/material";
 import { useState } from "react";
 
 const AlertsPage = () => {
-  const [isActive, setIsActive] = useState("all");
+  const [isActive, setIsActive] = useState(ACTIVE_TYPES.ALL);
+
+  const notificationType =
+    isActive === ACTIVE_TYPES.UNREAD ? UNREAD_ALERT_DATA : ALERT_DATA;
   return (
     <Box
       sx={{
@@ -48,11 +51,13 @@ const AlertsPage = () => {
         >
           {/* Select All */}
           <Box
-            onClick={() => setIsActive("all")}
+            onClick={() => setIsActive(ACTIVE_TYPES.ALL)}
             sx={{
               padding: " 0 1rem",
               borderBottom:
-                isActive === "all" ? "2px solid rgb(252,252,253)" : "",
+                isActive === ACTIVE_TYPES.ALL
+                  ? "2px solid rgb(252,252,253)"
+                  : "",
               ":hover": {
                 cursor: "pointer",
               },
@@ -74,10 +79,12 @@ const AlertsPage = () => {
 
           {/* Select Unread */}
           <Box
-            onClick={() => setIsActive("unread")}
+            onClick={() => setIsActive(ACTIVE_TYPES.UNREAD)}
             sx={{
               borderBottom:
-                isActive === "unread" ? "2px solid rgb(252,252,253)" : "",
+                isActive === ACTIVE_TYPES.UNREAD
+                  ? "2px solid rgb(252,252,253)"
+                  : "",
               ":hover": {
                 cursor: "pointer",
               },
@@ -107,7 +114,7 @@ const AlertsPage = () => {
             scrollbarWidth: "none",
           }}
         >
-          {ALERT_DATA.map((notification, index) => (
+          {notificationType.map((notification, index) => (
             <AlertCard
               key={index}
               type={notification.type === "user" ? "user" : "option"}
@@ -115,7 +122,9 @@ const AlertsPage = () => {
               name={notification?.name}
               price={notification?.price}
               product={notification?.product}
-              description={notification?.description}
+              description={
+                notification.description && notification?.description
+              }
               time={notification.time}
               dataLength={ALERT_DATA.length}
               index={index}
