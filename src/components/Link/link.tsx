@@ -6,6 +6,7 @@ interface CustomLinkProps {
   children: ReactNode;
   variant?: "border" | "simple";
   style?: CSSProperties;
+  color?: string;
 }
 
 const CustomLink: FC<CustomLinkProps> = ({
@@ -13,12 +14,13 @@ const CustomLink: FC<CustomLinkProps> = ({
   children,
   variant = "simple",
   style,
+  color = "#54A6FF",
   ...props
 }) => {
   switch (variant) {
     case "simple":
       return (
-        <Link href={href} {...props} style={{ ...style, color: "#54A6FF" }}>
+        <Link href={href} {...props} style={{ ...style, color }}>
           {children}
         </Link>
       );
