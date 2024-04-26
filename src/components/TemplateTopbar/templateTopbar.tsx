@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { FC } from "react";
-import Input from "../Input/input";
 import { ACTIVE_TYPES } from "@/utils/constants";
+import { Input } from "../Input";
 
 interface TemplateTopbarProps {
   isActive: string;

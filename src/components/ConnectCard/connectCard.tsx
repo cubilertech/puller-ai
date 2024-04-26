@@ -1,8 +1,9 @@
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import React, { FC } from "react";
 import { Button } from "../Button";
 import { ConnectItem } from "@/utils/types";
+import { Divider } from "../Divider";
 
 interface ConnectCardProps {
   item: ConnectItem;
@@ -36,9 +37,10 @@ const ConnectCard: FC<ConnectCardProps> = ({ item }) => {
         </Box>
       </Box>
       <Divider
+        type="light"
         sx={{
           backgroundColor:
-            "linear-gradient(142.96deg, rgba(57, 57, 57, 0.6) -3.54%, rgba(97, 97, 97, 0.6) 99.99%)",
+            "linear-gradient(142.96deg, rgba(57, 57, 57, 0.6) -3.54%, rgba(97, 97, 97, 0.6) 99.99%) !important",
         }}
       />
     </>

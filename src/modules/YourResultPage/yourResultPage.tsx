@@ -1,9 +1,8 @@
 "use client";
-
-import NotesList from "@/components/NotesList/notesList";
+import { NotesList } from "@/components/NotesList";
 import { PageHeader } from "@/components/PageHeader";
 import { ResultCard } from "@/components/ResultCard";
-import { RESULTS_DATA, SingleCardDomyData } from "@/utils/constants";
+import { RESULTS_DATA } from "@/utils/data";
 import { Box } from "@mui/material";
 import { FC } from "react";
 

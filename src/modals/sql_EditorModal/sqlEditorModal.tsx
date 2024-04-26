@@ -30,25 +30,22 @@ const SQL_EditorModal: FC<SQL_EditorModalProps> = ({
   open,
   code,
 }) => {
-  // State to store the formatted code
   const [formattedCode, setFormattedCode] = useState<string>("");
 
-  // Function to format the code using Prettier
   useEffect(() => {
     setFormattedCode(format(code, { language: "mysql" }));
   }, []);
 
-  // Function to prepend line numbers to each line of the code
   const addLineNumbers = (code: string) => {
     return code.split("\n").map((line, index) => (
       <div key={index} style={{ display: "flex", alignItems: "center" }}>
         <div
           style={{
-            width: "30px", // Adjust as needed
-            marginRight: "10px", // Adjust as needed
+            width: "30px",
+            marginRight: "10px",
             textAlign: "right",
             paddingRight: "5px",
-            color: "#98A2B3", // Adjust as needed
+            color: "#98A2B3",
           }}
         >
           {index + 1}
@@ -58,7 +55,6 @@ const SQL_EditorModal: FC<SQL_EditorModalProps> = ({
     ));
   };
 
-  // Add line numbers to the formatted code
   const codeWithLineNumbers = addLineNumbers(formattedCode);
 
   return (

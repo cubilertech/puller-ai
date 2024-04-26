@@ -1,5 +1,4 @@
-import { Paper as MuiPaper } from "@mui/material";
-import { CSSProperties } from "@mui/styled-engine-sc";
+import { Paper as MuiPaper, SxProps } from "@mui/material";
 import { FC, ReactNode } from "react";
 
 interface PaperProps {
@@ -10,7 +9,7 @@ interface PaperProps {
     | "light-border-2"
     | "dark-border-2";
   children?: ReactNode;
-  sx?: CSSProperties;
+  sx?: SxProps;
   onClick?: () => void;
 }
 

@@ -1,6 +1,6 @@
 import { PageHeader } from "@/components/PageHeader";
-import RetriverCard from "@/components/RetriverCard/retriverCard";
-import { RETRIEVER_DATA } from "@/utils/constants";
+import { RetriverCard } from "@/components/RetriverCard";
+import { RETRIEVER_DATA } from "@/utils/data";
 import { Box } from "@mui/material";
 
 const RetrieversPage = () => {
@@ -33,40 +33,8 @@ const RetrieversPage = () => {
         {RETRIEVER_DATA.map((card, i) => (
           <RetriverCard
             description={card.description}
-            icon={
-              card.icon === "snowflake"
-                ? "snowflake"
-                : card.icon === "segment"
-                  ? "segment"
-                  : card.icon === "lytics"
-                    ? "lytics"
-                    : card.icon === "dataRoom"
-                      ? "dataRoom"
-                      : card.icon === "dbtCore"
-                        ? "dbtCore"
-                        : card.icon === "sfCrm"
-                          ? "sfCrm"
-                          : card.icon === "clReport"
-                            ? "clReport"
-                            : card.icon === "nielsen"
-                              ? "nielsen"
-                              : card.icon === "googleAnalytics"
-                                ? "googleAnalytics"
-                                : card.icon === "clickstream"
-                                  ? "clickstream"
-                                  : "snowflake"
-            }
-            status={
-              card.status === "live"
-                ? "live"
-                : card.status === "blocked"
-                  ? "blocked"
-                  : card.status === "issues"
-                    ? "issues"
-                    : card.status === "needPermissions"
-                      ? "needPermissions"
-                      : "issues"
-            }
+            icon={card.icon}
+            status={card.status}
             title={card.title}
             key={i}
           />

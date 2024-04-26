@@ -1,8 +1,7 @@
 import React, { ReactNode } from "react";
-import TopNavBar from "../../components/TopNavBar/topNavBar";
 import { SideNavbar } from "@/components/SideNavbar";
-
 import "./appLayout.css";
+import { TopNavBar } from "@/components/TopNavBar";
 
 const AppLayout = ({ children }: { children: ReactNode }) => {
   return (

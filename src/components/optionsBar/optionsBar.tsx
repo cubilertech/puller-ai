@@ -1,13 +1,13 @@
-"use client";
-import { Box, Checkbox, Divider, Input, Typography } from "@mui/material";
-import { FC, useState } from "react";
+import { Box, Checkbox, Input, Typography } from "@mui/material";
+import { FC } from "react";
 import { Paper } from "../Paper";
 import { Button } from "../Button";
 import { CircleOutlined } from "@mui/icons-material";
 import CloseIcon from "@mui/icons-material/Close";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import "./optionsBar.css";
-import DropdownSelect from "../DropdownSelect/dropdownSelect";
+import { Divider } from "../Divider";
+import { DropdownSelect } from "../DropdownSelect";
 
 interface optionbarProps {
   variant:
@@ -21,13 +21,11 @@ interface optionbarProps {
 }
 
 const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
-  const [isShown, setIsShown] = useState(true);
 
   const data = [1, 2, 3, 4];
 
   if (variant === "input")
     return (
-      isShown && (
         <Box
           sx={{
             width: { lg: "24%", md: "30%", sm: "40%" },
@@ -110,7 +108,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
             </Box>
 
             <Box>
-              <Divider />
+              <Divider type="light" />
               <Box
                 sx={{
                   display: "flex",
@@ -128,7 +126,6 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
             </Box>
           </Paper>
         </Box>
-      )
     );
   else
     return (
@@ -259,7 +256,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
           )}
 
           <Box>
-            <Divider />
+            <Divider type="light" />
             <Box
               sx={{
                 display: "flex",

@@ -1,5 +1,5 @@
 import { Box, Input } from "@mui/material";
-import UploadCard from "../UploadCard/uploadCard";
+import { UploadCard } from "../UploadCard";
 
 const data = [1, 2, 3];
 

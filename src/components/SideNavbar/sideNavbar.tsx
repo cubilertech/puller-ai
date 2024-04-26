@@ -9,16 +9,24 @@ import {
 } from "@mui/material";
 
 import MuiListItemButton from "@/theme/overrides/listItemButton";
-import Logo from "../logo/logo";
 import { Icon } from "../Icon";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { Logo } from "../logo";
+import { SideBar_Data } from "@/utils/data";
 
 const SideNavbar = () => {
+  const Route = useRouter();
   const pathname = usePathname();
 
   const path = pathname.split("/")[1];
   const drawerWidth = 240;
+  useEffect(() => {
+    if (pathname === "/") {
+      Route.push("/request");
+    }
+  }, []);
   return (
     <Box
       sx={{
@@ -65,45 +73,19 @@ const SideNavbar = () => {
 
             <Box>
               <List>
-                {[
-                  {
-                    name: "Request",
-                    img: <Icon width={18} height={18} icon="requestIcon" />,
-                    link: "/request",
-                  },
-                  {
-                    name: "Pulls",
-                    img: <Icon width={18} height={18} icon="pullsIcon" />,
-                    link: "/pulls",
-                  },
-                  {
-                    name: "Retrievers",
-                    img: <Icon width={18} height={18} icon="retrieversIcon" />,
-                    link: "/retrievers",
-                  },
-                  {
-                    name: "Alerts",
-                    img: <Icon width={18} height={18} icon="alertsIcon" />,
-                    link: "/alerts",
-                  },
-                  {
-                    name: "Advanced",
-                    img: <Icon width={18} height={18} icon="advancedIcon" />,
-                    link: "/advanced",
-                  },
-                ].map((text, index) => (
-                  <ListItem key={text.name}>
-                    <Link href={text.link} style={{ width: "100%" }}>
+                {SideBar_Data.map((item, index) => (
+                  <ListItem key={item.name}>
+                    <Link href={item.link} style={{ width: "100%" }}>
                       <MuiListItemButton
                         sx={{
                           display: "flex",
                           gap: "12px",
                           border:
-                            path === text.name
+                            path === item.name
                               ? "1px solid #8f8f94"
                               : "1px solid transparent",
                           background:
-                            path === text.name.toLowerCase()
+                            path === item.name.toLowerCase()
                               ? "rgb(118,119,124)"
                               : path === "" && index === 0
                                 ? "rgb(118,119,124)"
@@ -115,14 +97,14 @@ const SideNavbar = () => {
                             minWidth: 0,
                           }}
                         >
-                          {text.img}
+                          <Icon width={18} height={18} icon={item.icon} />
                         </ListItemIcon>
 
                         <ListItemText
                           sx={{
                             fontSize: "14px",
                           }}
-                          primary={text.name}
+                          primary={item.name}
                         />
                       </MuiListItemButton>
                     </Link>

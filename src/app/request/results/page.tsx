@@ -4,20 +4,15 @@ import AppLayout from "@/common/appLayout/appLayout";
 import { useEffect, useState } from "react";
 import LoaderComponent from "@/common/LoaderComponent/LoaderComponent";
 
-export default function YourResults() {
+function Page() {
   const [isLoading, setIsLoading] = useState(true);
 
-  // Display Loader on initail render
-  const toggleStateWithTimeout = () => {
-    setIsLoading(true); // Set state to true initially
+  useEffect(() => {
+    setIsLoading(true);
 
     setTimeout(() => {
-      setIsLoading(false); // Set state to false after 5 seconds
-    }, 4000); // 4000 milliseconds = 5 seconds
-  };
-
-  useEffect(() => {
-    toggleStateWithTimeout();
+      setIsLoading(false);
+    }, 4000);
   }, []);
   return (
     <AppLayout>
@@ -25,3 +20,5 @@ export default function YourResults() {
     </AppLayout>
   );
 }
+
+export default Page;

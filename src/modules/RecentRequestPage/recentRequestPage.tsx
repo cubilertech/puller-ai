@@ -1,6 +1,6 @@
 import { PageHeader } from "@/components/PageHeader";
-import SimpleCard from "@/components/SimpleCard/simpleCard";
-import { SingleCardDomyData } from "@/utils/constants";
+import { RequestsCard } from "@/components/RecentRequestes-Card";
+import { SingleCardDomyData } from "@/utils/data";
 import { Box } from "@mui/material";
 import { FC } from "react";
 
@@ -28,13 +28,14 @@ const RecentRequestPage: FC = () => {
             },
             gap: "15px",
             placeItems: "stretch",
+            overflow: "auto",
+            scrollbarWidth: "none",
           }}
         >
           {SingleCardDomyData.map((item, index) => (
             // <CustomLink href="/request/preview" key={index}>
-            <SimpleCard
+            <RequestsCard
               key={index}
-              isFor="Requests"
               title={item.title}
               discription={item.discription}
             />

@@ -1,16 +1,15 @@
 "use client";
-import { Box, Input, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { Paper } from "../../components/Paper";
 import { Button } from "../../components/Button";
-import { Icon } from "../../components/Icon";
 import { FC, useState } from "react";
 import { Loader } from "../../components/Loader";
 import Divider from "../../components/Divider/divider";
 import { palette } from "@/theme/Palette";
-import OptionsBar from "@/components/optionsBar/optionsBar";
 import { useRouter } from "next/navigation";
-import Tooltip from "@/components/Tooltip/tooltip";
-import { CustomInput } from "./input";
+import { CreateInputAreaComponent } from "@/components/inputArea";
+import { OptionsBar } from "@/components/optionsBar";
+import { Tooltip } from "@/components/Tooltip";
 
 interface PannelAreaProps {
   content?: {
@@ -198,108 +197,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
         {content ? (
           ""
         ) : (
-          <Paper type="light-border">
-            <Box
-              sx={{
-                padding: "8px",
-              }}
-            >
-              <Box
-                sx={{
-                  marginBottom: "0.5rem",
-                }}
-              >
-                <Paper
-                  type="dark-border"
-                  sx={{
-                    padding: "0.5rem ",
-                    margin: 0,
-                    minHeight: "5rem",
-                    display: "flex",
-                    maxHeight: "15rem",
-                    borderRadius: "8px",
-                  }}
-                >
-                  <span
-                    style={{
-                      display: "contents",
-                      maxHeight: "10rem",
-                      overflow: "auto",
-                    }}
-                  >
-                    <CustomInput />
-                  </span>
-                </Paper>
-              </Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "1rem",
-                    ml: "4px",
-                  }}
-                >
-                  <Box width={163}>
-                    <Button
-                      size="small"
-                      variant="outlined"
-                      label="Prompt"
-                      disabled={isLoading}
-                      fullWidth
-                      endIcon={
-                        <Icon
-                          icon="plus"
-                          height={2}
-                          width={8}
-                          disabled={isLoading}
-                        />
-                      }
-                    />
-                  </Box>
-
-                  <Box width={82}>
-                    <Button
-                      fullWidth
-                      size="small"
-                      disabled={isLoading}
-                      variant="outlined"
-                      label="Source"
-                      endIcon={
-                        <Icon
-                          icon="minus"
-                          height={2}
-                          width={8}
-                          disabled={isLoading}
-                        />
-                      }
-                    />
-                  </Box>
-                </Box>
-
-                <Box>
-                  {isLoading ? (
-                    ""
-                  ) : (
-                    <Box width={155} mr={"4px"}>
-                      <Button
-                        onClick={handleAvailable}
-                        fullWidth
-                        size="small"
-                        variant="contained"
-                        label="Validate"
-                      />
-                    </Box>
-                  )}
-                </Box>
-              </Box>
-            </Box>
-          </Paper>
+          <CreateInputAreaComponent handleValidate={handleAvailable} />
         )}
       </Box>
     </>

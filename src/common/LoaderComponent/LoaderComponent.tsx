@@ -3,7 +3,7 @@ import React, { FC, useState, useEffect } from "react";
 import { Loader } from "@/components/Loader";
 import { Paper } from "@/components/Paper";
 import { Box } from "@mui/material";
-import "./LoaderComponent.css"; // Import CSS file for animations
+import "./LoaderComponent.css";
 
 interface LoaderComponentProps {
   type: "Loading" | "Processing";
@@ -12,7 +12,6 @@ interface LoaderComponentProps {
 const LoaderComponent: FC<LoaderComponentProps> = ({ type }) => {
   const [showLoader, setShowLoader] = useState(true);
 
-  // Delay for animation to get off
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowLoader(false);

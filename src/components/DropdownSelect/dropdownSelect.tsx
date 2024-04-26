@@ -10,12 +10,10 @@ interface DropDownSelectProps {
 const DropdownSelect: FC<DropDownSelectProps> = ({ value, onChange }) => {
   const [isOpen, setIsOpen] = useState(false);
 
-  // Event handler to handle the opening of the Select
   const handleOpen = () => {
     setIsOpen(true);
   };
 
-  // Event handler to handle the closing of the Select
   const handleClose = () => {
     setIsOpen(false);
   };

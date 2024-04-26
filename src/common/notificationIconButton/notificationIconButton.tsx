@@ -7,8 +7,8 @@ import "./notificationIconButton.css";
 interface IconButtonProps {
   icon?: IconTypes;
   text?: string;
-  iconWidth?: number; // Explicit type for icon width
-  iconHeight?: number; // Explicit type for icon height
+  iconWidth?: number;
+  iconHeight?: number; 
   isNotice?: boolean;
 }
 

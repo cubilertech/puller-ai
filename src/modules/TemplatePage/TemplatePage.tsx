@@ -3,9 +3,9 @@ import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
 import { Box } from "@mui/material";
 import React, { useState } from "react";
-import TemplateTopbar from "@/components/TemplateTopbar/templateTopbar";
-import TemplateCardList from "@/components/TemplateCardList/templateCardList";
 import { ACTIVE_TYPES } from "@/utils/constants";
+import { TemplateCardList } from "@/components/TemplateCardList";
+import { TemplateTopbar } from "@/components/TemplateTopbar";
 
 const TemplatePage = () => {
   const [isActive, setIsActive] = useState(ACTIVE_TYPES.PUBLIC);

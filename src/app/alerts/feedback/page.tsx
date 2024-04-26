@@ -4,21 +4,15 @@ import AppLayout from "@/common/appLayout/appLayout";
 import FeedbackPage from "@/modules/FeedbackPage/feedbackPage";
 import { useEffect, useState } from "react";
 
-const Page = () => {
+function Page() {
   const [isLoading, setIsLoading] = useState(true);
 
-  // Display Loader on initial render
-
-  const toggleStateWithTimeout = () => {
-    setIsLoading(true); // Set state to true initially
+  useEffect(() => {
+    setIsLoading(true);
 
     setTimeout(() => {
-      setIsLoading(false); // Set state to false after 5 seconds
-    }, 4000); // 4000 milliseconds = 5 seconds
-  };
-
-  useEffect(() => {
-    toggleStateWithTimeout();
+      setIsLoading(false);
+    }, 4000);
   }, []);
   return (
     <AppLayout>
@@ -29,6 +23,6 @@ const Page = () => {
       )}
     </AppLayout>
   );
-};
+}
 
 export default Page;

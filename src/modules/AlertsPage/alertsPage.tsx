@@ -1,9 +1,10 @@
 "use client";
 import CustomButton from "@/common/CustomButtons/CustomButtons";
-import AlertCard from "@/components/AlertCard/alertCard";
+import { AlertCard } from "@/components/AlertCard";
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
-import { ACTIVE_TYPES, ALERT_DATA, UNREAD_ALERT_DATA } from "@/utils/constants";
+import { ACTIVE_TYPES } from "@/utils/constants";
+import { ALERT_DATA, UNREAD_ALERT_DATA } from "@/utils/data";
 import { Box, Typography } from "@mui/material";
 import { useState } from "react";
 

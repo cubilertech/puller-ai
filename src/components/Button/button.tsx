@@ -1,6 +1,6 @@
-import { Box, Button as MuiButton, SxProps } from "@mui/material";
+import { Button as MuiButton, SxProps } from "@mui/material";
 import { FC, ReactNode } from "react";
-import "./Button.css";
+import "./button.css";
 
 interface ButtonProps {
   size?: "small" | "medium" | "large";
@@ -29,16 +29,14 @@ const Button: FC<ButtonProps> = ({
   sx,
   ...props
 }) => {
+  const buttonClass =
+    variant === "outlined"
+      ? "btn-container"
+      : variant === "contained"
+        ? "contained-container"
+        : "";
   return (
-    <div
-      className={
-        variant === "outlined"
-          ? "btn-container"
-          : variant === "contained"
-            ? "contained-container"
-            : ""
-      }
-    >
+    <div className={buttonClass}>
       <MuiButton
         {...props}
         size={size}

@@ -1,8 +1,9 @@
 import { Button } from "@/components/Button";
+import { Divider } from "@/components/Divider";
 import { Icon } from "@/components/Icon";
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 
 const data = [1, 2, 3, 4];
@@ -70,7 +71,7 @@ const RetrieverDetailPage = () => {
           </Typography>
         </Box>
 
-        <Divider />
+        <Divider type="light" />
 
         <Box
           display={"grid"}

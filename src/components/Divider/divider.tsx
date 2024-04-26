@@ -1,9 +1,10 @@
-import { Divider as MuiDivider } from "@mui/material";
+import { Divider as MuiDivider, SxProps } from "@mui/material";
 import { FC } from "react";
 
 interface DividerProps {
   variant?: "fullWidth" | "middle" | "inset";
   type: "dark" | "light";
+  sx?: SxProps;
 }
 
 const Divider: FC<DividerProps> = ({ variant, type }) => {

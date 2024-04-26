@@ -1,10 +1,11 @@
 "use client";
 import { Button } from "@/components/Button";
+import { Divider } from "@/components/Divider";
 import { Icon } from "@/components/Icon";
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
-import UploadBox from "@/components/UplaodBox/uploadBox";
-import { Box, Divider, Input, Typography } from "@mui/material";
+import { UploadBox } from "@/components/UplaodBox";
+import { Box, Input, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -91,6 +92,7 @@ const UploadRetrieverPage = () => {
 
           {!isOpen ? (
             <Divider
+              type="light"
               sx={{
                 backgroundColor: "rgb(215,215,215)",
                 mt: "10px",

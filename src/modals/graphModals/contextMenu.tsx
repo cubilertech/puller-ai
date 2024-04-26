@@ -16,11 +16,9 @@ const style = {
 };
 
 export default function ContextMenu(props: any) {
-  const id = "simple-popper";
   const [value, setValue] = useState(props.variables);
 
   useEffect(() => {
-    // Update the local state when props.variables change
     setValue(props.variables);
   }, [props.variables]);
 

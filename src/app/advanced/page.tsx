@@ -1,12 +1,12 @@
 import AppLayout from "@/common/appLayout/appLayout";
 import AdvancedPage from "@/modules/AdvancedPage/advancedPage";
 
-const page = () => {
+function Page() {
   return (
     <AppLayout>
       <AdvancedPage />
     </AppLayout>
   );
-};
+}
 
-export default page;
+export default Page;

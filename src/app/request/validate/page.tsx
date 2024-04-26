@@ -1,12 +1,11 @@
 import AppLayout from "@/common/appLayout/appLayout";
 import ValidateRequestPage from "@/modules/ValidateRequestPage/validateRequestPage";
 
-export default function CreateRequest() {
+function Page() {
   return (
-    <>
-      <AppLayout>
-        <ValidateRequestPage />
-      </AppLayout>
-    </>
+    <AppLayout>
+      <ValidateRequestPage />
+    </AppLayout>
   );
 }
+export default Page;

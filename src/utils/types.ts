@@ -1,4 +1,4 @@
-import { ACTIVE_TYPES, icons } from "./constants";
+import { icons } from "./constants";
 
 export type IconTypes = keyof typeof icons;
 export interface ActiveTypeProps {
@@ -38,4 +38,32 @@ export interface TemplateCardTypes {
   heading: string;
   subHeading: string;
   subHeading2: string;
+}
+
+export interface MenuItemType {
+  text: string;
+  value?: number | string;
+}
+export enum RetrieverIconsTypes {
+  Search = "search",
+  Ellipse = "ellipse",
+  Snowflake = "snowflake",
+  Live = "live",
+  Segment = "segment",
+  Lytics = "lytics",
+  DataRoom = "dataRoom",
+  DbtCore = "dbtCore",
+  SfCrm = "sfCrm",
+  Issues = "issues",
+  ClReport = "clReport",
+  Nielsen = "nielsen",
+  GoogleAnalytics = "googleAnalytics",
+  Clickstream = "clickstream",
+  CPU = "cpu",
+}
+export enum StatusTypes {
+  live = "live",
+  blocked = "blocked",
+  issues = "issues",
+  needPermissions = "needPermissions",
 }

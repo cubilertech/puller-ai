@@ -1,9 +1,9 @@
 "use client";
 import { Box } from "@mui/material";
 import { Paper } from "../Paper";
-import { SingleCardDomyData } from "@/utils/constants";
-import SimpleCard from "../SimpleCard/simpleCard";
 import { useRouter } from "next/navigation";
+import { SingleCardDomyData } from "@/utils/data";
+import { RequestsCard } from "../RecentRequestes-Card";
 
 const NotesList = () => {
   const route = useRouter();
@@ -47,11 +47,7 @@ const NotesList = () => {
         {SingleCardDomyData.map((item, i) => (
           <Box mr={-10} width={"100%"} key={i}>
             {/* <CustomLink href="/request/preview"> */}
-            <SimpleCard
-              isFor="Results"
-              title={item.title}
-              discription={item.discription}
-            />
+            <RequestsCard title={item.title} discription={item.discription} />
             {/* </CustomLink> */}
           </Box>
         ))}

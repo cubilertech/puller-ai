@@ -4,20 +4,11 @@ import { Paper } from "../Paper";
 import { Icon } from "../Icon";
 import { FC } from "react";
 import { useRouter } from "next/navigation";
+import { RetrieverIconsTypes, StatusTypes } from "@/utils/types";
 
 interface retriverCardProps {
-  status: "live" | "blocked" | "needPermissions" | "issues";
-  icon:
-    | "snowflake"
-    | "segment"
-    | "lytics"
-    | "dataRoom"
-    | "dbtCore"
-    | "sfCrm"
-    | "clReport"
-    | "nielsen"
-    | "googleAnalytics"
-    | "clickstream";
+  status: StatusTypes;
+  icon: RetrieverIconsTypes;
   title: string;
   description: string;
 }

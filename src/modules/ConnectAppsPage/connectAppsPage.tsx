@@ -2,11 +2,11 @@
 import { Button } from "@/components/Button";
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
-import Input from "@/components/Input/input";
 import { Box } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { CONNECT_APP_DATA } from "@/utils/constants";
-import ConnectCard from "@/components/ConnectCard/connectCard";
+import { ConnectCard } from "@/components/ConnectCard";
+import { CONNECT_APP_DATA } from "@/utils/data";
+import { Input } from "@/components/Input";
 
 const ConnectAppsPage = () => {
   const router = useRouter();

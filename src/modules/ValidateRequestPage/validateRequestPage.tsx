@@ -1,6 +1,6 @@
 "use client";
 import { Box } from "@mui/material";
-import React, { FC, ReactNode, useState } from "react";
+import React, { FC, useState } from "react";
 
 import { PannelArea } from "../../modules/PannelArea";
 import { PageHeader } from "@/components/PageHeader";

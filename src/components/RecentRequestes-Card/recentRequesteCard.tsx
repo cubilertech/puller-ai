@@ -3,13 +3,12 @@ import { Paper } from "../Paper";
 import { Box, Typography } from "@mui/material";
 import { Icon } from "../Icon";
 
-interface SimpleCardProps {
+interface RequestsCardProps {
   title: string;
   discription: string;
-  isFor: "Results" | "Requests";
 }
 
-const SimpleCard: FC<SimpleCardProps> = ({ title, discription, isFor }) => {
+const RequestsCard: FC<RequestsCardProps> = ({ title, discription }) => {
   return (
     <Paper
       type="light-border"
@@ -51,4 +50,4 @@ const SimpleCard: FC<SimpleCardProps> = ({ title, discription, isFor }) => {
     </Paper>
   );
 };
-export default SimpleCard;
+export default RequestsCard;

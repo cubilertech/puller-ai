@@ -5,8 +5,8 @@ import { CardData } from "@/utils/types";
 import { IconButton } from "../IconButton";
 import { Button } from "../Button";
 import Divider from "../Divider/divider";
-import CustomLink from "../Link/link";
 import CustomButton from "@/common/CustomButtons/CustomButtons";
+import { CustomLink } from "../Link";
 
 interface ResultCardProps {
   data: CardData;
@@ -14,19 +14,15 @@ interface ResultCardProps {
 
 const ResultCard: FC<ResultCardProps> = ({ data }) => {
   const handleDownload = () => {
-    // Create a link element
     const link = document.createElement("a");
-    link.href = "../../../public/download.txt"; // Replace with the actual file URL
-    link.download = "download.txt"; // Specify the desired filename
-
-    // Simulate a click event on the link
+    link.href = "../../../public/download.txt"; 
+    link.download = "download.txt"; 
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
 
   return (
-    <>
       <Box width={"80%"} height={"100%"}>
         <Paper
           type="light-border"
@@ -199,7 +195,6 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
           </Box>
         </Paper>
       </Box>
-    </>
   );
 };
 export default ResultCard;

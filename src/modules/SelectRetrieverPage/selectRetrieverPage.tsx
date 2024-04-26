@@ -1,6 +1,7 @@
 import { PageHeader } from "@/components/PageHeader";
-import RetriverCard from "@/components/RetriverCard/retriverCard";
-import { Selcect_RetrieverData } from "@/utils/constants";
+import { RetriverCard } from "@/components/RetriverCard";
+import { Select_RetrieverData } from "@/utils/data";
+import { RetrieverIconsTypes } from "@/utils/types";
 import { Box } from "@mui/material";
 
 const SelectRetrieverPage = () => {
@@ -31,44 +32,11 @@ const SelectRetrieverPage = () => {
           scrollbarWidth: "none",
         }}
       >
-        {Selcect_RetrieverData.map((card, i) => (
+        {Select_RetrieverData.map((card, i) => (
           <RetriverCard
             description={card.description}
-            // icon={card.icon && card.icon}
-            icon={
-              card.icon === "snowflake"
-                ? "snowflake"
-                : card.icon === "segment"
-                  ? "segment"
-                  : card.icon === "lytics"
-                    ? "lytics"
-                    : card.icon === "dataRoom"
-                      ? "dataRoom"
-                      : card.icon === "dbtCore"
-                        ? "dbtCore"
-                        : card.icon === "sfCrm"
-                          ? "sfCrm"
-                          : card.icon === "clReport"
-                            ? "clReport"
-                            : card.icon === "nielsen"
-                              ? "nielsen"
-                              : card.icon === "googleAnalytics"
-                                ? "googleAnalytics"
-                                : card.icon === "clickstream"
-                                  ? "clickstream"
-                                  : "snowflake"
-            }
-            status={
-              card.status === "live"
-                ? "live"
-                : card.status === "blocked"
-                  ? "blocked"
-                  : card.status === "issues"
-                    ? "issues"
-                    : card.status === "needPermissions"
-                      ? "needPermissions"
-                      : "issues"
-            }
+            icon={card.icon as RetrieverIconsTypes}
+            status={card.status}
             title={card.title}
             key={i}
           />

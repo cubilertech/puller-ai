@@ -1,6 +1,7 @@
-import { Box, Divider, Typography, useMediaQuery } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 import { Paper } from "../Paper";
 import { Icon } from "../Icon";
+import { Divider } from "../Divider";
 
 const UploadCard = () => {
   const isMobile = useMediaQuery("(max-width: 1200px)");
@@ -22,6 +23,7 @@ const UploadCard = () => {
         pulvinar, aliquam quam vitae, tempus sem. Donec elementum pulvinar odio.
       </Typography>
       <Divider
+        type={"light"}
         sx={{
           my: "10px",
         }}

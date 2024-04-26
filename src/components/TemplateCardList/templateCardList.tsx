@@ -1,12 +1,8 @@
-import {
-  ACTIVE_TYPES,
-  TEMPLATE_PRIVATE_DATA,
-  TEMPLATE_PUBLIC_DATA,
-} from "@/utils/constants";
+import { ACTIVE_TYPES } from "@/utils/constants";
 import { Box } from "@mui/material";
-import TemplateCard from "../TemplateCard/templateCard";
 import { FC } from "react";
-
+import { TEMPLATE_PRIVATE_DATA, TEMPLATE_PUBLIC_DATA } from "@/utils/data";
+import { TemplateCard } from "../TemplateCard";
 interface TemplateCardListProps {
   isActive: string;
 }

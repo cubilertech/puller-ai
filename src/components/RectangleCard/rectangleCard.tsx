@@ -1,9 +1,8 @@
-"use client";
 import { Box, Typography } from "@mui/material";
 import { Icon } from "../Icon";
 import { Paper } from "../Paper";
 import { FC } from "react";
-import "./rectangleCardWithIcon.css";
+import "./rectangleCard.css";
 
 interface RectangleCardProps {
   icon: "connectApps" | "apiKey" | "upload" | "cpu";
@@ -11,13 +10,12 @@ interface RectangleCardProps {
   onClick?: () => void;
 }
 
-const RectangleCardWithIcon: FC<RectangleCardProps> = ({
+const RectangleCard: FC<RectangleCardProps> = ({
   icon,
   title,
   onClick,
 }) => {
   return (
-    <>
       <Paper
         type="light-border"
         sx={{
@@ -64,8 +62,7 @@ const RectangleCardWithIcon: FC<RectangleCardProps> = ({
 
         <Typography variant="text-md-semibold">{title}</Typography>
       </Paper>
-    </>
   );
 };
 
-export default RectangleCardWithIcon;
+export default RectangleCard;

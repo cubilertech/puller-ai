@@ -1,9 +1,9 @@
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
 import { Box } from "@mui/material";
-import Summary from "@/components/Summary/summary";
 import DataTable from "@/components/table/table";
 import { FC } from "react";
+import { Summary } from "@/components/Summary";
 
 const PreviewDataPage: FC = () => {
   return (

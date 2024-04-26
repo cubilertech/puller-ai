@@ -1,12 +1,12 @@
-"use client";
 import { palette } from "@/theme/Palette";
-import { Box, Button, Menu, MenuItem, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { FC, useState } from "react";
-
 import "./CustomButtons.css";
 import { UserProps } from "@/utils/types";
 import Image from "next/image";
 import { Icon } from "@/components/Icon";
+import { Menu } from "@/components/Menu";
+
 
 interface buttonProps {
   variant: "select" | "rounded-SQL" | "smallbutton" | "round";
@@ -88,6 +88,11 @@ const CustomButton: FC<buttonProps> = ({
         </div>
       );
     case "select":
+      const menuItems = [
+        {
+          text: "Logout",
+        },
+      ];
       return (
         <div className="container-round-btn">
           <Button
@@ -126,37 +131,11 @@ const CustomButton: FC<buttonProps> = ({
             </Box>
           </Button>
           <Menu
-            sx={{
-              width: 252,
-            }}
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
+            menuItems={menuItems}
             onClose={handleMenuClose}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            PaperProps={{
-              style: {
-                width: 122,
-                // marginLeft: 32,
-                marginTop: 45,
-                borderRadius: "8px",
-                border: "2px solid rgba(196, 196, 196, 0.60)",
-                background:
-                  "linear-gradient(142.96deg, rgba(68,74,89,255) -3.54%,  rgba(68,74,89,255) 7.55%, rgba(55,61,74,255) 95.15%)",
-                backdropFilter: "blur(20px)",
-                paddingTop: 0,
-                paddingBottom: 0,
-              },
-            }}
-          >
-            <MenuItem>Logout</MenuItem>
-          </Menu>
+          />
         </div>
       );
     case "round":

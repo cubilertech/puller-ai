@@ -1,6 +1,5 @@
-import { MuiToolTip } from "@/theme/overrides/tooltip";
 import { Box, Tooltip as MuiTooltip, Typography } from "@mui/material";
-import { FC, ReactElement, ReactNode } from "react";
+import { FC, ReactElement } from "react";
 import { Icon } from "../Icon";
 
 interface TooltipProps {

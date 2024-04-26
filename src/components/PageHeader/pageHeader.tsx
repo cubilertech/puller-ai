@@ -8,9 +8,8 @@ import CustomButton from "@/common/CustomButtons/CustomButtons";
 import SQL_EditorModal from "@/modals/sql_EditorModal/sqlEditorModal";
 import { Icon } from "../Icon";
 import { useRouter } from "next/navigation";
-import { Paper } from "../Paper";
-import Tooltip from "../Tooltip/tooltip";
-import GraphModal from "@/modals/graphModal/graphModal";
+import GraphModal from "@/modals/graphModals/graphModal";
+import { Tooltip } from "../Tooltip";
 
 interface PageHeaderProps {
   type:
