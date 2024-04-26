@@ -7,6 +7,7 @@ import {
   ListItemButtonProps,
   styled,
 } from "@mui/material";
+import { Background } from "reactflow";
 
 // Define your custom styles for the ListItemButton
 const MuiListItemButton = styled(ListItemButton)(
@@ -21,8 +22,9 @@ const MuiListItemButton = styled(ListItemButton)(
       borderRadius: "8px",
       "&:hover": {
         borderRadius: "8px",
-        border: "1px solid #8f8f94",
-        background: "var(--buttons, rgba(255, 255, 255, 0.30))",
+        // border: "1px solid #8f8f94",
+        // background: "var(--buttons, rgba(255, 255, 255, 0.30))",
+        background: "rgb(54,75,120)",
         backdropFilter: "blur(8px)",
       },
     },

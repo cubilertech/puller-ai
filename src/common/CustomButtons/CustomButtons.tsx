@@ -7,7 +7,6 @@ import Image from "next/image";
 import { Icon } from "@/components/Icon";
 import { Menu } from "@/components/Menu";
 
-
 interface buttonProps {
   variant: "select" | "rounded-SQL" | "smallbutton" | "round";
   text?: string;
@@ -81,6 +80,7 @@ const CustomButton: FC<buttonProps> = ({
                 // backgroundColor: "rgb(95,112,125)",
                 background:
                   "linear-gradient(54deg, rgba(108,33,177,1) 16%, rgba(26,138,169,1) 100%)",
+                borderRadius: "50px",
               },
             }}
             onClick={onClick}
@@ -102,13 +102,14 @@ const CustomButton: FC<buttonProps> = ({
             sx={{
               borderRadius: "50px",
               border: `1px solid var(--vison-pro-stock, ${palette.base.white})`,
-              backgroundColor: "rgb(115,129,133)",
+              background: "rgb(115,129,133) !important",
               width: 122,
               height: 48,
               py: 2,
               px: 4,
               ":hover": {
-                backgroundColor: "rgb(95,112,125)",
+                borderRadius: "50px !important",
+                background: "rgb(95,112,125) !important",
               },
             }}
             variant="outlined"

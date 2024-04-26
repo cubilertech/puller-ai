@@ -7,10 +7,16 @@ import { CustomInput } from "@/modules/PannelArea/input";
 
 interface InputAreaComponentPorps {
   handleValidate: () => void;
+  onChangeInput: (event: any) => any;
+  isLoading: boolean;
+  isTextareaFilled: boolean;
 }
 
 const InputAreaComponent: FC<InputAreaComponentPorps> = ({
   handleValidate,
+  onChangeInput,
+  isLoading,
+  isTextareaFilled,
 }) => {
   return (
     <Paper type="light-border">
@@ -42,7 +48,7 @@ const InputAreaComponent: FC<InputAreaComponentPorps> = ({
                 overflow: "auto",
               }}
             >
-              <CustomInput />
+              <CustomInput onChange={(event) => onChangeInput(event)} />
             </span>
           </Paper>
         </Box>
@@ -52,33 +58,64 @@ const InputAreaComponent: FC<InputAreaComponentPorps> = ({
             justifyContent: "space-between",
           }}
         >
-          <Box
-            sx={{
-              display: "flex",
-              alignItems: "center",
-              gap: "1rem",
-            }}
-          >
+          {!isTextareaFilled || isLoading ? (
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                gap: "1rem",
+                ml: "4px",
+              }}
+            >
+              <Box width={163}>
+                <Button
+                  size="small"
+                  variant="outlined"
+                  label="Prompt"
+                  disabled={isLoading}
+                  fullWidth
+                  endIcon={
+                    <Icon
+                      icon="plus"
+                      height={2}
+                      width={8}
+                      disabled={isLoading}
+                    />
+                  }
+                />
+              </Box>
+              <Box width={82}>
+                <Button
+                  fullWidth
+                  size="small"
+                  disabled={isLoading}
+                  variant="outlined"
+                  label="Source"
+                  endIcon={
+                    <Icon
+                      icon="minus"
+                      height={2}
+                      width={8}
+                      disabled={isLoading}
+                    />
+                  }
+                />
+              </Box>
+            </Box>
+          ) : (
             <Box width={163}>
               <Button
                 size="small"
                 variant="outlined"
-                label="Prompt"
+                label="Manage Sources"
+                disabled={isLoading}
                 fullWidth
-                endIcon={<Icon icon="plus" height={8} width={8} />}
+                endIcon={
+                  <Icon icon="plus" height={2} width={8} disabled={isLoading} />
+                }
               />
             </Box>
-
-            <Box width={82}>
-              <Button
-                fullWidth
-                size="small"
-                variant="outlined"
-                label="Source"
-                endIcon={<Icon icon="minus" height={8} width={8} />}
-              />
-            </Box>
-          </Box>
+          )}
 
           <Box>
             <Box width={155}>

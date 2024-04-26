@@ -6,11 +6,11 @@ import { FC, useState } from "react";
 import { Loader } from "../../components/Loader";
 import Divider from "../../components/Divider/divider";
 import { palette } from "@/theme/Palette";
-import { useRouter } from "next/navigation";
 import { CreateInputAreaComponent } from "@/components/inputArea";
-import { OptionsBar } from "@/components/optionsBar";
-import { Tooltip } from "@/components/Tooltip";
+import { usePathname, useRouter } from "next/navigation";
 import CustomLink from "@/components/Link/link";
+import { Tooltip } from "@/components/Tooltip";
+import { OptionsBar } from "@/components/optionsBar";
 
 interface PannelAreaProps {
   content?: {
@@ -25,6 +25,10 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
   const [isLoading, setisLoading] = useState(false);
   const [isOpenSelectBar, setisOpenSelectBar] = useState(false);
 
+  const routename = usePathname();
+  const routeParts = routename.replace(/^\//, "").split("/");
+  const isValidate = routeParts.includes("validate");
+
   const handleAvailable = () => {
     setisLoading(true);
     setTimeout(() => {
@@ -37,6 +41,11 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
   };
   const handleCloseSelectBar = () => {
     setisOpenSelectBar(false);
+  };
+  const [isTextareaFilled, setIsTextareaFilled] = useState(false);
+
+  const handleTextareaChange = (event: any) => {
+    setIsTextareaFilled(event.target.value.trim().length > 0);
   };
 
   return (
@@ -78,11 +87,10 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
               sx={{
                 border: "1px solid rgb(52,51,65)",
                 height: content ? "fit-content" : "100%",
+                // height: "100%",
                 margin: 0,
                 padding: content ? 1 : 0,
-                // width: isOpenSelectBar
-                //   ? { lg: "76%", md: "70%", xs: "60%" }
-                //   : "100%",
+                width: "100%",
               }}
             >
               {isLoading ? (
@@ -159,7 +167,6 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                         by week and by Store ID. It only covers product SKUs
                         that include Flyease technology, which is determined
                         from INT DB for Product ID values 1234 and 5678
-                        {/* {content.response} */}
                       </Typography>
                     </Box>
 
@@ -192,7 +199,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                             whiteSpace: "nowrap",
                             overflow: "hidden",
                             textOverflow: "ellipsis",
-                            maxWidth: "100%", // You can adjust the width as needed
+                            maxWidth: "100%",
                           }}
                         >
                           {content.original}
@@ -205,7 +212,6 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                             height: "38px !important",
                           }}
                           onClick={handleUpdate}
-                          // onClick={handleOpenSelectBar}
                           label="Run Query"
                           variant="contained"
                         />
@@ -217,10 +223,13 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                 ""
               )}
             </Paper>
-            {content ? (
+            {isValidate && (
               <Paper
                 type="dark-border"
                 sx={{
+                  // width: isOpenSelectBar
+                  //   ? { lg: "76%", md: "70%", xs: "60%" }
+                  //   : "100%",
                   borderRadius: "8px",
                   padding: "0.6rem",
                   margin: 0,
@@ -239,14 +248,13 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                   </span>
                 </Typography>
               </Paper>
-            ) : (
-              ""
             )}
           </Box>
+
           {isOpenSelectBar && (
             <OptionsBar
               close={handleCloseSelectBar}
-              variant="input"
+              variant="square-checkbox"
               handleUpdate={handleUpdate ? () => handleUpdate() : undefined}
             />
           )}
@@ -254,7 +262,12 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
         {content ? (
           ""
         ) : (
-          <CreateInputAreaComponent handleValidate={handleAvailable} />
+          <CreateInputAreaComponent
+            handleValidate={handleAvailable}
+            onChangeInput={handleTextareaChange}
+            isLoading={isLoading}
+            isTextareaFilled={isTextareaFilled}
+          />
         )}
       </Box>
     </>

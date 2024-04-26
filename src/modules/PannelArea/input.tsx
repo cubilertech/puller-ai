@@ -1,6 +1,11 @@
 import { Input, TextField } from "@mui/material";
+import { FC, useState } from "react";
 
-export const CustomInput = () => {
+interface CustomInputProps {
+  onChange?: (event: any) => void;
+}
+
+export const CustomInput: FC<CustomInputProps> = ({ onChange }) => {
   return (
     <textarea
       autoFocus
@@ -19,6 +24,7 @@ export const CustomInput = () => {
         background: "transparent",
         outline: 0,
       }}
+      onChange={onChange}
     />
   );
 };
