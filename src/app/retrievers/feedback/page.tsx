@@ -1,6 +1,6 @@
 "use client";
-import LoaderComponent from "@/common/LoaderComponent/LoaderComponent";
 import AppLayout from "@/common/appLayout/appLayout";
+import { Loader } from "@/components/Loader";
 import FeedbackPage from "@/modules/FeedbackPage/feedbackPage";
 import { useEffect, useState } from "react";
 
@@ -17,9 +17,9 @@ function Page() {
   return (
     <AppLayout>
       {isLoading ? (
-        <LoaderComponent type="Loading" />
+        <Loader variant="pageLoader" type="Loading" />
       ) : (
-        <FeedbackPage type="retriever" />
+        <FeedbackPage variant="retriever" />
       )}
     </AppLayout>
   );

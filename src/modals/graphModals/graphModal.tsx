@@ -153,7 +153,7 @@ const GraphModal: FC<GraphModalProps> = ({ open, handleClose }) => {
     <Modal open={open} onClose={handleClose}>
       <Box sx={modalStyle}>
         <Paper
-          type="light-border"
+          variant="light-border"
           sx={{
             height: "80vh",
             width: "80vw",

@@ -1,20 +1,22 @@
+import { PaperVariants } from "@/utils/types";
 import { Paper as MuiPaper, SxProps } from "@mui/material";
 import { FC, ReactNode } from "react";
 
 interface PaperProps {
-  type:
-    | "light-border"
-    | "dark-border"
-    | "light-bg-border"
-    | "light-border-2"
-    | "dark-border-2";
+  variant: PaperVariants;
   children?: ReactNode;
   sx?: SxProps;
   onClick?: () => void;
 }
 
-const Paper: FC<PaperProps> = ({ type, children, sx, onClick, ...props }) => {
-  switch (type) {
+const Paper: FC<PaperProps> = ({
+  variant,
+  children,
+  sx,
+  onClick,
+  ...props
+}) => {
+  switch (variant) {
     case "light-border":
       return (
         <>

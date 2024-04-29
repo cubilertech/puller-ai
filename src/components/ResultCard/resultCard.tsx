@@ -25,7 +25,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
   return (
       <Box width={"80%"} height={"100%"}>
         <Paper
-          type="light-border"
+          variant="light-border"
           sx={{
             padding: 3,
             height: "calc(100vh - 200px)",

@@ -13,7 +13,7 @@ const PreviewDataPage: FC = () => {
         height: "calc(100vh - 200px)",
       }}
     >
-      <PageHeader type="Preview" />
+      <PageHeader variant="Preview" />
 
       <Box
         sx={{
@@ -32,7 +32,7 @@ The GROUP BY clause groups the transactions by SKU, Store ID, quarter, and yea
 Finally, the ORDER BY clause sorts the results by SKU, Store ID, year, and quarter, in descending order. This will give you the most recent quarter first, followed by the previous quarter, and so on. "
         />
 
-        <Paper type="light-border">
+        <Paper variant="light-border">
           <DataTable />
         </Paper>
       </Box>

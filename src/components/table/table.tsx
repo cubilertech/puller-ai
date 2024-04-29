@@ -349,9 +349,9 @@ const DataTable = () => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                {[1, 3, 5, 10].map((value) => (
+                {[1, 3, 5, 10].map((value, index) => (
                   <MenuItem
-                    key={value}
+                    key={index}
                     onClick={() => {
                       setRowsPerPage(value);
                       setPage(0);
@@ -400,9 +400,9 @@ const DataTable = () => {
             <Icon icon="paginationLeft" disabled={page === 0} />
           </Button>
 
-          {[...Array(totalPages).keys()].map((pageNumber) => (
+          {[...Array(totalPages).keys()].map((pageNumber, i) => (
             <Button
-              key={pageNumber}
+              key={i}
               variant="text"
               label={(pageNumber + 1).toString()}
               onClick={() => handlePageChange(pageNumber)}

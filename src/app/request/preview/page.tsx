@@ -1,6 +1,6 @@
 "use client";
-import LoaderComponent from "@/common/LoaderComponent/LoaderComponent";
 import AppLayout from "@/common/appLayout/appLayout";
+import { Loader } from "@/components/Loader";
 import PreviewDataPage from "@/modules/PreviewDataPage/previewDataPage";
 import { useEffect, useState } from "react";
 
@@ -18,7 +18,7 @@ function Page () {
   return (
     <>
       <AppLayout>
-        {isLoading ? <LoaderComponent type="Loading" /> : <PreviewDataPage />}
+        {isLoading ? <Loader variant="pageLoader" type="Loading" /> : <PreviewDataPage />}
       </AppLayout>
     </>
   );

@@ -5,37 +5,31 @@ export const typography: TypographyOptions = {
   h1: {
     fontSize: "56px",
     lineHeight: "normal",
-    // fontKerning: "0%",
     fontWeight: 700,
   },
   h2: {
     fontSize: "48px",
     lineHeight: "normal",
-    // fontKerning: "0%",
     fontWeight: 700,
   },
   h3: {
     fontSize: "40px",
     lineHeight: "normal",
-    // fontKerning: "0%",
     fontWeight: 700,
   },
   h4: {
     fontSize: "32px",
     lineHeight: "normal",
-    // fontKerning: "0%",
     fontWeight: 700,
   },
   h5: {
     fontSize: "24px",
     lineHeight: "normal",
-    // fontKerning: "0%",
     fontWeight: 700,
   },
   h6: {
     fontSize: "16px",
     lineHeight: "normal",
-    // fontKerning: "0%",
     fontWeight: 700,
   },
   subtitle1: {

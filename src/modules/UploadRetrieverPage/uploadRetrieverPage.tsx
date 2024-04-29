@@ -26,7 +26,7 @@ const UploadRetrieverPage = () => {
         overflowY: "none",
       }}
     >
-      <PageHeader type="Custom Retrievers" />
+      <PageHeader variant="Custom Retrievers" />
 
       {/* Main Container */}
       <Box
@@ -46,7 +46,7 @@ const UploadRetrieverPage = () => {
             minHeight: "25rem",
             height: "fit-content",
           }}
-          type="light-border"
+          variant="light-border"
         >
           {/* Name Label & Input */}
           <Box

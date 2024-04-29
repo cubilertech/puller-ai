@@ -22,7 +22,7 @@ const NotesList = () => {
     >
       <Paper
         onClick={() => handleOpenNotes()}
-        type="light-border"
+        variant="light-border"
         sx={{
           padding: 2,
           width: "100%",

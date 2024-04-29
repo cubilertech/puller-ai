@@ -1,6 +1,7 @@
 import { Button as MuiButton, SxProps } from "@mui/material";
 import { FC, ReactNode } from "react";
 import "./button.css";
+import { ButtonTextTransforms } from "@/utils/types";
 
 interface ButtonProps {
   size?: "small" | "medium" | "large";
@@ -9,7 +10,7 @@ interface ButtonProps {
   variant: "contained" | "outlined" | "text";
   disabled?: boolean;
   fullWidth?: boolean;
-  textTransform?: "capitalize" | "lowercase" | "uppercase" | "inherit";
+  textTransform?: ButtonTextTransforms;
   endIcon?: ReactNode;
   startIcon?: ReactNode;
   children?: ReactNode;

@@ -14,7 +14,7 @@ const TemplateCard: FC<TemplateCardProps> = ({ card, index }) => {
   return (
     <Box key={index} mt={index === 0 ? "" : "1rem"}>
       <Paper
-        type="light-border"
+        variant="light-border"
         sx={{
           padding: "1rem",
           display: "flex",

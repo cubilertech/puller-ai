@@ -109,7 +109,6 @@ const AlertCard: FC<alertCardProps> = ({
               <Typography variant="text-sm">{time}</Typography>
             </Box>
           </Box>
-
         </Box>
       );
   }

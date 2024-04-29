@@ -23,7 +23,7 @@ const AlertsPage = () => {
         height: "100%",
       }}
     >
-      <PageHeader type="Alerts" />
+      <PageHeader variant="Alerts" />
 
       {/* Table */}
 
@@ -34,7 +34,7 @@ const AlertsPage = () => {
           flexDirection: "column",
           paddingBottom: "1rem",
         }}
-        type="light-border"
+        variant="light-border"
       >
         {/* Table Topbar */}
         <Box

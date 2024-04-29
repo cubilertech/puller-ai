@@ -19,9 +19,9 @@ const RetrieverDetailPage = () => {
         gap: "1.4rem",
       }}
     >
-      <PageHeader type="Retriever Detail" />
+      <PageHeader variant="Retriever Detail" />
       <Paper
-        type="light-border"
+        variant="light-border"
         sx={{
           width: "100%",
           height: "100%",

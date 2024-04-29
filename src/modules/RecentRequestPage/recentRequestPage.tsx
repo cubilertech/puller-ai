@@ -6,7 +6,6 @@ import { FC } from "react";
 
 const RecentRequestPage: FC = () => {
   return (
-    <>
       <Box
         p={2}
         height={"98%"}
@@ -14,7 +13,7 @@ const RecentRequestPage: FC = () => {
         flexDirection={"column"}
         gap={"2rem"}
       >
-        <PageHeader type="Recent" />
+        <PageHeader variant="Recent" />
 
         <Box
           sx={{
@@ -43,7 +42,6 @@ const RecentRequestPage: FC = () => {
           ))}
         </Box>
       </Box>
-    </>
   );
 };
 

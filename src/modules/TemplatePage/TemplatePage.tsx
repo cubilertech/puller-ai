@@ -19,20 +19,19 @@ const TemplatePage = () => {
       gap={"1.5rem"}
       height={"100%"}
     >
-      <PageHeader type="Template" />
+      <PageHeader variant="Template" />
 
       {/* Table Container */}
-      <Box height={"85%"}>
+      <Box height={"88%"}>
         <Paper
           sx={{
             padding: "1.5rem",
             height: "100%",
-            paddingBottom: "1rem",
-            paddingTop: "2rem",
+            paddingY: "1.2rem",
             display: "flex",
             flexDirection: "column",
           }}
-          type="light-border"
+          variant="light-border"
         >
           {/* Topbar */}
           <TemplateTopbar isActive={isActive} setIsActive={setIsActive} />

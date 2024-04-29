@@ -1,1 +1,1 @@
-export { default as CreateInputAreaComponent } from "./inputAreaComponent";
+export { default as CreateInputAreaComponent } from "./inputArea";

@@ -10,27 +10,13 @@ import { Icon } from "../Icon";
 import { useRouter } from "next/navigation";
 import GraphModal from "@/modals/graphModals/graphModal";
 import { Tooltip } from "../Tooltip";
+import { PageHeaderVariants } from "@/utils/types";
 
 interface PageHeaderProps {
-  type:
-    | "Recent"
-    | "Results"
-    | "create"
-    | "Validate"
-    | "Preview"
-    | "Template"
-    | "Retrivers"
-    | "New Retriver"
-    | "Select Retriver"
-    | "Alerts"
-    | "Create Alert"
-    | "Connect App"
-    | "Custom Retrievers"
-    | "Retriever Detail"
-    | "Advanced";
+  variant: PageHeaderVariants;
 }
 
-const PageHeader: FC<PageHeaderProps> = ({ type }) => {
+const PageHeader: FC<PageHeaderProps> = ({ variant }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [openSQL_Editor, setopenSQL_Editor] = useState(false);
   const [openGraph, setOpenGraph] = useState(false);
@@ -42,7 +28,7 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
   const handleOpenGraph = () => {
     setOpenGraph(!openGraph);
   };
-  switch (type) {
+  switch (variant) {
     case "Recent":
       return (
         <Box
@@ -96,39 +82,7 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
           </Typography>
           <CustomLink href="/request/recent">
             <Box width={242}>
-              <Button
-                variant="text"
-                fullWidth
-                label="Request History"
-                sx={{
-                  "@keyframes exitGradient": {
-                    "0%": {
-                      background:
-                        "linear-gradient(126deg, rgba(108,33,177,1) 16%, rgba(26,138,169,1) 100%)",
-                    },
-                    "100%": {
-                      background:
-                        "linear-gradient(to top left, rgba(108,33,177,1), transparent)",
-                    },
-                  },
-                  color: "#5d92fe",
-                  border: "1px solid #5d92fe",
-                  transition: "background-color 0.3s ease",
-                  borderRadius: "8px",
-                  "&:hover": {
-                    color: palette.base.white,
-                    background: "rgba(105,65,198,255)",
-                    borderRadius: "8px",
-                  },
-                  "&:hover, &:focus": {
-                    border: "1px solid transparent",
-                    borderRadius: "8px",
-                  },
-                  "&:not(:hover)": {
-                    animation: "exitGradient 0.3s ease ",
-                  },
-                }}
-              />
+              <CustomButton variant="request-history" text="Request History" />
             </Box>
           </CustomLink>
         </Box>
@@ -183,11 +137,6 @@ const PageHeader: FC<PageHeaderProps> = ({ type }) => {
           ORDER BY 
             Week, 
             Store_ID;
-
-            
-         
-          
-          
           `}
           />
           <GraphModal open={openGraph} handleClose={() => handleOpenGraph()} />

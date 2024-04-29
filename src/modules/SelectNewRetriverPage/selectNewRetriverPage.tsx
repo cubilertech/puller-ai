@@ -8,7 +8,7 @@ const SelectNewRetriverPage = () => {
   const router = useRouter();
   return (
     <Box p={"1rem"} display={"flex"} flexDirection={"column"} gap={"2rem"}>
-      <PageHeader type="New Retriver" />
+      <PageHeader variant="New Retriver" />
       {/*Layout Container */}
       <Box
         display={"flex"}

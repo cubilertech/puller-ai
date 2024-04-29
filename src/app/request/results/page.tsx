@@ -2,7 +2,7 @@
 import YourResultsPage from "@/modules/YourResultPage/yourResultPage";
 import AppLayout from "@/common/appLayout/appLayout";
 import { useEffect, useState } from "react";
-import LoaderComponent from "@/common/LoaderComponent/LoaderComponent";
+import { Loader } from "@/components/Loader";
 
 function Page() {
   const [isLoading, setIsLoading] = useState(true);
@@ -16,7 +16,11 @@ function Page() {
   }, []);
   return (
     <AppLayout>
-      {isLoading ? <LoaderComponent type="Processing" /> : <YourResultsPage />}
+      {isLoading ? (
+        <Loader variant="pageLoader" type="Processing" />
+      ) : (
+        <YourResultsPage />
+      )}
     </AppLayout>
   );
 }

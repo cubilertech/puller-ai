@@ -74,7 +74,7 @@ const SideNavbar = () => {
             <Box>
               <List>
                 {SideBar_Data.map((item, index) => (
-                  <ListItem key={item.name}>
+                  <ListItem key={index}>
                     <Link href={item.link} style={{ width: "100%" }}>
                       <MuiListItemButton
                         sx={{
@@ -122,7 +122,7 @@ const SideNavbar = () => {
                   img: <Icon width={18} height={18} icon="adminIcon" />,
                 },
               ].map((text, index) => (
-                <ListItem key={text.name}>
+                <ListItem key={index}>
                   <MuiListItemButton>
                     <ListItemIcon
                       sx={{

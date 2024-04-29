@@ -40,8 +40,8 @@ const Menu: FC<MenuProps> = ({ open, menuItems, anchorEl, onClose }) => {
         },
       }}
     >
-      {menuItems.map((item) => (
-        <MenuItem value={item.value}>{item.text}</MenuItem>
+      {menuItems.map((item, index) => (
+        <MenuItem key={index} value={item.value}>{item.text}</MenuItem>
       ))}
     </MuiMenu>
   );

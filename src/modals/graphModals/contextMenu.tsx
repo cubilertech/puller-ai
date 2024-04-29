@@ -35,7 +35,7 @@ export default function ContextMenu(props: any) {
     >
       <Box sx={style}>
         <Paper
-          type="light-bg-border"
+          variant="light-bg-border"
           sx={{
             width: "35rem",
             padding: "1rem",

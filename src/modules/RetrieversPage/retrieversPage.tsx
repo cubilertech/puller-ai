@@ -14,7 +14,7 @@ const RetrieversPage = () => {
         height: "100%",
       }}
     >
-      <PageHeader type="Retrivers" />
+      <PageHeader variant="Retrivers" />
       {/* Grid Layout */}
       <Box
         sx={{

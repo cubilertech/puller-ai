@@ -17,7 +17,7 @@ const CreateAlertPage = () => {
         alignItems: "flex-end",
       }}
     >
-      <PageHeader type="Create Alert" />
+      <PageHeader variant="Create Alert" />
 
       {/* Input container */}
       <Box width={"100%"}>
@@ -28,12 +28,12 @@ const CreateAlertPage = () => {
             padding: "2rem",
             border: "2px solid rgba(196, 196, 196, 0.6) !important",
           }}
-          type="light-border"
+          variant="light-border"
         >
           <Box display={"flex"} flexDirection={"column"} gap={"0.5rem"}>
             <Typography variant="text-md-semibold">Alert Name 1</Typography>
             <Paper
-              type="light-border"
+              variant="light-border"
               sx={{
                 minHeight: "5rem",
                 padding: "0.5rem 1rem",

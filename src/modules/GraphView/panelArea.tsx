@@ -34,7 +34,7 @@ const PanelArea: FC<PanelAreaProps> = ({ content, handleUpdate }) => {
           }}
         >
           <Paper
-            type="dark-border"
+            variant="dark-border"
             sx={{
               border: "1px solid rgb(52,51,65)",
               height: content ? "fit-content" : "100%",
@@ -44,7 +44,7 @@ const PanelArea: FC<PanelAreaProps> = ({ content, handleUpdate }) => {
             }}
           ></Paper>
         </Box>
-        <Paper type="light-border">
+        <Paper variant="light-border">
           <Box
             sx={{
               padding: "8px",
@@ -56,7 +56,7 @@ const PanelArea: FC<PanelAreaProps> = ({ content, handleUpdate }) => {
               }}
             >
               <Paper
-                type="dark-border"
+                variant="dark-border"
                 sx={{
                   padding: "0.5rem ",
                   margin: 0,
@@ -86,7 +86,7 @@ const PanelArea: FC<PanelAreaProps> = ({ content, handleUpdate }) => {
               }}
             >
               <Paper
-                type="dark-border"
+                variant="dark-border"
                 sx={{
                   padding: "0.5rem ",
                   margin: 0,

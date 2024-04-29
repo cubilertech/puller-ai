@@ -20,11 +20,11 @@ const ConnectAppsPage = () => {
         gap: "1.2rem",
       }}
     >
-      <PageHeader type="Connect App" />
+      <PageHeader variant="Connect App" />
 
       {/* Table */}
       <Paper
-        type="light-border"
+        variant="light-border"
         sx={{
           height: "calc(100vh - 210px)",
           display: "flex",

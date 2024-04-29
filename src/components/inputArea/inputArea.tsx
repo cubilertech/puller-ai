@@ -19,7 +19,7 @@ const InputAreaComponent: FC<InputAreaComponentPorps> = ({
   isTextareaFilled,
 }) => {
   return (
-    <Paper type="light-border">
+    <Paper variant="light-border">
       <Box
         sx={{
           padding: "8px",
@@ -31,7 +31,7 @@ const InputAreaComponent: FC<InputAreaComponentPorps> = ({
           }}
         >
           <Paper
-            type="dark-border"
+            variant="dark-border"
             sx={{
               padding: "0.5rem ",
               margin: 0,

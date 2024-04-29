@@ -5,7 +5,7 @@ import { Box } from "@mui/material";
 const AdvancedPage = () => {
   return (
     <Box p={"1rem"} display={"flex"} flexDirection={"column"} gap={"2rem"}>
-      <PageHeader type="Advanced" />
+      <PageHeader variant="Advanced" />
       {/* Card Container */}
       <Box
         display={"flex"}

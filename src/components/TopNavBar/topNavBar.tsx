@@ -20,7 +20,6 @@ const TopNavBar = () => {
     routeParts.includes("retriever-detail");
 
   return (
-    <>
       <Box
         sx={{
           display: "flex",
@@ -94,7 +93,6 @@ const TopNavBar = () => {
           />
         </Box>
       </Box>
-    </>
   );
 };
 export default TopNavBar;

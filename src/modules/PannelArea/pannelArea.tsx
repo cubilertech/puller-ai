@@ -83,7 +83,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
             }}
           >
             <Paper
-              type="dark-border"
+              variant="dark-border"
               sx={{
                 border: "1px solid rgb(52,51,65)",
                 height: content ? "fit-content" : "100%",
@@ -103,7 +103,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                     height: "100%",
                   }}
                 >
-                  <Loader type="Processing" varient="simple" />
+                  <Loader type="Processing" variant="simple" />
                 </Box>
               ) : content ? (
                 <Box display={"flex"} flexDirection={"column"} gap={"1rem"}>
@@ -225,7 +225,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
             </Paper>
             {isValidate && (
               <Paper
-                type="dark-border"
+              variant="dark-border"
                 sx={{
                   // width: isOpenSelectBar
                   //   ? { lg: "76%", md: "70%", xs: "60%" }

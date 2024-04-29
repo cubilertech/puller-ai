@@ -1,26 +1,4 @@
-// import { Theme, Tooltip, TooltipProps, styled } from "@mui/material";
-
 import { Theme } from "@mui/material";
-
-// // Define your custom styles for the Tooltip
-// const CustomTooltip = styled(Tooltip)(({ theme }: { theme: Theme }) => ({
-//   // Add your custom styles here
-//   // Example:
-//   "&.MuiTooltip-tooltip": {
-//     // Override default styles
-//     backgroundColor: "red",
-//     color: "white",
-//     fontSize: "44px",
-//     borderRadius: "4px",
-//     // Add any other custom styles you want
-//   },
-// }));
-
-// // Define the props for your custom Tooltip component
-// type CustomTooltipProps = TooltipProps;
-
-// // Export your custom Tooltip component
-// export default CustomTooltip;
 
 export const MuiToolTip = (theme: Theme) => {
   return {

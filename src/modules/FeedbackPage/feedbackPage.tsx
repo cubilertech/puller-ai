@@ -1,16 +1,17 @@
 "use client";
 import { Button } from "@/components/Button";
 import { Paper } from "@/components/Paper";
+import { FeedbackPageVariants } from "@/utils/types";
 import { Box, Typography, useMediaQuery } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FC } from "react";
 
 interface FeedbackProps {
-  type: "retriever" | "alert";
+  variant: FeedbackPageVariants;
 }
 
-const FeedbackPage: FC<FeedbackProps> = ({ type }) => {
+const FeedbackPage: FC<FeedbackProps> = ({ variant }) => {
   const router = useRouter();
   const isLg = useMediaQuery("(max-width:1500px)");
 
@@ -35,7 +36,7 @@ const FeedbackPage: FC<FeedbackProps> = ({ type }) => {
           justifyContent: "center",
           alignItems: "center",
         }}
-        type="light-border"
+        variant="light-border"
       >
         {/* Success logo and message */}
         <Box
@@ -59,14 +60,14 @@ const FeedbackPage: FC<FeedbackProps> = ({ type }) => {
               textAlign: "center",
             }}
           >
-            {type === "alert"
+            {variant === "alert"
               ? "This retriever will alert you when sales go up by 30% in a given week. Your alert is now active."
               : "This retriever has created successfully. You can use this retriever from Retrievers List."}
           </Typography>
         </Box>
 
         {/* Alert Success Buttons */}
-        {type === "alert" ? (
+        {variant === "alert" ? (
           <Box display={"flex"} gap={"1rem"} mt={"1rem"}>
             <Box width={{ xl: "280px", lg: "150px" }}>
               <Button

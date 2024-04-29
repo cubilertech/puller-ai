@@ -33,12 +33,12 @@ const ValidateRequestPage: FC = () => {
           }}
         >
           <Box sx={{ width: "60%", height: "70%" }}>
-            <Loader type="Processing" varient="paper" />
+            <Loader type="Processing" variant="paper" />
           </Box>
         </Box>
       ) : (
         <Box sx={{ px: 1.2, pt: 1 }}>
-          <PageHeader type="Validate" />
+          <PageHeader variant="Validate" />
           <Box sx={{ width: "97%", m: "auto", pt: 2 }}>
             <PannelArea content={content} handleUpdate={() => handleUpdate()} />
           </Box>

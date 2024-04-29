@@ -2,13 +2,13 @@ import { palette } from "@/theme/Palette";
 import { Box, Button, Typography } from "@mui/material";
 import { FC, useState } from "react";
 import "./CustomButtons.css";
-import { UserProps } from "@/utils/types";
+import { CustomButtonVariants, UserProps } from "@/utils/types";
 import Image from "next/image";
 import { Icon } from "@/components/Icon";
 import { Menu } from "@/components/Menu";
 
 interface buttonProps {
-  variant: "select" | "rounded-SQL" | "smallbutton" | "round";
+  variant: CustomButtonVariants;
   text?: string;
   selectData?: UserProps;
   onClick?: () => void;
@@ -158,6 +158,46 @@ const CustomButton: FC<buttonProps> = ({
                 borderRadius: "100%",
 
                 backgroundColor: "rgb(95,112,125)",
+              },
+            }}
+          >
+            {text}
+          </Button>
+        </div>
+      );
+    case "request-history":
+      return (
+        <div className="requestHistory-btn-container">
+          <Button
+            variant="text"
+            sx={{
+              "@keyframes exitGradient": {
+                "0%": {
+                  background:
+                    "linear-gradient(126deg, rgba(108,33,177,1) 16%, rgba(26,138,169,1) 100%)",
+                },
+                "100%": {
+                  background:
+                    "linear-gradient(to top left, rgba(108,33,177,1), transparent)",
+                },
+              },
+              width: "216px",
+              color: "#5d92fe",
+              border: "none",
+              backgroundColor: "#263f50",
+              transition: "background 0.3s ease",
+              borderRadius: "8px",
+              "&:hover": {
+                color: palette.base.white,
+                background: "rgba(105,65,198,255)",
+                borderRadius: "8px",
+              },
+              "&:hover, &:focus": {
+                border: "none",
+                borderRadius: "8px",
+              },
+              "&:not(:hover)": {
+                animation: "exitGradient 0.3s ease ",
               },
             }}
           >

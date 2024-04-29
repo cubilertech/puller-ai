@@ -13,7 +13,7 @@ const UploadCard = () => {
         padding: "1rem",
         borderRadius: "8px",
       }}
-      type="light-border"
+      variant="light-border"
     >
       <Typography variant="text-xxs-regular">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet

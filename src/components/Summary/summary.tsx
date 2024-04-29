@@ -10,7 +10,7 @@ interface Summary {
 const Summary: FC<Summary> = ({ heading, description }) => {
   return (
     <Paper
-      type="light-border"
+    variant="light-border"
       sx={{
         maxWidth: "100%",
         wordWrap: "break-word",

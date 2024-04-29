@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material";
 import { FC } from "react";
 import { ACTIVE_TYPES } from "@/utils/constants";
 import { Input } from "../Input";
+import { Divider } from "../Divider";
 
 interface TemplateTopbarProps {
   isActive: string;
@@ -15,8 +16,8 @@ const TemplateTopbar: FC<TemplateTopbarProps> = ({ isActive, setIsActive }) => {
         display: "flex",
         justifyContent: "space-between",
         alignItems: "baseline",
-        mb: "2rem",
-        height: "5%",
+        mb: "1.2rem",
+        height: "8%",
       }}
     >
       <Box
@@ -27,43 +28,54 @@ const TemplateTopbar: FC<TemplateTopbarProps> = ({ isActive, setIsActive }) => {
         <Box
           onClick={() => setIsActive(ACTIVE_TYPES.PUBLIC)}
           sx={{
-            borderBottom:
-              isActive === "public"
-                ? "1px solid rgb(0,224,238)"
-                : "1px solid rgb(114,121,129)",
-
             width: "202px",
             display: "flex",
-            alignItems: "flex-end",
-            justifyContent: "center",
-            pb: "5px",
+            flexDirection: "column",
+            alignItems: "center",
             ":hover": {
               cursor: "pointer",
             },
           }}
         >
           <Typography variant="text-md-regular">Public</Typography>
+          {isActive === "public" && (
+            <Box
+              sx={{
+                background:
+                  "linear-gradient(to right, #AD00FE -140.78%, #00E0EE)",
+                height: "1px",
+                width: "100%",
+                mt: "5px",
+              }}
+            />
+          )}
         </Box>
 
         <Box
           onClick={() => setIsActive(ACTIVE_TYPES.PRIVATE)}
           sx={{
-            borderBottom:
-              isActive === "private"
-                ? "1px solid rgb(0,224,238)"
-                : "1px solid rgb(114,121,129)",
-            textAlign: "center",
             width: "202px",
             display: "flex",
-            alignItems: "flex-end",
-            justifyContent: "center",
-            pb: "5px",
+            flexDirection: "column",
+            alignItems: "center",
             ":hover": {
               cursor: "pointer",
             },
           }}
         >
           <Typography variant="text-md-regular">Private</Typography>
+
+          <Box
+            sx={{
+              background:
+                isActive === "private"
+                  ? "linear-gradient(to right, #AD00FE -140.78%, #00E0EE)"
+                  : "transparent",
+              height: "1px",
+              width: "100%",
+              mt: "5px",
+            }}
+          />
         </Box>
       </Box>
 

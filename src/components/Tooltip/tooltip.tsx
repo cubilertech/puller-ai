@@ -1,9 +1,10 @@
 import { Box, Tooltip as MuiTooltip, Typography } from "@mui/material";
 import { FC, ReactElement } from "react";
 import { Icon } from "../Icon";
+import { TooltipVariants } from "@/utils/types";
 
 interface TooltipProps {
-  variant: "info" | "status";
+  variant: TooltipVariants;
   title?: string;
   description?: string;
   children: ReactElement;

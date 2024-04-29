@@ -15,7 +15,7 @@ const SelectRetrieverPage = () => {
         height: "100%",
       }}
     >
-      <PageHeader type="Select Retriver" />
+      <PageHeader variant="Select Retriver" />
 
       {/* Grid Layout */}
       <Box

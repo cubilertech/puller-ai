@@ -25,13 +25,14 @@ const RetriverCard: FC<retriverCardProps> = ({
     <Box
       sx={{
         ":hover": {
+          borderRadius: "16px",
           cursor: "pointer",
           backgroundColor: "rgb(47,61,92)",
         },
       }}
     >
       <Paper
-        type="light-border"
+        variant="light-border"
         sx={{
           backgroundColor: "transparent",
           padding: "1.5rem",
@@ -42,7 +43,7 @@ const RetriverCard: FC<retriverCardProps> = ({
             background:
               "linear-gradient(142.96deg, rgba(93, 146, 254, 0.148) -3.54%, rgba(93, 146, 254, 0.168) 95.15%)",
             "& .child": {
-              background: "rgba(93, 146, 254, 0.3)",
+              background: "rgb(115,129,161)",
             },
           },
         }}
@@ -69,7 +70,7 @@ const RetriverCard: FC<retriverCardProps> = ({
                   alignItems: "center",
                   pointerEvents: "none",
                   ":hover": {
-                    background: "rgba(93, 146, 254, 0.3)",
+                    background: "rgba(93, 146, 254)",
                   },
                 }}
                 className="child"

@@ -1,10 +1,11 @@
 import { CSSProperties, FC, ReactNode } from "react";
 import Link from "next/link";
+import { CustomLinkVariants } from "@/utils/types";
 
 interface CustomLinkProps {
   href: string;
   children: ReactNode;
-  variant?: "border" | "simple";
+  variant?: CustomLinkVariants;
   style?: CSSProperties;
   color?: string;
 }

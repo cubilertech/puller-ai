@@ -11,7 +11,7 @@ interface RequestsCardProps {
 const RequestsCard: FC<RequestsCardProps> = ({ title, discription }) => {
   return (
     <Paper
-      type="light-border"
+    variant="light-border"
       sx={{
         padding: "20px",
         maxWidth: "100%",
