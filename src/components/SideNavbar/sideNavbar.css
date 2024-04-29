@@ -1,0 +1,6 @@
+.navbar-container:hover {
+  padding: 1px;
+  background: "linear-gradient(54deg, rgba(255,255,255,1) 37%, rgba(114,114,114,1) 95%)";
+  background: rgb(96, 112, 147);
+  border-radius: 8px;
+}
