@@ -1,4 +1,4 @@
-import { icons } from "@/utils/constants";
+import { ICONS_TYPES, icons } from "@/utils/constants";
 import { IconTypes } from "@/utils/types";
 import Image from "next/image";
 import { FC } from "react";
@@ -24,7 +24,7 @@ const Icon: FC<IconProps> = ({
     return null;
   }
 
-  if (icon === "plus") {
+  if (icon === ICONS_TYPES.PLUS) {
     return disabled ? (
       <Image
         {...props}
@@ -44,7 +44,7 @@ const Icon: FC<IconProps> = ({
     );
   }
 
-  if (icon === "minus") {
+  if (icon === ICONS_TYPES.MINUS) {
     return disabled ? (
       <Image
         {...props}
@@ -63,7 +63,7 @@ const Icon: FC<IconProps> = ({
       />
     );
   }
-  if (icon === "paginationLeft") {
+  if (icon === ICONS_TYPES.PAGINATIONLEFT) {
     return disabled ? (
       <Image
         {...props}
@@ -83,7 +83,7 @@ const Icon: FC<IconProps> = ({
     );
   }
 
-  if (icon === "paginationRight") {
+  if (icon === ICONS_TYPES.PAGINATIONRIGHT) {
     return disabled ? (
       <Image
         {...props}

@@ -4,17 +4,17 @@ import {
   SxProps,
   Typography,
 } from "@mui/material";
-import Image from "next/image";
 import { IconTypes } from "@/utils/types";
 import { Icon } from "../Icon";
 import "./iconButton.css";
+import { palette } from "@/theme/Palette";
 
 interface IconButtonProps {
   icon?: IconTypes;
   text?: string;
-  iconWidth?: number; // Explicit type for icon width
+  iconWidth?: number;
   iconHeight?: number;
-  fullWidth?: boolean; // Explicit type for icon height
+  fullWidth?: boolean;
   disabled?: boolean;
   sx?: SxProps;
 }
@@ -36,7 +36,7 @@ const IconButton: FC<IconButtonProps> = ({
         sx={{
           width: fullWidth ? "100%" : "auto",
           ":hover": {
-            backgroundColor: "rgb(95,112,125)",
+            backgroundColor: palette.color.gray[400],
           },
           ...sx,
         }}

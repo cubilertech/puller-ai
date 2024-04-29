@@ -2,7 +2,7 @@
 import { palette } from "@/theme/Palette";
 import { Box, Typography } from "@mui/material";
 import { Icon } from "../Icon";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { PagesType } from "@/utils/constants";
 import CustomLink from "../Link/link";
 import NotificationIconButton from "@/common/notificationIconButton/notificationIconButton";
@@ -10,25 +10,30 @@ import CustomButton from "@/common/CustomButtons/CustomButtons";
 
 const TopNavBar = () => {
   const route = usePathname();
+  const router = useRouter();
   const routeParts = route.replace(/^\//, "").split("/");
   const firstRoute = routeParts[0];
-  console.log(firstRoute, PagesType.RECENT_REQUESTS, "route");
+  const isBack =
+    routeParts.includes("preview") ||
+    routeParts.includes("connect") ||
+    routeParts.includes("recent") ||
+    routeParts.includes("retriever-detail");
+
   return (
-    <>
       <Box
         sx={{
           display: "flex",
           width: "100%",
-          padding: "20px 48px",
+          padding: "21px 48px",
           justifyContent: "space-between",
           alignItems: "center",
           gap: "211px",
-          bgcolor: "rgba(102, 112, 133, 0.60)",
+          bgcolor: palette.opacity.lightBlue,
         }}
       >
         <Box sx={{ ml: 4 }}>
-          {firstRoute === PagesType.PREVIEW_DATA ? (
-            <CustomLink href={"/results"}>
+          {isBack ? (
+            <Box onClick={() => router.back()}>
               <Typography
                 variant="text-md-bold"
                 sx={{
@@ -42,7 +47,7 @@ const TopNavBar = () => {
                 <Icon icon="arrowLeftIcon" height={24} width={24} />
                 Back
               </Typography>
-            </CustomLink>
+            </Box>
           ) : firstRoute === PagesType.RECENT_REQUESTS ? (
             <CustomLink href={"/create"}>
               <Typography
@@ -88,7 +93,6 @@ const TopNavBar = () => {
           />
         </Box>
       </Box>
-    </>
   );
 };
 export default TopNavBar;

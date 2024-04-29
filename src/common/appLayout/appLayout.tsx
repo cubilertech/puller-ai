@@ -1,8 +1,7 @@
 import React, { ReactNode } from "react";
-import TopNavBar from "../../components/TopNavBar/topNavBar";
 import { SideNavbar } from "@/components/SideNavbar";
-
 import "./appLayout.css";
+import { TopNavBar } from "@/components/TopNavBar";
 
 const AppLayout = ({ children }: { children: ReactNode }) => {
   return (
@@ -10,10 +9,14 @@ const AppLayout = ({ children }: { children: ReactNode }) => {
       <div className="sidebar">
         <SideNavbar />
       </div>
-      <div className="topbar">
-        <TopNavBar />
+      <div className="right-container">
+        <div className="topbar">
+          <TopNavBar />
+        </div>
+        <div className="content">
+          <div className="children-container">{children}</div>
+        </div>
       </div>
-      <div className="content">{children}</div>
     </div>
   );
 };

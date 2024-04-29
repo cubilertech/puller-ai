@@ -1,10 +1,11 @@
 import RecentRequestPage from "@/modules/RecentRequestPage/recentRequestPage";
 import AppLayout from "@/common/appLayout/appLayout";
 
-export default function RecentRequests() {
+function Page() {
   return (
     <AppLayout>
       <RecentRequestPage />
     </AppLayout>
   );
 }
+export default Page;

@@ -28,21 +28,27 @@ export const MuiButton = (theme: Theme) => {
             "1px solid linear-gradient(to right, #FFFFFF 0%,#FFFFFF 40%,#FFFFFF 40%, #FFFFFF 60%,#FFFFFF 60%,#FFFFFF 100%)#FFF)",
           background: "#5D92FE",
           color: palette.base.white,
-          backdropFilter: "blur(8px)",
-
+          boxShadow: "none",
           "&:hover": {
             color: palette.base.white,
-            background: "#5D92FE",
+            boxShadow: "none",
+            background:
+              "linear-gradient(54deg, rgba(108,33,177,1) 16%, rgba(26,138,169,1) 100%)",
+            borderRadius: "8px",
           },
         },
+
         outlined: {
           color: palette.base.white,
           borderRadius: "8px",
           border: "none",
-          background: "#7c7586",
+          background: "#627177",
+
           "&:hover": {
             border: "none",
-            backgroundColor: "rgb(95,112,125)",
+            background:
+              "linear-gradient(54deg, rgba(108,33,177,1) 16%, rgba(26,138,169,1) 100%)",
+            borderRadius: "8px",
           },
         },
         text: {

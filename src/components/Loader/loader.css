@@ -1,0 +1,76 @@
+@keyframes typing {
+  0% {
+    content: "Processing";
+  }
+  33% {
+    content: "Processing.";
+  }
+  66% {
+    content: "Processing..";
+  }
+  100% {
+    content: "Processing...";
+  }
+}
+
+.typing-animation {
+  min-width: 12rem;
+}
+
+.typing-animation::before {
+  content: "Processing";
+  animation: typing 1s steps(16) infinite;
+  overflow: hidden;
+  white-space: nowrap;
+  min-width: 10rem;
+  margin-left: 2.3rem;
+}
+@keyframes typing2 {
+  0% {
+    content: "Loading";
+  }
+  33% {
+    content: "Loading.";
+  }
+  66% {
+    content: "Loading..";
+  }
+  100% {
+    content: "Loading...";
+  }
+}
+
+.typing2-animation {
+  min-width: 12rem;
+}
+
+.typing2-animation::before {
+  content: "Loading";
+  animation: typing2 1s steps(16) infinite;
+  overflow: hidden;
+  white-space: nowrap;
+  min-width: 10rem;
+  margin-left: 3.1rem;
+}
+
+.loader-container {
+  opacity: 0; /* Initially hide the loader */
+}
+
+.fade-in {
+  animation: fadeInAnimation 0.5s ease forwards; /* Apply fade-in animation */
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+@keyframes fadeInAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

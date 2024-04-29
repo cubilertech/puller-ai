@@ -1,40 +1,47 @@
-import CustomLink from "@/components/Link/link";
 import { PageHeader } from "@/components/PageHeader";
-import SimpleCard from "@/components/SimpleCard/simpleCard";
-import TopNavBar from "@/components/TopNavBar/topNavBar";
-import { SingleCardDomyData } from "@/utils/constants";
-import { Box, Grid } from "@mui/material";
+import { RequestsCard } from "@/components/RecentRequestes-Card";
+import { SingleCardDomyData } from "@/utils/data";
+import { Box } from "@mui/material";
 import { FC } from "react";
 
 const RecentRequestPage: FC = () => {
   return (
-    <>
-      <Box p={2}>
-        <PageHeader type="Recent" />
+      <Box
+        p={2}
+        height={"98%"}
+        display={"flex"}
+        flexDirection={"column"}
+        gap={"2rem"}
+      >
+        <PageHeader variant="Recent" />
 
-        <Grid
-          container
-          gap={2}
+        <Box
           sx={{
-            mt: 3,
-            maxHeight: "78vh",
+            display: "grid",
+            gridTemplateColumns: {
+              xs: "1fr",
+              sm: "1fr 1fr",
+              md: "1fr 1fr 1fr",
+              lg: "1fr 1fr 1fr 1fr",
+              xl: "repeat(5, 1fr)",
+            },
+            gap: "15px",
+            placeItems: "stretch",
             overflow: "auto",
             scrollbarWidth: "none",
-            width: "100%",
           }}
         >
           {SingleCardDomyData.map((item, index) => (
-            <CustomLink href="/request/preview" key={index}>
-              <SimpleCard
-                isFor="Requests"
-                title={item.title}
-                discription={item.discription}
-              />
-            </CustomLink>
+            // <CustomLink href="/request/preview" key={index}>
+            <RequestsCard
+              key={index}
+              title={item.title}
+              discription={item.discription}
+            />
+            // </CustomLink>
           ))}
-        </Grid>
+        </Box>
       </Box>
-    </>
   );
 };
 

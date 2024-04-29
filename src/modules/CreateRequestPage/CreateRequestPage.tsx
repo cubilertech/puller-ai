@@ -5,8 +5,8 @@ import { PannelArea } from "../PannelArea";
 const CreateRequestPage = () => {
   return (
     <Box sx={{ px: 1.2, pt: 1 }}>
-      <PageHeader type="create" />
-      <Box sx={{ pt: 2, width: "97%", m: "auto" }}>
+      <PageHeader variant="create" />
+      <Box sx={{ pt: 2, width: "96%", m: "auto" }}>
         <PannelArea />
       </Box>
     </Box>

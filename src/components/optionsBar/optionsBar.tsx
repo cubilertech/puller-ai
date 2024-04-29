@@ -1,60 +1,46 @@
-"use client";
-
-import {
-  Box,
-  Checkbox,
-  Divider,
-  Input,
-  MenuItem,
-  Select,
-  Typography,
-} from "@mui/material";
-import { FC, useState } from "react";
+import { Box, Checkbox, Input, Typography } from "@mui/material";
+import { FC } from "react";
 import { Paper } from "../Paper";
 import { Button } from "../Button";
 import { CircleOutlined } from "@mui/icons-material";
-
+import CloseIcon from "@mui/icons-material/Close";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import "./optionsBar.css";
+import DropdownSelect from "../DropdownSelect/dropdownSelect";
+import { Divider } from "../Divider";
+import { OptionsBarVariants } from "@/utils/types";
+import { palette } from "@/theme/Palette";
 
 interface optionbarProps {
-  variant:
-    | "input"
-    | "square-checkbox"
-    | "round-checkbox"
-    | "dropdown"
-    | "options-dropdown";
+  variant: OptionsBarVariants;
   handleUpdate?: () => void | undefined;
+  close?: () => void | undefined;
 }
 
-const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  // Event handler to handle the opening of the Select
-  const handleOpen = () => {
-    setIsOpen(true);
-  };
-
-  // Event handler to handle the closing of the Select
-  const handleClose = () => {
-    setIsOpen(false);
-  };
+const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
+  const data = ["HELP_TICKET_CREATE", "SIGN_UP", "TXN_EVENT", "SITE_LOGIN"];
 
   if (variant === "input")
     return (
       <Box
         sx={{
-          width: "100%",
+          width: { lg: "24%", md: "30%", sm: "40%" },
           height: "100%",
+          ml: "1rem",
+          overflow: "auto",
+          scrollbarWidth: "none",
         }}
       >
         <Paper
-          type="light-border"
+          variant="light-border"
           sx={{
             display: "flex",
             flexDirection: "column",
             padding: "1rem",
             height: "98.8%",
             justifyContent: "space-between",
+            overflow: "auto",
+            scrollbarWidth: "none",
           }}
         >
           <Box
@@ -63,25 +49,43 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate }) => {
               flexDirection: "column",
               gap: "1rem",
               overflow: "auto",
-              scrollbarColor: "none",
+              scrollbarWidth: "none",
             }}
           >
-            <Typography color={"#fff"} variant="text-md-regular">
-              Seasonal Transactions
-            </Typography>
-            <Typography color={"#fff"} variant="text-sm-regular">
+            <Box
+              sx={{
+                display: "flex",
+                width: "100%",
+                justifyContent: "space-between",
+              }}
+            >
+              <Typography color={palette.base.white} variant="text-md-regular">
+                Seasonal Transactions
+              </Typography>
+              <Box onClick={close}>
+                <CloseIcon
+                  sx={{
+                    ":hover": {
+                      cursor: "pointer",
+                    },
+                  }}
+                />
+              </Box>
+            </Box>
+            <Typography color={palette.base.white} variant="text-sm-regular">
               “TXN_SZNAL” table . This query uses a table
               called Transactions that contains the following columns:
             </Typography>
 
             <Paper
-              type="light-border"
+              variant="dark-border"
               sx={{
                 minHeight: "10rem",
                 padding: "0.5rem 1rem",
                 display: "flex",
                 maxHeight: "15rem",
                 margin: 0,
+                border: `2px solid ${palette.opacity.darkerGray}`,
               }}
             >
               <Input
@@ -94,12 +98,13 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate }) => {
                 multiline
                 fullWidth
                 disableUnderline
+                autoFocus
               />
             </Paper>
           </Box>
 
           <Box>
-            <Divider />
+            <Divider type="light" />
             <Box
               sx={{
                 display: "flex",
@@ -108,7 +113,8 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate }) => {
               }}
             >
               <Button
-                onClick={handleUpdate}
+                // onClick={handleUpdate}
+                sx={{ height: "38px !important" }}
                 label="Update"
                 variant="contained"
               />
@@ -128,12 +134,12 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate }) => {
         }}
       >
         <Paper
-          type="dark-border"
+          variant="dark-border"
           sx={{
             display: "flex",
             flexDirection: "column",
             padding: "1rem",
-            minHeight: "calc(100vh - 22vh)",
+            minHeight: "calc(100vh - 27vh)",
             justifyContent: "space-between",
           }}
         >
@@ -145,10 +151,23 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate }) => {
                 gap: "1rem",
               }}
             >
-              <Typography color={"#fff"} variant="text-md-regular">
-                Data Type
+              <Typography
+                color={palette.base.white}
+                variant="text-md-regular"
+                sx={{ display: "flex", justifyContent: "space-between" }}
+              >
+                Data Type{" "}
+                <Box onClick={close}>
+                  <CloseIcon
+                    sx={{
+                      ":hover": {
+                        cursor: "pointer",
+                      },
+                    }}
+                  />
+                </Box>
               </Typography>
-              <Typography color={"#fff"} variant="text-sm-regular">
+              <Typography color={palette.base.white} variant="text-sm-regular">
                 “TXN_SZNAL” table . This query uses a table
                 called Transactions that contains the following columns:
               </Typography>
@@ -160,98 +179,33 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate }) => {
                   gap: "10px",
                 }}
               >
-                <Paper
-                  type="light-border"
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    padding: "0 0.5rem 0 1rem",
-                  }}
-                >
-                  <Typography variant="text-md-regular">Data</Typography>
-                  <Checkbox
-                    icon={
-                      variant === "round-checkbox" ? (
-                        <CircleOutlined />
-                      ) : undefined
-                    }
-                    checkedIcon={
-                      variant === "round-checkbox" ? (
-                        <CheckCircleIcon />
-                      ) : undefined
-                    }
-                  />
-                </Paper>
-                <Paper
-                  type="light-border"
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    padding: "0 0.5rem 0 1rem",
-                  }}
-                >
-                  <Typography variant="text-md-regular">Data</Typography>
-                  <Checkbox
-                    icon={
-                      variant === "round-checkbox" ? (
-                        <CircleOutlined />
-                      ) : undefined
-                    }
-                    checkedIcon={
-                      variant === "round-checkbox" ? (
-                        <CheckCircleIcon />
-                      ) : undefined
-                    }
-                  />
-                </Paper>
-                <Paper
-                  type="light-border"
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    padding: "0 0.5rem 0 1rem",
-                  }}
-                >
-                  <Typography variant="text-md-regular">Data</Typography>
-                  <Checkbox
-                    icon={
-                      variant === "round-checkbox" ? (
-                        <CircleOutlined />
-                      ) : undefined
-                    }
-                    checkedIcon={
-                      variant === "round-checkbox" ? (
-                        <CheckCircleIcon />
-                      ) : undefined
-                    }
-                  />
-                </Paper>
-                <Paper
-                  type="light-border"
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    padding: "0 0.5rem 0 1rem",
-                  }}
-                >
-                  <Typography variant="text-md-regular">Data</Typography>
-                  <Checkbox
-                    icon={
-                      variant === "round-checkbox" ? (
-                        <CircleOutlined />
-                      ) : undefined
-                    }
-                    checkedIcon={
-                      variant === "round-checkbox" ? (
-                        <CheckCircleIcon />
-                      ) : undefined
-                    }
-                  />
-                </Paper>
+                {data.map((item, index) => (
+                  <Paper
+                    key={index}
+                    variant="light-border"
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      padding: "0 0.5rem 0 1rem",
+                      borderRadius: "8px",
+                    }}
+                  >
+                    <Typography variant="text-md-regular">{item}</Typography>
+                    <Checkbox
+                      icon={
+                        variant === "round-checkbox" ? (
+                          <CircleOutlined />
+                        ) : undefined
+                      }
+                      checkedIcon={
+                        variant === "round-checkbox" ? (
+                          <CheckCircleIcon />
+                        ) : undefined
+                      }
+                    />
+                  </Paper>
+                ))}
               </Box>
             </Box>
           )}
@@ -260,87 +214,32 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate }) => {
             <Box
               sx={{
                 display: "flex",
-                justifyContent: "center",
+                flexDirection: "column",
+                gap: "1rem",
               }}
             >
-              <Box>
-                <Select
-                  labelId="demo-controlled-open-select-label"
-                  variant="standard"
-                  fullWidth
-                  disableUnderline
-                  defaultValue={10}
-                  open={isOpen}
-                  onOpen={handleOpen}
-                  onClose={handleClose}
-                  sx={{
-                    border: "2px solid rgba(196, 196, 196, 0.60)",
-                    // borderTop: "none",
-                    width: "14rem",
-                    background:
-                      "linear-gradient(143deg, rgba(255, 255, 255, 0.15) -3.54%, rgba(114, 114, 114, 0.17) 95.15%)",
-                    color: "white",
-                    boxShadow: "none",
-                    borderRadius: isOpen ? 0 : "8px",
-                    borderTopRightRadius: "8px",
-                    borderTopLeftRadius: "8px",
-                    "&:focus": {
-                      bgcolor: "transparent",
-                    },
-                    padding: "0 10px",
-                    borderBottom: isOpen
-                      ? "0"
-                      : "2px solid rgba(196, 196, 196, 0.60)",
-                  }}
-                  MenuProps={{
-                    PaperProps: {
-                      sx: {
-                        border: "2px solid rgba(196, 196, 196, 0.60)",
-                        borderTop: "none",
-                        background:
-                          "linear-gradient(143deg, rgba(255, 255, 255, 0.15) -3.54%, rgba(114, 114, 114, 0.17) 95.15%)",
-                        color: "white",
-                        boxShadow: "none",
-                        borderRadius: 0,
-                        borderBottomRightRadius: "8px",
-                        borderBottomLeftRadius: "8px",
-                      },
-                    },
-                    anchorOrigin: {
-                      vertical: "bottom",
-                      horizontal: "left",
-                    },
-                    transformOrigin: {
-                      vertical: "top",
-                      horizontal: "left",
-                    },
-                  }}
-                >
-                  <MenuItem
+              <Typography
+                color={palette.base.white}
+                variant="text-md-regular"
+                sx={{ display: "flex", justifyContent: "space-between" }}
+              >
+                Data Type{" "}
+                <Box onClick={close}>
+                  <CloseIcon
                     sx={{
-                      width: "13.8rem",
-                      px: 1,
+                      ":hover": {
+                        cursor: "pointer",
+                      },
                     }}
-                    value=""
-                  >
-                    <em>None</em>
-                  </MenuItem>
-                  <MenuItem value={10}>
-                    <Typography
-                      variant="text-md-regular"
-                      sx={{
-                        width: "100%",
-                        pr: 1,
-                      }}
-                    >
-                      Ten
-                    </Typography>
-                  </MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-              </Box>
-              {/* </Paper> */}
+                  />
+                </Box>
+              </Typography>
+              <Typography color={palette.base.white} variant="text-sm-regular">
+                “TXN_SZNAL” table . This query uses a table
+                called Transactions that contains the following columns:
+              </Typography>
+
+              <DropdownSelect />
             </Box>
           )}
 
@@ -349,106 +248,50 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate }) => {
               sx={{
                 display: "flex",
                 flexDirection: "column",
-                gap: "10px",
+                gap: "1rem",
               }}
             >
-              <Paper
-                type="light-border"
-                sx={{
-                  padding: "3px",
-                }}
+              <Typography
+                color={palette.base.white}
+                variant="text-md-regular"
+                sx={{ display: "flex", justifyContent: "space-between" }}
               >
-                <Select
-                  placeholder="Data asdsd"
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  variant="standard"
-                  label="Age"
-                  fullWidth
-                  disableUnderline
-                  sx={{
-                    border: "none", // Remove borders
-                    bgcolor: "transparent", // Set transparent background color
-                    "&:focus": {
-                      // Remove focus outline
-                      bgcolor: "transparent",
-                    },
-                    boxShadow: "none",
-                    ".MuiOutlinedInput-notchedOutline": { border: 0 },
-                    padding: " 0 10px",
-                  }}
-                >
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-              </Paper>
-              <Paper
-                type="light-border"
-                sx={{
-                  padding: "3px",
-                }}
+                Data Type{" "}
+                <Box onClick={close}>
+                  <CloseIcon
+                    sx={{
+                      ":hover": {
+                        cursor: "pointer",
+                      },
+                    }}
+                  />
+                </Box>
+              </Typography>
+              <Typography color={palette.base.white} variant="text-sm-regular">
+                “TXN_SZNAL” table . This query uses a table
+                called Transactions that contains the following columns:
+              </Typography>
+
+              <Box
+                mt={"1rem"}
+                display={"flex"}
+                flexDirection={"column"}
+                gap={"10px"}
               >
-                <Select
-                  placeholder="Data asdsd"
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  variant="standard"
-                  label="Age"
-                  fullWidth
-                  disableUnderline
-                  sx={{
-                    border: "none", // Remove borders
-                    bgcolor: "transparent", // Set transparent background color
-                    "&:focus": {
-                      // Remove focus outline
-                      bgcolor: "transparent",
-                    },
-                    boxShadow: "none",
-                    ".MuiOutlinedInput-notchedOutline": { border: 0 },
-                    padding: " 0 10px",
-                  }}
-                >
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-              </Paper>
-              <Paper
-                type="light-border"
-                sx={{
-                  padding: "3px",
-                }}
-              >
-                <Select
-                  placeholder="Data asdsd"
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  variant="standard"
-                  label="Age"
-                  fullWidth
-                  disableUnderline
-                  sx={{
-                    border: "none",
-                    bgcolor: "transparent",
-                    "&:focus": {
-                      bgcolor: "transparent",
-                    },
-                    boxShadow: "none",
-                    ".MuiOutlinedInput-notchedOutline": { border: 0 },
-                    padding: " 0 10px",
-                  }}
-                >
-                  <MenuItem value={10}>Ten</MenuItem>
-                  <MenuItem value={20}>Twenty</MenuItem>
-                  <MenuItem value={30}>Thirty</MenuItem>
-                </Select>
-              </Paper>
+                <Typography variant="text-sm">And</Typography>
+                <DropdownSelect />
+                <DropdownSelect />
+                <DropdownSelect />
+                <Typography variant="text-sm">OR</Typography>
+                <DropdownSelect />
+                <DropdownSelect />
+                <DropdownSelect />
+              </Box>
             </Box>
           )}
 
           <Box>
-            <Divider />
+            <Divider type="light" />
             <Box
               sx={{
                 display: "flex",

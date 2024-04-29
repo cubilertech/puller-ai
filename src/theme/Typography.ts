@@ -1,40 +1,35 @@
 import { TypographyOptions } from "@mui/material/styles/createTypography";
 
 export const typography: TypographyOptions = {
+  fontFamily: "Inter, sans-serif",
   h1: {
     fontSize: "56px",
     lineHeight: "normal",
-    // fontKerning: "0%",
     fontWeight: 700,
   },
   h2: {
     fontSize: "48px",
     lineHeight: "normal",
-    // fontKerning: "0%",
     fontWeight: 700,
   },
   h3: {
     fontSize: "40px",
     lineHeight: "normal",
-    // fontKerning: "0%",
     fontWeight: 700,
   },
   h4: {
     fontSize: "32px",
     lineHeight: "normal",
-    // fontKerning: "0%",
     fontWeight: 700,
   },
   h5: {
     fontSize: "24px",
     lineHeight: "normal",
-    // fontKerning: "0%",
     fontWeight: 700,
   },
   h6: {
     fontSize: "16px",
     lineHeight: "normal",
-    // fontKerning: "0%",
     fontWeight: 700,
   },
   subtitle1: {
@@ -124,8 +119,10 @@ declare module "@mui/material/Typography" {
     "text-xs-medium": true;
     "text-xs-regular": true;
     "text-xs": true;
+    "text-xxs-bold": true;
     "text-sm": true;
     "display-xs": true;
+    "text-xxs-regular": true;
   }
 }
 declare module "@mui/material/styles" {

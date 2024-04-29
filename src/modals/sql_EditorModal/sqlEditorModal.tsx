@@ -1,19 +1,21 @@
 import { Box, Modal, Typography } from "@mui/material";
 import { FC, useEffect, useState } from "react";
-import MonacoEditor from "react-monaco-editor";
-import { format } from "sql-formatter";
 import "./style.css";
 import { Paper } from "@/components/Paper";
 import { Button } from "@/components/Button";
 import { Close } from "@mui/icons-material";
 import Divider from "@/components/Divider/divider";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { coy } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { format } from "sql-formatter";
 
 const modalStyle = {
   position: "absolute",
   top: "50%",
-  left: "50%",
+  left: "53%",
   transform: "translate(-50%, -50%)",
-  width: "fit-content",
+  width: "70vw",
+  height: "70vh",
   bgcolor: "transparnet",
   border: "none",
   boxShadow: 24,
@@ -30,78 +32,37 @@ const SQL_EditorModal: FC<SQL_EditorModalProps> = ({
   open,
   code,
 }) => {
-  // State to store the formatted code
   const [formattedCode, setFormattedCode] = useState<string>("");
 
-  // Function to format the code using Prettier
   useEffect(() => {
     setFormattedCode(format(code, { language: "mysql" }));
-  }, [code]);
-// Function to add line numbers to the code and color individual words
-const addLineNumbers = (code: string) => {
-  return code.split("\n").map((line, index) => {
-    const words = line.split(/(\b)/); // Split line into words preserving word boundaries
-
-    // Map each word to its appropriate color
-    const coloredWords = words.map((word, wordIndex) => {
-      let color = '#98A2B3'; // Default color
-
-      // Check if the word ends with "("
-      const endsWithParenthesis = word.endsWith("(");
-
-      // Check if the word is within a string
-      const inString = line.includes(word) && line.trim().startsWith('"') && line.trim().endsWith('"');
-
-      // Check if the word is a variable (assuming variables start with $ or _)
-      const isVariable = !inString && !endsWithParenthesis && /\b(\$|_)?[a-zA-Z][$\w]*\b/.test(word);
-      // Check if the word is a number
-      const isNumber = !inString && !endsWithParenthesis && /^\s*\d+(\.\d+)?\s*$/.test(word);
-
-      if (inString) {
-        color = '#c6807c'; // Change color for words within a string
-      } else if (isVariable) {
-        color = 'blue'; // Change color for variables
-      } else if (isNumber) {
-        color = 'green'; // Change color for numbers
-      }
-
-      if (endsWithParenthesis) {
-        // If the word ends with "(", we only change the color of the word itself
-        const wordWithoutParenthesis = word.substring(0, word.length - 1); // Remove the parenthesis
-        return (
-          <span key={wordIndex}>
-            <span style={{ color }}>{wordWithoutParenthesis}</span>
-            {"("}
-          </span>
-        );
-      }
-
-      return <span key={wordIndex} style={{ color }}>{word}</span>;
-    });
-
-    // Return the line with colored words
-    return (
-      <div key={index} style={{ display: "flex", alignItems: "center" }}>
-        <div
-          style={{
-            width: "30px",
-            marginRight: "10px",
-            textAlign: "right",
-            paddingRight: "5px",
-            color: "#98A2B3",
-          }}
-        >
-          {index + 1}
-        </div>
-        <div>{coloredWords}</div>
-      </div>
-    );
-  });
-};
-
-  // Add line numbers to the formatted code
-  const codeWithLineNumbers = addLineNumbers(formattedCode);
-
+  }, []);
+  const customCoyStyle = {
+    ...coy,
+    'code[class*="language-"]': {
+      ...coy['code[class*="language-"]'],
+      background: "transparent",
+      color: "white",
+      padding: 0,
+      fontSize: "16px",
+      height: "100%",
+      overflow: "auto",
+    },
+    'pre[class*="language-"]': {
+      ...coy['code[class*="language-"]'],
+      background: "transparent",
+      color: "white",
+      padding: 0,
+      fontSize: "16px",
+      height: "100%",
+      overflow: "auto",
+    },
+    'span[class="token"]': {
+      ...coy['span[class="token"]'],
+      background: "transparent",
+      fontSize: "16px !important",
+    },
+  };
   return (
     <Modal
       open={open}
@@ -110,7 +71,15 @@ const addLineNumbers = (code: string) => {
       aria-describedby="modal-modal-description"
     >
       <Box sx={modalStyle}>
-        <Paper type="dark-border" sx={{ padding: 3, height: "626px" }}>
+        <Paper
+          variant="dark-border"
+          sx={{
+            padding: 3,
+            height: "69vh",
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
           <Box
             sx={{
               display: "flex",
@@ -137,9 +106,9 @@ const addLineNumbers = (code: string) => {
           <Divider variant="fullWidth" type="light" />
           <Box
             sx={{
-              width: "600px",
+              width: "100%",
               mt: 1,
-              maxHeight: "500px",
+              maxHeight: "86%",
               overflow: "auto",
               scrollbarWidth: "none",
             }}
@@ -149,7 +118,13 @@ const addLineNumbers = (code: string) => {
               component="div"
               sx={{ whiteSpace: "pre-wrap", lineHeight: "30px" }}
             >
-              {codeWithLineNumbers}
+              <SyntaxHighlighter
+                language="sql"
+                style={customCoyStyle}
+                showLineNumbers
+              >
+                {formattedCode}
+              </SyntaxHighlighter>
             </Typography>
           </Box>
         </Paper>
