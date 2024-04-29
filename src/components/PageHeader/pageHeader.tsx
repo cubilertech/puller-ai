@@ -169,7 +169,7 @@ const PageHeader: FC<PageHeaderProps> = ({ variant }) => {
           }}
         >
           <Typography variant="display-xs-semibold" color={palette.base.white}>
-            Templates
+            Pulls Inventory
           </Typography>
           <Box></Box>
         </Box>

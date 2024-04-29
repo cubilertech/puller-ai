@@ -1,6 +1,6 @@
 import { PageHeader } from "@/components/PageHeader";
 import { RetriverCard } from "@/components/RetriverCard";
-import { Select_RetrieverData } from "@/utils/data";
+import { RETRIEVER_DATA } from "@/utils/data";
 import { RetrieverIconsTypes } from "@/utils/types";
 import { Box } from "@mui/material";
 
@@ -32,7 +32,7 @@ const SelectRetrieverPage = () => {
           scrollbarWidth: "none",
         }}
       >
-        {Select_RetrieverData.map((card, i) => (
+        {RETRIEVER_DATA.map((card, i) => (
           <RetriverCard
             description={card.description}
             icon={card.icon as RetrieverIconsTypes}

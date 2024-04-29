@@ -11,6 +11,7 @@ import { usePathname, useRouter } from "next/navigation";
 import CustomLink from "@/components/Link/link";
 import { Tooltip } from "@/components/Tooltip";
 import { OptionsBar } from "@/components/optionsBar";
+import "./panelArea.css";
 
 interface PannelAreaProps {
   content?: {
@@ -59,6 +60,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
           // height: "100%",
           width: "100%",
           gap: 2,
+          overflowX: "hidden",
         }}
       >
         <Box
@@ -80,6 +82,8 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                 : "100%",
               height: "100%",
               justifyContent: "flex-end",
+              overflowX: "hidden",
+              transition: "width 0.5s ease",
             }}
           >
             <Paper
@@ -87,7 +91,6 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
               sx={{
                 border: "1px solid rgb(52,51,65)",
                 height: content ? "fit-content" : "100%",
-                // height: "100%",
                 margin: 0,
                 padding: content ? 1 : 0,
                 width: "100%",
@@ -225,22 +228,25 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
             </Paper>
             {isValidate && (
               <Paper
-              variant="dark-border"
+                variant="dark-border"
                 sx={{
-                  // width: isOpenSelectBar
-                  //   ? { lg: "76%", md: "70%", xs: "60%" }
-                  //   : "100%",
-                  borderRadius: "8px",
+                  borderRadius: "16px",
+                  height: "56px",
                   padding: "0.6rem",
                   margin: 0,
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
+                  animation: "fallingEffect 0.5s ease forwards",
+                  position: "relative",
+                  top: "-500px",
+                  zIndex: 10,
+                  opacity: 0,
                 }}
               >
                 <Typography variant="text-sm" color={palette.gray[300]}>
                   This query is estimated to take X minutes and will be
-                  approximatley X size.{" "}
+                  approximately X size.
                   <span style={{ textDecoration: "underline" }}>
                     <CustomLink color="#90919b" variant="simple" href="#">
                       Need to optimize?
@@ -252,11 +258,13 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
           </Box>
 
           {isOpenSelectBar && (
-            <OptionsBar
-              close={handleCloseSelectBar}
-              variant="square-checkbox"
-              handleUpdate={handleUpdate ? () => handleUpdate() : undefined}
-            />
+            <Box className={isOpenSelectBar ? "slide-in" : "slide-out"}>
+              <OptionsBar
+                close={handleCloseSelectBar}
+                variant="square-checkbox"
+                handleUpdate={handleUpdate ? () => handleUpdate() : undefined}
+              />
+            </Box>
           )}
         </Box>
         {content ? (

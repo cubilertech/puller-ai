@@ -72,7 +72,7 @@ const CustomButton: FC<buttonProps> = ({
               border: `1px solid var(--vison-pro-stock, ${palette.base.white})`,
               backgroundColor: "#425459",
               width: 82,
-              height: 40,
+              height: "40px !important",
               py: 2,
               px: 4,
               transition: "background 3.3s ease",

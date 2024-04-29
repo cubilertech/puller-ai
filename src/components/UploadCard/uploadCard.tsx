@@ -15,7 +15,7 @@ const UploadCard = () => {
       }}
       variant="light-border"
     >
-      <Typography variant="text-xxs-regular">
+      <Typography variant="text-xxs-regular" mb={1}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet
         justo ipsum. Sed accumsan quam vitae est varius fringilla. Pellentesque
         placerat vestibulum lorem sed porta. Nullam mattis tristique iaculis.
@@ -24,11 +24,13 @@ const UploadCard = () => {
       </Typography>
       <Divider
         type={"light"}
-        sx={{
-          my: "10px",
-        }}
       />
-      <Box display={"flex"} justifyContent={"space-between"} gap={1}>
+      <Box
+        display={"flex"}
+        justifyContent={"space-between"}
+        gap={1}
+        sx={{ alignItems: "center", pt: 1 }}
+      >
         <Box
           display={"flex"}
           sx={{ alignItems: { md: "center", xs: "flex-start" } }}
