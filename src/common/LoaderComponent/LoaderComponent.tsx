@@ -15,7 +15,7 @@ const LoaderComponent: FC<LoaderComponentProps> = ({ type }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setShowLoader(false);
-    }, 4000);
+    }, 3950);
 
     return () => clearTimeout(timer);
   }, []);

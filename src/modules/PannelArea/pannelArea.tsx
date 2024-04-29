@@ -11,6 +11,7 @@ import { usePathname, useRouter } from "next/navigation";
 import CustomLink from "@/components/Link/link";
 import { Tooltip } from "@/components/Tooltip";
 import { OptionsBar } from "@/components/optionsBar";
+
 import "./panelArea.css";
 
 interface PannelAreaProps {
@@ -60,6 +61,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
           // height: "100%",
           width: "100%",
           gap: 2,
+          overflowX: "hidden",
         }}
       >
         <Box
@@ -81,6 +83,9 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                 : "100%",
               height: "100%",
               justifyContent: "flex-end",
+              overflowX: "hidden",
+              // Apply CSS transition for smooth width change
+              transition: "width 0.5s ease",
             }}
           >
             <Paper
@@ -281,11 +286,13 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
           </Box>
 
           {isOpenSelectBar && (
-            <OptionsBar
-              close={handleCloseSelectBar}
-              variant="square-checkbox"
-              handleUpdate={handleUpdate ? () => handleUpdate() : undefined}
-            />
+            <Box className={isOpenSelectBar ? "slide-in" : "slide-out"}>
+              <OptionsBar
+                close={handleCloseSelectBar}
+                variant="square-checkbox"
+                handleUpdate={handleUpdate ? () => handleUpdate() : undefined}
+              />
+            </Box>
           )}
         </Box>
         {content ? (
