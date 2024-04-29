@@ -7,6 +7,7 @@ import { useRouter } from "next/navigation";
 import { ConnectCard } from "@/components/ConnectCard";
 import { CONNECT_APP_DATA } from "@/utils/data";
 import { Input } from "@/components/Input";
+import { palette } from "@/theme/Palette";
 
 const ConnectAppsPage = () => {
   const router = useRouter();
@@ -34,9 +35,7 @@ const ConnectAppsPage = () => {
         {/* Topbar */}
         <Box
           sx={{
-            background:
-              "linear-gradient(142.96deg, rgba(255, 255, 255, 0.148) -3.54%, rgba(114, 114, 114, 0.168) 95.15%)",
-            borderTopLeftRadius: "14px",
+            background: palette.linearGradient.gray,
             borderTopRightRadius: "14px",
             minHeight: "5rem",
             display: "flex",

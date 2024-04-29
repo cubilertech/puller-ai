@@ -3,6 +3,7 @@ import { Icon } from "../Icon";
 import { FC } from "react";
 import { IconTypes } from "@/utils/types";
 import "./Input.css";
+import { palette } from "@/theme/Palette";
 
 interface SearchbarProps {
   width?: number;
@@ -27,7 +28,7 @@ const Input: FC<SearchbarProps> = ({
         placeholder={placeholder}
         disableUnderline
         sx={{
-          background: "rgb(115,130,133)",
+          background: palette.color.gray[300],
           zIndex: 2,
           border: 0,
           padding: "10px 16px 10px 16px",

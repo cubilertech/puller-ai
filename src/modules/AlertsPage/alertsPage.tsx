@@ -3,6 +3,7 @@ import CustomButton from "@/common/CustomButtons/CustomButtons";
 import { AlertCard } from "@/components/AlertCard";
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
+import { palette } from "@/theme/Palette";
 import { ACTIVE_TYPES } from "@/utils/constants";
 import { ALERT_DATA, UNREAD_ALERT_DATA } from "@/utils/data";
 import { Box, Typography } from "@mui/material";
@@ -41,8 +42,7 @@ const AlertsPage = () => {
           sx={{
             width: "100%",
             minHeight: "2rem",
-            background:
-              "linear-gradient(142.96deg, rgba(255, 255, 255, 0.148) -3.54%, rgba(114, 114, 114, 0.168) 95.15%)",
+            background: palette.linearGradient.gray,
             padding: "1rem 1rem 0",
             borderTopLeftRadius: "14px",
             borderTopRightRadius: "14px",
@@ -57,7 +57,7 @@ const AlertsPage = () => {
               padding: " 0 1rem",
               borderBottom:
                 isActive === ACTIVE_TYPES.ALL
-                  ? "2px solid rgb(252,252,253)"
+                  ? `2px solid ${palette.color.offWhite}`
                   : "",
               ":hover": {
                 cursor: "pointer",
@@ -84,7 +84,7 @@ const AlertsPage = () => {
             sx={{
               borderBottom:
                 isActive === ACTIVE_TYPES.UNREAD
-                  ? "2px solid rgb(252,252,253)"
+                  ? `2px solid ${palette.color.offWhite}`
                   : "",
               ":hover": {
                 cursor: "pointer",

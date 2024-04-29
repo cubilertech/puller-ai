@@ -2,16 +2,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
   padding: 1px;
-  background: linear-gradient(
-    to bottom right,
-    rgba(255, 255, 255, 0.7),
-    rgba(255, 255, 255, 0.4),
-    rgba(255, 255, 255, 0.4),
-    rgba(255, 255, 255, 0.4),
-    rgba(255, 255, 255, 0.7)
-  );
+  background: var(--gray-gradient-border);
   border-radius: 8px;
   width: 100%;
 }
@@ -21,26 +13,11 @@
   justify-content: center;
   align-items: center;
   padding: 1px;
-  background: linear-gradient(
-    to bottom right,
-
-    rgb(158, 190, 254),
-    rgba(93, 146, 254, 1),
-    rgba(93, 146, 254, 1),
-    rgba(93, 146, 254, 1),
-    rgb(158, 190, 254)
-  );
+  background: var(--button-contained-border);
   border-radius: 8px;
   width: "100%";
 }
 
 .contained-container:hover {
-  background: linear-gradient(
-    to bottom right,
-    rgba(144, 118, 207, 1),
-    rgba(105, 65, 198, 1),
-    rgba(105, 65, 198, 1),
-    rgba(105, 65, 198, 1),
-    rgba(144, 118, 207, 1)
-  );
+  background: var(--button-contained-border-hover);
 }

@@ -3,6 +3,7 @@ import { Divider } from "@/components/Divider";
 import { Icon } from "@/components/Icon";
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
+import { palette } from "@/theme/Palette";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 
@@ -78,7 +79,7 @@ const RetrieverDetailPage = () => {
           gridTemplateColumns={"1fr 1fr"}
           gridTemplateRows={"4"}
         >
-          <Box borderRight={"1px solid rgba(230, 230, 230, 0.3)"}>
+          <Box borderRight={`1px solid ${palette.opacity.darkGray}`}>
             <Typography variant="text-xl-semibold">Usage History</Typography>
             <Box
               display={"flex"}
@@ -94,14 +95,17 @@ const RetrieverDetailPage = () => {
                   gap={"1rem"}
                   alignItems={"flex-start"}
                 >
-                  <Typography color={"#E6E6E6"} variant="text-sm">
+                  <Typography color={palette.color.eggWhite} variant="text-sm">
                     12/02/2024
                   </Typography>
-                  <Typography color={"#E6E6E6"} variant="text-sm">
+                  <Typography color={palette.color.eggWhite} variant="text-sm">
                     |
                   </Typography>
                   <Box display={"flex"} flexDirection={"column"} gap={"0.5rem"}>
-                    <Typography color={"#E6E6E6"} variant="text-sm">
+                    <Typography
+                      color={palette.color.eggWhite}
+                      variant="text-sm"
+                    >
                       Aliquam a dui vel justo fringilla euismod id id enim. Nunc
                       non semper tellus. Pellentesque
                     </Typography>
@@ -129,10 +133,10 @@ const RetrieverDetailPage = () => {
                   gap={"1rem"}
                   alignItems={"flex-start"}
                 >
-                  <Typography color={"#E6E6E6"} variant="text-sm">
+                  <Typography color={palette.color.eggWhite} variant="text-sm">
                     12/02/2024
                   </Typography>
-                  <Typography color={"#E6E6E6"} variant="text-sm">
+                  <Typography color={palette.color.eggWhite} variant="text-sm">
                     |
                   </Typography>
                   <Box
@@ -144,7 +148,10 @@ const RetrieverDetailPage = () => {
                     <Typography variant="text-md-regular">
                       Title of the notification
                     </Typography>
-                    <Typography color={"#E6E6E6"} variant="text-sm">
+                    <Typography
+                      color={palette.color.eggWhite}
+                      variant="text-sm"
+                    >
                       Aliquam a dui vel justo fringilla euismod id id enim. Nunc
                       non semper tellus. Pellentesque
                     </Typography>

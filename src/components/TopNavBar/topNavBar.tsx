@@ -29,7 +29,7 @@ const TopNavBar = () => {
           justifyContent: "space-between",
           alignItems: "center",
           gap: "211px",
-          bgcolor: "rgba(102, 112, 133, 0.60)",
+          bgcolor: palette.opacity.lightBlue,
         }}
       >
         <Box sx={{ ml: 4 }}>

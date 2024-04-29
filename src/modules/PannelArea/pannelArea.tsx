@@ -85,7 +85,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
             <Paper
               type="dark-border"
               sx={{
-                border: "1px solid rgb(52,51,65)",
+                border: `1px solid ${palette.color.gray[700]}`,
                 height: content ? "fit-content" : "100%",
                 // height: "100%",
                 margin: 0,
@@ -123,8 +123,8 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                           m: "auto",
                           textAlign: "start",
                           color: isOpenSelectBar
-                            ? "rgba(151, 151, 161, 1)"
-                            : "rgba(255, 255, 255, 1)",
+                            ? palette.opacity.lightGray
+                            : palette.base.white,
                         }}
                         component="p"
                       >
@@ -146,16 +146,16 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                             sx={{
                               borderRadius: "8px",
                               bgcolor: isOpenSelectBar
-                                ? "rgb(255,255,255)"
+                                ? palette.base.white
                                 : "",
                               color: isOpenSelectBar
-                                ? " rgba(42, 39, 62, 1)"
+                                ? palette.color.midnightPlum
                                 : "",
                               mx: "5px",
                               pb: "3px",
                               pr: "4px",
                               ":hover": {
-                                bgcolor: "rgb(91,93,107)",
+                                bgcolor: palette.color.gray[200],
                               },
                             }}
                           >
@@ -194,7 +194,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                         <Typography variant="text-xs-bold">Original</Typography>
                         <Typography
                           variant="text-xs-regular"
-                          color={palette.gray[300]}
+                          color={palette.color.gray[300]}
                           style={{
                             whiteSpace: "nowrap",
                             overflow: "hidden",
@@ -238,7 +238,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                   alignItems: "center",
                 }}
               >
-                <Typography variant="text-sm" color={palette.gray[300]}>
+                <Typography variant="text-sm" color={palette.color.gray[300]}>
                   This query is estimated to take X minutes and will be
                   approximatley X size.{" "}
                   <span style={{ textDecoration: "underline" }}>

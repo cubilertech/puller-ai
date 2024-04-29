@@ -8,6 +8,7 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import "./optionsBar.css";
 import DropdownSelect from "../DropdownSelect/dropdownSelect";
 import { Divider } from "../Divider";
+import { palette } from "@/theme/Palette";
 
 interface optionbarProps {
   variant:
@@ -21,28 +22,36 @@ interface optionbarProps {
 }
 
 const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
-
   const data = ["HELP_TICKET_CREATE", "SIGN_UP", "TXN_EVENT", "SITE_LOGIN"];
 
   if (variant === "input")
     return (
-        <Box
+      <Box
+        sx={{
+          width: { lg: "24%", md: "30%", sm: "40%" },
+          height: "100%",
+          ml: "1rem",
+          overflow: "auto",
+          scrollbarWidth: "none",
+        }}
+      >
+        <Paper
+          type="light-border"
           sx={{
-            width: { lg: "24%", md: "30%", sm: "40%" },
-            height: "100%",
-            ml: "1rem",
+            display: "flex",
+            flexDirection: "column",
+            padding: "1rem",
+            height: "98.8%",
+            justifyContent: "space-between",
             overflow: "auto",
             scrollbarWidth: "none",
           }}
         >
-          <Paper
-            type="light-border"
+          <Box
             sx={{
               display: "flex",
               flexDirection: "column",
-              padding: "1rem",
-              height: "98.8%",
-              justifyContent: "space-between",
+              gap: "1rem",
               overflow: "auto",
               scrollbarWidth: "none",
             }}
@@ -50,82 +59,73 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
             <Box
               sx={{
                 display: "flex",
-                flexDirection: "column",
-                gap: "1rem",
-                overflow: "auto",
-                scrollbarWidth: "none",
+                width: "100%",
+                justifyContent: "space-between",
               }}
             >
-              <Box
-                sx={{
-                  display: "flex",
-                  width: "100%",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Typography color={"#fff"} variant="text-md-regular">
-                  Seasonal Transactions
-                </Typography>
-                <Box onClick={close}>
-                  <CloseIcon
-                    sx={{
-                      ":hover": {
-                        cursor: "pointer",
-                      },
-                    }}
-                  />
-                </Box>
-              </Box>
-              <Typography color={"#fff"} variant="text-sm-regular">
-                “TXN_SZNAL” table . This query uses a table
-                called Transactions that contains the following columns:
+              <Typography color={palette.base.white} variant="text-md-regular">
+                Seasonal Transactions
               </Typography>
-
-              <Paper
-                type="dark-border"
-                sx={{
-                  minHeight: "10rem",
-                  padding: "0.5rem 1rem",
-                  display: "flex",
-                  maxHeight: "15rem",
-                  margin: 0,
-                  border: "2px solid rgba(57, 57, 57, 0.6)",
-                }}
-              >
-                <Input
+              <Box onClick={close}>
+                <CloseIcon
                   sx={{
-                    boxSizing: "border-box",
-                    minHeight: "100%",
-                    alignItems: "flex-start",
-                    overflowY: "auto",
+                    ":hover": {
+                      cursor: "pointer",
+                    },
                   }}
-                  multiline
-                  fullWidth
-                  disableUnderline
-                  autoFocus
-                />
-              </Paper>
-            </Box>
-
-            <Box>
-              <Divider type="light" />
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "flex-end",
-                  mt: "1rem",
-                }}
-              >
-                <Button
-                  // onClick={handleUpdate}
-                  sx={{ height: "38px !important" }}
-                  label="Update"
-                  variant="contained"
                 />
               </Box>
             </Box>
-          </Paper>
-        </Box>
+            <Typography color={palette.base.white} variant="text-sm-regular">
+              “TXN_SZNAL” table . This query uses a table
+              called Transactions that contains the following columns:
+            </Typography>
+
+            <Paper
+              type="dark-border"
+              sx={{
+                minHeight: "10rem",
+                padding: "0.5rem 1rem",
+                display: "flex",
+                maxHeight: "15rem",
+                margin: 0,
+                border: `2px solid ${palette.opacity.darkerGray}`,
+              }}
+            >
+              <Input
+                sx={{
+                  boxSizing: "border-box",
+                  minHeight: "100%",
+                  alignItems: "flex-start",
+                  overflowY: "auto",
+                }}
+                multiline
+                fullWidth
+                disableUnderline
+                autoFocus
+              />
+            </Paper>
+          </Box>
+
+          <Box>
+            <Divider type="light" />
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "flex-end",
+                mt: "1rem",
+              }}
+            >
+              <Button
+                // onClick={handleUpdate}
+                sx={{ height: "38px !important" }}
+                label="Update"
+                variant="contained"
+              />
+            </Box>
+          </Box>
+        </Paper>
+      </Box>
     );
   else
     return (
@@ -156,7 +156,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
               }}
             >
               <Typography
-                color={"#fff"}
+                color={palette.base.white}
                 variant="text-md-regular"
                 sx={{ display: "flex", justifyContent: "space-between" }}
               >
@@ -171,7 +171,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
                   />
                 </Box>
               </Typography>
-              <Typography color={"#fff"} variant="text-sm-regular">
+              <Typography color={palette.base.white} variant="text-sm-regular">
                 “TXN_SZNAL” table . This query uses a table
                 called Transactions that contains the following columns:
               </Typography>
@@ -223,7 +223,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
               }}
             >
               <Typography
-                color={"#fff"}
+                color={palette.base.white}
                 variant="text-md-regular"
                 sx={{ display: "flex", justifyContent: "space-between" }}
               >
@@ -238,7 +238,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
                   />
                 </Box>
               </Typography>
-              <Typography color={"#fff"} variant="text-sm-regular">
+              <Typography color={palette.base.white} variant="text-sm-regular">
                 “TXN_SZNAL” table . This query uses a table
                 called Transactions that contains the following columns:
               </Typography>
@@ -256,7 +256,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
               }}
             >
               <Typography
-                color={"#fff"}
+                color={palette.base.white}
                 variant="text-md-regular"
                 sx={{ display: "flex", justifyContent: "space-between" }}
               >
@@ -271,7 +271,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
                   />
                 </Box>
               </Typography>
-              <Typography color={"#fff"} variant="text-sm-regular">
+              <Typography color={palette.base.white} variant="text-sm-regular">
                 “TXN_SZNAL” table . This query uses a table
                 called Transactions that contains the following columns:
               </Typography>

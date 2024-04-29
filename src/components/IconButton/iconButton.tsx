@@ -7,6 +7,7 @@ import {
 import { IconTypes } from "@/utils/types";
 import { Icon } from "../Icon";
 import "./iconButton.css";
+import { palette } from "@/theme/Palette";
 
 interface IconButtonProps {
   icon?: IconTypes;
@@ -35,7 +36,7 @@ const IconButton: FC<IconButtonProps> = ({
         sx={{
           width: fullWidth ? "100%" : "auto",
           ":hover": {
-            backgroundColor: "rgb(95,112,125)",
+            backgroundColor: palette.color.gray[400],
           },
           ...sx,
         }}

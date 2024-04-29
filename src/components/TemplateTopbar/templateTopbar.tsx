@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material";
 import { FC } from "react";
 import { ACTIVE_TYPES } from "@/utils/constants";
 import { Input } from "../Input";
+import { palette } from "@/theme/Palette";
 
 interface TemplateTopbarProps {
   isActive: string;
@@ -29,9 +30,8 @@ const TemplateTopbar: FC<TemplateTopbarProps> = ({ isActive, setIsActive }) => {
           sx={{
             borderBottom:
               isActive === "public"
-                ? "1px solid rgb(0,224,238)"
-                : "1px solid rgb(114,121,129)",
-
+                ? `1px solid ${palette.color.teal}`
+                : `1px solid ${palette.color.gray[600]}`,
             width: "202px",
             display: "flex",
             alignItems: "flex-end",
@@ -50,8 +50,8 @@ const TemplateTopbar: FC<TemplateTopbarProps> = ({ isActive, setIsActive }) => {
           sx={{
             borderBottom:
               isActive === "private"
-                ? "1px solid rgb(0,224,238)"
-                : "1px solid rgb(114,121,129)",
+                ? `1px solid ${palette.color.teal}`
+                : `1px solid ${palette.color.gray[600]}`,
             textAlign: "center",
             width: "202px",
             display: "flex",

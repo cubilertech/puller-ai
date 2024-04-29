@@ -53,16 +53,46 @@ const success = {
 };
 
 const gray = {
-  900: "#0C111D",
-  800: "#101828",
-  700: "#182230",
-  600: "#344054",
-  500: "#475467",
-  400: "#667085",
-  300: "#90919b",
-  200: "#D0D5DD",
-  100: "#EAECF0",
-  50: "#F2F4F7",
+  700: "rgb(52,51,65)",
+  650: "#425459",
+  600: "rgb(91,93,107)",
+  550: "rgb(90,93,105)",
+  500: "rgb(112,112,129)",
+  400: "rgb(95,112,125)",
+  300: "rgb(115,130,133)",
+  250: "#7a8089",
+  200: "rgb(114,121,129)",
+  175: "rgb(118,119,124)",
+  150: "rgba(255, 255, 255, 0.37)",
+  100: "#90919b",
+  50: "#8f8f94",
+};
+
+const opacity = {
+  blue: "rgba(93, 146, 254, 0.3)",
+  lightBlue: "rgba(102, 112, 133, 0.60)",
+  gray: "rgba(196, 196, 196, 0.6)",
+  darkGray: "rgba(230, 230, 230, 0.3)",
+  lightGray: "rgba(151, 151, 161, 1)",
+  darkerGray: "rgba(57, 57, 57, 0.6)",
+};
+
+const color = {
+  offWhite: "rgb(252,252,253)",
+  eggWhite: "#E6E6E6",
+  midnightPlum: "rgba(42, 39, 62, 1)",
+  blue: "rgb(47,61,92)",
+  teal: "rgb(0,224,238)",
+};
+
+const gradiant = {
+  darkBlue:
+    "linear-gradient(142.96deg, rgba(93, 146, 254, 0.148) -3.54%, rgba(93, 146, 254, 0.168) 95.15%)",
+  gray: "linear-gradient(142.96deg, rgba(255, 255, 255, 0.148) -3.54%, rgba(114, 114, 114, 0.168) 95.15%)",
+  lightGray:
+    "linear-gradient(143deg, rgba(57, 57, 57, 0.60) -3.54%, rgba(97, 97, 97, 0.60) 99.99%)",
+  purpleBlue:
+    "linear-gradient(54deg, rgba(108,33,177,1) 16%, rgba(26,138,169,1) 100%)",
 };
 
 const base = {
@@ -74,17 +104,13 @@ const base = {
 export const palette = {
   mode: "dark" as PaletteMode,
   primary: {
-    main: '#5D92FE',
+    main: "#5D92FE",
   },
   brand: {
     main: "#7F56D9",
     ...brand,
   },
   base: base,
-  gray: {
-    main: "#667085",
-    ...gray,
-  },
   error: {
     main: "#F04438",
     ...error,
@@ -96,5 +122,17 @@ export const palette = {
   success: {
     main: "#17B26A",
     ...success,
+  },
+  linearGradient: {
+    ...gradiant,
+  },
+  opacity: {
+    ...opacity,
+  },
+  color: {
+    gray: {
+      ...gray,
+    },
+    ...color,
   },
 };

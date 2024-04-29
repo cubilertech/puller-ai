@@ -2,6 +2,7 @@
 import { Button } from "@/components/Button";
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
+import { palette } from "@/theme/Palette";
 import { Box, Input, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 
@@ -26,7 +27,7 @@ const CreateAlertPage = () => {
             width: "100%",
             minHeight: "15rem",
             padding: "2rem",
-            border: "2px solid rgba(196, 196, 196, 0.6) !important",
+            border: `2px solid ${palette.opacity.gray} !important`,
           }}
           type="light-border"
         >
@@ -40,7 +41,7 @@ const CreateAlertPage = () => {
                 display: "flex",
                 maxHeight: "15rem",
                 background: "transparent !important ",
-                border: "2px solid rgba(196, 196, 196, 0.6) !important",
+                border: `2px solid ${palette.opacity.gray} !important`,
                 borderRadius: "8px",
               }}
             >
