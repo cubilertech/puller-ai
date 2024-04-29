@@ -1,0 +1,10 @@
+@keyframes fallingEffect {
+  from {
+    top: -500px; /* Start from above the viewport */
+    opacity: 0; /* Start invisible */
+  }
+  to {
+    top: 0; /* End at the original position */
+    opacity: 1; /* Fade in */
+  }
+}

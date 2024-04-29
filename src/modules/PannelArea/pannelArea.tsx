@@ -11,6 +11,7 @@ import { usePathname, useRouter } from "next/navigation";
 import CustomLink from "@/components/Link/link";
 import { Tooltip } from "@/components/Tooltip";
 import { OptionsBar } from "@/components/optionsBar";
+import "./panelArea.css";
 
 interface PannelAreaProps {
   content?: {
@@ -224,23 +225,51 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
               )}
             </Paper>
             {isValidate && (
+              // <Paper
+              //   type="dark-border"
+              //   sx={{
+              //     // width: isOpenSelectBar
+              //     //   ? { lg: "76%", md: "70%", xs: "60%" }
+              //     //   : "100%",
+              //     borderRadius: "8px",
+              //     padding: "0.6rem",
+              //     margin: 0,
+              //     display: "flex",
+              //     justifyContent: "center",
+              //     alignItems: "center",
+              //   }}
+              // >
+              //   <Typography variant="text-sm" color={palette.gray[300]}>
+              //     This query is estimated to take X minutes and will be
+              //     approximatley X size.{" "}
+              //     <span style={{ textDecoration: "underline" }}>
+              //       <CustomLink color="#90919b" variant="simple" href="#">
+              //         Need to optimize?
+              //       </CustomLink>
+              //     </span>
+              //   </Typography>
+              // </Paper>
               <Paper
                 type="dark-border"
                 sx={{
-                  // width: isOpenSelectBar
-                  //   ? { lg: "76%", md: "70%", xs: "60%" }
-                  //   : "100%",
                   borderRadius: "8px",
                   padding: "0.6rem",
                   margin: 0,
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
+                  // Add CSS animation for falling effect
+                  animation: "fallingEffect 0.5s ease forwards",
+                  // Adjust these properties according to your layout
+                  position: "relative",
+                  top: "-500px", // Initially position above the viewport
+                  zIndex: 10,
+                  opacity: 0, // Initially invisible
                 }}
               >
                 <Typography variant="text-sm" color={palette.gray[300]}>
                   This query is estimated to take X minutes and will be
-                  approximatley X size.{" "}
+                  approximately X size.
                   <span style={{ textDecoration: "underline" }}>
                     <CustomLink color="#90919b" variant="simple" href="#">
                       Need to optimize?
