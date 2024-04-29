@@ -18,6 +18,6 @@
 .monaco-editor .mtk3 {
   color: #ff0000;
 }
-span {
+span.token {
   background: transparent !important;
 }

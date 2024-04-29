@@ -16,6 +16,7 @@ import { useEffect } from "react";
 import { Logo } from "../logo";
 import { SideBar_Data } from "@/utils/data";
 import { palette } from "@/theme/Palette";
+import "./sideNavbar.css";
 
 const SideNavbar = () => {
   const Route = useRouter();
@@ -73,37 +74,39 @@ const SideNavbar = () => {
                 {SideBar_Data.map((item, index) => (
                   <ListItem key={index}>
                     <Link href={item.link} style={{ width: "100%" }}>
-                      <MuiListItemButton
-                        sx={{
-                          display: "flex",
-                          gap: "12px",
-                          border:
-                            path === item.name
-                              ? `1px solid ${palette.color.gray[50]}`
-                              : "1px solid transparent",
-                          background:
-                            path === item.name.toLowerCase()
-                              ? palette.color.gray[175]
-                              : path === "" && index === 0
-                                ? palette.color.gray[175]
-                                : "",
-                        }}
-                      >
-                        <ListItemIcon
+                      <div className="navbar-container">
+                        <MuiListItemButton
                           sx={{
-                            minWidth: 0,
+                            display: "flex",
+                            gap: "12px",
+                            border:
+                              path === item.name
+                                ? "1px solid #8f8f94"
+                                : "1px solid transparent",
+                            background:
+                              path === item.name.toLowerCase()
+                                ? "rgb(118,119,124)"
+                                : path === "" && index === 0
+                                  ? "rgb(118,119,124)"
+                                  : "",
                           }}
                         >
-                          <Icon width={18} height={18} icon={item.icon} />
-                        </ListItemIcon>
+                          <ListItemIcon
+                            sx={{
+                              minWidth: 0,
+                            }}
+                          >
+                            <Icon width={18} height={18} icon={item.icon} />
+                          </ListItemIcon>
 
-                        <ListItemText
-                          sx={{
-                            fontSize: "14px",
-                          }}
-                          primary={item.name}
-                        />
-                      </MuiListItemButton>
+                          <ListItemText
+                            sx={{
+                              fontSize: "14px",
+                            }}
+                            primary={item.name}
+                          />
+                        </MuiListItemButton>
+                      </div>
                     </Link>
                   </ListItem>
                 ))}

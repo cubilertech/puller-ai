@@ -158,7 +158,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
                               pb: "3px",
                               pr: "4px",
                               ":hover": {
-                                bgcolor: palette.color.gray[200],
+                                backgroundColor: palette.color.gray[600],
                               },
                             }}
                           >

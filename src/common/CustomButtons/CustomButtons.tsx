@@ -78,7 +78,7 @@ const CustomButton: FC<buttonProps> = ({
               height: "40px !important",
               py: 2,
               px: 4,
-              transition: "background 3.3s ease",
+              transition: "background 0.3s ease, border-radius 0.3s ease",
               ":hover": {
                 background: palette.linearGradient.purpleBlue,
                 borderRadius: "50px",

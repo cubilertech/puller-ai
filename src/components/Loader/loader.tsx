@@ -30,6 +30,7 @@ const Loader: FC<LoaderProps> = ({ variant, type }) => {
             flexDirection: "column",
             alignItems: "center",
           }}
+          className={`loader-container ${showLoader ? "fade-in" : "fade-out"}`}
         >
           <Icon icon="logoIcon" width={240} height={260} />
 

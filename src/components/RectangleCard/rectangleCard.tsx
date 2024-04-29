@@ -29,7 +29,7 @@ const RectangleCard: FC<RectangleCardProps> = ({ icon, title, onClick }) => {
           cursor: "pointer",
           background: palette.linearGradient.darkBlue,
           "& .child": {
-            background: palette.opacity.blue,
+            background: palette.color.darkblue,
           },
         },
       }}

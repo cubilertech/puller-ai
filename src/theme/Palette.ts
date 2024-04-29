@@ -82,6 +82,8 @@ const color = {
   eggWhite: "#E6E6E6",
   midnightPlum: "rgba(42, 39, 62, 1)",
   blue: "rgb(47,61,92)",
+  lightblue: "rgb(114,128,159)",
+  darkblue: "rgb(60,86,140)",
   teal: "rgb(0,224,238)",
 };
 

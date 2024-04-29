@@ -43,7 +43,7 @@ const RetriverCard: FC<retriverCardProps> = ({
             cursor: "pointer",
             background: palette.linearGradient.darkBlue,
             "& .child": {
-              background: palette.opacity.blue,
+              background: palette.color.lightblue,
             },
           },
         }}
