@@ -15,6 +15,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { Logo } from "../logo";
 import { SideBar_Data } from "@/utils/data";
+import { palette } from "@/theme/Palette";
 
 const SideNavbar = () => {
   const Route = useRouter();
@@ -37,18 +38,14 @@ const SideNavbar = () => {
         sx={{
           position: "static",
           flexShrink: 0,
-          borderRight:
-            "1px solid var(--Vision-pro-01, rgba(255, 255, 255, 0.37))",
-          background:
-            "linear-gradient(143deg, rgba(57, 57, 57, 0.60) -3.54%, rgba(97, 97, 97, 0.60) 99.99%)",
+          borderRight: `1px solid ${palette.color.gray[150]} `,
+          background: palette.linearGradient.lightGray,
           "& .MuiDrawer-paper": {
             width: drawerWidth,
 
             boxSizing: "border-box",
-            borderRight:
-              "1px solid var(--Vision-pro-01, rgba(255, 255, 255, 0.37))",
-            background:
-              "linear-gradient(143deg, rgba(57, 57, 57, 0.60) -3.54%, rgba(97, 97, 97, 0.60) 99.99%)",
+            borderRight: `1px solid ${palette.color.gray[150]} `,
+            background: palette.linearGradient.lightGray,
             boxShadow:
               "0px 1.127px 3.38px 0px rgba(255, 255, 255, 0.25) inset, 0px 0.501px 12.02px -0.501px rgba(0, 0, 0, 0.18)",
             backdropFilter: "blur(30px)",
@@ -82,13 +79,13 @@ const SideNavbar = () => {
                           gap: "12px",
                           border:
                             path === item.name
-                              ? "1px solid #8f8f94"
+                              ? `1px solid ${palette.color.gray[50]}`
                               : "1px solid transparent",
                           background:
                             path === item.name.toLowerCase()
-                              ? "rgb(118,119,124)"
+                              ? palette.color.gray[175]
                               : path === "" && index === 0
-                                ? "rgb(118,119,124)"
+                                ? palette.color.gray[175]
                                 : "",
                         }}
                       >

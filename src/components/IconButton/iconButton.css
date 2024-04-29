@@ -1,13 +1,6 @@
 .icon-btn-container {
   padding: 1px;
-  background: linear-gradient(
-    110.74deg,
-    rgba(255, 255, 255, 0.7) 3.19%,
-    rgba(255, 255, 255, 0.4) 23.36%,
-    rgba(255, 255, 255, 0.4) 49.75%,
-    rgba(255, 255, 255, 0.4) 76.94%,
-    rgba(255, 255, 255, 0.7) 98.29%
-  );
+  background: var(--notification-button-border);
   border-radius: 8px;
   width: fit-content;
 }

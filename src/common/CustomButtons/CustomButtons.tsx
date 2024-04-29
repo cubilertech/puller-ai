@@ -42,7 +42,7 @@ const CustomButton: FC<buttonProps> = ({
           <Button
             sx={{
               borderRadius: "8px",
-              backgroundColor: "#7a8089",
+              backgroundColor: palette.color.gray[250],
               height: "22px !important",
               width: "40px !important",
               pr: 0,
@@ -51,13 +51,16 @@ const CustomButton: FC<buttonProps> = ({
               m: 0,
               mt: -0.6,
               ":hover": {
-                backgroundColor: "rgb(95,112,125)",
+                backgroundColor: palette.color.gray[400],
               },
             }}
             onClick={onClick}
             variant="outlined"
           >
-            <Typography variant="text-xs" sx={{ color: "#e6e6e6" }}>
+            <Typography
+              variant="text-xs"
+              sx={{ color: palette.color.eggWhite }}
+            >
               {text}
             </Typography>
           </Button>
@@ -70,16 +73,14 @@ const CustomButton: FC<buttonProps> = ({
             sx={{
               borderRadius: "50px",
               border: `1px solid var(--vison-pro-stock, ${palette.base.white})`,
-              backgroundColor: "#425459",
+              backgroundColor: palette.color.gray[650],
               width: 82,
               height: "40px !important",
               py: 2,
               px: 4,
               transition: "background 3.3s ease",
               ":hover": {
-                // backgroundColor: "rgb(95,112,125)",
-                background:
-                  "linear-gradient(54deg, rgba(108,33,177,1) 16%, rgba(26,138,169,1) 100%)",
+                background: palette.linearGradient.purpleBlue,
                 borderRadius: "50px",
               },
             }}
@@ -102,14 +103,14 @@ const CustomButton: FC<buttonProps> = ({
             sx={{
               borderRadius: "50px",
               border: `1px solid var(--vison-pro-stock, ${palette.base.white})`,
-              background: "rgb(115,129,133) !important",
+              background: `${palette.color.gray[300]} !important`,
               width: 122,
               height: 48,
               py: 2,
               px: 4,
               ":hover": {
                 borderRadius: "50px !important",
-                background: "rgb(95,112,125) !important",
+                background: `${palette.color.gray[400]} !important`,
               },
             }}
             variant="outlined"
@@ -149,7 +150,7 @@ const CustomButton: FC<buttonProps> = ({
             variant="text"
             sx={{
               borderRadius: "100%",
-              bgcolor: "rgb(90,93,105)",
+              bgcolor: palette.color.gray[550],
               p: 0,
               minWidth: 20,
               width: "20px !important",
@@ -157,7 +158,7 @@ const CustomButton: FC<buttonProps> = ({
               ":hover": {
                 borderRadius: "100%",
 
-                backgroundColor: "rgb(95,112,125)",
+                backgroundColor: palette.color.gray[500],
               },
             }}
           >

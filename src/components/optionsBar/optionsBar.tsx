@@ -9,6 +9,7 @@ import "./optionsBar.css";
 import DropdownSelect from "../DropdownSelect/dropdownSelect";
 import { Divider } from "../Divider";
 import { OptionsBarVariants } from "@/utils/types";
+import { palette } from "@/theme/Palette";
 
 interface optionbarProps {
   variant: OptionsBarVariants;
@@ -58,7 +59,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
                 justifyContent: "space-between",
               }}
             >
-              <Typography color={"#fff"} variant="text-md-regular">
+              <Typography color={palette.base.white} variant="text-md-regular">
                 Seasonal Transactions
               </Typography>
               <Box onClick={close}>
@@ -71,7 +72,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
                 />
               </Box>
             </Box>
-            <Typography color={"#fff"} variant="text-sm-regular">
+            <Typography color={palette.base.white} variant="text-sm-regular">
               “TXN_SZNAL” table . This query uses a table
               called Transactions that contains the following columns:
             </Typography>
@@ -84,7 +85,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
                 display: "flex",
                 maxHeight: "15rem",
                 margin: 0,
-                border: "2px solid rgba(57, 57, 57, 0.6)",
+                border: `2px solid ${palette.opacity.darkerGray}`,
               }}
             >
               <Input
@@ -151,7 +152,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
               }}
             >
               <Typography
-                color={"#fff"}
+                color={palette.base.white}
                 variant="text-md-regular"
                 sx={{ display: "flex", justifyContent: "space-between" }}
               >
@@ -166,7 +167,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
                   />
                 </Box>
               </Typography>
-              <Typography color={"#fff"} variant="text-sm-regular">
+              <Typography color={palette.base.white} variant="text-sm-regular">
                 “TXN_SZNAL” table . This query uses a table
                 called Transactions that contains the following columns:
               </Typography>
@@ -218,7 +219,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
               }}
             >
               <Typography
-                color={"#fff"}
+                color={palette.base.white}
                 variant="text-md-regular"
                 sx={{ display: "flex", justifyContent: "space-between" }}
               >
@@ -233,7 +234,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
                   />
                 </Box>
               </Typography>
-              <Typography color={"#fff"} variant="text-sm-regular">
+              <Typography color={palette.base.white} variant="text-sm-regular">
                 “TXN_SZNAL” table . This query uses a table
                 called Transactions that contains the following columns:
               </Typography>
@@ -251,7 +252,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
               }}
             >
               <Typography
-                color={"#fff"}
+                color={palette.base.white}
                 variant="text-md-regular"
                 sx={{ display: "flex", justifyContent: "space-between" }}
               >
@@ -266,7 +267,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
                   />
                 </Box>
               </Typography>
-              <Typography color={"#fff"} variant="text-sm-regular">
+              <Typography color={palette.base.white} variant="text-sm-regular">
                 “TXN_SZNAL” table . This query uses a table
                 called Transactions that contains the following columns:
               </Typography>

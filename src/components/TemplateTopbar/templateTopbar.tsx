@@ -54,6 +54,7 @@ const TemplateTopbar: FC<TemplateTopbarProps> = ({ isActive, setIsActive }) => {
         <Box
           onClick={() => setIsActive(ACTIVE_TYPES.PRIVATE)}
           sx={{
+            textAlign: "center",
             width: "202px",
             display: "flex",
             flexDirection: "column",

@@ -4,6 +4,7 @@ import { Paper } from "../Paper";
 import { FC } from "react";
 import "./rectangleCard.css";
 import { RectangleCardIcons } from "@/utils/types";
+import { palette } from "@/theme/Palette";
 
 interface RectangleCardProps {
   icon: RectangleCardIcons;
@@ -16,7 +17,6 @@ const RectangleCard: FC<RectangleCardProps> = ({ icon, title, onClick }) => {
     <Paper
       variant="light-border"
       sx={{
-        // width: { xl: "350px", lg: "280px" },
         width: "100%",
         height: { xl: "92px", lg: "92px" },
         display: "flex",
@@ -27,10 +27,9 @@ const RectangleCard: FC<RectangleCardProps> = ({ icon, title, onClick }) => {
         borderRadius: "8px",
         ":hover": {
           cursor: "pointer",
-          background:
-            "linear-gradient(142.96deg, rgba(93, 146, 254, 0.148) -3.54%, rgba(93, 146, 254, 0.168) 95.15%)",
+          background: palette.linearGradient.darkBlue,
           "& .child": {
-            background: "rgb(115,129,161)",
+            background: palette.opacity.blue,
           },
         },
       }}
@@ -39,7 +38,7 @@ const RectangleCard: FC<RectangleCardProps> = ({ icon, title, onClick }) => {
       <div className="rectangle-card-container">
         <Box
           sx={{
-            background: "rgb(112,112,129)",
+            background: palette.color.gray[500],
             width: 60,
             height: 60,
             borderRadius: "8px",
@@ -48,7 +47,7 @@ const RectangleCard: FC<RectangleCardProps> = ({ icon, title, onClick }) => {
             alignItems: "center",
             pointerEvents: "none",
             ":hover": {
-              background: "rgba(93, 146, 254, 0.3)",
+              background: palette.opacity.blue,
             },
           }}
           className="child"

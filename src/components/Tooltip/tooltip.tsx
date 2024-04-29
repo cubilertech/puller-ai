@@ -2,6 +2,7 @@ import { Box, Tooltip as MuiTooltip, Typography } from "@mui/material";
 import { FC, ReactElement } from "react";
 import { Icon } from "../Icon";
 import { TooltipVariants } from "@/utils/types";
+import { palette } from "@/theme/Palette";
 
 interface TooltipProps {
   variant: TooltipVariants;
@@ -30,10 +31,7 @@ const Tooltip: FC<TooltipProps> = ({
                 gap: "0.5rem",
               }}
             >
-              <Typography
-                variant="text-md-regular"
-                color={"rgba(230, 230, 230, 1)"}
-              >
+              <Typography variant="text-md-regular" color={palette.base.white}>
                 {title}
               </Typography>
               <Typography variant="text-sm">{description}</Typography>

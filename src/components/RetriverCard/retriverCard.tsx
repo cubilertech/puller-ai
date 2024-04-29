@@ -6,6 +6,7 @@ import { FC } from "react";
 import { useRouter } from "next/navigation";
 import { RetrieverIconsTypes, StatusTypes } from "@/utils/types";
 import "./retrieverCard.css";
+import { palette } from "@/theme/Palette";
 
 interface retriverCardProps {
   status: StatusTypes;
@@ -27,7 +28,7 @@ const RetriverCard: FC<retriverCardProps> = ({
         ":hover": {
           borderRadius: "16px",
           cursor: "pointer",
-          backgroundColor: "rgb(47,61,92)",
+          backgroundColor: palette.color.blue,
         },
       }}
     >
@@ -40,10 +41,9 @@ const RetriverCard: FC<retriverCardProps> = ({
           textAlign: "center",
           ":hover": {
             cursor: "pointer",
-            background:
-              "linear-gradient(142.96deg, rgba(93, 146, 254, 0.148) -3.54%, rgba(93, 146, 254, 0.168) 95.15%)",
+            background: palette.linearGradient.darkBlue,
             "& .child": {
-              background: "rgb(115,129,161)",
+              background: palette.opacity.blue,
             },
           },
         }}
@@ -61,7 +61,7 @@ const RetriverCard: FC<retriverCardProps> = ({
             <Box position={"relative"}>
               <Box
                 sx={{
-                  background: "rgb(112,112,129)",
+                  background: palette.color.gray[500],
                   width: 60,
                   height: 60,
                   borderRadius: "8px",
@@ -70,7 +70,7 @@ const RetriverCard: FC<retriverCardProps> = ({
                   alignItems: "center",
                   pointerEvents: "none",
                   ":hover": {
-                    background: "rgba(93, 146, 254)",
+                    background: palette.opacity.blue,
                   },
                 }}
                 className="child"
