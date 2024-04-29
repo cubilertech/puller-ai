@@ -17,14 +17,3 @@
   background: var(--custom-button-round-border);
   border-radius: 100%;
 }
-
-.requestHistory-btn-container {
-  padding: 1px;
-  background: linear-gradient(
-    9deg,
-    rgba(108, 33, 177, 1) 16%,
-    rgba(26, 138, 169, 1) 100%
-  );
-  border-radius: 8px;
-  width: fit-content;
-}

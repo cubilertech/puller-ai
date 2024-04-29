@@ -168,7 +168,6 @@ const CustomButton: FC<buttonProps> = ({
       );
     case "request-history":
       return (
-        <div className="requestHistory-btn-container">
           <Button
             variant="text"
             sx={{
@@ -204,7 +203,6 @@ const CustomButton: FC<buttonProps> = ({
           >
             {text}
           </Button>
-        </div>
       );
   }
 };
