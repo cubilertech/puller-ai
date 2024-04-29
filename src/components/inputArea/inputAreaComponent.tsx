@@ -114,7 +114,12 @@ const InputAreaComponent: FC<InputAreaComponentPorps> = ({
                 disabled={isLoading}
                 fullWidth
                 endIcon={
-                  <Icon icon="plus" height={2} width={8} disabled={isLoading} />
+                  <Icon
+                    icon="minus"
+                    height={2}
+                    width={8}
+                    disabled={isLoading}
+                  />
                 }
               />
             </Box>

@@ -230,34 +230,11 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
               )}
             </Paper>
             {isValidate && (
-              // <Paper
-              //   type="dark-border"
-              //   sx={{
-              //     // width: isOpenSelectBar
-              //     //   ? { lg: "76%", md: "70%", xs: "60%" }
-              //     //   : "100%",
-              //     borderRadius: "8px",
-              //     padding: "0.6rem",
-              //     margin: 0,
-              //     display: "flex",
-              //     justifyContent: "center",
-              //     alignItems: "center",
-              //   }}
-              // >
-              //   <Typography variant="text-sm" color={palette.gray[300]}>
-              //     This query is estimated to take X minutes and will be
-              //     approximatley X size.{" "}
-              //     <span style={{ textDecoration: "underline" }}>
-              //       <CustomLink color="#90919b" variant="simple" href="#">
-              //         Need to optimize?
-              //       </CustomLink>
-              //     </span>
-              //   </Typography>
-              // </Paper>
               <Paper
                 type="dark-border"
                 sx={{
-                  borderRadius: "8px",
+                  borderRadius: "16px",
+                  height: "56px",
                   padding: "0.6rem",
                   margin: 0,
                   display: "flex",
