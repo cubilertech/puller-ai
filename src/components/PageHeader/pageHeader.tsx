@@ -121,7 +121,7 @@ const PageHeader: FC<PageHeaderProps> = ({ variant }) => {
             open={openSQL_Editor}
             handleClose={handleOpenCloseSQL_Editor}
             code={`
-            SELECT 
+          SELECT 
             Store_ID, 
             DATE_TRUNC(TXN_DATE, 'week') AS Week, 
             SUM(TXN_AMT) AS Total_Sales
@@ -130,8 +130,44 @@ const PageHeader: FC<PageHeaderProps> = ({ variant }) => {
           WHERE 
             PROD_ID IN (1234, 5678) AND
             TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND
+            DATE_TRUNC(TXN_DATE, 'week') AS Week, 
             TXN_DATE <= DATE_TRUNC(CURRENT_DATE(), 'week')
+            DATE_TRUNC(TXN_DATE, 'week') AS Week, 
+            TXN_DATE <= DATE_TRUNC(CURRENT_DATE(), 'week')
+            DATE_TRUNC(TXN_DATE, 'week') AS Week, 
+            TXN_DATE <= DATE_TRUNC(CURRENT_DATE(), 'week')
+            DATE_TRUNC(TXN_DATE, 'week') AS Week, 
+            TXN_DATE <= DATE_TRUNC(CURRENT_DATE(), 'week')
+            DATE_TRUNC(TXN_DATE, 'week') AS Week, 
+            TXN_DATE <= DATE_TRUNC(CURRENT_DATE(), 'week')
+            DATE_TRUNC(TXN_DATE, 'week') AS Week, 
+            TXN_DATE <= DATE_TRUNC(CURRENT_DATE(), 'week')
+            DATE_TRUNC(TXN_DATE, 'week') AS Week, 
+            TXN_DATE <= DATE_TRUNC(CURRENT_DATE(), 'week')
+            DATE_TRUNC(TXN_DATE, 'week') AS Week, 
+            PROD_ID IN (1234, 5678) AND
+            TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND
+            Store_ID,
+            PROD_ID IN (1234, 5678) AND
+            TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND
+            Store_ID,
+
+            PROD_ID IN (1234, 5678) AND
+            TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND
+            Store_ID,
+            PROD_ID IN (1234, 5678) AND
+            TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND  PROD_ID IN (1234, 5678) AND
+            TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND  PROD_ID IN (1234, 5678) AND
+            TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND  PROD_ID IN (1234, 5678) AND
+            TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND
+            Store_ID,
+            Store_ID,
+            Store_ID,
+            Store_ID,
+
           GROUP BY 
+            PROD_ID IN (1234, 5678) AND
+            TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND
             Store_ID, 
             Week
           ORDER BY 

@@ -1,11 +1,13 @@
 import { Box, Modal, Typography } from "@mui/material";
 import { FC, useEffect, useState } from "react";
-import { format } from "sql-formatter";
 import "./style.css";
 import { Paper } from "@/components/Paper";
 import { Button } from "@/components/Button";
 import { Close } from "@mui/icons-material";
 import Divider from "@/components/Divider/divider";
+import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
+import { coy } from "react-syntax-highlighter/dist/esm/styles/prism";
+import { format } from "sql-formatter";
 
 const modalStyle = {
   position: "absolute",
@@ -35,28 +37,32 @@ const SQL_EditorModal: FC<SQL_EditorModalProps> = ({
   useEffect(() => {
     setFormattedCode(format(code, { language: "mysql" }));
   }, []);
-
-  const addLineNumbers = (code: string) => {
-    return code.split("\n").map((line, index) => (
-      <div key={index} style={{ display: "flex", alignItems: "center" }}>
-        <div
-          style={{
-            width: "30px",
-            marginRight: "10px",
-            textAlign: "right",
-            paddingRight: "5px",
-            color: "#98A2B3",
-          }}
-        >
-          {index + 1}
-        </div>
-        <div>{line}</div>
-      </div>
-    ));
+  const customCoyStyle = {
+    ...coy,
+    'code[class*="language-"]': {
+      ...coy['code[class*="language-"]'],
+      background: "transparent",
+      color: "white",
+      padding: 0,
+      fontSize: "16px",
+      height: "100%",
+      overflow: "auto",
+    },
+    'pre[class*="language-"]': {
+      ...coy['code[class*="language-"]'],
+      background: "transparent",
+      color: "white",
+      padding: 0,
+      fontSize: "16px",
+      height: "100%",
+      overflow: "auto",
+    },
+    'span[class="token"]': {
+      ...coy['span[class="token"]'],
+      background: "transparent",
+      fontSize: "16px !important",
+    },
   };
-
-  const codeWithLineNumbers = addLineNumbers(formattedCode);
-
   return (
     <Modal
       open={open}
@@ -65,7 +71,15 @@ const SQL_EditorModal: FC<SQL_EditorModalProps> = ({
       aria-describedby="modal-modal-description"
     >
       <Box sx={modalStyle}>
-        <Paper variant="dark-border" sx={{ padding: 3, height: "69vh" }}>
+        <Paper
+          variant="dark-border"
+          sx={{
+            padding: 3,
+            height: "69vh",
+            position: "relative",
+            overflow: "hidden",
+          }}
+        >
           <Box
             sx={{
               display: "flex",
@@ -104,8 +118,13 @@ const SQL_EditorModal: FC<SQL_EditorModalProps> = ({
               component="div"
               sx={{ whiteSpace: "pre-wrap", lineHeight: "30px" }}
             >
-              {codeWithLineNumbers}
-              {codeWithLineNumbers}
+              <SyntaxHighlighter
+                language="sql"
+                style={customCoyStyle}
+                showLineNumbers
+              >
+                {formattedCode}
+              </SyntaxHighlighter>
             </Typography>
           </Box>
         </Paper>

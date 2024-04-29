@@ -7,16 +7,17 @@
   background-color: transparent !important;
 }
 
-
 .monaco-editor .mtk1 {
-  color: #007acc; 
+  color: #007acc;
 }
 
 .monaco-editor .mtk2 {
-  color: #ffa500; 
+  color: #ffa500;
 }
 
 .monaco-editor .mtk3 {
-  color: #ff0000; 
+  color: #ff0000;
 }
-
+span {
+  background: transparent !important;
+}
