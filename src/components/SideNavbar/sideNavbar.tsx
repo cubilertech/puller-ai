@@ -123,21 +123,30 @@ const SideNavbar = () => {
                 },
               ].map((text, index) => (
                 <ListItem key={index}>
-                  <MuiListItemButton>
-                    <ListItemIcon
+                  <div className="navbar-container">
+                    <MuiListItemButton
                       sx={{
-                        minWidth: 0,
+                        border:
+                          path === text.name
+                            ? "1px solid #8f8f94"
+                            : "1px solid transparent",
                       }}
                     >
-                      {text.img}
-                    </ListItemIcon>
-                    <ListItemText
-                      sx={{
-                        fontSize: "14px",
-                      }}
-                      primary={text.name}
-                    />
-                  </MuiListItemButton>
+                      <ListItemIcon
+                        sx={{
+                          minWidth: 0,
+                        }}
+                      >
+                        {text.img}
+                      </ListItemIcon>
+                      <ListItemText
+                        sx={{
+                          fontSize: "14px",
+                        }}
+                        primary={text.name}
+                      />
+                    </MuiListItemButton>
+                  </div>
                 </ListItem>
               ))}
             </List>

@@ -45,7 +45,6 @@ const TopNavBar = () => {
               }}
             >
               <Icon icon="arrowLeftIcon" height={24} width={24} />
-              Back
             </Typography>
           </Box>
         ) : firstRoute === PagesType.RECENT_REQUESTS ? (

@@ -45,7 +45,7 @@ const Tooltip: FC<TooltipProps> = ({
     case "status":
       return (
         <MuiTooltip
-          placement="bottom-start"
+          placement="right-end"
           title={
             <Box
               sx={{

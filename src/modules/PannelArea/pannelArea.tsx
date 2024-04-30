@@ -80,7 +80,6 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
           width: "100%",
           alignItems: "flex-end",
           flexGrow: "1",
-          justifyContent: "space-between",
         }}
       >
         <Box
