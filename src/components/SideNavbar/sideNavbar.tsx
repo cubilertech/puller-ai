@@ -23,7 +23,7 @@ const SideNavbar = () => {
   const pathname = usePathname();
 
   const path = pathname.split("/")[1];
-  const drawerWidth = 240;
+  const drawerWidth = 200;
   useEffect(() => {
     if (pathname === "/") {
       Route.push("/request");

@@ -56,7 +56,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
           display: "flex",
           flexDirection: "column",
           justifyContent: "flex-end",
-          height: "calc(100vh - 200px)",
+          height: "calc(100vh - 180px)",
           // height: "100%",
           width: "100%",
           gap: 2,
