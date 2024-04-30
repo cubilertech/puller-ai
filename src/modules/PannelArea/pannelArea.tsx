@@ -12,6 +12,7 @@ import CustomLink from "@/components/Link/link";
 import { Tooltip } from "@/components/Tooltip";
 import { OptionsBar } from "@/components/optionsBar";
 import "./panelArea.css";
+import { useValidate } from "@/hooks/useRequest";
 
 interface PannelAreaProps {
   content?: {
@@ -25,16 +26,15 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
   const route = useRouter();
   const [isLoading, setisLoading] = useState(false);
   const [isOpenSelectBar, setisOpenSelectBar] = useState(false);
-
+  const [prompt, setPrompt] = useState("");
+  const { mutate: validatePrompt } = useValidate();
   const routename = usePathname();
   const routeParts = routename.replace(/^\//, "").split("/");
   const isValidate = routeParts.includes("validate");
 
   const handleAvailable = () => {
     setisLoading(true);
-    setTimeout(() => {
-      route.push("/request/validate");
-    }, 2000);
+    validatePrompt({ message: "get me the data for our top 100 customers" });
   };
 
   const handleOpenSelectBar = () => {
@@ -43,10 +43,8 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
   const handleCloseSelectBar = () => {
     setisOpenSelectBar(false);
   };
-  const [isTextareaFilled, setIsTextareaFilled] = useState(false);
-
   const handleTextareaChange = (event: any) => {
-    setIsTextareaFilled(event.target.value.trim().length > 0);
+    setPrompt(event.target.value);
   };
 
   return (
@@ -274,7 +272,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
             handleValidate={handleAvailable}
             onChangeInput={handleTextareaChange}
             isLoading={isLoading}
-            isTextareaFilled={isTextareaFilled}
+            value={prompt}
           />
         )}
       </Box>

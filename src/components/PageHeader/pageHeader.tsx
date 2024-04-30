@@ -14,9 +14,11 @@ import { PageHeaderVariants } from "@/utils/types";
 
 interface PageHeaderProps {
   variant: PageHeaderVariants;
+  sql?: string;
+  graph?: any[];
 }
 
-const PageHeader: FC<PageHeaderProps> = ({ variant }) => {
+const PageHeader: FC<PageHeaderProps> = ({ variant , sql , graph  }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [openSQL_Editor, setopenSQL_Editor] = useState(false);
   const [openGraph, setOpenGraph] = useState(false);
@@ -120,60 +122,7 @@ const PageHeader: FC<PageHeaderProps> = ({ variant }) => {
           <SQL_EditorModal
             open={openSQL_Editor}
             handleClose={handleOpenCloseSQL_Editor}
-            code={`
-          SELECT 
-            Store_ID, 
-            DATE_TRUNC(TXN_DATE, 'week') AS Week, 
-            SUM(TXN_AMT) AS Total_Sales
-          FROM 
-            TXN_SZNAL
-          WHERE 
-            PROD_ID IN (1234, 5678) AND
-            TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND
-            DATE_TRUNC(TXN_DATE, 'week') AS Week, 
-            TXN_DATE <= DATE_TRUNC(CURRENT_DATE(), 'week')
-            DATE_TRUNC(TXN_DATE, 'week') AS Week, 
-            TXN_DATE <= DATE_TRUNC(CURRENT_DATE(), 'week')
-            DATE_TRUNC(TXN_DATE, 'week') AS Week, 
-            TXN_DATE <= DATE_TRUNC(CURRENT_DATE(), 'week')
-            DATE_TRUNC(TXN_DATE, 'week') AS Week, 
-            TXN_DATE <= DATE_TRUNC(CURRENT_DATE(), 'week')
-            DATE_TRUNC(TXN_DATE, 'week') AS Week, 
-            TXN_DATE <= DATE_TRUNC(CURRENT_DATE(), 'week')
-            DATE_TRUNC(TXN_DATE, 'week') AS Week, 
-            TXN_DATE <= DATE_TRUNC(CURRENT_DATE(), 'week')
-            DATE_TRUNC(TXN_DATE, 'week') AS Week, 
-            TXN_DATE <= DATE_TRUNC(CURRENT_DATE(), 'week')
-            DATE_TRUNC(TXN_DATE, 'week') AS Week, 
-            PROD_ID IN (1234, 5678) AND
-            TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND
-            Store_ID,
-            PROD_ID IN (1234, 5678) AND
-            TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND
-            Store_ID,
-
-            PROD_ID IN (1234, 5678) AND
-            TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND
-            Store_ID,
-            PROD_ID IN (1234, 5678) AND
-            TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND  PROD_ID IN (1234, 5678) AND
-            TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND  PROD_ID IN (1234, 5678) AND
-            TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND  PROD_ID IN (1234, 5678) AND
-            TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND
-            Store_ID,
-            Store_ID,
-            Store_ID,
-            Store_ID,
-
-          GROUP BY 
-            PROD_ID IN (1234, 5678) AND
-            TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND
-            Store_ID, 
-            Week
-          ORDER BY 
-            Week, 
-            Store_ID;
-          `}
+            code={sql as string}
           />
           <GraphModal open={openGraph} handleClose={() => handleOpenGraph()} />
         </>
