@@ -125,3 +125,7 @@ export type RectangleCardIcons = "connectApps" | "apiKey" | "upload" | "cpu";
 export type TooltipVariants = "info" | "status";
 
 export type FeedbackPageVariants = "retriever" | "alert";
+
+// export type RootState = {
+//   sqlEditor: ReturnType<typeof sqlEditorReducer>;
+// };

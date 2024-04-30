@@ -5,25 +5,25 @@ import { Button } from "../Button";
 import { palette } from "@/theme/Palette";
 import CustomLink from "../Link/link";
 import CustomButton from "@/common/CustomButtons/CustomButtons";
-import SQL_EditorModal from "@/modals/sql_EditorModal/sqlEditorModal";
 import { Icon } from "../Icon";
 import { useRouter } from "next/navigation";
 import GraphModal from "@/modals/graphModals/graphModal";
 import { Tooltip } from "../Tooltip";
 import { PageHeaderVariants } from "@/utils/types";
-
+import { useDispatch } from "react-redux";
+import { HandleOpenSQL } from "@/redux/sqlEditor";
 interface PageHeaderProps {
   variant: PageHeaderVariants;
 }
 
 const PageHeader: FC<PageHeaderProps> = ({ variant }) => {
+  const dispatch = useDispatch();
   const [isHovered, setIsHovered] = useState(false);
-  const [openSQL_Editor, setopenSQL_Editor] = useState(false);
   const [openGraph, setOpenGraph] = useState(false);
   const router = useRouter();
 
-  const handleOpenCloseSQL_Editor = () => {
-    setopenSQL_Editor(!openSQL_Editor);
+  const handleOpenSQL_Editor = () => {
+    dispatch(HandleOpenSQL());
   };
   const handleOpenGraph = () => {
     setOpenGraph(!openGraph);
@@ -113,11 +113,11 @@ const PageHeader: FC<PageHeaderProps> = ({ variant }) => {
               <CustomButton
                 text="SQL"
                 variant="rounded-SQL"
-                onClick={() => handleOpenCloseSQL_Editor()}
+                onClick={() => handleOpenSQL_Editor()}
               />
             </Box>
           </Box>
-          <SQL_EditorModal
+          {/* <SQL_EditorModal
             open={openSQL_Editor}
             handleClose={handleOpenCloseSQL_Editor}
             code={`
@@ -174,7 +174,7 @@ const PageHeader: FC<PageHeaderProps> = ({ variant }) => {
             Week, 
             Store_ID;
           `}
-          />
+          /> */}
           <GraphModal open={openGraph} handleClose={() => handleOpenGraph()} />
         </>
       );
