@@ -84,9 +84,10 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
           flexDirection={"column"}
           gap={"5px"}
           sx={{
-            width: isOpenSelectBar
-              ? { lg: "76%", md: "70%", xs: "60%" }
-              : "100%",
+            width:
+              isOpenSelectBar || isSQLEditorOpen
+                ? { lg: "76%", md: "70%", xs: "60%" }
+                : "100%",
             height: "100%",
             justifyContent: "flex-end",
             overflowX: "hidden",
