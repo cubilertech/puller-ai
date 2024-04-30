@@ -4,12 +4,12 @@ import { Paper } from "../Paper";
 import { Button } from "../Button";
 import { CircleOutlined } from "@mui/icons-material";
 import CloseIcon from "@mui/icons-material/Close";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import "./optionsBar.css";
 import DropdownSelect from "../DropdownSelect/dropdownSelect";
 import { Divider } from "../Divider";
 import { OptionsBarVariants } from "@/utils/types";
 import { palette } from "@/theme/Palette";
+import { Icon } from "../Icon";
 
 interface optionbarProps {
   variant: OptionsBarVariants;
@@ -193,6 +193,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
                   >
                     <Typography variant="text-md-regular">{item}</Typography>
                     <Checkbox
+                      sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
                       icon={
                         variant === "round-checkbox" ? (
                           <CircleOutlined />
@@ -200,8 +201,10 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
                       }
                       checkedIcon={
                         variant === "round-checkbox" ? (
-                          <CheckCircleIcon />
-                        ) : undefined
+                          <Icon icon="roundCheckbox" width={18} height={18} />
+                        ) : (
+                          <Icon icon="squareCheckbox" width={18} height={18} />
+                        )
                       }
                     />
                   </Paper>

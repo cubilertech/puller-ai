@@ -44,6 +44,8 @@ export const icons = {
   cloudUpload: "/Images/Icons/cloud-upload-icon.svg",
   folder: "/Images/Icons/folder-icon.svg",
   cpu: "/Images/Icons/cpu-icon.svg",
+  squareCheckbox: "/Images/Icons/check-box.svg",
+  roundCheckbox: "/Images/Icons/round-check-box.svg",
 };
 
 export const PagesType = {
@@ -55,7 +57,6 @@ export const PagesType = {
 };
 
 export const isClient = typeof window !== "undefined";
-
 
 export const ACTIVE_TYPES = {
   ALL: "all",
@@ -109,4 +110,6 @@ export const ICONS_TYPES = {
   CLOUDUPLOAD: "cloudUpload",
   FOLDER: "folder",
   CPU: "cpu",
+  SQUARECHECKBOX: "squareCheckbox",
+  ROUNDCHECKBOX: "roundCheckbox",
 };
