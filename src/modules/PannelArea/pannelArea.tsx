@@ -64,7 +64,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "flex-end",
-        height: "calc(100vh - 200px)",
+        height: "calc(100vh - 180px)",
         width: "100%",
         gap: 2,
         overflowX: "hidden",
@@ -73,7 +73,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
       <Box
         sx={{
           display: "flex",
-          flexDirection: "column",
+          // flexDirection: "column",
           justifyContent: "flex-end",
           height: "calc(100vh - 180px)",
           // height: "100%",
