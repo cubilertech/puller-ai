@@ -14,7 +14,13 @@ import { OptionsBar } from "@/components/optionsBar";
 import "./panelArea.css";
 import { SQL_Editor } from "@/components/sql_Editor";
 import { useSelector, useDispatch } from "react-redux";
-import { HandleCloseSQL, getSQLEditorOpen } from "@/redux/sqlEditor";
+import {
+  HandleCloseOptionbar,
+  HandleCloseSQL,
+  HandleOpenOptionbar,
+  getOptionbarOpen,
+  getSQLEditorOpen,
+} from "@/redux/sqlEditor";
 
 interface PannelAreaProps {
   content?: {
@@ -28,8 +34,9 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
   const route = useRouter();
   const dispatch = useDispatch();
   const isSQLEditorOpen = useSelector(getSQLEditorOpen);
+  const isOpenSelectBar = useSelector(getOptionbarOpen);
+
   const [isLoading, setisLoading] = useState(false);
-  const [isOpenSelectBar, setisOpenSelectBar] = useState(false);
 
   const routename = usePathname();
   const routeParts = routename.replace(/^\//, "").split("/");
@@ -43,14 +50,14 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
   };
 
   const handleOpenSelectBar = () => {
-    setisOpenSelectBar(true);
+    dispatch(HandleOpenOptionbar());
     dispatch(HandleCloseSQL());
   };
   const handleCloseSQL_Editor = () => {
     dispatch(HandleCloseSQL());
   };
   const handleCloseSelectBar = () => {
-    setisOpenSelectBar(false);
+    dispatch(HandleCloseOptionbar());
   };
   const [isTextareaFilled, setIsTextareaFilled] = useState(false);
 
