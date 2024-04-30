@@ -53,7 +53,7 @@ const SQL_Editor: FC<SQL_EditorProps> = ({ handleClose, code }) => {
     <Paper
       variant="dark-border"
       sx={{
-        height: "98%",
+        height: "98.1%",
         padding: 3,
         overflow: "hidden",
       }}
@@ -85,7 +85,7 @@ const SQL_Editor: FC<SQL_EditorProps> = ({ handleClose, code }) => {
         sx={{
           width: "100%",
           mt: 1,
-          height: "calc(100vh  - 326px)",
+          height: "calc(100vh  - 276px)",
         }}
       >
         {/* Display formatted code with line numbers   */}
