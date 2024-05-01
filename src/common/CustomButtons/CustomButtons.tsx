@@ -102,6 +102,7 @@ const CustomButton: FC<buttonProps> = ({
           <Button
             sx={{
               borderRadius: "50px",
+              color: palette.base.white,
               border: `1px solid var(--vison-pro-stock, ${palette.base.white})`,
               background: `${palette.color.gray[300]} !important`,
               width: 122,
@@ -168,41 +169,41 @@ const CustomButton: FC<buttonProps> = ({
       );
     case "request-history":
       return (
-          <Button
-            variant="text"
-            sx={{
-              "@keyframes exitGradient": {
-                "0%": {
-                  background:
-                    "linear-gradient(126deg, rgba(108,33,177,1) 16%, rgba(26,138,169,1) 100%)",
-                },
-                "100%": {
-                  background:
-                    "linear-gradient(to top left, rgba(108,33,177,1), transparent)",
-                },
+        <Button
+          variant="text"
+          sx={{
+            "@keyframes exitGradient": {
+              "0%": {
+                background:
+                  "linear-gradient(126deg, rgba(108,33,177,1) 16%, rgba(26,138,169,1) 100%)",
               },
-              width: "216px",
-              color: "#5d92fe",
-              border: "none",
-              backgroundColor: "#263f50",
-              transition: "background 0.3s ease",
+              "100%": {
+                background:
+                  "linear-gradient(to top left, rgba(108,33,177,1), transparent)",
+              },
+            },
+            width: "216px",
+            color: "#5d92fe",
+            border: "none",
+            backgroundColor: "#263f50",
+            transition: "background 0.3s ease",
+            borderRadius: "8px",
+            "&:hover": {
+              color: palette.base.white,
+              background: "rgba(105,65,198,255)",
               borderRadius: "8px",
-              "&:hover": {
-                color: palette.base.white,
-                background: "rgba(105,65,198,255)",
-                borderRadius: "8px",
-              },
-              "&:hover, &:focus": {
-                border: "none",
-                borderRadius: "8px",
-              },
-              "&:not(:hover)": {
-                animation: "exitGradient 0.3s ease ",
-              },
-            }}
-          >
-            {text}
-          </Button>
+            },
+            "&:hover, &:focus": {
+              border: "none",
+              borderRadius: "8px",
+            },
+            "&:not(:hover)": {
+              animation: "exitGradient 0.3s ease ",
+            },
+          }}
+        >
+          {text}
+        </Button>
       );
   }
 };

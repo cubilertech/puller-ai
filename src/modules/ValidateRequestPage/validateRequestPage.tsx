@@ -6,13 +6,19 @@ import { PannelArea } from "../../modules/PannelArea";
 import { PageHeader } from "@/components/PageHeader";
 import { Loader } from "@/components/Loader";
 import { useRouter } from "next/navigation";
+import { useAppSelector } from "@/libs/redux/hooks";
+import { getActiveRequest } from "@/libs/redux/features/activeRequest";
+import { useRunQuery } from "@/hooks/useRequest";
 
 const ValidateRequestPage: FC = () => {
   const route = useRouter();
   const [isProccessing, setisProccessing] = useState(false);
+  const activeRequest = useAppSelector(getActiveRequest);
+  const { mutate: runQuery } = useRunQuery();
 
   const handleUpdate = () => {
-    route.push("/request/results");
+    runQuery({ prompt: activeRequest.id });
+    // route.push("/request/results");
   };
   const content = {
     response:
@@ -38,9 +44,13 @@ const ValidateRequestPage: FC = () => {
         </Box>
       ) : (
         <Box sx={{ px: 1.2, pt: 1 }}>
-          <PageHeader variant="Validate" />
+          <PageHeader variant="Validate" graph={activeRequest?.graph} />
           <Box sx={{ width: "97%", m: "auto", pt: 2 }}>
-            <PannelArea content={content} handleUpdate={() => handleUpdate()} />
+            <PannelArea
+              sql={activeRequest?.sql}
+              content={content}
+              handleUpdate={() => handleUpdate()}
+            />
           </Box>
         </Box>
       )}

@@ -19,8 +19,9 @@ const SQL_Editor: FC<SQL_EditorProps> = ({ handleClose, code }) => {
   const [formattedCode, setFormattedCode] = useState<string>("");
 
   useEffect(() => {
+    if(code)
     setFormattedCode(format(code, { language: "mysql" }));
-  }, []);
+  }, [code]);
   const customCoyStyle = {
     ...coy,
     'code[class*="language-"]': {

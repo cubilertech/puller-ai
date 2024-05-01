@@ -20,6 +20,7 @@ export interface CardData {
   sources: string;
   title: string;
   discription: string;
+  fileLink: string;
 }
 
 export interface UserProps {
@@ -129,3 +130,30 @@ export type FeedbackPageVariants = "retriever" | "alert";
 // export type RootState = {
 //   sqlEditor: ReturnType<typeof sqlEditorReducer>;
 // };
+export interface validateRequestPayload {
+  message: string;
+}
+
+export interface runQueryPayload {
+  prompt: string;
+}
+
+export interface validateRequestResponse {
+  description: string;
+  graph: any[]; // Replace 'any' with the actual type of 'graph' if known
+  id: string;
+  sql: string;
+  target: string;
+  variables: any[]; // Replace 'any' with the actual type of 'variables' if known
+}
+
+export interface runQueryResponse {
+  id: string;
+  status: string;
+}
+
+export interface queryStatusResponse {
+  id: string;
+  result: string;
+  status: string;
+}

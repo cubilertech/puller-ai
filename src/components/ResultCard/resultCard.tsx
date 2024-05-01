@@ -17,8 +17,9 @@ interface ResultCardProps {
 const ResultCard: FC<ResultCardProps> = ({ data }) => {
   const handleDownload = () => {
     const link = document.createElement("a");
-    link.href = "../../../public/download.txt";
+    link.href = data?.fileLink;
     link.download = "download.txt";
+    link.target = '_blank';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

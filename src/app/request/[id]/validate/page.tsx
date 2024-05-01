@@ -1,13 +1,11 @@
-"use client";
-import YourResultsPage from "@/modules/YourResultPage/yourResultPage";
 import AppLayout from "@/common/appLayout/appLayout";
+import ValidateRequestPage from "@/modules/ValidateRequestPage/validateRequestPage";
 
 function Page() {
   return (
     <AppLayout>
-      <YourResultsPage />
+      <ValidateRequestPage />
     </AppLayout>
   );
 }
-
 export default Page;

@@ -79,6 +79,7 @@ const SideNavbar = () => {
                           sx={{
                             display: "flex",
                             gap: "12px",
+                            color: palette.base.white,
                             border:
                               path === item.name
                                 ? "1px solid #8f8f94"
@@ -126,6 +127,7 @@ const SideNavbar = () => {
                   <div className="navbar-container">
                     <MuiListItemButton
                       sx={{
+                        color: palette.base.white,
                         border:
                           path === text.name
                             ? "1px solid #8f8f94"

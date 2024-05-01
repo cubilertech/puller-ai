@@ -9,14 +9,14 @@ interface InputAreaComponentPorps {
   handleValidate: () => void;
   onChangeInput: (event: any) => any;
   isLoading: boolean;
-  isTextareaFilled: boolean;
+  value: string;
 }
 
 const InputAreaComponent: FC<InputAreaComponentPorps> = ({
   handleValidate,
   onChangeInput,
   isLoading,
-  isTextareaFilled,
+  value,
 }) => {
   return (
     <Paper variant="light-border">
@@ -61,7 +61,7 @@ const InputAreaComponent: FC<InputAreaComponentPorps> = ({
             justifyContent: "space-between",
           }}
         >
-          {!isTextareaFilled || isLoading ? (
+          {!value?.length || isLoading ? (
             <Box
               sx={{
                 display: "flex",

@@ -1,4 +1,4 @@
-import AppLayout from "@/common/appLayout/appLayout";
+import  AppLayout  from "@/common/appLayout/appLayout";
 import CreateRequestPage from "@/modules/CreateRequestPage/CreateRequestPage";
 
 function Page() {

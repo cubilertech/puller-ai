@@ -21,6 +21,7 @@ import {
   getOptionbarOpen,
   getSQLEditorOpen,
 } from "@/redux/sqlEditor";
+import { useValidate } from "@/hooks/useRequest";
 
 interface PannelAreaProps {
   content?: {
@@ -28,25 +29,25 @@ interface PannelAreaProps {
     original: string;
   };
   handleUpdate?: () => void;
+  sql?: string;
 }
 
-const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
+const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate, sql }) => {
   const route = useRouter();
   const dispatch = useDispatch();
   const isSQLEditorOpen = useSelector(getSQLEditorOpen);
   const isOpenSelectBar = useSelector(getOptionbarOpen);
 
   const [isLoading, setisLoading] = useState(false);
-
+  const [prompt, setPrompt] = useState("");
+  const { mutate: validatePrompt } = useValidate();
   const routename = usePathname();
   const routeParts = routename.replace(/^\//, "").split("/");
   const isValidate = routeParts.includes("validate");
 
   const handleAvailable = () => {
     setisLoading(true);
-    setTimeout(() => {
-      route.push("/request/validate");
-    }, 2000);
+    validatePrompt({ message: "get me the data for our top 100 customers" });
   };
 
   const handleOpenSelectBar = () => {
@@ -59,10 +60,8 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
   const handleCloseSelectBar = () => {
     dispatch(HandleCloseOptionbar());
   };
-  const [isTextareaFilled, setIsTextareaFilled] = useState(false);
-
   const handleTextareaChange = (event: any) => {
-    setIsTextareaFilled(event.target.value.trim().length > 0);
+    setPrompt(event.target.value);
   };
 
   return (
@@ -292,37 +291,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
           >
             <SQL_Editor
               handleClose={() => handleCloseSQL_Editor()}
-              code=" SELECT 
-            Store_ID, 
-            DATE_TRUNC(TXN_DATE, 'week') AS Week, 
-            SUM(TXN_AMT) AS Total_Sales
-          FROM 
-            TXN_SZNAL
-          WHERE 
-            PROD_ID IN (1234, 5678) AND
-      
-
-            PROD_ID IN (1234, 5678) AND
-            TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND
-            Store_ID,
-            PROD_ID IN (1234, 5678) AND
-            TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND  PROD_ID IN (1234, 5678) AND
-            TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND  PROD_ID IN (1234, 5678) AND
-            TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND  PROD_ID IN (1234, 5678) AND
-            TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND
-            Store_ID,
-            Store_ID,
-            Store_ID,
-            Store_ID,
-
-          GROUP BY 
-            PROD_ID IN (1234, 5678) AND
-            TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND
-            Store_ID, 
-            Week
-          ORDER BY 
-            Week, 
-            Store_ID;"
+              code={sql as string}
             />
           </Box>
         )}
@@ -334,7 +303,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate }) => {
           handleValidate={handleAvailable}
           onChangeInput={handleTextareaChange}
           isLoading={isLoading}
-          isTextareaFilled={isTextareaFilled}
+          value={prompt}
         />
       )}
     </Box>
