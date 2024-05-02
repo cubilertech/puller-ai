@@ -18,13 +18,6 @@ const YourResultsPage: FC = () => {
     activeRequest?.id
   );
 
-  // useEffect(() => {
-  //   refetchQuerySatus();
-  //   setIsLoading(false);
-  //   // setTimeout(() => {
-  //   //   setIsLoading(false);
-  //   // }, 4000);
-  // }, []);
   useEffect(() => {
     if (data && data?.status === "complete") {
       setIsLoading(false);
@@ -64,7 +57,7 @@ const YourResultsPage: FC = () => {
           <PageHeader title="Your Results" />
 
           <Box sx={{ display: "flex", gap: 2, pt: 3, width: "100%" }}>
-            <ResultCard data={{...RESULTS_DATA,fileLink:data?.result}} />
+            <ResultCard data={{ ...RESULTS_DATA, fileLink: data?.result }} />
             <NotesList />
           </Box>
         </Box>

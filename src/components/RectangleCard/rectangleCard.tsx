@@ -18,7 +18,7 @@ const RectangleCard: FC<RectangleCardProps> = ({ icon, title, onClick }) => {
       variant="light-border"
       sx={{
         width: "100%",
-        height: { xl: "92px", lg: "92px" },
+        padding: "0.9rem",
         display: "flex",
         justifyContent: "flex-start",
         alignItems: "center",
