@@ -1,4 +1,5 @@
 import { PageHeader } from "@/components/PageHeader";
+
 import { RetriverCard } from "@/components/RetriverCard";
 import { RETRIEVER_DATA } from "@/utils/data";
 import { RetrieverIconsTypes } from "@/utils/types";
@@ -15,7 +16,17 @@ const SelectRetrieverPage = () => {
         height: "100%",
       }}
     >
-      <PageHeader variant="Select Retriver" />
+      <PageHeader
+        title="Select a Retriever"
+        buttons={[
+          {
+            label: "Continue",
+            variant: "outlined",
+            href: "/alerts/create",
+            width: 220,
+          },
+        ]}
+      />
 
       {/* Grid Layout */}
       <Box

@@ -78,6 +78,8 @@ export type CustomButtonVariants =
   | "round"
   | "request-history";
 
+export type ButtonVariants = "outlined" | "contained" | "text";
+
 export type ButtonTextTransforms =
   | "capitalize"
   | "lowercase"

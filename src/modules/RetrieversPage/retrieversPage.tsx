@@ -14,7 +14,17 @@ const RetrieversPage = () => {
         height: "100%",
       }}
     >
-      <PageHeader variant="Retrivers" />
+      <PageHeader
+        title="Retrievers"
+        buttons={[
+          {
+            label: "Create Retriever",
+            variant: "outlined",
+            href: "/retrievers/new",
+            width: 220,
+          },
+        ]}
+      />
       {/* Grid Layout */}
       <Box
         sx={{

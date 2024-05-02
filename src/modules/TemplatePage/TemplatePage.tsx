@@ -19,7 +19,7 @@ const TemplatePage = () => {
       gap={"1.5rem"}
       height={"100%"}
     >
-      <PageHeader variant="Template" />
+      <PageHeader title="Pulls Inventory" />
 
       {/* Table Container */}
       <Box height={"88%"}>

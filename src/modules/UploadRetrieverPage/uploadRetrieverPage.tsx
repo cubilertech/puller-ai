@@ -3,6 +3,7 @@ import { Button } from "@/components/Button";
 import { Divider } from "@/components/Divider";
 import { Icon } from "@/components/Icon";
 import { PageHeader } from "@/components/PageHeader";
+
 import { Paper } from "@/components/Paper";
 import { UploadBox } from "@/components/UplaodBox";
 import { Box, Input, Typography } from "@mui/material";
@@ -26,7 +27,7 @@ const UploadRetrieverPage = () => {
         overflowY: "none",
       }}
     >
-      <PageHeader variant="Custom Retrievers" />
+      <PageHeader title="Custom Retrievers" />
 
       {/* Main Container */}
       <Box

@@ -22,6 +22,7 @@ import {
   getSQLEditorOpen,
 } from "@/libs/redux/features/sqlEditor";
 import { useValidate } from "@/hooks/useRequest";
+import { dummySQL } from "@/utils/constants";
 
 interface PannelAreaProps {
   content?: {
@@ -291,7 +292,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate, sql }) => {
           >
             <SQL_Editor
               handleClose={() => handleCloseSQL_Editor()}
-              code={sql as string}
+              code={sql ? (sql as string) : dummySQL}
             />
           </Box>
         )}
