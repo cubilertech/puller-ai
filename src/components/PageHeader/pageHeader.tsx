@@ -11,7 +11,7 @@ import GraphModal from "@/modals/graphModals/graphModal";
 import { Tooltip } from "../Tooltip";
 import { PageHeaderVariants } from "@/utils/types";
 import { useDispatch } from "react-redux";
-import { HandleOpenSQL } from "@/redux/sqlEditor";
+import { HandleOpenSQL } from "@/libs/redux/features/sqlEditor";
 interface PageHeaderProps {
   variant: PageHeaderVariants;
   graph?: any[];

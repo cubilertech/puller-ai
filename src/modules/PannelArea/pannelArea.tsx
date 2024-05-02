@@ -20,7 +20,7 @@ import {
   HandleOpenOptionbar,
   getOptionbarOpen,
   getSQLEditorOpen,
-} from "@/redux/sqlEditor";
+} from "@/libs/redux/features/sqlEditor";
 import { useValidate } from "@/hooks/useRequest";
 
 interface PannelAreaProps {

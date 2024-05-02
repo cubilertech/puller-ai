@@ -1,9 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "./store";
+import { RootState } from "../store";
 
-export const getSQLEditorOpen = (state: RootState) => state.sqlEditor?.open;
+export const getSQLEditorOpen = (state: RootState) => state.SQLEditor?.open;
 export const getOptionbarOpen = (state: RootState) =>
-  state.sqlEditor?.optionbarOpen;
+  state.SQLEditor?.optionbarOpen;
 
 const SQLEditor = createSlice({
   name: "sqlEditor",
