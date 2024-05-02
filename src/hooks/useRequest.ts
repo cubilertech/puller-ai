@@ -1,6 +1,10 @@
 import { setActiveRequest } from "@/libs/redux/features/activeRequest";
 import { useAppDispatch } from "@/libs/redux/hooks";
-import { runQueryPayload, validateRequestPayload, validateRequestResponse } from "@/utils/types";
+import {
+  runQueryPayload,
+  validateRequestPayload,
+  validateRequestResponse,
+} from "@/utils/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/navigation";
@@ -47,46 +51,47 @@ export const useValidate = () => {
 };
 
 export const useRunQuery = () => {
-    // const dispatch = useAppDispatch();
-    const router = useRouter();
-  
-    async function submit(
-      data: runQueryPayload
-    ): Promise<validateRequestResponse | null> {
-      try {
-        const res = await axios({
-          url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/v0/query/execute`,
-          method: "POST",
-          data,
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        if (res.status === 200) {
-          return res.data;
-        } else {
-          return null;
-        }
-      } catch (error) {
-        console.error("Network error:", error);
+  // const dispatch = useAppDispatch();
+  const router = useRouter();
+
+  async function submit(
+    data: runQueryPayload
+  ): Promise<validateRequestResponse | null> {
+    try {
+      const res = await axios({
+        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/v0/query/execute`,
+        method: "POST",
+        data,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (res.status === 200) {
+        return res.data;
+      } else {
         return null;
       }
+    } catch (error) {
+      console.error("Network error:", error);
+      return null;
     }
-    return useMutation({
-      mutationFn: submit,
-      onSuccess: (data) => {
-        // dispatch(setActiveRequest(data));
-        setTimeout(() => {
-          router.push("/request/results");
-        }, 1000);
-      },
-      onError: (err) => {
-        console.log(err, "error in validating request");
-      },
-    });
-  };
+  }
+  return useMutation({
+    mutationFn: submit,
+    onSuccess: (data) => {
+      // dispatch(setActiveRequest(data));
+      setTimeout(() => {
+        router.push("/request/results");
+      }, 1000);
+    },
+    onError: (err) => {
+      console.log(err, "error in validating request");
+    },
+  });
+};
 
 export const useGetQueryStatus = (executionID: string) => {
+  const router = useRouter();
   async function submit() {
     try {
       const res = await axios({
@@ -103,17 +108,16 @@ export const useGetQueryStatus = (executionID: string) => {
       }
     } catch (error: any) {
       toast.error(error.message as string);
+      setTimeout(() => {
+        router.push("/request");
+      }, 5000);
       console.error("Network error:", error);
       return null;
     }
   }
 
-    return useQuery(
-      ["query-status", executionID],
-      submit,
-      {
-        refetchInterval: 10_000,
-        enabled: false,
-      }
-    );
-  };
+  return useQuery(["query-status", executionID], submit, {
+    refetchInterval: 10_000,
+    enabled: false,
+  });
+};

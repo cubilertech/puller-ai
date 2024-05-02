@@ -36,6 +36,9 @@ export const MuiButton = (theme: Theme) => {
               "linear-gradient(54deg, rgba(108,33,177,1) 16%, rgba(26,138,169,1) 100%)",
             borderRadius: "8px",
           },
+          "&.Mui-disabled": {
+            background: "#4c7ac9",
+          },
         },
 
         outlined: {

@@ -19,8 +19,7 @@ const SQL_Editor: FC<SQL_EditorProps> = ({ handleClose, code }) => {
   const [formattedCode, setFormattedCode] = useState<string>("");
 
   useEffect(() => {
-    if(code)
-    setFormattedCode(format(code, { language: "mysql" }));
+    if (code) setFormattedCode(format(code, { language: "mysql" }));
   }, [code]);
   const customCoyStyle = {
     ...coy,
@@ -64,13 +63,18 @@ const SQL_Editor: FC<SQL_EditorProps> = ({ handleClose, code }) => {
           display: "flex",
           justifyContent: "space-between",
           width: "100%",
+          alignItems: "center",
+          mb: 0.8,
         }}
       >
-        <Typography variant="display-sm-medium">SQL Editor</Typography>
+        <Typography variant="display-xs-medium">SQL Editor</Typography>
         <Button
           variant="text"
           onClick={handleClose}
           sx={{
+            maxWidth: 25,
+            maxHeight: 25,
+            minWidth: "25px !important",
             color: "white",
             bgcolor: "#293b42",
             borderRadius: "100%",
@@ -78,7 +82,11 @@ const SQL_Editor: FC<SQL_EditorProps> = ({ handleClose, code }) => {
             ":hover": { borderRadius: "100%", border: "none" },
           }}
         >
-          <Close />
+          <Close
+            sx={{
+              fontSize: "18px",
+            }}
+          />
         </Button>
       </Box>
       <Divider variant="fullWidth" type="light" />
