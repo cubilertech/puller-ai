@@ -4,6 +4,7 @@ import { runQueryPayload, validateRequestPayload, validateRequestResponse } from
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 export const useValidate = () => {
   const dispatch = useAppDispatch();
@@ -85,26 +86,27 @@ export const useRunQuery = () => {
     });
   };
 
-  export const useGetQueryStatus = (executionID : string) => {
-    async function submit() {
-      try {
-        const res = await axios({
-          url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/v0/query/execute/${executionID}`,
-          method: "get",
-          headers: {
-            accept: "application/json",
-          },
-        });
-        if (res.status === 200) {
-          return res.data;
-        } else {
-          return null;
-        }
-      } catch (error) {
-        console.error("Network error:", error);
+export const useGetQueryStatus = (executionID: string) => {
+  async function submit() {
+    try {
+      const res = await axios({
+        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/v0/query/execute/${executionID}`,
+        method: "get",
+        headers: {
+          accept: "application/json",
+        },
+      });
+      if (res.status === 200) {
+        return res.data;
+      } else {
         return null;
       }
+    } catch (error: any) {
+      toast.error(error.message as string);
+      console.error("Network error:", error);
+      return null;
     }
+  }
 
     return useQuery(
       ["query-status", executionID],
