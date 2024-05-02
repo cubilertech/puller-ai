@@ -31,7 +31,6 @@ const YourResultsPage: FC = () => {
       // Trigger fade-in effect after component mounts
       setFadeIn(true);
     } else {
-      setIsLoading(true);
       refetchQuerySatus();
     }
   }, [data]);
@@ -65,7 +64,7 @@ const YourResultsPage: FC = () => {
           <PageHeader title="Your Results" />
 
           <Box sx={{ display: "flex", gap: 2, pt: 3, width: "100%" }}>
-            <ResultCard data={{ ...RESULTS_DATA, fileLink: data?.result }} />
+            <ResultCard data={{...RESULTS_DATA,fileLink:data?.result}} />
             <NotesList />
           </Box>
         </Box>
