@@ -81,7 +81,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate, sql }) => {
         sx={{
           display: "flex",
           // flexDirection: "column",
-          justifyContent: "flex-end",
+          justifyContent: "flex-start",
           height: "calc(100vh - 180px)",
           // height: "100%",
           width: "100%",
@@ -109,6 +109,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate, sql }) => {
             sx={{
               border: `1px solid ${palette.color.gray[700]}`,
               height: content ? "fit-content" : "100%",
+              // height: "100%",
               margin: 0,
               padding: content ? 1 : 0,
               width: "100%",
