@@ -61,7 +61,7 @@ const YourResultsPage: FC = () => {
             transition: "opacity 1s ease",
           }}
         >
-          <PageHeader variant="Results" />
+          <PageHeader title="Your Results" />
 
           <Box sx={{ display: "flex", gap: 2, pt: 3, width: "100%" }}>
             <ResultCard data={{...RESULTS_DATA,fileLink:data?.result}} />

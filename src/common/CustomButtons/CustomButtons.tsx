@@ -104,14 +104,15 @@ const CustomButton: FC<buttonProps> = ({
               borderRadius: "50px",
               color: palette.base.white,
               border: `1px solid var(--vison-pro-stock, ${palette.base.white})`,
-              background: `${palette.color.gray[300]} !important`,
+              background: `${palette.color.gray[400]} !important`,
               width: 122,
               height: 48,
               py: 2,
               px: 4,
               ":hover": {
+                border: `1px solid var(--vison-pro-stock, ${palette.base.white})`,
                 borderRadius: "50px !important",
-                background: `${palette.color.gray[400]} !important`,
+                background: `${palette.color.gray[300]} !important`,
               },
             }}
             variant="outlined"
