@@ -24,6 +24,8 @@ export const CustomInput: FC<CustomInputProps> = ({ onChange, disabled }) => {
         padding: "0.5rem",
         background: "transparent",
         outline: 0,
+        color: disabled ? "#738285" : "#fff",
+        fontFamily: "inherit", // Inherit font family for consistency
       }}
       onChange={onChange}
     />

@@ -3,12 +3,13 @@ import { Box, IconButton as MuiIconButton, Typography } from "@mui/material";
 import { Icon } from "@/components/Icon";
 import { IconTypes } from "@/utils/types";
 import "./notificationIconButton.css";
+import { palette } from "@/theme/Palette";
 
 interface IconButtonProps {
   icon?: IconTypes;
   text?: string;
   iconWidth?: number;
-  iconHeight?: number; 
+  iconHeight?: number;
   isNotice?: boolean;
 }
 
@@ -23,7 +24,14 @@ const NotificationIconButton: FC<IconButtonProps> = ({
   return (
     <div className="container-notification">
       <MuiIconButton
-        sx={{ position: "relative", borderRadius: "100%" }}
+        sx={{
+          position: "relative",
+          borderRadius: "100%",
+          bgcolor: `${palette.color.gray[400]}`,
+          ":hover": {
+            bgcolor: `${palette.color.gray[300]}`,
+          },
+        }}
         {...props}
       >
         {isNotice && (

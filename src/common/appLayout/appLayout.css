@@ -7,11 +7,11 @@
 }
 
 .sidebar {
-  width: 240px;
+  width: 200px;
 }
 
 .topbar {
-  height: 88px;
+  height: 80px;
   z-index: 999;
   width: 100%;
 }
@@ -23,7 +23,7 @@
 
 .content {
   overflow: auto;
-  height: calc(100vh - 88px);
+  height: calc(100vh - 80px);
   width: 100%;
 }
 .children-container {

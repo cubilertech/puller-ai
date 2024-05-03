@@ -1,5 +1,6 @@
 "use client";
 import { PageHeader } from "@/components/PageHeader";
+
 import { RectangleCard } from "@/components/RectangleCard";
 import { Box } from "@mui/material";
 import { useRouter } from "next/navigation";
@@ -8,7 +9,7 @@ const SelectNewRetriverPage = () => {
   const router = useRouter();
   return (
     <Box p={"1rem"} display={"flex"} flexDirection={"column"} gap={"2rem"}>
-      <PageHeader variant="New Retriver" />
+      <PageHeader title="Select New Retriever Type" />
       {/*Layout Container */}
       <Box
         display={"flex"}

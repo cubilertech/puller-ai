@@ -4,6 +4,7 @@ import { Paper } from "../Paper";
 import { useRouter } from "next/navigation";
 import { SingleCardDomyData } from "@/utils/data";
 import { RequestsCard } from "../RecentRequestes-Card";
+import { CustomLink } from "../Link";
 
 const NotesList = () => {
   const route = useRouter();
@@ -46,9 +47,9 @@ const NotesList = () => {
       >
         {SingleCardDomyData.map((item, i) => (
           <Box mr={-10} width={"100%"} key={i}>
-            {/* <CustomLink href="/request/preview"> */}
-            <RequestsCard title={item.title} discription={item.discription} />
-            {/* </CustomLink> */}
+            <CustomLink href="/request/preview">
+              <RequestsCard title={item.title} discription={item.discription} />
+            </CustomLink>
           </Box>
         ))}
       </Box>

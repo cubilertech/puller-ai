@@ -23,12 +23,12 @@ const SideNavbar = () => {
   const pathname = usePathname();
 
   const path = pathname.split("/")[1];
-  const drawerWidth = 240;
+  const drawerWidth = 200;
   useEffect(() => {
     if (pathname === "/") {
       Route.push("/request");
     }
-  }, []);
+  }, [Route, pathname]);
   return (
     <Box
       sx={{
@@ -79,6 +79,7 @@ const SideNavbar = () => {
                           sx={{
                             display: "flex",
                             gap: "12px",
+                            color: palette.base.white,
                             border:
                               path === item.name
                                 ? "1px solid #8f8f94"
@@ -123,21 +124,31 @@ const SideNavbar = () => {
                 },
               ].map((text, index) => (
                 <ListItem key={index}>
-                  <MuiListItemButton>
-                    <ListItemIcon
+                  <div className="navbar-container">
+                    <MuiListItemButton
                       sx={{
-                        minWidth: 0,
+                        color: palette.base.white,
+                        border:
+                          path === text.name
+                            ? "1px solid #8f8f94"
+                            : "1px solid transparent",
                       }}
                     >
-                      {text.img}
-                    </ListItemIcon>
-                    <ListItemText
-                      sx={{
-                        fontSize: "14px",
-                      }}
-                      primary={text.name}
-                    />
-                  </MuiListItemButton>
+                      <ListItemIcon
+                        sx={{
+                          minWidth: 0,
+                        }}
+                      >
+                        {text.img}
+                      </ListItemIcon>
+                      <ListItemText
+                        sx={{
+                          fontSize: "14px",
+                        }}
+                        primary={text.name}
+                      />
+                    </MuiListItemButton>
+                  </div>
                 </ListItem>
               ))}
             </List>

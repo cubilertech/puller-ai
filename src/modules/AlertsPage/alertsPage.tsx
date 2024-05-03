@@ -2,6 +2,7 @@
 import CustomButton from "@/common/CustomButtons/CustomButtons";
 import { AlertCard } from "@/components/AlertCard";
 import { PageHeader } from "@/components/PageHeader";
+
 import { Paper } from "@/components/Paper";
 import { palette } from "@/theme/Palette";
 import { ACTIVE_TYPES } from "@/utils/constants";
@@ -24,7 +25,16 @@ const AlertsPage = () => {
         height: "100%",
       }}
     >
-      <PageHeader variant="Alerts" />
+      <PageHeader
+        title="Alerts"
+        buttons={[
+          {
+            label: "Create Alert",
+            variant: "outlined",
+            href: "/alerts/select-retriever",
+          },
+        ]}
+      />
 
       {/* Table */}
 

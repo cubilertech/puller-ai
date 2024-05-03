@@ -78,6 +78,8 @@ export type CustomButtonVariants =
   | "round"
   | "request-history";
 
+export type ButtonVariants = "outlined" | "contained" | "text";
+
 export type ButtonTextTransforms =
   | "capitalize"
   | "lowercase"
@@ -127,6 +129,9 @@ export type TooltipVariants = "info" | "status";
 
 export type FeedbackPageVariants = "retriever" | "alert";
 
+// export type RootState = {
+//   sqlEditor: ReturnType<typeof sqlEditorReducer>;
+// };
 export interface validateRequestPayload {
   message: string;
 }
@@ -153,4 +158,30 @@ export interface queryStatusResponse {
   id: string;
   result: string;
   status: string;
+}
+
+export interface CustomNodeData {
+  value?: number;
+  label: string;
+}
+
+export interface Variable {
+  id: string;
+  model: string;
+  name: string;
+  type: string;
+  value: number;
+  a?: string;
+  c?: string;
+  e?: string;
+  g?: string;
+  i?: string;
+  k?: string;
+  m?: string;
+}
+export enum Position {
+  Left = "left",
+  Top = "top",
+  Right = "right",
+  Bottom = "bottom",
 }

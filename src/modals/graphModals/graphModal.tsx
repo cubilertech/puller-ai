@@ -8,10 +8,12 @@ import ReactFlow, {
   useNodesState,
   useEdgesState,
   addEdge,
+  Node,
 } from "reactflow";
 import "reactflow/dist/style.css";
 import ContextMenu from "./contextMenu";
 import CloseIcon from "@mui/icons-material/Close";
+import { CustomNodeData, Position, Variable } from "@/utils/types";
 
 interface GraphModalProps {
   open: boolean;
@@ -29,6 +31,14 @@ const modalStyle = {
   border: "none",
   boxShadow: 24,
 };
+interface CustomNode {
+  id: string;
+  type: string;
+  targetPosition?: Position;
+  position: { x: number; y: number };
+  data: CustomNodeData;
+  variables: Variable[];
+}
 
 const GraphModal: FC<GraphModalProps> = ({ open, handleClose }) => {
   const [openUpdateName, setOpenUpdateName] = useState(false);
@@ -37,7 +47,7 @@ const GraphModal: FC<GraphModalProps> = ({ open, handleClose }) => {
     setOpenUpdateName(!openUpdateName);
   };
 
-  const initialNodes = [
+  const initialNodes: CustomNode[] = [
     {
       id: "node-1",
       type: "textUpdater",
@@ -56,7 +66,7 @@ const GraphModal: FC<GraphModalProps> = ({ open, handleClose }) => {
     {
       id: "node-2",
       type: "textUpdater",
-      targetPosition: "top",
+      targetPosition: Position.Top,
       position: { x: 0, y: 200 },
       data: { label: "Node 2" },
       variables: [
@@ -72,7 +82,7 @@ const GraphModal: FC<GraphModalProps> = ({ open, handleClose }) => {
     {
       id: "node-3",
       type: "textUpdater",
-      targetPosition: "top",
+      targetPosition: Position.Top,
       position: { x: 200, y: 200 },
       data: { label: "node 3" },
       variables: [
@@ -106,11 +116,21 @@ const GraphModal: FC<GraphModalProps> = ({ open, handleClose }) => {
   const route = useRouter();
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-  const [menu, setMenu] = useState(null);
-  const ref = useRef(null);
+  // const [menu, setMenu] = useState(null);
+  const [menu, setMenu] = useState<{
+    id: string;
+    label: string;
+    variables: any;
+    top?: number;
+    left?: number;
+    right?: number | boolean;
+    bottom?: number | boolean;
+  } | null>(null);
+
+  const ref = useRef<HTMLDivElement>(null);
 
   const onConnect = useCallback(
-    (params) => setEdges((eds) => addEdge(params, eds)),
+    (params: any) => setEdges((eds) => addEdge(params, eds)),
     [setEdges]
   );
 
@@ -132,7 +152,7 @@ const GraphModal: FC<GraphModalProps> = ({ open, handleClose }) => {
 
   const onNodeClick = useCallback(
     (event: any, node: any) => {
-      const pane = ref?.current?.getBoundingClientRect();
+      const pane = ref.current!.getBoundingClientRect();
       setMenu({
         id: node.id,
         label: node.data.label,

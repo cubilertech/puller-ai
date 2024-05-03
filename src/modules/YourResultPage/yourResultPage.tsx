@@ -8,32 +8,26 @@ import { getActiveRequest } from "@/libs/redux/features/activeRequest";
 import { useAppSelector } from "@/libs/redux/hooks";
 import { RESULTS_DATA } from "@/utils/data";
 import { Box } from "@mui/material";
+import { useParams } from "next/navigation";
 import { FC, useEffect, useState } from "react";
 
 const YourResultsPage: FC = () => {
+  const { id } = useParams<{ id: string }>();
   const [fadeIn, setFadeIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const activeRequest = useAppSelector(getActiveRequest);
-  const { data, refetch: refetchQuerySatus } = useGetQueryStatus(
-    activeRequest?.id
+  const { data, refetch: refetchQueryStatus } = useGetQueryStatus(
+    activeRequest?.id ? activeRequest.id : id
   );
-
-  // useEffect(() => {
-  //   refetchQuerySatus();
-  //   setIsLoading(false);
-  //   // setTimeout(() => {
-  //   //   setIsLoading(false);
-  //   // }, 4000);
-  // }, []);
   useEffect(() => {
     if (data && data?.status === "complete") {
       setIsLoading(false);
       // Trigger fade-in effect after component mounts
       setFadeIn(true);
     } else {
-      refetchQuerySatus();
+      refetchQueryStatus();
     }
-  }, [data]);
+  }, [data, refetchQueryStatus]);
 
   return (
     <>
@@ -61,10 +55,10 @@ const YourResultsPage: FC = () => {
             transition: "opacity 1s ease",
           }}
         >
-          <PageHeader variant="Results" />
+          <PageHeader title="Your Results" />
 
           <Box sx={{ display: "flex", gap: 2, pt: 3, width: "100%" }}>
-            <ResultCard data={{...RESULTS_DATA,fileLink:data?.result}} />
+            <ResultCard data={{ ...RESULTS_DATA, fileLink: data?.result }} />
             <NotesList />
           </Box>
         </Box>

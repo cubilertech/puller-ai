@@ -34,3 +34,7 @@
 .slide-out {
   animation: slideOut 0.5s ease forwards; /* Apply the closing animation */
 }
+
+textarea::placeholder {
+  font-style: italic;
+}

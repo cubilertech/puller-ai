@@ -1,6 +1,7 @@
 "use client";
 import { Button } from "@/components/Button";
 import { PageHeader } from "@/components/PageHeader";
+
 import { Paper } from "@/components/Paper";
 import { palette } from "@/theme/Palette";
 import { Box, Input, Typography } from "@mui/material";
@@ -18,7 +19,7 @@ const CreateAlertPage = () => {
         alignItems: "flex-end",
       }}
     >
-      <PageHeader variant="Create Alert" />
+      <PageHeader title={`Create Alert for "Retriever 2"`} />
 
       {/* Input container */}
       <Box width={"100%"}>

@@ -45,7 +45,7 @@ const Tooltip: FC<TooltipProps> = ({
     case "status":
       return (
         <MuiTooltip
-          placement="bottom-start"
+          placement="right-end"
           title={
             <Box
               sx={{
@@ -56,28 +56,28 @@ const Tooltip: FC<TooltipProps> = ({
             >
               {" "}
               <Typography
-                variant="text-md-semibold"
+                variant="text-md-regular"
                 display={"flex"}
                 gap={"1rem"}
               >
                 <Icon icon="live" /> Live
               </Typography>
               <Typography
-                variant="text-md-semibold"
+                variant="text-md-regular"
                 display={"flex"}
                 gap={"1rem"}
               >
                 <Icon icon="issues" /> Issues
               </Typography>
               <Typography
-                variant="text-md-semibold"
+                variant="text-md-regular"
                 display={"flex"}
                 gap={"1rem"}
               >
                 <Icon icon="blocked" /> Blocked
               </Typography>
               <Typography
-                variant="text-md-semibold"
+                variant="text-md-regular"
                 display={"flex"}
                 gap={"1rem"}
               >

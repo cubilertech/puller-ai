@@ -20,7 +20,27 @@ const RetrieverDetailPage = () => {
         gap: "1.4rem",
       }}
     >
-      <PageHeader variant="Retriever Detail" />
+      <PageHeader
+        title="Alerts"
+        buttons={[
+          {
+            label: "Add Context",
+            variant: "outlined",
+            width: 180,
+          },
+          {
+            label: "Request Access",
+            variant: "outlined",
+            width: 180,
+          },
+          {
+            label: "Create Alert",
+            variant: "outlined",
+            width: 180,
+            href: "/alerts/feedback",
+          },
+        ]}
+      />
       <Paper
         variant="light-border"
         sx={{

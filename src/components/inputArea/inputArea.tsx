@@ -125,17 +125,22 @@ const InputAreaComponent: FC<InputAreaComponentPorps> = ({
             </Box>
           )}
 
-          <Box>
-            <Box width={155}>
-              <Button
-                onClick={() => handleValidate()}
-                fullWidth
-                size="small"
-                variant="contained"
-                label="Validate"
-              />
+          {isLoading ? (
+            ""
+          ) : (
+            <Box>
+              <Box width={155}>
+                <Button
+                  onClick={() => handleValidate()}
+                  fullWidth
+                  size="small"
+                  variant="contained"
+                  label="Validate"
+                  disabled={value.length <= 0}
+                />
+              </Box>
             </Box>
-          </Box>
+          )}
         </Box>
       </Box>
     </Paper>

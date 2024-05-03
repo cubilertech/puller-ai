@@ -1,15 +1,21 @@
+"use client";
 import { Box, Checkbox, Input, Typography } from "@mui/material";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { Paper } from "../Paper";
 import { Button } from "../Button";
 import { CircleOutlined } from "@mui/icons-material";
 import CloseIcon from "@mui/icons-material/Close";
-import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import "./optionsBar.css";
 import DropdownSelect from "../DropdownSelect/dropdownSelect";
 import { Divider } from "../Divider";
 import { OptionsBarVariants } from "@/utils/types";
 import { palette } from "@/theme/Palette";
+import { Icon } from "../Icon";
+import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
+import { updateValue } from "@/libs/redux/features/validateRequest";
+import { HandleCloseOptionbar } from "@/libs/redux/features/sqlEditor";
+import { toggleCheckbox } from "@/libs/redux/features/checkbox";
+import { OPTIONBAR_DATA } from "@/utils/constants";
 
 interface optionbarProps {
   variant: OptionsBarVariants;
@@ -18,13 +24,46 @@ interface optionbarProps {
 }
 
 const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
-  const data = ["HELP_TICKET_CREATE", "SIGN_UP", "TXN_EVENT", "SITE_LOGIN"];
+  const dispatch = useAppDispatch();
+
+  const checkedItems = useAppSelector((state: any) => state.checkbox);
+  const [selectedItems, setSelectedItems] = useState("");
+
+  useEffect(() => {
+    // Update selectedItems whenever checkedItems change
+    const updatedSelectedItems = OPTIONBAR_DATA.filter(
+      (_, index) => checkedItems[index]
+    )
+      .map((item) => item + " ")
+      .join("");
+    setSelectedItems(updatedSelectedItems);
+  }, [checkedItems]);
+
+  const handleItemClick = (item: string, index: number) => {
+    // Check if the item is already selected
+    let updatedSelectedItems;
+    if (selectedItems.includes(item)) {
+      // If selected, remove it from the selected items string
+      updatedSelectedItems = selectedItems.replace(`${item} `, "");
+    } else {
+      // If not selected, add it to the selected items string
+      updatedSelectedItems = selectedItems + `${item} `;
+    }
+    setSelectedItems(updatedSelectedItems);
+    // Toggle checkbox state
+    dispatch(toggleCheckbox({ index }));
+  };
+
+  const handleUpdateVariable = () => {
+    dispatch(updateValue(selectedItems));
+    dispatch(HandleCloseOptionbar());
+  };
 
   if (variant === "input")
     return (
       <Box
         sx={{
-          width: { lg: "24%", md: "30%", sm: "40%" },
+          width: "100%",
           height: "100%",
           ml: "1rem",
           overflow: "auto",
@@ -127,7 +166,8 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
     return (
       <Box
         sx={{
-          width: "20rem",
+          width: "100%",
+          height: "100%",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
@@ -179,32 +219,44 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
                   gap: "10px",
                 }}
               >
-                {data.map((item, index) => (
-                  <Paper
+                {OPTIONBAR_DATA.map((item, index) => (
+                  <label
                     key={index}
-                    variant="light-border"
-                    sx={{
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                      padding: "0 0.5rem 0 1rem",
-                      borderRadius: "8px",
-                    }}
+                    onClick={() => handleItemClick(item, index)}
                   >
-                    <Typography variant="text-md-regular">{item}</Typography>
-                    <Checkbox
-                      icon={
-                        variant === "round-checkbox" ? (
-                          <CircleOutlined />
-                        ) : undefined
-                      }
-                      checkedIcon={
-                        variant === "round-checkbox" ? (
-                          <CheckCircleIcon />
-                        ) : undefined
-                      }
-                    />
-                  </Paper>
+                    <Paper
+                      variant="light-border"
+                      sx={{
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                        padding: "0 0.5rem 0 1rem",
+                        borderRadius: "8px",
+                      }}
+                    >
+                      <Typography variant="text-md-regular">{item}</Typography>
+                      <Checkbox
+                        checked={!!checkedItems[index]}
+                        sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
+                        icon={
+                          variant === "round-checkbox" ? (
+                            <CircleOutlined />
+                          ) : undefined
+                        }
+                        checkedIcon={
+                          variant === "round-checkbox" ? (
+                            <Icon icon="roundCheckbox" width={18} height={18} />
+                          ) : (
+                            <Icon
+                              icon="squareCheckbox"
+                              width={18}
+                              height={18}
+                            />
+                          )
+                        }
+                      />
+                    </Paper>
+                  </label>
                 ))}
               </Box>
             </Box>
@@ -299,7 +351,11 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
                 mt: "1rem",
               }}
             >
-              <Button label="Update" variant="contained" />
+              <Button
+                label="Update"
+                variant="contained"
+                onClick={() => handleUpdateVariable()}
+              />
             </Box>
           </Box>
         </Paper>

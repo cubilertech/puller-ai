@@ -21,7 +21,7 @@ const ConnectAppsPage = () => {
         gap: "1.2rem",
       }}
     >
-      <PageHeader variant="Connect App" />
+      <PageHeader title="Connect App" />
 
       {/* Table */}
       <Paper
