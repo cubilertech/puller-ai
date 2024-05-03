@@ -132,12 +132,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate, sql }) => {
                 <Box>
                   <Box display={"flex"}>
                     <Typography
-                      variant={{
-                        xl: "display-xs",
-                        lg: "text-md-regular",
-                        md: "text-sm",
-                        sm: "text-xxs-regular",
-                      }}
+                      variant={"display-xs"}
                       sx={{
                         width: "98%",
                         pr: 5,
@@ -158,12 +153,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate, sql }) => {
                         description="“TXN_SZNAL” table . This query uses a table called Transactions that contains the following columns:"
                       >
                         <Typography
-                          variant={{
-                            xl: "display-xs",
-                            lg: "text-md-regular",
-                            md: "text-sm",
-                            sm: "text-xxs-regular",
-                          }}
+                          variant={"display-xs"}
                           onClick={handleOpenSelectBar}
                           sx={{
                             borderRadius: "8px",
