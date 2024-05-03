@@ -10,19 +10,32 @@ interface Summary {
 const Summary: FC<Summary> = ({ heading, description }) => {
   return (
     <Paper
-    variant="light-border"
+      variant="light-border"
       sx={{
         maxWidth: "100%",
         wordWrap: "break-word",
-        padding: "2rem",
+        padding: "1rem",
         alignSelf: "stretch",
         display: "flex",
         flexDirection: "column",
+        overflowY: "auto",
+        scrollbarWidth: "none",
+        whiteSpace: "pre-wrap",
       }}
     >
       <Typography variant="text-md-semibold"> {heading} </Typography>
       <br />
-      <Typography variant="text-xxs-regular">{description}</Typography>
+      <Typography
+        sx={{
+          whiteSpace: "pre-wrap",
+          fontSize: "15px",
+          fontFamily: "Inter",
+        }}
+        component={"pre"}
+        variant="text-xxs-regular"
+      >
+        {description}
+      </Typography>
     </Paper>
   );
 };

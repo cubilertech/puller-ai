@@ -99,12 +99,15 @@ const PageHeader: FC<PageHeaderProps> = ({ title, buttons }) => {
                 onClick={button?.onClick}
               />
             ) : (
-              <Button
-                key={index}
-                label={button.label}
-                variant={button.variant}
-                onClick={button?.onClick}
-              />
+              <Box width={button.width || 240}>
+                <Button
+                  key={index}
+                  label={button.label}
+                  variant={button.variant}
+                  onClick={button?.onClick}
+                  fullWidth
+                />
+              </Box>
             )
           )}
         </Box>
