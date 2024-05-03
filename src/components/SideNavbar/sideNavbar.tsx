@@ -28,7 +28,7 @@ const SideNavbar = () => {
     if (pathname === "/") {
       Route.push("/request");
     }
-  }, []);
+  }, [Route, pathname]);
   return (
     <Box
       sx={{
