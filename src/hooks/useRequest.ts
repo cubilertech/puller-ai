@@ -22,7 +22,7 @@ export const useValidate = () => {
   ): Promise<validateRequestResponse | null> {
     try {
       const res = await axios({
-        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/v0/query/prompt`,
+        url: `/api/prompt`,
         method: "POST",
         data,
         headers: {
@@ -62,7 +62,7 @@ export const useRunQuery = () => {
   ): Promise<validateRequestResponse | null> {
     try {
       const res = await axios({
-        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/v0/query/execute`,
+        url: `/api/execute`,
         method: "POST",
         data,
         headers: {
@@ -97,7 +97,7 @@ export const useGetQueryStatus = (executionID: string) => {
   async function submit() {
     try {
       const res = await axios({
-        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/v0/query/execute/${executionID}`,
+        url: `/api/execute/${executionID}`,
         method: "get",
         headers: {
           accept: "application/json",

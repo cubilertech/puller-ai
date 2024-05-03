@@ -10,6 +10,7 @@ import { useRunQuery } from "@/hooks/useRequest";
 import GraphModal from "@/modals/graphModals/graphModal";
 
 import { HandleOpenSQL } from "@/libs/redux/features/sqlEditor";
+import GraphModal2 from "@/modals/graphModals/graphModal2";
 
 const ValidateRequestPage: FC = () => {
   const [isProccessing, setisProccessing] = useState(false);
@@ -69,7 +70,8 @@ const ValidateRequestPage: FC = () => {
               },
             ]}
           />
-          <GraphModal open={openGraph} handleClose={() => handleOpenGraph()} />
+          <GraphModal2 open={openGraph} handleClose={() => handleOpenGraph()} graph={activeRequest?.graph as any[]} />
+          {/* <GraphModal open={openGraph} handleClose={() => handleOpenGraph()} /> */}
           <Box sx={{ width: "97%", m: "auto", pt: 2 }}>
             <PannelArea
               sql={activeRequest?.sql}
