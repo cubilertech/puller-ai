@@ -8,9 +8,10 @@ import CustomButton from "@/common/CustomButtons/CustomButtons";
 import SQL_EditorModal from "@/modals/sql_EditorModal/sqlEditorModal";
 import { Icon } from "../Icon";
 import { useRouter } from "next/navigation";
-import GraphModal from "@/modals/graphModals/graphModal";
+// import GraphModal from "@/modals/graphModals/graphModal";
 import { Tooltip } from "../Tooltip";
 import { PageHeaderVariants } from "@/utils/types";
+import GraphModal2 from "@/modals/graphModals/graphModal2";
 
 interface PageHeaderProps {
   variant: PageHeaderVariants;
@@ -124,7 +125,8 @@ const PageHeader: FC<PageHeaderProps> = ({ variant , sql , graph  }) => {
             handleClose={handleOpenCloseSQL_Editor}
             code={sql as string}
           />
-          <GraphModal open={openGraph} handleClose={() => handleOpenGraph()} />
+          <GraphModal2 open={openGraph} handleClose={() => handleOpenGraph()} graph={graph as any[]}/>
+          {/* <GraphModal open={openGraph} handleClose={() => handleOpenGraph()} /> */}
         </>
       );
     case "Preview":
