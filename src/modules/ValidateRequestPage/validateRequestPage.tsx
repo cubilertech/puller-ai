@@ -1,11 +1,9 @@
 "use client";
 import { Box } from "@mui/material";
 import React, { FC, useState } from "react";
-
 import { PannelArea } from "../../modules/PannelArea";
 import { PageHeader } from "@/components/PageHeader";
 import { Loader } from "@/components/Loader";
-import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
 import { getActiveRequest } from "@/libs/redux/features/activeRequest";
 import { useRunQuery } from "@/hooks/useRequest";
@@ -14,7 +12,6 @@ import GraphModal from "@/modals/graphModals/graphModal";
 import { HandleOpenSQL } from "@/libs/redux/features/sqlEditor";
 
 const ValidateRequestPage: FC = () => {
-  const route = useRouter();
   const [isProccessing, setisProccessing] = useState(false);
   const activeRequest = useAppSelector(getActiveRequest);
   const [openGraph, setOpenGraph] = useState(false);
@@ -24,7 +21,7 @@ const ValidateRequestPage: FC = () => {
 
   const handleUpdate = () => {
     runQuery({ prompt: activeRequest.id });
-    // route.push("/request/results");
+    setisProccessing(true)
   };
   const handleOpenGraph = () => {
     setOpenGraph(!openGraph);

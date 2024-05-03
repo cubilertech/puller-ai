@@ -1,5 +1,8 @@
-import { setActiveRequest } from "@/libs/redux/features/activeRequest";
-import { useAppDispatch } from "@/libs/redux/hooks";
+import {
+  getActiveRequest,
+  setActiveRequest,
+} from "@/libs/redux/features/activeRequest";
+import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
 import {
   runQueryPayload,
   validateRequestPayload,
@@ -51,7 +54,7 @@ export const useValidate = () => {
 };
 
 export const useRunQuery = () => {
-  // const dispatch = useAppDispatch();
+  const activeRequest = useAppSelector(getActiveRequest);
   const router = useRouter();
 
   async function submit(
@@ -79,9 +82,8 @@ export const useRunQuery = () => {
   return useMutation({
     mutationFn: submit,
     onSuccess: (data) => {
-      // dispatch(setActiveRequest(data));
       setTimeout(() => {
-        router.push("/request/results");
+        router.push(`/request/results/${activeRequest.id}`);
       }, 1000);
     },
     onError: (err) => {
