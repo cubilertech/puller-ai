@@ -275,7 +275,12 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate, sql }) => {
         </Box>
 
         {isOpenSelectBar && (
-          <Box className={isOpenSelectBar ? "slide-in" : "slide-out"}>
+          <Box
+            className={isOpenSelectBar ? "slide-in" : "slide-out"}
+            sx={{
+              width: { lg: "26%", md: "38%", sm: "40%" },
+            }}
+          >
             <OptionsBar
               close={handleCloseSelectBar}
               variant="square-checkbox"

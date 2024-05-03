@@ -24,7 +24,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
     return (
       <Box
         sx={{
-          width: { lg: "24%", md: "30%", sm: "40%" },
+          width: "100%",
           height: "100%",
           ml: "1rem",
           overflow: "auto",
@@ -127,7 +127,8 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
     return (
       <Box
         sx={{
-          width: "20rem",
+          width: "100%",
+          height: "100%",
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
