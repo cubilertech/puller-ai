@@ -1,7 +1,9 @@
 "use client";
 import { Button } from "@/components/Button";
 import { PageHeader } from "@/components/PageHeader";
+
 import { Paper } from "@/components/Paper";
+import { palette } from "@/theme/Palette";
 import { Box, Input, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 
@@ -17,30 +19,30 @@ const CreateAlertPage = () => {
         alignItems: "flex-end",
       }}
     >
-      <PageHeader type="Create Alert" />
+      <PageHeader title={`Create Alert for "Retriever 2"`} />
 
+      {/* Input container */}
       <Box width={"100%"}>
         <Paper
           sx={{
             width: "100%",
             minHeight: "15rem",
             padding: "2rem",
-            border: "2px solid rgba(196, 196, 196, 0.6) !important",
+            border: `2px solid ${palette.opacity.gray} !important`,
           }}
-          type="light-border"
+          variant="light-border"
         >
           <Box display={"flex"} flexDirection={"column"} gap={"0.5rem"}>
             <Typography variant="text-md-semibold">Alert Name 1</Typography>
             <Paper
-              type="light-border"
+              variant="light-border"
               sx={{
                 minHeight: "5rem",
                 padding: "0.5rem 1rem",
                 display: "flex",
                 maxHeight: "15rem",
-                margin: 0,
                 background: "transparent !important ",
-                border: "2px solid rgba(196, 196, 196, 0.6) !important",
+                border: `2px solid ${palette.opacity.gray} !important`,
                 borderRadius: "8px",
               }}
             >
@@ -69,6 +71,8 @@ const CreateAlertPage = () => {
           </Box>
         </Paper>
       </Box>
+
+      {/* Create Alert Button */}
       <Box width={180} mt={"2rem"}>
         <Button
           variant="outlined"

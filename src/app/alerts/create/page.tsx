@@ -1,7 +1,7 @@
 import AppLayout from "@/common/appLayout/appLayout";
 import CreateAlertPage from "@/modules/CreateAlertPage/createAlertPage";
 
-const page = () => {
+function Page () {
   return (
     <AppLayout>
       <CreateAlertPage />
@@ -9,4 +9,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

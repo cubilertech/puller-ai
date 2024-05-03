@@ -44,6 +44,8 @@ export const icons = {
   cloudUpload: "/Images/Icons/cloud-upload-icon.svg",
   folder: "/Images/Icons/folder-icon.svg",
   cpu: "/Images/Icons/cpu-icon.svg",
+  squareCheckbox: "/Images/Icons/check-box.svg",
+  roundCheckbox: "/Images/Icons/round-check-box.svg",
 };
 
 export const PagesType = {
@@ -54,246 +56,268 @@ export const PagesType = {
   CONNECT_APP: "connect",
 };
 
-export const SingleCardDomyData = [
-  {
-    title: "Customer Elite Records",
-    discription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet justo ipsum. Sed accumsan quam vitae est varius fringilla. Pellentesque placerat vestibulum lorem sed porta. Nullam mattis tristique iaculis. Nullam pulvinar sit amet risus pretium auctor. Etiam quis massa pulvinar, aliquam quam vitae, tempus sem. Donec elementum pulvinar odio.",
-  },
-  {
-    title: "Customer Elite Records",
-    discription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet justo ipsum. Sed accumsan quam vitae est varius fringilla. Pellentesque placerat vestibulum lorem sed porta. Nullam mattis tristique iaculis. Nullam pulvinar sit amet risus pretium auctor. Etiam quis massa pulvinar, aliquam quam vitae, tempus sem. Donec elementum pulvinar odio.",
-  },
-  {
-    title: "Customer Elite Records",
-    discription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet justo ipsum. Sed accumsan quam vitae est varius fringilla. Pellentesque placerat vestibulum lorem sed porta. Nullam mattis tristique iaculis. Nullam pulvinar sit amet risus pretium auctor. Etiam quis massa pulvinar, aliquam quam vitae, tempus sem. Donec elementum pulvinar odio.",
-  },
-  {
-    title: "Customer Elite Records",
-    discription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet justo ipsum. Sed accumsan quam vitae est varius fringilla. Pellentesque placerat vestibulum lorem sed porta. Nullam mattis tristique iaculis. Nullam pulvinar sit amet risus pretium auctor. Etiam quis massa pulvinar, aliquam quam vitae, tempus sem. Donec elementum pulvinar odio.",
-  },
+export const isClient = typeof window !== "undefined";
 
-  {
-    title: "Customer Elite Records",
-    discription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet justo ipsum. Sed accumsan quam vitae est varius fringilla. Pellentesque placerat vestibulum lorem sed porta. Nullam mattis tristique iaculis. Nullam pulvinar sit amet risus pretium auctor. Etiam quis massa pulvinar, aliquam quam vitae, tempus sem. Donec elementum pulvinar odio.",
-  },
-  {
-    title: "Customer Elite Records",
-    discription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet justo ipsum. Sed accumsan quam vitae est varius fringilla. Pellentesque placerat vestibulum lorem sed porta. Nullam mattis tristique iaculis. Nullam pulvinar sit amet risus pretium auctor. Etiam quis massa pulvinar, aliquam quam vitae, tempus sem. Donec elementum pulvinar odio.",
-  },
-  {
-    title: "Customer Elite Records",
-    discription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet justo ipsum. Sed accumsan quam vitae est varius fringilla. Pellentesque placerat vestibulum lorem sed porta. Nullam mattis tristique iaculis. Nullam pulvinar sit amet risus pretium auctor. Etiam quis massa pulvinar, aliquam quam vitae, tempus sem. Donec elementum pulvinar odio.",
-  },
-  {
-    title: "Customer Elite Records",
-    discription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet justo ipsum. Sed accumsan quam vitae est varius fringilla. Pellentesque placerat vestibulum lorem sed porta. Nullam mattis tristique iaculis. Nullam pulvinar sit amet risus pretium auctor. Etiam quis massa pulvinar, aliquam quam vitae, tempus sem. Donec elementum pulvinar odio.",
-  },
-  {
-    title: "Customer Elite Records",
-    discription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet justo ipsum. Sed accumsan quam vitae est varius fringilla. Pellentesque placerat vestibulum lorem sed porta. Nullam mattis tristique iaculis. Nullam pulvinar sit amet risus pretium auctor. Etiam quis massa pulvinar, aliquam quam vitae, tempus sem. Donec elementum pulvinar odio.",
-  },
-  {
-    title: "Customer Elite Records",
-    discription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet justo ipsum. Sed accumsan quam vitae est varius fringilla. Pellentesque placerat vestibulum lorem sed porta. Nullam mattis tristique iaculis. Nullam pulvinar sit amet risus pretium auctor. Etiam quis massa pulvinar, aliquam quam vitae, tempus sem. Donec elementum pulvinar odio.",
-  },
+export const ACTIVE_TYPES = {
+  ALL: "all",
+  UNREAD: "unread",
+  PUBLIC: "public",
+  PRIVATE: "private",
+};
+export const ICONS_TYPES = {
+  LOGO: "logo",
+  OUTLINEDBOOKMARK: "outlinedBookMark",
+  LOGOTITLE: "logoTitle",
+  LOGOICON: "logoIcon",
+  ANNOTATION: "annotation",
+  BELL: "bell",
+  ELLIPSE: "ellipse",
+  PLUS: "plus",
+  MINUS: "minus",
+  IMPORTICON: "importIcon",
+  EYEICON: "eyeIcon",
+  ARROWLEFTICON: "arrowLeftIcon",
+  REQUESTICON: "requestIcon",
+  PULLSICON: "pullsIcon",
+  ADMINICON: "adminIcon",
+  ADVANCEDICON: "advancedIcon",
+  RETRIEVERSICON: "retrieversIcon",
+  ALERTSICON: "alertsIcon",
+  ARROWDOWN: "arrowDown",
+  PAGINATIONLEFT: "paginationLeft",
+  PAGINATIONRIGHT: "paginationRight",
+  SEARCH: "search",
+  ACTIONS: "actions",
+  INFO: "info",
+  INFOHOVER: "infoHover",
+  SNOWFLAKE: "snowflake",
+  SEGMENT: "segment",
+  LYITICS: "lytics",
+  DATAROOM: "dataRoom",
+  DBTCORE: "dbtCore",
+  SFCRM: "sfCrm",
+  CLREPORT: "clReport",
+  NIELSEN: "nielsen",
+  GOOGLEANALYTICS: "googleAnalytics",
+  CLICKSTREAM: "clickstream",
+  LIVE: "live",
+  BLOCKED: "blocked",
+  ISSUES: "issues",
+  NEEDPERMISSIONS: "needPermissions",
+  CONNECTAPPS: "connectApps",
+  APIKEY: "apiKey",
+  UPLOAD: "upload",
+  CLOUDUPLOAD: "cloudUpload",
+  FOLDER: "folder",
+  CPU: "cpu",
+  SQUARECHECKBOX: "squareCheckbox",
+  ROUNDCHECKBOX: "roundCheckbox",
+};
 
-  {
-    title: "Customer Elite Records",
-    discription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet justo ipsum. Sed accumsan quam vitae est varius fringilla. Pellentesque placerat vestibulum lorem sed porta. Nullam mattis tristique iaculis. Nullam pulvinar sit amet risus pretium auctor. Etiam quis massa pulvinar, aliquam quam vitae, tempus sem. Donec elementum pulvinar odio.",
-  },
-  {
-    title: "Customer Elite Records",
-    discription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet justo ipsum. Sed accumsan quam vitae est varius fringilla. Pellentesque placerat vestibulum lorem sed porta. Nullam mattis tristique iaculis. Nullam pulvinar sit amet risus pretium auctor. Etiam quis massa pulvinar, aliquam quam vitae, tempus sem. Donec elementum pulvinar odio.",
-  },
-  {
-    title: "Customer Elite Records",
-    discription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet justo ipsum. Sed accumsan quam vitae est varius fringilla. Pellentesque placerat vestibulum lorem sed porta. Nullam mattis tristique iaculis. Nullam pulvinar sit amet risus pretium auctor. Etiam quis massa pulvinar, aliquam quam vitae, tempus sem. Donec elementum pulvinar odio.",
-  },
-  {
-    title: "Customer Elite Records",
-    discription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet justo ipsum. Sed accumsan quam vitae est varius fringilla. Pellentesque placerat vestibulum lorem sed porta. Nullam mattis tristique iaculis. Nullam pulvinar sit amet risus pretium auctor. Etiam quis massa pulvinar, aliquam quam vitae, tempus sem. Donec elementum pulvinar odio.",
-  },
-  {
-    title: "Customer Elite Records",
-    discription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet justo ipsum. Sed accumsan quam vitae est varius fringilla. Pellentesque placerat vestibulum lorem sed porta. Nullam mattis tristique iaculis. Nullam pulvinar sit amet risus pretium auctor. Etiam quis massa pulvinar, aliquam quam vitae, tempus sem. Donec elementum pulvinar odio.",
-  },
-  {
-    title: "Customer Elite Records",
-    discription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet justo ipsum. Sed accumsan quam vitae est varius fringilla. Pellentesque placerat vestibulum lorem sed porta. Nullam mattis tristique iaculis. Nullam pulvinar sit amet risus pretium auctor. Etiam quis massa pulvinar, aliquam quam vitae, tempus sem. Donec elementum pulvinar odio.",
-  },
-  {
-    title: "Customer Elite Records",
-    discription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet justo ipsum. Sed accumsan quam vitae est varius fringilla. Pellentesque placerat vestibulum lorem sed porta. Nullam mattis tristique iaculis. Nullam pulvinar sit amet risus pretium auctor. Etiam quis massa pulvinar, aliquam quam vitae, tempus sem. Donec elementum pulvinar odio.",
-  },
-  {
-    title: "Customer Elite Records",
-    discription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet justo ipsum. Sed accumsan quam vitae est varius fringilla. Pellentesque placerat vestibulum lorem sed porta. Nullam mattis tristique iaculis. Nullam pulvinar sit amet risus pretium auctor. Etiam quis massa pulvinar, aliquam quam vitae, tempus sem. Donec elementum pulvinar odio.",
-  },
-  {
-    title: "Customer Elite Records",
-    discription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet justo ipsum. Sed accumsan quam vitae est varius fringilla. Pellentesque placerat vestibulum lorem sed porta. Nullam mattis tristique iaculis. Nullam pulvinar sit amet risus pretium auctor. Etiam quis massa pulvinar, aliquam quam vitae, tempus sem. Donec elementum pulvinar odio.",
-  },
-  {
-    title: "Customer Elite Records",
-    discription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet justo ipsum. Sed accumsan quam vitae est varius fringilla. Pellentesque placerat vestibulum lorem sed porta. Nullam mattis tristique iaculis. Nullam pulvinar sit amet risus pretium auctor. Etiam quis massa pulvinar, aliquam quam vitae, tempus sem. Donec elementum pulvinar odio.",
-  },
-  {
-    title: "Customer Elite Records",
-    discription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet justo ipsum. Sed accumsan quam vitae est varius fringilla. Pellentesque placerat vestibulum lorem sed porta. Nullam mattis tristique iaculis. Nullam pulvinar sit amet risus pretium auctor. Etiam quis massa pulvinar, aliquam quam vitae, tempus sem. Donec elementum pulvinar odio.",
-  },
-  {
-    title: "Customer Elite Records",
-    discription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet justo ipsum. Sed accumsan quam vitae est varius fringilla. Pellentesque placerat vestibulum lorem sed porta. Nullam mattis tristique iaculis. Nullam pulvinar sit amet risus pretium auctor. Etiam quis massa pulvinar, aliquam quam vitae, tempus sem. Donec elementum pulvinar odio.",
-  },
-  {
-    title: "Customer Elite Records",
-    discription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet justo ipsum. Sed accumsan quam vitae est varius fringilla. Pellentesque placerat vestibulum lorem sed porta. Nullam mattis tristique iaculis. Nullam pulvinar sit amet risus pretium auctor. Etiam quis massa pulvinar, aliquam quam vitae, tempus sem. Donec elementum pulvinar odio.",
-  },
-  {
-    title: "Customer Elite Records",
-    discription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet justo ipsum. Sed accumsan quam vitae est varius fringilla. Pellentesque placerat vestibulum lorem sed porta. Nullam mattis tristique iaculis. Nullam pulvinar sit amet risus pretium auctor. Etiam quis massa pulvinar, aliquam quam vitae, tempus sem. Donec elementum pulvinar odio.",
-  },
-  {
-    title: "Customer Elite Records",
-    discription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet justo ipsum. Sed accumsan quam vitae est varius fringilla. Pellentesque placerat vestibulum lorem sed porta. Nullam mattis tristique iaculis. Nullam pulvinar sit amet risus pretium auctor. Etiam quis massa pulvinar, aliquam quam vitae, tempus sem. Donec elementum pulvinar odio.",
-  },
-  {
-    title: "Customer Elite Records",
-    discription:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet justo ipsum. Sed accumsan quam vitae est varius fringilla. Pellentesque placerat vestibulum lorem sed porta. Nullam mattis tristique iaculis. Nullam pulvinar sit amet risus pretium auctor. Etiam quis massa pulvinar, aliquam quam vitae, tempus sem. Donec elementum pulvinar odio.",
-  },
+export const dummySQL = `
+SELECT 
+  Store_ID, 
+  DATE_TRUNC(TXN_DATE, 'week') AS Week, 
+  SUM(TXN_AMT) AS Total_Sales
+FROM 
+  TXN_SZNAL
+WHERE 
+  PROD_ID IN (1234, 5678) AND
+  TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND
+  DATE_TRUNC(TXN_DATE, 'week') AS Week, 
+  TXN_DATE <= DATE_TRUNC(CURRENT_DATE(), 'week')
+  DATE_TRUNC(TXN_DATE, 'week') AS Week, 
+  TXN_DATE <= DATE_TRUNC(CURRENT_DATE(), 'week')
+  DATE_TRUNC(TXN_DATE, 'week') AS Week, 
+  TXN_DATE <= DATE_TRUNC(CURRENT_DATE(), 'week')
+  DATE_TRUNC(TXN_DATE, 'week') AS Week, 
+  TXN_DATE <= DATE_TRUNC(CURRENT_DATE(), 'week')
+  DATE_TRUNC(TXN_DATE, 'week') AS Week, 
+  TXN_DATE <= DATE_TRUNC(CURRENT_DATE(), 'week')
+  DATE_TRUNC(TXN_DATE, 'week') AS Week, 
+  TXN_DATE <= DATE_TRUNC(CURRENT_DATE(), 'week')
+  DATE_TRUNC(TXN_DATE, 'week') AS Week, 
+  TXN_DATE <= DATE_TRUNC(CURRENT_DATE(), 'week')
+  DATE_TRUNC(TXN_DATE, 'week') AS Week, 
+  PROD_ID IN (1234, 5678) AND
+  TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND
+  Store_ID,
+  PROD_ID IN (1234, 5678) AND
+  TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND
+  Store_ID,
+
+  PROD_ID IN (1234, 5678) AND
+  TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND
+  Store_ID,
+  PROD_ID IN (1234, 5678) AND
+  TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND  PROD_ID IN (1234, 5678) AND
+  TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND  PROD_ID IN (1234, 5678) AND
+  TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND  PROD_ID IN (1234, 5678) AND
+  TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND
+  Store_ID,
+  Store_ID,
+  Store_ID,
+  Store_ID,
+
+GROUP BY 
+  PROD_ID IN (1234, 5678) AND
+  TXN_DATE >= DATE_ADD(CURRENT_DATE(), INTERVAL) AND
+  Store_ID, 
+  Week
+ORDER BY 
+  Week, 
+  Store_ID;
+`;
+
+export const OPTIONBAR_DATA = [
+  "HELP_TICKET_CREATE",
+  "SIGN_UP",
+  "TXN_EVENT",
+  "SITE_LOGIN",
 ];
-export const isClient = typeof window !== 'undefined';
 
-export const Selcect_RetrieverData = [
+export const DUMMY_SUMMARY =
+  "This query first selects distinct customer IDs, email addresses, and last interaction timestamps from both the Segment and Lytics tables, and sums up the total transactions from both tables.\n\nIt then filters the results based on membership in Wawa's loyalty program and whether a purchase or redemption was made in the past week. \n\nFinally, it merges the two lists, deduplicating line items by Customer ID";
+
+export const TABLEDATA = [
   {
-    icon: "snowflake",
-    status: "needPermissions",
-    title: "snowflake 1",
-    description:
-      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+    id: "1",
+    email: "test@test.com",
+    lastInteract: "019128182198",
+    timestamp: "3/11/24",
+    totalTxns: "23000",
   },
   {
-    icon: "snowflake",
-    status: "needPermissions",
-    title: "snowflake 3",
-    description:
-      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+    id: "2",
+    email: "test@2test.com",
+    lastInteract: "01322119128182198",
+    timestamp: "2/21/22",
+    totalTxns: "2322",
   },
   {
-    icon: "segment",
-    status: "needPermissions",
-    title: "Segment",
-    description:
-      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+    id: "3",
+    email: "test3@3test3.com",
+    lastInteract: "3338182198",
+    timestamp: "3/13/23",
+    totalTxns: "23333",
   },
   {
-    icon: "lytics",
-    status: "needPermissions",
-    title: "Lytics",
-    description:
-      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+    id: "4",
+    email: "test3@3test3.com",
+    lastInteract: "3338182198",
+    timestamp: "3/13/23",
+    totalTxns: "23333",
   },
   {
-    icon: "dataRoom",
-    status: "needPermissions",
-    title: "Data room 1",
-    description:
-      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+    id: "5",
+    email: "test3@3test3.com",
+    lastInteract: "3338182198",
+    timestamp: "3/13/23",
+    totalTxns: "23333",
   },
   {
-    icon: "snowflake",
-    status: "needPermissions",
-    title: "snowflake 2",
-    description:
-      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+    id: "6",
+    email: "test3@3test3.com",
+    lastInteract: "3338182198",
+    timestamp: "3/13/23",
+    totalTxns: "23333",
   },
   {
-    icon: "dbtCore",
-    status: "needPermissions",
-    title: "dbt Core",
-    description:
-      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+    id: "7",
+    email: "test4@4test4.com",
+    lastInteract: "4444444444",
+    timestamp: "4/14/24",
+    totalTxns: "24444",
   },
   {
-    icon: "sfCrm",
-    status: "needPermissions",
-    title: "SF CRM",
-    description:
-      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+    id: "8",
+    email: "test5@5test5.com",
+    lastInteract: "5555555555",
+    timestamp: "5/15/25",
+    totalTxns: "25555",
   },
   {
-    icon: "clReport",
-    status: "needPermissions",
-    title: "Cl Report 23",
-    description:
-      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+    id: "9",
+    email: "test6@6test6.com",
+    lastInteract: "6666666666",
+    timestamp: "6/16/26",
+    totalTxns: "26666",
   },
   {
-    icon: "nielsen",
-    status: "needPermissions",
-    title: "Nielsen",
-    description:
-      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+    id: "10",
+    email: "test7@7test7.com",
+    lastInteract: "7777777777",
+    timestamp: "7/17/27",
+    totalTxns: "27777",
   },
   {
-    icon: "googleAnalytics",
-    status: "needPermissions",
-    title: "Google Analytics",
-    description:
-      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+    id: "11",
+    email: "test8@8test8.com",
+    lastInteract: "8888888888",
+    timestamp: "8/18/28",
+    totalTxns: "28888",
   },
   {
-    icon: "clickstream",
-    status: "needPermissions",
-    title: "clickstream",
-    description:
-      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+    id: "12",
+    email: "test9@9test9.com",
+    lastInteract: "9999999999",
+    timestamp: "9/19/29",
+    totalTxns: "29999",
   },
   {
-    icon: "clickstream",
-    status: "needPermissions",
-    title: "PowerBI Link",
-    description:
-      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+    id: "13",
+    email: "test10@10test10.com",
+    lastInteract: "101010101010",
+    timestamp: "10/20/30",
+    totalTxns: "30000",
   },
   {
-    icon: "clickstream",
-    status: "needPermissions",
-    title: "IRI Panel",
-    description:
-      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+    id: "14",
+    email: "test11@11test11.com",
+    lastInteract: "111111111111",
+    timestamp: "11/21/31",
+    totalTxns: "31111",
   },
   {
-    icon: "clickstream",
-    status: "needPermissions",
-    title: "Transact POS",
-    description:
-      "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+    id: "15",
+    email: "test12@12test12.com",
+    lastInteract: "121212121212",
+    timestamp: "12/22/32",
+    totalTxns: "32222",
+  },
+  {
+    id: "16",
+    email: "test13@13test13.com",
+    lastInteract: "131313131313",
+    timestamp: "13/23/33",
+    totalTxns: "33333",
+  },
+  {
+    id: "17",
+    email: "test14@14test14.com",
+    lastInteract: "141414141414",
+    timestamp: "14/24/34",
+    totalTxns: "34444",
+  },
+  {
+    id: "18",
+    email: "test15@15test15.com",
+    lastInteract: "151515151515",
+    timestamp: "15/25/35",
+    totalTxns: "35555",
+  },
+  {
+    id: "19",
+    email: "test16@16test16.com",
+    lastInteract: "161616161616",
+    timestamp: "16/26/36",
+    totalTxns: "36666",
+  },
+  {
+    id: "20",
+    email: "test17@17test17.com",
+    lastInteract: "171717171717",
+    timestamp: "17/27/37",
+    totalTxns: "37777",
   },
 ];

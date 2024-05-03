@@ -9,16 +9,26 @@ import {
 } from "@mui/material";
 
 import MuiListItemButton from "@/theme/overrides/listItemButton";
-import Logo from "../logo/logo";
 import { Icon } from "../Icon";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { Logo } from "../logo";
+import { SideBar_Data } from "@/utils/data";
+import { palette } from "@/theme/Palette";
+import "./sideNavbar.css";
 
 const SideNavbar = () => {
+  const Route = useRouter();
   const pathname = usePathname();
 
   const path = pathname.split("/")[1];
-  const drawerWidth = 240;
+  const drawerWidth = 200;
+  useEffect(() => {
+    if (pathname === "/") {
+      Route.push("/request");
+    }
+  }, [Route, pathname]);
   return (
     <Box
       sx={{
@@ -29,18 +39,14 @@ const SideNavbar = () => {
         sx={{
           position: "static",
           flexShrink: 0,
-          borderRight:
-            "1px solid var(--Vision-pro-01, rgba(255, 255, 255, 0.37))",
-          background:
-            "linear-gradient(143deg, rgba(57, 57, 57, 0.60) -3.54%, rgba(97, 97, 97, 0.60) 99.99%)",
+          borderRight: `1px solid ${palette.color.gray[150]} `,
+          background: palette.linearGradient.lightGray,
           "& .MuiDrawer-paper": {
             width: drawerWidth,
 
             boxSizing: "border-box",
-            borderRight:
-              "1px solid var(--Vision-pro-01, rgba(255, 255, 255, 0.37))",
-            background:
-              "linear-gradient(143deg, rgba(57, 57, 57, 0.60) -3.54%, rgba(97, 97, 97, 0.60) 99.99%)",
+            borderRight: `1px solid ${palette.color.gray[150]} `,
+            background: palette.linearGradient.lightGray,
             boxShadow:
               "0px 1.127px 3.38px 0px rgba(255, 255, 255, 0.25) inset, 0px 0.501px 12.02px -0.501px rgba(0, 0, 0, 0.18)",
             backdropFilter: "blur(30px)",
@@ -65,66 +71,43 @@ const SideNavbar = () => {
 
             <Box>
               <List>
-                {[
-                  {
-                    name: "Request",
-                    img: <Icon width={18} height={18} icon="requestIcon" />,
-                    link: "/request",
-                  },
-                  {
-                    name: "Pulls",
-                    img: <Icon width={18} height={18} icon="pullsIcon" />,
-                    link: "/pulls",
-                  },
-                  {
-                    name: "Retrievers",
-                    img: <Icon width={18} height={18} icon="retrieversIcon" />,
-                    link: "/retrievers",
-                  },
-                  {
-                    name: "Alerts",
-                    img: <Icon width={18} height={18} icon="alertsIcon" />,
-                    link: "/alerts",
-                  },
-                  {
-                    name: "Advanced",
-                    img: <Icon width={18} height={18} icon="advancedIcon" />,
-                    link: "/advanced",
-                  },
-                ].map((text, index) => (
-                  <ListItem key={text.name}>
-                    <Link href={text.link} style={{ width: "100%" }}>
-                      <MuiListItemButton
-                        sx={{
-                          display: "flex",
-                          gap: "12px",
-                          border:
-                            path === text.name
-                              ? "1px solid #8f8f94"
-                              : "1px solid transparent",
-                          background:
-                            path === text.name.toLowerCase()
-                              ? "rgb(118,119,124)"
-                              : path === "" && index === 0
-                                ? "rgb(118,119,124)"
-                                : "",
-                        }}
-                      >
-                        <ListItemIcon
+                {SideBar_Data.map((item, index) => (
+                  <ListItem key={index}>
+                    <Link href={item.link} style={{ width: "100%" }}>
+                      <div className="navbar-container">
+                        <MuiListItemButton
                           sx={{
-                            minWidth: 0,
+                            display: "flex",
+                            gap: "12px",
+                            color: palette.base.white,
+                            border:
+                              path === item.name
+                                ? "1px solid #8f8f94"
+                                : "1px solid transparent",
+                            background:
+                              path === item.name.toLowerCase()
+                                ? "rgb(118,119,124)"
+                                : path === "" && index === 0
+                                  ? "rgb(118,119,124)"
+                                  : "",
                           }}
                         >
-                          {text.img}
-                        </ListItemIcon>
+                          <ListItemIcon
+                            sx={{
+                              minWidth: 0,
+                            }}
+                          >
+                            <Icon width={18} height={18} icon={item.icon} />
+                          </ListItemIcon>
 
-                        <ListItemText
-                          sx={{
-                            fontSize: "14px",
-                          }}
-                          primary={text.name}
-                        />
-                      </MuiListItemButton>
+                          <ListItemText
+                            sx={{
+                              fontSize: "14px",
+                            }}
+                            primary={item.name}
+                          />
+                        </MuiListItemButton>
+                      </div>
                     </Link>
                   </ListItem>
                 ))}
@@ -140,22 +123,32 @@ const SideNavbar = () => {
                   img: <Icon width={18} height={18} icon="adminIcon" />,
                 },
               ].map((text, index) => (
-                <ListItem key={text.name}>
-                  <MuiListItemButton>
-                    <ListItemIcon
+                <ListItem key={index}>
+                  <div className="navbar-container">
+                    <MuiListItemButton
                       sx={{
-                        minWidth: 0,
+                        color: palette.base.white,
+                        border:
+                          path === text.name
+                            ? "1px solid #8f8f94"
+                            : "1px solid transparent",
                       }}
                     >
-                      {text.img}
-                    </ListItemIcon>
-                    <ListItemText
-                      sx={{
-                        fontSize: "14px",
-                      }}
-                      primary={text.name}
-                    />
-                  </MuiListItemButton>
+                      <ListItemIcon
+                        sx={{
+                          minWidth: 0,
+                        }}
+                      >
+                        {text.img}
+                      </ListItemIcon>
+                      <ListItemText
+                        sx={{
+                          fontSize: "14px",
+                        }}
+                        primary={text.name}
+                      />
+                    </MuiListItemButton>
+                  </div>
                 </ListItem>
               ))}
             </List>

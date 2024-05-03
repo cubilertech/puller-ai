@@ -1,6 +1,7 @@
-import { Box, Divider, Typography, useMediaQuery } from "@mui/material";
+import { Box, Typography, useMediaQuery } from "@mui/material";
 import { Paper } from "../Paper";
 import { Icon } from "../Icon";
+import { Divider } from "../Divider";
 
 const UploadCard = () => {
   const isMobile = useMediaQuery("(max-width: 1200px)");
@@ -12,9 +13,9 @@ const UploadCard = () => {
         padding: "1rem",
         borderRadius: "8px",
       }}
-      type="light-border"
+      variant="light-border"
     >
-      <Typography variant="text-xxs-regular">
+      <Typography variant="text-xxs-regular" mb={1}>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit amet
         justo ipsum. Sed accumsan quam vitae est varius fringilla. Pellentesque
         placerat vestibulum lorem sed porta. Nullam mattis tristique iaculis.
@@ -22,11 +23,14 @@ const UploadCard = () => {
         pulvinar, aliquam quam vitae, tempus sem. Donec elementum pulvinar odio.
       </Typography>
       <Divider
-        sx={{
-          my: "10px",
-        }}
+        type={"light"}
       />
-      <Box display={"flex"} justifyContent={"space-between"} gap={1}>
+      <Box
+        display={"flex"}
+        justifyContent={"space-between"}
+        gap={1}
+        sx={{ alignItems: "center", pt: 1 }}
+      >
         <Box
           display={"flex"}
           sx={{ alignItems: { md: "center", xs: "flex-start" } }}

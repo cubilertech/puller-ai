@@ -1,17 +1,27 @@
+"use client";
 import { Box, Typography } from "@mui/material";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { Icon } from "../Icon";
 import { Paper } from "../Paper";
-import { palette } from "@/theme/Palette";
 import "./loader.css";
+import { LoaderVariants } from "@/utils/types";
 
 interface LoaderProps {
-  varient: "simple" | "paper";
+  variant: LoaderVariants;
   type: "Loading" | "Processing";
 }
 
-const Loader: FC<LoaderProps> = ({ varient, type }) => {
-  switch (varient) {
+const Loader: FC<LoaderProps> = ({ variant, type }) => {
+  const [showLoader, setShowLoader] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowLoader(false);
+    }, 4000);
+
+    return () => clearTimeout(timer);
+  }, []);
+  switch (variant) {
     case "simple":
       return (
         <Box
@@ -20,6 +30,7 @@ const Loader: FC<LoaderProps> = ({ varient, type }) => {
             flexDirection: "column",
             alignItems: "center",
           }}
+          className={`loader-container ${showLoader ? "fade-in" : "fade-out"}`}
         >
           <Icon icon="logoIcon" width={240} height={260} />
 
@@ -33,7 +44,7 @@ const Loader: FC<LoaderProps> = ({ varient, type }) => {
       );
     case "paper":
       return (
-        <Paper type="light-border" sx={{ width: "100%", height: "100%" }}>
+        <Paper variant="light-border" sx={{ width: "100%", height: "100%" }}>
           <Box
             sx={{
               display: "flex",
@@ -45,11 +56,68 @@ const Loader: FC<LoaderProps> = ({ varient, type }) => {
             }}
           >
             <Icon icon="logoIcon" width={260} height={280} />
-            <Typography variant="display-xs-medium" color={palette.base.white}>
-              Processing..
-            </Typography>
+            <Typography
+              variant="display-xs-medium"
+              className={
+                type === "Loading" ? "typing2-animation" : "typing-animation"
+              }
+            ></Typography>
           </Box>
         </Paper>
+      );
+    case "pageLoader":
+      return (
+        <Box
+          display={"flex"}
+          justifyContent={"center"}
+          alignItems={"center"}
+          sx={{
+            height: "100%",
+            margin: 0,
+            padding: 0,
+            width: "100%",
+          }}
+          className={`loader-container ${showLoader ? "fade-in" : "fade-out"}`}
+        >
+          <Paper
+            variant="light-border"
+            sx={{
+              height: { xl: "516px", lg: "350px", md: "216px" },
+              margin: 0,
+              padding: 0,
+              width: { xl: "704px", lg: "504px", md: "403px" },
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                width: "100%",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "100%",
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <Icon icon="logoIcon" width={240} height={260} />
+
+                <Typography
+                  variant="display-xs-medium"
+                  className={
+                    type === "Loading"
+                      ? "typing2-animation"
+                      : "typing-animation"
+                  }
+                ></Typography>
+              </Box>
+            </Box>
+          </Paper>
+        </Box>
       );
   }
 };

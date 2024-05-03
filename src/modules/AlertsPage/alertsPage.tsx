@@ -1,85 +1,20 @@
 "use client";
 import CustomButton from "@/common/CustomButtons/CustomButtons";
-import AlertCard from "@/components/AlertCard/alertCard";
+import { AlertCard } from "@/components/AlertCard";
 import { PageHeader } from "@/components/PageHeader";
+
 import { Paper } from "@/components/Paper";
-import { Box, Divider, Typography } from "@mui/material";
+import { palette } from "@/theme/Palette";
+import { ACTIVE_TYPES } from "@/utils/constants";
+import { ALERT_DATA, UNREAD_ALERT_DATA } from "@/utils/data";
+import { Box, Typography } from "@mui/material";
 import { useState } from "react";
 
-const data = [
-  {
-    image: "/Images/avatar-1.svg",
-    name: "James Eusobio",
-    product: "Blue Jeans Polos Slim Fit ",
-    price: 199.0,
-    time: "23 mins ago",
-    type: "user",
-  },
-  {
-    image: "/Images/avatar-2.svg",
-    name: "Darcel Ballentine",
-    product: "Pattern Top with Knot ",
-    price: 210.98,
-    time: "30 mins ago",
-    type: "user",
-  },
-  {
-    image: "/Images/avatar-2.svg",
-    name: "Darcel Ballentine",
-    product: "Pattern Top with Knot ",
-    price: 210.98,
-    time: "30 mins ago",
-    type: "user",
-  },
-  {
-    image: "/Images/avatar-2.svg",
-    name: "Darcel Ballentine",
-    product: "Pattern Top with Knot ",
-    price: 210.98,
-    time: "30 mins ago",
-    type: "user",
-  },
-  {
-    image: "/Images/avatar-2.svg",
-    name: "Darcel Ballentine",
-    product: "Pattern Top with Knot ",
-    price: 210.98,
-    time: "30 mins ago",
-    type: "user",
-  },
-  {
-    image: "/Images/avatar-2.svg",
-    name: "Darcel Ballentine",
-    product: "Pattern Top with Knot ",
-    price: 210.98,
-    time: "30 mins ago",
-    type: "user",
-  },
-  {
-    image: "/Images/avatar-2.svg",
-    product: "Pattern Top with Knot ",
-    name: "Darcel Ballentine",
-    price: 210.98,
-    time: "30 mins ago",
-    type: "user",
-  },
-  {
-    image: "/Images/avatar-2.svg",
-    product: "Pattern Top with Knot ",
-    name: "Darcel Ballentine",
-    price: 210.98,
-    time: "30 mins ago",
-    type: "user",
-  },
-  {
-    image: "/Images/avatar-3.svg",
-    description: "Personalize your comunication with Customer Segmentation",
-    time: "April 25",
-  },
-];
-
 const AlertsPage = () => {
-  const [isActive, setIsActive] = useState("all");
+  const [isActive, setIsActive] = useState(ACTIVE_TYPES.ALL);
+
+  const notificationType =
+    isActive === ACTIVE_TYPES.UNREAD ? UNREAD_ALERT_DATA : ALERT_DATA;
   return (
     <Box
       sx={{
@@ -90,7 +25,18 @@ const AlertsPage = () => {
         height: "100%",
       }}
     >
-      <PageHeader type="Alerts" />
+      <PageHeader
+        title="Alerts"
+        buttons={[
+          {
+            label: "Create Alert",
+            variant: "outlined",
+            href: "/alerts/select-retriever",
+          },
+        ]}
+      />
+
+      {/* Table */}
 
       <Paper
         sx={{
@@ -99,14 +45,14 @@ const AlertsPage = () => {
           flexDirection: "column",
           paddingBottom: "1rem",
         }}
-        type="light-border"
+        variant="light-border"
       >
+        {/* Table Topbar */}
         <Box
           sx={{
             width: "100%",
             minHeight: "2rem",
-            background:
-              "linear-gradient(142.96deg, rgba(255, 255, 255, 0.148) -3.54%, rgba(114, 114, 114, 0.168) 95.15%)",
+            background: palette.linearGradient.gray,
             padding: "1rem 1rem 0",
             borderTopLeftRadius: "14px",
             borderTopRightRadius: "14px",
@@ -114,12 +60,15 @@ const AlertsPage = () => {
             gap: "1rem",
           }}
         >
+          {/* Select All */}
           <Box
-            onClick={() => setIsActive("all")}
+            onClick={() => setIsActive(ACTIVE_TYPES.ALL)}
             sx={{
               padding: " 0 1rem",
               borderBottom:
-                isActive === "all" ? "2px solid rgb(252,252,253)" : "",
+                isActive === ACTIVE_TYPES.ALL
+                  ? `2px solid ${palette.color.offWhite}`
+                  : "",
               ":hover": {
                 cursor: "pointer",
               },
@@ -139,11 +88,14 @@ const AlertsPage = () => {
             </Typography>
           </Box>
 
+          {/* Select Unread */}
           <Box
-            onClick={() => setIsActive("unread")}
+            onClick={() => setIsActive(ACTIVE_TYPES.UNREAD)}
             sx={{
               borderBottom:
-                isActive === "unread" ? "2px solid rgb(252,252,253)" : "",
+                isActive === ACTIVE_TYPES.UNREAD
+                  ? `2px solid ${palette.color.offWhite}`
+                  : "",
               ":hover": {
                 cursor: "pointer",
               },
@@ -162,20 +114,18 @@ const AlertsPage = () => {
             </Typography>
           </Box>
         </Box>
+
+        {/* TableData */}
         <Box
           sx={{
             height: "90%",
             borderRadius: "16px",
             overflow: "hidden",
-            overflowY: "scroll",
-            "&::-webkit-scrollbar": {
-              display: "none",
-            },
+            overflowY: "auto",
             scrollbarWidth: "none",
-            "-ms-overflow-style": "none",
           }}
         >
-          {data.map((notification, index) => (
+          {notificationType.map((notification, index) => (
             <AlertCard
               key={index}
               type={notification.type === "user" ? "user" : "option"}
@@ -183,9 +133,11 @@ const AlertsPage = () => {
               name={notification?.name}
               price={notification?.price}
               product={notification?.product}
-              description={notification?.description}
+              description={
+                notification.description && notification?.description
+              }
               time={notification.time}
-              dataLength={data.length}
+              dataLength={ALERT_DATA.length}
               index={index}
             />
           ))}

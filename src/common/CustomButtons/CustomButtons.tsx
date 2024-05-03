@@ -1,15 +1,14 @@
-"use client";
 import { palette } from "@/theme/Palette";
-import { Box, Button, Menu, MenuItem, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { FC, useState } from "react";
-
 import "./CustomButtons.css";
-import { UserProps } from "@/utils/types";
+import { CustomButtonVariants, UserProps } from "@/utils/types";
 import Image from "next/image";
 import { Icon } from "@/components/Icon";
+import { Menu } from "@/components/Menu";
 
 interface buttonProps {
-  variant: "select" | "rounded-SQL" | "smallbutton" | "round";
+  variant: CustomButtonVariants;
   text?: string;
   selectData?: UserProps;
   onClick?: () => void;
@@ -43,7 +42,7 @@ const CustomButton: FC<buttonProps> = ({
           <Button
             sx={{
               borderRadius: "8px",
-              backgroundColor: "#7a8089",
+              backgroundColor: palette.color.gray[250],
               height: "22px !important",
               width: "40px !important",
               pr: 0,
@@ -52,13 +51,16 @@ const CustomButton: FC<buttonProps> = ({
               m: 0,
               mt: -0.6,
               ":hover": {
-                backgroundColor: "rgb(95,112,125)",
+                backgroundColor: palette.color.gray[400],
               },
             }}
             onClick={onClick}
             variant="outlined"
           >
-            <Typography variant="text-xs" sx={{ color: "#e6e6e6" }}>
+            <Typography
+              variant="text-xs"
+              sx={{ color: palette.color.eggWhite }}
+            >
               {text}
             </Typography>
           </Button>
@@ -71,13 +73,15 @@ const CustomButton: FC<buttonProps> = ({
             sx={{
               borderRadius: "50px",
               border: `1px solid var(--vison-pro-stock, ${palette.base.white})`,
-              backgroundColor: "#425459",
+              backgroundColor: palette.color.gray[650],
               width: 82,
-              height: 40,
+              height: "40px !important",
               py: 2,
               px: 4,
+              transition: "background 0.3s ease, border-radius 0.3s ease",
               ":hover": {
-                backgroundColor: "rgb(95,112,125)",
+                background: palette.linearGradient.purpleBlue,
+                borderRadius: "50px",
               },
             }}
             onClick={onClick}
@@ -88,19 +92,27 @@ const CustomButton: FC<buttonProps> = ({
         </div>
       );
     case "select":
+      const menuItems = [
+        {
+          text: "Logout",
+        },
+      ];
       return (
         <div className="container-round-btn">
           <Button
             sx={{
               borderRadius: "50px",
+              color: palette.base.white,
               border: `1px solid var(--vison-pro-stock, ${palette.base.white})`,
-              backgroundColor: "rgb(115,129,133)",
+              background: `${palette.color.gray[400]} !important`,
               width: 122,
               height: 48,
               py: 2,
               px: 4,
               ":hover": {
-                backgroundColor: "rgb(95,112,125)",
+                border: `1px solid var(--vison-pro-stock, ${palette.base.white})`,
+                borderRadius: "50px !important",
+                background: `${palette.color.gray[300]} !important`,
               },
             }}
             variant="outlined"
@@ -126,37 +138,11 @@ const CustomButton: FC<buttonProps> = ({
             </Box>
           </Button>
           <Menu
-            sx={{
-              width: 252,
-            }}
             anchorEl={anchorEl}
             open={Boolean(anchorEl)}
+            menuItems={menuItems}
             onClose={handleMenuClose}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-            PaperProps={{
-              style: {
-                width: 122,
-                // marginLeft: 32,
-                marginTop: 45,
-                borderRadius: "8px",
-                border: "2px solid rgba(196, 196, 196, 0.60)",
-                background:
-                  "linear-gradient(142.96deg, rgba(68,74,89,255) -3.54%,  rgba(68,74,89,255) 7.55%, rgba(55,61,74,255) 95.15%)",
-                backdropFilter: "blur(20px)",
-                paddingTop: 0,
-                paddingBottom: 0,
-              },
-            }}
-          >
-            <MenuItem>Logout</MenuItem>
-          </Menu>
+          />
         </div>
       );
     case "round":
@@ -166,7 +152,7 @@ const CustomButton: FC<buttonProps> = ({
             variant="text"
             sx={{
               borderRadius: "100%",
-              bgcolor: "rgb(90,93,105)",
+              bgcolor: palette.color.gray[550],
               p: 0,
               minWidth: 20,
               width: "20px !important",
@@ -174,13 +160,51 @@ const CustomButton: FC<buttonProps> = ({
               ":hover": {
                 borderRadius: "100%",
 
-                backgroundColor: "rgb(95,112,125)",
+                backgroundColor: palette.color.gray[500],
               },
             }}
           >
             {text}
           </Button>
         </div>
+      );
+    case "request-history":
+      return (
+        <Button
+          variant="text"
+          sx={{
+            "@keyframes exitGradient": {
+              "0%": {
+                background:
+                  "linear-gradient(126deg, rgba(108,33,177,1) 16%, rgba(26,138,169,1) 100%)",
+              },
+              "100%": {
+                background:
+                  "linear-gradient(to top left, rgba(108,33,177,1), transparent)",
+              },
+            },
+            width: "216px",
+            color: "#5d92fe",
+            border: "none",
+            backgroundColor: "#263f50",
+            transition: "background 0.3s ease",
+            borderRadius: "8px",
+            "&:hover": {
+              color: palette.base.white,
+              background: "rgba(105,65,198,255)",
+              borderRadius: "8px",
+            },
+            "&:hover, &:focus": {
+              border: "none",
+              borderRadius: "8px",
+            },
+            "&:not(:hover)": {
+              animation: "exitGradient 0.3s ease ",
+            },
+          }}
+        >
+          {text}
+        </Button>
       );
   }
 };

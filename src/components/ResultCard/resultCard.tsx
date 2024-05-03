@@ -1,3 +1,4 @@
+"use client";
 import { FC } from "react";
 import { Paper } from "../Paper";
 import { Box, Typography } from "@mui/material";
@@ -5,8 +6,9 @@ import { CardData } from "@/utils/types";
 import { IconButton } from "../IconButton";
 import { Button } from "../Button";
 import Divider from "../Divider/divider";
-import CustomLink from "../Link/link";
 import CustomButton from "@/common/CustomButtons/CustomButtons";
+import { CustomLink } from "../Link";
+import { useRouter } from "next/navigation";
 
 interface ResultCardProps {
   data: CardData;
@@ -14,21 +16,20 @@ interface ResultCardProps {
 
 const ResultCard: FC<ResultCardProps> = ({ data }) => {
   const handleDownload = () => {
-    // Create a link element
     const link = document.createElement("a");
-    link.href = "../../../public/download.txt"; // Replace with the actual file URL
-    link.download = "download.txt"; // Specify the desired filename
-
-    // Simulate a click event on the link
+    link.href = data?.fileLink;
+    link.download = "download.txt";
+    link.target = "_blank";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
   };
 
+  const router = useRouter();
   return (
-    <>
+    <Box width={"80%"} height={"100%"}>
       <Paper
-        type="light-border"
+        variant="light-border"
         sx={{
           padding: 3,
           height: "calc(100vh - 200px)",
@@ -49,23 +50,27 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
               width: "100%",
               display: "flex",
               justifyContent: "space-between",
-              // height: "calc(100vh - 200px)",
             }}
           >
             <Typography variant="text-xl-bold" width={"fit-contant"}>
               {data.main_title}
             </Typography>
             <Box sx={{ display: "flex", gap: 1 }}>
-              <Box width={"36px"}>
-                <IconButton
-                  icon="importIcon"
-                  iconHeight={16}
-                  iconWidth={16}
-                  fullWidth
-                />
-              </Box>
-              {/* <CustomLink href="/request/preview"> */}
-              <Box width={"36px"}>
+              <CustomLink href="/request/preview">
+                <Box width={"36px"}>
+                  <IconButton
+                    icon="importIcon"
+                    iconHeight={16}
+                    iconWidth={16}
+                    fullWidth
+                  />
+                </Box>
+              </CustomLink>
+
+              <Box
+                width={"36px"}
+                onClick={() => router.push("/request/validate")}
+              >
                 <IconButton
                   icon="eyeIcon"
                   iconHeight={16}
@@ -73,14 +78,15 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
                   fullWidth
                 />
               </Box>
-              {/* </CustomLink> */}
             </Box>
           </Box>
+          {/* Description */}
           <Box sx={{ maxWidth: "568px" }}>
             <Typography variant="text-md-regular">
               {data.main_discription}
             </Typography>
           </Box>
+          {/* File info */}
           <Box
             sx={{
               display: "flex",
@@ -131,9 +137,11 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
               <Typography variant="text-sm-semibold">{data.sources}</Typography>
             </Box>
           </Box>
+          {/* Divider */}
           <Box py={2}>
             <Divider variant="fullWidth" type="dark" />
           </Box>
+          {/* Observations */}
           <Box
             sx={{
               width: "100%",
@@ -148,6 +156,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
             </Typography>
           </Box>
         </Box>
+
         <Box
           sx={{
             display: "flex",
@@ -158,9 +167,11 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
             height: "20%",
           }}
         >
+          {/* Divider */}
           <Box pb={2} pt={"6%"}>
             <Divider variant="fullWidth" type="dark" />
           </Box>
+          {/*Download & Advanced Buttons */}
           <Box
             sx={{
               display: "flex",
@@ -178,7 +189,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
                 onClick={handleDownload}
               />
             </Box>
-            <Box width={"242px"}>
+            <Box width={"242px"} onClick={() => router.push("/advanced")}>
               <Button
                 label="Advanced Actions"
                 fullWidth
@@ -189,7 +200,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
           </Box>
         </Box>
       </Paper>
-    </>
+    </Box>
   );
 };
 export default ResultCard;

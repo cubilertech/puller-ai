@@ -1,28 +1,4 @@
-<svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-<g filter="url(#filter0_b_261_9576)">
-<rect width="60" height="60" rx="8" fill="white" fill-opacity="0.3"/>
-<rect x="0.5" y="0.5" width="59" height="59" rx="7.5" stroke="url(#paint0_linear_261_9576)" stroke-opacity="0.4"/>
-<g clip-path="url(#clip0_261_9576)">
-<path d="M40.8171 38.9521C40.8215 39.8054 40.4596 40.6196 39.8231 41.1879C39.1866 41.7563 38.3368 42.0241 37.4895 41.9235C35.9647 41.6978 34.8473 40.3709 34.8844 38.83V21.1137C34.8476 19.5711 35.9677 18.2435 37.4946 18.0202C38.3411 17.9211 39.1895 18.1897 39.8248 18.7579C40.4601 19.326 40.8213 20.1393 40.8171 20.9916V38.9521Z" fill="white"/>
-<path d="M22.1494 36.0164C23.7876 36.0164 25.1157 37.3445 25.1157 38.9827C25.1157 40.6209 23.7876 41.949 22.1494 41.949C20.5112 41.949 19.1831 40.6209 19.1831 38.9827C19.1831 37.3445 20.5112 36.0164 22.1494 36.0164ZM29.9543 27.026C28.3083 27.1162 27.0313 28.4969 27.0695 30.1449V38.1127C27.0695 40.2751 28.0209 41.5877 29.415 41.8676C30.2902 42.045 31.1988 41.8193 31.8893 41.2531C32.5798 40.6869 32.9791 39.8401 32.9766 38.9471V30.0075C32.978 29.2092 32.6588 28.4438 32.0905 27.8832C31.5222 27.3226 30.7525 27.0137 29.9543 27.026Z" fill="white"/>
-</g>
-</g>
-<defs>
-<filter id="filter0_b_261_9576" x="-16" y="-16" width="92" height="92" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
-<feFlood flood-opacity="0" result="BackgroundImageFix"/>
-<feGaussianBlur in="BackgroundImageFix" stdDeviation="8"/>
-<feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_261_9576"/>
-<feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_261_9576" result="shape"/>
-</filter>
-<linearGradient id="paint0_linear_261_9576" x1="2.6427" y1="-1.2612e-06" x2="71.4406" y2="26.0516" gradientUnits="userSpaceOnUse">
-<stop stop-color="white"/>
-<stop offset="0.21206" stop-color="white" stop-opacity="0"/>
-<stop offset="0.489583" stop-color="white" stop-opacity="0"/>
-<stop offset="0.775473" stop-color="white" stop-opacity="0"/>
-<stop offset="1" stop-color="white"/>
-</linearGradient>
-<clipPath id="clip0_261_9576">
-<rect width="24" height="24" fill="white" transform="translate(18 18)"/>
-</clipPath>
-</defs>
+<svg width="22" height="24" viewBox="0 0 22 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M21.8163 20.9521C21.8208 21.8054 21.4588 22.6196 20.8224 23.1879C20.1859 23.7563 19.3361 24.0241 18.4888 23.9235C16.964 23.6978 15.8466 22.3709 15.8837 20.83V3.11368C15.8469 1.57105 16.967 0.243503 18.4938 0.0201969C19.3404 -0.0788853 20.1888 0.189681 20.824 0.75785C21.4593 1.32602 21.8206 2.13928 21.8163 2.99157V20.9521Z" fill="white"/>
+<path d="M3.1489 18.0164C4.78713 18.0164 6.11519 19.3445 6.11519 20.9827C6.11519 22.6209 4.78713 23.949 3.1489 23.949C1.51067 23.949 0.182617 22.6209 0.182617 20.9827C0.182617 19.3445 1.51067 18.0164 3.1489 18.0164ZM10.9538 9.02599C9.30785 9.11621 8.03078 10.4969 8.06896 12.1449V20.1127C8.06896 22.2751 9.02041 23.5877 10.4145 23.8676C11.2897 24.045 12.1983 23.8193 12.8888 23.2531C13.5793 22.6869 13.9786 21.8401 13.9761 20.9471V12.0075C13.9776 11.2092 13.6583 10.4438 13.09 9.8832C12.5217 9.32256 11.752 9.0137 10.9538 9.02599Z" fill="white"/>
 </svg>

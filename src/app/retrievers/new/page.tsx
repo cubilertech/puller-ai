@@ -1,14 +1,12 @@
 import AppLayout from "@/common/appLayout/appLayout";
 import SelectNewRetriverPage from "@/modules/SelectNewRetriverPage/selectNewRetriverPage";
 
-const NewRetriver = () => {
+function Page() {
   return (
-    <>
-      <AppLayout>
-        <SelectNewRetriverPage />
-      </AppLayout>
-    </>
+    <AppLayout>
+      <SelectNewRetriverPage />
+    </AppLayout>
   );
-};
+}
 
-export default NewRetriver;
+export default Page;

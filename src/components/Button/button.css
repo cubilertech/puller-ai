@@ -1,0 +1,27 @@
+.btn-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1px;
+  background: var(--gray-gradient-border);
+  border-radius: 8px;
+  width: 100%;
+}
+
+/* .btn-container:hover {
+  background: transparent;
+} */
+
+.contained-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1px;
+  background: var(--button-contained-border);
+  border-radius: 8px;
+  width: "100%";
+}
+
+.contained-container:hover {
+  background: var(--button-contained-border-hover);
+}

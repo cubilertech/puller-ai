@@ -1,0 +1,23 @@
+.monaco-editor .monaco-editor-background {
+  background-color: transparent !important;
+  color: white;
+}
+
+.monaco-editor .monaco-editor .mtk1 {
+  background-color: transparent !important;
+}
+
+.monaco-editor .mtk1 {
+  color: #007acc;
+}
+
+.monaco-editor .mtk2 {
+  color: #ffa500;
+}
+
+.monaco-editor .mtk3 {
+  color: #ff0000;
+}
+span.token {
+  background: transparent !important;
+}

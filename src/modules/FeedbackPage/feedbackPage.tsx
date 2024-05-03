@@ -1,22 +1,24 @@
 "use client";
 import { Button } from "@/components/Button";
 import { Paper } from "@/components/Paper";
+import { FeedbackPageVariants } from "@/utils/types";
 import { Box, Typography, useMediaQuery } from "@mui/material";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FC } from "react";
 
 interface FeedbackProps {
-  type: "retriever" | "alert";
+  variant: FeedbackPageVariants;
 }
 
-const FeedbackPage: FC<FeedbackProps> = ({ type }) => {
+const FeedbackPage: FC<FeedbackProps> = ({ variant }) => {
   const router = useRouter();
   const isLg = useMediaQuery("(max-width:1500px)");
+
   return (
     <Box
       sx={{
-        height: "calc(100vh - 130px)",
+        height: "100%",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -25,8 +27,8 @@ const FeedbackPage: FC<FeedbackProps> = ({ type }) => {
     >
       <Paper
         sx={{
-          height: { xl: "516px", lg: "350px", md: "216px" },
-          width: { xl: "704px", lg: "504px", md: "403px" },
+          height: { xl: "516px", lg: "350px", md: "316px" },
+          width: { xl: "704px", lg: "504px", md: "453px" },
           padding: "4rem",
           display: "flex",
           flexDirection: "column",
@@ -34,8 +36,9 @@ const FeedbackPage: FC<FeedbackProps> = ({ type }) => {
           justifyContent: "center",
           alignItems: "center",
         }}
-        type="light-border"
+        variant="light-border"
       >
+        {/* Success logo and message */}
         <Box
           display={"flex"}
           flexDirection={"column"}
@@ -57,14 +60,16 @@ const FeedbackPage: FC<FeedbackProps> = ({ type }) => {
               textAlign: "center",
             }}
           >
-            {type === "alert"
+            {variant === "alert"
               ? "This retriever will alert you when sales go up by 30% in a given week. Your alert is now active."
               : "This retriever has created successfully. You can use this retriever from Retrievers List."}
           </Typography>
         </Box>
-        {type === "alert" ? (
+
+        {/* Alert Success Buttons */}
+        {variant === "alert" ? (
           <Box display={"flex"} gap={"1rem"} mt={"1rem"}>
-            <Box width={{ xl: "280px", lg: "150px" }}>
+            <Box width={{ xl: "280px", lg: "200px" }}>
               <Button
                 fullWidth
                 variant="outlined"
@@ -72,7 +77,7 @@ const FeedbackPage: FC<FeedbackProps> = ({ type }) => {
                 onClick={() => router.push("/alerts")}
               />
             </Box>
-            <Box width={{ xl: "280px", lg: "150px" }}>
+            <Box width={{ xl: "280px", lg: "200px" }}>
               <Button
                 fullWidth
                 variant="contained"
@@ -81,7 +86,8 @@ const FeedbackPage: FC<FeedbackProps> = ({ type }) => {
             </Box>
           </Box>
         ) : (
-          <Box width={{ xl: "280px", lg: "180px" }} height={44}>
+          // Retriever Success Button
+          <Box width={{ xl: "280px", lg: "250px" }} height={44}>
             <Button
               variant="contained"
               label="Go to Retrievers"

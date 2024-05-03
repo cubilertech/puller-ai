@@ -1,11 +1,15 @@
-import { Input, TextField } from "@mui/material";
+import { FC } from "react";
 
-export const CustomInput = () => {
+interface CustomInputProps {
+  onChange?: (event: any) => void;
+  disabled: boolean;
+}
+
+export const CustomInput: FC<CustomInputProps> = ({ onChange, disabled }) => {
   return (
     <textarea
-      //   disableUnderline
-
       autoFocus
+      disabled={disabled}
       placeholder="Type your data request (prompt) here..."
       style={{
         boxSizing: "border-box",
@@ -20,7 +24,10 @@ export const CustomInput = () => {
         padding: "0.5rem",
         background: "transparent",
         outline: 0,
+        color: disabled ? "#738285" : "#fff",
+        fontFamily: "inherit", // Inherit font family for consistency
       }}
+      onChange={onChange}
     />
   );
 };

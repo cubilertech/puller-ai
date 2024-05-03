@@ -1,14 +1,12 @@
 import AppLayout from "@/common/appLayout/appLayout";
 import RetrieversPage from "@/modules/RetrieversPage/retrieversPage";
 
-const Retrivers = () => {
+function Page() {
   return (
-    <>
-      <AppLayout>
-        <RetrieversPage />
-      </AppLayout>
-    </>
+    <AppLayout>
+      <RetrieversPage />
+    </AppLayout>
   );
-};
+}
 
-export default Retrivers;
+export default Page;

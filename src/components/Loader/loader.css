@@ -52,3 +52,25 @@
   min-width: 10rem;
   margin-left: 3.1rem;
 }
+
+.loader-container {
+  opacity: 0; /* Initially hide the loader */
+}
+
+.fade-in {
+  animation: fadeInAnimation 0.5s ease forwards; /* Apply fade-in animation */
+}
+
+.fade-out {
+  opacity: 0;
+  transition: opacity 0.5s ease-out;
+}
+
+@keyframes fadeInAnimation {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

@@ -1,12 +1,11 @@
-import AppLayout from "@/common/appLayout/appLayout";
+import  AppLayout  from "@/common/appLayout/appLayout";
 import CreateRequestPage from "@/modules/CreateRequestPage/CreateRequestPage";
 
-export default function CreateRequest() {
+function Page() {
   return (
-    <>
-      <AppLayout>
-        <CreateRequestPage />
-      </AppLayout>
-    </>
+    <AppLayout>
+      <CreateRequestPage />
+    </AppLayout>
   );
 }
+export default Page;

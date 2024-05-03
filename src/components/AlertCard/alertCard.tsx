@@ -1,8 +1,9 @@
-import { Box, Divider, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 import { FC } from "react";
 import { Button } from "../Button";
 import "./alertCard.css";
+import { Divider } from "../Divider";
 
 interface alertCardProps {
   name?: string;
@@ -30,6 +31,7 @@ const AlertCard: FC<alertCardProps> = ({
   switch (type) {
     case "user":
       return (
+        // Card Container
         <Box
           display={"flex"}
           flexDirection={"column"}
@@ -40,7 +42,8 @@ const AlertCard: FC<alertCardProps> = ({
           }}
           className="alert-card"
         >
-          <Divider sx={{ bgcolor: "rgba(71, 84, 103, 0.0)" }} />
+          <Divider type="light" />
+          {/* Layout Container for user notification */}
           <Box
             padding={"1rem"}
             display={"flex"}
@@ -59,11 +62,11 @@ const AlertCard: FC<alertCardProps> = ({
               <Typography variant="text-sm">{time}</Typography>
             </Box>
           </Box>
-          <Divider sx={{ bgcolor: "rgba(71, 84, 103, 0.1)" }} />
         </Box>
       );
     case "option":
       return (
+        // Card Container
         <Box
           display={"flex"}
           flexDirection={"column"}
@@ -74,7 +77,8 @@ const AlertCard: FC<alertCardProps> = ({
           }}
           className="alert-card"
         >
-          <Divider sx={{ bgcolor: "rgb(62,64,71)" }} />
+          <Divider type="light" sx={{ bgcolor: "rgb(62,64,71)" }} />
+          {/* Layout Container for option notification */}
           <Box
             padding={"1rem"}
             display={"flex"}
@@ -105,8 +109,6 @@ const AlertCard: FC<alertCardProps> = ({
               <Typography variant="text-sm">{time}</Typography>
             </Box>
           </Box>
-
-          {/* <Divider sx={{ bgcolor: "rgb(62,64,71)" }} /> */}
         </Box>
       );
   }

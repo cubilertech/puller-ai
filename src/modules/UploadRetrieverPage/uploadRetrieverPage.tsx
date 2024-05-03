@@ -1,14 +1,15 @@
 "use client";
 import { Button } from "@/components/Button";
+import { Divider } from "@/components/Divider";
 import { Icon } from "@/components/Icon";
 import { PageHeader } from "@/components/PageHeader";
+
 import { Paper } from "@/components/Paper";
-import UploadCard from "@/components/UploadCard/uploadCard";
-import { Box, Divider, Input, Typography } from "@mui/material";
+import { UploadBox } from "@/components/UplaodBox";
+import { Box, Input, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-const data = [1, 2, 3];
 const UploadRetrieverPage = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
@@ -26,7 +27,9 @@ const UploadRetrieverPage = () => {
         overflowY: "none",
       }}
     >
-      <PageHeader type="Custom Retrievers" />
+      <PageHeader title="Custom Retrievers" />
+
+      {/* Main Container */}
       <Box
         sx={{
           overflowY: "auto",
@@ -44,8 +47,9 @@ const UploadRetrieverPage = () => {
             minHeight: "25rem",
             height: "fit-content",
           }}
-          type="light-border"
+          variant="light-border"
         >
+          {/* Name Label & Input */}
           <Box
             display={"flex"}
             flexDirection={"column"}
@@ -65,6 +69,7 @@ const UploadRetrieverPage = () => {
             />
           </Box>
 
+          {/* Uplaod Area */}
           <Box
             onClick={() => setIsOpen(!isOpen)}
             sx={{
@@ -88,40 +93,18 @@ const UploadRetrieverPage = () => {
 
           {!isOpen ? (
             <Divider
+              type="light"
               sx={{
                 backgroundColor: "rgb(215,215,215)",
                 mt: "10px",
               }}
             />
           ) : (
-            <Box
-              display={"grid"}
-              gridTemplateColumns={"1fr 1fr 1fr"}
-              gap={"1.4rem"}
-              mb={"2rem"}
-            >
-              {data.map((item, index) => (
-                <Box
-                  display={"flex"}
-                  flexDirection={"column"}
-                  key={index}
-                  gap={"1rem"}
-                >
-                  <UploadCard />
-                  <Input
-                    disableUnderline
-                    placeholder="Add additional context here"
-                    sx={{
-                      border: "2px solid rgba(196, 196, 196, 0.6)",
-                      borderRadius: "8px",
-                      padding: "0.1rem 0.5rem",
-                    }}
-                  />
-                </Box>
-              ))}
-            </Box>
+            // Upload Cards & Inputs
+            <UploadBox />
           )}
 
+          {/* Back & Create Buttons */}
           <Box display={"flex"} justifyContent={"flex-end"} gap={"1rem"}>
             <Box width={242} height={44}>
               <Button

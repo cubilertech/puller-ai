@@ -7,29 +7,35 @@ interface Summary {
   description: string;
 }
 
-let dummyData = {
-  heading: "Summary",
-  description:
-    " This query first selects distinct customer IDs, email addresses, and last interaction timestamps from both the Segment and Lytics tables, and sums up the total transactions from both tables.Itthen filters the results based on membership in Wawas loyalty program and whether a purchase or redemption was made in the past week.Finally, it merges the two lists, deduplicating line items by Customer ID ",
-};
-
 const Summary: FC<Summary> = ({ heading, description }) => {
   return (
     <Paper
-      type="light-border"
+      variant="light-border"
       sx={{
         maxWidth: "100%",
-        // wordBreak: "break-all",
         wordWrap: "break-word",
-        padding: "2rem",
+        padding: "1rem",
         alignSelf: "stretch",
         display: "flex",
         flexDirection: "column",
+        overflowY: "auto",
+        scrollbarWidth: "none",
+        whiteSpace: "pre-wrap",
       }}
     >
       <Typography variant="text-md-semibold"> {heading} </Typography>
       <br />
-      <Typography variant="text-xxs-regular">{description}</Typography>
+      <Typography
+        sx={{
+          whiteSpace: "pre-wrap",
+          fontSize: "15px",
+          fontFamily: "Inter",
+        }}
+        component={"pre"}
+        variant="text-xxs-regular"
+      >
+        {description}
+      </Typography>
     </Paper>
   );
 };

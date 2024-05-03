@@ -4,20 +4,13 @@ import { Paper } from "../Paper";
 import { Icon } from "../Icon";
 import { FC } from "react";
 import { useRouter } from "next/navigation";
+import { RetrieverIconsTypes, StatusTypes } from "@/utils/types";
+import "./retrieverCard.css";
+import { palette } from "@/theme/Palette";
 
 interface retriverCardProps {
-  status: "live" | "blocked" | "needPermissions" | "issues";
-  icon:
-    | "snowflake"
-    | "segment"
-    | "lytics"
-    | "dataRoom"
-    | "dbtCore"
-    | "sfCrm"
-    | "clReport"
-    | "nielsen"
-    | "googleAnalytics"
-    | "clickstream";
+  status: StatusTypes;
+  icon: RetrieverIconsTypes;
   title: string;
   description: string;
 }
@@ -33,32 +26,64 @@ const RetriverCard: FC<retriverCardProps> = ({
     <Box
       sx={{
         ":hover": {
+          borderRadius: "16px",
           cursor: "pointer",
+          backgroundColor: palette.color.blue,
         },
       }}
     >
       <Paper
-        type="light-border"
+        variant="light-border"
         sx={{
+          backgroundColor: "transparent",
           padding: "1.5rem",
           width: "100%",
-          // height: "226px",
           textAlign: "center",
+          ":hover": {
+            cursor: "pointer",
+            background: palette.linearGradient.darkBlue,
+            "& .child": {
+              background: palette.color.lightblue,
+            },
+          },
         }}
         onClick={() => router.push("/alerts/retriever-detail")}
       >
+        {/* Content Container */}
         <Box
           display={"flex"}
           flexDirection={"column"}
           gap={"1rem"}
           alignItems={"center"}
         >
-          <Box position={"relative"}>
-            <Icon icon={icon} width={64} height={64} />
-            <Box position={"absolute"} top={"-3px"} right={"-3px"}>
-              <Icon icon={status} width={12} height={12} />
+          {/* Icon Box */}
+          <div className="retriever-card-container">
+            <Box position={"relative"}>
+              <Box
+                sx={{
+                  background: palette.color.gray[500],
+                  width: 60,
+                  height: 60,
+                  borderRadius: "8px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  pointerEvents: "none",
+                  ":hover": {
+                    background: palette.opacity.blue,
+                  },
+                }}
+                className="child"
+              >
+                <Icon icon={icon} height={30} width={30} />
+              </Box>
+              <Box position={"absolute"} top={"-3px"} right={"-3px"}>
+                <Icon icon={status} width={12} height={12} />
+              </Box>
             </Box>
-          </Box>
+          </div>
+
+          {/* Title & description */}
           <Typography variant="text-md-semibold">
             {title.charAt(0).toUpperCase() + title.slice(1)}
           </Typography>

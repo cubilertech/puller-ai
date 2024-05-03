@@ -32,20 +32,26 @@ export const MuiButton = (theme: Theme) => {
           "&:hover": {
             color: palette.base.white,
             boxShadow: "none",
-            background: "rgba(105,65,198,255)",
+            background:
+              "linear-gradient(54deg, rgba(108,33,177,1) 16%, rgba(26,138,169,1) 100%)",
+            borderRadius: "8px",
+          },
+          "&.Mui-disabled": {
+            background: "#4c7ac9",
           },
         },
+
         outlined: {
           color: palette.base.white,
           borderRadius: "8px",
           border: "none",
-          // background: "#7c7586",
           background: "#627177",
 
           "&:hover": {
             border: "none",
-            // backgroundColor: "rgb(95,112,125)",
-            background: "#8f9b9e",
+            background:
+              "linear-gradient(54deg, rgba(108,33,177,1) 16%, rgba(26,138,169,1) 100%)",
+            borderRadius: "8px",
           },
         },
         text: {

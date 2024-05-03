@@ -1,14 +1,12 @@
 import AppLayout from "@/common/appLayout/appLayout";
 import SelectRetrieverPage from "@/modules/SelectRetrieverPage/selectRetrieverPage";
 
-const page = () => {
+function Page() {
   return (
-    <>
-      <AppLayout>
-        <SelectRetrieverPage />
-      </AppLayout>
-    </>
+    <AppLayout>
+      <SelectRetrieverPage />
+    </AppLayout>
   );
-};
+}
 
-export default page;
+export default Page;

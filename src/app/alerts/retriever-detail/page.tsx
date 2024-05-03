@@ -1,12 +1,12 @@
 import AppLayout from "@/common/appLayout/appLayout";
 import RetrieverDetailPage from "@/modules/RetrieverDetailPage/retrieverDetailPage";
 
-const page = () => {
+function Page() {
   return (
     <AppLayout>
       <RetrieverDetailPage />
     </AppLayout>
   );
-};
+}
 
-export default page;
+export default Page;

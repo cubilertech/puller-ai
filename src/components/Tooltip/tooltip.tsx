@@ -1,10 +1,11 @@
-import { MuiToolTip } from "@/theme/overrides/tooltip";
 import { Box, Tooltip as MuiTooltip, Typography } from "@mui/material";
-import { FC, ReactElement, ReactNode } from "react";
+import { FC, ReactElement } from "react";
 import { Icon } from "../Icon";
+import { TooltipVariants } from "@/utils/types";
+import { palette } from "@/theme/Palette";
 
 interface TooltipProps {
-  variant: "info" | "status";
+  variant: TooltipVariants;
   title?: string;
   description?: string;
   children: ReactElement;
@@ -30,10 +31,7 @@ const Tooltip: FC<TooltipProps> = ({
                 gap: "0.5rem",
               }}
             >
-              <Typography
-                variant="text-md-regular"
-                color={"rgba(230, 230, 230, 1)"}
-              >
+              <Typography variant="text-md-regular" color={palette.base.white}>
                 {title}
               </Typography>
               <Typography variant="text-sm">{description}</Typography>
@@ -47,7 +45,7 @@ const Tooltip: FC<TooltipProps> = ({
     case "status":
       return (
         <MuiTooltip
-          placement="bottom-start"
+          placement="right-end"
           title={
             <Box
               sx={{
@@ -58,28 +56,28 @@ const Tooltip: FC<TooltipProps> = ({
             >
               {" "}
               <Typography
-                variant="text-md-semibold"
+                variant="text-md-regular"
                 display={"flex"}
                 gap={"1rem"}
               >
                 <Icon icon="live" /> Live
               </Typography>
               <Typography
-                variant="text-md-semibold"
+                variant="text-md-regular"
                 display={"flex"}
                 gap={"1rem"}
               >
                 <Icon icon="issues" /> Issues
               </Typography>
               <Typography
-                variant="text-md-semibold"
+                variant="text-md-regular"
                 display={"flex"}
                 gap={"1rem"}
               >
                 <Icon icon="blocked" /> Blocked
               </Typography>
               <Typography
-                variant="text-md-semibold"
+                variant="text-md-regular"
                 display={"flex"}
                 gap={"1rem"}
               >

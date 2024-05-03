@@ -27,6 +27,85 @@ body {
       rgba(255, 255, 255, 0.4)
     )
     1;
+  --gray-gradient-border: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.4),
+    rgba(255, 255, 255, 0.4),
+    rgba(255, 255, 255, 0.4),
+    rgba(255, 255, 255, 0.7)
+  );
+  --button-contained-border: linear-gradient(
+    to bottom right,
+
+    rgb(158, 190, 254),
+    rgba(93, 146, 254, 1),
+    rgba(93, 146, 254, 1),
+    rgba(93, 146, 254, 1),
+    rgb(158, 190, 254)
+  );
+  --button-contained-border-hover: linear-gradient(
+    to bottom right,
+    rgba(144, 118, 207, 1),
+    rgba(105, 65, 198, 1),
+    rgba(105, 65, 198, 1),
+    rgba(105, 65, 198, 1),
+    rgba(144, 118, 207, 1)
+  );
+
+  --notification-button-border: linear-gradient(
+    110.74deg,
+    rgba(255, 255, 255, 0.7) 3.19%,
+    rgba(255, 255, 255, 0.4) 23.36%,
+    rgba(255, 255, 255, 0.4) 49.75%,
+    rgba(255, 255, 255, 0.4) 76.94%,
+    rgba(255, 255, 255, 0.7) 98.29%
+  );
+
+  --custom-button-border: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.7)
+  );
+
+  --custom-button-small-border: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.7),
+    #7a8089,
+    #7a8089,
+    #7a8089,
+    rgba(255, 255, 255, 0.7)
+  );
+
+  --custom-button-round-border: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 0.7)
+  );
+
+  --notification-icon-button-border: linear-gradient(
+    to bottom right,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.2),
+    rgba(255, 255, 255, 0.9)
+  );
+
+  --optionbar-border: linear-gradient(
+    142.96deg,
+    rgba(255, 255, 255, 0.222) -3.54%,
+    rgba(114, 114, 114, 0.252) 95.15%
+  );
+
+  --slate-blue-opacity: rgba(71, 84, 103, 0.3);
+  --royal-navy-blue: rgba(78, 95, 149, 0.9);
 }
 
 /* Example: global.css */

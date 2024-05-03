@@ -1,10 +1,10 @@
 import { Box } from "@mui/material";
-import Image from "next/image";
 import React, { FC } from "react";
 import { Icon } from "../Icon";
+import { LogoVariants } from "@/utils/types";
 
 interface logoProps {
-  variant?: "login" | "default";
+  variant?: LogoVariants;
 }
 
 const Logo: FC<logoProps> = ({ variant }) => {

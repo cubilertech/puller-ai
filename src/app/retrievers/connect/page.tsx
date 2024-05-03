@@ -1,7 +1,7 @@
 import AppLayout from "@/common/appLayout/appLayout";
 import ConnectAppsPage from "@/modules/ConnectAppsPage/connectAppsPage";
 
-const page = () => {
+function Page ()  {
   return (
     <AppLayout>
       <ConnectAppsPage />
@@ -9,4 +9,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
