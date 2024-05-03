@@ -168,3 +168,10 @@ ORDER BY
   Week, 
   Store_ID;
 `;
+
+export const OPTIONBAR_DATA = [
+  "HELP_TICKET_CREATE",
+  "SIGN_UP",
+  "TXN_EVENT",
+  "SITE_LOGIN",
+];

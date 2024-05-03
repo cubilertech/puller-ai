@@ -23,6 +23,7 @@ import {
 } from "@/libs/redux/features/sqlEditor";
 import { useValidate } from "@/hooks/useRequest";
 import { dummySQL } from "@/utils/constants";
+import { getValidateData } from "@/libs/redux/features/validateRequest";
 
 interface PannelAreaProps {
   content?: {
@@ -38,6 +39,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate, sql }) => {
   const dispatch = useDispatch();
   const isSQLEditorOpen = useSelector(getSQLEditorOpen);
   const isOpenSelectBar = useSelector(getOptionbarOpen);
+  const variable = useSelector(getValidateData);
 
   const [isLoading, setisLoading] = useState(false);
   const [prompt, setPrompt] = useState("");
@@ -179,8 +181,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate, sql }) => {
                             },
                           }}
                         >
-                          {" "}
-                          TXN_SZNAL table
+                          {variable}
                         </Typography>
                       </Tooltip>
                       ) for the past 52 weeks, ending March 15, 2024, grouped by
