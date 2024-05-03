@@ -12,7 +12,7 @@ import { useParams } from "next/navigation";
 import { FC, useEffect, useState } from "react";
 
 const YourResultsPage: FC = () => {
-  const { id } = useParams<{ id: string }>(); 
+  const { id } = useParams<{ id: string }>();
   const [fadeIn, setFadeIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const activeRequest = useAppSelector(getActiveRequest);
@@ -27,7 +27,7 @@ const YourResultsPage: FC = () => {
     } else {
       refetchQueryStatus();
     }
-  }, [data]);
+  }, [data, refetchQueryStatus]);
 
   return (
     <>

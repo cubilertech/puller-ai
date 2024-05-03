@@ -19,7 +19,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
     const link = document.createElement("a");
     link.href = data?.fileLink;
     link.download = "download.txt";
-    link.target = '_blank';
+    link.target = "_blank";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -56,15 +56,17 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
               {data.main_title}
             </Typography>
             <Box sx={{ display: "flex", gap: 1 }}>
-              <Box width={"36px"}>
-                <IconButton
-                  icon="importIcon"
-                  iconHeight={16}
-                  iconWidth={16}
-                  fullWidth
-                />
-              </Box>
-              {/* <CustomLink href="/request/preview"> */}
+              <CustomLink href="/request/preview">
+                <Box width={"36px"}>
+                  <IconButton
+                    icon="importIcon"
+                    iconHeight={16}
+                    iconWidth={16}
+                    fullWidth
+                  />
+                </Box>
+              </CustomLink>
+
               <Box
                 width={"36px"}
                 onClick={() => router.push("/request/validate")}
@@ -76,7 +78,6 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
                   fullWidth
                 />
               </Box>
-              {/* </CustomLink> */}
             </Box>
           </Box>
           {/* Description */}

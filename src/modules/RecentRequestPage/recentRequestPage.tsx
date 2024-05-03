@@ -1,3 +1,4 @@
+import { CustomLink } from "@/components/Link";
 import { PageHeader } from "@/components/PageHeader";
 
 import { RequestsCard } from "@/components/RecentRequestes-Card";
@@ -33,13 +34,13 @@ const RecentRequestPage: FC = () => {
         }}
       >
         {SingleCardDomyData.map((item, index) => (
-          // <CustomLink href="/request/preview" key={index}>
-          <RequestsCard
-            key={index}
-            title={item.title}
-            discription={item.discription}
-          />
-          // </CustomLink>
+          <CustomLink href="/request/preview" key={index}>
+            <RequestsCard
+              key={index}
+              title={item.title}
+              discription={item.discription}
+            />
+          </CustomLink>
         ))}
       </Box>
     </Box>
