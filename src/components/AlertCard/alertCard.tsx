@@ -42,7 +42,7 @@ const AlertCard: FC<alertCardProps> = ({
           }}
           className="alert-card"
         >
-          <Divider type="light" />
+          <Divider type="dark" />
           {/* Layout Container for user notification */}
           <Box
             padding={"1rem"}
@@ -77,7 +77,7 @@ const AlertCard: FC<alertCardProps> = ({
           }}
           className="alert-card"
         >
-          <Divider type="light" sx={{ bgcolor: "rgb(62,64,71)" }} />
+          <Divider type="dark" />
           {/* Layout Container for option notification */}
           <Box
             padding={"1rem"}

@@ -13,7 +13,8 @@ const Divider: FC<DividerProps> = ({ variant, type }) => {
     <MuiDivider
       variant={variant}
       sx={{
-        bgcolor: type === "dark" ? "rgba(90, 90, 90, 1)" : "",
+        borderColor:
+          type === "dark" ? "rgb(40, 41, 44)" : "rgba(90, 90, 90, 1)",
       }}
     />
   );
