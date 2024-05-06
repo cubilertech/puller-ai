@@ -9,9 +9,20 @@ import { CONNECT_APP_DATA } from "@/utils/data";
 import { Input } from "@/components/Input";
 import { palette } from "@/theme/Palette";
 import { CURRENT_MODE, MODES } from "@/utils/constants";
+import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
+import {
+  getConnectQuery,
+  updateConnectQuery,
+} from "@/libs/redux/features/searchbar";
 
 const ConnectAppsPage = () => {
+  const query = useAppSelector(getConnectQuery);
+  const dispatch = useAppDispatch();
   const router = useRouter();
+
+  const filteredData = CONNECT_APP_DATA.filter((item) =>
+    item.name.toLowerCase().includes(query.toLowerCase())
+  );
   return (
     <Box
       sx={{
@@ -38,7 +49,7 @@ const ConnectAppsPage = () => {
           sx={{
             background: palette.linearGradient.gray,
             borderTopRightRadius: "14px",
-            minHeight: "5rem",
+            height: "5rem",
             display: "flex",
             justifyContent: "space-between",
             padding: "2rem",
@@ -50,6 +61,8 @@ const ConnectAppsPage = () => {
             icon="search"
             width={409}
             height={44}
+            value={query}
+            onChange={(e) => dispatch(updateConnectQuery(e.target.value))}
           />
           <Button
             variant="contained"
@@ -73,7 +86,7 @@ const ConnectAppsPage = () => {
             scrollbarWidth: "none",
           }}
         >
-          {CONNECT_APP_DATA.map((item, index) => (
+          {filteredData.map((item, index) => (
             <ConnectCard key={index} item={item} />
           ))}
         </Box>
