@@ -8,11 +8,17 @@ import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
 import { getActiveRequest } from "@/libs/redux/features/activeRequest";
 import { useRunQuery } from "@/hooks/useRequest";
 import GraphModal from "@/modals/graphModals/graphModal";
+import { useSelector } from "react-redux";
 
-import { HandleOpenSQL } from "@/libs/redux/features/sqlEditor";
+import {
+  HandleOpenSQL,
+  getSQLEditorOpen,
+} from "@/libs/redux/features/sqlEditor";
+import GraphModal2 from "@/modals/graphModals/graphModal2";
 
 const ValidateRequestPage: FC = () => {
   const [isProccessing, setisProccessing] = useState(false);
+  const isSQLEditorOpen = useSelector(getSQLEditorOpen);
   const activeRequest = useAppSelector(getActiveRequest);
   const [openGraph, setOpenGraph] = useState(false);
   const { mutate: runQuery } = useRunQuery();
@@ -21,7 +27,7 @@ const ValidateRequestPage: FC = () => {
 
   const handleUpdate = () => {
     runQuery({ prompt: activeRequest.id });
-    setisProccessing(true)
+    setisProccessing(true);
   };
   const handleOpenGraph = () => {
     setOpenGraph(!openGraph);
@@ -54,22 +60,30 @@ const ValidateRequestPage: FC = () => {
         </Box>
       ) : (
         <Box sx={{ px: 1.2, pt: 1 }}>
-          <PageHeader
-            title="Validate Request"
-            buttons={[
-              {
-                label: "Graph",
-                variant: "rounded-SQL",
-                onClick: () => handleOpenGraph(),
-              },
-              {
-                label: "SQL",
-                variant: "rounded-SQL",
-                onClick: () => handleOpenSQL_Editor(),
-              },
-            ]}
+          {!isSQLEditorOpen && (
+            <PageHeader
+              title="Validate Request"
+              buttons={[
+                {
+                  label: "Graph",
+                  variant: "rounded-SQL",
+                  onClick: () => handleOpenGraph(),
+                },
+                {
+                  label: "SQL",
+                  variant: "rounded-SQL",
+                  onClick: () => handleOpenSQL_Editor(),
+                },
+              ]}
+            />
+          )}
+
+          <GraphModal2
+            open={openGraph}
+            handleClose={() => handleOpenGraph()}
+            graph={activeRequest?.graph as any[]}
           />
-          <GraphModal open={openGraph} handleClose={() => handleOpenGraph()} />
+          {/* <GraphModal open={openGraph} handleClose={() => handleOpenGraph()} /> */}
           <Box sx={{ width: "97%", m: "auto", pt: 2 }}>
             <PannelArea
               sql={activeRequest?.sql}
