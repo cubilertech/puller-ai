@@ -6,6 +6,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  Typography,
 } from "@mui/material";
 
 import MuiListItemButton from "@/theme/overrides/listItemButton";
@@ -17,6 +18,7 @@ import { Logo } from "../logo";
 import { SideBar_Data } from "@/utils/data";
 import { palette } from "@/theme/Palette";
 import "./sideNavbar.css";
+import { Paper } from "../Paper";
 
 const SideNavbar = () => {
   const Route = useRouter();
@@ -65,8 +67,41 @@ const SideNavbar = () => {
           }}
         >
           <Box>
-            <Box sx={{ display: "flex", justifyContent: "center", mt: "20px" }}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-end",
+                mt: "20px",
+              }}
+            >
               <Logo variant="default" />
+              <Paper
+                variant="light-border"
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  borderRadius: "50px",
+                  width: "fit-content",
+                  padding: "2px 8px",
+                  mr: "10px",
+                  mt: "-15px",
+                  backgroundColor: "#263f50",
+                  border: 0,
+                }}
+              >
+                <Typography
+                  sx={{
+                    color: "#5D92FE",
+                    fontSize: "10px",
+                    fontWeight: "700",
+                  }}
+                  variant="text-xxs-bold"
+                >
+                  Private Beta
+                </Typography>
+              </Paper>
             </Box>
 
             <Box>
