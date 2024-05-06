@@ -77,44 +77,6 @@ const Paper: FC<PaperProps> = ({
           </MuiPaper>
         </>
       );
-    case "light-border-2":
-      return (
-        <>
-          <MuiPaper
-            onClick={onClick}
-            {...props}
-            sx={{
-              borderRadius: "16px",
-              border: "2px solid rgb(110,105,122)",
-              background:
-                "linear-gradient(143deg, rgba(255, 255, 255, 0.07) -3.54%, rgba(114, 114, 114, 0.08) 95.15%)",
-              backdropFilter: "blur(20px)",
-              ...sx,
-            }}
-          >
-            {children}
-          </MuiPaper>
-        </>
-      );
-    case "dark-border-2":
-      return (
-        <>
-          <MuiPaper
-            onClick={onClick}
-            {...props}
-            sx={{
-              borderRadius: "16px",
-              border: "20px solid rgba(97, 97, 97, 0.6)",
-              background:
-                "linear-gradient(143deg, rgba(255, 255, 255, 0.07) -3.54%, rgba(114, 114, 114, 0.08) 95.15%)",
-              backdropFilter: "blur(20px)",
-              ...sx,
-            }}
-          >
-            {children}
-          </MuiPaper>
-        </>
-      );
   }
 };
 

@@ -6,6 +6,8 @@ import { PageHeader } from "@/components/PageHeader";
 
 import { Paper } from "@/components/Paper";
 import { UploadBox } from "@/components/UplaodBox";
+import { AlertModal } from "@/modals/AlertModal";
+import { CURRENT_MODE, MODES } from "@/utils/constants";
 import { Box, Input, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -13,7 +15,15 @@ import { useState } from "react";
 const UploadRetrieverPage = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
+  const [isOpenAlert, setIsOpenAlert] = useState(false);
 
+  const handleCreateRetriever = () => {
+    if (CURRENT_MODE === MODES.PILOT) {
+      setIsOpenAlert(true);
+    } else {
+      router.push("/retrivers/feedback");
+    }
+  };
   return (
     <Box
       sx={{
@@ -119,12 +129,16 @@ const UploadRetrieverPage = () => {
                 label="Create Retriever"
                 variant="contained"
                 fullWidth
-                onClick={() => router.push("/retrievers/feedback")}
+                onClick={handleCreateRetriever}
               />
             </Box>
           </Box>
         </Paper>
       </Box>
+      <AlertModal
+        handleClose={() => setIsOpenAlert(false)}
+        open={isOpenAlert}
+      />
     </Box>
   );
 };
