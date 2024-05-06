@@ -1,4 +1,5 @@
-import React, { ReactNode } from "react";
+"use client";
+import React, { ReactNode, useEffect } from "react";
 import { SideNavbar } from "@/components/SideNavbar";
 import "./appLayout.css";
 import { TopNavBar } from "@/components/TopNavBar";
@@ -8,8 +9,17 @@ import { ThemeProvider } from "@mui/material";
 import { customTheme } from "@/theme/CustomTheme";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { usePathname, useRouter } from "next/navigation";
 
 const AppLayout = ({ children }: { children: ReactNode }) => {
+  const Route = useRouter();
+  const pathname = usePathname();
+  useEffect(() => {
+    if (pathname === "/") {
+      Route.push("/request");
+    }
+  }, [Route, pathname]);
+
   return (
     <div className="app-layout">
       <div className="sidebar">

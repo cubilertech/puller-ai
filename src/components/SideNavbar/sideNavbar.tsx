@@ -19,16 +19,11 @@ import { palette } from "@/theme/Palette";
 import "./sideNavbar.css";
 
 const SideNavbar = () => {
-  const Route = useRouter();
   const pathname = usePathname();
 
   const path = pathname.split("/")[1];
   const drawerWidth = 200;
-  useEffect(() => {
-    if (pathname === "/") {
-      Route.push("/request");
-    }
-  }, [Route, pathname]);
+
   return (
     <Box
       sx={{
