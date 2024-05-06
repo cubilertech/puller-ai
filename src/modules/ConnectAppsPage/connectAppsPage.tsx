@@ -8,6 +8,8 @@ import { ConnectCard } from "@/components/ConnectCard";
 import { CONNECT_APP_DATA } from "@/utils/data";
 import { Input } from "@/components/Input";
 import { palette } from "@/theme/Palette";
+import { AlertModal } from "@/modals/AlertModal";
+import { useState } from "react";
 import { CURRENT_MODE, MODES } from "@/utils/constants";
 import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
 import {
@@ -19,7 +21,18 @@ const ConnectAppsPage = () => {
   const query = useAppSelector(getConnectQuery);
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const [isOpenAlert, setIsOpenAlert] = useState(false);
 
+  const handleCreateRetriever = () => {
+    if (CURRENT_MODE === MODES.PILOT) {
+      setIsOpenAlert(true);
+    } else router.push("/retrievers/feedback");
+  };
+  const handleCardConnect = () => {
+    if (CURRENT_MODE === MODES.PILOT) {
+      setIsOpenAlert(true);
+    }
+  };
   const filteredData = CONNECT_APP_DATA.filter((item) =>
     item.name.toLowerCase().includes(query.toLowerCase())
   );
@@ -71,17 +84,13 @@ const ConnectAppsPage = () => {
               height: "44",
             }}
             label="Create Retriever"
-            onClick={
-              CURRENT_MODE === MODES.DEMO
-                ? () => router.push("/retrievers/feedback")
-                : () => alert("Restricted access")
-            }
+            onClick={() => handleCreateRetriever()}
           />
         </Box>
 
         <Box
           sx={{
-            MaxHeight: "80%",
+            height: "80%",
             overflowY: "auto",
             scrollbarWidth: "none",
           }}
@@ -102,11 +111,19 @@ const ConnectAppsPage = () => {
             </Typography>
           ) : (
             filteredData.map((item, index) => (
-              <ConnectCard key={index} item={item} />
+              <ConnectCard
+                key={index}
+                item={item}
+                onClick={() => handleCardConnect()}
+              />
             ))
           )}
         </Box>
       </Paper>
+      <AlertModal
+        open={isOpenAlert}
+        handleClose={() => setIsOpenAlert(false)}
+      />
     </Box>
   );
 };

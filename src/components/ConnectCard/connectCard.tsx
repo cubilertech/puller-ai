@@ -8,9 +8,10 @@ import { CURRENT_MODE, MODES } from "@/utils/constants";
 
 interface ConnectCardProps {
   item: ConnectItem;
+  onClick?: () => void;
 }
 
-const ConnectCard: FC<ConnectCardProps> = ({ item }) => {
+const ConnectCard: FC<ConnectCardProps> = ({ item, onClick }) => {
   return (
     <>
       <Box

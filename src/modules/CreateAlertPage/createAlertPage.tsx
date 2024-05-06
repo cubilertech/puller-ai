@@ -3,12 +3,21 @@ import { Button } from "@/components/Button";
 import { PageHeader } from "@/components/PageHeader";
 
 import { Paper } from "@/components/Paper";
+import { AlertModal } from "@/modals/AlertModal";
 import { palette } from "@/theme/Palette";
+import { CURRENT_MODE, MODES } from "@/utils/constants";
 import { Box, Input, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 const CreateAlertPage = () => {
   const router = useRouter();
+  const [isOpenAlert, setIsOpenAlert] = useState(false);
+  const handleCreateAlert = () => {
+    if (CURRENT_MODE === MODES.PILOT) {
+      setIsOpenAlert(true);
+    } else router.push("/alerts/feedback");
+  };
   return (
     <Box
       sx={{
@@ -78,9 +87,13 @@ const CreateAlertPage = () => {
           variant="outlined"
           label="Create Alert"
           fullWidth
-          onClick={() => router.push("/alerts/feedback")}
+          onClick={() => handleCreateAlert()}
         />
       </Box>
+      <AlertModal
+        open={isOpenAlert}
+        handleClose={() => setIsOpenAlert(false)}
+      />
     </Box>
   );
 };

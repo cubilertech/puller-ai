@@ -120,8 +120,6 @@ export type PaperVariants =
   | "light-border"
   | "dark-border"
   | "light-bg-border"
-  | "light-border-2"
-  | "dark-border-2";
 
 export type RectangleCardIcons = "connectApps" | "apiKey" | "upload" | "cpu";
 
