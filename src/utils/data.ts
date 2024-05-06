@@ -386,14 +386,14 @@ export const CONNECT_APP_DATA = [
 ];
 
 export const TEMPLATE_PUBLIC_DATA = Array.from({ length: 10 }, (_, index) => ({
-  image: "/images/blank-square.svg",
+  image: "/Images/blank-square.svg",
   heading: `Template ${index + 1}`,
   subHeading: `Maker by User ${index + 1}`,
   subHeading2: `Retrievers ${index + 1} bot will help to geth...`,
 }));
 
 export const TEMPLATE_PRIVATE_DATA = Array.from({ length: 10 }, (_, index) => ({
-  image: "/images/blank-square.svg",
+  image: "/Images/blank-square.svg",
   heading: `Template 2 ${index + 1}`,
   subHeading: `Maker by User 2${index + 1}`,
   subHeading2: `Retrievers 2${index + 1} bot will help to geth...`,

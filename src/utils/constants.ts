@@ -321,3 +321,11 @@ export const TABLEDATA = [
     totalTxns: "37777",
   },
 ];
+
+export const MODES = {
+  PILOT: "Pilot",
+  DEMO: "Demo",
+};
+
+export const CURRENT_MODE =
+  process.env.NEXT_PUBLIC_MODE === MODES.PILOT ? MODES.PILOT : MODES.DEMO;

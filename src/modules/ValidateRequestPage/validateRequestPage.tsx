@@ -7,14 +7,13 @@ import { Loader } from "@/components/Loader";
 import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
 import { getActiveRequest } from "@/libs/redux/features/activeRequest";
 import { useRunQuery } from "@/hooks/useRequest";
-import GraphModal from "@/modals/graphModals/graphModal";
 import { useSelector } from "react-redux";
 
 import {
   HandleOpenSQL,
   getSQLEditorOpen,
 } from "@/libs/redux/features/sqlEditor";
-import GraphModal2 from "@/modals/graphModals/graphModal2";
+import { GraphModal2 } from "@/modals/graphModals";
 
 const ValidateRequestPage: FC = () => {
   const [isProccessing, setisProccessing] = useState(false);
