@@ -93,9 +93,13 @@ const SideNavbar = () => {
               >
                 <Typography
                   sx={{
-                    color: "#5D92FE",
+                    background:
+                      "linear-gradient(274deg, rgba(141,107,255,1) 2%, rgba(91,145,252,1) 50%, rgba(6,191,250,1) 99%)",
                     fontSize: "10px",
-                    fontWeight: "700",
+                    fontWeight: "900",
+                    "$-webkit-background-clip": "text",
+                    backgroundClip: "text",
+                    color: "transparent",
                   }}
                   variant="text-xxs-bold"
                 >
