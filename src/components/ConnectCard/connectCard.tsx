@@ -30,7 +30,6 @@ const ConnectCard: FC<ConnectCardProps> = ({ item, onClick }) => {
               variant={item.isConnected ? "contained" : "outlined"}
               label={item.isConnected ? "Connected" : "Connect"}
               fullWidth
-              onClick={onClick}
               sx={{
                 width: "98px",
                 height: "34px",
