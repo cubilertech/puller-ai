@@ -2,7 +2,7 @@
 import { Button } from "@/components/Button";
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { ConnectCard } from "@/components/ConnectCard";
 import { CONNECT_APP_DATA } from "@/utils/data";
@@ -86,9 +86,25 @@ const ConnectAppsPage = () => {
             scrollbarWidth: "none",
           }}
         >
-          {filteredData.map((item, index) => (
-            <ConnectCard key={index} item={item} />
-          ))}
+          {filteredData.length <= 0 ? (
+            <Typography
+              variant="text-lg-bold"
+              sx={{
+                width: "100%",
+                height: "100%",
+                justifyContent: "center",
+                color: palette.opacity.lightGray,
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              No Connect Data
+            </Typography>
+          ) : (
+            filteredData.map((item, index) => (
+              <ConnectCard key={index} item={item} />
+            ))
+          )}
         </Box>
       </Paper>
     </Box>
