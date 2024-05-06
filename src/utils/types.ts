@@ -159,3 +159,29 @@ export interface queryStatusResponse {
   result: string;
   status: string;
 }
+
+export interface CustomNodeData {
+  value?: number;
+  label: string;
+}
+
+export interface Variable {
+  id: string;
+  model: string;
+  name: string;
+  type: string;
+  value: number;
+  a?: string;
+  c?: string;
+  e?: string;
+  g?: string;
+  i?: string;
+  k?: string;
+  m?: string;
+}
+export enum Position {
+  Left = "left",
+  Top = "top",
+  Right = "right",
+  Bottom = "bottom",
+}
