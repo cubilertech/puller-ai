@@ -7,9 +7,10 @@ import { Divider } from "../Divider";
 
 interface ConnectCardProps {
   item: ConnectItem;
+  onClick?: () => void;
 }
 
-const ConnectCard: FC<ConnectCardProps> = ({ item }) => {
+const ConnectCard: FC<ConnectCardProps> = ({ item, onClick }) => {
   return (
     <>
       <Box
@@ -28,6 +29,7 @@ const ConnectCard: FC<ConnectCardProps> = ({ item }) => {
               variant={item.isConnected ? "contained" : "outlined"}
               label={item.isConnected ? "Connected" : "Connect"}
               fullWidth
+              onClick={onClick}
               sx={{
                 width: "98px",
                 height: "34px",

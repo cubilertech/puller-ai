@@ -8,9 +8,23 @@ import { ConnectCard } from "@/components/ConnectCard";
 import { CONNECT_APP_DATA } from "@/utils/data";
 import { Input } from "@/components/Input";
 import { palette } from "@/theme/Palette";
+import { AlertModal } from "@/modals/AlertModal";
+import { useState } from "react";
+import { CURRENT_MODE, MODES } from "@/utils/constants";
 
 const ConnectAppsPage = () => {
   const router = useRouter();
+  const [isOpenAlert, setIsOpenAlert] = useState(false);
+  const handleCreateRetriever = () => {
+    if (CURRENT_MODE === MODES.PILOT) {
+      setIsOpenAlert(true);
+    } else router.push("/retrievers/feedback");
+  };
+  const handleCardConnect = () => {
+    if (CURRENT_MODE === MODES.PILOT) {
+      setIsOpenAlert(true);
+    }
+  };
   return (
     <Box
       sx={{
@@ -57,7 +71,7 @@ const ConnectAppsPage = () => {
               height: "44",
             }}
             label="Create Retriever"
-            onClick={() => router.push("/retrievers/feedback")}
+            onClick={() => handleCreateRetriever()}
           />
         </Box>
 
@@ -69,10 +83,18 @@ const ConnectAppsPage = () => {
           }}
         >
           {CONNECT_APP_DATA.map((item, index) => (
-            <ConnectCard key={index} item={item} />
+            <ConnectCard
+              key={index}
+              item={item}
+              onClick={() => handleCardConnect()}
+            />
           ))}
         </Box>
       </Paper>
+      <AlertModal
+        open={isOpenAlert}
+        handleClose={() => setIsOpenAlert(false)}
+      />
     </Box>
   );
 };
