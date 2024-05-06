@@ -6,6 +6,7 @@ import { PageHeader } from "@/components/PageHeader";
 
 import { Paper } from "@/components/Paper";
 import { UploadBox } from "@/components/UplaodBox";
+import { CURRENT_MODE, MODES } from "@/utils/constants";
 import { Box, Input, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -119,7 +120,11 @@ const UploadRetrieverPage = () => {
                 label="Create Retriever"
                 variant="contained"
                 fullWidth
-                onClick={() => router.push("/retrievers/feedback")}
+                onClick={
+                  CURRENT_MODE === MODES.DEMO
+                    ? () => router.push("/retrievers/feedback")
+                    : () => alert("No acess")
+                }
               />
             </Box>
           </Box>
