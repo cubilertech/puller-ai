@@ -8,6 +8,7 @@ import { ConnectCard } from "@/components/ConnectCard";
 import { CONNECT_APP_DATA } from "@/utils/data";
 import { Input } from "@/components/Input";
 import { palette } from "@/theme/Palette";
+import { CURRENT_MODE, MODES } from "@/utils/constants";
 
 const ConnectAppsPage = () => {
   const router = useRouter();
@@ -57,7 +58,11 @@ const ConnectAppsPage = () => {
               height: "44",
             }}
             label="Create Retriever"
-            onClick={() => router.push("/retrievers/feedback")}
+            onClick={
+              CURRENT_MODE === MODES.DEMO
+                ? () => router.push("/retrievers/feedback")
+                : () => alert("Restricted access")
+            }
           />
         </Box>
 
