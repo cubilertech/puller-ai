@@ -46,6 +46,7 @@ export const icons = {
   cpu: "/Images/Icons/cpu-icon.svg",
   squareCheckbox: "/Images/Icons/check-box.svg",
   roundCheckbox: "/Images/Icons/round-check-box.svg",
+  topbarIcon: "/Images/Icons/topbar-icon.svg",
 };
 
 export const PagesType = {
