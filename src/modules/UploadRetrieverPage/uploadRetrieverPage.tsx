@@ -17,11 +17,19 @@ const UploadRetrieverPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenAlert, setIsOpenAlert] = useState(false);
 
+  const handleUploadDocs = () => {
+    if (CURRENT_MODE === MODES.PILOT) {
+      setIsOpenAlert(true);
+    } else {
+      setIsOpen(!isOpen);
+    }
+  };
+
   const handleCreateRetriever = () => {
     if (CURRENT_MODE === MODES.PILOT) {
       setIsOpenAlert(true);
     } else {
-      router.push("/retrivers/feedback");
+      router.push("/retrievers/feedback");
     }
   };
   return (
@@ -81,7 +89,7 @@ const UploadRetrieverPage = () => {
 
           {/* Uplaod Area */}
           <Box
-            onClick={() => setIsOpen(!isOpen)}
+            onClick={() => handleUploadDocs()}
             sx={{
               border: "2px solid rgba(196, 196, 196, 0.6)",
               minHeight: "10rem",
