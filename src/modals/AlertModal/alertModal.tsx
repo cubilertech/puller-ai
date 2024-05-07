@@ -25,7 +25,11 @@ const modalStyle = {
 const AlertModal: FC<AlertModalProps> = ({ open, handleClose }) => {
   return (
     <>
-      <Modal open={open} onClose={handleClose}>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        sx={{ background: "rgba(0,0,0,0.4)" }}
+      >
         <Box sx={modalStyle}>
           <Paper
             variant="light-border"

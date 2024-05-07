@@ -1,15 +1,25 @@
+"use client";
 import { Button } from "@/components/Button";
 import { Divider } from "@/components/Divider";
 import { Icon } from "@/components/Icon";
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
+import { AlertModal } from "@/modals/AlertModal";
 import { palette } from "@/theme/Palette";
+import { CURRENT_MODE, MODES } from "@/utils/constants";
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
+import { useState } from "react";
 
 const data = [1, 2, 3, 4];
 
 const RetrieverDetailPage = () => {
+  const [isOpenAlert, setIsOpenAlert] = useState(false);
+  const handleCreateAlert = () => {
+    if (CURRENT_MODE === MODES.PILOT) {
+      setIsOpenAlert(true);
+    }
+  };
   return (
     <Box
       sx={{
@@ -27,17 +37,19 @@ const RetrieverDetailPage = () => {
             label: "Add Context",
             variant: "outlined",
             width: 180,
+            onClick: () => handleCreateAlert(),
           },
           {
             label: "Request Access",
             variant: "outlined",
             width: 180,
+            onClick: () => handleCreateAlert(),
           },
           {
             label: "Create Alert",
             variant: "outlined",
             width: 180,
-            href: "/alerts/feedback",
+            onClick: () => handleCreateAlert(),
           },
         ]}
       />
@@ -195,6 +207,10 @@ const RetrieverDetailPage = () => {
           </Box>
         </Box>
       </Paper>
+      <AlertModal
+        open={isOpenAlert}
+        handleClose={() => setIsOpenAlert(false)}
+      />
     </Box>
   );
 };

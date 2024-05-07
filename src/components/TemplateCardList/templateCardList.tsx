@@ -16,8 +16,11 @@ const TemplateCardList: FC<TemplateCardListProps> = ({ isActive }) => {
   const filteredData = (
     isActive === ACTIVE_TYPES.PRIVATE
       ? TEMPLATE_PRIVATE_DATA
-      : TEMPLATE_PUBLIC_DATA
-  ).filter((item) => item.heading.toLowerCase().includes(query.toLowerCase()));
+      : CURRENT_MODE === MODES.PILOT
+        ? undefined
+        : TEMPLATE_PUBLIC_DATA
+  )?.filter((item) => item.heading.toLowerCase().includes(query.toLowerCase())) ?? [];
+  
 
   return (
     <Box

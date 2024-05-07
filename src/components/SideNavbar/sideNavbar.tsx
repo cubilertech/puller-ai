@@ -19,6 +19,7 @@ import { SideBar_Data } from "@/utils/data";
 import { palette } from "@/theme/Palette";
 import "./sideNavbar.css";
 import { Paper } from "../Paper";
+import { CURRENT_MODE, MODES } from "@/utils/constants";
 
 const SideNavbar = () => {
   const Route = useRouter();
@@ -76,36 +77,38 @@ const SideNavbar = () => {
               }}
             >
               <Logo variant="default" />
-              <Paper
-                variant="light-border"
-                sx={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                  borderRadius: "50px",
-                  width: "fit-content",
-                  padding: "2px 8px",
-                  mr: "10px",
-                  mt: "-15px",
-                  backgroundColor: "#263f50",
-                  border: 0,
-                }}
-              >
-                <Typography
+              {CURRENT_MODE === MODES.PILOT && (
+                <Paper
+                  variant="light-border"
                   sx={{
-                    background:
-                      "linear-gradient(274deg, rgba(141,107,255,1) 2%, rgba(91,145,252,1) 50%, rgba(6,191,250,1) 99%)",
-                    fontSize: "10px",
-                    fontWeight: "900",
-                    "$-webkit-background-clip": "text",
-                    backgroundClip: "text",
-                    color: "transparent",
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    borderRadius: "50px",
+                    width: "fit-content",
+                    padding: "2px 8px",
+                    mr: "10px",
+                    mt: "-15px",
+                    backgroundColor: "#263f50",
+                    border: 0,
                   }}
-                  variant="text-xxs-bold"
                 >
-                  Private Beta
-                </Typography>
-              </Paper>
+                  <Typography
+                    sx={{
+                      background:
+                        "linear-gradient(274deg, rgba(141,107,255,1) 2%, rgba(91,145,252,1) 50%, rgba(6,191,250,1) 99%)",
+                      fontSize: "10px",
+                      fontWeight: "900",
+                      "$-webkit-background-clip": "text",
+                      backgroundClip: "text",
+                      color: "transparent",
+                    }}
+                    variant="text-xxs-bold"
+                  >
+                    Private Beta
+                  </Typography>
+                </Paper>
+              )}
             </Box>
 
             <Box>
