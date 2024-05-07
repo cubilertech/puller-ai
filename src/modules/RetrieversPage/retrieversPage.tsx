@@ -1,9 +1,19 @@
+"use client";
 import { PageHeader } from "@/components/PageHeader";
 import { RetriverCard } from "@/components/RetriverCard";
+import { AlertModal } from "@/modals/AlertModal";
+import { CURRENT_MODE, MODES } from "@/utils/constants";
 import { RETRIEVER_DATA } from "@/utils/data";
 import { Box } from "@mui/material";
+import { useState } from "react";
 
 const RetrieversPage = () => {
+  const [isOpenAlert, setIsOpenAlert] = useState(false);
+  const handleSingleAlert = () => {
+    if (CURRENT_MODE === MODES.PILOT) {
+      setIsOpenAlert(true);
+    }
+  };
   return (
     <Box
       sx={{
@@ -45,11 +55,16 @@ const RetrieversPage = () => {
             description={card.description}
             icon={card.icon}
             status={card.status}
+            onClick={() => handleSingleAlert()}
             title={card.title}
             key={i}
           />
         ))}
       </Box>
+      <AlertModal
+        open={isOpenAlert}
+        handleClose={() => setIsOpenAlert(false)}
+      />
     </Box>
   );
 };
