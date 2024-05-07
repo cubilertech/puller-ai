@@ -127,9 +127,6 @@ export type TooltipVariants = "info" | "status";
 
 export type FeedbackPageVariants = "retriever" | "alert";
 
-// export type RootState = {
-//   sqlEditor: ReturnType<typeof sqlEditorReducer>;
-// };
 export interface validateRequestPayload {
   message: string;
 }

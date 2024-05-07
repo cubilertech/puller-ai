@@ -34,11 +34,7 @@ const ConnectCard: FC<ConnectCardProps> = ({ item, onClick }) => {
                 width: "98px",
                 height: "34px",
               }}
-              onClick={
-                CURRENT_MODE === MODES.PILOT
-                  ? () => alert("Restricted Access")
-                  : undefined
-              }
+              onClick={onClick}
             />
           </Box>
         </Box>

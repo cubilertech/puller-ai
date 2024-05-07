@@ -6,11 +6,12 @@ import "./notificationIconButton.css";
 import { palette } from "@/theme/Palette";
 
 interface IconButtonProps {
-  icon?: IconTypes;
+  icon: IconTypes;
   text?: string;
   iconWidth?: number;
   iconHeight?: number;
   isNotice?: boolean;
+  onClick?: () => void;
 }
 
 const NotificationIconButton: FC<IconButtonProps> = ({
@@ -19,6 +20,7 @@ const NotificationIconButton: FC<IconButtonProps> = ({
   iconWidth = 40,
   iconHeight = 40,
   isNotice,
+  onClick,
   ...props
 }) => {
   return (
@@ -32,6 +34,7 @@ const NotificationIconButton: FC<IconButtonProps> = ({
             bgcolor: `${palette.color.gray[300]}`,
           },
         }}
+        onClick={onClick}
         {...props}
       >
         {isNotice && (

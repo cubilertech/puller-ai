@@ -1,5 +1,6 @@
 import { Button } from "@/components/Button";
 import { Paper } from "@/components/Paper";
+import { palette } from "@/theme/Palette";
 import { Close } from "@mui/icons-material";
 import { Box, Modal, Typography } from "@mui/material";
 import { FC } from "react";
@@ -52,7 +53,7 @@ const AlertModal: FC<AlertModalProps> = ({ open, handleClose }) => {
               }}
               onClick={handleClose}
             >
-              <Close />
+              <Close sx={{ color: palette.base.white }} />
             </Box>
             <Box>
               <Box sx={{ width: "240px", height: "240px", m: "auto" }}>
@@ -63,7 +64,11 @@ const AlertModal: FC<AlertModalProps> = ({ open, handleClose }) => {
                   alt="alert loader"
                 />
               </Box>
-              <Typography variant="display-xs-regular">
+              <Typography
+                component={"p"}
+                variant="display-xs-regular"
+                color={palette.base.white}
+              >
                 This feature is not available in Private Beta.
               </Typography>
               <Box sx={{ width: 180, mt: 4, mx: "auto", mb: 5 }}>

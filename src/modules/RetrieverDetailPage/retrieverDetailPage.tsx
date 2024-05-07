@@ -193,6 +193,7 @@ const RetrieverDetailPage = () => {
                           variant="outlined"
                           label="Request Access"
                           fullWidth
+                          onClick={() => handleCreateAlert()}
                           sx={{
                             minHeight: "38px",
                             height: "38px !important",
