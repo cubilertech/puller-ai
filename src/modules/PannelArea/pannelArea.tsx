@@ -65,7 +65,6 @@ const PannelArea: FC<PannelAreaProps> = ({
       setisLoading(false);
     }
   }, [submitPromptError]);
-  console.log(isLoading, "isLoading");
   return (
     <Box
       sx={{
