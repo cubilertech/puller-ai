@@ -1,10 +1,13 @@
-import React, { useCallback } from "react";
+"use client";
+import React, { useCallback, useMemo, useRef, useState } from "react";
 import ReactFlow, {
   addEdge,
   ConnectionLineType,
   Panel,
   useNodesState,
   useEdgesState,
+  Background,
+  Controls,
 } from "reactflow";
 import dagre from "dagre";
 const modalStyle = {
@@ -24,6 +27,9 @@ import "reactflow/dist/style.css";
 import { Box, Modal } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { Paper } from "@/components/Paper";
+import ContextMenu from "./contextMenu";
+import CustomNode from "./customNode";
+import "./customNode.css";
 
 const dagreGraph = new dagre.graphlib.Graph();
 dagreGraph.setDefaultEdgeLabel(() => ({}));
@@ -31,8 +37,8 @@ dagreGraph.setDefaultEdgeLabel(() => ({}));
 const position = { x: 0, y: 0 };
 const edgeType = "smoothstep";
 
-const nodeWidth = 172;
-const nodeHeight = 36;
+const nodeWidth = 200;
+const nodeHeight = 100;
 
 const getLayoutedElements = (nodes: any[], edges: any[], direction = "TB") => {
   const isHorizontal = direction === "LR";
@@ -73,7 +79,13 @@ interface props {
 }
 
 const GraphModal2 = ({ open, handleClose, graph }: props) => {
+  const nodeTypes = useMemo(() => ({ textUpdater: CustomNode }), []);
   // console.log(graph,'graph')
+  const [openUpdateName, setOpenUpdateName] = useState(false);
+  const handleCloseUpdateName = () => {
+    setOpenUpdateName(!openUpdateName);
+  };
+
   let initialNodes2 = [];
   let initialEdges2: any[] = [];
   initialNodes2 = graph?.map((item) => {
@@ -82,6 +94,8 @@ const GraphModal2 = ({ open, handleClose, graph }: props) => {
       // type:'input',
       data: { label: item.name },
       position: position,
+      // type:'textUpdater',
+      // data:{label: item.name, variables: item.variables}
     };
   });
   graph?.forEach((item) => {
@@ -126,6 +140,53 @@ const GraphModal2 = ({ open, handleClose, graph }: props) => {
     },
     [nodes, edges, setEdges, setNodes]
   );
+  const ref = useRef<HTMLDivElement>(null);
+
+  const [menu, setMenu] = useState<{
+    id: string;
+    label: string;
+    variables: any;
+    top?: number;
+    left?: number;
+    right?: number | boolean;
+    bottom?: number | boolean;
+  } | null>(null);
+
+  const handleNodeLabelChange = (id: string, label: any) => {
+    // Update the label of the node with the given id
+    const updatedNodes = nodes.map((node) => {
+      if (node.id === id) {
+        return {
+          ...node,
+          variables: label,
+        };
+      }
+      return node;
+    });
+    // Update the nodes state with the modified nodes array
+    setNodes(updatedNodes);
+    setMenu(null);
+  };
+
+  const onNodeClick = useCallback(
+    (event: any, node: any) => {
+      const pane = ref.current!.getBoundingClientRect();
+      setMenu({
+        id: node.id,
+        label: node.data.label,
+        variables: node.variables,
+        top: event.clientY < pane.height - 200 && event.clientY,
+        left: event.clientX < pane.width - 200 && event.clientX,
+        right: event.clientX >= pane.width - 200 && pane.width - event.clientX,
+        bottom:
+          event.clientY >= pane.height - 200 && pane.height - event.clientY,
+      });
+      setOpenUpdateName(true);
+    },
+    [setMenu]
+  );
+
+  const onPaneClick = useCallback(() => setMenu(null), [setMenu]);
 
   console.log(nodes, "nodes");
   console.log(edges, "edges");
@@ -153,18 +214,32 @@ const GraphModal2 = ({ open, handleClose, graph }: props) => {
             <CloseIcon onClick={() => handleClose()} />
           </Box>
           <ReactFlow
+            // nodeTypes={nodeTypes}
+            ref={ref}
             nodes={nodes}
             edges={edges}
             onNodesChange={onNodesChange}
             onEdgesChange={onEdgesChange}
             onConnect={onConnect}
+            onNodeClick={onNodeClick}
             connectionLineType={ConnectionLineType.SmoothStep}
             fitView
           >
-            <Panel position="top-right">
+            <Controls />
+            <Background />
+
+            {menu && (
+              <ContextMenu
+                handleNodeLabelChange={handleNodeLabelChange}
+                {...menu}
+                open={openUpdateName}
+                onClose={handleCloseUpdateName}
+              />
+            )}
+            {/* <Panel position="top-right">
               <button onClick={() => onLayout("TB")}>vertical layout</button>
               <button onClick={() => onLayout("LR")}>horizontal layout</button>
-            </Panel>
+            </Panel> */}
           </ReactFlow>
         </Paper>
       </Box>
