@@ -5,9 +5,9 @@ import { Handle, Position } from "reactflow";
 const handleStyle = { left: 10 };
 
 function customNode({ data, isConnectable }) {
-  const onChange = useCallback((evt) => {
-    console.log(evt.target.value);
-  }, []);
+  // const onChange = useCallback((evt) => {
+  //   console.log(evt.target.value);
+  // }, []);
 
   return (
     <Box className="wrapper">
