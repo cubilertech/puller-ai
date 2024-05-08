@@ -13,7 +13,6 @@ import { palette } from "@/theme/Palette";
 import { Icon } from "../Icon";
 import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
 import { updateValue } from "@/libs/redux/features/validateRequest";
-import { HandleCloseOptionbar } from "@/libs/redux/features/sqlEditor";
 import { toggleCheckbox } from "@/libs/redux/features/checkbox";
 import { OPTIONBAR_DATA } from "@/utils/constants";
 
@@ -56,7 +55,6 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
 
   const handleUpdateVariable = () => {
     dispatch(updateValue(selectedItems));
-    dispatch(HandleCloseOptionbar());
   };
 
   if (variant === "input")

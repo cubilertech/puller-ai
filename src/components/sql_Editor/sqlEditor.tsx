@@ -11,7 +11,7 @@ import { coy } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { format } from "sql-formatter";
 
 interface SQL_EditorProps {
-  handleClose: () => void;
+  handleClose?: () => void | undefined;
   code: string;
 }
 

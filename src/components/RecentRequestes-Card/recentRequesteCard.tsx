@@ -6,12 +6,18 @@ import { Icon } from "../Icon";
 interface RequestsCardProps {
   title: string;
   discription: string;
+  onClick?: () => void;
 }
 
-const RequestsCard: FC<RequestsCardProps> = ({ title, discription }) => {
+const RequestsCard: FC<RequestsCardProps> = ({
+  title,
+  discription,
+  onClick,
+}) => {
   return (
     <Paper
-    variant="light-border"
+      onClick={onClick}
+      variant="light-border"
       sx={{
         padding: "20px",
         maxWidth: "100%",
