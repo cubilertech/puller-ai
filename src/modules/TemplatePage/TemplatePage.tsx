@@ -70,7 +70,7 @@ const TemplatePage = () => {
                 height: "100%",
               }}
             >
-              <Loader type="Processing" variant="simple" />
+              <Loader type="Loading" variant="simple" />
             </Box>
           ) : (
             <TemplateCardList isActive={isActive} pulls={pullsList} />

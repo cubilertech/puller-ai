@@ -1,5 +1,5 @@
 "use client";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Paper } from "../Paper";
 import { Box, Typography } from "@mui/material";
 import { CardData } from "@/utils/types";
@@ -9,12 +9,27 @@ import Divider from "../Divider/divider";
 import CustomButton from "@/common/CustomButtons/CustomButtons";
 import { CustomLink } from "../Link";
 import { useRouter } from "next/navigation";
+import { AlertModal } from "@/modals/AlertModal";
+import { CURRENT_MODE, MODES } from "@/utils/constants";
 
 interface ResultCardProps {
   data: CardData;
 }
 
 const ResultCard: FC<ResultCardProps> = ({ data }) => {
+  const route = useRouter();
+  const [isOpenAlert, setIsOpenAlert] = useState(false);
+
+  const handleOpen = () => {
+    if (CURRENT_MODE === MODES.PILOT) {
+      setIsOpenAlert(true);
+    } else route.push("/request/recent");
+  };
+  const handleAdvanced = () => {
+    if (CURRENT_MODE === MODES.PILOT) {
+      setIsOpenAlert(true);
+    } else route.push("/advanced");
+  };
   const handleDownload = () => {
     const link = document.createElement("a");
     link.href = data?.fileLink;
@@ -56,7 +71,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
               {data.main_title}
             </Typography>
             <Box sx={{ display: "flex", gap: 1 }}>
-              <Box width={"36px"}>
+              <Box width={"36px"} onClick={() => handleOpen()}>
                 <IconButton
                   icon="importIcon"
                   iconHeight={16}
@@ -65,10 +80,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
                 />
               </Box>
 
-              <Box
-                width={"36px"}
-                // onClick={() => router.push("/request/validate")}
-              >
+              <Box width={"36px"} onClick={() => handleDownload()}>
                 <IconButton
                   icon="eyeIcon"
                   iconHeight={16}
@@ -184,20 +196,25 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
                 fullWidth
                 size="large"
                 variant="outlined"
-                onClick={handleDownload}
+                onClick={handleOpen}
               />
             </Box>
-            <Box width={"242px"} onClick={() => router.push("/advanced")}>
+            <Box width={"242px"}>
               <Button
                 label="Advanced Actions"
                 fullWidth
                 size="large"
                 variant="contained"
+                onClick={handleAdvanced}
               />
             </Box>
           </Box>
         </Box>
       </Paper>
+      <AlertModal
+        open={isOpenAlert}
+        handleClose={() => setIsOpenAlert(false)}
+      />
     </Box>
   );
 };

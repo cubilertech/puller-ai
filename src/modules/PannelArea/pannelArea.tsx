@@ -128,7 +128,7 @@ const PannelArea: FC<PannelAreaProps> = ({
               <Box display={"flex"} flexDirection={"column"} gap={"1rem"}>
                 <Box>
                   <Box display={"flex"}>
-                    <Typography
+                    {/* <Typography
                       variant={"display-xs"}
                       sx={{
                         width: "98%",
@@ -173,6 +173,22 @@ const PannelArea: FC<PannelAreaProps> = ({
                       week and by Store ID. It only covers product SKUs that
                       include Flyease technology, which is determined from INT
                       DB for Product ID values 1234 and 5678
+                    </Typography> */}
+                    <Typography
+                      variant={"display-xs"}
+                      sx={{
+                        width: "98%",
+                        pr: 5,
+                        pt: 1,
+                        m: "auto",
+                        textAlign: "start",
+                        color: isOpenSelectBar
+                          ? palette.opacity.lightGray
+                          : palette.base.white,
+                      }}
+                      component="p"
+                    >
+                      {content.response}
                     </Typography>
                   </Box>
 
