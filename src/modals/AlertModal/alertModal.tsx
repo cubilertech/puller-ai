@@ -58,11 +58,12 @@ const AlertModal: FC<AlertModalProps> = ({ open, handleClose }) => {
             </Box>
             <Box>
               <Box sx={{ width: "240px", height: "240px", m: "auto" }}>
-                <Image
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={"/Images/alert-loader.gif"}
+                  alt="alert loader"
                   width={240}
                   height={240}
-                  src="/alert-loader.gif"
-                  alt="alert loader"
                 />
               </Box>
               <Typography

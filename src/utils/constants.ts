@@ -47,6 +47,7 @@ export const icons = {
   squareCheckbox: "/Images/Icons/check-box.svg",
   roundCheckbox: "/Images/Icons/round-check-box.svg",
   topbarIcon: "/Images/Icons/topbar-icon.svg",
+  alertLoader: "/Images/alert-loader.gif",
 };
 
 export const PagesType = {

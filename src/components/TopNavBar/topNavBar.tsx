@@ -88,6 +88,7 @@ const TopNavBar = () => {
             icon="annotation"
             iconHeight={28}
             iconWidth={28}
+            onClick={() => handleClickAlerts()}
             isNotice
           />
           <NotificationIconButton
