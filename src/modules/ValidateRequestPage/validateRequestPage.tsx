@@ -4,15 +4,8 @@ import React, { FC, useEffect, useState } from "react";
 import { PannelArea } from "../../modules/PannelArea";
 import { PageHeader } from "@/components/PageHeader";
 import { Loader } from "@/components/Loader";
-import { useAppDispatch } from "@/libs/redux/hooks";
 import { useSubmitExecute } from "@/hooks/useExecute";
 // import GraphModal from "@/modals/graphModals/graphModal";
-import { useSelector } from "react-redux";
-
-import {
-  HandleOpenSQL,
-  getSQLEditorOpen,
-} from "@/libs/redux/features/sqlEditor";
 import GraphModal2 from "@/modals/graphModals/graphModal2";
 import { useGetSinglePrompt } from "@/hooks/usePrompt";
 interface Props {
@@ -20,7 +13,8 @@ interface Props {
 }
 const ValidateRequestPage: FC<Props> = ({ id }) => {
   const [isProccessing, setisProccessing] = useState(false);
-  const isSQLEditorOpen = useSelector(getSQLEditorOpen);
+  const [isSQLEditorOpen, setIsSQLEditorOpen] = useState(false);
+  const [isOpenSelectBar, setIsOpenSelectBar] = useState(false);
   const [openGraph, setOpenGraph] = useState(false);
   const { mutate: submitExecute, isError: submitExecuteError } =
     useSubmitExecute();
@@ -29,7 +23,6 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
     isLoading,
     refetch: refetchPrompt,
   } = useGetSinglePrompt(id);
-  const dispatch = useAppDispatch();
 
   const handleUpdate = () => {
     submitExecute({ prompt: `query#${id}` });
@@ -39,8 +32,23 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
     setOpenGraph(!openGraph);
   };
 
+  const handleCloseSQL_Editor = () => {
+    setIsSQLEditorOpen(false);
+  };
   const handleOpenSQL_Editor = () => {
-    dispatch(HandleOpenSQL());
+    setIsSQLEditorOpen(true);
+    if (isOpenSelectBar) {
+      setIsOpenSelectBar(false);
+    }
+  };
+  const handleCloseSelectBar = () => {
+    setIsOpenSelectBar(false);
+  };
+  const handleOpenSelectBar = () => {
+    setIsOpenSelectBar(true);
+    if (isSQLEditorOpen) {
+      setIsSQLEditorOpen(false);
+    }
   };
   useEffect(() => {
     refetchPrompt();
@@ -105,6 +113,11 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
               sql={prompt?.sql ?? "Select * from test;"}
               content={content}
               handleUpdate={() => handleUpdate()}
+              isSQLEditorOpen={isSQLEditorOpen}
+              handleCloseSQL_Editor={() => handleCloseSQL_Editor()}
+              isOpenSelectBar={isOpenSelectBar}
+              handleOpenSelectBar={() => handleOpenSelectBar()}
+              handleCloseSelectBar={() => handleCloseSelectBar()}
             />
           </Box>
         </Box>

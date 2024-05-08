@@ -13,14 +13,7 @@ import { Tooltip } from "@/components/Tooltip";
 import { OptionsBar } from "@/components/optionsBar";
 import "./panelArea.css";
 import { SQL_Editor } from "@/components/sql_Editor";
-import { useSelector, useDispatch } from "react-redux";
-import {
-  HandleCloseOptionbar,
-  HandleCloseSQL,
-  HandleOpenOptionbar,
-  getOptionbarOpen,
-  getSQLEditorOpen,
-} from "@/libs/redux/features/sqlEditor";
+import { useSelector } from "react-redux";
 import { useSubmitPrompt } from "@/hooks/usePrompt";
 import { dummySQL } from "@/utils/constants";
 import { getValidateData } from "@/libs/redux/features/validateRequest";
@@ -32,12 +25,23 @@ interface PannelAreaProps {
   };
   handleUpdate?: () => void;
   sql?: string;
+  isSQLEditorOpen?: boolean;
+  isOpenSelectBar?: boolean;
+  handleCloseSQL_Editor?: () => void;
+  handleCloseSelectBar?: () => void;
+  handleOpenSelectBar?: () => void;
 }
 
-const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate, sql }) => {
-  const dispatch = useDispatch();
-  const isSQLEditorOpen = useSelector(getSQLEditorOpen);
-  const isOpenSelectBar = useSelector(getOptionbarOpen);
+const PannelArea: FC<PannelAreaProps> = ({
+  content,
+  handleUpdate,
+  sql,
+  isSQLEditorOpen,
+  isOpenSelectBar,
+  handleCloseSQL_Editor,
+  handleCloseSelectBar,
+  handleOpenSelectBar,
+}) => {
   const variable = useSelector(getValidateData);
 
   const [isLoading, setisLoading] = useState(false);
@@ -52,17 +56,6 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate, sql }) => {
     submitPrompt({ message: prompt });
     setisLoading(true);
   };
-
-  const handleOpenSelectBar = () => {
-    dispatch(HandleOpenOptionbar());
-    dispatch(HandleCloseSQL());
-  };
-  const handleCloseSQL_Editor = () => {
-    dispatch(HandleCloseSQL());
-  };
-  const handleCloseSelectBar = () => {
-    dispatch(HandleCloseOptionbar());
-  };
   const handleTextareaChange = (event: any) => {
     setPrompt(event.target.value);
   };
@@ -72,7 +65,7 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate, sql }) => {
       setisLoading(false);
     }
   }, [submitPromptError]);
-
+  console.log(isLoading, "isLoading");
   return (
     <Box
       sx={{
@@ -88,10 +81,8 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate, sql }) => {
       <Box
         sx={{
           display: "flex",
-          // flexDirection: "column",
           justifyContent: "flex-start",
           height: "calc(100vh - 180px)",
-          // height: "100%",
           width: "100%",
           alignItems: "flex-end",
           flexGrow: "1",
@@ -117,7 +108,6 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate, sql }) => {
             sx={{
               border: `1px solid ${palette.color.gray[700]}`,
               height: content ? "fit-content" : "100%",
-              // height: "100%",
               margin: 0,
               padding: content ? 1 : 0,
               width: "100%",
@@ -294,8 +284,12 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate, sql }) => {
             }}
           >
             <SQL_Editor
-              handleClose={() => handleCloseSQL_Editor()}
-              code={sql ? (sql as string) : dummySQL}
+              handleClose={
+                handleCloseSQL_Editor
+                  ? () => handleCloseSQL_Editor()
+                  : undefined
+              }
+              code={sql ? sql : dummySQL}
             />
           </Box>
         )}
