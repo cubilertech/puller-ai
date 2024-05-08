@@ -1,0 +1,40 @@
+.wrapper {
+    height: auto;
+    border: 1px solid #eee;
+    padding: 5px;
+    border-radius: 5px;
+    background: black;
+    width: 200px;
+  }
+.node-label {
+  font-size: 12px;
+  color:blue;
+  padding: 5px;
+}
+
+.variables-label{
+    font-size: 12px;
+    color:red;
+    padding: 5px;
+}
+
+.variables-wrapper{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap:5px;
+}
+
+.input{
+    padding:2px 10px;
+    border:1px solid #ccc;
+}
+  
+  /* .text-updater-node label {
+    display: block;
+    color: #777;
+    font-size: 12px;
+  } */
