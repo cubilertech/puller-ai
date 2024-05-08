@@ -19,10 +19,10 @@ interface Props {
   id: string;
 }
 const ValidateRequestPage: FC<Props> = ({ id }) => {
-  // const [isProccessing, setisProccessing] = useState(false);
+  const [isProccessing, setisProccessing] = useState(false);
   const isSQLEditorOpen = useSelector(getSQLEditorOpen);
   const [openGraph, setOpenGraph] = useState(false);
-  const { mutate: submitExecute, isLoading: submitExecuteLoading } =
+  const { mutate: submitExecute, isError: submitExecuteError } =
     useSubmitExecute();
   const {
     data: prompt,
@@ -33,7 +33,7 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
 
   const handleUpdate = () => {
     submitExecute({ prompt: `query#${id}` });
-    // setisProccessing(true);
+    setisProccessing(true);
   };
   const handleOpenGraph = () => {
     setOpenGraph(!openGraph);
@@ -46,6 +46,12 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
     refetchPrompt();
   }, [refetchPrompt]);
 
+  useEffect(() => {
+    if (submitExecuteError) {
+      setisProccessing(false);
+    }
+  }, [submitExecuteError]);
+
   const content = {
     response:
       "The data request will give you transaction level data (from the TXN_SZNAL table) for the past 52 weeks, ending March 15, 2024,  grouped by week and by Store ID. It only covers product SKUs that include Flyease technology, which is determined from INT DB for Product ID values 1234 and 5678.",
@@ -54,7 +60,7 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
   };
   return (
     <>
-      {isLoading || submitExecuteLoading ? (
+      {isLoading || isProccessing ? (
         <Box
           sx={{
             width: "100%",

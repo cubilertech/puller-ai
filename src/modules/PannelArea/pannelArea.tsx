@@ -2,12 +2,12 @@
 import { Box, Typography } from "@mui/material";
 import { Paper } from "../../components/Paper";
 import { Button } from "../../components/Button";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Loader } from "../../components/Loader";
 import Divider from "../../components/Divider/divider";
 import { palette } from "@/theme/Palette";
 import { CreateInputAreaComponent } from "@/components/inputArea";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import CustomLink from "@/components/Link/link";
 import { Tooltip } from "@/components/Tooltip";
 import { OptionsBar } from "@/components/optionsBar";
@@ -35,22 +35,22 @@ interface PannelAreaProps {
 }
 
 const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate, sql }) => {
-  const route = useRouter();
   const dispatch = useDispatch();
   const isSQLEditorOpen = useSelector(getSQLEditorOpen);
   const isOpenSelectBar = useSelector(getOptionbarOpen);
   const variable = useSelector(getValidateData);
 
-  // const [isLoading, setisLoading] = useState(false);
+  const [isLoading, setisLoading] = useState(false);
   const [prompt, setPrompt] = useState("");
-  const { mutate: submitPrompt, isLoading } = useSubmitPrompt();
+  const { mutate: submitPrompt, isError: submitPromptError } =
+    useSubmitPrompt();
   const routename = usePathname();
   const routeParts = routename.replace(/^\//, "").split("/");
   const isValidate = routeParts.includes("validate");
 
   const handleAvailable = () => {
-    // setisLoading(true);
     submitPrompt({ message: prompt });
+    setisLoading(true);
   };
 
   const handleOpenSelectBar = () => {
@@ -66,6 +66,12 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate, sql }) => {
   const handleTextareaChange = (event: any) => {
     setPrompt(event.target.value);
   };
+
+  useEffect(() => {
+    if (submitPromptError) {
+      setisLoading(false);
+    }
+  }, [submitPromptError]);
 
   return (
     <Box
