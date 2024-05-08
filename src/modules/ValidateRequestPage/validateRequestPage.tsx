@@ -1,13 +1,12 @@
 "use client";
 import { Box } from "@mui/material";
-import React, { FC, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 import { PannelArea } from "../../modules/PannelArea";
 import { PageHeader } from "@/components/PageHeader";
 import { Loader } from "@/components/Loader";
-import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
-import { getActiveRequest } from "@/libs/redux/features/activeRequest";
-import { useRunQuery } from "@/hooks/useRequest";
-import GraphModal from "@/modals/graphModals/graphModal";
+import { useAppDispatch } from "@/libs/redux/hooks";
+import { useSubmitExecute } from "@/hooks/useExecute";
+// import GraphModal from "@/modals/graphModals/graphModal";
 import { useSelector } from "react-redux";
 
 import {
@@ -15,19 +14,26 @@ import {
   getSQLEditorOpen,
 } from "@/libs/redux/features/sqlEditor";
 import GraphModal2 from "@/modals/graphModals/graphModal2";
-
-const ValidateRequestPage: FC = () => {
-  const [isProccessing, setisProccessing] = useState(false);
+import { useGetSinglePrompt } from "@/hooks/usePrompt";
+interface Props {
+  id: string;
+}
+const ValidateRequestPage: FC<Props> = ({ id }) => {
+  // const [isProccessing, setisProccessing] = useState(false);
   const isSQLEditorOpen = useSelector(getSQLEditorOpen);
-  const activeRequest = useAppSelector(getActiveRequest);
   const [openGraph, setOpenGraph] = useState(false);
-  const { mutate: runQuery } = useRunQuery();
-
+  const { mutate: submitExecute, isLoading: submitExecuteLoading } =
+    useSubmitExecute();
+  const {
+    data: prompt,
+    isLoading,
+    refetch: refetchPrompt,
+  } = useGetSinglePrompt(id);
   const dispatch = useAppDispatch();
 
   const handleUpdate = () => {
-    runQuery({ prompt: activeRequest.id });
-    setisProccessing(true);
+    submitExecute({ prompt: `query#${id}` });
+    // setisProccessing(true);
   };
   const handleOpenGraph = () => {
     setOpenGraph(!openGraph);
@@ -36,6 +42,10 @@ const ValidateRequestPage: FC = () => {
   const handleOpenSQL_Editor = () => {
     dispatch(HandleOpenSQL());
   };
+  useEffect(() => {
+    refetchPrompt();
+  }, []);
+
   const content = {
     response:
       "The data request will give you transaction level data (from the TXN_SZNAL table) for the past 52 weeks, ending March 15, 2024,  grouped by week and by Store ID. It only covers product SKUs that include Flyease technology, which is determined from INT DB for Product ID values 1234 and 5678.",
@@ -44,7 +54,7 @@ const ValidateRequestPage: FC = () => {
   };
   return (
     <>
-      {isProccessing ? (
+      {isLoading || submitExecuteLoading ? (
         <Box
           sx={{
             width: "100%",
@@ -81,12 +91,12 @@ const ValidateRequestPage: FC = () => {
           <GraphModal2
             open={openGraph}
             handleClose={() => handleOpenGraph()}
-            graph={activeRequest?.graph as any[]}
+            graph={prompt?.graph ?? []}
           />
           {/* <GraphModal open={openGraph} handleClose={() => handleOpenGraph()} /> */}
           <Box sx={{ width: "97%", m: "auto", pt: 2 }}>
             <PannelArea
-              sql={activeRequest?.sql}
+              sql={prompt?.sql ?? "Select * from test;"}
               content={content}
               handleUpdate={() => handleUpdate()}
             />

@@ -7,9 +7,11 @@ import { Divider } from "../Divider";
 interface TemplateTopbarProps {
   isActive: string;
   setIsActive: React.Dispatch<React.SetStateAction<string>>;
+  search: string;
+  setSearch: (val: string) => void;
 }
 
-const TemplateTopbar: FC<TemplateTopbarProps> = ({ isActive, setIsActive }) => {
+const TemplateTopbar: FC<TemplateTopbarProps> = ({ isActive, setIsActive, search, setSearch }) => {
   return (
     <Box
       sx={{
@@ -80,7 +82,7 @@ const TemplateTopbar: FC<TemplateTopbarProps> = ({ isActive, setIsActive }) => {
         </Box>
       </Box>
 
-      <Input placeholder="Search..." icon="search" width={230} height={40} />
+      <Input value={search} onChange={(e)=>{setSearch(e.target.value)}} placeholder="Search..." icon="search" width={230} height={40} />
     </Box>
   );
 };

@@ -132,32 +132,49 @@ export type FeedbackPageVariants = "retriever" | "alert";
 // export type RootState = {
 //   sqlEditor: ReturnType<typeof sqlEditorReducer>;
 // };
-export interface validateRequestPayload {
+export interface submitPromptPayload {
   message: string;
 }
 
-export interface runQueryPayload {
-  prompt: string;
-}
-
-export interface validateRequestResponse {
+export interface Prompt {
   description: string;
-  graph: any[]; // Replace 'any' with the actual type of 'graph' if known
+  graph: Graph[];
   id: string;
   sql: string;
   target: string;
-  variables: any[]; // Replace 'any' with the actual type of 'variables' if known
+  variables: Variable[];
 }
 
-export interface runQueryResponse {
-  id: string;
-  status: string;
+export interface submitExecutePayload {
+  prompt: string;
 }
 
-export interface queryStatusResponse {
+export interface Query {
   id: string;
-  result: string;
   status: string;
+  results: any[];
+}
+
+export interface Client {
+  connection: {
+    dataset: string,
+    project: string,
+    status: true,
+    type: string
+    },
+    name: string
+}
+
+export interface submitValidatePayload {
+  prompt: string;
+  variables?: Variable[];
+}
+
+export type Graph = {
+  depends: any[],
+  description: string,
+  id: string,
+  name: string
 }
 
 export interface CustomNodeData {

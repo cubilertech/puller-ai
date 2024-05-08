@@ -3,31 +3,31 @@ import { Loader } from "@/components/Loader";
 import { NotesList } from "@/components/NotesList";
 import { PageHeader } from "@/components/PageHeader";
 import { ResultCard } from "@/components/ResultCard";
-import { useGetQueryStatus } from "@/hooks/useRequest";
-import { getActiveRequest } from "@/libs/redux/features/activeRequest";
-import { useAppSelector } from "@/libs/redux/hooks";
+import { useGetSingleExecute } from "@/hooks/useExecute";
+// import { getActiveRequest } from "@/libs/redux/features/activeRequest";
+// import { useAppSelector } from "@/libs/redux/hooks";
 import { RESULTS_DATA } from "@/utils/data";
 import { Box } from "@mui/material";
-import { useParams } from "next/navigation";
+// import { useParams } from "next/navigation";
 import { FC, useEffect, useState } from "react";
 
-const YourResultsPage: FC = () => {
-  const { id } = useParams<{ id: string }>();
+interface Props {
+  id: string;
+}
+
+const YourResultsPage: FC<Props> = ({ id }) => {
   const [fadeIn, setFadeIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const activeRequest = useAppSelector(getActiveRequest);
-  const { data, refetch: refetchQueryStatus } = useGetQueryStatus(
-    activeRequest?.id ? activeRequest.id : id
-  );
+  const { data, refetch: refetchSignleExecute } = useGetSingleExecute(id);
   useEffect(() => {
     if (data && data?.status === "complete") {
       setIsLoading(false);
       // Trigger fade-in effect after component mounts
       setFadeIn(true);
     } else {
-      refetchQueryStatus();
+      refetchSignleExecute();
     }
-  }, [data, refetchQueryStatus]);
+  }, [data, refetchSignleExecute]);
 
   return (
     <>
@@ -58,7 +58,12 @@ const YourResultsPage: FC = () => {
           <PageHeader title="Your Results" />
 
           <Box sx={{ display: "flex", gap: 2, pt: 3, width: "100%" }}>
-            <ResultCard data={{ ...RESULTS_DATA, fileLink: data?.result }} />
+            <ResultCard
+              data={{
+                ...RESULTS_DATA,
+                fileLink: (data?.results[0]?.url as string) ?? "",
+              }}
+            />
             <NotesList />
           </Box>
         </Box>

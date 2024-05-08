@@ -1,18 +1,26 @@
 import { Box, Typography } from "@mui/material";
 import Image from "next/image";
-import { Icon } from "../Icon";
+// import { Icon } from "../Icon";
 import { Paper } from "../Paper";
 import { FC } from "react";
-import { TemplateCardTypes } from "@/utils/types";
+import { Prompt } from "@/utils/types";
+import { useRouter } from "next/navigation";
 
 interface TemplateCardProps {
-  card: TemplateCardTypes;
+  card: Prompt;
   index: number;
 }
 
 const TemplateCard: FC<TemplateCardProps> = ({ card, index }) => {
+  const router = useRouter();
+  const id = card?.id?.includes("#") ? card?.id?.split("#")?.[1] : card?.id;
   return (
-    <Box key={index} mt={index === 0 ? "" : "1rem"}>
+    <Box
+      key={index}
+      mt={index === 0 ? "" : "1rem"}
+      onClick={() => router.push(`/request/${id}/validate`)}
+      sx={{ cursor: "pointer" }}
+    >
       <Paper
         variant="light-border"
         sx={{
@@ -30,17 +38,24 @@ const TemplateCard: FC<TemplateCardProps> = ({ card, index }) => {
           gap={"1rem"}
           borderRadius={"8px"}
         >
-          <Image src={card.image} alt="pic" width={64} height={64} />
+          <Image
+            src="/Images/blank-square.svg"
+            alt="pic"
+            width={64}
+            height={64}
+          />
           {/* Description */}
           <Box display={"flex"} flexDirection={"column"}>
-            <Typography variant="text-md-regular">{card.heading}</Typography>
-            <Typography variant="text-xs-regular">{card.subHeading}</Typography>
+            <Typography variant="text-md-regular">Template {id}</Typography>
             <Typography variant="text-xs-regular">
-              {card.subHeading2}
+              {card.description}
             </Typography>
+            {/* <Typography variant="text-xs-regular">
+              {card.subHeading2}
+            </Typography> */}
           </Box>
         </Box>
-        <Icon icon="actions" width={42} height={24} />
+        {/* <Icon icon="actions" width={42} height={24} /> */}
       </Paper>
     </Box>
   );

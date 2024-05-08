@@ -21,7 +21,7 @@ import {
   getOptionbarOpen,
   getSQLEditorOpen,
 } from "@/libs/redux/features/sqlEditor";
-import { useValidate } from "@/hooks/useRequest";
+import { useSubmitPrompt } from "@/hooks/usePrompt";
 import { dummySQL } from "@/utils/constants";
 import { getValidateData } from "@/libs/redux/features/validateRequest";
 
@@ -41,16 +41,16 @@ const PannelArea: FC<PannelAreaProps> = ({ content, handleUpdate, sql }) => {
   const isOpenSelectBar = useSelector(getOptionbarOpen);
   const variable = useSelector(getValidateData);
 
-  const [isLoading, setisLoading] = useState(false);
+  // const [isLoading, setisLoading] = useState(false);
   const [prompt, setPrompt] = useState("");
-  const { mutate: validatePrompt } = useValidate();
+  const { mutate: submitPrompt, isLoading } = useSubmitPrompt();
   const routename = usePathname();
   const routeParts = routename.replace(/^\//, "").split("/");
   const isValidate = routeParts.includes("validate");
 
   const handleAvailable = () => {
-    setisLoading(true);
-    validatePrompt({ message: "get me the data for our top 100 customers" });
+    // setisLoading(true);
+    submitPrompt({ message: prompt });
   };
 
   const handleOpenSelectBar = () => {
