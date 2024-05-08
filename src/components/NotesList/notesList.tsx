@@ -5,12 +5,23 @@ import { useRouter } from "next/navigation";
 import { SingleCardDomyData } from "@/utils/data";
 import { RequestsCard } from "../RecentRequestes-Card";
 import { CustomLink } from "../Link";
+import { AlertModal } from "@/modals/AlertModal";
+import { CURRENT_MODE, MODES } from "@/utils/constants";
+import { useState } from "react";
 
 const NotesList = () => {
   const route = useRouter();
+  const [isOpenAlert, setIsOpenAlert] = useState(false);
 
   const handleOpenNotes = () => {
-    route.push("/request/recent");
+    if (CURRENT_MODE === MODES.PILOT) {
+      setIsOpenAlert(true);
+    } else route.push("/request/recent");
+  };
+  const handleCard = () => {
+    if (CURRENT_MODE === MODES.PILOT) {
+      setIsOpenAlert(true);
+    } else route.push("/request/preview");
   };
   return (
     <Box
@@ -47,12 +58,18 @@ const NotesList = () => {
       >
         {SingleCardDomyData.map((item, i) => (
           <Box mr={-10} width={"100%"} key={i}>
-            <CustomLink href="/request/preview">
-              <RequestsCard title={item.title} discription={item.discription} />
-            </CustomLink>
+            <RequestsCard
+              title={item.title}
+              discription={item.discription}
+              onClick={() => handleCard()}
+            />
           </Box>
         ))}
       </Box>
+      <AlertModal
+        open={isOpenAlert}
+        handleClose={() => setIsOpenAlert(false)}
+      />
     </Box>
   );
 };

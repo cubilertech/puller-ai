@@ -56,20 +56,18 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
               {data.main_title}
             </Typography>
             <Box sx={{ display: "flex", gap: 1 }}>
-              <CustomLink href="/request/preview">
-                <Box width={"36px"}>
-                  <IconButton
-                    icon="importIcon"
-                    iconHeight={16}
-                    iconWidth={16}
-                    fullWidth
-                  />
-                </Box>
-              </CustomLink>
+              <Box width={"36px"}>
+                <IconButton
+                  icon="importIcon"
+                  iconHeight={16}
+                  iconWidth={16}
+                  fullWidth
+                />
+              </Box>
 
               <Box
                 width={"36px"}
-                onClick={() => router.push("/request/validate")}
+                // onClick={() => router.push("/request/validate")}
               >
                 <IconButton
                   icon="eyeIcon"
