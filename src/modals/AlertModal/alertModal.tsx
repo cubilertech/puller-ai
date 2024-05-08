@@ -3,6 +3,7 @@ import { Paper } from "@/components/Paper";
 import { palette } from "@/theme/Palette";
 import { Close } from "@mui/icons-material";
 import { Box, Modal, Typography } from "@mui/material";
+import Image from "next/image";
 import { FC } from "react";
 
 interface AlertModalProps {
@@ -57,9 +58,9 @@ const AlertModal: FC<AlertModalProps> = ({ open, handleClose }) => {
             </Box>
             <Box>
               <Box sx={{ width: "240px", height: "240px", m: "auto" }}>
-                <img
-                  width={"100%"}
-                  height={"100%"}
+                <Image
+                  width={240}
+                  height={240}
                   src="/alert-loader.gif"
                   alt="alert loader"
                 />

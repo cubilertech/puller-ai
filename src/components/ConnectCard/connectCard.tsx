@@ -4,7 +4,6 @@ import React, { FC } from "react";
 import { Button } from "../Button";
 import { ConnectItem } from "@/utils/types";
 import { Divider } from "../Divider";
-import { CURRENT_MODE, MODES } from "@/utils/constants";
 
 interface ConnectCardProps {
   item: ConnectItem;
