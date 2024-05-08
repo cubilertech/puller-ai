@@ -6,24 +6,33 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  Typography,
 } from "@mui/material";
 
 import MuiListItemButton from "@/theme/overrides/listItemButton";
 import { Icon } from "../Icon";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Logo } from "../logo";
 import { SideBar_Data } from "@/utils/data";
 import { palette } from "@/theme/Palette";
 import "./sideNavbar.css";
+import { Paper } from "../Paper";
+import { CURRENT_MODE, MODES } from "@/utils/constants";
+import { AlertModal } from "@/modals/AlertModal";
 
 const SideNavbar = () => {
   const Route = useRouter();
   const pathname = usePathname();
-
+  const [isOpenAlert, setIsOpenAlert] = useState(false);
   const path = pathname.split("/")[1];
   const drawerWidth = 200;
+  const handleAlert = (isAlert: boolean) => {
+    if (CURRENT_MODE === MODES.PILOT && isAlert) {
+      setIsOpenAlert(true);
+    }
+  };
   useEffect(() => {
     if (pathname === "/") {
       Route.push("/request");
@@ -65,15 +74,57 @@ const SideNavbar = () => {
           }}
         >
           <Box>
-            <Box sx={{ display: "flex", justifyContent: "center", mt: "20px" }}>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "flex-end",
+                mt: "20px",
+              }}
+            >
               <Logo variant="default" />
+              {CURRENT_MODE === MODES.PILOT && (
+                <Paper
+                  variant="light-border"
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    borderRadius: "50px",
+                    width: "fit-content",
+                    padding: "0px 8px",
+                    mr: "10px",
+                    mt: "-15px",
+                    backgroundColor: "#263f50",
+                    border: 0,
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      background:
+                        "linear-gradient(274deg, rgba(141,107,255,1) 2%, rgba(91,145,252,1) 50%, rgba(6,191,250,1) 99%)",
+                      fontSize: "10px",
+                      fontWeight: "900",
+                      "$-webkit-background-clip": "text",
+                      backgroundClip: "text",
+                      color: "transparent",
+                    }}
+                    variant="text-xxs-bold"
+                  >
+                    Private Beta
+                  </Typography>
+                </Paper>
+              )}
             </Box>
 
             <Box>
               <List>
                 {SideBar_Data.map((item, index) => (
                   <ListItem key={index}>
-                    <Link href={item.link} style={{ width: "100%" }}>
+                    <Link
+                      href={item.link === "alert" ? "#" : item.link}
+                      style={{ width: "100%" }}
+                    >
                       <div className="navbar-container">
                         <MuiListItemButton
                           sx={{
@@ -91,6 +142,9 @@ const SideNavbar = () => {
                                   ? "rgb(118,119,124)"
                                   : "",
                           }}
+                          onClick={() =>
+                            handleAlert(item.link === "alert" ? true : false)
+                          }
                         >
                           <ListItemIcon
                             sx={{
@@ -117,44 +171,49 @@ const SideNavbar = () => {
 
           <Box>
             <List>
-              {[
-                {
-                  name: "Administration",
-                  img: <Icon width={18} height={18} icon="adminIcon" />,
-                },
-              ].map((text, index) => (
-                <ListItem key={index}>
-                  <div className="navbar-container">
-                    <MuiListItemButton
-                      sx={{
-                        color: palette.base.white,
-                        border:
-                          path === text.name
-                            ? "1px solid #8f8f94"
-                            : "1px solid transparent",
-                      }}
-                    >
-                      <ListItemIcon
+              {CURRENT_MODE === MODES.DEMO &&
+                [
+                  {
+                    name: "Administration",
+                    img: <Icon width={18} height={18} icon="adminIcon" />,
+                  },
+                ].map((text, index) => (
+                  <ListItem key={index}>
+                    <div className="navbar-container">
+                      <MuiListItemButton
                         sx={{
-                          minWidth: 0,
+                          color: palette.base.white,
+                          border:
+                            path === text.name
+                              ? "1px solid #8f8f94"
+                              : "1px solid transparent",
                         }}
                       >
-                        {text.img}
-                      </ListItemIcon>
-                      <ListItemText
-                        sx={{
-                          fontSize: "14px",
-                        }}
-                        primary={text.name}
-                      />
-                    </MuiListItemButton>
-                  </div>
-                </ListItem>
-              ))}
+                        <ListItemIcon
+                          sx={{
+                            minWidth: 0,
+                          }}
+                        >
+                          {text.img}
+                        </ListItemIcon>
+                        <ListItemText
+                          sx={{
+                            fontSize: "14px",
+                          }}
+                          primary={text.name}
+                        />
+                      </MuiListItemButton>
+                    </div>
+                  </ListItem>
+                ))}
             </List>
           </Box>
         </Box>
       </Drawer>
+      <AlertModal
+        open={isOpenAlert}
+        handleClose={() => setIsOpenAlert(false)}
+      />
     </Box>
   );
 };

@@ -11,35 +11,36 @@ import "react-toastify/dist/ReactToastify.css";
 
 const AppLayout = ({ children }: { children: ReactNode }) => {
   return (
-    <div className="app-layout">
-      <div className="sidebar">
-        <SideNavbar />
-      </div>
-      <div className="right-container">
-        <div className="topbar">
-          <TopNavBar />
+    <ThemeProvider theme={customTheme}>
+      <div className="app-layout">
+        <div className="sidebar">
+          <SideNavbar />
         </div>
-        <div className="content">
-          <div className="children-container">
-            <ToastContainer
-              position="top-right"
-              autoClose={5000}
-              newestOnTop={false}
-              closeOnClick
-              pauseOnFocusLoss
-              draggable
-              pauseOnHover
-              theme="dark"
-            />
-            <ThemeProvider theme={customTheme}>
+        <div className="right-container">
+          <div className="topbar">
+            <TopNavBar />
+          </div>
+          <div className="content">
+            <div className="children-container">
+              <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                newestOnTop={false}
+                closeOnClick
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="dark"
+              />
+
               <TanstackProvider>
                 <ReduxProvider>{children}</ReduxProvider>
               </TanstackProvider>
-            </ThemeProvider>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </ThemeProvider>
   );
 };
 

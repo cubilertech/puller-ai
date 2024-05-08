@@ -2,7 +2,8 @@ import { Box, Typography } from "@mui/material";
 import { FC } from "react";
 import { ACTIVE_TYPES } from "@/utils/constants";
 import { Input } from "../Input";
-import { Divider } from "../Divider";
+import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
+import { getSearchQuery, updateQuery } from "@/libs/redux/features/searchbar";
 
 interface TemplateTopbarProps {
   isActive: string;

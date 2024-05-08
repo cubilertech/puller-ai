@@ -14,7 +14,7 @@ const TemplateCardList: FC<TemplateCardListProps> = ({ isActive, pulls }) => {
     <Box
       sx={{
         overflowY: "auto",
-        maxHeight: "94%",
+        height: "94%",
         scrollbarWidth: "none",
       }}
     >

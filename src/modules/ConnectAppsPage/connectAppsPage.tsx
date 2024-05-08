@@ -2,15 +2,40 @@
 import { Button } from "@/components/Button";
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
-import { Box } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { ConnectCard } from "@/components/ConnectCard";
 import { CONNECT_APP_DATA } from "@/utils/data";
 import { Input } from "@/components/Input";
 import { palette } from "@/theme/Palette";
+import { AlertModal } from "@/modals/AlertModal";
+import { useState } from "react";
+import { CURRENT_MODE, MODES } from "@/utils/constants";
+import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
+import {
+  getConnectQuery,
+  updateConnectQuery,
+} from "@/libs/redux/features/searchbar";
 
 const ConnectAppsPage = () => {
+  const query = useAppSelector(getConnectQuery);
+  const dispatch = useAppDispatch();
   const router = useRouter();
+  const [isOpenAlert, setIsOpenAlert] = useState(false);
+
+  const handleCreateRetriever = () => {
+    if (CURRENT_MODE === MODES.PILOT) {
+      setIsOpenAlert(true);
+    } else router.push("/retrievers/feedback");
+  };
+  const handleCardConnect = () => {
+    if (CURRENT_MODE === MODES.PILOT) {
+      setIsOpenAlert(true);
+    }
+  };
+  const filteredData = CONNECT_APP_DATA.filter((item) =>
+    item.name.toLowerCase().includes(query.toLowerCase())
+  );
   return (
     <Box
       sx={{
@@ -37,7 +62,7 @@ const ConnectAppsPage = () => {
           sx={{
             background: palette.linearGradient.gray,
             borderTopRightRadius: "14px",
-            minHeight: "5rem",
+            height: "5rem",
             display: "flex",
             justifyContent: "space-between",
             padding: "2rem",
@@ -49,6 +74,8 @@ const ConnectAppsPage = () => {
             icon="search"
             width={409}
             height={44}
+            value={query}
+            onChange={(e) => dispatch(updateConnectQuery(e.target.value))}
           />
           <Button
             variant="contained"
@@ -57,22 +84,46 @@ const ConnectAppsPage = () => {
               height: "44",
             }}
             label="Create Retriever"
-            onClick={() => router.push("/retrievers/feedback")}
+            onClick={() => handleCreateRetriever()}
           />
         </Box>
 
         <Box
           sx={{
-            MaxHeight: "80%",
+            height: "80%",
             overflowY: "auto",
             scrollbarWidth: "none",
           }}
         >
-          {CONNECT_APP_DATA.map((item, index) => (
-            <ConnectCard key={index} item={item} />
-          ))}
+          {filteredData.length <= 0 ? (
+            <Typography
+              variant="text-lg-bold"
+              sx={{
+                width: "100%",
+                height: "100%",
+                justifyContent: "center",
+                color: palette.opacity.lightGray,
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              No Connect Data
+            </Typography>
+          ) : (
+            filteredData.map((item, index) => (
+              <ConnectCard
+                key={index}
+                item={item}
+                onClick={() => handleCardConnect()}
+              />
+            ))
+          )}
         </Box>
       </Paper>
+      <AlertModal
+        open={isOpenAlert}
+        handleClose={() => setIsOpenAlert(false)}
+      />
     </Box>
   );
 };

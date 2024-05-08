@@ -46,6 +46,7 @@ export const icons = {
   cpu: "/Images/Icons/cpu-icon.svg",
   squareCheckbox: "/Images/Icons/check-box.svg",
   roundCheckbox: "/Images/Icons/round-check-box.svg",
+  topbarIcon: "/Images/Icons/topbar-icon.svg",
 };
 
 export const PagesType = {
@@ -321,3 +322,11 @@ export const TABLEDATA = [
     totalTxns: "37777",
   },
 ];
+
+export const MODES = {
+  PILOT: "Pilot",
+  DEMO: "Demo",
+};
+
+export const CURRENT_MODE =
+  process.env.NEXT_PUBLIC_MODE === MODES.PILOT ? MODES.PILOT : MODES.DEMO;

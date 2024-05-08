@@ -69,6 +69,7 @@ const AlertsPage = () => {
                 isActive === ACTIVE_TYPES.ALL
                   ? `2px solid ${palette.color.offWhite}`
                   : "",
+
               ":hover": {
                 cursor: "pointer",
               },

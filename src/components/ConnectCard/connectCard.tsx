@@ -4,12 +4,14 @@ import React, { FC } from "react";
 import { Button } from "../Button";
 import { ConnectItem } from "@/utils/types";
 import { Divider } from "../Divider";
+import { CURRENT_MODE, MODES } from "@/utils/constants";
 
 interface ConnectCardProps {
   item: ConnectItem;
+  onClick?: () => void;
 }
 
-const ConnectCard: FC<ConnectCardProps> = ({ item }) => {
+const ConnectCard: FC<ConnectCardProps> = ({ item, onClick }) => {
   return (
     <>
       <Box
@@ -32,6 +34,7 @@ const ConnectCard: FC<ConnectCardProps> = ({ item }) => {
                 width: "98px",
                 height: "34px",
               }}
+              onClick={onClick}
             />
           </Box>
         </Box>

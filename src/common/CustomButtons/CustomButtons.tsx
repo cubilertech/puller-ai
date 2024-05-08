@@ -134,7 +134,7 @@ const CustomButton: FC<buttonProps> = ({
               />
               <Typography variant="text-md-bold">{selectData?.name}</Typography>
 
-              <Icon icon="arrowDown" />
+              <Icon icon="topbarIcon" />
             </Box>
           </Button>
           <Menu

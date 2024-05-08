@@ -13,6 +13,7 @@ interface retriverCardProps {
   icon: RetrieverIconsTypes;
   title: string;
   description: string;
+  onClick?: () => void;
 }
 
 const RetriverCard: FC<retriverCardProps> = ({
@@ -20,6 +21,7 @@ const RetriverCard: FC<retriverCardProps> = ({
   icon,
   status,
   title,
+  onClick,
 }) => {
   const router = useRouter();
   return (
@@ -31,6 +33,7 @@ const RetriverCard: FC<retriverCardProps> = ({
           backgroundColor: palette.color.blue,
         },
       }}
+      onClick={onClick}
     >
       <Paper
         variant="light-border"
@@ -47,7 +50,6 @@ const RetriverCard: FC<retriverCardProps> = ({
             },
           },
         }}
-        onClick={() => router.push("/alerts/retriever-detail")}
       >
         {/* Content Container */}
         <Box

@@ -179,7 +179,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
             display: "flex",
             flexDirection: "column",
             padding: "1rem",
-            minHeight: "calc(100vh - 27vh)",
+            minHeight: "calc(100vh - 200px)",
             justifyContent: "space-between",
           }}
         >

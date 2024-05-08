@@ -37,7 +37,6 @@ const RetrieverDetailPage = () => {
             label: "Create Alert",
             variant: "outlined",
             width: 180,
-            href: "/alerts/feedback",
           },
         ]}
       />

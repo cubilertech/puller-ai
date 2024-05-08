@@ -44,7 +44,7 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
   };
   useEffect(() => {
     refetchPrompt();
-  }, []);
+  }, [refetchPrompt]);
 
   const content = {
     response:
