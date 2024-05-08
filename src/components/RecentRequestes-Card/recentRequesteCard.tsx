@@ -6,7 +6,7 @@ import { Icon } from "../Icon";
 interface RequestsCardProps {
   title: string;
   discription: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const RequestsCard: FC<RequestsCardProps> = ({
