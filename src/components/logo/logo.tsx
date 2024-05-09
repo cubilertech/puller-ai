@@ -32,10 +32,12 @@ const Logo: FC<logoProps> = ({ variant }) => {
       ) : (
         <Box
           sx={{
-            marginRight: "35px",
+            width: "100%",
+            mt: 1,
+            pl: 2.3
           }}
         >
-          <Icon width={186} height={63} icon="logo" />
+          <Icon width={140} height={63} icon="logo" />
         </Box>
       )}
     </>

@@ -84,8 +84,7 @@ const SideNavbar = () => {
             >
               <Logo variant="default" />
               {CURRENT_MODE === MODES.PILOT && (
-                <Paper
-                  variant="light-border"
+                <Box
                   sx={{
                     display: "flex",
                     flexDirection: "column",
@@ -113,7 +112,7 @@ const SideNavbar = () => {
                   >
                     Private Beta
                   </Typography>
-                </Paper>
+                </Box>
               )}
             </Box>
 
