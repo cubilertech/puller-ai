@@ -17,13 +17,13 @@ export const MuiButton = (theme: Theme) => {
           },
           minWidth: "34px",
           padding: "10px",
-          borderRadius: "16px",
+          borderRadius: "12px",
           textTransform: "none" as const,
           zIndex: 4,
           border: "none",
         },
         contained: {
-          borderRadius: "8px",
+          borderRadius: "4px",
           border:
             "1px solid linear-gradient(to right, #FFFFFF 0%,#FFFFFF 40%,#FFFFFF 40%, #FFFFFF 60%,#FFFFFF 60%,#FFFFFF 100%)#FFF)",
           background: "#5D92FE",
@@ -34,7 +34,7 @@ export const MuiButton = (theme: Theme) => {
             boxShadow: "none",
             background:
               "linear-gradient(54deg, rgba(108,33,177,1) 16%, rgba(26,138,169,1) 100%)",
-            borderRadius: "8px",
+            borderRadius: "4px",
           },
           "&.Mui-disabled": {
             background: "#4c7ac9",
@@ -43,7 +43,7 @@ export const MuiButton = (theme: Theme) => {
 
         outlined: {
           color: palette.base.white,
-          borderRadius: "8px",
+          borderRadius: "4px",
           border: "none",
           background: "#627177",
 
@@ -51,7 +51,7 @@ export const MuiButton = (theme: Theme) => {
             border: "none",
             background:
               "linear-gradient(54deg, rgba(108,33,177,1) 16%, rgba(26,138,169,1) 100%)",
-            borderRadius: "8px",
+            borderRadius: "4px",
           },
         },
         text: {
@@ -59,10 +59,10 @@ export const MuiButton = (theme: Theme) => {
           color: palette.base.white,
           gap: "12px",
           border: "1px solid transparent",
-          borderRadius: "8px",
+          borderRadius: "4px",
           "&:hover": {
             color: palette.base.white,
-            borderRadius: "8px",
+            borderRadius: "4px",
             border: "1px solid var(--Vision-pro-01, rgba(255, 255, 255, 0.37))",
             background: "var(--buttons, rgba(255, 255, 255, 0.30))",
             backdropFilter: "blur(8px)",

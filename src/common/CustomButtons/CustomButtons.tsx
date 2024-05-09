@@ -41,7 +41,7 @@ const CustomButton: FC<buttonProps> = ({
         <div className="container-btn-small">
           <Button
             sx={{
-              borderRadius: "8px",
+              borderRadius: "4px",
               backgroundColor: palette.color.gray[250],
               height: "22px !important",
               width: "40px !important",
@@ -188,15 +188,15 @@ const CustomButton: FC<buttonProps> = ({
             border: "none",
             backgroundColor: "#263f50",
             transition: "background 0.3s ease",
-            borderRadius: "8px",
+            borderRadius: "4px",
             "&:hover": {
               color: palette.base.white,
               background: "rgba(105,65,198,255)",
-              borderRadius: "8px",
+              borderRadius: "4px",
             },
             "&:hover, &:focus": {
               border: "none",
-              borderRadius: "8px",
+              borderRadius: "4px",
             },
             "&:not(:hover)": {
               animation: "exitGradient 0.3s ease ",

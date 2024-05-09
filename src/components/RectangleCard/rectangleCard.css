@@ -1,6 +1,6 @@
 .rectangle-card-container {
   padding: 1px;
   background: var(--gray-gradient-border);
-  border-radius: 8px;
+  border-radius: 4px;
   width: fit-content;
 }

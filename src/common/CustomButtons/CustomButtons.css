@@ -7,7 +7,7 @@
 .container-btn-small {
   padding: 1px;
   background: var(--custom-button-small-border);
-  border-radius: 8px;
+  border-radius: 4px;
   height: 23px;
   width: fit-content;
 }

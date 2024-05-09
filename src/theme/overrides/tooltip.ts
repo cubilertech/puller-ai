@@ -6,7 +6,7 @@ export const MuiToolTip = (theme: Theme) => {
     MuiTooltip: {
       styleOverrides: {
         tooltip: {
-          borderRadius: "16px",
+          borderRadius: "12px",
           border: `2px solid ${palette.opacity.gray} `,
           background: palette.linearGradient.tooltip,
           backdropFilter: "blur(20px)",

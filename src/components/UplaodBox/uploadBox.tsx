@@ -19,7 +19,7 @@ const UploadBox = () => {
             placeholder="Add additional context here"
             sx={{
               border: "2px solid rgba(196, 196, 196, 0.6)",
-              borderRadius: "8px",
+              borderRadius: "4x",
               padding: "0.1rem 0.5rem",
             }}
           />

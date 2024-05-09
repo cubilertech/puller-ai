@@ -249,7 +249,7 @@ const PannelArea: FC<PannelAreaProps> = ({
             <Paper
               variant="dark-border"
               sx={{
-                borderRadius: "16px",
+                borderRadius: "12px",
                 height: "56px",
                 padding: "0.6rem",
                 margin: 0,

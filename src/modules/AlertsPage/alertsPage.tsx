@@ -120,7 +120,7 @@ const AlertsPage = () => {
         <Box
           sx={{
             height: "90%",
-            borderRadius: "16px",
+            borderRadius: "12px",
             overflow: "hidden",
             overflowY: "auto",
             scrollbarWidth: "none",
