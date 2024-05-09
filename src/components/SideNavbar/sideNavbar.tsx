@@ -127,7 +127,7 @@ const SideNavbar = () => {
             <Box>
               <List>
                 {SideBar_Data.map((item, index) => (
-                  <ListItem key={index} sx={{py: "4px"}}>
+                  <ListItem key={index} sx={{ py: "4px" }}>
                     <Link
                       href={item.link === "alert" ? "#" : item.link}
                       style={{ width: "100%" }}
@@ -140,8 +140,8 @@ const SideNavbar = () => {
                             height: "44px",
                             color: palette.base.white,
                             border:
-                              path === item.name
-                                ? "1px solid #8f8f94"
+                              path === item.name.toLowerCase()
+                                ? "1px solid #8f8f94 !important"
                                 : "1px solid transparent",
                             background:
                               path === item.name.toLowerCase()
@@ -149,6 +149,20 @@ const SideNavbar = () => {
                                 : path === "" && index === 0
                                   ? "rgb(118,119,124)"
                                   : "",
+                            "& .MuiTypography-root": {
+                              fontWeight:
+                                path === item.name.toLowerCase() ? 600 : "",
+                            },
+
+                            ":hover": {
+                              border:
+                                path === item.name.toLowerCase()
+                                  ? "1px solid transparent !important"
+                                  : "",
+                              "& .MuiTypography-root": {
+                                fontWeight: 600,
+                              },
+                            },
                           }}
                           onClick={() =>
                             handleAlert(item.link === "alert" ? true : false)
@@ -172,6 +186,7 @@ const SideNavbar = () => {
                             sx={{
                               fontSize: "14px",
                             }}
+                            className="child"
                             primary={item.name}
                           />
                         </MuiListItemButton>
