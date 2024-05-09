@@ -127,7 +127,7 @@ const SideNavbar = () => {
             <Box>
               <List>
                 {SideBar_Data.map((item, index) => (
-                  <ListItem key={index}>
+                  <ListItem key={index} sx={{py: "4px"}}>
                     <Link
                       href={item.link === "alert" ? "#" : item.link}
                       style={{ width: "100%" }}
