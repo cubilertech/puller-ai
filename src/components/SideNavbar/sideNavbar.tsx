@@ -20,7 +20,7 @@ import { palette } from "@/theme/Palette";
 import "./sideNavbar.css";
 import { CURRENT_MODE, MODES } from "@/utils/constants";
 import { AlertModal } from "@/modals/AlertModal";
-import { CommentOutlined } from "@mui/icons-material";
+import { CommentOutlined, PriorityHigh } from "@mui/icons-material";
 
 const SideNavbar = () => {
   const Route = useRouter();
@@ -200,41 +200,63 @@ const SideNavbar = () => {
 
           <Box>
             <List>
-              {CURRENT_MODE === MODES.DEMO &&
-                [
-                  {
-                    name: "Administration",
-                    img: <Icon width={18} height={18} icon="adminIcon" />,
-                  },
-                ].map((text, index) => (
-                  <ListItem key={index}>
-                    <div className="navbar-container">
-                      <MuiListItemButton
+              {CURRENT_MODE === MODES.PILOT && (
+                <ListItem sx={{ py: 0 }}>
+                  <div className="navbar-container">
+                    <MuiListItemButton
+                      sx={{
+                        width: "100%",
+                        color: palette.base.white,
+                        border: "1px solid transparent",
+                        textAlign: "center",
+                      }}
+                    >
+                      <ListItemText
                         sx={{
-                          color: palette.base.white,
-                          border:
-                            path === text.name
-                              ? "1px solid #8f8f94"
-                              : "1px solid transparent",
+                          fontSize: "14px",
+                          textAlign: "center",
                         }}
                       >
-                        <ListItemIcon
-                          sx={{
-                            minWidth: 0,
-                          }}
-                        >
-                          {text.img}
-                        </ListItemIcon>
-                        <ListItemText
-                          sx={{
-                            fontSize: "14px",
-                          }}
-                          primary={text.name}
-                        />
-                      </MuiListItemButton>
-                    </div>
-                  </ListItem>
-                ))}
+                        Private Beta Help !
+                      </ListItemText>
+                    </MuiListItemButton>
+                  </div>
+                </ListItem>
+              )}
+              {[
+                {
+                  name: "Administration",
+                  img: <Icon width={18} height={18} icon="adminIcon" />,
+                },
+              ].map((text, index) => (
+                <ListItem key={index}>
+                  <div className="navbar-container">
+                    <MuiListItemButton
+                      sx={{
+                        color: palette.base.white,
+                        border:
+                          path === text.name
+                            ? "1px solid #8f8f94"
+                            : "1px solid transparent",
+                      }}
+                    >
+                      <ListItemIcon
+                        sx={{
+                          minWidth: 0,
+                        }}
+                      >
+                        {text.img}
+                      </ListItemIcon>
+                      <ListItemText
+                        sx={{
+                          fontSize: "14px",
+                        }}
+                        primary={text.name}
+                      />
+                    </MuiListItemButton>
+                  </div>
+                </ListItem>
+              ))}
             </List>
           </Box>
         </Box>
