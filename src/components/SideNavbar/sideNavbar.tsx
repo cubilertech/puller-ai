@@ -86,7 +86,7 @@ const SideNavbar = () => {
                 sx={{
                   width: "100%",
                   mt: 1,
-                  pl: 4.5,
+                  pl: 2.1,
                 }}
               >
                 <Logo variant="default" />
@@ -208,13 +208,11 @@ const SideNavbar = () => {
                         width: "100%",
                         color: palette.base.white,
                         border: "1px solid transparent",
-                        textAlign: "center",
                       }}
                     >
                       <ListItemText
                         sx={{
                           fontSize: "14px",
-                          textAlign: "center",
                         }}
                       >
                         Private Beta Help !

@@ -35,7 +35,7 @@ const Logo: FC<logoProps> = ({ variant }) => {
             width: "100%",
           }}
         >
-          <Icon width={140} height={63} icon="logo" />
+          <Icon width={160} height={63} icon="logo" />
         </Box>
       )}
     </>
