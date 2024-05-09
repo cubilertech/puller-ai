@@ -204,6 +204,7 @@ const SideNavbar = () => {
                 <ListItem sx={{ py: 0 }}>
                   <div className="navbar-container">
                     <MuiListItemButton
+                      onClick={() => handleAlert(true)}
                       sx={{
                         width: "100%",
                         color: palette.base.white,
