@@ -92,7 +92,7 @@ const gradiant = {
     "linear-gradient(142.96deg, rgba(93, 146, 254, 0.148) -3.54%, rgba(93, 146, 254, 0.168) 95.15%)",
   gray: "linear-gradient(142.96deg, rgba(255, 255, 255, 0.148) -3.54%, rgba(114, 114, 114, 0.168) 95.15%)",
   lightGray:
-    "linear-gradient(143deg, rgba(57, 57, 57, 0.60) -3.54%, rgba(97, 97, 97, 0.60) 99.99%)",
+    "linear-gradient(138deg, rgba(57,57,57,0.6) -30%, rgba(97,97,97,0.6) 100%)",
   purpleBlue:
     "linear-gradient(54deg, rgba(108,33,177,1) 16%, rgba(26,138,169,1) 100%)",
   tooltip:

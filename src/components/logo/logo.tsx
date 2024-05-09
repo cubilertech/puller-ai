@@ -33,8 +33,6 @@ const Logo: FC<logoProps> = ({ variant }) => {
         <Box
           sx={{
             width: "100%",
-            mt: 1,
-            pl: 2.3
           }}
         >
           <Icon width={140} height={63} icon="logo" />

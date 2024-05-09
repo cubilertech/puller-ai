@@ -18,7 +18,6 @@ import { Logo } from "../logo";
 import { SideBar_Data } from "@/utils/data";
 import { palette } from "@/theme/Palette";
 import "./sideNavbar.css";
-import { Paper } from "../Paper";
 import { CURRENT_MODE, MODES } from "@/utils/constants";
 import { AlertModal } from "@/modals/AlertModal";
 import { CommentOutlined } from "@mui/icons-material";
@@ -28,7 +27,7 @@ const SideNavbar = () => {
   const pathname = usePathname();
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const path = pathname.split("/")[1];
-  const drawerWidth = 200;
+  const drawerWidth = 234;
   const handleAlert = (isAlert: boolean) => {
     if (CURRENT_MODE === MODES.PILOT && isAlert) {
       setIsOpenAlert(true);
@@ -83,7 +82,15 @@ const SideNavbar = () => {
                 mt: "20px",
               }}
             >
-              <Logo variant="default" />
+              <Box
+                sx={{
+                  width: "100%",
+                  mt: 1,
+                  pl: 4.5,
+                }}
+              >
+                <Logo variant="default" />
+              </Box>
               {CURRENT_MODE === MODES.PILOT && (
                 <Box
                   sx={{
@@ -93,7 +100,7 @@ const SideNavbar = () => {
                     borderRadius: "50px",
                     width: "fit-content",
                     padding: "0px 8px",
-                    mr: "10px",
+                    mr: "20px",
                     mt: "-15px",
                     backgroundColor: "#263f50",
                     border: 0,
@@ -130,6 +137,7 @@ const SideNavbar = () => {
                           sx={{
                             display: "flex",
                             gap: "12px",
+                            height: "44px",
                             color: palette.base.white,
                             border:
                               path === item.name
@@ -152,7 +160,9 @@ const SideNavbar = () => {
                             }}
                           >
                             {item.name === "Request" ? (
-                              <CommentOutlined sx={{width: "18px", height: '18px'}} />
+                              <CommentOutlined
+                                sx={{ width: "18px", height: "18px" }}
+                              />
                             ) : (
                               <Icon width={18} height={18} icon={item.icon} />
                             )}
