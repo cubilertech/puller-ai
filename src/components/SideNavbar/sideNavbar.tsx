@@ -21,6 +21,7 @@ import "./sideNavbar.css";
 import { Paper } from "../Paper";
 import { CURRENT_MODE, MODES } from "@/utils/constants";
 import { AlertModal } from "@/modals/AlertModal";
+import { CommentOutlined } from "@mui/icons-material";
 
 const SideNavbar = () => {
   const Route = useRouter();
@@ -150,7 +151,11 @@ const SideNavbar = () => {
                               minWidth: 0,
                             }}
                           >
-                            <Icon width={18} height={18} icon={item.icon} />
+                            {item.name === "Request" ? (
+                              <CommentOutlined sx={{width: "18px", height: '18px'}} />
+                            ) : (
+                              <Icon width={18} height={18} icon={item.icon} />
+                            )}
                           </ListItemIcon>
 
                           <ListItemText
