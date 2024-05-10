@@ -5,7 +5,7 @@ import { CURRENT_MODE, MODES } from "@/utils/constants";
 
 const CreateRequestPage = () => {
   return (
-    <Box sx={{ px: 1.2, pt: 1 }}>
+    <Box sx={{ px: 1.5, pt: 1 }}>
       <PageHeader
         title="Create a Request"
         buttons={
@@ -20,7 +20,7 @@ const CreateRequestPage = () => {
             : undefined
         }
       />
-      <Box sx={{ pt: 2, width: "96%", m: "auto" }}>
+      <Box sx={{ pt: 2, width: "100%", m: "auto" }}>
         <PannelArea />
       </Box>
     </Box>
