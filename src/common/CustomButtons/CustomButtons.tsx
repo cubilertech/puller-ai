@@ -123,12 +123,13 @@ const CustomButton: FC<buttonProps> = ({
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                gap: "10px",
+                gap: "13px",
               }}
             >
               <Image
-                width={50}
-                height={50}
+                style={{ marginBottom: "2px" }}
+                width={32}
+                height={32}
                 src={isImage}
                 alt="profile-picture"
               />
