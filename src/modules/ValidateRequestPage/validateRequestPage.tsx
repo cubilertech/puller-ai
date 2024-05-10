@@ -114,7 +114,7 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
             graph={prompt?.graph ?? []}
           />
           {/* <GraphModal open={openGraph} handleClose={() => handleOpenGraph()} /> */}
-          <Box sx={{ width: "97%", m: "auto", pt: 2 }}>
+          <Box sx={{ width: "100%", m: "auto", pt: 2 }}>
             <PannelArea
               sql={prompt?.sql ?? "Select * from test;"}
               content={content}

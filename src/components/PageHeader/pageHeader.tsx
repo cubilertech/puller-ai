@@ -44,7 +44,7 @@ const PageHeader: FC<PageHeaderProps> = ({ title, buttons }) => {
         }}
       >
         <Typography
-          variant="display-xs-semibold"
+          variant="display-xs-medium"
           color="white"
           display={"flex"}
           alignItems={"center"}
