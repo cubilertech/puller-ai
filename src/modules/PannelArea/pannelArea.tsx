@@ -9,14 +9,12 @@ import { palette } from "@/theme/Palette";
 import { CreateInputAreaComponent } from "@/components/inputArea";
 import { usePathname } from "next/navigation";
 import CustomLink from "@/components/Link/link";
-import { Tooltip } from "@/components/Tooltip";
 import { OptionsBar } from "@/components/optionsBar";
 import "./panelArea.css";
 import { SQL_Editor } from "@/components/sql_Editor";
-import { useSelector } from "react-redux";
 import { useSubmitPrompt } from "@/hooks/usePrompt";
-import { dummySQL } from "@/utils/constants";
-import { getValidateData } from "@/libs/redux/features/validateRequest";
+import { CURRENT_MODE, MODES, dummySQL } from "@/utils/constants";
+import { AlertModal } from "@/modals/AlertModal";
 
 interface PannelAreaProps {
   content?: {
@@ -42,10 +40,9 @@ const PannelArea: FC<PannelAreaProps> = ({
   handleCloseSelectBar,
   handleOpenSelectBar,
 }) => {
-  const variable = useSelector(getValidateData);
-
   const [isLoading, setisLoading] = useState(false);
   const [prompt, setPrompt] = useState("");
+  const [isOpenAlert, setIsOpenAlert] = useState(false);
   const { mutate: submitPrompt, isError: submitPromptError } =
     useSubmitPrompt();
   const routename = usePathname();
@@ -59,7 +56,16 @@ const PannelArea: FC<PannelAreaProps> = ({
   const handleTextareaChange = (event: any) => {
     setPrompt(event.target.value);
   };
-
+  const handlePrompt = () => {
+    if (CURRENT_MODE === MODES.PILOT) {
+      setIsOpenAlert(true);
+    }
+  };
+  const handleSource = () => {
+    if (CURRENT_MODE === MODES.PILOT) {
+      setIsOpenAlert(true);
+    }
+  };
   useEffect(() => {
     if (submitPromptError) {
       setisLoading(false);
@@ -175,7 +181,7 @@ const PannelArea: FC<PannelAreaProps> = ({
                       DB for Product ID values 1234 and 5678
                     </Typography> */}
                     <Typography
-                      variant={"display-xs"}
+                      variant={"display-xs-response"}
                       sx={{
                         width: "98%",
                         pr: 5,
@@ -313,12 +319,18 @@ const PannelArea: FC<PannelAreaProps> = ({
         ""
       ) : (
         <CreateInputAreaComponent
+          handlePrompt={handlePrompt}
+          handleSource={handleSource}
           handleValidate={handleAvailable}
           onChangeInput={handleTextareaChange}
           isLoading={isLoading}
           value={prompt}
         />
       )}
+      <AlertModal
+        open={isOpenAlert}
+        handleClose={() => setIsOpenAlert(false)}
+      />
     </Box>
   );
 };
