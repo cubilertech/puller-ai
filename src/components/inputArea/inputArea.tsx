@@ -28,20 +28,21 @@ const InputAreaComponent: FC<InputAreaComponentPorps> = ({
     <Paper variant="light-border">
       <Box
         sx={{
-          padding: "8px",
+          paddingY: "12px",
+          px: "10px",
         }}
       >
         <Box
           sx={{
-            marginBottom: "0.5rem",
+            marginBottom: "0.8rem",
           }}
         >
           <Paper
             variant="dark-border"
             sx={{
               padding: "0.5rem ",
-              margin: 0,
-              minHeight: "5rem",
+              m: 0,
+              minHeight: "7rem",
               display: "flex",
               maxHeight: "15rem",
               borderRadius: "8px",
