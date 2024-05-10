@@ -57,7 +57,7 @@ const SideNavbar = () => {
             borderRight: `1px solid ${palette.color.gray[150]} `,
             background: palette.linearGradient.lightGray,
             boxShadow:
-              "0px 1.127px 3.38px 0px rgba(255, 255, 255, 0.25) inset, 0px 0.501px 12.02px -0.501px rgba(0, 0, 0, 0.18)",
+              "0px 1px 18px 4px rgba(255, 255, 255, 0.25), 0px 0.501px 12.02px -0.501px rgba(0, 0, 0, 0.18)",
             backdropFilter: "blur(30px)",
           },
         }}

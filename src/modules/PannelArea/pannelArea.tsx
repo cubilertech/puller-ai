@@ -181,7 +181,7 @@ const PannelArea: FC<PannelAreaProps> = ({
                       DB for Product ID values 1234 and 5678
                     </Typography> */}
                     <Typography
-                      variant={"display-xs"}
+                      variant={"display-xs-response"}
                       sx={{
                         width: "98%",
                         pr: 5,
