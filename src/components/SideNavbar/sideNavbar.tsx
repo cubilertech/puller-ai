@@ -20,7 +20,7 @@ import { palette } from "@/theme/Palette";
 import "./sideNavbar.css";
 import { CURRENT_MODE, MODES } from "@/utils/constants";
 import { AlertModal } from "@/modals/AlertModal";
-import { CommentOutlined, PriorityHigh } from "@mui/icons-material";
+import { CommentOutlined } from "@mui/icons-material";
 
 const SideNavbar = () => {
   const Route = useRouter();

@@ -4,10 +4,14 @@ import { Button } from "../Button";
 import { Icon } from "../Icon";
 import { FC } from "react";
 import { CustomInput } from "@/modules/PannelArea/input";
+import { CURRENT_MODE, MODES } from "@/utils/constants";
+import { Tooltip } from "../Tooltip";
 
 interface InputAreaComponentPorps {
   handleValidate: () => void;
   onChangeInput: (event: any) => any;
+  handleSource: () => void;
+  handlePrompt: () => void;
   isLoading: boolean;
   value: string;
 }
@@ -15,6 +19,8 @@ interface InputAreaComponentPorps {
 const InputAreaComponent: FC<InputAreaComponentPorps> = ({
   handleValidate,
   onChangeInput,
+  handleSource,
+  handlePrompt,
   isLoading,
   value,
 }) => {
@@ -61,7 +67,7 @@ const InputAreaComponent: FC<InputAreaComponentPorps> = ({
             justifyContent: "space-between",
           }}
         >
-          {!value?.length || isLoading ? (
+          {/* {!value?.length || isLoading ? (
             <Box
               sx={{
                 display: "flex",
@@ -72,6 +78,7 @@ const InputAreaComponent: FC<InputAreaComponentPorps> = ({
             >
               <Box width={163}>
                 <Button
+                  onClick={() => handlePrompt()}
                   size="small"
                   variant="outlined"
                   label="Prompt"
@@ -89,6 +96,7 @@ const InputAreaComponent: FC<InputAreaComponentPorps> = ({
               </Box>
               <Box width={82}>
                 <Button
+                  onClick={() => handleSource()}
                   fullWidth
                   size="small"
                   disabled={isLoading}
@@ -105,25 +113,34 @@ const InputAreaComponent: FC<InputAreaComponentPorps> = ({
                 />
               </Box>
             </Box>
-          ) : (
-            <Box width={163}>
-              <Button
-                size="small"
-                variant="outlined"
-                label="Manage Sources"
-                disabled={isLoading}
-                fullWidth
-                endIcon={
-                  <Icon
-                    icon="minus"
-                    height={2}
-                    width={8}
-                    disabled={isLoading}
-                  />
-                }
-              />
-            </Box>
-          )}
+          ) : ( */}
+            <Tooltip
+              variant="info"
+              title={
+                CURRENT_MODE === MODES.PILOT
+                  ? "This Feature is not available in Private Beta"
+                  : ""
+              }
+            >
+              <Box width={163}>
+                <Button
+                  size="small"
+                  variant="outlined"
+                  label="Manage Sources"
+                  disabled={CURRENT_MODE === MODES.PILOT ? true : isLoading}
+                  fullWidth
+                  endIcon={
+                    <Icon
+                      icon="minus"
+                      height={2}
+                      width={8}
+                      disabled={CURRENT_MODE === MODES.PILOT ? true : isLoading}
+                    />
+                  }
+                />
+              </Box>
+            </Tooltip>
+          {/* )} */}
 
           {isLoading ? (
             ""
