@@ -171,8 +171,7 @@ const CustomButton: FC<buttonProps> = ({
       );
     case "request-history":
       return (
-        <Button
-          variant="text"
+        <Box
           sx={{
             "@keyframes exitGradient": {
               "0%": {
@@ -190,10 +189,13 @@ const CustomButton: FC<buttonProps> = ({
             backgroundColor: "#263f50",
             transition: "background 0.3s ease",
             borderRadius: "4px",
+            padding: 1.2,
+            textAlign: "center",
             "&:hover": {
               color: palette.base.white,
               background: "rgba(105,65,198,255)",
               borderRadius: "4px",
+              fontWeight: 500,
             },
             "&:hover, &:focus": {
               border: "none",
@@ -205,7 +207,7 @@ const CustomButton: FC<buttonProps> = ({
           }}
         >
           {text}
-        </Button>
+        </Box>
       );
   }
 };
