@@ -11,9 +11,9 @@ const MuiListItemButton = styled(ListItemButton)(
       display: "flex",
       gap: "12px",
       border: "1px solid transparent",
-      borderRadius: "4px",
+      borderRadius: "5px",
       "&:hover": {
-        borderRadius: "4px",
+        borderRadius: "5px",
         background: "rgb(54,75,120)",
         backdropFilter: "blur(8px)",
       },

@@ -38,7 +38,7 @@ const NotesList = () => {
         sx={{
           padding: 2,
           width: "100%",
-          borderRadius: "4px",
+          borderRadius: "5px",
           textAlign: "center",
           cursor: "pointer",
         }}

@@ -34,7 +34,7 @@ const TopNavBar = () => {
         sx={{
           display: "flex",
           width: "100%",
-          padding: "15px 48px",
+          padding: "15px 29px",
           justifyContent: "space-between",
           alignItems: "center",
           gap: "211px",

@@ -1,6 +1,6 @@
 .icon-btn-container {
   padding: 1px;
   background: var(--notification-button-border);
-  border-radius: 4px;
+  border-radius: 5px;
   width: fit-content;
 }

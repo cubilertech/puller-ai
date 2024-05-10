@@ -34,7 +34,7 @@ const Input: FC<SearchbarProps> = ({
           padding: "10px 16px 10px 16px",
           height: height,
           width: width,
-          borderRadius: "4px",
+          borderRadius: "5px",
         }}
         value={value}
         onChange={onChange}

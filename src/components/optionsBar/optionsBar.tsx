@@ -229,7 +229,7 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
                         alignItems: "center",
                         justifyContent: "space-between",
                         padding: "0 0.5rem 0 1rem",
-                        borderRadius: "4px",
+                        borderRadius: "5px",
                       }}
                     >
                       <Typography variant="text-md-regular">{item}</Typography>

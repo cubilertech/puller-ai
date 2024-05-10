@@ -1,6 +1,6 @@
 .option-bar-conatiner {
   padding: 2px;
   background: var(--optionbar-border);
-  border-radius: 4px;
+  border-radius: 5px;
   width: 100%;
 }

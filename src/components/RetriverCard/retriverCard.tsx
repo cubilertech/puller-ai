@@ -28,7 +28,7 @@ const RetriverCard: FC<retriverCardProps> = ({
     <Box
       sx={{
         ":hover": {
-          borderRadius: "12px",
+          borderRadius: "10px",
           cursor: "pointer",
           backgroundColor: palette.color.blue,
         },
@@ -66,7 +66,7 @@ const RetriverCard: FC<retriverCardProps> = ({
                   background: palette.color.gray[500],
                   width: 60,
                   height: 60,
-                  borderRadius: "4px",
+                  borderRadius: "5px",
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",

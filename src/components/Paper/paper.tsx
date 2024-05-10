@@ -24,7 +24,7 @@ const Paper: FC<PaperProps> = ({
             onClick={onClick}
             {...props}
             sx={{
-              borderRadius: "12px",
+              borderRadius: "10px",
               border: "2px solid rgb(93,97,108)",
               background:
                 "linear-gradient(143deg, rgba(255, 255, 255, 0.15) -3.54%, rgba(114, 114, 114, 0.17) 95.15%)",
@@ -44,7 +44,7 @@ const Paper: FC<PaperProps> = ({
             {...props}
             sx={{
               m: 1,
-              borderRadius: "12px",
+              borderRadius: "10px",
               border:
                 "2px solid linear-gradient(142.96deg, rgba(57, 57, 57, 0.6) -3.54%, rgba(97, 97, 97, 0.6) 99.99%)",
               background:
@@ -65,7 +65,7 @@ const Paper: FC<PaperProps> = ({
             onClick={onClick}
             {...props}
             sx={{
-              borderRadius: "12px",
+              borderRadius: "10px",
               border: "2px solid rgba(196, 196, 196, 0.60)",
               background:
                 "linear-gradient(143deg, rgba(255, 255, 255, 0.07) -3.54%, rgba(114, 114, 114, 0.08) 95.15%)",

@@ -80,7 +80,7 @@ const UploadRetrieverPage = () => {
               fullWidth
               placeholder="Enter Name"
               sx={{
-                borderRadius: "4px",
+                borderRadius: "5px",
                 padding: "0.5rem 1rem",
                 border: "2px solid rgba(196, 196, 196, 0.6)",
               }}
@@ -94,7 +94,7 @@ const UploadRetrieverPage = () => {
               border: "2px solid rgba(196, 196, 196, 0.6)",
               minHeight: "10rem",
               height: "50%",
-              borderRadius: "4px",
+              borderRadius: "5px",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",

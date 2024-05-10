@@ -24,7 +24,7 @@ const RectangleCard: FC<RectangleCardProps> = ({ icon, title, onClick }) => {
         alignItems: "center",
         gap: "1.8rem",
         paddingLeft: "15px",
-        borderRadius: "4px",
+        borderRadius: "5px",
         ":hover": {
           cursor: "pointer",
           background: palette.linearGradient.darkBlue,
@@ -41,7 +41,7 @@ const RectangleCard: FC<RectangleCardProps> = ({ icon, title, onClick }) => {
             background: palette.color.gray[500],
             width: 60,
             height: 60,
-            borderRadius: "4px",
+            borderRadius: "5px",
             display: "flex",
             justifyContent: "center",
             alignItems: "center",

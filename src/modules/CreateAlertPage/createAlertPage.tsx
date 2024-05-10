@@ -52,7 +52,7 @@ const CreateAlertPage = () => {
                 maxHeight: "15rem",
                 background: "transparent !important ",
                 border: `2px solid ${palette.opacity.gray} !important`,
-                borderRadius: "4px",
+                borderRadius: "5px",
               }}
             >
               <Input

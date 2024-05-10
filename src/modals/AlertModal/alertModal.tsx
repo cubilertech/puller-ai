@@ -21,7 +21,7 @@ const modalStyle = {
   border: "none",
   boxShadow: 24,
   p: 0,
-  borderRadius: "12px",
+  borderRadius: "10px",
 };
 
 const AlertModal: FC<AlertModalProps> = ({ open, handleClose }) => {

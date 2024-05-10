@@ -28,7 +28,7 @@ const TemplateCard: FC<TemplateCardProps> = ({ card, index }) => {
           display: "flex",
           justifyContent: "space-between",
           border: 0,
-          borderRadius: "4px",
+          borderRadius: "5px",
         }}
       >
         {/* Layout Conatiner */}
@@ -36,7 +36,7 @@ const TemplateCard: FC<TemplateCardProps> = ({ card, index }) => {
           display={"flex"}
           alignItems={"center"}
           gap={"1rem"}
-          borderRadius={"4px"}
+          borderRadius={"5px"}
         >
           <Image
             src="/Images/blank-square.svg"

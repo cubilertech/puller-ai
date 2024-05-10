@@ -13,7 +13,7 @@ export const CustomInput: FC<CustomInputProps> = ({ onChange, disabled }) => {
       placeholder="Type your data request (prompt) here..."
       style={{
         boxSizing: "border-box",
-        borderRadius: "4px",
+        borderRadius: "5px",
         width: "100%",
         minHeight: "100%",
         maxHeight: "8rem",

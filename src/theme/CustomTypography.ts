@@ -204,9 +204,8 @@ export const CustomTypography = {
   },
   "display-xs-response": {
     fontSize: "20px",
-    lineHeight: "48px",
-    fontKerning: "0%",
-    fontWeight: 200,
+    lineHeight: "32px",
+    fontWeight: 300,
     letterSpacing: "",
     fontFamily: "Inter",
   },
