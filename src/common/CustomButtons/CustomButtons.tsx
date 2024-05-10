@@ -105,10 +105,10 @@ const CustomButton: FC<buttonProps> = ({
               color: palette.base.white,
               border: `1px solid var(--vison-pro-stock, ${palette.base.white})`,
               background: `${palette.color.gray[400]} !important`,
-              width: 122,
+              width: 82,
               height: 48,
-              py: 2,
-              px: 4,
+              py: 1,
+              px: 1.2,
               ":hover": {
                 border: `1px solid var(--vison-pro-stock, ${palette.base.white})`,
                 borderRadius: "50px !important",
@@ -133,9 +133,9 @@ const CustomButton: FC<buttonProps> = ({
                 src={isImage}
                 alt="profile-picture"
               />
-              <Typography variant="text-md-bold">{selectData?.name}</Typography>
+              {/* <Typography variant="text-md-bold">{selectData?.name}</Typography> */}
 
-              <Icon icon="topbarIcon" />
+              <Icon icon="topbarIcon" width={11} height={11} />
             </Box>
           </Button>
           <Menu
