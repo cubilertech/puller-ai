@@ -1,3 +1,5 @@
+import { UpdateIsLoadingRequest } from "@/libs/redux/features/isLoadingRequest";
+import { useAppDispatch } from "@/libs/redux/hooks";
 import { submitPromptPayload, Prompt } from "@/utils/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -6,7 +8,6 @@ import { toast } from "react-toastify";
 
 export const useSubmitPrompt = () => {
   const router = useRouter();
-
   async function submit(data: submitPromptPayload): Promise<Prompt | null> {
     try {
       const res = await axios({
@@ -45,6 +46,7 @@ export const useSubmitPrompt = () => {
 
 export const useGetSinglePrompt = (promptId: string) => {
   const router = useRouter();
+  const dispatch = useAppDispatch()
   async function submit(promptId: string): Promise<Prompt | null> {
     try {
       const encodedPromptId = encodeURIComponent(`query#${promptId}`);
@@ -74,6 +76,9 @@ export const useGetSinglePrompt = (promptId: string) => {
     queryKey: ["single-prompt", promptId],
     queryFn: () => submit(promptId),
     enabled: false,
+    onSuccess: () => {
+      dispatch(UpdateIsLoadingRequest(false));
+    },
     //   refetchInterval: 60_000,
     // placeholderData: [],
   });

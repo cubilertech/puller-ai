@@ -3,7 +3,6 @@ import { Box } from "@mui/material";
 import React, { FC, useEffect, useState } from "react";
 import { PannelArea } from "../../modules/PannelArea";
 import { PageHeader } from "@/components/PageHeader";
-import { Loader } from "@/components/Loader";
 import { useSubmitExecute } from "@/hooks/useExecute";
 import GraphModal2 from "@/modals/graphModals/graphModal2";
 import { useGetSinglePrompt } from "@/hooks/usePrompt";
@@ -52,24 +51,17 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
     }
   };
   useEffect(() => {
-    refetchPrompt();
-  }, [refetchPrompt]);
+    if (id) {
+      refetchPrompt();
+    }
+  }, [refetchPrompt, id]);
 
   useEffect(() => {
     if (submitExecuteError) {
       setisProccessing(false);
     }
-    if (id) {
-      refetchPrompt();
-    }
-  }, [submitExecuteError, id]);
+  }, [submitExecuteError]);
 
-  // const content = {
-  //   response:
-  //     "The data request will give you transaction level data (from the TXN_SZNAL table) for the past 52 weeks, ending March 15, 2024,  grouped by week and by Store ID. It only covers product SKUs that include Flyease technology, which is determined from INT DB for Product ID values 1234 and 5678.",
-  //   original:
-  //     "Can I get data to understand how Flyease technology products have been performing this past year? I want to be able to pivot by SKU or by store, to understand transactional data by week.",
-  // };
   const content = {
     response: prompt?.description as string,
     original:
@@ -78,7 +70,7 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
 
   return (
     <>
-      {isLoading || isProccessing ? (
+      {/* {isLoading || isProccessing ? (
         <Box
           sx={{
             width: "100%",
@@ -92,7 +84,7 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
             <Loader type="Processing" variant="paper" />
           </Box>
         </Box>
-      ) : (
+      ) : ( */}
         <Box sx={{ px: 1.2, pt: 1 }}>
           {!isSQLEditorOpen && (
             <PageHeader
@@ -131,7 +123,7 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
             />
           </Box>
         </Box>
-      )}
+      {/* )} */}
     </>
   );
 };

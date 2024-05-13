@@ -1,5 +1,5 @@
 import { palette } from "@/theme/Palette";
-import { Box, Typography } from "@mui/material";
+import { Box, Skeleton, Typography } from "@mui/material";
 import { Divider } from "../Divider";
 import { Button } from "../Button";
 import { FC } from "react";
@@ -13,12 +13,14 @@ interface ResponseAreaProps {
   };
   handleUpdate?: () => void;
   variables?: boolean;
+  isLoading: boolean;
 }
 
 const ResponseArea: FC<ResponseAreaProps> = ({
   content,
   handleUpdate,
   variables,
+  isLoading,
 }) => {
   return (
     <>
@@ -70,20 +72,30 @@ const ResponseArea: FC<ResponseAreaProps> = ({
                       include Flyease technology, which is determined from INT
                       DB for Product ID values 1234 and 5678
                     </Typography> */}
-          <Typography
-            variant={"display-xs-response"}
-            sx={{
-              width: "98%",
-              pr: 5,
-              pt: 1,
-              m: "auto",
-              textAlign: "start",
-              color: palette.base.white,
-            }}
-            component="p"
-          >
-            {content.response}
-          </Typography>
+          {isLoading ? (
+            <>
+              <pre style={{ width: "100%" }}>
+                <Skeleton style={{ width: "100%", margin: "0" }} />
+                <Skeleton style={{ width: "100%", margin: "0" }} />
+                <Skeleton style={{ width: "80%", margin: "0" }} />
+              </pre>
+            </>
+          ) : (
+            <Typography
+              variant={"display-xs-response"}
+              sx={{
+                width: "98%",
+                pr: 5,
+                pt: 1,
+                m: "auto",
+                textAlign: "start",
+                color: palette.base.white,
+              }}
+              component="p"
+            >
+              {content.response}
+            </Typography>
+          )}
         </Box>
 
         <Box pt={2} pb={1}>
@@ -108,18 +120,22 @@ const ResponseArea: FC<ResponseAreaProps> = ({
             }}
           >
             <Typography variant="text-xs-bold">Original</Typography>
-            <Typography
-              variant="text-xs-regular"
-              color={palette.color.gray[300]}
-              style={{
-                whiteSpace: "nowrap",
-                overflow: "hidden",
-                textOverflow: "ellipsis",
-                maxWidth: "100%",
-              }}
-            >
-              {content.original}
-            </Typography>
+            {isLoading ? (
+              <Skeleton style={{ width: "90%", margin: "auto" }} />
+            ) : (
+              <Typography
+                variant="text-xs-regular"
+                color={palette.color.gray[300]}
+                style={{
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                  maxWidth: "100%",
+                }}
+              >
+                {content.original}
+              </Typography>
+            )}
           </Box>
           <Box sx={{ width: "122px" }}>
             <Button
@@ -152,15 +168,19 @@ const ResponseArea: FC<ResponseAreaProps> = ({
             opacity: 0,
           }}
         >
-          <Typography variant="text-sm" color={palette.color.gray[300]}>
-            This query is estimated to take X minutes and will be approximately
-            X size.
-            <span style={{ textDecoration: "underline" }}>
-              <CustomLink color="#90919b" variant="simple" href="#">
-                Need to optimize?
-              </CustomLink>
-            </span>
-          </Typography>
+          {isLoading ? (
+            <Skeleton style={{ width: "90%", margin: "auto" }} />
+          ) : (
+            <Typography variant="text-sm" color={palette.color.gray[300]}>
+              This query is estimated to take X minutes and will be
+              approximately X size.
+              <span style={{ textDecoration: "underline" }}>
+                <CustomLink color="#90919b" variant="simple" href="#">
+                  Need to optimize?
+                </CustomLink>
+              </span>
+            </Typography>
+          )}
         </Paper>
       )}
     </>

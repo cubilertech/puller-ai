@@ -21,17 +21,27 @@ import "./sideNavbar.css";
 import { CURRENT_MODE, MODES } from "@/utils/constants";
 import { AlertModal } from "@/modals/AlertModal";
 import { CommentOutlined, InfoOutlined } from "@mui/icons-material";
+import { useAppDispatch } from "@/libs/redux/hooks";
+import { UpdateCurrentPage } from "@/libs/redux/features/isLoadingRequest";
 
 const SideNavbar = () => {
   const Route = useRouter();
   const pathname = usePathname();
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const path = pathname.split("/")[1];
+  const dispatch = useAppDispatch();
   const drawerWidth = 234;
-  const handleAlert = (isAlert: boolean) => {
+  const handleAlert = (link: string) => {
+    const isAlert = link === "alert" ? true : false;
+    const isRequest = link === "/request" ? true : false;
     if (CURRENT_MODE === MODES.PILOT && isAlert) {
       setIsOpenAlert(true);
     }
+    if (isRequest) {
+      dispatch(UpdateCurrentPage("creates"));
+    }
+    console.log(link, "link");
+    Route.push(isAlert ? "#" : link);
   };
   useEffect(() => {
     if (pathname === "/") {
@@ -128,70 +138,68 @@ const SideNavbar = () => {
               <List>
                 {SideBar_Data.map((item, index) => (
                   <ListItem key={index} sx={{ py: "4px" }}>
-                    <Link
+                    {/* <Link
                       href={item.link === "alert" ? "#" : item.link}
                       style={{ width: "100%" }}
-                    >
-                      <div className="navbar-container">
-                        <MuiListItemButton
-                          sx={{
-                            display: "flex",
-                            gap: "12px",
-                            height: "44px",
-                            color: palette.base.white,
+                    > */}
+                    <div className="navbar-container">
+                      <MuiListItemButton
+                        sx={{
+                          display: "flex",
+                          gap: "12px",
+                          height: "44px",
+                          color: palette.base.white,
+                          border:
+                            path === item.name.toLowerCase()
+                              ? "1px solid #8f8f94 !important"
+                              : "1px solid transparent",
+                          background:
+                            path === item.name.toLowerCase()
+                              ? "rgb(118,119,124)"
+                              : path === "" && index === 0
+                                ? "rgb(118,119,124)"
+                                : "",
+                          "& .MuiTypography-root": {
+                            fontWeight:
+                              path === item.name.toLowerCase() ? 600 : "",
+                          },
+
+                          ":hover": {
                             border:
                               path === item.name.toLowerCase()
-                                ? "1px solid #8f8f94 !important"
-                                : "1px solid transparent",
-                            background:
-                              path === item.name.toLowerCase()
-                                ? "rgb(118,119,124)"
-                                : path === "" && index === 0
-                                  ? "rgb(118,119,124)"
-                                  : "",
+                                ? "1px solid transparent !important"
+                                : "",
                             "& .MuiTypography-root": {
-                              fontWeight:
-                                path === item.name.toLowerCase() ? 600 : "",
+                              fontWeight: 600,
                             },
-
-                            ":hover": {
-                              border:
-                                path === item.name.toLowerCase()
-                                  ? "1px solid transparent !important"
-                                  : "",
-                              "& .MuiTypography-root": {
-                                fontWeight: 600,
-                              },
-                            },
+                          },
+                        }}
+                        onClick={() => handleAlert(item.link)}
+                      >
+                        <ListItemIcon
+                          sx={{
+                            minWidth: 0,
                           }}
-                          onClick={() =>
-                            handleAlert(item.link === "alert" ? true : false)
-                          }
                         >
-                          <ListItemIcon
-                            sx={{
-                              minWidth: 0,
-                            }}
-                          >
-                            {item.name === "Request" ? (
-                              <CommentOutlined
-                                sx={{ width: "18px", height: "18px" }}
-                              />
-                            ) : (
-                              <Icon width={18} height={18} icon={item.icon} />
-                            )}
-                          </ListItemIcon>
+                          {item.name === "Request" ? (
+                            <CommentOutlined
+                              sx={{ width: "18px", height: "18px" }}
+                            />
+                          ) : (
+                            <Icon width={18} height={18} icon={item.icon} />
+                          )}
+                        </ListItemIcon>
 
-                          <ListItemText
-                            sx={{
-                              fontSize: "14px",
-                            }}
-                            className="child"
-                            primary={item.name}
-                          />
-                        </MuiListItemButton>
-                      </div>
-                    </Link>
+                        <ListItemText
+                          sx={{
+                            fontSize: "14px",
+                          }}
+                          className="child"
+                          primary={item.name}
+                        />
+                      </MuiListItemButton>
+                    </div>
+                    {/* </Link> */}
                   </ListItem>
                 ))}
               </List>
@@ -204,7 +212,7 @@ const SideNavbar = () => {
                 <ListItem sx={{ py: 0 }}>
                   <div className="navbar-container">
                     <MuiListItemButton
-                      onClick={() => handleAlert(true)}
+                      onClick={() => handleAlert("alert")}
                       sx={{
                         width: "100%",
                         color: palette.base.white,

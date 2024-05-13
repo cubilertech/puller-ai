@@ -29,7 +29,6 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
   const [selectedItems, setSelectedItems] = useState("");
 
   useEffect(() => {
-    // Update selectedItems whenever checkedItems change
     const updatedSelectedItems = OPTIONBAR_DATA.filter(
       (_, index) => checkedItems[index]
     )
@@ -39,17 +38,13 @@ const OptionsBar: FC<optionbarProps> = ({ variant, handleUpdate, close }) => {
   }, [checkedItems]);
 
   const handleItemClick = (item: string, index: number) => {
-    // Check if the item is already selected
     let updatedSelectedItems;
     if (selectedItems.includes(item)) {
-      // If selected, remove it from the selected items string
       updatedSelectedItems = selectedItems.replace(`${item} `, "");
     } else {
-      // If not selected, add it to the selected items string
       updatedSelectedItems = selectedItems + `${item} `;
     }
     setSelectedItems(updatedSelectedItems);
-    // Toggle checkbox state
     dispatch(toggleCheckbox({ index }));
   };
 

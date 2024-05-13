@@ -17,6 +17,7 @@ import { LatestPullesCard } from "@/components/Latestpulles-Card";
 import { LatestPullsData } from "@/utils/data";
 import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
 import {
+  UpdateCurrentPage,
   UpdateIsLoadingRequest,
   getIsLoadingRequest,
 } from "@/libs/redux/features/isLoadingRequest";
@@ -45,19 +46,23 @@ const PannelArea: FC<PannelAreaProps> = ({
   handleCloseSelectBar,
   handleOpenSelectBar,
 }) => {
+  // const [isLoading, setisLoading] = useState(false);
   const [prompt, setPrompt] = useState("");
   const [isOpenAlert, setIsOpenAlert] = useState(false);
+  const isLoading = useAppSelector(getIsLoadingRequest)
+  const dispatch = useAppDispatch();
   const {
     mutate: submitPrompt,
+    // data: PromptData,
     isError: submitPromptError,
     isSuccess,
   } = useSubmitPrompt();
-  const dispatch = useAppDispatch();
-  const isLoadingRequest = useAppSelector(getIsLoadingRequest);
 
   const handleAvailable = () => {
     submitPrompt({ message: prompt });
+    // setisLoading(true);
     dispatch(UpdateIsLoadingRequest(true));
+    dispatch(UpdateCurrentPage("validate"));
   };
   const handleTextareaChange = (event: any) => {
     setPrompt(event.target.value);
@@ -78,11 +83,10 @@ const PannelArea: FC<PannelAreaProps> = ({
   useEffect(() => {
     if (submitPromptError) {
       dispatch(UpdateIsLoadingRequest(false));
-    }
-    if (isSuccess) {
-      dispatch(UpdateIsLoadingRequest(false));
+      dispatch(UpdateIsLoadingRequest("create"));
     }
   }, [submitPromptError, isSuccess]);
+  console.log(isLoading, "isLoading");
   return (
     <Box
       sx={{
@@ -131,25 +135,12 @@ const PannelArea: FC<PannelAreaProps> = ({
                 width: "100%",
               }}
             >
-              {isLoadingRequest ? (
-                <Box
-                  sx={{
-                    display: "flex",
-                    width: "100%",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    height: "100%",
-                  }}
-                >
-                  <Loader type="Processing" variant="simple" />
-                </Box>
-              ) : (
-                <ResponseArea
-                  content={content}
-                  handleUpdate={handleUpdate ? () => handleUpdate() : undefined}
-                  variables={content ? true : false}
-                />
-              )}
+              <ResponseArea
+                content={content}
+                handleUpdate={handleUpdate ? () => handleUpdate() : undefined}
+                variables={content ? true : false}
+                isLoading={isLoading}
+              />
             </Paper>
           ) : (
             <Box sx={{ display: "flex", flexDirection: "column", gap: 5 }}>
@@ -226,7 +217,7 @@ const PannelArea: FC<PannelAreaProps> = ({
           handleSource={handleSource}
           handleValidate={handleAvailable}
           onChangeInput={handleTextareaChange}
-          isLoading={isLoadingRequest}
+          isLoading={isLoading}
           value={prompt}
         />
       )}
