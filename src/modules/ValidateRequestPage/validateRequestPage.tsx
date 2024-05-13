@@ -8,6 +8,8 @@ import { useSubmitExecute } from "@/hooks/useExecute";
 // import GraphModal from "@/modals/graphModals/graphModal";
 import GraphModal2 from "@/modals/graphModals/graphModal2";
 import { useGetSinglePrompt } from "@/hooks/usePrompt";
+import { useSubmitValidate } from "@/hooks/useValidate";
+import { Prompt } from "@/utils/types";
 interface Props {
   id: string;
 }
@@ -18,6 +20,8 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
   const [openGraph, setOpenGraph] = useState(false);
   const { mutate: submitExecute, isError: submitExecuteError } =
     useSubmitExecute();
+  const { mutate: submitValidate, isError: submitValidateError } =
+  useSubmitValidate();
   const {
     data: prompt,
     isLoading,
@@ -111,7 +115,8 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
           <GraphModal2
             open={openGraph}
             handleClose={() => handleOpenGraph()}
-            graph={prompt?.graph ?? []}
+            prompt={prompt as Prompt}
+            validatePrompt={submitValidate}
           />
           {/* <GraphModal open={openGraph} handleClose={() => handleOpenGraph()} /> */}
           <Box sx={{ width: "97%", m: "auto", pt: 2 }}>

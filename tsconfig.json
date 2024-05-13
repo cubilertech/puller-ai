@@ -34,7 +34,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-  ],
+, "src/modals/graphModals/customNode.tsx"  ],
   "exclude": [
     "node_modules"
   ]
