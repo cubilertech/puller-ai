@@ -5,7 +5,6 @@ import { PannelArea } from "../../modules/PannelArea";
 import { PageHeader } from "@/components/PageHeader";
 import { Loader } from "@/components/Loader";
 import { useSubmitExecute } from "@/hooks/useExecute";
-// import GraphModal from "@/modals/graphModals/graphModal";
 import GraphModal2 from "@/modals/graphModals/graphModal2";
 import { useGetSinglePrompt } from "@/hooks/usePrompt";
 interface Props {
@@ -25,7 +24,9 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
   } = useGetSinglePrompt(id);
 
   const handleUpdate = () => {
-    submitExecute({ prompt: `query#${id}` });
+    if (id) {
+      submitExecute({ prompt: `query#${id}` });
+    }
     setisProccessing(true);
   };
   const handleOpenGraph = () => {
@@ -58,7 +59,10 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
     if (submitExecuteError) {
       setisProccessing(false);
     }
-  }, [submitExecuteError]);
+    if (id) {
+      refetchPrompt();
+    }
+  }, [submitExecuteError, id]);
 
   // const content = {
   //   response:

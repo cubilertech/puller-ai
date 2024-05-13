@@ -20,7 +20,7 @@ import { palette } from "@/theme/Palette";
 import "./sideNavbar.css";
 import { CURRENT_MODE, MODES } from "@/utils/constants";
 import { AlertModal } from "@/modals/AlertModal";
-import { CommentOutlined } from "@mui/icons-material";
+import { CommentOutlined, InfoOutlined } from "@mui/icons-material";
 
 const SideNavbar = () => {
   const Route = useRouter();
@@ -124,7 +124,7 @@ const SideNavbar = () => {
               )}
             </Box>
 
-            <Box>
+            <Box sx={{ mt: 2 }}>
               <List>
                 {SideBar_Data.map((item, index) => (
                   <ListItem key={index} sx={{ py: "4px" }}>
@@ -211,12 +211,19 @@ const SideNavbar = () => {
                         border: "1px solid transparent",
                       }}
                     >
+                      <ListItemIcon
+                        sx={{
+                          minWidth: 0,
+                        }}
+                      >
+                        <InfoOutlined sx={{ width: 18, height: 18 }} />
+                      </ListItemIcon>
                       <ListItemText
                         sx={{
                           fontSize: "14px",
                         }}
                       >
-                        Private Beta Help !
+                        Private Beta Help
                       </ListItemText>
                     </MuiListItemButton>
                   </div>

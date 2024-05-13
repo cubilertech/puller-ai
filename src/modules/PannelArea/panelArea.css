@@ -38,3 +38,28 @@
 textarea::placeholder {
   font-style: italic;
 }
+
+.animated-text {
+  font-size: 50px !important;
+  font-weight: 500 !important;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-image: linear-gradient(
+    to top left,
+    #ad00fe 10%,
+    #00e0ee 50%,
+    #ad00fe 100%
+  );
+  background-size: 200% 100%;
+  animation: animate-gradient 5s linear infinite;
+}
+
+@keyframes animate-gradient {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 200% 100%;
+  }
+}

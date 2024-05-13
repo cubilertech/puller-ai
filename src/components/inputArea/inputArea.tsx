@@ -57,6 +57,7 @@ const InputAreaComponent: FC<InputAreaComponentPorps> = ({
             >
               <CustomInput
                 disabled={isLoading}
+                value={value}
                 onChange={(event) => onChangeInput(event)}
               />
             </span>

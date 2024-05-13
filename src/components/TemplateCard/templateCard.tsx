@@ -18,7 +18,7 @@ const TemplateCard: FC<TemplateCardProps> = ({ card, index }) => {
     <Box
       key={index}
       mt={index === 0 ? "" : "1rem"}
-      onClick={() => router.push(`/request/${id}/validate`)}
+      onClick={() => router.push(`/request?id=${id}`)}
       sx={{ cursor: "pointer" }}
     >
       <Paper

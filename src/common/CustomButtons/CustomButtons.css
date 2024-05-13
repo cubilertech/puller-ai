@@ -17,3 +17,50 @@
   background: var(--custom-button-round-border);
   border-radius: 100%;
 }
+.animated-request {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 3px;
+  width: 216px;
+  color: #5d92fe;
+  border: none;
+  background-color: #263f50;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  border-radius: 5px;
+  text-align: center;
+  height: 44px;
+  will-change: opacity background-color;
+}
+
+.animated-request:hover {
+  color: white;
+  background: rgba(105, 65, 198, 255);
+  border-radius: 5px;
+  font-weight: 500;
+}
+
+/* Remove animation from non-hover state */
+
+@keyframes exitGradient {
+  from {
+    background: linear-gradient(
+      126deg,
+      rgba(108, 33, 177, 1) 16%,
+      rgba(26, 138, 169, 1) 100%
+    );
+  }
+  to {
+    background: linear-gradient(
+      to top left,
+      rgba(108, 33, 177, 1),
+      transparent
+    );
+  }
+}
+.animated-request:not(:hover) {
+  animation: exitGradient 0.3s ease; /* Removed animation */
+}

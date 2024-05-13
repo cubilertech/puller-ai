@@ -64,6 +64,8 @@ const PageHeader: FC<PageHeaderProps> = ({ title, buttons }) => {
                 />
               </Tooltip>
             </>
+          ) : title === "Create a Request" ? (
+            " "
           ) : (
             title
           )}

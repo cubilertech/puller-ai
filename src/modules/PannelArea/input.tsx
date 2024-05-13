@@ -2,12 +2,18 @@ import { FC } from "react";
 
 interface CustomInputProps {
   onChange?: (event: any) => void;
+  value?: string;
   disabled: boolean;
 }
 
-export const CustomInput: FC<CustomInputProps> = ({ onChange, disabled }) => {
+export const CustomInput: FC<CustomInputProps> = ({
+  onChange,
+  value,
+  disabled,
+}) => {
   return (
     <textarea
+      value={value}
       autoFocus
       disabled={disabled}
       placeholder="Type your data request (prompt) here..."

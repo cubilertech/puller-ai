@@ -6,6 +6,7 @@ import { CustomButtonVariants, UserProps } from "@/utils/types";
 import Image from "next/image";
 import { Icon } from "@/components/Icon";
 import { Menu } from "@/components/Menu";
+import { History } from "@mui/icons-material";
 
 interface buttonProps {
   variant: CustomButtonVariants;
@@ -78,7 +79,7 @@ const CustomButton: FC<buttonProps> = ({
               height: "40px !important",
               py: 2,
               px: 4,
-              transition: "background 0.3s ease, border-radius 0.3s ease",
+              transition: "background-color 0.3s ease, border-radius 0.3s ease",
               ":hover": {
                 background: palette.linearGradient.purpleBlue,
                 borderRadius: "50px",
@@ -171,42 +172,9 @@ const CustomButton: FC<buttonProps> = ({
       );
     case "request-history":
       return (
-        <Box
-          sx={{
-            "@keyframes exitGradient": {
-              "0%": {
-                background:
-                  "linear-gradient(126deg, rgba(108,33,177,1) 16%, rgba(26,138,169,1) 100%)",
-              },
-              "100%": {
-                background:
-                  "linear-gradient(to top left, rgba(108,33,177,1), transparent)",
-              },
-            },
-            width: "216px",
-            color: "#5d92fe",
-            border: "none",
-            backgroundColor: "#263f50",
-            transition: "background 0.3s ease",
-            borderRadius: "5px",
-            padding: 1.2,
-            textAlign: "center",
-            "&:hover": {
-              color: palette.base.white,
-              background: "rgba(105,65,198,255)",
-              borderRadius: "5px",
-              fontWeight: 500,
-            },
-            "&:hover, &:focus": {
-              border: "none",
-              borderRadius: "5px",
-            },
-            "&:not(:hover)": {
-              animation: "exitGradient 0.3s ease ",
-            },
-          }}
-        >
-          {text}
+        <Box className={"animated-request"}>
+          <Typography>{text}</Typography>
+          <History />
         </Box>
       );
   }

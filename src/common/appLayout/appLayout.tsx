@@ -34,7 +34,7 @@ const AppLayout = ({ children }: { children: ReactNode }) => {
               />
 
               <TanstackProvider>
-                <ReduxProvider>{children}</ReduxProvider>
+                {children}
               </TanstackProvider>
             </div>
           </div>

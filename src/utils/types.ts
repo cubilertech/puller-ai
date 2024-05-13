@@ -116,10 +116,7 @@ export type PageHeaderVariants =
   | "Retriever Detail"
   | "Advanced";
 
-export type PaperVariants =
-  | "light-border"
-  | "dark-border"
-  | "light-bg-border"
+export type PaperVariants = "light-border" | "dark-border" | "light-bg-border";
 
 export type RectangleCardIcons = "connectApps" | "apiKey" | "upload" | "cpu";
 
@@ -155,12 +152,12 @@ export interface Query {
 
 export interface Client {
   connection: {
-    dataset: string,
-    project: string,
-    status: true,
-    type: string
-    },
-    name: string
+    dataset: string;
+    project: string;
+    status: true;
+    type: string;
+  };
+  name: string;
 }
 
 export interface submitValidatePayload {
@@ -169,11 +166,11 @@ export interface submitValidatePayload {
 }
 
 export type Graph = {
-  depends: any[],
-  description: string,
-  id: string,
-  name: string
-}
+  depends: any[];
+  description: string;
+  id: string;
+  name: string;
+};
 
 export interface CustomNodeData {
   value?: number;
@@ -199,4 +196,7 @@ export enum Position {
   Top = "top",
   Right = "right",
   Bottom = "bottom",
+}
+export interface LatestPullesCardDataProps {
+  text: string;
 }

@@ -33,7 +33,7 @@ export const useSubmitPrompt = () => {
     onSuccess: (data) => {
       const id = data?.id?.includes("#") ? data?.id?.split("#")?.[1] : data?.id;
       setTimeout(() => {
-        router.push(`/request/${id}/validate`);
+        router.push(`/request?id=${id}`);
       }, 1000);
     },
     onError: (error: any) => {
@@ -62,9 +62,9 @@ export const useGetSinglePrompt = (promptId: string) => {
       }
     } catch (error: any) {
       toast.error(error?.response?.data?.message ?? (error.message as string));
-      setTimeout(() => {
-        router.push("/request");
-      }, 5000);
+      // setTimeout(() => {
+      //   router.push("/request");
+      // }, 5000);
       console.error("Network error:", error);
       return null;
     }
