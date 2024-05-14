@@ -84,6 +84,7 @@ const GraphModal2 = ({ open, handleClose, prompt, validatePrompt }: props) => {
   let initialNodes2: any[] = [];
   let initialEdges2: any[] = [];
   const [variables, setVariables] = useState(prompt?.variables ?? []);
+  const variablesInitialArray = prompt?.variables ?? [];
   // useEffect(()=>{
 
   initialNodes2 = prompt?.graph?.map((item, index) => {
@@ -154,14 +155,14 @@ const GraphModal2 = ({ open, handleClose, prompt, validatePrompt }: props) => {
   //   [nodes, edges, setEdges, setNodes]
   // );
 
-  console.log(nodes, "nodes");
-  console.log(edges, "edges");
+  // console.log(nodes, "nodes");
+  // console.log(edges, "edges");
 
   const handleChange = (id: string, updatedPrompt: any) => {
     const updatedNodes = nodes.map((node) => {
-      console.log("Processing node:", node);
+      // console.log("Processing node:", node);
       if (node.id == id) {
-        console.log("Updating node:", node);
+        // console.log("Updating node:", node);
         return {
           ...node,
           data: {
@@ -171,7 +172,7 @@ const GraphModal2 = ({ open, handleClose, prompt, validatePrompt }: props) => {
           },
         };
       } else {
-        console.log("Keeping node as is:", node);
+        // console.log("Keeping node as is:", node);
         return node;
       }
     });
@@ -186,6 +187,14 @@ const GraphModal2 = ({ open, handleClose, prompt, validatePrompt }: props) => {
     setVariables(combined);
     setNodes(updatedNodes);
   };
+
+  const handleSubmit = () => {
+    validatePrompt({
+      prompt: prompt?.id,
+      variables: variables,
+    });
+    handleClose();
+  }
 
   const nodeTypes = useMemo(() => {
     return {
@@ -228,20 +237,13 @@ const GraphModal2 = ({ open, handleClose, prompt, validatePrompt }: props) => {
             fitView
           >
             <Controls />
-            <Panel position="bottom-right">
-              <Box>
+            {JSON.stringify(variablesInitialArray) !== JSON.stringify(variables) && <Panel position="bottom-right">
                 <Button
                   variant="contained"
-                  label="Submit"
-                  onClick={() =>
-                    validatePrompt({
-                      prompt: prompt?.id,
-                      variables: variables,
-                    })
-                  }
+                  label="Save Changes"
+                  onClick={handleSubmit}
                 />
-              </Box>
-            </Panel>
+            </Panel>}
             <Background />
           </ReactFlow>
         </Paper>

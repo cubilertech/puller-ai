@@ -20,8 +20,12 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
   const [openGraph, setOpenGraph] = useState(false);
   const { mutate: submitExecute, isError: submitExecuteError } =
     useSubmitExecute();
-  const { mutate: submitValidate, isError: submitValidateError } =
-  useSubmitValidate();
+  const {
+    mutate: submitValidate,
+    isLoading: submitValidateLoading,
+    // isError: submitValidateError,
+    isSuccess: submitValidateSuccess,
+  } = useSubmitValidate();
   const {
     data: prompt,
     isLoading,
@@ -56,7 +60,7 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
   };
   useEffect(() => {
     refetchPrompt();
-  }, [refetchPrompt]);
+  }, [refetchPrompt, submitValidateSuccess]);
 
   useEffect(() => {
     if (submitExecuteError) {
@@ -78,7 +82,7 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
 
   return (
     <>
-      {isLoading || isProccessing ? (
+      {isLoading || isProccessing || submitValidateLoading ? (
         <Box
           sx={{
             width: "100%",

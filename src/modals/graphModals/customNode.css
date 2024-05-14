@@ -77,7 +77,7 @@
 
 .variable-item-input{
     padding:2px 10px;
-    border:1px solid #ccc;
+    /* border:1px solid #ccc; */
     color:black;
     /* width: 50px; */
     height:25px;

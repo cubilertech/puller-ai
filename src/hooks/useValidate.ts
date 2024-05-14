@@ -1,13 +1,9 @@
-// import { useAppDispatch } from "@/libs/redux/hooks";
 import { Prompt, submitValidatePayload } from "@/utils/types";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-// import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 
 export const useSubmitValidate = () => {
-  //   const dispatch = useAppDispatch();
-  //   const router = useRouter();
-
   async function submit(data: submitValidatePayload): Promise<Prompt | null> {
     try {
       const res = await axios({
@@ -30,14 +26,10 @@ export const useSubmitValidate = () => {
   }
   return useMutation({
     mutationFn: submit,
-    onSuccess: (data) => {
-      // dispatch(setActiveRequest(data));
-      // setTimeout(() => {
-      //   router.push("/request/abcd/validate");
-      // }, 1000);
-    },
-    onError: (err) => {
-      console.log(err, "error in validating request");
+    onSuccess: (data) => {},
+    onError: (error: any) => {
+      toast.error(error?.response?.data?.message ?? (error.message as string));
+      console.log(error, "error in validating request");
     },
   });
 };

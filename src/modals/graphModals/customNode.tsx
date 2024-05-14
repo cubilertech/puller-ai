@@ -1,10 +1,8 @@
 import { Graph, Variable } from "@/utils/types";
-import { Box, IconButton, Input, Typography } from "@mui/material";
+import { Box, IconButton, TextField, Typography } from "@mui/material";
 import { FC, useState } from "react";
 import { Handle, Position } from "reactflow";
 import CheckIcon from "@mui/icons-material/Check";
-import { Tooltip } from "@/components/Tooltip";
-// import { NodeProps } from 'react-flow-renderer';
 const handleStyle = { left: 10 };
 
 type Data = Graph & { variables: Variable[] };
@@ -90,8 +88,44 @@ const CustomNode: FC<Props> = ({ data, isConnectable, handleChange }) => {
             >
               {item?.name}
             </Typography>
-            <Input
-              sx={{ fontSize: "10px !important", padding: "5px !important" }}
+            <TextField
+              sx={{
+                "& .MuiInputLabel-root": {
+                  color: "black", // Change this to your desired label color
+                },
+                "& .MuiOutlinedInput-root": {
+                  "& fieldset": {
+                    borderColor: "red", // Change this to your desired border color
+                  },
+                  "& input": {
+                    color: "black", // Change this to your desired input text color
+                    padding: "4px", // Change this to your desired input padding
+                    fontSize: "10px",
+                  },
+                  "& .MuiOutlinedInput-notchedOutline": {
+                    borderColor: "black", // Change this to your desired border color
+                  },
+                  "&:hover": {
+                    "& fieldset": {
+                      borderColor: "black", // Border color on hover
+                    },
+                    "& .MuiInputLabel-root": {
+                      color: "black", // Label color on hover
+                      padding: "4px",
+                      height: "25px",
+                    },
+                    "& input": {
+                      color: "black", // Text color on hover
+                    },
+                  },
+                  "&:focus-within": {
+                    "& .MuiOutlinedInput-notchedOutline": {
+                      borderColor: "black", // Border color on focus
+                    },
+                  },
+                  height: "25px", // Change this to your desired input height
+                },
+              }}
               type={item.type === "numeric" ? "number" : "text"}
               key={`${prompt?.id}-variable-value-${index++}`}
               value={item.value}
@@ -101,6 +135,8 @@ const CustomNode: FC<Props> = ({ data, isConnectable, handleChange }) => {
               onChange={(event) =>
                 onVariableChange(item?.id, event.target.value)
               }
+              // label={item?.name}
+              variant="outlined"
             />
           </Box>
         ))}
