@@ -71,29 +71,28 @@ const CustomButton: FC<buttonProps> = ({
       );
     case "rounded-SQL":
       return (
-        <div className="container-round-btn">
-          <Button
-            sx={{
-              borderRadius: "50px",
-              border: `1px solid var(--vison-pro-stock, ${palette.base.white})`,
-              backgroundColor: palette.color.gray[650],
-              width: 82,
-              height: "40px !important",
-              py: 2,
-              px: 4,
-              transition: "background-color 0.3s ease, border-radius 0.3s ease",
-              ":hover": {
-                background: palette.linearGradient.purpleBlue,
-                borderRadius: "50px",
-              },
-              ...sx,
-            }}
-            onClick={onClick}
-            variant="outlined"
-          >
-            <Typography variant="text-md-bold">{text}</Typography>
-          </Button>
-        </div>
+        // <div className="container-round-btn">
+        <Button
+          sx={{
+            border: `1px solid var(--vison-pro-stock, ${palette.base.white})`,
+            backgroundColor: "none",
+            width: 76,
+            height: "32px !important",
+            py: 2,
+            px: 4,
+            background: "none !important",
+            ":hover": {
+              background: palette.color.gray[650],
+            },
+            ...sx,
+          }}
+          size="small"
+          onClick={onClick}
+          variant="outlined"
+        >
+          <Typography variant="text-md-bold">{text}</Typography>
+        </Button>
+        // </div>
       );
     case "select":
       const menuItems = [
@@ -102,13 +101,14 @@ const CustomButton: FC<buttonProps> = ({
         },
       ];
       return (
-        <div className="container-round-btn">
+        <>
+          {/* <div className="container-round-btn"> */}
           <Button
             sx={{
               borderRadius: "50px",
               color: palette.base.white,
-              border: `1px solid var(--vison-pro-stock, ${palette.base.white})`,
-              background: `${palette.color.gray[400]} !important`,
+              border: `none`,
+              background: `none !important`,
               width: 82,
               height: 48,
               py: 1,
@@ -119,6 +119,7 @@ const CustomButton: FC<buttonProps> = ({
                 background: `${palette.color.gray[300]} !important`,
               },
             }}
+            size="large"
             variant="outlined"
             onClick={handleMenuOpen}
           >
@@ -132,8 +133,8 @@ const CustomButton: FC<buttonProps> = ({
             >
               <Image
                 style={{ marginBottom: "2px" }}
-                width={32}
-                height={32}
+                width={26}
+                height={26}
                 src={isImage}
                 alt="profile-picture"
               />
@@ -148,7 +149,9 @@ const CustomButton: FC<buttonProps> = ({
             menuItems={menuItems}
             onClose={handleMenuClose}
           />
-        </div>
+
+          {/* </div> */}
+        </>
       );
     case "round":
       return (
@@ -176,8 +179,8 @@ const CustomButton: FC<buttonProps> = ({
     case "request-history":
       return (
         <Box className={"animated-request"}>
-          <Typography>{text}</Typography>
-          <History />
+          <History sx={{ width: 20, height: 20 }} />
+          <Typography variant="text-sm-semibold">{text}</Typography>
         </Box>
       );
   }

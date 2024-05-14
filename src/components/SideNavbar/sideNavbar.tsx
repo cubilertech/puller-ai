@@ -58,13 +58,13 @@ const SideNavbar = () => {
         sx={{
           position: "static",
           flexShrink: 0,
-          borderRight: `1px solid ${palette.color.gray[150]} `,
+          // borderRight: `1px solid ${palette.color.gray[150]} `,
           background: palette.linearGradient.lightGray,
           "& .MuiDrawer-paper": {
             width: drawerWidth,
 
             boxSizing: "border-box",
-            borderRight: `1px solid ${palette.color.gray[150]} `,
+            // borderRight: `1px solid ${palette.color.gray[150]} `,
             background: palette.linearGradient.lightGray,
             boxShadow:
               "0px 1px 18px 4px rgba(255, 255, 255, 0.25), 0px 0.501px 12.02px -0.501px rgba(0, 0, 0, 0.18)",
@@ -147,7 +147,7 @@ const SideNavbar = () => {
                         sx={{
                           display: "flex",
                           gap: "12px",
-                          height: "44px",
+                          height: "40px",
                           color: palette.base.white,
                           border:
                             path === item.name.toLowerCase()
@@ -217,6 +217,7 @@ const SideNavbar = () => {
                         width: "100%",
                         color: palette.base.white,
                         border: "1px solid transparent",
+                        height: "40px",
                       }}
                     >
                       <ListItemIcon
@@ -252,6 +253,7 @@ const SideNavbar = () => {
                           path === text.name
                             ? "1px solid #8f8f94"
                             : "1px solid transparent",
+                        height: "40px",
                       }}
                     >
                       <ListItemIcon

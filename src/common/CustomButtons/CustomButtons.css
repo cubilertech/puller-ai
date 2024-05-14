@@ -23,17 +23,18 @@
   align-items: center;
   gap: 8px;
   padding-bottom: 3px;
-  width: 216px;
+  width: 190px;
   color: #5d92fe;
   border: none;
   background-color: #263f50;
-  transition:
-    background-color 0.3s ease,
-    color 0.3s ease;
+  font-weight: 500;
+  /* transition:
+    background-color 0.3s ease, */
+  /* color 0.3s ease; */
   border-radius: 5px;
   text-align: center;
-  height: 44px;
-  will-change: opacity background-color;
+  height: 40px;
+  /* will-change: opacity background-color; */
 }
 
 .animated-request:hover {
@@ -61,6 +62,6 @@
     );
   }
 }
-.animated-request:not(:hover) {
-  animation: exitGradient 0.3s ease; /* Removed animation */
-}
+/* .animated-request:not(:hover) {
+  animation: exitGradient 0.3s ease;
+} */

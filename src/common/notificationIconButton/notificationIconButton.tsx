@@ -17,36 +17,37 @@ interface IconButtonProps {
 const NotificationIconButton: FC<IconButtonProps> = ({
   icon,
   text,
-  iconWidth = 40,
-  iconHeight = 40,
+  iconWidth = 32,
+  iconHeight = 32,
   isNotice,
   onClick,
   ...props
 }) => {
   return (
-    <div className="container-notification">
-      <MuiIconButton
-        sx={{
-          position: "relative",
-          borderRadius: "100%",
-          bgcolor: `${palette.color.gray[400]}`,
-          ":hover": {
-            bgcolor: `${palette.color.gray[300]}`,
-          },
-        }}
-        onClick={onClick}
-        {...props}
-      >
-        {isNotice && (
-          <Box sx={{ position: "absolute", top: "8px", right: "8px" }}>
-            <Icon icon="ellipse" width={12} height={12} />
-          </Box>
-        )}
+    // <div className="container-notification">
+    <MuiIconButton
+      sx={{
+        position: "relative",
+        borderRadius: "100%",
+        background: "none",
+        bgcolor: `none !important`,
+        ":hover": {
+          bgcolor: `${palette.color.gray[300]}`,
+        },
+      }}
+      onClick={onClick}
+      {...props}
+    >
+      {isNotice && (
+        <Box sx={{ position: "absolute", top: "8px", right: "8px" }}>
+          <Icon icon="ellipse" width={12} height={12} />
+        </Box>
+      )}
 
-        {icon && <Icon icon={icon} width={iconWidth} height={iconHeight} />}
-        {text && <Typography variant="text-xxs-bold">{text}</Typography>}
-      </MuiIconButton>
-    </div>
+      {icon && <Icon icon={icon} width={iconWidth} height={iconHeight} />}
+      {text && <Typography variant="text-xxs-bold">{text}</Typography>}
+    </MuiIconButton>
+    // </div>
   );
 };
 

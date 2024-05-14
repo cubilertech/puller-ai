@@ -66,7 +66,7 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
 
   return (
     <>
-      <Box sx={{ maxWidth: "1100px", pt: 1, m: "auto" }}>
+      <Box sx={{ px: 2, pt: 1, m: "auto" }}>
         <PageHeader
           title="Validate Request"
           buttons={[
@@ -75,9 +75,7 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
               variant: "rounded-SQL",
               sx: {
                 background:
-                  CurrentType === "text"
-                    ? palette.linearGradient.purpleBlue
-                    : "",
+                  CurrentType === "text" ? palette.color.gray[650] : "none",
               },
               onClick: () => handleOpenTxt(),
             },
@@ -86,9 +84,7 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
               variant: "rounded-SQL",
               sx: {
                 background:
-                  CurrentType === "SQL"
-                    ? palette.linearGradient.purpleBlue
-                    : "",
+                  CurrentType === "SQL" ? palette.color.gray[650] : "none",
               },
               onClick: () => handleOpenSQL_Editor(),
             },
@@ -97,9 +93,7 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
               variant: "rounded-SQL",
               sx: {
                 background:
-                  CurrentType === "graph"
-                    ? palette.linearGradient.purpleBlue
-                    : "",
+                  CurrentType === "graph" ? palette.color.gray[650] : "none",
               },
               onClick: () => handleOpenGraph(),
             },

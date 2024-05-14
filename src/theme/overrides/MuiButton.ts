@@ -10,7 +10,7 @@ export const MuiButton = (theme: Theme) => {
             height: "30px",
           },
           "&.MuiButton-sizeMedium": {
-            height: "44px",
+            height: "34px ",
           },
           "&.MuiButton-sizeLarge": {
             height: "45px",

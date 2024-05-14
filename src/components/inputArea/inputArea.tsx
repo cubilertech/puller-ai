@@ -28,8 +28,7 @@ const InputAreaComponent: FC<InputAreaComponentPorps> = ({
     <Paper variant="light-border">
       <Box
         sx={{
-          paddingY: "12px",
-          px: "10px",
+         p: "12px"
         }}
       >
         <Box
@@ -40,9 +39,10 @@ const InputAreaComponent: FC<InputAreaComponentPorps> = ({
           <Paper
             variant="dark-border"
             sx={{
-              padding: "0.5rem ",
+              backdropFilter: "none",
+              padding: "0.5rem",
               m: 0,
-              minHeight: "7rem",
+              minHeight: "8rem",
               display: "flex",
               maxHeight: "15rem",
               borderRadius: "8px",
@@ -126,7 +126,7 @@ const InputAreaComponent: FC<InputAreaComponentPorps> = ({
             >
               <Box width={163}>
                 <Button
-                  size="small"
+                  size="medium"
                   variant="outlined"
                   label="Manage Sources"
                   disabled={CURRENT_MODE === MODES.PILOT ? true : isLoading}
@@ -152,7 +152,7 @@ const InputAreaComponent: FC<InputAreaComponentPorps> = ({
                 <Button
                   onClick={() => handleValidate()}
                   fullWidth
-                  size="small"
+                  size="medium"
                   variant="contained"
                   label="Validate"
                   disabled={value.length <= 0}

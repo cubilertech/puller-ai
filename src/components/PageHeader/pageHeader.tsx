@@ -71,7 +71,7 @@ const PageHeader: FC<PageHeaderProps> = ({ title, buttons }) => {
             title
           )}
         </Typography>
-        <Box display={"flex"} gap={"1rem"}>
+        <Box display={"flex"} gap={"0.5rem"}>
           {buttons?.map((button, index) =>
             button.href ? (
               <CustomLink href={button.href} key={index}>

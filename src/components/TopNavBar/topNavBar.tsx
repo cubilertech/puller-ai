@@ -34,7 +34,7 @@ const TopNavBar = () => {
         sx={{
           display: "flex",
           width: "100%",
-          padding: { xl: "10px 30px", sm: "10px 16px" },
+          padding: "10px 31px",
           justifyContent: "space-between",
           alignItems: "center",
           gap: "211px",
@@ -81,20 +81,20 @@ const TopNavBar = () => {
           sx={{
             display: "flex",
             alignItems: "center",
-            gap: "16px",
+            gap: "8px",
           }}
         >
           <NotificationIconButton
             icon="annotation"
-            iconHeight={28}
-            iconWidth={28}
+            iconHeight={24}
+            iconWidth={24}
             onClick={() => handleClickAlerts()}
             isNotice
           />
           <NotificationIconButton
             icon="bell"
-            iconHeight={28}
-            iconWidth={28}
+            iconHeight={24}
+            iconWidth={24}
             isNotice
             onClick={() => handleClickAlerts()}
           />

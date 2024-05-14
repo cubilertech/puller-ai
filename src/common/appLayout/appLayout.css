@@ -10,8 +10,8 @@
   width: 234px;
 }
 
-.topbar {
-  height: 80px;
+.topbar { 
+  height: 68px;
   z-index: 999;
   width: 100%;
 }
