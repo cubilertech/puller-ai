@@ -1,6 +1,6 @@
 "use client";
-import { Box } from "@mui/material";
-import React, { FC, useEffect, useState } from "react";
+import { Box, Skeleton } from "@mui/material";
+import React, { FC, useEffect, useMemo, useState } from "react";
 import { PannelArea } from "../../modules/PannelArea";
 import { PageHeader } from "@/components/PageHeader";
 import { useSubmitExecute } from "@/hooks/useExecute";
@@ -11,6 +11,8 @@ import { SQL_Editor } from "@/components/sql_Editor";
 import { useSubmitValidate } from "@/hooks/useValidate";
 import { Prompt } from "@/utils/types";
 import { useAppDispatch } from "@/libs/redux/hooks";
+import { Icon } from "@/components/Icon";
+import { Paper } from "@/components/Paper";
 interface Props {
   id: string;
 }
@@ -22,17 +24,26 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
   const { mutate: submitExecute, isError: submitExecuteError } =
     useSubmitExecute();
   const {
+    data: validatedPrompt,
     mutate: submitValidate,
     isLoading: submitValidateLoading,
     isSuccess: submitValidateSuccess,
   } = useSubmitValidate();
-  const { data: prompt, refetch: refetchPrompt } = useGetSinglePrompt(id);
+  const { data: singlePrompt, refetch: refetchPrompt } = useGetSinglePrompt(id);
 
   const handleUpdate = () => {
     if (id) {
       submitExecute({ prompt: `query#${id}` });
     }
   };
+  const prompt = useMemo(()=>{
+     if(submitValidateSuccess && validatedPrompt){
+     return validatedPrompt;
+     }
+     else{
+      return singlePrompt;
+     }
+  },[singlePrompt,submitValidateSuccess])
   const handleOpenGraph = () => {
     setCurrentType("graph");
   };
@@ -50,14 +61,15 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
     setIsOpenSelectBar(true);
   };
   useEffect(() => {
-    if (id || submitValidateSuccess) {
+    if (id) {
       refetchPrompt();
     }
+  }, [refetchPrompt, id]);
+  useEffect(()=>{
     if (submitValidateLoading) {
       setCurrentType("text");
     }
-  }, [refetchPrompt, id, submitValidateSuccess, submitValidateLoading]);
-
+  },[submitValidateLoading])
   const content = {
     response: prompt?.description as string,
     original:
@@ -107,6 +119,38 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
         />
 
         {/* <GraphModal open={openGraph} handleClose={() => handleOpenGraph()} /> */}
+        {submitValidateLoading ? <Paper
+        variant="dark-border"
+        sx={{
+          border: `1px solid ${palette.color.gray[700]}`,
+          height: "fit-content",
+          padding: 2,
+          display: "flex",
+          gap: 1,
+          pb: 5,
+          alignItems: "flex-start",
+          m: 0,
+          mt: 1,
+        }}
+      >
+          <Box>
+          <Box sx={{ transform: "scale(200%)", mt: 0.7 }}>
+            <Icon icon="logoIcon" height={30} width={30} />
+          </Box>
+        </Box>
+            <pre
+              style={{
+                width: "100%",
+                paddingRight: 50,
+                margin: "auto",
+                textAlign: "start",
+              }}
+            >
+              <Skeleton style={{ width: "100%", margin: "0", height: 32 }} />
+              <Skeleton style={{ width: "100%", margin: "0", height: 32 }} />
+              <Skeleton style={{ width: "80%", margin: "0", height: 32 }} />
+            </pre>
+          </Paper> :
         <Box sx={{ width: "100%", m: "auto", pt: 2 }}>
           {CurrentType === "SQL" ? (
             <Box
@@ -158,7 +202,7 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
               handleCloseSelectBar={() => handleCloseSelectBar()}
             />
           )}
-        </Box>
+        </Box> }
       </Box>
     </>
   );
