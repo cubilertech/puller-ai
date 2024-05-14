@@ -1,11 +1,9 @@
 "use client";
-import { Box, Typography } from "@mui/material";
+import { Box, Skeleton, Typography } from "@mui/material";
 import { Paper } from "../../components/Paper";
 import { FC, useEffect, useState } from "react";
-import { Loader } from "../../components/Loader";
 import { palette } from "@/theme/Palette";
 import { CreateInputAreaComponent } from "@/components/inputArea";
-import { usePathname } from "next/navigation";
 import { OptionsBar } from "@/components/optionsBar";
 import "./panelArea.css";
 import { SQL_Editor } from "@/components/sql_Editor";
@@ -21,6 +19,8 @@ import {
   UpdateIsLoadingRequest,
   getIsLoadingRequest,
 } from "@/libs/redux/features/isLoadingRequest";
+import { CustomLink } from "@/components/Link";
+import { Button } from "@/components/Button";
 
 interface PannelAreaProps {
   content?: {
@@ -29,9 +29,7 @@ interface PannelAreaProps {
   };
   handleUpdate?: () => void;
   sql?: string;
-  isSQLEditorOpen?: boolean;
   isOpenSelectBar?: boolean;
-  handleCloseSQL_Editor?: () => void;
   handleCloseSelectBar?: () => void;
   handleOpenSelectBar?: () => void;
 }
@@ -40,27 +38,22 @@ const PannelArea: FC<PannelAreaProps> = ({
   content,
   handleUpdate,
   sql,
-  isSQLEditorOpen,
   isOpenSelectBar,
-  handleCloseSQL_Editor,
   handleCloseSelectBar,
   handleOpenSelectBar,
 }) => {
-  // const [isLoading, setisLoading] = useState(false);
   const [prompt, setPrompt] = useState("");
   const [isOpenAlert, setIsOpenAlert] = useState(false);
-  const isLoading = useAppSelector(getIsLoadingRequest)
+  const isLoading = useAppSelector(getIsLoadingRequest);
   const dispatch = useAppDispatch();
   const {
     mutate: submitPrompt,
-    // data: PromptData,
     isError: submitPromptError,
     isSuccess,
   } = useSubmitPrompt();
 
   const handleAvailable = () => {
     submitPrompt({ message: prompt });
-    // setisLoading(true);
     dispatch(UpdateIsLoadingRequest(true));
     dispatch(UpdateCurrentPage("validate"));
   };
@@ -115,37 +108,29 @@ const PannelArea: FC<PannelAreaProps> = ({
           gap={"5px"}
           sx={{
             width:
-              isOpenSelectBar || isSQLEditorOpen
+              isOpenSelectBar
                 ? { lg: "76%", md: "70%", xs: "60%" }
                 : "100%",
             height: "100%",
-            justifyContent: content ? "flex-end" : "space-between",
+            justifyContent: "space-between",
             overflowX: "hidden",
             transition: "width 0.5s ease",
           }}
         >
           {content ? (
-            <Paper
-              variant="dark-border"
-              sx={{
-                border: `1px solid ${palette.color.gray[700]}`,
-                height: content ? "fit-content" : "100%",
-                margin: 0,
-                padding: content ? 1 : 0,
-                width: "100%",
-              }}
-            >
+            <>
               <ResponseArea
                 content={content}
                 handleUpdate={handleUpdate ? () => handleUpdate() : undefined}
-                variables={content ? true : false}
                 isLoading={isLoading}
               />
-            </Paper>
+            </>
           ) : (
             <Box sx={{ display: "flex", flexDirection: "column", gap: 5 }}>
               <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <Typography className="animated-text">Hello, Abdul </Typography>
+                <Typography className="animated-text animated-left-right-text">
+                  Hello, Abdul{" "}
+                </Typography>
                 <Typography
                   sx={{
                     color: palette.color.gray[600],
@@ -190,24 +175,7 @@ const PannelArea: FC<PannelAreaProps> = ({
             />
           </Box>
         )}
-        {isSQLEditorOpen && (
-          <Box
-            className={isSQLEditorOpen ? "slide-in" : "slide-out"}
-            sx={{
-              width: { lg: "32%", md: "38%", sm: "40%" },
-              height: "100%",
-            }}
-          >
-            <SQL_Editor
-              handleClose={
-                handleCloseSQL_Editor
-                  ? () => handleCloseSQL_Editor()
-                  : undefined
-              }
-              code={sql ? sql : dummySQL}
-            />
-          </Box>
-        )}
+
       </Box>
       {content ? (
         ""

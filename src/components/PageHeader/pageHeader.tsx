@@ -1,5 +1,5 @@
 "use client";
-import { Box, Typography } from "@mui/material";
+import { Box, SxProps, Typography } from "@mui/material";
 import { FC } from "react";
 import { Button } from "../Button";
 import { palette } from "@/theme/Palette";
@@ -15,6 +15,7 @@ interface ButtonProps {
   onClick?: () => void;
   href?: string;
   width?: number;
+  sx?: SxProps;
 }
 
 interface PageHeaderProps {
@@ -80,6 +81,7 @@ const PageHeader: FC<PageHeaderProps> = ({ title, buttons }) => {
                     text={button.label}
                     variant={button.variant}
                     onClick={button?.onClick}
+                    sx={{ ...button.sx }}
                   />
                 ) : (
                   <Box width={button.width || 240}>
@@ -89,6 +91,7 @@ const PageHeader: FC<PageHeaderProps> = ({ title, buttons }) => {
                       variant={button.variant}
                       onClick={button?.onClick}
                       fullWidth
+                      sx={{ ...button.sx }}
                     />
                   </Box>
                 )}
@@ -99,6 +102,7 @@ const PageHeader: FC<PageHeaderProps> = ({ title, buttons }) => {
                 text={button.label}
                 variant={button.variant}
                 onClick={button?.onClick}
+                sx={{ ...button.sx }}
               />
             ) : (
               <Box width={button.width || 240}>
@@ -108,6 +112,7 @@ const PageHeader: FC<PageHeaderProps> = ({ title, buttons }) => {
                   variant={button.variant}
                   onClick={button?.onClick}
                   fullWidth
+                  sx={{ ...button.sx }}
                 />
               </Box>
             )

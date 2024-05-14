@@ -53,9 +53,10 @@ const SQL_Editor: FC<SQL_EditorProps> = ({ handleClose, code }) => {
     <Paper
       variant="dark-border"
       sx={{
-        height: "98.1%",
+        height: "90%",
         padding: 3,
         overflow: "hidden",
+        width: "100%"
       }}
     >
       <Box
@@ -68,33 +69,14 @@ const SQL_Editor: FC<SQL_EditorProps> = ({ handleClose, code }) => {
         }}
       >
         <Typography variant="display-xs-medium">SQL Editor</Typography>
-        <Button
-          variant="text"
-          onClick={handleClose}
-          sx={{
-            maxWidth: 25,
-            maxHeight: 25,
-            minWidth: "25px !important",
-            color: "white",
-            bgcolor: "#293b42",
-            borderRadius: "100%",
-            border: "none",
-            ":hover": { borderRadius: "100%", border: "none" },
-          }}
-        >
-          <Close
-            sx={{
-              fontSize: "18px",
-            }}
-          />
-        </Button>
+       
       </Box>
       <Divider variant="fullWidth" type="light" />
       <Box
         sx={{
           width: "100%",
           mt: 1,
-          height: "calc(100vh  - 276px)",
+          height: "calc(100vh  - 282px)",
         }}
       >
         {/* Display formatted code with line numbers   */}

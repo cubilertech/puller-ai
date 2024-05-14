@@ -1,5 +1,5 @@
 import { palette } from "@/theme/Palette";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, SxProps, Typography } from "@mui/material";
 import { FC, useState } from "react";
 import "./CustomButtons.css";
 import { CustomButtonVariants, UserProps } from "@/utils/types";
@@ -13,6 +13,7 @@ interface buttonProps {
   text?: string;
   selectData?: UserProps;
   onClick?: () => void;
+  sx?: SxProps;
 }
 
 const CustomButton: FC<buttonProps> = ({
@@ -20,6 +21,7 @@ const CustomButton: FC<buttonProps> = ({
   selectData,
   text,
   onClick,
+  sx,
 }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
@@ -84,6 +86,7 @@ const CustomButton: FC<buttonProps> = ({
                 background: palette.linearGradient.purpleBlue,
                 borderRadius: "50px",
               },
+              ...sx,
             }}
             onClick={onClick}
             variant="outlined"

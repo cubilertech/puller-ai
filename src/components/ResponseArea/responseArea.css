@@ -1,0 +1,15 @@
+.animated-genrated-text {
+  opacity: 0;
+  animation: revealTextTopToBottom 2s forwards;
+}
+
+@keyframes revealTextTopToBottom {
+  from {
+    opacity: 0;
+    clip: rect(0px, 100%, 0px, 0px); /* Clip top part initially */
+  }
+  to {
+    opacity: 1;
+    clip: rect(0px, 100%, 100%, 0px); /* Reveal entire text */
+  }
+}

@@ -7,10 +7,8 @@ interface validateRequestState {
 }
 
 const initialState: validateRequestState = {
-  isLoadingRequest: false,
-  CurrentPage: window.location.href.split("?")[1]
-    ? "validate"
-    : "create",
+  isLoadingRequest: window.location.href.split("?")[1] ? true : false,
+  CurrentPage: window.location.href.split("?")[1] ? "validate" : "create",
 };
 
 const LoadingRequest = createSlice({

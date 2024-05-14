@@ -85,7 +85,6 @@ export const useGetSinglePrompt = (promptId: string) => {
 };
 
 export const useGetAllPrompt = () => {
-  // const router = useRouter();
   async function submit(): Promise<Prompt[] | null> {
     try {
       const res = await axios({
