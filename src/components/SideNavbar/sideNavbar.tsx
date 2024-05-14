@@ -38,7 +38,7 @@ const SideNavbar = () => {
       setIsOpenAlert(true);
     }
     if (isRequest) {
-      dispatch(UpdateCurrentPage("creates"));
+      dispatch(UpdateCurrentPage("create"));
     }
     console.log(link, "link");
     Route.push(isAlert ? "#" : link);

@@ -85,44 +85,44 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
           </Box>
         </Box>
       ) : ( */}
-        <Box sx={{ px: 1.2, pt: 1 }}>
-          {!isSQLEditorOpen && (
-            <PageHeader
-              title="Validate Request"
-              buttons={[
-                {
-                  label: "Graph",
-                  variant: "rounded-SQL",
-                  onClick: () => handleOpenGraph(),
-                },
-                {
-                  label: "SQL",
-                  variant: "rounded-SQL",
-                  onClick: () => handleOpenSQL_Editor(),
-                },
-              ]}
-            />
-          )}
-
-          <GraphModal2
-            open={openGraph}
-            handleClose={() => handleOpenGraph()}
-            graph={prompt?.graph ?? []}
+      <Box sx={{ maxWidth: "1100px", pt: 1, m: "auto" }}>
+        {!isSQLEditorOpen && (
+          <PageHeader
+            title="Validate Request"
+            buttons={[
+              {
+                label: "Graph",
+                variant: "rounded-SQL",
+                onClick: () => handleOpenGraph(),
+              },
+              {
+                label: "SQL",
+                variant: "rounded-SQL",
+                onClick: () => handleOpenSQL_Editor(),
+              },
+            ]}
           />
-          {/* <GraphModal open={openGraph} handleClose={() => handleOpenGraph()} /> */}
-          <Box sx={{ width: "100%", m: "auto", pt: 2 }}>
-            <PannelArea
-              sql={prompt?.sql ?? "Select * from test;"}
-              content={content}
-              handleUpdate={() => handleUpdate()}
-              isSQLEditorOpen={isSQLEditorOpen}
-              handleCloseSQL_Editor={() => handleCloseSQL_Editor()}
-              isOpenSelectBar={isOpenSelectBar}
-              handleOpenSelectBar={() => handleOpenSelectBar()}
-              handleCloseSelectBar={() => handleCloseSelectBar()}
-            />
-          </Box>
+        )}
+
+        <GraphModal2
+          open={openGraph}
+          handleClose={() => handleOpenGraph()}
+          graph={prompt?.graph ?? []}
+        />
+        {/* <GraphModal open={openGraph} handleClose={() => handleOpenGraph()} /> */}
+        <Box sx={{ width: "100%", m: "auto", pt: 2 }}>
+          <PannelArea
+            sql={prompt?.sql ?? "Select * from test;"}
+            content={content}
+            handleUpdate={() => handleUpdate()}
+            isSQLEditorOpen={isSQLEditorOpen}
+            handleCloseSQL_Editor={() => handleCloseSQL_Editor()}
+            isOpenSelectBar={isOpenSelectBar}
+            handleOpenSelectBar={() => handleOpenSelectBar()}
+            handleCloseSelectBar={() => handleCloseSelectBar()}
+          />
         </Box>
+      </Box>
       {/* )} */}
     </>
   );

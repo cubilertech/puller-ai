@@ -19,14 +19,16 @@ function Page() {
 
       if (idParams) {
         setId(idParams);
-        console.log(idParams, "data");
       }
     };
     getIdFromParams();
 
     const intervalId = setInterval(() => {
-      if (!currentPage) {
+      if (currentPage === "create") {
         clearInterval(intervalId);
+        if (id) {
+          setId(null);
+        }
         return;
       }
       if (id) {
@@ -34,6 +36,7 @@ function Page() {
         return;
       }
 
+      console.log(id, "id");
       getIdFromParams();
     }, 1000);
     setisCurrentPage(currentPage);
