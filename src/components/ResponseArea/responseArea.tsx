@@ -34,6 +34,8 @@ const ResponseArea: FC<ResponseAreaProps> = ({
           gap: 1,
           pb: 5,
           alignItems: "flex-start",
+          m: 0,
+          mt: 1,
         }}
       >
         {/* <Typography
@@ -131,11 +133,10 @@ const ResponseArea: FC<ResponseAreaProps> = ({
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            animation: "fallingEffect 0.5s ease forwards",
+            // animation: "fallingEffect 0.5s ease forwards",
             position: "relative",
-            top: "-500px",
             zIndex: 10,
-            opacity: 0,
+            // opacity: 0,
           }}
         >
           <Box

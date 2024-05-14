@@ -1,35 +1,25 @@
 "use client";
-import React, { useCallback, useMemo, useRef, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import ReactFlow, {
   addEdge,
   ConnectionLineType,
-  Panel,
   useNodesState,
   useEdgesState,
   Background,
   Controls,
+  Panel,
 } from "reactflow";
 import dagre from "dagre";
-const modalStyle = {
-  position: "absolute",
-  top: "35%",
-  left: "43%",
-  transform: "translate(-50%, -50%)",
-  width: "60vw",
-  height: "50vh",
-  bgcolor: "transparnet",
-  border: "none",
-  boxShadow: 24,
-};
 // import { initialNodes, initialEdges } from "./nodes-edges";
 
 import "reactflow/dist/style.css";
 import { Box, Modal } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { Paper } from "@/components/Paper";
-import ContextMenu from "./contextMenu";
 import CustomNode from "./customNode";
 import "./customNode.css";
+import { Prompt, Variable } from "@/utils/types";
+import { Button } from "@/components/Button";
 
 const dagreGraph = new dagre.graphlib.Graph();
 dagreGraph.setDefaultEdgeLabel(() => ({}));
@@ -73,32 +63,40 @@ const getLayoutedElements = (nodes: any[], edges: any[], direction = "TB") => {
 };
 
 interface props {
-  open: boolean;
-  handleClose: () => void;
-  graph: any[];
+  prompt: Prompt;
+  validatePrompt: (data: any) => void;
 }
 
-const GraphModal2 = ({ open, handleClose, graph }: props) => {
-  const nodeTypes = useMemo(() => ({ textUpdater: CustomNode }), []);
-  // console.log(graph,'graph')
-  const [openUpdateName, setOpenUpdateName] = useState(false);
-  const handleCloseUpdateName = () => {
-    setOpenUpdateName(!openUpdateName);
-  };
-
-  let initialNodes2 = [];
+const GraphModal2 = ({ prompt, validatePrompt }: props) => {
+  let initialNodes2: any[] = [];
   let initialEdges2: any[] = [];
-  initialNodes2 = graph?.map((item) => {
+  const [variables, setVariables] = useState(prompt?.variables ?? []);
+  const variablesInitialArray = prompt?.variables ?? [];
+  // useEffect(()=>{
+
+  initialNodes2 = prompt?.graph?.map((item, index) => {
+    let variable = prompt?.variables.find((_item) => _item.model === item.id);
     return {
       id: item.id,
       // type:'input',
-      data: { label: item.name },
+      // data: { label: item.name },
       position: position,
-      // type:'textUpdater',
-      // data:{label: item.name, variables: item.variables}
+      // position : {
+      //   x: position.x - nodeWidth / 2,
+      //   y: position.y - nodeHeight / 2,
+      // },
+      type: "textUpdater",
+      data: {
+        // label: item.name,
+        depends: item.depends,
+        description: item.description,
+        id: item.id,
+        name: item.name,
+        variables: variable ? [variable] : [],
+      },
     };
   });
-  graph?.forEach((item) => {
+  prompt?.graph?.forEach((item) => {
     item.depends.forEach((dep: any) => {
       initialEdges2.push({
         id: `e${item.id}${dep}`,
@@ -109,6 +107,9 @@ const GraphModal2 = ({ open, handleClose, graph }: props) => {
       });
     });
   });
+  // setNodes(initialNodes2);
+  // setEdges(initialEdges2);
+  // },[])
 
   //   console.log(initialEdges2, "initial Edges");
   //   console.log(initialNodes2, "initial Nodes");
@@ -130,120 +131,100 @@ const GraphModal2 = ({ open, handleClose, graph }: props) => {
       ),
     [setEdges]
   );
-  const onLayout = useCallback(
-    (direction: any) => {
-      const { nodes: layoutedNodes, edges: layoutedEdges } =
-        getLayoutedElements(nodes, edges, direction);
+  // const onLayout = useCallback(
+  //   (direction: any) => {
+  //     const { nodes: layoutedNodes, edges: layoutedEdges } =
+  //       getLayoutedElements(nodes, edges, direction);
 
-      setNodes([...layoutedNodes]);
-      setEdges([...layoutedEdges]);
-    },
-    [nodes, edges, setEdges, setNodes]
-  );
-  const ref = useRef<HTMLDivElement>(null);
+  //     setNodes([...layoutedNodes]);
+  //     setEdges([...layoutedEdges]);
+  //   },
+  //   [nodes, edges, setEdges, setNodes]
+  // );
 
-  const [menu, setMenu] = useState<{
-    id: string;
-    label: string;
-    variables: any;
-    top?: number;
-    left?: number;
-    right?: number | boolean;
-    bottom?: number | boolean;
-  } | null>(null);
+  // console.log(nodes, "nodes");
+  // console.log(edges, "edges");
 
-  const handleNodeLabelChange = (id: string, label: any) => {
-    // Update the label of the node with the given id
+  const handleChange = (id: string, updatedPrompt: any) => {
     const updatedNodes = nodes.map((node) => {
-      if (node.id === id) {
+      // console.log("Processing node:", node);
+      if (node.id == id) {
+        // console.log("Updating node:", node);
         return {
           ...node,
-          variables: label,
+          data: {
+            ...node.data,
+            name: updatedPrompt?.name,
+            variables: updatedPrompt?.variables,
+          },
         };
+      } else {
+        // console.log("Keeping node as is:", node);
+        return node;
       }
-      return node;
     });
-    // Update the nodes state with the modified nodes array
+    const combined: Variable[] = updatedNodes.reduce((acc: any, item) => {
+      if (item.data.variables) {
+        acc.push(...item.data.variables);
+      }
+      return acc;
+    }, []);
+
+    // console.log(updatedNodes, "updates nodes after variable change");
+    setVariables(combined);
     setNodes(updatedNodes);
-    setMenu(null);
   };
 
-  const onNodeClick = useCallback(
-    (event: any, node: any) => {
-      const pane = ref.current!.getBoundingClientRect();
-      setMenu({
-        id: node.id,
-        label: node.data.label,
-        variables: node.variables,
-        top: event.clientY < pane.height - 200 && event.clientY,
-        left: event.clientX < pane.width - 200 && event.clientX,
-        right: event.clientX >= pane.width - 200 && pane.width - event.clientX,
-        bottom:
-          event.clientY >= pane.height - 200 && pane.height - event.clientY,
-      });
-      setOpenUpdateName(true);
-    },
-    [setMenu]
-  );
+  const handleSubmit = () => {
+    validatePrompt({
+      prompt: prompt?.id,
+      variables: variables,
+    });
+  };
 
-  const onPaneClick = useCallback(() => setMenu(null), [setMenu]);
-
-  console.log(nodes, "nodes");
-  console.log(edges, "edges");
+  const nodeTypes = useMemo(() => {
+    return {
+      textUpdater: (props: any) => (
+        <CustomNode {...props} handleChange={handleChange} />
+      ),
+    };
+  }, []);
 
   return (
-    <Modal open={open} onClose={handleClose}>
-      <Box sx={modalStyle}>
-        <Paper
-          variant="light-border"
-          sx={{
-            height: "80vh",
-            width: "80vw",
-            zIndex: 1,
-          }}
-        >
-          <Box
-            zIndex={5}
-            sx={{
-              cursor: "pointer",
-              position: "absolute",
-              right: "2%",
-              top: "2%",
-            }}
+    <Box sx={{ width: "100%", height: "calc(100vh - 180px)" }}>
+      <Paper
+        variant="dark-border"
+        sx={{
+          height: "100%",
+          width: "100%",
+          zIndex: 1,
+        }}
+      >
+        <ReactFlow
+          nodeTypes={nodeTypes}
+          nodes={nodes}
+          edges={edges}
+          onNodesChange={onNodesChange}
+          onEdgesChange={onEdgesChange}
+          onConnect={onConnect}
+          connectionLineType={ConnectionLineType.SmoothStep}
+          fitView
           >
-            <CloseIcon onClick={() => handleClose()} />
-          </Box>
-          <ReactFlow
-            // nodeTypes={nodeTypes}
-            ref={ref}
-            nodes={nodes}
-            edges={edges}
-            onNodesChange={onNodesChange}
-            onEdgesChange={onEdgesChange}
-            onConnect={onConnect}
-            onNodeClick={onNodeClick}
-            connectionLineType={ConnectionLineType.SmoothStep}
-            fitView
-          >
-            <Controls />
-            <Background />
-
-            {menu && (
-              <ContextMenu
-                handleNodeLabelChange={handleNodeLabelChange}
-                {...menu}
-                open={openUpdateName}
-                onClose={handleCloseUpdateName}
+          <Controls />
+          {JSON.stringify(variablesInitialArray) !==
+            JSON.stringify(variables) && (
+            <Panel position="bottom-right">
+              <Button
+                variant="contained"
+                label="Save Changes"
+                onClick={handleSubmit}
               />
-            )}
-            {/* <Panel position="top-right">
-              <button onClick={() => onLayout("TB")}>vertical layout</button>
-              <button onClick={() => onLayout("LR")}>horizontal layout</button>
-            </Panel> */}
-          </ReactFlow>
-        </Paper>
-      </Box>
-    </Modal>
+            </Panel>
+          )}
+          <Background />
+        </ReactFlow>
+      </Paper>
+    </Box>
   );
 };
 

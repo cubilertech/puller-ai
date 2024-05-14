@@ -8,6 +8,9 @@ import GraphModal2 from "@/modals/graphModals/graphModal2";
 import { useGetSinglePrompt } from "@/hooks/usePrompt";
 import { palette } from "@/theme/Palette";
 import { SQL_Editor } from "@/components/sql_Editor";
+import { useSubmitValidate } from "@/hooks/useValidate";
+import { Prompt } from "@/utils/types";
+import { useAppDispatch } from "@/libs/redux/hooks";
 interface Props {
   id: string;
 }
@@ -15,11 +18,14 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
   const [CurrentType, setCurrentType] = useState<"text" | "graph" | "SQL">(
     "text"
   );
-  // const [isSQLEditorOpen, setIsSQLEditorOpen] = useState(false);
   const [isOpenSelectBar, setIsOpenSelectBar] = useState(false);
-  const [openGraph, setOpenGraph] = useState(false);
   const { mutate: submitExecute, isError: submitExecuteError } =
     useSubmitExecute();
+  const {
+    mutate: submitValidate,
+    isLoading: submitValidateLoading,
+    isSuccess: submitValidateSuccess,
+  } = useSubmitValidate();
   const { data: prompt, refetch: refetchPrompt } = useGetSinglePrompt(id);
 
   const handleUpdate = () => {
@@ -28,7 +34,7 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
     }
   };
   const handleOpenGraph = () => {
-    setOpenGraph(!openGraph);
+    setCurrentType("graph");
   };
 
   const handleOpenSQL_Editor = () => {
@@ -44,10 +50,13 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
     setIsOpenSelectBar(true);
   };
   useEffect(() => {
-    if (id) {
+    if (id || submitValidateSuccess) {
       refetchPrompt();
     }
-  }, [refetchPrompt, id]);
+    if (submitValidateLoading) {
+      setCurrentType("text");
+    }
+  }, [refetchPrompt, id, submitValidateSuccess, submitValidateLoading]);
 
   const content = {
     response: prompt?.description as string,
@@ -62,7 +71,7 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
           title="Validate Request"
           buttons={[
             {
-              label: "Txt",
+              label: "TXT",
               variant: "rounded-SQL",
               sx: {
                 background:
@@ -71,17 +80,6 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
                     : "",
               },
               onClick: () => handleOpenTxt(),
-            },
-            {
-              label: "Graph",
-              variant: "rounded-SQL",
-              sx: {
-                background:
-                  CurrentType === "graph"
-                    ? palette.linearGradient.purpleBlue
-                    : "",
-              },
-              onClick: () => handleOpenGraph(),
             },
             {
               label: "SQL",
@@ -94,13 +92,18 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
               },
               onClick: () => handleOpenSQL_Editor(),
             },
+            {
+              label: "Graph",
+              variant: "rounded-SQL",
+              sx: {
+                background:
+                  CurrentType === "graph"
+                    ? palette.linearGradient.purpleBlue
+                    : "",
+              },
+              onClick: () => handleOpenGraph(),
+            },
           ]}
-        />
-
-        <GraphModal2
-          open={openGraph}
-          handleClose={() => handleOpenGraph()}
-          graph={prompt?.graph ?? []}
         />
 
         {/* <GraphModal open={openGraph} handleClose={() => handleOpenGraph()} /> */}
@@ -115,18 +118,39 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
-                animation: "LeftToCenterEffect 0.5s ease forwards",
+                animation: "fallingEffect 0.8s ease forwards",
                 position: "relative",
-                // top: "-500px",
                 zIndex: 10,
-                opacity: 0,
+                opacity: 1,
               }}
             >
               <SQL_Editor code={prompt?.sql ?? "Select * from test;"} />
             </Box>
+          ) : CurrentType === "graph" ? (
+            prompt && (
+              <Box
+                sx={{
+                  height: "100%",
+                  margin: 0,
+                  width: "100%",
+                  borderRadius: "10px",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  animation: "fallingEffect2 0.8s ease forwards",
+                  position: "relative",
+                  zIndex: 10,
+                  opacity: 0,
+                }}
+              >
+                <GraphModal2
+                  prompt={prompt as Prompt}
+                  validatePrompt={submitValidate}
+                />
+              </Box>
+            )
           ) : (
             <PannelArea
-              sql={prompt?.sql ?? "Select * from test;"}
               content={content}
               handleUpdate={() => handleUpdate()}
               isOpenSelectBar={isOpenSelectBar}

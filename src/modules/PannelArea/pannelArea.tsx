@@ -28,7 +28,6 @@ interface PannelAreaProps {
     original: string;
   };
   handleUpdate?: () => void;
-  sql?: string;
   isOpenSelectBar?: boolean;
   handleCloseSelectBar?: () => void;
   handleOpenSelectBar?: () => void;
@@ -37,7 +36,6 @@ interface PannelAreaProps {
 const PannelArea: FC<PannelAreaProps> = ({
   content,
   handleUpdate,
-  sql,
   isOpenSelectBar,
   handleCloseSelectBar,
   handleOpenSelectBar,
@@ -107,10 +105,9 @@ const PannelArea: FC<PannelAreaProps> = ({
           flexDirection={"column"}
           gap={"5px"}
           sx={{
-            width:
-              isOpenSelectBar
-                ? { lg: "76%", md: "70%", xs: "60%" }
-                : "100%",
+            width: isOpenSelectBar
+              ? { lg: "76%", md: "70%", xs: "60%" }
+              : "100%",
             height: "100%",
             justifyContent: "space-between",
             overflowX: "hidden",
@@ -175,7 +172,6 @@ const PannelArea: FC<PannelAreaProps> = ({
             />
           </Box>
         )}
-
       </Box>
       {content ? (
         ""

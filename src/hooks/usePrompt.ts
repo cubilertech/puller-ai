@@ -1,4 +1,4 @@
-import { UpdateIsLoadingRequest } from "@/libs/redux/features/isLoadingRequest";
+import { UpdateCurrentPage, UpdateIsLoadingRequest } from "@/libs/redux/features/isLoadingRequest";
 import { useAppDispatch } from "@/libs/redux/hooks";
 import { submitPromptPayload, Prompt } from "@/utils/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -46,7 +46,7 @@ export const useSubmitPrompt = () => {
 
 export const useGetSinglePrompt = (promptId: string) => {
   const router = useRouter();
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   async function submit(promptId: string): Promise<Prompt | null> {
     try {
       const encodedPromptId = encodeURIComponent(`query#${promptId}`);
@@ -78,6 +78,9 @@ export const useGetSinglePrompt = (promptId: string) => {
     enabled: false,
     onSuccess: () => {
       dispatch(UpdateIsLoadingRequest(false));
+    },
+    onError: () => {
+      dispatch(UpdateCurrentPage("create"));
     },
     //   refetchInterval: 60_000,
     // placeholderData: [],

@@ -32,7 +32,7 @@ function Page() {
         return;
       }
       if (id) {
-        clearInterval(intervalId);
+        clearInterval(intervalId);  
         return;
       }
 
