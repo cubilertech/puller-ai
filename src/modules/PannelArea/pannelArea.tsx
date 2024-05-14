@@ -19,8 +19,6 @@ import {
   UpdateIsLoadingRequest,
   getIsLoadingRequest,
 } from "@/libs/redux/features/isLoadingRequest";
-import { CustomLink } from "@/components/Link";
-import { Button } from "@/components/Button";
 
 interface PannelAreaProps {
   content?: {
@@ -77,7 +75,6 @@ const PannelArea: FC<PannelAreaProps> = ({
       dispatch(UpdateIsLoadingRequest("create"));
     }
   }, [submitPromptError, isSuccess]);
-  console.log(isLoading, "isLoading");
   return (
     <Box
       sx={{

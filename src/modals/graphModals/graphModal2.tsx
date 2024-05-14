@@ -28,7 +28,7 @@ const position = { x: 0, y: 0 };
 const edgeType = "smoothstep";
 
 const nodeWidth = 200;
-const nodeHeight = 100;
+const nodeHeight = 200;
 
 const getLayoutedElements = (nodes: any[], edges: any[], direction = "TB") => {
   const isHorizontal = direction === "LR";

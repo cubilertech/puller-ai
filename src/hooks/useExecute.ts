@@ -1,3 +1,5 @@
+import { UpdateCurrentPage, UpdateIsLoadingRequest } from "@/libs/redux/features/isLoadingRequest";
+import { useAppDispatch } from "@/libs/redux/hooks";
 import { submitExecutePayload, Query } from "@/utils/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -6,6 +8,7 @@ import { toast } from "react-toastify";
 
 export const useSubmitExecute = () => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
   async function submit(data: submitExecutePayload): Promise<Query | null> {
     try {
@@ -30,13 +33,14 @@ export const useSubmitExecute = () => {
   return useMutation({
     mutationFn: submit,
     onSuccess: (data) => {
-      console.log(data,'data');
       const id = data?.id?.includes("#") ? data?.id?.split("#")?.[1] : data?.id;
       setTimeout(() => {
         router.push(`/request/results/${id}`);
       }, 1000);
+      dispatch(UpdateIsLoadingRequest(false));
     },
     onError: (error: any) => {
+      dispatch(UpdateCurrentPage("create"));
       toast.error(error?.response?.data?.message ?? (error.message as string));
       console.log(error, "error in validating request");
     },

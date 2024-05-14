@@ -182,6 +182,7 @@ const ResponseArea: FC<ResponseAreaProps> = ({
                   width: "122px",
                   height: "38px !important",
                 }}
+                disabled={isLoading}
                 onClick={handleUpdate}
                 label="Run Query"
                 variant="contained"

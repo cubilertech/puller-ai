@@ -20,7 +20,13 @@ const CreateRequestPage = () => {
             : undefined
         }
       />
-      <Box sx={{ pt: 2, width: "100%", m: "auto" }}>
+      <Box
+        sx={{
+          pt: CURRENT_MODE === MODES.PILOT ? "55px" : 2,
+          width: "100%",
+          m: "auto",
+        }}
+      >
         <PannelArea />
       </Box>
     </Box>
