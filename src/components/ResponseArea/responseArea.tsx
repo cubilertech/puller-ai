@@ -8,12 +8,12 @@ import "./responseArea.css";
 import { Icon } from "../Icon";
 
 interface ResponseAreaProps {
-  content: {
+  content?: {
     response: string;
     original: string;
   };
   handleUpdate?: () => void;
-  isLoading: boolean;
+  isLoading?: boolean;
 }
 
 const ResponseArea: FC<ResponseAreaProps> = ({
@@ -114,7 +114,7 @@ const ResponseArea: FC<ResponseAreaProps> = ({
             component="p"
             className="animated-genrated-text"
           >
-            {content.response}
+            {content?.response}
           </Typography>
         )}
       </Paper>
@@ -172,7 +172,7 @@ const ResponseArea: FC<ResponseAreaProps> = ({
                     maxWidth: "100%",
                   }}
                 >
-                  {content.original}
+                  {content?.original}
                 </Typography>
               )}
             </Box>

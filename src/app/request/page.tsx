@@ -4,6 +4,7 @@ import { getCurrentPage } from "@/libs/redux/features/isLoadingRequest";
 import { useAppSelector } from "@/libs/redux/hooks";
 import CreateRequestPage from "@/modules/CreateRequestPage/CreateRequestPage";
 import ValidateRequestPage from "@/modules/ValidateRequestPage/validateRequestPage";
+import { isClient } from "@/utils/constants";
 import { useEffect, useState } from "react";
 
 function Page() {
@@ -13,12 +14,14 @@ function Page() {
 
   useEffect(() => {
     const getIdFromParams = () => {
-      const url = window.location.href;
-      const urlParams = new URLSearchParams(url.split("?")[1]);
-      const idParams = urlParams.get("id");
+      if (isClient) {
+        const url = window.location.href;
+        const urlParams = new URLSearchParams(url.split("?")[1]);
+        const idParams = urlParams.get("id");
 
-      if (idParams) {
-        setId(idParams);
+        if (idParams) {
+          setId(idParams);
+        }
       }
     };
     getIdFromParams();
@@ -32,7 +35,7 @@ function Page() {
         return;
       }
       if (id) {
-        clearInterval(intervalId);  
+        clearInterval(intervalId);
         return;
       }
 

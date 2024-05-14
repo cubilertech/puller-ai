@@ -146,6 +146,7 @@ const PannelArea: FC<PannelAreaProps> = ({
               >
                 {LatestPullsData.map((item, i) => (
                   <LatestPullesCard
+                    key={i}
                     data={item}
                     onClick={() => handleLatestPulls(item.text)}
                   />

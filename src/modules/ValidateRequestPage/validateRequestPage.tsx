@@ -12,6 +12,7 @@ import { useSubmitValidate } from "@/hooks/useValidate";
 import { Prompt } from "@/utils/types";
 import { Icon } from "@/components/Icon";
 import { Paper } from "@/components/Paper";
+import { ResponseArea } from "@/components/ResponseArea";
 interface Props {
   id: string;
 }
@@ -112,38 +113,22 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
 
         {/* <GraphModal open={openGraph} handleClose={() => handleOpenGraph()} /> */}
         {submitValidateLoading ? (
-          <Paper
-            variant="dark-border"
+          <Box
             sx={{
-              border: `1px solid ${palette.color.gray[700]}`,
-              height: "fit-content",
-              padding: 2,
               display: "flex",
-              gap: 1,
-              pb: 5,
-              alignItems: "flex-start",
-              m: 0,
+              width: isOpenSelectBar
+                ? { lg: "76%", md: "70%", xs: "60%" }
+                : "100%",
+              height: "calc(100vh - 174px)",
+              flexDirection: "column",
+              justifyContent: "space-between",
+              overflowX: "hidden",
+              transition: "width 0.5s ease",
               mt: 1,
             }}
           >
-            <Box>
-              <Box sx={{ transform: "scale(200%)", mt: 0.7 }}>
-                <Icon icon="logoIcon" height={30} width={30} />
-              </Box>
-            </Box>
-            <pre
-              style={{
-                width: "100%",
-                paddingRight: 50,
-                margin: "auto",
-                textAlign: "start",
-              }}
-            >
-              <Skeleton style={{ width: "100%", margin: "0", height: 32 }} />
-              <Skeleton style={{ width: "100%", margin: "0", height: 32 }} />
-              <Skeleton style={{ width: "80%", margin: "0", height: 32 }} />
-            </pre>
-          </Paper>
+            <ResponseArea isLoading={submitValidateLoading} />
+          </Box>
         ) : (
           <Box sx={{ width: "100%", m: "auto", pt: 2 }}>
             {CurrentType === "SQL" ? (

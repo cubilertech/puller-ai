@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../store";
+import { isClient } from "@/utils/constants";
 
 interface validateRequestState {
   isLoadingRequest: boolean;
@@ -7,8 +8,16 @@ interface validateRequestState {
 }
 
 const initialState: validateRequestState = {
-  isLoadingRequest: window.location.href.split("?")[1] ? true : false,
-  CurrentPage: window.location.href.split("?")[1] ? "validate" : "create",
+  isLoadingRequest: isClient
+    ? window.location.href.split("?")[1]
+      ? true
+      : false
+    : false,
+  CurrentPage: isClient
+    ? window.location.href.split("?")[1]
+      ? "validate"
+      : "create"
+    : "create",
 };
 
 const LoadingRequest = createSlice({
