@@ -103,7 +103,7 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
               sx: {
                 background:
                   CurrentType === "SQL" ? palette.color.gray[650] : "none",
-                fontWeight: CurrentType === "SQL" ? "bold" : 500,
+                fontWeight: CurrentType === "SQL" ? "bold" : 400,
               },
               onClick: () => handleOpenSQL_Editor(),
             },
@@ -113,7 +113,7 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
               sx: {
                 background:
                   CurrentType === "graph" ? palette.color.gray[650] : "none",
-                fontWeight: CurrentType === "graph" ? "bold" : 500,
+                fontWeight: CurrentType === "graph" ? "bold" : 400,
               },
               onClick: () => handleOpenGraph(),
             },

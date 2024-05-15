@@ -76,12 +76,11 @@ const CustomButton: FC<buttonProps> = ({
           sx={{
             border: `1px solid var(--vison-pro-stock, ${palette.base.white})`,
             backgroundColor: "none",
-            width: 76,
+            width: 60,
             height: "32px !important",
             py: 2,
             px: 4,
-            fontSize: "18px",
-            fontWeight: 500,
+            fontSize: "16px",
             background: "none !important",
             ":hover": {
               background: palette.linearGradient.darkBlue,
