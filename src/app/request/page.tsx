@@ -38,14 +38,11 @@ function Page() {
         clearInterval(intervalId);
         return;
       }
-
-      console.log(id, "id");
       getIdFromParams();
     }, 1000);
     setisCurrentPage(currentPage);
     return () => clearInterval(intervalId);
   }, [currentPage]);
-  console.log(currentPage, "currentPage");
   return (
     <AppLayout>
       {isCurrentPage === "validate" || id ? (

@@ -1,3 +1,5 @@
+
+
 export const icons = {
   logo: "/Images/logos/logo.svg",
   outlinedBookMark: "/Images/Icons/outlined-bookMark.svg",
@@ -331,3 +333,4 @@ export const MODES = {
 
 export const CURRENT_MODE =
   process.env.NEXT_PUBLIC_MODE === MODES.PILOT ? MODES.PILOT : MODES.DEMO;
+

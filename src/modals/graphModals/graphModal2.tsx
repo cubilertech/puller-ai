@@ -191,13 +191,14 @@ const GraphModal2 = ({ prompt, validatePrompt }: props) => {
   }, []);
 
   return (
-    <Box sx={{ width: "100%", height: "calc(100vh - 180px)" }}>
+    <Box sx={{ width: "100%", height: "calc(100vh - 298px)" }}>
       <Paper
         variant="dark-border"
         sx={{
           height: "100%",
           width: "100%",
           zIndex: 1,
+          m: 0
         }}
       >
         <ReactFlow

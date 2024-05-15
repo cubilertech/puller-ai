@@ -1,4 +1,7 @@
-import { UpdateCurrentPage, UpdateIsLoadingRequest } from "@/libs/redux/features/isLoadingRequest";
+import {
+  UpdateCurrentPage,
+  UpdateIsLoadingRequest,
+} from "@/libs/redux/features/isLoadingRequest";
 import { useAppDispatch } from "@/libs/redux/hooks";
 import { submitExecutePayload, Query } from "@/utils/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -32,11 +35,10 @@ export const useSubmitExecute = () => {
   }
   return useMutation({
     mutationFn: submit,
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
       const id = data?.id?.includes("#") ? data?.id?.split("#")?.[1] : data?.id;
-      setTimeout(() => {
-        router.push(`/request/results/${id}`);
-      }, 1000);
+      router.push(`/request/results/${id}`);
+      await new Promise((resolve) => setTimeout(resolve, 1000)); 
       dispatch(UpdateIsLoadingRequest(false));
     },
     onError: (error: any) => {

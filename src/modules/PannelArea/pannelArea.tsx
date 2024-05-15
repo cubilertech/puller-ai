@@ -17,6 +17,7 @@ import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
 import {
   UpdateCurrentPage,
   UpdateIsLoadingRequest,
+  getCurrentPage,
   getIsLoadingRequest,
 } from "@/libs/redux/features/isLoadingRequest";
 
@@ -25,22 +26,23 @@ interface PannelAreaProps {
     response: string;
     original: string;
   };
-  handleUpdate?: () => void;
+  // handleUpdate?: () => void;
   isOpenSelectBar?: boolean;
   handleCloseSelectBar?: () => void;
-  handleOpenSelectBar?: () => void;
+  // handleOpenSelectBar?: () => void;
 }
 
 const PannelArea: FC<PannelAreaProps> = ({
   content,
-  handleUpdate,
+  // handleUpdate,
   isOpenSelectBar,
   handleCloseSelectBar,
-  handleOpenSelectBar,
+  // handleOpenSelectBar,
 }) => {
   const [prompt, setPrompt] = useState("");
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const isLoading = useAppSelector(getIsLoadingRequest);
+  const CurrentPage = useAppSelector(getCurrentPage);
   const dispatch = useAppDispatch();
   const {
     mutate: submitPrompt,
@@ -81,7 +83,10 @@ const PannelArea: FC<PannelAreaProps> = ({
         display: "flex",
         flexDirection: "column",
         justifyContent: "flex-end",
-        height: "calc(100vh - 180px)",
+        height:
+          CurrentPage === "validate"
+            ? "calc(100vh - 275px)"
+            : "calc(100vh - 168px)",
         width: "100%",
         gap: 2,
         overflowX: "hidden",
@@ -112,13 +117,13 @@ const PannelArea: FC<PannelAreaProps> = ({
           }}
         >
           {content ? (
-            <>
+            <div>
               <ResponseArea
                 content={content}
-                handleUpdate={handleUpdate ? () => handleUpdate() : undefined}
+                // handleUpdate={handleUpdate ? () => handleUpdate() : undefined}
                 isLoading={isLoading}
               />
-            </>
+            </div>
           ) : (
             <Box sx={{ display: "flex", flexDirection: "column", gap: 5 }}>
               <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -166,7 +171,7 @@ const PannelArea: FC<PannelAreaProps> = ({
             <OptionsBar
               close={handleCloseSelectBar}
               variant="square-checkbox"
-              handleUpdate={handleUpdate ? () => handleUpdate() : undefined}
+              // handleUpdate={handleUpdate ? () => handleUpdate() : undefined}
             />
           </Box>
         )}

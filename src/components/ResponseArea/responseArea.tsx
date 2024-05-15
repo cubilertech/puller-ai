@@ -12,13 +12,13 @@ interface ResponseAreaProps {
     response: string;
     original: string;
   };
-  handleUpdate?: () => void;
+  // handleUpdate?: () => void;
   isLoading?: boolean;
 }
 
 const ResponseArea: FC<ResponseAreaProps> = ({
   content,
-  handleUpdate,
+  // handleUpdate,
   isLoading,
 }) => {
   return (
@@ -119,8 +119,8 @@ const ResponseArea: FC<ResponseAreaProps> = ({
         )}
       </Paper>
 
-      <Box display={"flex"} flexDirection={"column"} gap={"1rem"}>
-        {/* origninal text */}
+      {/* <Box display={"flex"} flexDirection={"column"} gap={"1rem"}>
+        {/* origninal text *
         <Paper
           variant="dark-border"
           sx={{
@@ -190,7 +190,7 @@ const ResponseArea: FC<ResponseAreaProps> = ({
             </Box>
           </Box>
         </Paper>
-        {/* down text */}
+        {/* down text *
         <Box sx={{ width: "100%", justifyContent: "center", display: "flex" }}>
           {isLoading ? (
             <Skeleton style={{ width: "90%", margin: "auto" }} />
@@ -206,7 +206,7 @@ const ResponseArea: FC<ResponseAreaProps> = ({
             </Typography>
           )}
         </Box>
-      </Box>
+      </Box> */}
     </>
   );
 };

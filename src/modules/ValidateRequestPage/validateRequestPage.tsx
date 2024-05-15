@@ -10,9 +10,14 @@ import { palette } from "@/theme/Palette";
 import { SQL_Editor } from "@/components/sql_Editor";
 import { useSubmitValidate } from "@/hooks/useValidate";
 import { Prompt } from "@/utils/types";
-import { Icon } from "@/components/Icon";
-import { Paper } from "@/components/Paper";
+
 import { ResponseArea } from "@/components/ResponseArea";
+import { QueryComponent } from "@/components/QuaryComponent";
+import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
+import {
+  UpdateIsLoadingRequest,
+  getCurrentPage,
+} from "@/libs/redux/features/isLoadingRequest";
 interface Props {
   id: string;
 }
@@ -20,9 +25,10 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
   const [CurrentType, setCurrentType] = useState<"text" | "graph" | "SQL">(
     "text"
   );
+  const dispatch = useAppDispatch();
+  const CurrentPage = useAppSelector(getCurrentPage);
   const [isOpenSelectBar, setIsOpenSelectBar] = useState(false);
-  const { mutate: submitExecute, isError: submitExecuteError } =
-    useSubmitExecute();
+  const { mutate: submitExecute, isLoading: isLoadingExecute } = useSubmitExecute();
   const {
     data: validatedPrompt,
     mutate: submitValidate,
@@ -87,6 +93,7 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
               sx: {
                 background:
                   CurrentType === "text" ? palette.color.gray[650] : "none",
+                fontWeight: CurrentType === "text" ? "bold" : 500,
               },
               onClick: () => handleOpenTxt(),
             },
@@ -96,6 +103,7 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
               sx: {
                 background:
                   CurrentType === "SQL" ? palette.color.gray[650] : "none",
+                fontWeight: CurrentType === "SQL" ? "bold" : 500,
               },
               onClick: () => handleOpenSQL_Editor(),
             },
@@ -105,13 +113,13 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
               sx: {
                 background:
                   CurrentType === "graph" ? palette.color.gray[650] : "none",
+                fontWeight: CurrentType === "graph" ? "bold" : 500,
               },
               onClick: () => handleOpenGraph(),
             },
           ]}
         />
 
-        {/* <GraphModal open={openGraph} handleClose={() => handleOpenGraph()} /> */}
         {submitValidateLoading ? (
           <Box
             sx={{
@@ -130,11 +138,17 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
             <ResponseArea isLoading={submitValidateLoading} />
           </Box>
         ) : (
-          <Box sx={{ width: "100%", m: "auto", pt: 2 }}>
+          <Box
+            sx={{
+              height: "calc(100vh - 180px)",
+              width: "100%",
+              m: "auto",
+              pt: 2,
+            }}
+          >
             {CurrentType === "SQL" ? (
               <Box
                 sx={{
-                  height: "100%",
                   margin: 0,
                   width: "100%",
                   borderRadius: "10px",
@@ -145,6 +159,7 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
                   position: "relative",
                   zIndex: 10,
                   opacity: 1,
+                  mb: 2,
                 }}
               >
                 <SQL_Editor code={prompt?.sql ?? "Select * from test;"} />
@@ -153,7 +168,6 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
               prompt && (
                 <Box
                   sx={{
-                    height: "100%",
                     margin: 0,
                     width: "100%",
                     borderRadius: "10px",
@@ -164,6 +178,7 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
                     position: "relative",
                     zIndex: 10,
                     opacity: 0,
+                    mb: 3,
                   }}
                 >
                   <GraphModal2
@@ -175,11 +190,14 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
             ) : (
               <PannelArea
                 content={content}
-                handleUpdate={() => handleUpdate()}
+                // handleUpdate={() => handleUpdate()}
                 isOpenSelectBar={isOpenSelectBar}
-                handleOpenSelectBar={() => handleOpenSelectBar()}
+                // handleOpenSelectBar={() => handleOpenSelectBar()}
                 handleCloseSelectBar={() => handleCloseSelectBar()}
               />
+            )}
+            {CurrentPage === "validate" && (
+              <QueryComponent content={content} isLoading={isLoadingExecute} handleUpdate={handleUpdate} />
             )}
           </Box>
         )}

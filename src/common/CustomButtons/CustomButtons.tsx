@@ -80,9 +80,11 @@ const CustomButton: FC<buttonProps> = ({
             height: "32px !important",
             py: 2,
             px: 4,
+            fontSize: "18px",
+            fontWeight: 500,
             background: "none !important",
             ":hover": {
-              background: palette.color.gray[650],
+              background: palette.linearGradient.darkBlue,
             },
             ...sx,
           }}
@@ -90,7 +92,7 @@ const CustomButton: FC<buttonProps> = ({
           onClick={onClick}
           variant="outlined"
         >
-          <Typography variant="text-md-bold">{text}</Typography>
+          {text}
         </Button>
         // </div>
       );
