@@ -40,7 +40,6 @@ const SideNavbar = () => {
     if (isRequest) {
       dispatch(UpdateCurrentPage("create"));
     }
-    console.log(link, "link");
     Route.push(isAlert ? "#" : link);
   };
   return (

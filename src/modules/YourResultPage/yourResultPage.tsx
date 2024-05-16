@@ -42,7 +42,7 @@ const YourResultsPage: FC<Props> = ({ id }) => {
           }}
         >
           <Box sx={{ width: "60%", height: "70%" }}>
-            <Loader type="Processing" variant="paper" />
+            <Loader type="Loading" variant="paper" />
           </Box>
         </Box>
       ) : (
