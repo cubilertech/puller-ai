@@ -3,7 +3,7 @@ import { palette } from "@/theme/Palette";
 import { Box, Typography } from "@mui/material";
 import { Icon } from "../Icon";
 import { usePathname, useRouter } from "next/navigation";
-import { CURRENT_MODE, MODES, PagesType } from "@/utils/constants";
+import { CURRENT_MODE, MODES, PagesType, isPilotMode } from "@/utils/constants";
 import CustomLink from "../Link/link";
 import NotificationIconButton from "@/common/notificationIconButton/notificationIconButton";
 import CustomButton from "@/common/CustomButtons/CustomButtons";
@@ -89,13 +89,13 @@ const TopNavBar = () => {
             iconHeight={24}
             iconWidth={24}
             onClick={() => handleClickAlerts()}
-            isNotice
+            isNotice={isPilotMode ? false : true}
           />
           <NotificationIconButton
             icon="bell"
             iconHeight={24}
             iconWidth={24}
-            isNotice
+            isNotice={isPilotMode ? false : true}
             onClick={() => handleClickAlerts()}
           />
           <CustomButton

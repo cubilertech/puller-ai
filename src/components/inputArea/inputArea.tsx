@@ -51,7 +51,8 @@ const InputAreaComponent: FC<InputAreaComponentPorps> = ({
             <span
               style={{
                 display: "contents",
-                maxHeight: "10rem",
+                width: "100%",
+                height: "100%",
                 overflow: "auto",
               }}
             >
@@ -116,32 +117,32 @@ const InputAreaComponent: FC<InputAreaComponentPorps> = ({
               </Box>
             </Box>
           ) : ( */}
-            <Tooltip
-              variant="info"
-              title={
-                CURRENT_MODE === MODES.PILOT
-                  ? "This Feature is not available in Private Beta"
-                  : ""
-              }
-            >
-              <Box width={163}>
-                <Button
-                  size="medium"
-                  variant="outlined"
-                  label="Manage Sources"
-                  disabled={CURRENT_MODE === MODES.PILOT ? true : isLoading}
-                  fullWidth
-                  endIcon={
-                    <Icon
-                      icon="minus"
-                      height={2}
-                      width={8}
-                      disabled={CURRENT_MODE === MODES.PILOT ? true : isLoading}
-                    />
-                  }
-                />
-              </Box>
-            </Tooltip>
+          <Tooltip
+            variant="info"
+            title={
+              CURRENT_MODE === MODES.PILOT
+                ? "This Feature is not available in Private Beta"
+                : ""
+            }
+          >
+            <Box width={163}>
+              <Button
+                size="medium"
+                variant="outlined"
+                label="Manage Sources"
+                disabled={CURRENT_MODE === MODES.PILOT ? true : isLoading}
+                fullWidth
+                endIcon={
+                  <Icon
+                    icon="minus"
+                    height={2}
+                    width={8}
+                    disabled={CURRENT_MODE === MODES.PILOT ? true : isLoading}
+                  />
+                }
+              />
+            </Box>
+          </Tooltip>
           {/* )} */}
 
           {isLoading ? (
