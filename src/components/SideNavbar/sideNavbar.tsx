@@ -219,7 +219,7 @@ const SideNavbar = () => {
                           minWidth: 0,
                         }}
                       >
-                        <InfoOutlined sx={{ width: 18, height: 18 }} />
+                        <InfoOutlined sx={{ width: 19, height: 19 }} />
                       </ListItemIcon>
                       <ListItemText
                         sx={{
