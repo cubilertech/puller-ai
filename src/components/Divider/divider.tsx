@@ -8,13 +8,14 @@ interface DividerProps {
   sx?: SxProps;
 }
 
-const Divider: FC<DividerProps> = ({ variant, type }) => {
+const Divider: FC<DividerProps> = ({ variant, type, sx }) => {
   return (
     <MuiDivider
       variant={variant}
       sx={{
         borderColor:
           type === "dark" ? "rgb(40, 41, 44)" : "rgba(90, 90, 90, 1)",
+        ...sx,
       }}
     />
   );

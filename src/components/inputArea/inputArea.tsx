@@ -6,6 +6,7 @@ import { FC } from "react";
 import { CustomInput } from "@/modules/PannelArea/input";
 import { CURRENT_MODE, MODES } from "@/utils/constants";
 import { Tooltip } from "../Tooltip";
+import { Divider } from "../Divider";
 
 interface InputAreaComponentPorps {
   handleValidate: () => void;
@@ -25,10 +26,10 @@ const InputAreaComponent: FC<InputAreaComponentPorps> = ({
   value,
 }) => {
   return (
-    <Paper variant="light-border">
+    <Paper variant="light-border" sx={{ border: "none" }}>
       <Box
         sx={{
-         p: "12px"
+          p: "12px",
         }}
       >
         <Box
@@ -36,7 +37,7 @@ const InputAreaComponent: FC<InputAreaComponentPorps> = ({
             marginBottom: "0.8rem",
           }}
         >
-          <Paper
+          {/* <Paper
             variant="dark-border"
             sx={{
               backdropFilter: "none",
@@ -47,22 +48,27 @@ const InputAreaComponent: FC<InputAreaComponentPorps> = ({
               maxHeight: "15rem",
               borderRadius: "8px",
             }}
+          > */}
+          <span
+            style={{
+              display: "contents",
+              width: "100%",
+              minHeight: "8rem",
+              overflow: "auto",
+            }}
           >
-            <span
-              style={{
-                display: "contents",
-                width: "100%",
-                height: "100%",
-                overflow: "auto",
-              }}
-            >
-              <CustomInput
-                disabled={isLoading}
-                value={value}
-                onChange={(event) => onChangeInput(event)}
-              />
-            </span>
-          </Paper>
+            <CustomInput
+              disabled={isLoading}
+              value={value}
+              onChange={(event) => onChangeInput(event)}
+            />
+          </span>
+          <Divider
+            variant="fullWidth"
+            type="light"
+            sx={{ borderColor: "#969696" }}
+          />
+          {/* </Paper> */}
         </Box>
         <Box
           sx={{
