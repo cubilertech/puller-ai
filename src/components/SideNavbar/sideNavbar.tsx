@@ -43,11 +43,6 @@ const SideNavbar = () => {
     console.log(link, "link");
     Route.push(isAlert ? "#" : link);
   };
-  useEffect(() => {
-    if (pathname === "/") {
-      Route.push("/request");
-    }
-  }, [Route, pathname]);
   return (
     <Box
       sx={{
