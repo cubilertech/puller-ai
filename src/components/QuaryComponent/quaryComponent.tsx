@@ -11,11 +11,11 @@ import {
 } from "@/libs/redux/features/isLoadingRequest";
 
 interface QueryComponentProps {
-  content: {
+  content?: {
     response: string;
     original: string;
   };
-  handleUpdate: () => void;
+  handleUpdate?: () => void;
   isLoading: boolean;
 }
 

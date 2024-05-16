@@ -28,7 +28,8 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
   const dispatch = useAppDispatch();
   const CurrentPage = useAppSelector(getCurrentPage);
   const [isOpenSelectBar, setIsOpenSelectBar] = useState(false);
-  const { mutate: submitExecute, isLoading: isLoadingExecute } = useSubmitExecute();
+  const { mutate: submitExecute, isLoading: isLoadingExecute } =
+    useSubmitExecute();
   const {
     data: validatedPrompt,
     mutate: submitValidate,
@@ -127,7 +128,7 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
               width: isOpenSelectBar
                 ? { lg: "76%", md: "70%", xs: "60%" }
                 : "100%",
-              height: "calc(100vh - 174px)",
+              height: "calc(100vh - 156px)",
               flexDirection: "column",
               justifyContent: "space-between",
               overflowX: "hidden",
@@ -136,6 +137,7 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
             }}
           >
             <ResponseArea isLoading={submitValidateLoading} />
+            <QueryComponent isLoading={submitValidateLoading} />
           </Box>
         ) : (
           <Box
@@ -197,7 +199,11 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
               />
             )}
             {CurrentPage === "validate" && (
-              <QueryComponent content={content} isLoading={isLoadingExecute} handleUpdate={handleUpdate} />
+              <QueryComponent
+                content={content}
+                isLoading={isLoadingExecute}
+                handleUpdate={handleUpdate}
+              />
             )}
           </Box>
         )}
