@@ -21,17 +21,19 @@ export const CustomInput: FC<CustomInputProps> = ({
         boxSizing: "border-box",
         borderRadius: "5px",
         width: "100%",
-        minHeight: "100%",
-        maxHeight: "8rem",
-        height: "5rem",
+        // height: "100%",
+        // minHeight: "100%",
+        // maxHeight: "16rem",
+        // height: "5rem",
+        minHeight: "7rem",
         alignItems: "flex-start",
-        overflowY: "auto",
+        // overflowY: "auto",
         resize: "none",
-        padding: "0.5rem",
+        padding: "0.4rem 0.3rem ",
         background: "transparent",
         outline: 0,
         color: disabled ? "#738285" : "#fff",
-        fontFamily: "inherit", // Inherit font family for consistency
+        fontFamily: "inherit",
       }}
       onChange={onChange}
     />

@@ -1,14 +1,12 @@
 "use client";
-import { Box, Skeleton, Typography } from "@mui/material";
-import { Paper } from "../../components/Paper";
+import { Box, Typography } from "@mui/material";
 import { FC, useEffect, useState } from "react";
 import { palette } from "@/theme/Palette";
 import { CreateInputAreaComponent } from "@/components/inputArea";
 import { OptionsBar } from "@/components/optionsBar";
 import "./panelArea.css";
-import { SQL_Editor } from "@/components/sql_Editor";
 import { useSubmitPrompt } from "@/hooks/usePrompt";
-import { CURRENT_MODE, MODES, dummySQL } from "@/utils/constants";
+import { CURRENT_MODE, MODES } from "@/utils/constants";
 import { AlertModal } from "@/modals/AlertModal";
 import { ResponseArea } from "@/components/ResponseArea";
 import { LatestPullesCard } from "@/components/Latestpulles-Card";
@@ -145,7 +143,7 @@ const PannelArea: FC<PannelAreaProps> = ({
                         fontWeight: 500,
                       }}
                     >
-                      How can I help you today?
+                       Create a pull request to get started
                     </Typography>
                   </Box>
 

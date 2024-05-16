@@ -42,7 +42,7 @@ const YourResultsPage: FC<Props> = ({ id }) => {
           }}
         >
           <Box sx={{ width: "60%", height: "70%" }}>
-            <Loader type="Processing" variant="paper" />
+            <Loader type="Loading" variant="paper" />
           </Box>
         </Box>
       ) : (
@@ -53,6 +53,7 @@ const YourResultsPage: FC<Props> = ({ id }) => {
             mt: 1,
             opacity: fadeIn ? 1 : 0,
             transition: "opacity 1s ease",
+            px: 0.5
           }}
         >
           <PageHeader title="Your Results" />

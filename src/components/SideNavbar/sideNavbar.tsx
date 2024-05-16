@@ -40,7 +40,6 @@ const SideNavbar = () => {
     if (isRequest) {
       dispatch(UpdateCurrentPage("create"));
     }
-    console.log(link, "link");
     Route.push(isAlert ? "#" : link);
   };
   return (
@@ -84,13 +83,13 @@ const SideNavbar = () => {
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "flex-end",
-                mt: "20px",
+                mt: "0px",
               }}
             >
               <Box
                 sx={{
                   width: "100%",
-                  mt: 1,
+                  mt: 1.2,
                   pl: 2.1,
                 }}
               >
@@ -105,7 +104,7 @@ const SideNavbar = () => {
                     borderRadius: "50px",
                     width: "fit-content",
                     padding: "0px 8px",
-                    mr: "20px",
+                    mr: "30px",
                     mt: "-15px",
                     backgroundColor: "#263f50",
                     border: 0,
@@ -129,7 +128,7 @@ const SideNavbar = () => {
               )}
             </Box>
 
-            <Box sx={{ mt: 2 }}>
+            <Box sx={{ mt: 1 }}>
               <List>
                 {SideBar_Data.map((item, index) => (
                   <ListItem key={index} sx={{ py: "4px" }}>
@@ -204,7 +203,7 @@ const SideNavbar = () => {
           <Box>
             <List>
               {CURRENT_MODE === MODES.PILOT && (
-                <ListItem sx={{ py: 0 }}>
+                <ListItem sx={{ pb: 3 }}>
                   <div className="navbar-container">
                     <MuiListItemButton
                       onClick={() => handleAlert("alert")}
@@ -220,7 +219,7 @@ const SideNavbar = () => {
                           minWidth: 0,
                         }}
                       >
-                        <InfoOutlined sx={{ width: 18, height: 18 }} />
+                        <InfoOutlined sx={{ width: 19, height: 19 }} />
                       </ListItemIcon>
                       <ListItemText
                         sx={{
@@ -233,41 +232,42 @@ const SideNavbar = () => {
                   </div>
                 </ListItem>
               )}
-              {[
-                {
-                  name: "Administration",
-                  img: <Icon width={18} height={18} icon="adminIcon" />,
-                },
-              ].map((text, index) => (
-                <ListItem key={index}>
-                  <div className="navbar-container">
-                    <MuiListItemButton
-                      sx={{
-                        color: palette.base.white,
-                        border:
-                          path === text.name
-                            ? "1px solid #8f8f94"
-                            : "1px solid transparent",
-                        height: "40px",
-                      }}
-                    >
-                      <ListItemIcon
+              {CURRENT_MODE === MODES.DEMO &&
+                [
+                  {
+                    name: "Administration",
+                    img: <Icon width={18} height={18} icon="adminIcon" />,
+                  },
+                ].map((text, index) => (
+                  <ListItem key={index}>
+                    <div className="navbar-container">
+                      <MuiListItemButton
                         sx={{
-                          minWidth: 0,
+                          color: palette.base.white,
+                          border:
+                            path === text.name
+                              ? "1px solid #8f8f94"
+                              : "1px solid transparent",
+                          height: "40px",
                         }}
                       >
-                        {text.img}
-                      </ListItemIcon>
-                      <ListItemText
-                        sx={{
-                          fontSize: "14px",
-                        }}
-                        primary={text.name}
-                      />
-                    </MuiListItemButton>
-                  </div>
-                </ListItem>
-              ))}
+                        <ListItemIcon
+                          sx={{
+                            minWidth: 0,
+                          }}
+                        >
+                          {text.img}
+                        </ListItemIcon>
+                        <ListItemText
+                          sx={{
+                            fontSize: "14px",
+                          }}
+                          primary={text.name}
+                        />
+                      </MuiListItemButton>
+                    </div>
+                  </ListItem>
+                ))}
             </List>
           </Box>
         </Box>
