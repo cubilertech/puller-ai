@@ -5,6 +5,7 @@ import { isClient } from "@/utils/constants";
 interface validateRequestState {
   isLoadingRequest: boolean;
   CurrentPage: "validate" | "create";
+  PromptValue: string;
 }
 
 const initialState: validateRequestState = {
@@ -18,6 +19,7 @@ const initialState: validateRequestState = {
       ? "validate"
       : "create"
     : "create",
+  PromptValue: "",
 };
 
 const LoadingRequest = createSlice({
@@ -30,6 +32,9 @@ const LoadingRequest = createSlice({
     UpdateCurrentPage: (state, action) => {
       state.CurrentPage = action.payload;
     },
+    UpdatePromptValue: (state, action) => {
+      state.PromptValue = action.payload;
+    },
   },
 });
 
@@ -38,6 +43,9 @@ export const getIsLoadingRequest = (state: RootState) =>
 export const getCurrentPage = (state: RootState) =>
   state.LoadingRequest.CurrentPage;
 
-export const { UpdateIsLoadingRequest, UpdateCurrentPage } =
+export const getPromptValue = (state: RootState) =>
+  state.LoadingRequest.PromptValue;
+
+export const { UpdateIsLoadingRequest, UpdateCurrentPage, UpdatePromptValue } =
   LoadingRequest.actions;
 export default LoadingRequest.reducer;

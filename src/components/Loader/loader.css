@@ -13,8 +13,31 @@
   }
 }
 
+@keyframes dots {
+  0% {
+    content: "";
+  }
+  33% {
+    content: ".";
+  }
+  66% {
+    content: "..";
+  }
+  100% {
+    content: "...";
+  }
+}
 .typing-animation {
   min-width: 12rem;
+}
+.typing-animation3::before {
+  content: "";
+  animation: dots 1s steps(3) infinite; /* changed steps(16) to steps(3) */
+  overflow: hidden;
+  white-space: nowrap;
+  min-width: 10rem;
+  margin-left: 2.3rem;
+  display: inline-block; /* added display: inline-block */
 }
 
 .typing-animation::before {

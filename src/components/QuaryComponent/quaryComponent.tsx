@@ -5,7 +5,10 @@ import { Button } from "../Button";
 import { CustomLink } from "../Link";
 import { FC } from "react";
 import { useAppSelector } from "@/libs/redux/hooks";
-import { getIsLoadingRequest } from "@/libs/redux/features/isLoadingRequest";
+import {
+  getIsLoadingRequest,
+  getPromptValue,
+} from "@/libs/redux/features/isLoadingRequest";
 
 interface QueryComponentProps {
   content: {
@@ -22,7 +25,7 @@ const QueryComponent: FC<QueryComponentProps> = ({
   handleUpdate,
 }) => {
   const isLoadingPage = useAppSelector(getIsLoadingRequest);
-
+  const PromptValue = useAppSelector(getPromptValue);
   return (
     <Box display={"flex"} flexDirection={"column"} gap={"1rem"}>
       {/* origninal text */}
@@ -77,7 +80,7 @@ const QueryComponent: FC<QueryComponentProps> = ({
                   maxWidth: "100%",
                 }}
               >
-                {content?.original}
+                {PromptValue ? PromptValue : content?.original}
               </Typography>
             )}
           </Box>

@@ -15,6 +15,7 @@ import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
 import {
   UpdateCurrentPage,
   UpdateIsLoadingRequest,
+  UpdatePromptValue,
   getCurrentPage,
   getIsLoadingRequest,
 } from "@/libs/redux/features/isLoadingRequest";
@@ -52,9 +53,12 @@ const PannelArea: FC<PannelAreaProps> = ({
     setConsoleMessage(message);
   });
 
-  const handleAvailable = () => {
+  const handleAvailable = async () => {
     submitPrompt({ message: prompt });
-    dispatch(UpdateIsLoadingRequest(true));
+    await dispatch(UpdateIsLoadingRequest(true));
+    if (prompt) {
+      await dispatch(UpdatePromptValue(prompt));
+    }
     // dispatch(UpdateCurrentPage("validate"));
   };
   const handleTextareaChange = (event: any) => {
@@ -81,8 +85,12 @@ const PannelArea: FC<PannelAreaProps> = ({
   }, [submitPromptError]);
   return (
     <>
-      {isLoading && CurrentPage === 'create' ? (
-        <Loader type="Processing" variant="pageLoader" message={consoleMessage} />
+      {isLoading && CurrentPage === "create" ? (
+        <Loader
+          type="Processing"
+          variant="pageLoader"
+          message={consoleMessage}
+        />
       ) : (
         <Box
           sx={{
@@ -143,7 +151,7 @@ const PannelArea: FC<PannelAreaProps> = ({
                         fontWeight: 500,
                       }}
                     >
-                       Create a pull request to get started
+                      Create a pull request to get started
                     </Typography>
                   </Box>
 

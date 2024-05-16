@@ -12,7 +12,7 @@ interface LoaderProps {
   message?: string;
 }
 
-const Loader: FC<LoaderProps> = ({ variant, type , message}) => {
+const Loader: FC<LoaderProps> = ({ variant, type, message }) => {
   const [showLoader, setShowLoader] = useState(true);
 
   useEffect(() => {
@@ -109,8 +109,19 @@ const Loader: FC<LoaderProps> = ({ variant, type , message}) => {
 
                 <Typography
                   variant="display-xs-medium"
-              
-                >{message ?? 'Loading'}</Typography>
+                  sx={{ position: "relative", display: "inline-block" }} // added display: inline-block
+                >
+                  {message ?? "Loading"}
+                  <Typography
+                    sx={{
+                      position: "absolute",
+                      right: -159,
+                      top: 1, // added top: 0 to align vertically
+                    }}
+                    variant="display-xs-medium"
+                    className="typing-animation3"
+                  ></Typography>
+                </Typography>
               </Box>
             </Box>
           </Paper>
