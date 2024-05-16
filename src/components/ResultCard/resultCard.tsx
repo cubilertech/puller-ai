@@ -26,9 +26,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
     } else route.push("/request/recent");
   };
   const handleAdvanced = () => {
-    if (CURRENT_MODE === MODES.PILOT) {
-      setIsOpenAlert(true);
-    } else route.push("/advanced");
+    route.push("/advanced");
   };
   const handleDownload = () => {
     const link = document.createElement("a");

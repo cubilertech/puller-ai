@@ -53,6 +53,7 @@ const YourResultsPage: FC<Props> = ({ id }) => {
             mt: 1,
             opacity: fadeIn ? 1 : 0,
             transition: "opacity 1s ease",
+            px: 0.5
           }}
         >
           <PageHeader title="Your Results" />
