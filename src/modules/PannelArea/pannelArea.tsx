@@ -20,6 +20,7 @@ import {
   getCurrentPage,
   getIsLoadingRequest,
 } from "@/libs/redux/features/isLoadingRequest";
+import { Loader } from "@/components/Loader";
 
 interface PannelAreaProps {
   content?: {
@@ -43,17 +44,20 @@ const PannelArea: FC<PannelAreaProps> = ({
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const isLoading = useAppSelector(getIsLoadingRequest);
   const CurrentPage = useAppSelector(getCurrentPage);
+  const [consoleMessage, setConsoleMessage] = useState<string>("");
   const dispatch = useAppDispatch();
   const {
-    mutate: submitPrompt,
+    customMutate: submitPrompt,
     isError: submitPromptError,
     isSuccess,
-  } = useSubmitPrompt();
+  } = useSubmitPrompt((message) => {
+    setConsoleMessage(message);
+  });
 
   const handleAvailable = () => {
     submitPrompt({ message: prompt });
     dispatch(UpdateIsLoadingRequest(true));
-    dispatch(UpdateCurrentPage("validate"));
+    // dispatch(UpdateCurrentPage("validate"));
   };
   const handleTextareaChange = (event: any) => {
     setPrompt(event.target.value);
@@ -74,125 +78,131 @@ const PannelArea: FC<PannelAreaProps> = ({
   useEffect(() => {
     if (submitPromptError) {
       dispatch(UpdateIsLoadingRequest(false));
-      dispatch(UpdateIsLoadingRequest("create"));
+      dispatch(UpdateCurrentPage("create"));
     }
-  }, [submitPromptError, isSuccess]);
+  }, [submitPromptError]);
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "flex-end",
-        height:
-          CurrentPage === "validate"
-            ? "calc(100vh - 275px)"
-            : "calc(100vh - 168px)",
-        width: "100%",
-        gap: 2,
-        overflowX: "hidden",
-      }}
-    >
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "flex-start",
-          height: "calc(100vh - 180px)",
-          width: "100%",
-          alignItems: "flex-end",
-          flexGrow: "1",
-        }}
-      >
+    <>
+      {isLoading && CurrentPage === 'create' ? (
+        <Loader type="Processing" variant="pageLoader" message={consoleMessage} />
+      ) : (
         <Box
-          display={"flex"}
-          flexDirection={"column"}
-          gap={"5px"}
           sx={{
-            width: isOpenSelectBar
-              ? { lg: "76%", md: "70%", xs: "60%" }
-              : "100%",
-            height: "100%",
-            justifyContent: "space-between",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "flex-end",
+            height:
+              CurrentPage === "validate"
+                ? "calc(100vh - 275px)"
+                : "calc(100vh - 168px)",
+            width: "100%",
+            gap: 2,
             overflowX: "hidden",
-            transition: "width 0.5s ease",
           }}
         >
-          {content ? (
-            <div>
-              <ResponseArea
-                content={content}
-                // handleUpdate={handleUpdate ? () => handleUpdate() : undefined}
-                isLoading={isLoading}
-              />
-            </div>
-          ) : (
-            <Box sx={{ display: "flex", flexDirection: "column", gap: 5 }}>
-              <Box sx={{ display: "flex", flexDirection: "column" }}>
-                <Typography className="animated-text animated-left-right-text">
-                  Hello, Abdul{" "}
-                </Typography>
-                <Typography
-                  sx={{
-                    color: palette.color.gray[600],
-                    fontSize: "50px",
-                    fontWeight: 500,
-                  }}
-                >
-                  How can I help you today?
-                </Typography>
-              </Box>
-
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  width: "100%",
-                  gap: 2,
-                }}
-              >
-                {LatestPullsData.map((item, i) => (
-                  <LatestPullesCard
-                    key={i}
-                    data={item}
-                    onClick={() => handleLatestPulls(item.text)}
-                  />
-                ))}
-              </Box>
-            </Box>
-          )}
-        </Box>
-
-        {isOpenSelectBar && (
           <Box
-            className={isOpenSelectBar ? "slide-in" : "slide-out"}
             sx={{
-              width: { lg: "26%", md: "38%", sm: "40%" },
+              display: "flex",
+              justifyContent: "flex-start",
+              height: "calc(100vh - 180px)",
+              width: "100%",
+              alignItems: "flex-end",
+              flexGrow: "1",
             }}
           >
-            <OptionsBar
-              close={handleCloseSelectBar}
-              variant="square-checkbox"
-              // handleUpdate={handleUpdate ? () => handleUpdate() : undefined}
-            />
+            <Box
+              display={"flex"}
+              flexDirection={"column"}
+              gap={"5px"}
+              sx={{
+                width: isOpenSelectBar
+                  ? { lg: "76%", md: "70%", xs: "60%" }
+                  : "100%",
+                height: "100%",
+                justifyContent: "space-between",
+                overflowX: "hidden",
+                transition: "width 0.5s ease",
+              }}
+            >
+              {content ? (
+                <div>
+                  <ResponseArea
+                    content={content}
+                    // handleUpdate={handleUpdate ? () => handleUpdate() : undefined}
+                    isLoading={isLoading}
+                  />
+                </div>
+              ) : (
+                <Box sx={{ display: "flex", flexDirection: "column", gap: 5 }}>
+                  <Box sx={{ display: "flex", flexDirection: "column" }}>
+                    <Typography className="animated-text animated-left-right-text">
+                      Hello, Abdul{" "}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        color: palette.color.gray[600],
+                        fontSize: "50px",
+                        fontWeight: 500,
+                      }}
+                    >
+                      How can I help you today?
+                    </Typography>
+                  </Box>
+
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      width: "100%",
+                      gap: 2,
+                    }}
+                  >
+                    {LatestPullsData.map((item, i) => (
+                      <LatestPullesCard
+                        key={i}
+                        data={item}
+                        onClick={() => handleLatestPulls(item.text)}
+                      />
+                    ))}
+                  </Box>
+                </Box>
+              )}
+            </Box>
+
+            {isOpenSelectBar && (
+              <Box
+                className={isOpenSelectBar ? "slide-in" : "slide-out"}
+                sx={{
+                  width: { lg: "26%", md: "38%", sm: "40%" },
+                }}
+              >
+                <OptionsBar
+                  close={handleCloseSelectBar}
+                  variant="square-checkbox"
+                  // handleUpdate={handleUpdate ? () => handleUpdate() : undefined}
+                />
+              </Box>
+            )}
           </Box>
-        )}
-      </Box>
-      {content ? (
-        ""
-      ) : (
-        <CreateInputAreaComponent
-          handlePrompt={handlePrompt}
-          handleSource={handleSource}
-          handleValidate={handleAvailable}
-          onChangeInput={handleTextareaChange}
-          isLoading={isLoading}
-          value={prompt}
-        />
+          {content ? (
+            ""
+          ) : (
+            <CreateInputAreaComponent
+              handlePrompt={handlePrompt}
+              handleSource={handleSource}
+              handleValidate={handleAvailable}
+              onChangeInput={handleTextareaChange}
+              isLoading={isLoading}
+              value={prompt}
+            />
+          )}
+          <AlertModal
+            open={isOpenAlert}
+            handleClose={() => setIsOpenAlert(false)}
+          />
+        </Box>
       )}
-      <AlertModal
-        open={isOpenAlert}
-        handleClose={() => setIsOpenAlert(false)}
-      />
-    </Box>
+    </>
   );
 };
 

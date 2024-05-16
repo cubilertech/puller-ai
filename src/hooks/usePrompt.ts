@@ -6,18 +6,20 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
-export const useSubmitPrompt = () => {
+export const useSubmitPrompt = (
+  handleConsoleMessages: (message: string) => void
+) => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
   async function submit(data: submitPromptPayload): Promise<Prompt | null> {
     try {
       const res = await axios({
-        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/v0/query/prompt`,
+        url:  `${process.env.NEXT_PUBLIC_BACKEND_URL}/v0/query/prompt`,
         method: "POST",
         data,
         headers: {
           "Content-Type": "application/json",
         },
-        withCredentials: true,
       });
       if (res.status === 200) {
         return res.data;
@@ -29,20 +31,86 @@ export const useSubmitPrompt = () => {
       return null;
     }
   }
-  return useMutation({
+
+  const { mutate, ...mutationProps } = useMutation({
     mutationFn: submit,
-    onSuccess: (data) => {
+    onSuccess: async (data) => {
+      // dispatch(UpdateIsLoadingRequest(false));
       const id = data?.id?.includes("#") ? data?.id?.split("#")?.[1] : data?.id;
-      setTimeout(() => {
-        router.push(`/request?id=${id}`);
-      }, 1000);
+      // setTimeout(() => {
+       router.push(`/request?id=${id}`);
+      // }, 1000);
+      await new Promise((resolve) => setTimeout(resolve, 1000)); 
+      dispatch(UpdateCurrentPage("validate"));
     },
     onError: (error: any) => {
       toast.error(error?.response?.data?.message ?? (error.message as string));
       console.log(error, "error in validating request");
     },
   });
+
+  // Timeout logic
+  let timeoutId: NodeJS.Timeout | null = null;
+  const handleTimeout = () => {
+    if (timeoutId) {
+      clearTimeout(timeoutId);
+      timeoutId = null;
+    }
+    handleConsoleMessages("Generating SQL");
+    timeoutId = setTimeout(() => {
+      handleConsoleMessages("Preparing Graph");
+      timeoutId = setTimeout(() => {
+        handleConsoleMessages("Finalizing");
+        timeoutId = null;
+      }, 2000); // Finalizing after 2 seconds of preparing graph
+    }, 2000); // Preparing graph after 2 seconds of generating SQL
+  };
+
+  const customMutate = async (...args: Parameters<typeof mutate>) => {
+    handleTimeout();
+    await mutate(...args);
+  };
+
+  return { customMutate, ...mutationProps };
 };
+
+// export const useSubmitPrompt = () => {
+//   const router = useRouter();
+//   async function submit(data: submitPromptPayload): Promise<Prompt | null> {
+//     try {
+//       const res = await axios({
+//         url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/v0/query/prompt`,
+//         method: "POST",
+//         data,
+//         headers: {
+//           "Content-Type": "application/json",
+//         },
+//         withCredentials: true,
+//       });
+//       if (res.status === 200) {
+//         return res.data;
+//       } else {
+//         return null;
+//       }
+//     } catch (error) {
+//       console.error("Network error:", error);
+//       return null;
+//     }
+//   }
+//   return useMutation({
+//     mutationFn: submit,
+//     onSuccess: (data) => {
+//       const id = data?.id?.includes("#") ? data?.id?.split("#")?.[1] : data?.id;
+//       setTimeout(() => {
+//         router.push(`/request?id=${id}`);
+//       }, 1000);
+//     },
+//     onError: (error: any) => {
+//       toast.error(error?.response?.data?.message ?? (error.message as string));
+//       console.log(error, "error in validating request");
+//     },
+//   });
+// };
 
 export const useGetSinglePrompt = (promptId: string) => {
   const router = useRouter();

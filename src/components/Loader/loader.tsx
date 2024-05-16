@@ -9,9 +9,10 @@ import { LoaderVariants } from "@/utils/types";
 interface LoaderProps {
   variant: LoaderVariants;
   type: "Loading" | "Processing";
+  message?: string;
 }
 
-const Loader: FC<LoaderProps> = ({ variant, type }) => {
+const Loader: FC<LoaderProps> = ({ variant, type , message}) => {
   const [showLoader, setShowLoader] = useState(true);
 
   useEffect(() => {
@@ -72,7 +73,7 @@ const Loader: FC<LoaderProps> = ({ variant, type }) => {
           justifyContent={"center"}
           alignItems={"center"}
           sx={{
-            height: "100%",
+            height: "calc(100vh - 180px)",
             margin: 0,
             padding: 0,
             width: "100%",
@@ -108,12 +109,8 @@ const Loader: FC<LoaderProps> = ({ variant, type }) => {
 
                 <Typography
                   variant="display-xs-medium"
-                  className={
-                    type === "Loading"
-                      ? "typing2-animation"
-                      : "typing-animation"
-                  }
-                ></Typography>
+              
+                >{message ?? 'Loading'}</Typography>
               </Box>
             </Box>
           </Paper>
