@@ -75,8 +75,11 @@ const PannelArea: FC<PannelAreaProps> = ({
       setIsOpenAlert(true);
     }
   };
-  const handleLatestPulls = (text: string) => {
-    setPrompt(text);
+  const handleLatestPulls = async (text: string) => {
+    // setPrompt(text);
+    await submitPrompt({ message: text });
+    await dispatch(UpdateIsLoadingRequest(true));
+    await dispatch(UpdatePromptValue(text));
   };
   useEffect(() => {
     if (submitPromptError) {
