@@ -5,12 +5,19 @@ import { useAppSelector } from "@/libs/redux/hooks";
 import CreateRequestPage from "@/modules/CreateRequestPage/CreateRequestPage";
 import ValidateRequestPage from "@/modules/ValidateRequestPage/validateRequestPage";
 import { isClient } from "@/utils/constants";
+import { useParams, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 function Page() {
   const [id, setId] = useState<string | null>(null);
   const [isCurrentPage, setisCurrentPage] = useState<string | null>(null);
   const currentPage = useAppSelector(getCurrentPage);
+  const searchParams = useSearchParams()
+ 
+  const search = searchParams.get('id')
+ 
+  // This will not be logged on the server when using static rendering
+  console.log(search, "id")
 
   useEffect(() => {
     const getIdFromParams = () => {
