@@ -20,6 +20,7 @@ import {
   getIsLoadingRequest,
 } from "@/libs/redux/features/isLoadingRequest";
 import { Loader } from "@/components/Loader";
+import { motion } from "framer-motion";
 
 interface PannelAreaProps {
   content?: {
@@ -74,8 +75,11 @@ const PannelArea: FC<PannelAreaProps> = ({
       setIsOpenAlert(true);
     }
   };
-  const handleLatestPulls = (text: string) => {
-    setPrompt(text);
+  const handleLatestPulls = async (text: string) => {
+    // setPrompt(text);
+    await submitPrompt({ message: text });
+    await dispatch(UpdateIsLoadingRequest(true));
+    await dispatch(UpdatePromptValue(text));
   };
   useEffect(() => {
     if (submitPromptError) {
@@ -166,11 +170,19 @@ const PannelArea: FC<PannelAreaProps> = ({
                     }}
                   >
                     {LatestPullsData.map((item, i) => (
-                      <LatestPullesCard
-                        key={i}
-                        data={item}
-                        onClick={() => handleLatestPulls(item.text)}
-                      />
+                      <motion.div
+                        animate={{ y: [-240, 0] }}
+                        transition={{
+                          duration: i === 0 ? 1 : i,
+                          ease: "easeInOut",
+                        }}
+                      >
+                        <LatestPullesCard
+                          key={i}
+                          data={item}
+                          onClick={() => handleLatestPulls(item.text)}
+                        />
+                      </motion.div>
                     ))}
                   </Box>
                 </Box>
