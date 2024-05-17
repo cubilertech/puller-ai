@@ -37,10 +37,10 @@ export const useSubmitPrompt = (
     onSuccess: async (data) => {
       // dispatch(UpdateIsLoadingRequest(false));
       const id = data?.id?.includes("#") ? data?.id?.split("#")?.[1] : data?.id;
-      // setTimeout(() => {
+      setTimeout(() => {
        router.push(`/request?id=${id}`);
-      // }, 1000);
-      await new Promise((resolve) => setTimeout(resolve, 1000)); 
+      }, 1000);
+      // await new Promise((resolve) => setTimeout(resolve, 1000)); 
       dispatch(UpdateCurrentPage("validate"));
     },
     onError: (error: any) => {

@@ -83,6 +83,8 @@ const PannelArea: FC<PannelAreaProps> = ({
       dispatch(UpdateCurrentPage("create"));
     }
   }, [submitPromptError]);
+
+  console.log(consoleMessage,'message');
   return (
     <>
       {isLoading && CurrentPage === "create" ? (

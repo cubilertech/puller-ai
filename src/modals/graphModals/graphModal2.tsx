@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import ReactFlow, {
   addEdge,
   ConnectionLineType,
@@ -20,6 +20,7 @@ import CustomNode from "./customNode";
 import "./customNode.css";
 import { Prompt, Variable } from "@/utils/types";
 import { Button } from "@/components/Button";
+import { Loader } from "@/components/Loader";
 
 const dagreGraph = new dagre.graphlib.Graph();
 dagreGraph.setDefaultEdgeLabel(() => ({}));
@@ -67,14 +68,8 @@ interface props {
   validatePrompt: (data: any) => void;
 }
 
-const GraphModal2 = ({ prompt, validatePrompt }: props) => {
-  let initialNodes2: any[] = [];
-  let initialEdges2: any[] = [];
-  const [variables, setVariables] = useState(prompt?.variables ?? []);
-  const variablesInitialArray = prompt?.variables ?? [];
-  // useEffect(()=>{
-
-  initialNodes2 = prompt?.graph?.map((item, index) => {
+const getNodes = (prompt: Prompt) => {
+  const result = prompt?.graph?.map((item, index) => {
     let variable = prompt?.variables.find((_item) => _item.model === item.id);
     return {
       id: item.id,
@@ -96,9 +91,13 @@ const GraphModal2 = ({ prompt, validatePrompt }: props) => {
       },
     };
   });
+  return result ?? [];
+};
+const getEdges = (prompt: Prompt) => {
+  const result: any[] = [];
   prompt?.graph?.forEach((item) => {
     item.depends.forEach((dep: any) => {
-      initialEdges2.push({
+      result.push({
         id: `e${item.id}${dep}`,
         source: item.id,
         target: dep,
@@ -107,6 +106,27 @@ const GraphModal2 = ({ prompt, validatePrompt }: props) => {
       });
     });
   });
+  return result ?? [];
+};
+
+const GraphModal2 = ({ prompt, validatePrompt }: props) => {
+  // let initialNodes2: any[] = [];
+  // let initialEdges2: any[] = [];
+  const [isLoading, setIsLoading] = useState(true);
+  const [variables, setVariables] = useState(prompt?.variables ?? []);
+  const variablesInitialArray = prompt?.variables ?? [];
+  // useEffect(()=>{
+
+  const initialNodes2 = getNodes(prompt);
+  const initialEdges2 = getEdges(prompt);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setNodes(initialNodes2);
+      setIsLoading(false);
+    }, 1000);
+  }, []);
+
   // setNodes(initialNodes2);
   // setEdges(initialEdges2);
   // },[])
@@ -198,32 +218,45 @@ const GraphModal2 = ({ prompt, validatePrompt }: props) => {
           height: "100%",
           width: "100%",
           zIndex: 1,
-          m: 0
+          m: 0,
         }}
       >
-        <ReactFlow
-          nodeTypes={nodeTypes}
-          nodes={nodes}
-          edges={edges}
-          onNodesChange={onNodesChange}
-          onEdgesChange={onEdgesChange}
-          onConnect={onConnect}
-          connectionLineType={ConnectionLineType.SmoothStep}
-          fitView
+        {isLoading ? (
+          <Box
+            sx={{
+              position: "absolute",
+              left: "50%",
+              top: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
           >
-          <Controls />
-          {JSON.stringify(variablesInitialArray) !==
-            JSON.stringify(variables) && (
-            <Panel position="bottom-right">
-              <Button
-                variant="contained"
-                label="Save Changes"
-                onClick={handleSubmit}
-              />
-            </Panel>
-          )}
-          <Background />
-        </ReactFlow>
+            <Loader variant="simple" type="Loading" />
+          </Box>
+        ) : (
+          <ReactFlow
+            nodeTypes={nodeTypes}
+            nodes={nodes}
+            edges={edges}
+            onNodesChange={onNodesChange}
+            onEdgesChange={onEdgesChange}
+            onConnect={onConnect}
+            connectionLineType={ConnectionLineType.SmoothStep}
+            fitView
+          >
+            <Controls />
+            {JSON.stringify(variablesInitialArray) !==
+              JSON.stringify(variables) && (
+              <Panel position="bottom-right">
+                <Button
+                  variant="contained"
+                  label="Save Changes"
+                  onClick={handleSubmit}
+                />
+              </Panel>
+            )}
+            <Background />
+          </ReactFlow>
+        )}
       </Paper>
     </Box>
   );
