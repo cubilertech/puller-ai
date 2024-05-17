@@ -6,6 +6,7 @@ import { Paper } from "../Paper";
 import { CustomLink } from "../Link";
 import "./responseArea.css";
 import { Icon } from "../Icon";
+import { motion } from "framer-motion";
 
 interface ResponseAreaProps {
   content?: {
@@ -30,14 +31,18 @@ const ResponseArea: FC<ResponseAreaProps> = ({
           border: `1px solid ${palette.color.gray[700]}`,
           height: "fit-content",
           padding: 2,
-          display: "flex",
           gap: 1,
           pb: 5,
-          alignItems: "flex-start",
           m: 0,
           mt: 1,
         }}
       >
+        <Typography
+          variant="text-md-medium"
+          sx={{ color: palette.base.white, overflow: "hidden" }}
+        >
+          Your Prompt response is here:
+        </Typography>
         {/* <Typography
           variant={"display-xs"}
           sx={{
@@ -81,42 +86,51 @@ const ResponseArea: FC<ResponseAreaProps> = ({
           which is determined from INT DB for Product ID values 1234 and 5678
         </Typography> */}
         {/* gif loader */}
-        <Box>
-          <Box sx={{ transform: "scale(200%)", mt: 0.7 }}>
-            <Icon icon="logoIcon" height={30} width={30} />
+        <Box
+          sx={{
+            display: "flex",
+            gap: 1,
+            alignItems: "flex-start",
+            mt: 1,
+          }}
+        >
+          <Box>
+            <Box sx={{ transform: "scale(200%)", mt: 0.7 }}>
+              <Icon icon="logoIcon" height={30} width={30} />
+            </Box>
           </Box>
-        </Box>
-        {isLoading ? (
-          <>
-            <pre
-              style={{
-                width: "100%",
-                paddingRight: 50,
-                margin: "auto",
+          {isLoading ? (
+            <>
+              <pre
+                style={{
+                  width: "100%",
+                  paddingRight: 50,
+                  margin: "auto",
+                  textAlign: "start",
+                }}
+              >
+                <Skeleton style={{ width: "100%", margin: "0", height: 32 }} />
+                <Skeleton style={{ width: "100%", margin: "0", height: 32 }} />
+                <Skeleton style={{ width: "80%", margin: "0", height: 32 }} />
+              </pre>
+            </>
+          ) : (
+            <Typography
+              variant={"display-xs-response"}
+              sx={{
+                width: "98%",
+                pr: 5,
+                m: "auto",
                 textAlign: "start",
+                color: palette.base.white,
               }}
+              component="p"
+              className="animated-genrated-text"
             >
-              <Skeleton style={{ width: "100%", margin: "0", height: 32 }} />
-              <Skeleton style={{ width: "100%", margin: "0", height: 32 }} />
-              <Skeleton style={{ width: "80%", margin: "0", height: 32 }} />
-            </pre>
-          </>
-        ) : (
-          <Typography
-            variant={"display-xs-response"}
-            sx={{
-              width: "98%",
-              pr: 5,
-              m: "auto",
-              textAlign: "start",
-              color: palette.base.white,
-            }}
-            component="p"
-            className="animated-genrated-text"
-          >
-            {content?.response}
-          </Typography>
-        )}
+              {content?.response}
+            </Typography>
+          )}
+        </Box>
       </Paper>
 
       {/* <Box display={"flex"} flexDirection={"column"} gap={"1rem"}>
