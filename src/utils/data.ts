@@ -597,4 +597,7 @@ export const LatestPullsData = [
   {
     text: "Find the 20 largest payments",
   },
+  {
+    text: "Find the fifty most expensive orders",
+  },
 ];

@@ -158,9 +158,11 @@ const PannelArea: FC<PannelAreaProps> = ({
                   <Box
                     sx={{
                       display: "flex",
-                      justifyContent: "space-between",
+                      justifyContent: "start",
                       width: "100%",
                       gap: 2,
+                      overflow: "auto",
+                      scrollbarWidth: "none",
                     }}
                   >
                     {LatestPullsData.map((item, i) => (

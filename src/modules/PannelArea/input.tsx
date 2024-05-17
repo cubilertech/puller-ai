@@ -34,6 +34,7 @@ export const CustomInput: FC<CustomInputProps> = ({
         outline: 0,
         color: disabled ? "#738285" : "#fff",
         fontFamily: "inherit",
+        fontSize: "17px"
       }}
       onChange={onChange}
     />

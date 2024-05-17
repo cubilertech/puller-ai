@@ -1,5 +1,5 @@
 "use client";
-import { Box, Skeleton } from "@mui/material";
+import { Box } from "@mui/material";
 import React, { FC, useEffect, useMemo, useState } from "react";
 import { PannelArea } from "../../modules/PannelArea";
 import { PageHeader } from "@/components/PageHeader";
@@ -15,9 +15,9 @@ import { ResponseArea } from "@/components/ResponseArea";
 import { QueryComponent } from "@/components/QuaryComponent";
 import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
 import {
-  UpdateIsLoadingRequest,
   getCurrentPage,
 } from "@/libs/redux/features/isLoadingRequest";
+import { motion } from "framer-motion";
 interface Props {
   id: string;
 }
@@ -84,90 +84,75 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
 
   return (
     <>
-      <Box sx={{ px: 2, pt: 1, m: "auto" }}>
-        <PageHeader
-          title="Validate Request"
-          buttons={[
-            {
-              label: "TXT",
-              variant: "rounded-SQL",
-              sx: {
-                background:
-                  CurrentType === "text" ? palette.color.gray[650] : "none",
-                fontWeight: CurrentType === "text" ? "bold" : 500,
+      <motion.div
+        animate={{ opacity: [0, 1] }}
+        transition={{ duration: 0.5, ease: "easeInOut" }}
+      >
+        <Box sx={{ px: 2, pt: 1, m: "auto" }}>
+          <PageHeader
+            title="Validate Request"
+            buttons={[
+              {
+                label: "TXT",
+                variant: "rounded-SQL",
+                sx: {
+                  background:
+                    CurrentType === "text" ? palette.color.gray[650] : "none",
+                  fontWeight: CurrentType === "text" ? "bold" : 500,
+                },
+                onClick: () => handleOpenTxt(),
               },
-              onClick: () => handleOpenTxt(),
-            },
-            {
-              label: "SQL",
-              variant: "rounded-SQL",
-              sx: {
-                background:
-                  CurrentType === "SQL" ? palette.color.gray[650] : "none",
-                fontWeight: CurrentType === "SQL" ? "bold" : 400,
+              {
+                label: "SQL",
+                variant: "rounded-SQL",
+                sx: {
+                  background:
+                    CurrentType === "SQL" ? palette.color.gray[650] : "none",
+                  fontWeight: CurrentType === "SQL" ? "bold" : 400,
+                },
+                onClick: () => handleOpenSQL_Editor(),
               },
-              onClick: () => handleOpenSQL_Editor(),
-            },
-            {
-              label: "Graph",
-              variant: "rounded-SQL",
-              sx: {
-                background:
-                  CurrentType === "graph" ? palette.color.gray[650] : "none",
-                fontWeight: CurrentType === "graph" ? "bold" : 400,
+              {
+                label: "Graph",
+                variant: "rounded-SQL",
+                sx: {
+                  background:
+                    CurrentType === "graph" ? palette.color.gray[650] : "none",
+                  fontWeight: CurrentType === "graph" ? "bold" : 400,
+                },
+                onClick: () => handleOpenGraph(),
               },
-              onClick: () => handleOpenGraph(),
-            },
-          ]}
-        />
+            ]}
+          />
 
-        {submitValidateLoading ? (
-          <Box
-            sx={{
-              display: "flex",
-              width: isOpenSelectBar
-                ? { lg: "76%", md: "70%", xs: "60%" }
-                : "100%",
-              height: "calc(100vh - 156px)",
-              flexDirection: "column",
-              justifyContent: "space-between",
-              overflowX: "hidden",
-              transition: "width 0.5s ease",
-              mt: 1,
-            }}
-          >
-            <ResponseArea isLoading={submitValidateLoading} />
-            <QueryComponent isLoading={submitValidateLoading} />
-          </Box>
-        ) : (
-          <Box
-            sx={{
-              height: "calc(100vh - 180px)",
-              width: "100%",
-              m: "auto",
-              pt: 2,
-            }}
-          >
-            {CurrentType === "SQL" ? (
-              <Box
-                sx={{
-                  margin: 0,
-                  width: "100%",
-                  borderRadius: "10px",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  animation: "fallingEffect 0.8s ease forwards",
-                  position: "relative",
-                  zIndex: 10,
-                  opacity: 1,
-                  mb: 2,
-                }}
-              >
-                <SQL_Editor code={prompt?.sql ?? "Select * from test;"} />
-              </Box>
-            ) : CurrentType === "graph" ? (
-              prompt && (
+          {submitValidateLoading ? (
+            <Box
+              sx={{
+                display: "flex",
+                width: isOpenSelectBar
+                  ? { lg: "76%", md: "70%", xs: "60%" }
+                  : "100%",
+                height: "calc(100vh - 156px)",
+                flexDirection: "column",
+                justifyContent: "space-between",
+                overflowX: "hidden",
+                transition: "width 0.5s ease",
+                mt: 1,
+              }}
+            >
+              <ResponseArea isLoading={submitValidateLoading} />
+              <QueryComponent isLoading={submitValidateLoading} />
+            </Box>
+          ) : (
+            <Box
+              sx={{
+                height: "calc(100vh - 180px)",
+                width: "100%",
+                m: "auto",
+                pt: 2,
+              }}
+            >
+              {CurrentType === "SQL" ? (
                 <Box
                   sx={{
                     margin: 0,
@@ -176,38 +161,58 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
                     display: "flex",
                     justifyContent: "center",
                     alignItems: "center",
-                    animation: "fallingEffect2 0.8s ease forwards",
+                    animation: "fallingEffect 0.8s ease forwards",
                     position: "relative",
                     zIndex: 10,
-                    opacity: 0,
-                    mb: 3,
+                    opacity: 1,
+                    mb: 2,
                   }}
                 >
-                  <GraphModal2
-                    prompt={prompt as Prompt}
-                    validatePrompt={submitValidate}
-                  />
+                  <SQL_Editor code={prompt?.sql ?? "Select * from test;"} />
                 </Box>
-              )
-            ) : (
-              <PannelArea
-                content={content}
-                // handleUpdate={() => handleUpdate()}
-                isOpenSelectBar={isOpenSelectBar}
-                // handleOpenSelectBar={() => handleOpenSelectBar()}
-                handleCloseSelectBar={() => handleCloseSelectBar()}
-              />
-            )}
-            {CurrentPage === "validate" && (
-              <QueryComponent
-                content={content}
-                isLoading={isLoadingExecute}
-                handleUpdate={handleUpdate}
-              />
-            )}
-          </Box>
-        )}
-      </Box>
+              ) : CurrentType === "graph" ? (
+                prompt && (
+                  <Box
+                    sx={{
+                      margin: 0,
+                      width: "100%",
+                      borderRadius: "10px",
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      animation: "fallingEffect2 0.8s ease forwards",
+                      position: "relative",
+                      zIndex: 10,
+                      opacity: 0,
+                      mb: 3,
+                    }}
+                  >
+                    <GraphModal2
+                      prompt={prompt as Prompt}
+                      validatePrompt={submitValidate}
+                    />
+                  </Box>
+                )
+              ) : (
+                <PannelArea
+                  content={content}
+                  // handleUpdate={() => handleUpdate()}
+                  isOpenSelectBar={isOpenSelectBar}
+                  // handleOpenSelectBar={() => handleOpenSelectBar()}
+                  handleCloseSelectBar={() => handleCloseSelectBar()}
+                />
+              )}
+              {CurrentPage === "validate" && (
+                <QueryComponent
+                  content={content}
+                  isLoading={isLoadingExecute}
+                  handleUpdate={handleUpdate}
+                />
+              )}
+            </Box>
+          )}
+        </Box>
+      </motion.div>
     </>
   );
 };

@@ -18,6 +18,8 @@ const LatestPullesCard: FC<LatestPullesCardProps> = ({ data, onClick }) => {
         border: `1px solid ${palette.color.gray[700]}`,
         height: "180px",
         width: "100%",
+        maxWidth: "320px",
+        minWidth: "280px",
         margin: 0,
         padding: 2,
         pr: 4,
