@@ -42,7 +42,7 @@ export const useSubmitPrompt = (
       }, 1000);
       // await new Promise((resolve) => setTimeout(resolve, 1000)); 
       dispatch(UpdateCurrentPage("validate"));
-      dispatch(UpdateIsLoadingRequest(false));
+      // dispatch(UpdateIsLoadingRequest(false));
     },
     onError: (error: any) => {
       toast.error(error?.response?.data?.message ?? (error.message as string));
