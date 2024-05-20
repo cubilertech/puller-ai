@@ -9,6 +9,7 @@ import { useAppDispatch } from "@/libs/redux/hooks";
 import {
   UpdateCurrentPage,
   UpdateIsLoadingRequest,
+  UpdatePromptValue,
 } from "@/libs/redux/features/isLoadingRequest";
 
 interface TemplateCardProps {
@@ -24,6 +25,7 @@ const TemplateCard: FC<TemplateCardProps> = ({ card, index }) => {
     router.push(`/request?id=${id}`);
     dispatch(UpdateCurrentPage("validate"));
     dispatch(UpdateIsLoadingRequest(true));
+    dispatch(UpdatePromptValue(card.query));
   };
   return (
     <Box
