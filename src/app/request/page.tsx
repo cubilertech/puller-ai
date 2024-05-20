@@ -17,7 +17,7 @@ function Page() {
   const search = searchParams.get('id')
  
   // This will not be logged on the server when using static rendering
-  console.log(search, "id")
+  // console.log(search, "id")
 
   useEffect(() => {
     const getIdFromParams = () => {

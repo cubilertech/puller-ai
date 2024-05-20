@@ -5,7 +5,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
 import { AlertModal } from "@/modals/AlertModal";
 import { palette } from "@/theme/Palette";
-import { CURRENT_MODE, MODES } from "@/utils/constants";
+import { isPilotMode } from "@/utils/constants";
 import { Box, Input, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -14,7 +14,7 @@ const CreateAlertPage = () => {
   const router = useRouter();
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const handleCreateAlert = () => {
-    if (CURRENT_MODE === MODES.PILOT) {
+    if (isPilotMode) {
       setIsOpenAlert(true);
     } else router.push("/alerts/feedback");
   };

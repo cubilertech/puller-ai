@@ -6,7 +6,7 @@ import { CreateInputAreaComponent } from "@/components/inputArea";
 import { OptionsBar } from "@/components/optionsBar";
 import "./panelArea.css";
 import { useSubmitPrompt } from "@/hooks/usePrompt";
-import { CURRENT_MODE, MODES } from "@/utils/constants";
+import { isPilotMode } from "@/utils/constants";
 import { AlertModal } from "@/modals/AlertModal";
 import { ResponseArea } from "@/components/ResponseArea";
 import { LatestPullesCard } from "@/components/Latestpulles-Card";
@@ -70,12 +70,12 @@ const PannelArea: FC<PannelAreaProps> = ({
     setPrompt(event.target.value);
   };
   const handlePrompt = () => {
-    if (CURRENT_MODE === MODES.PILOT) {
+    if (isPilotMode) {
       setIsOpenAlert(true);
     }
   };
   const handleSource = () => {
-    if (CURRENT_MODE === MODES.PILOT) {
+    if (isPilotMode) {
       setIsOpenAlert(true);
     }
   };

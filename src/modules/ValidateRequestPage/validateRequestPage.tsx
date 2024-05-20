@@ -10,21 +10,19 @@ import { palette } from "@/theme/Palette";
 import { SQL_Editor } from "@/components/sql_Editor";
 import { useSubmitValidate } from "@/hooks/useValidate";
 import { Prompt } from "@/utils/types";
-
 import { ResponseArea } from "@/components/ResponseArea";
 import { QueryComponent } from "@/components/QuaryComponent";
-import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
+import { useAppSelector } from "@/libs/redux/hooks";
 import { getConsoleMessages, getCurrentPage, getIsLoadingPrompt } from "@/libs/redux/features/isLoadingRequest";
 import { motion } from "framer-motion";
 import { Loader } from "@/components/Loader";
-interface Props {
+interface Props { 
   id: string;
 }
 const ValidateRequestPage: FC<Props> = ({ id }) => {
   const [CurrentType, setCurrentType] = useState<"text" | "graph" | "SQL">(
     "text"
   );
-  const dispatch = useAppDispatch();
   const CurrentPage = useAppSelector(getCurrentPage);
   const ConsoleMessages = useAppSelector(getConsoleMessages);
   const isLoadingPrompt = useAppSelector(getIsLoadingPrompt);
@@ -64,9 +62,9 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
   const handleCloseSelectBar = () => {
     setIsOpenSelectBar(false);
   };
-  const handleOpenSelectBar = () => {
-    setIsOpenSelectBar(true);
-  };
+  // const handleOpenSelectBar = () => {
+  //   setIsOpenSelectBar(true);
+  // };
   useEffect(() => {
     if (id) {
       refetchPrompt();
@@ -151,6 +149,7 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
                 }}
               >
                 <ResponseArea isLoading={submitValidateLoading} />
+
                 <QueryComponent isLoading={submitValidateLoading} />
               </Box>
             ) : (

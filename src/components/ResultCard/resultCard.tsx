@@ -10,7 +10,7 @@ import CustomButton from "@/common/CustomButtons/CustomButtons";
 import { CustomLink } from "../Link";
 import { useRouter } from "next/navigation";
 import { AlertModal } from "@/modals/AlertModal";
-import { CURRENT_MODE, MODES } from "@/utils/constants";
+import { isPilotMode } from "@/utils/constants";
 
 interface ResultCardProps {
   data: CardData;
@@ -21,7 +21,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
   const [isOpenAlert, setIsOpenAlert] = useState(false);
 
   const handleOpen = () => {
-    if (CURRENT_MODE === MODES.PILOT) {
+    if (isPilotMode) {
       setIsOpenAlert(true);
     } else route.push("/request/recent");
   };

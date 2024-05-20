@@ -1,7 +1,7 @@
 import { PageHeader } from "@/components/PageHeader";
 import { Box } from "@mui/material";
 import { PannelArea } from "../PannelArea";
-import { CURRENT_MODE, MODES } from "@/utils/constants";
+import { isDemoMode, isPilotMode } from "@/utils/constants";
 import { Loader } from "@/components/Loader";
 import { useAppSelector } from "@/libs/redux/hooks";
 import { getConsoleMessages, getIsLoadingPrompt } from "@/libs/redux/features/isLoadingRequest";
@@ -22,7 +22,7 @@ const CreateRequestPage = () => {
           <PageHeader
             title="Create a Request"
             buttons={
-              CURRENT_MODE === MODES.DEMO
+              isDemoMode
                 ? [
                     {
                       label: "Request History",
@@ -35,7 +35,7 @@ const CreateRequestPage = () => {
           />
           <Box
             sx={{
-              pt: CURRENT_MODE === MODES.PILOT ? "55px" : 2,
+              pt: isPilotMode ? "55px" : 2,
               width: "100%",
               m: "auto",
             }}

@@ -3,7 +3,7 @@ import { PageHeader } from "@/components/PageHeader";
 
 import { RectangleCard } from "@/components/RectangleCard";
 import { AlertModal } from "@/modals/AlertModal";
-import { CURRENT_MODE, MODES } from "@/utils/constants";
+import { isPilotMode } from "@/utils/constants";
 import { Box } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -12,7 +12,7 @@ const SelectNewRetriverPage = () => {
   const router = useRouter();
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const handleApi = () => {
-    if (CURRENT_MODE === MODES.PILOT) {
+    if (isPilotMode) {
       setIsOpenAlert(true);
     }
   };

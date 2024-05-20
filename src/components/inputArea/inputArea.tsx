@@ -4,7 +4,7 @@ import { Button } from "../Button";
 import { Icon } from "../Icon";
 import { FC } from "react";
 import { CustomInput } from "@/modules/PannelArea/input";
-import { CURRENT_MODE, MODES } from "@/utils/constants";
+import { isPilotMode } from "@/utils/constants";
 import { Tooltip } from "../Tooltip";
 import { Divider } from "../Divider";
 
@@ -126,7 +126,7 @@ const InputAreaComponent: FC<InputAreaComponentPorps> = ({
           <Tooltip
             variant="info"
             title={
-              CURRENT_MODE === MODES.PILOT
+              isPilotMode
                 ? "This Feature is not available in Private Beta"
                 : ""
             }
@@ -136,14 +136,14 @@ const InputAreaComponent: FC<InputAreaComponentPorps> = ({
                 size="medium"
                 variant="outlined"
                 label="Manage Sources"
-                disabled={CURRENT_MODE === MODES.PILOT ? true : isLoading}
+                disabled={isPilotMode ? true : isLoading}
                 fullWidth
                 endIcon={
                   <Icon
                     icon="minus"
                     height={2}
                     width={8}
-                    disabled={CURRENT_MODE === MODES.PILOT ? true : isLoading}
+                    disabled={isPilotMode ? true : isLoading}
                   />
                 }
               />

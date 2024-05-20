@@ -2,7 +2,7 @@
 import { PageHeader } from "@/components/PageHeader";
 import { RetriverCard } from "@/components/RetriverCard";
 import { AlertModal } from "@/modals/AlertModal";
-import { CURRENT_MODE, MODES } from "@/utils/constants";
+import { isPilotMode } from "@/utils/constants";
 import { RETRIEVER_DATA } from "@/utils/data";
 import { Box } from "@mui/material";
 import { useState } from "react";
@@ -10,7 +10,7 @@ import { useState } from "react";
 const RetrieversPage = () => {
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const handleSingleAlert = () => {
-    if (CURRENT_MODE === MODES.PILOT) {
+    if (isPilotMode) {
       setIsOpenAlert(true);
     }
   };
