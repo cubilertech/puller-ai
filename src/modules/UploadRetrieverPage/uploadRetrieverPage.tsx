@@ -7,7 +7,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
 import { UploadBox } from "@/components/UplaodBox";
 import { AlertModal } from "@/modals/AlertModal";
-import { CURRENT_MODE, MODES } from "@/utils/constants";
+import { isPilotMode } from "@/utils/constants";
 import { Box, Input, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -18,7 +18,7 @@ const UploadRetrieverPage = () => {
   const [isOpenAlert, setIsOpenAlert] = useState(false);
 
   const handleUploadDocs = () => {
-    if (CURRENT_MODE === MODES.PILOT) {
+    if (isPilotMode) {
       setIsOpenAlert(true);
     } else {
       setIsOpen(!isOpen);
@@ -26,7 +26,7 @@ const UploadRetrieverPage = () => {
   };
 
   const handleCreateRetriever = () => {
-    if (CURRENT_MODE === MODES.PILOT) {
+    if (isPilotMode) {
       setIsOpenAlert(true);
     } else {
       router.push("/retrievers/feedback");

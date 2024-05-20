@@ -37,12 +37,6 @@ const ResponseArea: FC<ResponseAreaProps> = ({
           mt: 1,
         }}
       >
-        <Typography
-          variant="text-md-medium"
-          sx={{ color: palette.base.white, overflow: "hidden" }}
-        >
-          Your Prompt response is here:
-        </Typography>
         {/* <Typography
           variant={"display-xs"}
           sx={{
@@ -127,6 +121,12 @@ const ResponseArea: FC<ResponseAreaProps> = ({
               component="p"
               className="animated-genrated-text"
             >
+              <Typography
+                variant={"display-xs-response-bold"}
+                sx={{ color: palette.base.white, overflow: "hidden" }}
+              >
+                Your Prompt response is here:{" "}
+              </Typography>
               {content?.response}
             </Typography>
           )}

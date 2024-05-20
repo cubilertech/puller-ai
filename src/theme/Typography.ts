@@ -124,6 +124,7 @@ declare module "@mui/material/Typography" {
     "display-xs": true;
     "text-xxs-regular": true;
     "display-xs-response": true;
+    "display-xs-response-bold": true;
   }
 }
 declare module "@mui/material/styles" {

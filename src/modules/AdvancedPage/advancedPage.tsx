@@ -2,14 +2,14 @@
 import { PageHeader } from "@/components/PageHeader";
 import { RectangleCard } from "@/components/RectangleCard";
 import { AlertModal } from "@/modals/AlertModal";
-import { CURRENT_MODE, MODES } from "@/utils/constants";
+import { isPilotMode } from "@/utils/constants";
 import { Box } from "@mui/material";
 import { useState } from "react";
 
 const AdvancedPage = () => {
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const handleClick = () => {
-    if (CURRENT_MODE === MODES.PILOT) {
+    if (isPilotMode) {
       setIsOpenAlert(true);
     }
   };

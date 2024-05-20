@@ -4,9 +4,8 @@ import { Paper } from "../Paper";
 import { useRouter } from "next/navigation";
 import { SingleCardDomyData } from "@/utils/data";
 import { RequestsCard } from "../RecentRequestes-Card";
-import { CustomLink } from "../Link";
 import { AlertModal } from "@/modals/AlertModal";
-import { CURRENT_MODE, MODES } from "@/utils/constants";
+import { isPilotMode } from "@/utils/constants";
 import { useState } from "react";
 
 const NotesList = () => {
@@ -14,12 +13,12 @@ const NotesList = () => {
   const [isOpenAlert, setIsOpenAlert] = useState(false);
 
   const handleOpenNotes = () => {
-    if (CURRENT_MODE === MODES.PILOT) {
+    if (isPilotMode) {
       setIsOpenAlert(true);
     } else route.push("/request/recent");
   };
   const handleCard = () => {
-    if (CURRENT_MODE === MODES.PILOT) {
+    if (isPilotMode) {
       setIsOpenAlert(true);
     } else route.push("/request/preview");
   };

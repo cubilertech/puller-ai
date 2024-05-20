@@ -18,7 +18,7 @@ import { Logo } from "../logo";
 import { SideBar_Data } from "@/utils/data";
 import { palette } from "@/theme/Palette";
 import "./sideNavbar.css";
-import { CURRENT_MODE, MODES } from "@/utils/constants";
+import { isDemoMode, isPilotMode } from "@/utils/constants";
 import { AlertModal } from "@/modals/AlertModal";
 import { CommentOutlined, InfoOutlined } from "@mui/icons-material";
 import { useAppDispatch } from "@/libs/redux/hooks";
@@ -34,7 +34,7 @@ const SideNavbar = () => {
   const handleAlert = (link: string) => {
     const isAlert = link === "alert" ? true : false;
     const isRequest = link === "/request" ? true : false;
-    if (CURRENT_MODE === MODES.PILOT && isAlert) {
+    if (isPilotMode && isAlert) {
       setIsOpenAlert(true);
     }
     if (isRequest) {
@@ -95,7 +95,7 @@ const SideNavbar = () => {
               >
                 <Logo variant="default" />
               </Box>
-              {CURRENT_MODE === MODES.PILOT && (
+              {isPilotMode && (
                 <Box
                   sx={{
                     display: "flex",
@@ -202,7 +202,7 @@ const SideNavbar = () => {
 
           <Box>
             <List>
-              {CURRENT_MODE === MODES.PILOT && (
+              {isPilotMode && (
                 <ListItem sx={{ pb: 3 }}>
                   <div className="navbar-container">
                     <MuiListItemButton
@@ -232,7 +232,7 @@ const SideNavbar = () => {
                   </div>
                 </ListItem>
               )}
-              {CURRENT_MODE === MODES.DEMO &&
+              {isDemoMode &&
                 [
                   {
                     name: "Administration",

@@ -1,10 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
-import { CURRENT_MODE, MODES } from "./utils/constants";
+import {  isDemoMode, isPilotMode } from "./utils/constants";
 const protectedRoutes = ["/request/preview", "/request/recent"];
 
 export default function middleware(req: NextRequest, res: NextResponse) {
   if (
-    CURRENT_MODE === MODES.PILOT &&
+    isPilotMode &&
     protectedRoutes.includes(req.nextUrl.pathname)
   ) {
     const absoluteURL = new URL("/request/results", req.nextUrl.origin);
@@ -15,7 +15,7 @@ export default function middleware(req: NextRequest, res: NextResponse) {
     return NextResponse.redirect(absoluteURL.toString());
   }
 
-  if (CURRENT_MODE === MODES.DEMO) {
+  if (isDemoMode) {
     return;
   }
 }

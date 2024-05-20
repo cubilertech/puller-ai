@@ -23,7 +23,7 @@ const TopNavBar = () => {
     routeParts.includes("retriever-detail");
 
   const handleClickAlerts = () => {
-    if (CURRENT_MODE === MODES.PILOT) {
+    if (isPilotMode) {
       setIsOpenAlert(true);
     }
   };

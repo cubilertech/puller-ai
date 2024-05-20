@@ -10,7 +10,7 @@ import { Input } from "@/components/Input";
 import { palette } from "@/theme/Palette";
 import { AlertModal } from "@/modals/AlertModal";
 import { useState } from "react";
-import { CURRENT_MODE, MODES } from "@/utils/constants";
+import { isPilotMode } from "@/utils/constants";
 import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
 import {
   getConnectQuery,
@@ -24,12 +24,12 @@ const ConnectAppsPage = () => {
   const [isOpenAlert, setIsOpenAlert] = useState(false);
 
   const handleCreateRetriever = () => {
-    if (CURRENT_MODE === MODES.PILOT) {
+    if (isPilotMode) {
       setIsOpenAlert(true);
     } else router.push("/retrievers/feedback");
   };
   const handleCardConnect = () => {
-    if (CURRENT_MODE === MODES.PILOT) {
+    if (isPilotMode) {
       setIsOpenAlert(true);
     }
   };

@@ -1,4 +1,8 @@
-import { UpdateCurrentPage, UpdateIsLoadingRequest } from "@/libs/redux/features/isLoadingRequest";
+import {
+  UpdateCurrentPage,
+  UpdateIsLoadingPrompt,
+  UpdateIsLoadingRequest,
+} from "@/libs/redux/features/isLoadingRequest";
 import { useAppDispatch } from "@/libs/redux/hooks";
 import { submitPromptPayload, Prompt } from "@/utils/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
@@ -14,7 +18,7 @@ export const useSubmitPrompt = (
   async function submit(data: submitPromptPayload): Promise<Prompt | null> {
     try {
       const res = await axios({
-        url:  `${process.env.NEXT_PUBLIC_BACKEND_URL}/v0/query/prompt`,
+        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/v0/query/prompt`,
         method: "POST",
         data,
         headers: {
@@ -38,9 +42,9 @@ export const useSubmitPrompt = (
       // dispatch(UpdateIsLoadingRequest(false));
       const id = data?.id?.includes("#") ? data?.id?.split("#")?.[1] : data?.id;
       setTimeout(() => {
-       router.push(`/request?id=${id}`);
+        router.push(`/request?id=${id}`);
       }, 1000);
-      // await new Promise((resolve) => setTimeout(resolve, 1000)); 
+      // await new Promise((resolve) => setTimeout(resolve, 1000));
       dispatch(UpdateCurrentPage("validate"));
       // dispatch(UpdateIsLoadingRequest(false));
     },
@@ -147,6 +151,7 @@ export const useGetSinglePrompt = (promptId: string) => {
     enabled: false,
     onSuccess: () => {
       dispatch(UpdateIsLoadingRequest(false));
+      dispatch(UpdateIsLoadingPrompt(false));
     },
     onError: () => {
       dispatch(UpdateCurrentPage("create"));
