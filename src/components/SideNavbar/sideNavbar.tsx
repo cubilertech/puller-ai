@@ -32,7 +32,7 @@ const SideNavbar = () => {
   const dispatch = useAppDispatch();
   const drawerWidth = 234;
   const handleAlert = (link: string) => {
-    const isAlert = link === "alert" ? true : false;
+    const isAlert = link === "alerts" ? true : false;
     const isRequest = link === "/request" ? true : false;
     if (isPilotMode && isAlert) {
       setIsOpenAlert(true);
@@ -40,7 +40,7 @@ const SideNavbar = () => {
     if (isRequest) {
       dispatch(UpdateCurrentPage("create"));
     }
-    Route.push(isAlert ? "#" : link);
+    Route.push(isPilotMode && isAlert ? "#" : link);
   };
   return (
     <Box
@@ -177,7 +177,7 @@ const SideNavbar = () => {
                         >
                           {item.name === "Request" ? (
                             <CommentOutlined
-                              sx={{ width: "18px", height: "18px" }}
+                              sx={{ width: "21px", height: "21px" }}
                             />
                           ) : (
                             <Icon width={18} height={18} icon={item.icon} />
