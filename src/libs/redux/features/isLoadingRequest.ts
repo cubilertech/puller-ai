@@ -3,13 +3,16 @@ import { RootState } from "../store";
 import { isClient } from "@/utils/constants";
 
 interface validateRequestState {
-  isLoadingRequest: boolean;
+  isLoadingPrompt: boolean;
+  isLoadingRequests: boolean;
   CurrentPage: "validate" | "create";
   PromptValue: string;
+  ConsoleMessages: string;
 }
 
 const initialState: validateRequestState = {
-  isLoadingRequest: isClient
+  isLoadingPrompt: false,
+  isLoadingRequests: isClient
     ? window.location.href.split("?")[1]
       ? true
       : false
@@ -20,14 +23,18 @@ const initialState: validateRequestState = {
       : "create"
     : "create",
   PromptValue: "",
+  ConsoleMessages: "",
 };
 
 const LoadingRequest = createSlice({
   name: "loadingRequest",
   initialState,
   reducers: {
+    UpdateIsLoadingPrompt: (state, action) => {
+      state.isLoadingPrompt = action.payload;
+    },
     UpdateIsLoadingRequest: (state, action) => {
-      state.isLoadingRequest = action.payload;
+      state.isLoadingRequests = action.payload;
     },
     UpdateCurrentPage: (state, action) => {
       state.CurrentPage = action.payload;
@@ -35,17 +42,28 @@ const LoadingRequest = createSlice({
     UpdatePromptValue: (state, action) => {
       state.PromptValue = action.payload;
     },
+    UpdateConsoleMessages: (state, action) => {
+      state.ConsoleMessages = action.payload;
+    },
   },
 });
 
 export const getIsLoadingRequest = (state: RootState) =>
-  state.LoadingRequest.isLoadingRequest;
+  state.LoadingRequest.isLoadingRequests;
+export const getIsLoadingPrompt = (state: RootState) =>
+  state.LoadingRequest.isLoadingPrompt;
 export const getCurrentPage = (state: RootState) =>
   state.LoadingRequest.CurrentPage;
-
 export const getPromptValue = (state: RootState) =>
   state.LoadingRequest.PromptValue;
+export const getConsoleMessages = (state: RootState) =>
+  state.LoadingRequest.ConsoleMessages;
 
-export const { UpdateIsLoadingRequest, UpdateCurrentPage, UpdatePromptValue } =
-  LoadingRequest.actions;
+export const {
+  UpdateIsLoadingRequest,
+  UpdateCurrentPage,
+  UpdatePromptValue,
+  UpdateIsLoadingPrompt,
+  UpdateConsoleMessages,
+} = LoadingRequest.actions;
 export default LoadingRequest.reducer;
