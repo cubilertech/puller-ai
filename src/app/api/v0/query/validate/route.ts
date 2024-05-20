@@ -17,7 +17,8 @@ export async function POST(req: any, res: any) {
           });
       }
       if(variables && variables?.length){
-        list[itemIndex].varaibles = variables;
+        list[itemIndex].variables = variables;
+        list[itemIndex].description = `Show me a list of customers with their first order date, last order date, and order count, along with any additional information from the merged shop data, for customers who have made ${variables?.[0]?.value} or more orders.`;
       }
       // Write the updated data back to the JSON file
       fs.writeFileSync(filePath, JSON.stringify(list, null, 2), 'utf8');

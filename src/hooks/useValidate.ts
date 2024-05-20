@@ -1,5 +1,6 @@
 import { UpdateIsLoadingRequest } from "@/libs/redux/features/isLoadingRequest";
 import { useAppDispatch } from "@/libs/redux/hooks";
+import { getBackendURL } from "@/utils/common";
 import { Prompt, submitValidatePayload } from "@/utils/types";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
@@ -9,8 +10,9 @@ export const useSubmitValidate = () => {
   const dispatch = useAppDispatch();
   async function submit(data: submitValidatePayload): Promise<Prompt | null> {
     try {
+      const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
       const res = await axios({
-        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/v0/query/validate`,
+        url: `${backendUrl}/v0/query/validate`,
         method: "POST",
         data,
         headers: {

@@ -3,6 +3,7 @@ import {
   UpdateIsLoadingRequest,
 } from "@/libs/redux/features/isLoadingRequest";
 import { useAppDispatch } from "@/libs/redux/hooks";
+import { getBackendURL } from "@/utils/common";
 import { submitExecutePayload, Query } from "@/utils/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -15,8 +16,9 @@ export const useSubmitExecute = () => {
 
   async function submit(data: submitExecutePayload): Promise<Query | null> {
     try {
+      const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
       const res = await axios({
-        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/v0/query/execute`,
+        url: `${backendUrl}/v0/query/execute`,
         method: "POST",
         data,
         headers: {
