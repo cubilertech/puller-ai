@@ -138,6 +138,7 @@ export interface Prompt {
   sql: string;
   target: string;
   variables: Variable[];
+  query?: string;
 }
 
 export interface submitExecutePayload {

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-
+import pullsList from "@/utils/ApiData/pulls.json";
 export async function POST(req: any, res: any) {
   try {
     const response = {
@@ -39,6 +39,17 @@ export async function POST(req: any, res: any) {
     };
     // console.log(response, "response");
     return NextResponse.json(response);
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(error, {
+      status: 400,
+    });
+  }
+}
+
+export async function GET(req: any, res: any) {
+  try {
+    return NextResponse.json(pullsList);
   } catch (error) {
     console.error(error);
     return NextResponse.json(error, {
