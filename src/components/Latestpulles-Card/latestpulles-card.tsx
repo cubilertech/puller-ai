@@ -6,38 +6,31 @@ import { LatestPullesCardDataProps } from "@/utils/types";
 import { motion } from "framer-motion";
 
 interface LatestPullesCardProps {
-  data: LatestPullesCardDataProps;
+  query?: string;
   onClick: () => void;
-
 }
 
-const LatestPullesCard: FC<LatestPullesCardProps> = ({
-  data,
-  onClick,
-
-}) => {
+const LatestPullesCard: FC<LatestPullesCardProps> = ({ query, onClick }) => {
   return (
-
-      <Paper
-        onClick={onClick}
-        variant="dark-border"
-        sx={{
-          border: `1px solid ${palette.color.gray[700]}`,
-          height: "180px",
-          width: "100%",
-          maxWidth: "320px",
-          minWidth: "280px",
-          margin: 0,
-          padding: 3,
-          ":hover": {
-            background: palette.linearGradient.darkBlue,
-            cursor: "pointer",
-          },
-        }}
-      >
-        <Typography variant="text-md-medium">{data.text}</Typography>
-      </Paper>
-  
+    <Paper
+      onClick={onClick}
+      variant="dark-border"
+      sx={{
+        border: `1px solid ${palette.color.gray[700]}`,
+        height: "180px",
+        width: "100%",
+        maxWidth: "320px",
+        minWidth: "280px",
+        margin: 0,
+        padding: 3,
+        ":hover": {
+          background: palette.linearGradient.darkBlue,
+          cursor: "pointer",
+        },
+      }}
+    >
+      <Typography variant="text-md-medium">{query}</Typography>
+    </Paper>
   );
 };
 export default LatestPullesCard;
