@@ -5,6 +5,7 @@ import {
 } from "@/libs/redux/features/isLoadingRequest";
 import { useAppDispatch } from "@/libs/redux/hooks";
 import { getBackendURL } from "@/utils/common";
+import { toastTimeout } from "@/utils/constants";
 import { submitPromptPayload, Prompt } from "@/utils/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -140,9 +141,10 @@ export const useGetSinglePrompt = (promptId: string) => {
       }
     } catch (error: any) {
       toast.error(error?.response?.data?.message ?? (error.message as string));
-      // setTimeout(() => {
-      //   router.push("/request");
-      // }, 5000);
+      setTimeout(() => {
+        router.push("/request");
+        dispatch(UpdateCurrentPage('create'));
+      }, toastTimeout);
       console.error("Network error:", error);
       return null;
     }

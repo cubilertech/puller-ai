@@ -8,6 +8,7 @@ import { ThemeProvider } from "@mui/material";
 import { customTheme } from "@/theme/CustomTheme";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { toastTimeout } from "@/utils/constants";
 
 const AppLayout = ({ children }: { children: ReactNode }) => {
   return (
@@ -24,7 +25,7 @@ const AppLayout = ({ children }: { children: ReactNode }) => {
             <div className="children-container">
               <ToastContainer
                 position="top-right"
-                autoClose={5000}
+                autoClose={toastTimeout}
                 newestOnTop={false}
                 closeOnClick
                 pauseOnFocusLoss

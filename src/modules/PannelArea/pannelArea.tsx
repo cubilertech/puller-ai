@@ -186,7 +186,7 @@ const PannelArea: FC<PannelAreaProps> = ({
                 >
                   {filterDisplayedPrompts()?.map((item, i) => (
                     <motion.div
-                      key={i}
+                      key={`motion-div-${i}`}
                       animate={{ y: [-240, 0] }}
                       transition={{
                         duration: i === 0 ? 1 : i,

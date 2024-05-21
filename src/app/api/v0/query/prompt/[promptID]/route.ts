@@ -7,16 +7,17 @@ export async function GET(
 ) {
   try {
     const { promptID } = params;
-    // console.log(promptID, "id");
     const record = pullsList.find((item) => item.id === promptID);
     if (!record) {
-      throw new Error("Invalid Prompt ID.");
+      return NextResponse.json({ message: "Invalid Prompt ID." }, {
+        status: 400,
+      });
     }
     return NextResponse.json(record);
   } catch (error) {
     console.error(error);
-    return NextResponse.json(error, {
-      status: 400,
+    return NextResponse.json({message: 'Internal server error.'}, {
+      status: 500,
     });
   }
 }
