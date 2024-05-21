@@ -1,11 +1,15 @@
 import { getBackendURL } from "@/utils/common";
-import { Retriever, appUpdatePayload } from "@/utils/types";
+import {
+  Retriever,
+  appUpdatePayload,
+  createRetrieverPayload,
+} from "@/utils/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import App from "next/app";
 import { toast } from "react-toastify";
 
-export const useGetAllPrompt = () => {
+export const useGetAllRetriever = () => {
   async function submit(): Promise<Retriever[] | null> {
     try {
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
@@ -105,39 +109,50 @@ export const useUpdateAppStatus = () => {
   });
 };
 
-// export const useUploadAppData = () => {
-//   // const dispatch = useAppDispatch();
-//   async function submit(data: submitValidatePayload): Promise<Prompt | null> {
-//     try {
-//       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
-//       const res = await axios({
-//         url: `${backendUrl}/v0/query/validate`,
-//         method: "POST",
-//         data,
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//       });
-//       if (res.status === 200) {
-//         return res.data;
-//       } else {
-//         return null;
-//       }
-//     } catch (error) {
-//       console.error("Network error:", error);
-//       return null;
-//     }
-//   }
-//   return useMutation({
-//     mutationFn: submit,
-//     onSuccess: (data) => {
-//       dispatch(UpdateIsLoadingRequest(false));
-//       toast.success('Variables updated successfully.');
-      
-//     },
-//     onError: (error: any) => {
-//       toast.error(error?.response?.data?.message ?? (error.message as string));
-//       console.log(error, "error in validating request");
-//     },
-//   });
-// }
+export const useCreateRetriever = () => {
+  // const dispatch = useAppDispatch();
+  async function submit(
+    data: createRetrieverPayload
+  ): Promise<Retriever | null> {
+    try {
+
+      const formData = new FormData();
+    if (data.image) {
+      formData.append("image", data.image);
+    }
+    formData.append("title", data.title);
+    formData.append("description", data.description);
+    formData.append("status", data.status);
+    // formData.append("icon", data.icon);
+
+      const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
+      const res = await axios({
+        url: `${backendUrl}/v0/retriever`,
+        method: "POST",
+        data:formData,
+        headers: {
+          // "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      if (res.status === 200) {
+        return res.data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Network error:", error);
+      return null;
+    }
+  }
+  return useMutation({
+    mutationFn: submit,
+    onSuccess: (data) => {
+      toast.success("Retriever created successfully.");
+    },
+    onError: (error: any) => {
+      toast.error(error?.response?.data?.message ?? (error.message as string));
+      console.log(error, "error in creating retriever");
+    },
+  });
+};

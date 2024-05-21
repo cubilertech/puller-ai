@@ -207,6 +207,7 @@ export type Retriever = {
   status: string;
   title: string;
   description: string;
+  image?: string;
 };
 
 export type App = {
@@ -220,3 +221,10 @@ export interface appUpdatePayload {
   id: string;
   status: boolean;
 }
+
+export interface createRetrieverPayload {
+  status: string;
+  title: string;
+  description: string;
+  image?: string;
+};
