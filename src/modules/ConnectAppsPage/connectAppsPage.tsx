@@ -16,33 +16,48 @@ import {
   getConnectQuery,
   updateConnectQuery,
 } from "@/libs/redux/features/searchbar";
-import { useGetAllApps } from "@/hooks/useRetriever";
+import { useGetAllApps, useUpdateAppStatus } from "@/hooks/useRetriever";
+import { Loader } from "@/components/Loader";
+import { ConnectItem } from "@/utils/types";
 
 const ConnectAppsPage = () => {
   const query = useAppSelector(getConnectQuery);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [isOpenAlert, setIsOpenAlert] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const { data: ConnectApps, refetch: ConnectAppRefetch } = useGetAllApps();
-
+  const {
+    data: ConnectApps,
+    refetch: ConnectAppRefetch,
+    isLoading: LoadingApps,
+    isSuccess: isSuccessApps,
+  } = useGetAllApps();
+  const { mutate: UpdateAppStatus, isSuccess: AppStatusUpdated } =
+    useUpdateAppStatus();
   const handleCreateRetriever = () => {
     if (isPilotMode) {
       setIsOpenAlert(true);
     } else router.push("/retrievers/feedback");
   };
-  const handleCardConnect = () => {
+  const handleCardConnect = (item: ConnectItem) => {
     if (isPilotMode) {
       setIsOpenAlert(true);
+    } else {
+      UpdateAppStatus({ id: item.id, status: !item.isConnected });
     }
   };
   const filteredData = ConnectApps?.filter((item) =>
     item.name.toLowerCase().includes(query.toLowerCase())
   );
   useEffect(() => {
+    if (AppStatusUpdated) {
+      ConnectAppRefetch();
+    }
+  }, [AppStatusUpdated]);
+  useEffect(() => {
     ConnectAppRefetch();
   }, [ConnectAppRefetch]);
-  console.log(ConnectApps, "ConnectApps");
   return (
     <Box
       sx={{
@@ -102,7 +117,19 @@ const ConnectAppsPage = () => {
             scrollbarWidth: "none",
           }}
         >
-          {filteredData && filteredData.length <= 0 ? (
+          {LoadingApps ? (
+            <Box
+              sx={{
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Loader type="Loading" variant="simple" isLoading={LoadingApps} />
+            </Box>
+          ) : filteredData && filteredData.length <= 0 ? (
             <Typography
               variant="text-lg-bold"
               sx={{
@@ -121,7 +148,7 @@ const ConnectAppsPage = () => {
               <ConnectCard
                 key={index}
                 item={item}
-                onClick={() => handleCardConnect()}
+                onClick={() => handleCardConnect(item)}
               />
             ))
           )}

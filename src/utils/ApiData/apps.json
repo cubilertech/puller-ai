@@ -9,7 +9,7 @@
     "id": "2",
     "image": "/Images/blank-square.svg",
     "name": "Amazon Redshift",
-    "isConnected": false
+    "isConnected": true
   },
   {
     "id": "3",
@@ -21,6 +21,6 @@
     "id": "4",
     "image": "/Images/blank-square.svg",
     "name": "Amazon Redshift",
-    "isConnected": false
+    "isConnected": true
   }
 ]

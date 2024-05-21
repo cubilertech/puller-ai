@@ -10,18 +10,24 @@ interface LoaderProps {
   variant: LoaderVariants;
   type: "Loading" | "Processing";
   message?: string;
+  isLoading?: boolean;
 }
 
-const Loader: FC<LoaderProps> = ({ variant, type, message }) => {
-  const [showLoader, setShowLoader] = useState(true);
+const Loader: FC<LoaderProps> = ({
+  variant,
+  type,
+  message,
+  isLoading = true,
+}) => {
+  // const [showLoader, setShowLoader] = useState(true);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowLoader(false);
-    }, 4000);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setShowLoader(false);
+  //   }, 4000);
 
-    return () => clearTimeout(timer);
-  }, []);
+  //   return () => clearTimeout(timer);
+  // }, []);
   switch (variant) {
     case "simple":
       return (
@@ -31,7 +37,7 @@ const Loader: FC<LoaderProps> = ({ variant, type, message }) => {
             flexDirection: "column",
             alignItems: "center",
           }}
-          className={`loader-container ${showLoader ? "fade-in" : "fade-out"}`}
+          className={`loader-container ${isLoading ? "fade-in" : "fade-out"}`}
         >
           <Icon icon="logoIcon" width={240} height={260} />
 
@@ -78,7 +84,7 @@ const Loader: FC<LoaderProps> = ({ variant, type, message }) => {
             padding: 0,
             width: "100%",
           }}
-          className={`loader-container ${showLoader ? "fade-in" : "fade-out"}`}
+          className={`loader-container ${isLoading ? "fade-in" : "fade-out"}`}
         >
           <Paper
             variant="light-border"

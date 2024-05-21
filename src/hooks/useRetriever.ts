@@ -80,7 +80,7 @@ export const useUpdateAppStatus = () => {
     try {
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
       const res = await axios({
-        url: `${backendUrl}/v0/query/retriever/apps/${data.id}`,
+        url: `${backendUrl}/v0/retriever/apps/${data.id}`,
         method: "put",
         data,
         headers: {
