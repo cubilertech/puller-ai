@@ -38,7 +38,6 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
     document.body.removeChild(link);
   };
 
-  const router = useRouter();
   return (
     <Box width={"80%"} height={"100%"}>
       <Paper

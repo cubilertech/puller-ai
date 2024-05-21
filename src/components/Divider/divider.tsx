@@ -14,7 +14,7 @@ const Divider: FC<DividerProps> = ({ variant, type, sx }) => {
       variant={variant}
       sx={{
         borderColor:
-          type === "dark" ? "rgb(40, 41, 44)" : "rgba(90, 90, 90, 1)",
+          type === "dark" ? "#5A5A5A" : "rgba(90, 90, 90, 1)",
         ...sx,
       }}
     />

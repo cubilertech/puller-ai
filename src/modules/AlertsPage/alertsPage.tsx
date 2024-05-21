@@ -54,8 +54,8 @@ const AlertsPage = () => {
             minHeight: "2rem",
             background: palette.linearGradient.gray,
             padding: "1rem 1rem 0",
-            borderTopLeftRadius: "14px",
-            borderTopRightRadius: "14px",
+            borderTopLeftRadius: "8px",
+            borderTopRightRadius: "8px",
             display: "flex",
             gap: "1rem",
           }}

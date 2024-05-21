@@ -112,7 +112,7 @@ const ConnectAppsPage = () => {
 
         <Box
           sx={{
-            height: "80%",
+            height: "90%",
             overflowY: "auto",
             scrollbarWidth: "none",
           }}
