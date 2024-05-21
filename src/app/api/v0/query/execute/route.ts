@@ -1,9 +1,12 @@
+import { generateRandom10DigitNumber } from "@/utils/common";
 import { NextResponse } from "next/server";
-
+import path from "path";
+import fs from "fs";
 export async function POST(req: any, res: any) {
   try {
-    const response = {
-      id: "run#1716210109",
+    const id = generateRandom10DigitNumber();
+    const payload = {
+      id: `run#${id}`,
       results: [
         {
           bytes: 0,
@@ -48,7 +51,20 @@ export async function POST(req: any, res: any) {
       ],
       status: "complete",
     };
-    return NextResponse.json(response);
+    // Get the absolute path to the data.json file
+    const filePath = path.join(
+      process.cwd(),
+      "src",
+      "utils",
+      "ApiData",
+      "executes.json"
+    );
+    // Read the JSON file
+    const list = JSON.parse(fs.readFileSync(filePath, "utf8"));
+    list.push(payload);
+    // Write the updated data back to the JSON file
+    fs.writeFileSync(filePath, JSON.stringify(list, null, 2), "utf8");
+    return NextResponse.json(payload);
   } catch (error) {
     console.error(error);
     return NextResponse.json(
