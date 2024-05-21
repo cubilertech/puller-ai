@@ -14,7 +14,7 @@ export const useGetAllRetriever = () => {
     try {
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
       const res = await axios({
-        url: `${backendUrl}/v0/query/retriever`,
+        url: `${backendUrl}/v0/retriever`,
         method: "get",
         headers: {
           accept: "application/json",

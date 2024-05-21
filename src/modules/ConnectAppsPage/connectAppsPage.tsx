@@ -16,12 +16,15 @@ import {
   getConnectQuery,
   updateConnectQuery,
 } from "@/libs/redux/features/searchbar";
+import { useGetAllApps } from "@/hooks/useRetriever";
 
 const ConnectAppsPage = () => {
   const query = useAppSelector(getConnectQuery);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [isOpenAlert, setIsOpenAlert] = useState(false);
+
+  const {data: ConnectApps, refetch: ConnectAppRefetch } = useGetAllApps();
 
   const handleCreateRetriever = () => {
     if (isPilotMode) {
