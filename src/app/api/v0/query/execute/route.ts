@@ -2,6 +2,8 @@ import { generateRandom10DigitNumber } from "@/utils/common";
 import { NextResponse } from "next/server";
 import path from "path";
 import fs from "fs";
+import executesList from "@/utils/ApiData/executes.json";
+
 export async function POST(req: any, res: any) {
   try {
     const id = generateRandom10DigitNumber();
@@ -73,5 +75,16 @@ export async function POST(req: any, res: any) {
         status: 500,
       }
     );
+  }
+}
+
+export async function GET(req: any, res: any) {
+  try {
+    return NextResponse.json(executesList);
+  } catch (error) {
+    console.error(error);
+    return NextResponse.json(error, {
+      status: 400,
+    });
   }
 }

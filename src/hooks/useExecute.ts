@@ -55,9 +55,10 @@ export const useGetSingleExecute = (executeId: string) => {
   const router = useRouter();
   async function submit(executeId: string): Promise<Query | null> {
     try {
+      const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
       const encodedExecuteId = encodeURIComponent(`run#${executeId}`);
       const res = await axios({
-        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/v0/query/execute/${encodedExecuteId}`,
+        url: `${backendUrl}/v0/query/execute/${encodedExecuteId}`,
         method: "get",
         headers: {
           accept: "application/json",
@@ -89,8 +90,9 @@ export const useGetSingleExecute = (executeId: string) => {
 export const useGetAllExecute = () => {
   async function submit(): Promise<Query[] | null> {
     try {
+      const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
       const res = await axios({
-        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/v0/query/execute`,
+        url: `${backendUrl}/v0/query/execute`,
         method: "get",
         headers: {
           accept: "application/json",
