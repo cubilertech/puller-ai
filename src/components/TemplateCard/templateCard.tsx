@@ -5,6 +5,12 @@ import { Paper } from "../Paper";
 import { FC } from "react";
 import { Prompt } from "@/utils/types";
 import { useRouter } from "next/navigation";
+import { useAppDispatch } from "@/libs/redux/hooks";
+import {
+  UpdateCurrentPage,
+  UpdateIsLoadingRequest,
+  UpdatePromptValue,
+} from "@/libs/redux/features/isLoadingRequest";
 
 interface TemplateCardProps {
   card: Prompt;
@@ -13,12 +19,19 @@ interface TemplateCardProps {
 
 const TemplateCard: FC<TemplateCardProps> = ({ card, index }) => {
   const router = useRouter();
+  const dispatch = useAppDispatch();
   const id = card?.id?.includes("#") ? card?.id?.split("#")?.[1] : card?.id;
+  const handleClickTemplate = () => {
+    router.push(`/request?id=${id}`);
+    dispatch(UpdateCurrentPage("validate"));
+    dispatch(UpdateIsLoadingRequest(true));
+    dispatch(UpdatePromptValue(card.query));
+  };
   return (
     <Box
       key={index}
       mt={index === 0 ? "" : "1rem"}
-      onClick={() => router.push(`/request?id=${id}`)}
+      onClick={() => handleClickTemplate()}
       sx={{ cursor: "pointer" }}
     >
       <Paper

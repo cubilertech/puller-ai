@@ -138,6 +138,7 @@ export interface Prompt {
   sql: string;
   target: string;
   variables: Variable[];
+  query?: string;
 }
 
 export interface submitExecutePayload {
@@ -200,3 +201,30 @@ export enum Position {
 export interface LatestPullesCardDataProps {
   text: string;
 }
+
+export type Retriever = {
+  icon: string;
+  status: string;
+  title: string;
+  description: string;
+  image?: string;
+};
+
+export type App = {
+  id?: string;
+  image: string;
+  name: string;
+  isConnected: boolean;
+}
+
+export interface appUpdatePayload {
+  id: string;
+  status: boolean;
+}
+
+export interface createRetrieverPayload {
+  status: string;
+  title: string;
+  description: string;
+  image?: string;
+};

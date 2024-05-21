@@ -4,6 +4,8 @@ import {
   UpdateIsLoadingRequest,
 } from "@/libs/redux/features/isLoadingRequest";
 import { useAppDispatch } from "@/libs/redux/hooks";
+import { getBackendURL } from "@/utils/common";
+import { toastTimeout } from "@/utils/constants";
 import { submitPromptPayload, Prompt } from "@/utils/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -17,8 +19,9 @@ export const useSubmitPrompt = (
   const dispatch = useAppDispatch();
   async function submit(data: submitPromptPayload): Promise<Prompt | null> {
     try {
+       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
       const res = await axios({
-        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/v0/query/prompt`,
+        url: `${backendUrl}/v0/query/prompt`,
         method: "POST",
         data,
         headers: {
@@ -122,9 +125,10 @@ export const useGetSinglePrompt = (promptId: string) => {
   const dispatch = useAppDispatch();
   async function submit(promptId: string): Promise<Prompt | null> {
     try {
+      const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
       const encodedPromptId = encodeURIComponent(`query#${promptId}`);
       const res = await axios({
-        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/v0/query/prompt/${encodedPromptId}`,
+        url: `${backendUrl}/v0/query/prompt/${encodedPromptId}`,
         method: "GET",
         headers: {
           accept: "application/json",
@@ -137,9 +141,10 @@ export const useGetSinglePrompt = (promptId: string) => {
       }
     } catch (error: any) {
       toast.error(error?.response?.data?.message ?? (error.message as string));
-      // setTimeout(() => {
-      //   router.push("/request");
-      // }, 5000);
+      setTimeout(() => {
+        router.push("/request");
+        dispatch(UpdateCurrentPage('create'));
+      }, toastTimeout);
       console.error("Network error:", error);
       return null;
     }
@@ -164,8 +169,9 @@ export const useGetSinglePrompt = (promptId: string) => {
 export const useGetAllPrompt = () => {
   async function submit(): Promise<Prompt[] | null> {
     try {
+      const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
       const res = await axios({
-        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/v0/query/prompt`,
+        url: `${backendUrl}/v0/query/prompt`,
         method: "get",
         headers: {
           accept: "application/json",

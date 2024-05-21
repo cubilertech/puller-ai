@@ -1,0 +1,460 @@
+[
+  {
+    "query": "Get me the most loyal customers who have placed at least two orders",
+    "description": "Show me a list of customers with their first order date, last order date, and order count, along with any additional information from the merged shop data, for customers who have made 2 or more orders.",
+    "graph": [
+      {
+        "depends": [],
+        "description": "table of customers data",
+        "id": "model.dbt_tutorial.customers",
+        "name": "customers"
+      },
+      {
+        "depends": [],
+        "description": "table of store orders data",
+        "id": "model.dbt_tutorial.orders",
+        "name": "orders"
+      },
+      {
+        "depends": [
+          "model.dbt_tutorial.merge"
+        ],
+        "description": "filtered table of all our top and most loyal customers at least N orders",
+        "id": "model.dbt_tutorial.loyalty",
+        "name": "loyalty"
+      },
+      {
+        "depends": [
+          "model.dbt_tutorial.customers",
+          "model.dbt_tutorial.orders"
+        ],
+        "description": "merged summary table of orders grouped by customer",
+        "id": "model.dbt_tutorial.merge",
+        "name": "merge"
+      }
+    ],
+    "id": "query#1716199082",
+    "sql": "select * from `dbt-tutorial`.jaffle_shop.customers\nselect * from `dbt-tutorial`.jaffle_shop.orders\nwith\n    customers as (\n        select id as customer_id, first_name, last_name from `helical-math-378821`.`shop`.`customers`\n    ),\n    orders as (\n        select id as order_id, user_id as customer_id, order_date, status\n        from `helical-math-378821`.`shop`.`orders`\n    ),\n    customer_orders as (\n        select\n            customer_id,\n            min(order_date) as first_order_date,\n            max(order_date) as last_order_date,\n            count(order_id) as order_count\n        from orders\n        group by 1\n    ),\n    final as (\n        select\n            customers.customer_id,\n            customers.first_name,\n            customers.last_name,\n            customer_orders.first_order_date,\n            customer_orders.last_order_date,\n            coalesce(customer_orders.order_count, 0) as order_count\n        from customers\n        left join customer_orders using (customer_id)\n    )\nselect *\nfrom final\nselect * from `helical-math-378821`.`shop`.`merge`\nwhere order_count >= 2.0",
+    "target": "model.dbt_tutorial.loyalty",
+    "variables": [
+      {
+        "id": "loyalty_order_thresh",
+        "model": "model.dbt_tutorial.loyalty",
+        "name": "loyalty_order_thresh",
+        "type": "numeric",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "query": "Get me the latest 100 orders",
+    "description": "Show the most recent 100 orders placed in the shop.",
+    "graph": [
+      {
+        "depends": [],
+        "description": "table of store orders data",
+        "id": "model.dbt_tutorial.orders",
+        "name": "orders"
+      },
+      {
+        "depends": [
+          "model.dbt_tutorial.orders"
+        ],
+        "description": "filtered table of our latest or most recent orders",
+        "id": "model.dbt_tutorial.latest",
+        "name": "latest"
+      }
+    ],
+    "id": "query#1716199164",
+    "sql": "select * from `dbt-tutorial`.jaffle_shop.orders\nselect * from `helical-math-378821`.`shop`.`orders`\norder by order_date desc\nlimit 100",
+    "target": "model.dbt_tutorial.latest",
+    "variables": [
+      {
+        "id": "latest_limit",
+        "model": "model.dbt_tutorial.latest",
+        "name": "latest_limit",
+        "type": "int",
+        "value": 100
+      }
+    ]
+  },
+  {
+    "query": "Please get all stripe payments data",
+    "description": "Retrieve all information related to payments from the database for analysis.",
+    "graph": [
+      {
+        "depends": [],
+        "description": "table of stripe payments data",
+        "id": "model.dbt_tutorial.payments",
+        "name": "payments"
+      }
+    ],
+    "id": "query#1716199341",
+    "sql": "select * from `dbt-tutorial`.stripe.payment",
+    "target": "model.dbt_tutorial.payments",
+    "variables": []
+  },
+  {
+    "query": "Find the 20 largest payments",
+    "description": "Show a list of the top 20 payments across all transactions, sorted by the payment amount, from different database schemas.",
+    "graph": [
+      {
+        "depends": [],
+        "description": "table of stripe payments data",
+        "id": "model.dbt_tutorial.payments",
+        "name": "payments"
+      },
+      {
+        "depends": [
+          "model.dbt_tutorial.payments"
+        ],
+        "description": "filtered table of our largest payments or biggest or most expensive orders",
+        "id": "model.dbt_tutorial.biggest",
+        "name": "biggest"
+      }
+    ],
+    "id": "query#1716199392",
+    "sql": "select * from `dbt-tutorial`.stripe.payment\nselect * from `helical-math-378821`.`shop`.`payments`\norder by amount desc\nlimit 20",
+    "target": "model.dbt_tutorial.biggest",
+    "variables": [
+      {
+        "id": "biggest_count",
+        "model": "model.dbt_tutorial.biggest",
+        "name": "biggest_count",
+        "type": "int",
+        "value": 20
+      }
+    ]
+  },
+  {
+    "query": "Find the fifty most expensive orders",
+    "description": "Show me the details of the top 50 largest payment transactions across various payment methods and retail locations.",
+    "graph": [
+      {
+        "depends": [],
+        "description": "table of stripe payments data",
+        "id": "model.dbt_tutorial.payments",
+        "name": "payments"
+      },
+      {
+        "depends": [
+          "model.dbt_tutorial.payments"
+        ],
+        "description": "filtered table of our largest payments or biggest or most expensive orders",
+        "id": "model.dbt_tutorial.biggest",
+        "name": "biggest"
+      }
+    ],
+    "id": "query#1716199459",
+    "sql": "select * from `dbt-tutorial`.stripe.payment\nselect * from `helical-math-378821`.`shop`.`payments`\norder by amount desc\nlimit 50",
+    "target": "model.dbt_tutorial.biggest",
+    "variables": [
+      {
+        "id": "biggest_count",
+        "model": "model.dbt_tutorial.biggest",
+        "name": "biggest_count",
+        "type": "int",
+        "value": 50
+      }
+    ]
+  },
+  {
+    "query": "List of football players who win matches consecutively in the past year.",
+    "description": "Show all payment details from both the Stripe and shop databases, ordered by the payment amount in descending order, starting from the beginning.",
+    "graph": [
+      {
+        "depends": [],
+        "description": "table of stripe payments data",
+        "id": "model.dbt_tutorial.payments",
+        "name": "payments"
+      },
+      {
+        "depends": [
+          "model.dbt_tutorial.payments"
+        ],
+        "description": "filtered table of our largest payments or biggest or most expensive orders",
+        "id": "model.dbt_tutorial.biggest",
+        "name": "biggest"
+      }
+    ],
+    "id": "query#1716199644",
+    "sql": "select * from `dbt-tutorial`.stripe.payment\nselect * from `helical-math-378821`.`shop`.`payments`\norder by amount desc\nlimit 0",
+    "target": "model.dbt_tutorial.biggest",
+    "variables": [
+      {
+        "id": "biggest_count",
+        "model": "model.dbt_tutorial.biggest",
+        "name": "biggest_count",
+        "type": "int",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "query": "Get me some trending products from this month and past month",
+    "description": "Show all payment information, organized by the payment with the highest amount, from two different databases, including the payment amount, customer details, and transaction date.",
+    "graph": [
+      {
+        "depends": [],
+        "description": "table of stripe payments data",
+        "id": "model.dbt_tutorial.payments",
+        "name": "payments"
+      },
+      {
+        "depends": [
+          "model.dbt_tutorial.payments"
+        ],
+        "description": "filtered table of our largest payments or biggest or most expensive orders",
+        "id": "model.dbt_tutorial.biggest",
+        "name": "biggest"
+      }
+    ],
+    "id": "query#1716199751",
+    "sql": "select * from `dbt-tutorial`.stripe.payment\nselect * from `helical-math-378821`.`shop`.`payments`\norder by amount desc\nlimit 0",
+    "target": "model.dbt_tutorial.biggest",
+    "variables": [
+      {
+        "id": "biggest_count",
+        "model": "model.dbt_tutorial.biggest",
+        "name": "biggest_count",
+        "type": "int",
+        "value": 0
+      }
+    ]
+  },
+  {
+    "query": "Give me my prompt",
+    "description": "Show me a list of customers with their first order date, last order date, and order count, along with any additional information from the merged shop data, for customers who have made 5 or more orders.",
+    "graph": [
+      {
+        "depends": [],
+        "description": "table of customers data",
+        "id": "model.dbt_tutorial.customers",
+        "name": "customers"
+      },
+      {
+        "depends": [],
+        "description": "table of store orders data",
+        "id": "model.dbt_tutorial.orders",
+        "name": "orders"
+      },
+      {
+        "depends": [
+          "model.dbt_tutorial.merge"
+        ],
+        "description": "filtered table of all our top and most loyal customers at least N orders",
+        "id": "model.dbt_tutorial.loyalty",
+        "name": "loyalty"
+      },
+      {
+        "depends": [
+          "model.dbt_tutorial.customers",
+          "model.dbt_tutorial.orders"
+        ],
+        "description": "merged summary table of orders grouped by customer",
+        "id": "model.dbt_tutorial.merge",
+        "name": "merge"
+      }
+    ],
+    "id": "query#4874698516",
+    "sql": "select * from `dbt-tutorial`.jaffle_shop.customers\nselect * from `dbt-tutorial`.jaffle_shop.orders\nwith\n    customers as (\n        select id as customer_id, first_name, last_name from `helical-math-378821`.`shop`.`customers`\n    ),\n    orders as (\n        select id as order_id, user_id as customer_id, order_date, status\n        from `helical-math-378821`.`shop`.`orders`\n    ),\n    customer_orders as (\n        select\n            customer_id,\n            min(order_date) as first_order_date,\n            max(order_date) as last_order_date,\n            count(order_id) as order_count\n        from orders\n        group by 1\n    ),\n    final as (\n        select\n            customers.customer_id,\n            customers.first_name,\n            customers.last_name,\n            customer_orders.first_order_date,\n            customer_orders.last_order_date,\n            coalesce(customer_orders.order_count, 0) as order_count\n        from customers\n        left join customer_orders using (customer_id)\n    )\nselect *\nfrom final\nselect * from `helical-math-378821`.`shop`.`merge`\nwhere order_count >= 5.0",
+    "target": "model.dbt_tutorial.loyalty",
+    "variables": [
+      {
+        "id": "loyalty_order_thresh",
+        "model": "model.dbt_tutorial.loyalty",
+        "name": "loyalty_order_thresh",
+        "type": "numeric",
+        "value": "5"
+      }
+    ]
+  },
+  {
+    "query": "How are you?",
+    "description": "Show me a list of customers with their first order date, last order date, and order count, along with any additional information from the merged shop data, for customers who have made 2 or more orders.",
+    "graph": [
+      {
+        "depends": [],
+        "description": "table of customers data",
+        "id": "model.dbt_tutorial.customers",
+        "name": "customers"
+      },
+      {
+        "depends": [],
+        "description": "table of store orders data",
+        "id": "model.dbt_tutorial.orders",
+        "name": "orders"
+      },
+      {
+        "depends": [
+          "model.dbt_tutorial.merge"
+        ],
+        "description": "filtered table of all our top and most loyal customers at least N orders",
+        "id": "model.dbt_tutorial.loyalty",
+        "name": "loyalty"
+      },
+      {
+        "depends": [
+          "model.dbt_tutorial.customers",
+          "model.dbt_tutorial.orders"
+        ],
+        "description": "merged summary table of orders grouped by customer",
+        "id": "model.dbt_tutorial.merge",
+        "name": "merge"
+      }
+    ],
+    "id": "query#9753026396",
+    "sql": "select * from `dbt-tutorial`.jaffle_shop.customers\nselect * from `dbt-tutorial`.jaffle_shop.orders\nwith\n    customers as (\n        select id as customer_id, first_name, last_name from `helical-math-378821`.`shop`.`customers`\n    ),\n    orders as (\n        select id as order_id, user_id as customer_id, order_date, status\n        from `helical-math-378821`.`shop`.`orders`\n    ),\n    customer_orders as (\n        select\n            customer_id,\n            min(order_date) as first_order_date,\n            max(order_date) as last_order_date,\n            count(order_id) as order_count\n        from orders\n        group by 1\n    ),\n    final as (\n        select\n            customers.customer_id,\n            customers.first_name,\n            customers.last_name,\n            customer_orders.first_order_date,\n            customer_orders.last_order_date,\n            coalesce(customer_orders.order_count, 0) as order_count\n        from customers\n        left join customer_orders using (customer_id)\n    )\nselect *\nfrom final\nselect * from `helical-math-378821`.`shop`.`merge`\nwhere order_count >= 2.0",
+    "target": "model.dbt_tutorial.loyalty",
+    "variables": [
+      {
+        "id": "loyalty_order_thresh",
+        "model": "model.dbt_tutorial.loyalty",
+        "name": "loyalty_order_thresh",
+        "type": "numeric",
+        "value": 2
+      }
+    ]
+  },
+  {
+    "query": "HI",
+    "description": "Show me a list of customers with their first order date, last order date, and order count, along with any additional information from the merged shop data, for customers who have made 4 or more orders.",
+    "graph": [
+      {
+        "depends": [],
+        "description": "table of customers data",
+        "id": "model.dbt_tutorial.customers",
+        "name": "customers"
+      },
+      {
+        "depends": [],
+        "description": "table of store orders data",
+        "id": "model.dbt_tutorial.orders",
+        "name": "orders"
+      },
+      {
+        "depends": [
+          "model.dbt_tutorial.merge"
+        ],
+        "description": "filtered table of all our top and most loyal customers at least N orders",
+        "id": "model.dbt_tutorial.loyalty",
+        "name": "loyalty"
+      },
+      {
+        "depends": [
+          "model.dbt_tutorial.customers",
+          "model.dbt_tutorial.orders"
+        ],
+        "description": "merged summary table of orders grouped by customer",
+        "id": "model.dbt_tutorial.merge",
+        "name": "merge"
+      }
+    ],
+    "id": "query#6152804102",
+    "sql": "select * from `dbt-tutorial`.jaffle_shop.customers\nselect * from `dbt-tutorial`.jaffle_shop.orders\nwith\n    customers as (\n        select id as customer_id, first_name, last_name from `helical-math-378821`.`shop`.`customers`\n    ),\n    orders as (\n        select id as order_id, user_id as customer_id, order_date, status\n        from `helical-math-378821`.`shop`.`orders`\n    ),\n    customer_orders as (\n        select\n            customer_id,\n            min(order_date) as first_order_date,\n            max(order_date) as last_order_date,\n            count(order_id) as order_count\n        from orders\n        group by 1\n    ),\n    final as (\n        select\n            customers.customer_id,\n            customers.first_name,\n            customers.last_name,\n            customer_orders.first_order_date,\n            customer_orders.last_order_date,\n            coalesce(customer_orders.order_count, 0) as order_count\n        from customers\n        left join customer_orders using (customer_id)\n    )\nselect *\nfrom final\nselect * from `helical-math-378821`.`shop`.`merge`\nwhere order_count >= 4.0",
+    "target": "model.dbt_tutorial.loyalty",
+    "variables": [
+      {
+        "id": "loyalty_order_thresh",
+        "model": "model.dbt_tutorial.loyalty",
+        "name": "loyalty_order_thresh",
+        "type": "numeric",
+        "value": "4"
+      }
+    ]
+  },
+  {
+    "query": "get my response",
+    "description": "Show me a list of customers with their first order date, last order date, and order count, along with any additional information from the merged shop data, for customers who have made 3 or more orders.",
+    "graph": [
+      {
+        "depends": [],
+        "description": "table of customers data",
+        "id": "model.dbt_tutorial.customers",
+        "name": "customers"
+      },
+      {
+        "depends": [],
+        "description": "table of store orders data",
+        "id": "model.dbt_tutorial.orders",
+        "name": "orders"
+      },
+      {
+        "depends": [
+          "model.dbt_tutorial.merge"
+        ],
+        "description": "filtered table of all our top and most loyal customers at least N orders",
+        "id": "model.dbt_tutorial.loyalty",
+        "name": "loyalty"
+      },
+      {
+        "depends": [
+          "model.dbt_tutorial.customers",
+          "model.dbt_tutorial.orders"
+        ],
+        "description": "merged summary table of orders grouped by customer",
+        "id": "model.dbt_tutorial.merge",
+        "name": "merge"
+      }
+    ],
+    "id": "query#8579611218",
+    "sql": "select * from `dbt-tutorial`.jaffle_shop.customers\nselect * from `dbt-tutorial`.jaffle_shop.orders\nwith\n    customers as (\n        select id as customer_id, first_name, last_name from `helical-math-378821`.`shop`.`customers`\n    ),\n    orders as (\n        select id as order_id, user_id as customer_id, order_date, status\n        from `helical-math-378821`.`shop`.`orders`\n    ),\n    customer_orders as (\n        select\n            customer_id,\n            min(order_date) as first_order_date,\n            max(order_date) as last_order_date,\n            count(order_id) as order_count\n        from orders\n        group by 1\n    ),\n    final as (\n        select\n            customers.customer_id,\n            customers.first_name,\n            customers.last_name,\n            customer_orders.first_order_date,\n            customer_orders.last_order_date,\n            coalesce(customer_orders.order_count, 0) as order_count\n        from customers\n        left join customer_orders using (customer_id)\n    )\nselect *\nfrom final\nselect * from `helical-math-378821`.`shop`.`merge`\nwhere order_count >= 3.0",
+    "target": "model.dbt_tutorial.loyalty",
+    "variables": [
+      {
+        "id": "loyalty_order_thresh",
+        "model": "model.dbt_tutorial.loyalty",
+        "name": "loyalty_order_thresh",
+        "type": "numeric",
+        "value": "3"
+      }
+    ]
+  },
+  {
+    "query": "Testing request",
+    "description": "Show me a list of customers with their first order date, last order date, and order count, along with any additional information from the merged shop data, for customers who have made 2 or more orders.",
+    "graph": [
+      {
+        "depends": [],
+        "description": "table of customers data",
+        "id": "model.dbt_tutorial.customers",
+        "name": "customers"
+      },
+      {
+        "depends": [],
+        "description": "table of store orders data",
+        "id": "model.dbt_tutorial.orders",
+        "name": "orders"
+      },
+      {
+        "depends": [
+          "model.dbt_tutorial.merge"
+        ],
+        "description": "filtered table of all our top and most loyal customers at least N orders",
+        "id": "model.dbt_tutorial.loyalty",
+        "name": "loyalty"
+      },
+      {
+        "depends": [
+          "model.dbt_tutorial.customers",
+          "model.dbt_tutorial.orders"
+        ],
+        "description": "merged summary table of orders grouped by customer",
+        "id": "model.dbt_tutorial.merge",
+        "name": "merge"
+      }
+    ],
+    "id": "query#6537452254",
+    "sql": "select * from `dbt-tutorial`.jaffle_shop.customers\nselect * from `dbt-tutorial`.jaffle_shop.orders\nwith\n    customers as (\n        select id as customer_id, first_name, last_name from `helical-math-378821`.`shop`.`customers`\n    ),\n    orders as (\n        select id as order_id, user_id as customer_id, order_date, status\n        from `helical-math-378821`.`shop`.`orders`\n    ),\n    customer_orders as (\n        select\n            customer_id,\n            min(order_date) as first_order_date,\n            max(order_date) as last_order_date,\n            count(order_id) as order_count\n        from orders\n        group by 1\n    ),\n    final as (\n        select\n            customers.customer_id,\n            customers.first_name,\n            customers.last_name,\n            customer_orders.first_order_date,\n            customer_orders.last_order_date,\n            coalesce(customer_orders.order_count, 0) as order_count\n        from customers\n        left join customer_orders using (customer_id)\n    )\nselect *\nfrom final\nselect * from `helical-math-378821`.`shop`.`merge`\nwhere order_count >= 2.0",
+    "target": "model.dbt_tutorial.loyalty",
+    "variables": [
+      {
+        "id": "loyalty_order_thresh",
+        "model": "model.dbt_tutorial.loyalty",
+        "name": "loyalty_order_thresh",
+        "type": "numeric",
+        "value": 2
+      }
+    ]
+  }
+]
