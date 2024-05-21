@@ -82,7 +82,7 @@ export async function POST(req: NextRequest) {
     // Write the updated data back to the JSON file
     fs.writeFileSync(filePath, JSON.stringify(list, null, 2), "utf8");
 
-    return NextResponse.json({});
+    return NextResponse.json(list);
   } catch (e) {
     console.error("Error while trying to upload a file\n", e);
     return NextResponse.json(
