@@ -90,10 +90,12 @@ const PannelArea: FC<PannelAreaProps> = ({
     }
   };
   const filterDisplayedPrompts = () => {
-    if (Prompts) {
+    if (Prompts && Prompts?.length > 0) {
       const displayedPrompts =
         Prompts?.length > 5 ? Prompts?.slice(0, 5) : Prompts ?? [];
       return displayedPrompts;
+    } else {
+      return LatestPullsData;
     }
   };
   useEffect(() => {
