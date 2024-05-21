@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "image": "/Images/blank-square.svg",
+    "name": "dbt Core",
+    "isConnected": false
+  },
+  {
+    "id": "2",
+    "image": "/Images/blank-square.svg",
+    "name": "Amazon Redshift",
+    "isConnected": false
+  },
+  {
+    "id": "3",
+    "image": "/Images/blank-square.svg",
+    "name": "Snowflake",
+    "isConnected": true
+  },
+  {
+    "id": "4",
+    "image": "/Images/blank-square.svg",
+    "name": "Amazon Redshift",
+    "isConnected": false
+  }
+]
