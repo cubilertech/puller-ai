@@ -9,7 +9,7 @@ import { CONNECT_APP_DATA } from "@/utils/data";
 import { Input } from "@/components/Input";
 import { palette } from "@/theme/Palette";
 import { AlertModal } from "@/modals/AlertModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { isPilotMode } from "@/utils/constants";
 import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
 import {
@@ -24,7 +24,7 @@ const ConnectAppsPage = () => {
   const router = useRouter();
   const [isOpenAlert, setIsOpenAlert] = useState(false);
 
-  const {data: ConnectApps, refetch: ConnectAppRefetch } = useGetAllApps();
+  const { data: ConnectApps, refetch: ConnectAppRefetch } = useGetAllApps();
 
   const handleCreateRetriever = () => {
     if (isPilotMode) {
@@ -36,9 +36,13 @@ const ConnectAppsPage = () => {
       setIsOpenAlert(true);
     }
   };
-  const filteredData = CONNECT_APP_DATA.filter((item) =>
+  const filteredData = ConnectApps?.filter((item) =>
     item.name.toLowerCase().includes(query.toLowerCase())
   );
+  useEffect(() => {
+    ConnectAppRefetch();
+  }, [ConnectAppRefetch]);
+  console.log(ConnectApps, "ConnectApps");
   return (
     <Box
       sx={{
@@ -98,7 +102,7 @@ const ConnectAppsPage = () => {
             scrollbarWidth: "none",
           }}
         >
-          {filteredData.length <= 0 ? (
+          {filteredData && filteredData.length <= 0 ? (
             <Typography
               variant="text-lg-bold"
               sx={{
@@ -110,10 +114,10 @@ const ConnectAppsPage = () => {
                 alignItems: "center",
               }}
             >
-              No Connect Data
+              No Connect Apps
             </Typography>
           ) : (
-            filteredData.map((item, index) => (
+            filteredData?.map((item, index) => (
               <ConnectCard
                 key={index}
                 item={item}

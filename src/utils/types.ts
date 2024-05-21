@@ -29,6 +29,7 @@ export interface UserProps {
 }
 
 export interface ConnectItem {
+  id: string;
   image: string;
   name: string;
   isConnected: boolean;
@@ -215,7 +216,7 @@ export type App = {
   image: string;
   name: string;
   isConnected: boolean;
-}
+};
 
 export interface appUpdatePayload {
   id: string;
@@ -227,4 +228,4 @@ export interface createRetrieverPayload {
   title: string;
   description: string;
   image?: string;
-};
+}

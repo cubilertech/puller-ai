@@ -1,5 +1,6 @@
 import { getBackendURL } from "@/utils/common";
 import {
+  ConnectItem,
   Retriever,
   appUpdatePayload,
   createRetrieverPayload,
@@ -42,11 +43,11 @@ export const useGetAllRetriever = () => {
 };
 
 export const useGetAllApps = () => {
-  async function submit(): Promise<App[] | null> {
+  async function submit(): Promise<ConnectItem[] | null> {
     try {
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
       const res = await axios({
-        url: `${backendUrl}/v0/query/retriever/apps`,
+        url: `${backendUrl}/v0/retriever/apps`,
         method: "get",
         headers: {
           accept: "application/json",
