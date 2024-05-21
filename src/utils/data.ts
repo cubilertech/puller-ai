@@ -575,7 +575,7 @@ export const SideBar_Data: SidebarItem[] = [
   {
     name: "Alerts",
     icon: "alertsIcon",
-    link: "alert",
+    link: "alerts",
   },
   {
     name: "Advanced",

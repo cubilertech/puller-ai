@@ -180,7 +180,7 @@ const CustomButton: FC<buttonProps> = ({
     case "request-history":
       return (
         <Box className={"animated-request"}>
-          <History sx={{ width: 20, height: 20 }} />
+          <History sx={{ width: "21px", height: "23px" }} />
           <Typography variant="text-sm-semibold">{text}</Typography>
         </Box>
       );
