@@ -5,22 +5,9 @@ import FeedbackPage from "@/modules/FeedbackPage/feedbackPage";
 import { useEffect, useState } from "react";
 
 function Page() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    setIsLoading(true);
-
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 4000);
-  }, []);
   return (
     <AppLayout>
-      {isLoading ? (
-        <Loader variant="pageLoader" type="Loading" />
-      ) : (
-        <FeedbackPage variant="retriever" />
-      )}
+      <FeedbackPage variant="retriever" />
     </AppLayout>
   );
 }

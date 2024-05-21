@@ -23,12 +23,12 @@ const RetriverCard: FC<retriverCardProps> = ({
   title,
   onClick,
 }) => {
-  const router = useRouter();
   return (
     <Box
       sx={{
         width: "210px",
         height: "226px",
+        overflow: "hidden",
         ":hover": {
           borderRadius: "10px",
           cursor: "pointer",

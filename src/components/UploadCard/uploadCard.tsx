@@ -50,14 +50,22 @@ const UploadCard: FC<UploadCardProps> = ({ name, size }) => {
 
           <Typography
             variant={isMobile ? "text-xs-medium" : "text-sm-medium"}
-            sx={{ minWidth: "80px", maxWidth: "80px", wordWrap: "break-word", whiteSpace: "nowrap" }}
+            sx={{
+              minWidth: "80px",
+              maxWidth: "140px",
+              wordWrap: "break-word",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              display: "block",
+            }}
           >
             {name ? name : "Cl_insight_2021.pdf"}
           </Typography>
         </Box>
 
         <Typography variant={isMobile ? "text-xs-medium" : "text-sm-medium"}>
-          ({size ? ((size / 1024) / 1024).toFixed(2) : 24}mb)
+          ({size ? (size / 1024 / 1024).toFixed(2) : 24}mb)
         </Typography>
       </Box>
     </Paper>
