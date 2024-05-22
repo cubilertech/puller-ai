@@ -38,7 +38,7 @@ const ConnectAppsPage = () => {
   const handleCreateRetriever = () => {
     if (isPilotMode) {
       setIsOpenAlert(true);
-    } else router.push("/retrievers/feedback");
+    } else router.push("/retrievers/upload");
   };
   const handleCardConnect = (item: ConnectItem) => {
     if (isPilotMode) {

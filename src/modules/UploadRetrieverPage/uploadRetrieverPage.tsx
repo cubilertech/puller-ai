@@ -20,29 +20,33 @@ const UploadRetrieverPage = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenAlert, setIsOpenAlert] = useState(false);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [description, setdescription] = useState<string>("");
-  const [name, setname] = useState<string>("");
+  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
+  const [description, setDescription] = useState<string>("");
+  const [name, setName] = useState<string>("");
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const {
-    mutate: CreateRequestPage,
+    mutate: CreateRetriever,
     isSuccess: RetrieverCreatedSuccess,
     isLoading: CreatingRetriever,
   } = useCreateRetriever();
+
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files.length > 0) {
-      setSelectedFile(event.target.files[0]);
+    if (event.target.files) {
+      const newFiles = Array.from(event.target.files);
+      setSelectedFiles((prevFiles) => [...prevFiles, ...newFiles]);
     }
   };
+
   const handleDescriptionInput = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.value) {
-      setdescription(event.target.value);
+      setDescription(event.target.value);
     }
   };
+
   const handleNameInput = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.value) {
-      setname(event.target.value);
+      setName(event.target.value);
     }
   };
 
@@ -62,25 +66,28 @@ const UploadRetrieverPage = () => {
     } else {
       if (name === "") {
         toast.warning("Please Enter Name.");
-      } else if (selectedFile === null) {
-        toast.warning("Please Upload File.");
-      } else if (name && selectedFile) {
-        CreateRequestPage({
-          status: StatusTypes.needPermissions,
-          description: description,
-          image: selectedFile as File,
-          title: name,
-        });
+      } else if (selectedFiles.length === 0) {
+        toast.warning("Please Upload Files.");
+      } else if (name && selectedFiles.length > 0) {
+        // CreateRetriever({
+        //   status: StatusTypes.needPermissions,
+        //   description: description,
+        //   images: selectedFiles,
+        //   title: name,
+        // });
+        console.log(selectedFiles, "selectedFiles");
       }
     }
   };
+
   useEffect(() => {
-    if (selectedFile) {
+    if (selectedFiles.length > 0) {
       setIsOpen(true);
     } else {
       setIsOpen(false);
     }
-  }, [selectedFile, RetrieverCreatedSuccess]);
+  }, [selectedFiles, RetrieverCreatedSuccess]);
+
   return (
     <>
       {RetrieverCreatedSuccess ? (
@@ -143,9 +150,9 @@ const UploadRetrieverPage = () => {
                 />
               </Box>
 
-              {/* Uplaod Area */}
+              {/* Upload Area */}
               <Box
-                onClick={() => handleUploadDocs()}
+                onClick={handleUploadDocs}
                 sx={{
                   border: "2px solid rgba(196, 196, 196, 0.6)",
                   minHeight: "10rem",
@@ -164,6 +171,7 @@ const UploadRetrieverPage = () => {
                   onChange={handleFileChange}
                   ref={fileInputRef}
                   style={{ display: "none" }}
+                  multiple
                 />
                 <Icon icon="cloudUpload" width={40} height={40} />
                 <Typography variant="text-sm-medium">
@@ -184,12 +192,25 @@ const UploadRetrieverPage = () => {
                 />
               ) : (
                 // Upload Cards & Inputs
-                <UploadBox
-                  name={selectedFile?.name}
-                  size={selectedFile?.size}
-                  inputValue={description}
-                  handleChangeInput={handleDescriptionInput}
-                />
+                <Box
+                  sx={{
+                    display: "flex",
+                    gap: 3,
+                    overflowX: "auto",
+                    scrollbarWidth: "none",
+                    mb: 8,
+                  }}
+                >
+                  {selectedFiles.map((file, index) => (
+                    <UploadBox
+                      key={index}
+                      name={file.name}
+                      size={file.size}
+                      inputValue={description}
+                      handleChangeInput={handleDescriptionInput}
+                    />
+                  ))}
+                </Box>
               )}
 
               {/* Back & Create Buttons */}

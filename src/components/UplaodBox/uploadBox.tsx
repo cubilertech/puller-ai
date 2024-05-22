@@ -21,12 +21,7 @@ const UploadBox: FC<UplaodBoxProps> = ({
 }) => {
   const isMobile = useMediaQuery("(max-width: 1200px)");
   return (
-    <Box
-      display={"grid"}
-      gridTemplateColumns={"1fr 1fr 1fr"}
-      gap={"1.4rem"}
-      mb={"2rem"}
-    >
+    <Box sx={{ minWidth: "290px", maxWidth: "342px" }}>
       {/* {data.map((item, index) => ( */}
       <Box display={"flex"} flexDirection={"column"} gap={"1rem"}>
         {/* <UploadCard name={name} size={size} /> */}

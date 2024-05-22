@@ -47,5 +47,12 @@
     "title": "test",
     "description": "Description text",
     "image": "/uploads/21-05-2024/7n4rk8-1716272031472-216849206.gif"
+  },
+  {
+    "icon": "dataRoom",
+    "status": "needPermissions",
+    "title": "hello",
+    "description": "4ddsaasdad",
+    "image": "/uploads/21-05-2024/Screencast from 15-05-2024 15:55:22-1716302806582-814778741.webm"
   }
 ]
