@@ -1,16 +1,19 @@
-import { Box, Typography } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 import Image from "next/image";
 import React, { FC } from "react";
 import { Button } from "../Button";
 import { ConnectItem } from "@/utils/types";
 import { Divider } from "../Divider";
+import { palette } from "@/theme/Palette";
+import "./connectCard.css";
 
 interface ConnectCardProps {
   item: ConnectItem;
   onClick?: () => void;
+  isLoading: boolean;
 }
 
-const ConnectCard: FC<ConnectCardProps> = ({ item, onClick }) => {
+const ConnectCard: FC<ConnectCardProps> = ({ item, onClick, isLoading }) => {
   return (
     <>
       <Box
@@ -24,10 +27,16 @@ const ConnectCard: FC<ConnectCardProps> = ({ item, onClick }) => {
             <Image src={item?.image} alt="pic" width={37} height={37} />
             <Typography variant="text-md-semibold">{item.name}</Typography>
           </Box>
-          <Box>
+          <Box
+            sx={{ position: "relative" }}
+            className={isLoading ? "looping-opacity" : "opacity-out"}
+          >
             <Button
+              disabled={isLoading}
               variant={item.isConnected ? "contained" : "outlined"}
-              label={item.isConnected ? "Connected" : "Connect"}
+              label={
+                isLoading ? "" : item.isConnected ? "Connected" : "Connect"
+              }
               fullWidth
               sx={{
                 width: "98px",
@@ -35,6 +44,18 @@ const ConnectCard: FC<ConnectCardProps> = ({ item, onClick }) => {
               }}
               onClick={onClick}
             />
+            {isLoading && (
+              <CircularProgress
+                sx={{
+                  color: palette.base.white,
+                  position: "absolute",
+                  top: 5.4,
+                  zIndex: 5,
+                  left: 38,
+                }}
+                size={24}
+              />
+            )}
           </Box>
         </Box>
       </Box>

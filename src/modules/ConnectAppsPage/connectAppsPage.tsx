@@ -25,7 +25,7 @@ const ConnectAppsPage = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [isOpenAlert, setIsOpenAlert] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [loadingCardId, setLoadingCardId] = useState<string | null>(null);
 
   const {
     data: ConnectApps,
@@ -33,8 +33,11 @@ const ConnectAppsPage = () => {
     isLoading: LoadingApps,
     isSuccess: isSuccessApps,
   } = useGetAllApps();
-  const { mutate: UpdateAppStatus, isSuccess: AppStatusUpdated } =
-    useUpdateAppStatus();
+  const {
+    mutate: UpdateAppStatus,
+    isSuccess: AppStatusUpdated,
+    isLoading: LoadingStatusUpdate,
+  } = useUpdateAppStatus();
   const handleCreateRetriever = () => {
     if (isPilotMode) {
       setIsOpenAlert(true);
@@ -44,6 +47,7 @@ const ConnectAppsPage = () => {
     if (isPilotMode) {
       setIsOpenAlert(true);
     } else {
+      setLoadingCardId(item.id);
       UpdateAppStatus({ id: item.id, status: !item.isConnected });
     }
   };
@@ -54,10 +58,11 @@ const ConnectAppsPage = () => {
     if (AppStatusUpdated) {
       ConnectAppRefetch();
     }
-  }, [AppStatusUpdated]);
+  }, [AppStatusUpdated, ConnectAppRefetch]);
   useEffect(() => {
     ConnectAppRefetch();
   }, [ConnectAppRefetch]);
+  console.log(LoadingApps, "LoadingApps");
   return (
     <Box
       sx={{
@@ -148,6 +153,7 @@ const ConnectAppsPage = () => {
               <ConnectCard
                 key={index}
                 item={item}
+                isLoading={loadingCardId === item.id && LoadingStatusUpdate}
                 onClick={() => handleCardConnect(item)}
               />
             ))
