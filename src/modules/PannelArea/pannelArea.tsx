@@ -179,8 +179,8 @@ const PannelArea: FC<PannelAreaProps> = ({
                     >
                       <LatestPullesCard
                         key={i}
-                        data={item}
-                        onClick={() => handleLatestPulls(item.text)}
+                        query={item.query}
+                        onClick={() => handleLatestPulls(item.query)}
                       />
                     </motion.div>
                   ))}
