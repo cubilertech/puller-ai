@@ -169,20 +169,20 @@ const PannelArea: FC<PannelAreaProps> = ({
                   }}
                 >
                   {LatestPullsData.map((item, i) => (
-                    <motion.div
-                      key={`motion-div-${i}`}
-                      animate={{ y: [-240, 0] }}
-                      transition={{
-                        duration: i === 0 ? 1 : i,
-                        ease: "easeInOut",
-                      }}
-                    >
+                    // <motion.div
+                    //   key={`motion-div-${i}`}
+                    //   animate={{ y: [-240, 0] }}
+                    //   transition={{
+                    //     duration: i === 0 ? 1 : i,
+                    //     ease: "easeInOut",
+                    //   }}
+                    // >
                       <LatestPullesCard
                         key={i}
                         query={item.query}
                         onClick={() => handleLatestPulls(item.query)}
                       />
-                    </motion.div>
+                    // </motion.div>
                   ))}
                 </Box>
               </Box>

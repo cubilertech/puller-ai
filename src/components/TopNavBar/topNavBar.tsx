@@ -41,7 +41,7 @@ const TopNavBar = () => {
           bgcolor: palette.opacity.lightBlue,
         }}
       >
-        <Box sx={{ ml: 4 }}>
+        <Box>
           {isBack ? (
             <Box onClick={() => router.back()}>
               <Typography
