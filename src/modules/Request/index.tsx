@@ -180,14 +180,16 @@ const RequestPage: FC = () => {
           variant="pageLoader"
           message={consoleMessage}
         />
-      ) : !loading && !submitPromptLoading && submitValidateLoading ? (
-        // for validate prompt loading
-        <Loader
-          type="Processing"
-          variant="pageLoader"
-          message={"Updating Variables"}
-        />
-      ) : id &&
+      ) : // for submit ValidateLoading loading
+      // : !loading && !submitPromptLoading && submitValidateLoading ? (
+      //   // for validate prompt loading
+      //   <Loader
+      //     type="Processing"
+      //     variant="pageLoader"
+      //     message={"Updating Variables"}
+      //   />
+      // )
+      id &&
         id.length &&
         !submitPromptLoading &&
         !singlePromptLoading &&
@@ -234,7 +236,7 @@ const RequestPage: FC = () => {
                 },
               ]}
             />
-            {/* {submitValidateLoading ? (
+            {submitValidateLoading ? (
               <Box
                 sx={{
                   display: "flex",
@@ -253,38 +255,19 @@ const RequestPage: FC = () => {
 
                 <QueryComponent isLoading={submitValidateLoading} />
               </Box>
-            ) : ( */}
-            <Box
-              sx={{
-                height: "calc(100vh - 150px)",
-                width: "100%",
-                m: "auto",
-                pt: 2,
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "space-between",
-              }}
-            >
-              {CurrentType === "SQL" ? (
-                <Box
-                  sx={{
-                    margin: 0,
-                    width: "100%",
-                    borderRadius: "10px",
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "center",
-                    animation: "fallingEffect 0.8s ease forwards",
-                    position: "relative",
-                    zIndex: 10,
-                    opacity: 1,
-                    mb: 2,
-                  }}
-                >
-                  <SQL_Editor code={prompt?.sql ?? "Select * from test;"} />
-                </Box>
-              ) : CurrentType === "graph" ? (
-                prompt && (
+            ) : (
+              <Box
+                sx={{
+                  height: "calc(100vh - 150px)",
+                  width: "100%",
+                  m: "auto",
+                  pt: 2,
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                }}
+              >
+                {CurrentType === "SQL" ? (
                   <Box
                     sx={{
                       margin: 0,
@@ -293,40 +276,59 @@ const RequestPage: FC = () => {
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
-                      animation: "fallingEffect2 0.8s ease forwards",
+                      animation: "fallingEffect 0.8s ease forwards",
                       position: "relative",
                       zIndex: 10,
                       opacity: 1,
-                      mb: 3,
+                      mb: 2,
                     }}
                   >
-                    <GraphModal2
-                      prompt={prompt as Prompt}
-                      validatePrompt={submitValidate}
+                    <SQL_Editor code={prompt?.sql ?? "Select * from test;"} />
+                  </Box>
+                ) : CurrentType === "graph" ? (
+                  prompt && (
+                    <Box
+                      sx={{
+                        margin: 0,
+                        width: "100%",
+                        borderRadius: "10px",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        animation: "fallingEffect2 0.8s ease forwards",
+                        position: "relative",
+                        zIndex: 10,
+                        opacity: 1,
+                        mb: 3,
+                      }}
+                    >
+                      <GraphModal2
+                        prompt={prompt as Prompt}
+                        validatePrompt={submitValidate}
+                      />
+                    </Box>
+                  )
+                ) : (
+                  <Box
+                    sx={{
+                      width: "100%",
+                    }}
+                  >
+                    <ResponseArea
+                      content={content}
+                      // handleUpdate={handleUpdate ? () => handleUpdate() : undefined}
+                      isLoading={singlePromptLoading}
                     />
                   </Box>
-                )
-              ) : (
-                <Box
-                  sx={{
-                    width: "100%",
-                  }}
-                >
-                  <ResponseArea
-                    content={content}
-                    // handleUpdate={handleUpdate ? () => handleUpdate() : undefined}
-                    isLoading={singlePromptLoading}
-                  />
-                </Box>
-              )}
+                )}
 
-              <QueryComponent
-                content={content}
-                isLoading={submitExecuteLoading}
-                handleUpdate={handleUpdate}
-              />
-            </Box>
-            {/* )} */}
+                <QueryComponent
+                  content={content}
+                  isLoading={submitExecuteLoading}
+                  handleUpdate={handleUpdate}
+                />
+              </Box>
+            )}
           </Box>
         </motion.div>
       ) : !id &&

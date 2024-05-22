@@ -9,6 +9,7 @@ import { motion } from "framer-motion";
 import { CreateInputAreaComponent } from "@/components/inputArea";
 import { AlertModal } from "@/modals/AlertModal";
 import "./CreateRequestPage.css";
+import { LatestPullsData } from "@/utils/data";
 interface Props {
   list: Prompt[] | null | undefined;
   setRequestQuery: (query: string) => void;
@@ -26,7 +27,7 @@ const CreateRequestPage: FC<Props> = ({
   const [isOpenAlert, setIsOpenAlert] = useState(false);
 
   const promptList = useMemo(() => {
-    return list ? list : [];
+    return isPilotMode ? LatestPullsData : list ? list : [];
   }, [list]);
 
   const handlePrompt = () => {
@@ -61,7 +62,7 @@ const CreateRequestPage: FC<Props> = ({
             pt: isPilotMode ? "55px" : 2,
             width: "100%",
             m: "auto",
-            height: "calc(100vh - 150px)",
+            height: isPilotMode ? "calc(100vh - 120px)":  "calc(100vh - 150px)",
             display: "flex",
             justifyContent: "space-between",
             flexDirection: "column",
