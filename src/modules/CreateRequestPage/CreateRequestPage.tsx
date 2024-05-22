@@ -1,13 +1,6 @@
 import { PageHeader } from "@/components/PageHeader";
 import { Box, Typography } from "@mui/material";
-import { PannelArea } from "../PannelArea";
 import { isDemoMode, isPilotMode } from "@/utils/constants";
-import { Loader } from "@/components/Loader";
-import { useAppSelector } from "@/libs/redux/hooks";
-import {
-  getConsoleMessages,
-  getIsLoadingPrompt,
-} from "@/libs/redux/features/isLoadingRequest";
 import { palette } from "@/theme/Palette";
 import { FC, useMemo, useState } from "react";
 import { Prompt } from "@/utils/types";
@@ -28,10 +21,8 @@ const CreateRequestPage: FC<Props> = ({
   setRequestQuery,
   requestQuery,
   handleSubmitPrompt,
-  submitPromptLoading
+  submitPromptLoading,
 }) => {
-  //   const ConsoleMessages = useAppSelector(getConsoleMessages);
-  //   const isLoadingPrompt = useAppSelector(getIsLoadingPrompt);
   const [isOpenAlert, setIsOpenAlert] = useState(false);
 
   const promptList = useMemo(() => {
@@ -120,7 +111,7 @@ const CreateRequestPage: FC<Props> = ({
             handlePrompt={handlePrompt}
             handleSource={handleSource}
             handleValidate={handleSubmitPrompt}
-            onChangeInput={(e) => setRequestQuery(e.current.target)}
+            onChangeInput={(e) => setRequestQuery(e.target.value)}
             isLoading={submitPromptLoading}
             value={requestQuery}
           />

@@ -1,69 +1,120 @@
 "use client";
-import { Box } from "@mui/material";
+import { Box, Skeleton } from "@mui/material";
 import React, { FC, useEffect, useMemo, useState } from "react";
-import { PannelArea } from "../PannelArea";
 import { PageHeader } from "@/components/PageHeader";
 import { useSubmitExecute } from "@/hooks/useExecute";
 import GraphModal2 from "@/modals/graphModals/graphModal2";
-import { useGetAllPrompt, useGetSinglePrompt, useSubmitPrompt } from "@/hooks/usePrompt";
+import {
+  useGetAllPrompt,
+  useGetSinglePrompt,
+  useSubmitPrompt,
+} from "@/hooks/usePrompt";
 import { palette } from "@/theme/Palette";
 import { SQL_Editor } from "@/components/sql_Editor";
 import { useSubmitValidate } from "@/hooks/useValidate";
 import { Prompt } from "@/utils/types";
 import { ResponseArea } from "@/components/ResponseArea";
 import { QueryComponent } from "@/components/QuaryComponent";
-import { useAppSelector } from "@/libs/redux/hooks";
-import { getConsoleMessages, getCurrentPage, getIsLoadingPrompt } from "@/libs/redux/features/isLoadingRequest";
+import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
+import { getCurrentPage } from "@/libs/redux/features/isLoadingRequest";
 import { motion } from "framer-motion";
 import { Loader } from "@/components/Loader";
 import { useSearchParams } from "next/navigation";
 import CreateRequestPage from "../CreateRequestPage/CreateRequestPage";
-interface Props { 
+import { Icon } from "@/components/Icon";
+import {
+  getLoadingText,
+  getSubmitExecuteLoading,
+  getSubmitPromptLoading,
+  getSubmitValidateLoading,
+  setLoadingText,
+  setSubmitExecuteLoading,
+  setSubmitPromptLoading,
+} from "@/libs/redux/features/globalLoadings";
 
-}
-const RequestPage: FC<Props> = () => {
+const SkeletonLoader = () => {
+  return (
+    <Box
+      sx={{
+        display: "flex",
+        gap: 1,
+        alignItems: "flex-start",
+        mt: 1,
+        width: "100%",
+      }}
+    >
+      <Box>
+        <Box sx={{ transform: "scale(200%)", mt: 0.7 }}>
+          <Icon icon="logoIcon" height={30} width={30} />
+        </Box>
+      </Box>
+
+      <pre
+        style={{
+          width: "100%",
+          paddingRight: 50,
+          margin: "auto",
+          textAlign: "start",
+        }}
+      >
+        <Skeleton style={{ width: "100%", margin: "0", height: 32 }} />
+        <Skeleton style={{ width: "100%", margin: "0", height: 32 }} />
+        <Skeleton style={{ width: "80%", margin: "0", height: 32 }} />
+      </pre>
+    </Box>
+  );
+};
+const RequestPage: FC = () => {
   const [CurrentType, setCurrentType] = useState<"text" | "graph" | "SQL">(
     "text"
   );
-  const [loading,setLoading] = useState(true);
-  const [query,setQuery] = useState('');
-  const [consoleMessage, setConsoleMessage] = useState<string>("");
+  const dispatch = useAppDispatch();
+  const [loading, setLoading] = useState(true);
+  const [query, setQuery] = useState("");
   const searchParams = useSearchParams();
-  const id = searchParams.get('id');
-  console.log(id,'params')
-  // const id = useMemo(()=>{
-  //    searchParams;
-  // },[]);
+  const id = searchParams.get("id");
+
   const CurrentPage = useAppSelector(getCurrentPage);
-  // const ConsoleMessages = useAppSelector(getConsoleMessages);
-  // const isLoadingPrompt = useAppSelector(getIsLoadingPrompt);
+  const consoleMessage = useAppSelector(getLoadingText);
+  const submitPromptLoading = useAppSelector(getSubmitPromptLoading);
+  const submitExecuteLoading = useAppSelector(getSubmitExecuteLoading);
+  const submitValidateLoading = useAppSelector(getSubmitValidateLoading);
   const [isOpenSelectBar, setIsOpenSelectBar] = useState(false);
   const { mutate: submitExecute, isLoading: isLoadingExecute } =
     useSubmitExecute();
   const {
     data: validatedPrompt,
     mutate: submitValidate,
-    isLoading: submitValidateLoading,
+    // isLoading: submitValidateLoading,
     isSuccess: submitValidateSuccess,
   } = useSubmitValidate();
   const {
     data: submitPromptData,
     customMutate: submitPrompt,
-    isLoading: submitPromptLoading,
+    // isLoading: submitPromptLoading,
     isSuccess: submitPromptSuccess,
-  } = useSubmitPrompt((message) => {
-    setConsoleMessage(message);
-  });
-  const { data: singlePrompt, refetch: refetchPrompt, isLoading:singlePromptLoading } = useGetSinglePrompt(id);
-  const { data: allPrompt, refetch: refetchAllPrompt, isLoading:allPromptLoading } = useGetAllPrompt();
+  } = useSubmitPrompt(() => {});
+  const {
+    data: singlePrompt,
+    refetch: refetchPrompt,
+    isLoading: singlePromptLoading,
+  } = useGetSinglePrompt(id ?? "");
+  const {
+    data: allPrompt,
+    refetch: refetchAllPrompt,
+    isLoading: allPromptLoading,
+  } = useGetAllPrompt();
 
   const handleSubmitPrompt = () => {
-    submitPrompt({message:query});
-  }
+    submitPrompt({ message: query });
+    dispatch(setSubmitPromptLoading(true));
+    dispatch(setLoadingText("Processing"));
+  };
 
   const handleUpdate = () => {
     if (id) {
       submitExecute({ prompt: `query#${id}` });
+      dispatch(setSubmitExecuteLoading(true));
     }
   };
   const prompt = useMemo(() => {
@@ -90,36 +141,54 @@ const RequestPage: FC<Props> = () => {
   //   setIsOpenSelectBar(true);
   // };
   useEffect(() => {
-    if (id && id.length) {
-      refetchPrompt();
-    }
-  }, [refetchPrompt, id]);
-  useEffect(() => {
     if (submitValidateLoading) {
       setCurrentType("text");
     }
   }, [submitValidateLoading]);
-  useEffect(()=>{
+  useEffect(() => {
     setLoading(false);
     refetchAllPrompt();
-  },[])
+  }, []);
   const content = {
     response: prompt?.description as string,
     original:
       "Can I get data to understand how Flyease technology products have been performing this past year? I want to be able to pivot by SKU or by store, to understand transactional data by week.",
   };
 
-  console.log(loading,allPromptLoading,singlePromptLoading);
-
   return (
     <>
-      {loading || allPromptLoading || submitPromptLoading ? (
+      {loading &&
+      !submitPromptLoading &&
+      !submitExecuteLoading &&
+      !submitValidateLoading &&
+      !id ? (
+        // for page refresh on request page
+        <Loader type="Processing" variant="pageLoader" message={"Loading"} />
+      ) : loading &&
+        !submitPromptLoading &&
+        !submitExecuteLoading &&
+        !submitValidateLoading &&
+        id ? (
+        // for page refresh on validate page
+        <SkeletonLoader />
+      ) : !loading &&
+        submitPromptLoading &&
+        !submitExecuteLoading &&
+        !submitValidateLoading ? (
+        // for submit prompt loading
         <Loader
           type="Processing"
           variant="pageLoader"
           message={consoleMessage}
         />
-      ) : !loading && !singlePromptLoading && id?.length ? (
+      ) : !loading && !submitPromptLoading && submitValidateLoading ? (
+        // for validate prompt loading
+        <SkeletonLoader />
+      ) : id &&
+        id.length &&
+        !submitPromptLoading &&
+        !singlePromptLoading &&
+        !loading ? (
         <motion.div
           animate={{ opacity: [0, 1] }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
@@ -222,7 +291,7 @@ const RequestPage: FC<Props> = () => {
                         animation: "fallingEffect2 0.8s ease forwards",
                         position: "relative",
                         zIndex: 10,
-                        opacity: 0,
+                        opacity: 1,
                         mb: 3,
                       }}
                     >
@@ -233,26 +302,50 @@ const RequestPage: FC<Props> = () => {
                     </Box>
                   )
                 ) : (
-                  <PannelArea
-                    content={content}
-                    // handleUpdate={() => handleUpdate()}
-                    isOpenSelectBar={isOpenSelectBar}
-                    // handleOpenSelectBar={() => handleOpenSelectBar()}
-                    handleCloseSelectBar={() => handleCloseSelectBar()}
-                  />
+                  <Box
+                    sx={{
+                      display: "flex",
+                      justifyContent: "flex-start",
+                      // height: "calc(100vh - 180px)",
+                      width: "100%",
+                      alignItems: "flex-end",
+                      flexGrow: "1",
+                    }}
+                  >
+                    <div>
+                      <ResponseArea
+                        content={content}
+                        // handleUpdate={handleUpdate ? () => handleUpdate() : undefined}
+                        isLoading={singlePromptLoading}
+                      />
+                    </div>
+                  </Box>
                 )}
-                {CurrentPage === "validate" && (
-                  <QueryComponent
-                    content={content}
-                    isLoading={isLoadingExecute}
-                    handleUpdate={handleUpdate}
-                  />
-                )}
+
+                <QueryComponent
+                  content={content}
+                  isLoading={submitExecuteLoading}
+                  handleUpdate={handleUpdate}
+                />
               </Box>
             )}
           </Box>
         </motion.div>
-      ) : !loading && !allPromptLoading ?  (<CreateRequestPage list={allPrompt} setRequestQuery={setQuery} requestQuery={query} handleSubmitPrompt={handleSubmitPrompt} submitPromptLoading={submitPromptLoading}/>) : (<></>)}
+      ) : !id &&
+        !submitPromptLoading &&
+        !submitExecuteLoading &&
+        !submitValidateLoading &&
+        !loading ? (
+        <CreateRequestPage
+          list={allPrompt}
+          setRequestQuery={setQuery}
+          requestQuery={query}
+          handleSubmitPrompt={handleSubmitPrompt}
+          submitPromptLoading={submitPromptLoading}
+        />
+      ) : (
+        <></>
+      )}
     </>
   );
 };
