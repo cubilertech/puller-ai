@@ -8,7 +8,6 @@ import { motion } from "framer-motion";
 interface LatestPullesCardProps {
   query: string | undefined;
   onClick: () => void;
-
 }
 
 const LatestPullesCard: FC<LatestPullesCardProps> = ({
