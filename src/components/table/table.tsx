@@ -132,7 +132,7 @@ const DataTable = () => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                {[5, 8, 10].map((value, index) => (
+                {[5, 8, 10, 13].map((value, index) => (
                   <MenuItem
                     key={index}
                     onClick={() => {
