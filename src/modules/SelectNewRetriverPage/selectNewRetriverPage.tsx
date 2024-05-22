@@ -1,4 +1,5 @@
 "use client";
+import { CustomLink } from "@/components/Link";
 import { PageHeader } from "@/components/PageHeader";
 
 import { RectangleCard } from "@/components/RectangleCard";
@@ -6,14 +7,19 @@ import { AlertModal } from "@/modals/AlertModal";
 import { isPilotMode } from "@/utils/constants";
 import { Box } from "@mui/material";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRef, useState } from "react";
 
 const SelectNewRetriverPage = () => {
   const router = useRouter();
   const [isOpenAlert, setIsOpenAlert] = useState(false);
+  const linkRef = useRef<HTMLAnchorElement | null>(null);
   const handleApi = () => {
     if (isPilotMode) {
       setIsOpenAlert(true);
+    } else {
+      if (linkRef.current) {
+        linkRef.current.click();
+      }
     }
   };
 
@@ -32,12 +38,18 @@ const SelectNewRetriverPage = () => {
             title="Connect Apps"
             onClick={() => router.push("/retrievers/connect")}
           />
-
-          <RectangleCard
-            icon="apiKey"
-            title="Get API Key"
-            onClick={() => handleApi()}
-          />
+          <CustomLink
+            href="https://your-api-url.com"
+            target="_blank"
+            ref={linkRef}
+            style={{ width: "100%" }}
+          >
+            <RectangleCard
+              icon="apiKey"
+              title="Get API Key"
+              onClick={() => handleApi()}
+            />
+          </CustomLink>
           <RectangleCard
             icon="upload"
             title="Uplaod Data"

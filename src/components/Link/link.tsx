@@ -1,4 +1,4 @@
-import { CSSProperties, FC, ReactNode } from "react";
+import { CSSProperties, FC, LegacyRef, ReactNode } from "react";
 import Link from "next/link";
 import { CustomLinkVariants } from "@/utils/types";
 
@@ -8,6 +8,8 @@ interface CustomLinkProps {
   variant?: CustomLinkVariants;
   style?: CSSProperties;
   color?: string;
+  target?: string;
+  ref?: LegacyRef<HTMLAnchorElement> | undefined | null;
 }
 
 const CustomLink: FC<CustomLinkProps> = ({
@@ -16,20 +18,30 @@ const CustomLink: FC<CustomLinkProps> = ({
   variant = "simple",
   style,
   color = "#54A6FF",
+  target,
+  ref,
   ...props
 }) => {
   switch (variant) {
     case "simple":
       return (
-        <Link href={href} {...props} style={{ ...style, color }}>
+        <Link
+          target={target}
+          href={href}
+          {...props}
+          style={{ ...style, color }}
+          ref={ref}
+        >
           {children}
         </Link>
       );
     case "border":
       return (
         <Link
+          target={target}
           href={href}
           {...props}
+          ref={ref}
           style={{
             ...style,
             color: "#54A6FF",
