@@ -22,9 +22,8 @@ export async function POST(req: NextRequest) {
   const title = (formData.get("title") as string) || null;
   const description = (formData.get("description") as string) || null;
   const status = formData.get("status") as string;
-  const image = (formData.get("image") as File) || null;
+  const images = formData.getAll("image") as File[];
 
-  const buffer = Buffer.from(await image.arrayBuffer());
   const relativeUploadDir = `/uploads/${new Date(Date.now())
     .toLocaleDateString("id-ID", {
       day: "2-digit",
@@ -39,7 +38,7 @@ export async function POST(req: NextRequest) {
     await stat(uploadDir);
   } catch (e: any) {
     if (e.code === "ENOENT") {
-      // This is for checking the directory is exist (ENOENT : Error No Entry)
+      // This is for checking if the directory exists (ENOENT : Error No Entry)
       await mkdir(uploadDir, { recursive: true });
     } else {
       console.error(
@@ -54,13 +53,19 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-    const filename = `${image.name.replace(
-      /\.[^/.]+$/,
-      ""
-    )}-${uniqueSuffix}.${mime.getExtension(image.type)}`;
-    await writeFile(`${uploadDir}/${filename}`, buffer);
-    const fileUrl = `${relativeUploadDir}/${filename}`;
+    const fileUrls = [];
+
+    for (const image of images) {
+      const buffer = Buffer.from(await image.arrayBuffer());
+      const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+      const filename = `${image.name.replace(
+        /\.[^/.]+$/,
+        ""
+      )}-${uniqueSuffix}.${mime.getExtension(image.type)}`;
+      await writeFile(`${uploadDir}/${filename}`, buffer);
+      const fileUrl = `${relativeUploadDir}/${filename}`;
+      fileUrls.push(fileUrl);
+    }
 
     // Get the absolute path to the data.json file
     const filePath = path.join(
@@ -77,7 +82,7 @@ export async function POST(req: NextRequest) {
       status: status ?? "live",
       title,
       description: description ?? "",
-      image: fileUrl,
+      images: fileUrls,
     });
     // Write the updated data back to the JSON file
     fs.writeFileSync(filePath, JSON.stringify(list, null, 2), "utf8");
