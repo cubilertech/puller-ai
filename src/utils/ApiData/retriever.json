@@ -4,48 +4,48 @@
     "status": "live",
     "title": "Snowflake 1",
     "description": "Retrievers 1 bot will help to gather Retrievers 1 bot will help to gather in...",
-    "image": ""
+    "image": []
   },
   {
     "icon": "snowflake",
     "status": "live",
     "title": "Snowflake 3",
     "description": "Retrievers 1 bot will help to gather Retrievers 1 bot will help to gather in...",
-    "image": ""
+    "image": []
   },
   {
     "icon": "segment",
     "status": "live",
     "title": "Segment",
     "description": "Retrievers 1 bot will help to gather Retrievers 1 bot will help to gather in...",
-    "image": ""
+    "image": []
   },
   {
     "icon": "lytics",
     "status": "live",
     "title": "Lytics",
     "description": "Retrievers 1 bot will help to gather Retrievers 1 bot will help to gather in...",
-    "image": ""
+    "image": []
   },
   {
     "icon": "dataRoom",
     "status": "live",
     "title": "Data room 1",
     "description": "Retrievers 1 bot will help to gather Retrievers 1 bot will help to gather in...",
-    "image": ""
+    "image": []
   },
   {
     "icon": "snowflake",
     "status": "live",
     "title": "Snowflake 2",
     "description": "Retrievers 1 bot will help to gather Retrievers 1 bot will help to gather in...",
-    "image": ""
+    "image": []
   },
   {
     "icon": "dataRoom",
     "status": "live",
     "title": "test",
     "description": "Description text",
-    "image": "/uploads/21-05-2024/7n4rk8-1716272031472-216849206.gif"
+    "image": ["/uploads/21-05-2024/7n4rk8-1716272031472-216849206.gif"]
   }
 ]

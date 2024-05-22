@@ -208,7 +208,7 @@ export type Retriever = {
   status: string;
   title: string;
   description: string;
-  image?: string;
+  image?: Array<string>;
 };
 
 export type App = {
