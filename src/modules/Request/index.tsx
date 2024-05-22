@@ -169,8 +169,7 @@ const RequestPage: FC = () => {
         !submitExecuteLoading &&
         !submitValidateLoading &&
         id ? (
-        // for page refresh on validate page
-        <SkeletonLoader />
+        <Loader type="Processing" variant="pageLoader" message={"Loading"} />
       ) : !loading &&
         submitPromptLoading &&
         !submitExecuteLoading &&
@@ -183,7 +182,11 @@ const RequestPage: FC = () => {
         />
       ) : !loading && !submitPromptLoading && submitValidateLoading ? (
         // for validate prompt loading
-        <SkeletonLoader />
+        <Loader
+          type="Processing"
+          variant="pageLoader"
+          message={"Updating Variables"}
+        />
       ) : id &&
         id.length &&
         !submitPromptLoading &&
@@ -191,7 +194,7 @@ const RequestPage: FC = () => {
         !loading ? (
         <motion.div
           animate={{ opacity: [0, 1] }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
+          transition={{ duration: 0.4, ease: "easeInOut" }}
         >
           <Box sx={{ px: 2, pt: 1, m: "auto" }}>
             <PageHeader
@@ -231,8 +234,7 @@ const RequestPage: FC = () => {
                 },
               ]}
             />
-
-            {submitValidateLoading ? (
+            {/* {submitValidateLoading ? (
               <Box
                 sx={{
                   display: "flex",
@@ -251,16 +253,38 @@ const RequestPage: FC = () => {
 
                 <QueryComponent isLoading={submitValidateLoading} />
               </Box>
-            ) : (
-              <Box
-                sx={{
-                  height: "calc(100vh - 180px)",
-                  width: "100%",
-                  m: "auto",
-                  pt: 2,
-                }}
-              >
-                {CurrentType === "SQL" ? (
+            ) : ( */}
+            <Box
+              sx={{
+                height: "calc(100vh - 150px)",
+                width: "100%",
+                m: "auto",
+                pt: 2,
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "space-between",
+              }}
+            >
+              {CurrentType === "SQL" ? (
+                <Box
+                  sx={{
+                    margin: 0,
+                    width: "100%",
+                    borderRadius: "10px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    animation: "fallingEffect 0.8s ease forwards",
+                    position: "relative",
+                    zIndex: 10,
+                    opacity: 1,
+                    mb: 2,
+                  }}
+                >
+                  <SQL_Editor code={prompt?.sql ?? "Select * from test;"} />
+                </Box>
+              ) : CurrentType === "graph" ? (
+                prompt && (
                   <Box
                     sx={{
                       margin: 0,
@@ -269,66 +293,40 @@ const RequestPage: FC = () => {
                       display: "flex",
                       justifyContent: "center",
                       alignItems: "center",
-                      animation: "fallingEffect 0.8s ease forwards",
+                      animation: "fallingEffect2 0.8s ease forwards",
                       position: "relative",
                       zIndex: 10,
                       opacity: 1,
-                      mb: 2,
+                      mb: 3,
                     }}
                   >
-                    <SQL_Editor code={prompt?.sql ?? "Select * from test;"} />
+                    <GraphModal2
+                      prompt={prompt as Prompt}
+                      validatePrompt={submitValidate}
+                    />
                   </Box>
-                ) : CurrentType === "graph" ? (
-                  prompt && (
-                    <Box
-                      sx={{
-                        margin: 0,
-                        width: "100%",
-                        borderRadius: "10px",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        animation: "fallingEffect2 0.8s ease forwards",
-                        position: "relative",
-                        zIndex: 10,
-                        opacity: 1,
-                        mb: 3,
-                      }}
-                    >
-                      <GraphModal2
-                        prompt={prompt as Prompt}
-                        validatePrompt={submitValidate}
-                      />
-                    </Box>
-                  )
-                ) : (
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "flex-start",
-                      // height: "calc(100vh - 180px)",
-                      width: "100%",
-                      alignItems: "flex-end",
-                      flexGrow: "1",
-                    }}
-                  >
-                    <div>
-                      <ResponseArea
-                        content={content}
-                        // handleUpdate={handleUpdate ? () => handleUpdate() : undefined}
-                        isLoading={singlePromptLoading}
-                      />
-                    </div>
-                  </Box>
-                )}
+                )
+              ) : (
+                <Box
+                  sx={{
+                    width: "100%",
+                  }}
+                >
+                  <ResponseArea
+                    content={content}
+                    // handleUpdate={handleUpdate ? () => handleUpdate() : undefined}
+                    isLoading={singlePromptLoading}
+                  />
+                </Box>
+              )}
 
-                <QueryComponent
-                  content={content}
-                  isLoading={submitExecuteLoading}
-                  handleUpdate={handleUpdate}
-                />
-              </Box>
-            )}
+              <QueryComponent
+                content={content}
+                isLoading={submitExecuteLoading}
+                handleUpdate={handleUpdate}
+              />
+            </Box>
+            {/* )} */}
           </Box>
         </motion.div>
       ) : !id &&

@@ -8,7 +8,7 @@ import { LatestPullesCard } from "@/components/Latestpulles-Card";
 import { motion } from "framer-motion";
 import { CreateInputAreaComponent } from "@/components/inputArea";
 import { AlertModal } from "@/modals/AlertModal";
-
+import "./CreateRequestPage.css";
 interface Props {
   list: Prompt[] | null | undefined;
   setRequestQuery: (query: string) => void;
@@ -61,6 +61,10 @@ const CreateRequestPage: FC<Props> = ({
             pt: isPilotMode ? "55px" : 2,
             width: "100%",
             m: "auto",
+            height: "calc(100vh - 150px)",
+            display: "flex",
+            justifyContent: "space-between",
+            flexDirection: "column",
           }}
         >
           <Box sx={{ display: "flex", flexDirection: "column", gap: 5 }}>
@@ -92,9 +96,9 @@ const CreateRequestPage: FC<Props> = ({
               {promptList.map((item, i) => (
                 <motion.div
                   key={`motion-div-${i}`}
-                  animate={{ y: [-240, 0] }}
+                  animate={{ opacity: [0, 1] }}
                   transition={{
-                    duration: i === 0 ? 1 : i,
+                    duration: i === 0 ? 0.5 : i,
                     ease: "easeInOut",
                   }}
                 >
@@ -107,6 +111,7 @@ const CreateRequestPage: FC<Props> = ({
               ))}
             </Box>
           </Box>
+
           <CreateInputAreaComponent
             handlePrompt={handlePrompt}
             handleSource={handleSource}
