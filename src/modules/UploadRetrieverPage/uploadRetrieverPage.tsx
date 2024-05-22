@@ -69,12 +69,12 @@ const UploadRetrieverPage = () => {
       } else if (selectedFiles.length === 0) {
         toast.warning("Please Upload Files.");
       } else if (name && selectedFiles.length > 0) {
-        // CreateRetriever({
-        //   status: StatusTypes.needPermissions,
-        //   description: description,
-        //   images: selectedFiles,
-        //   title: name,
-        // });
+        CreateRetriever({
+          status: StatusTypes.needPermissions,
+          description: description,
+          images: selectedFiles,
+          title: name,
+        });
         console.log(selectedFiles, "selectedFiles");
       }
     }

@@ -118,8 +118,12 @@ export const useCreateRetriever = () => {
     try {
 
       const formData = new FormData();
-    if (data.image) {
-      formData.append("image", data.image);
+    if (data.images) {
+      if (data.images && data.images.length > 0) {
+        data.images.forEach(file => {
+          formData.append("image", file);
+        });
+      }
     }
     formData.append("title", data.title);
     formData.append("description", data.description);

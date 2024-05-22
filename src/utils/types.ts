@@ -227,5 +227,5 @@ export interface createRetrieverPayload {
   status: StatusTypes;
   title: string;
   description: string;
-  image?: File;
+  images?: File[];
 }
