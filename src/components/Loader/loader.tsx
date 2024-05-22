@@ -15,13 +15,13 @@ interface LoaderProps {
 const Loader: FC<LoaderProps> = ({ variant, type, message }) => {
   const [showLoader, setShowLoader] = useState(true);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setShowLoader(false);
-    }, 4000);
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setShowLoader(false);
+  //   }, 4000);
 
-    return () => clearTimeout(timer);
-  }, []);
+  //   return () => clearTimeout(timer);
+  // }, []);
   switch (variant) {
     case "simple":
       return (

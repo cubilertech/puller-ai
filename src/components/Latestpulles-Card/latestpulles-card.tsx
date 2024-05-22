@@ -6,13 +6,13 @@ import { LatestPullesCardDataProps } from "@/utils/types";
 import { motion } from "framer-motion";
 
 interface LatestPullesCardProps {
-  data: LatestPullesCardDataProps;
+  query: string | undefined;
   onClick: () => void;
 
 }
 
 const LatestPullesCard: FC<LatestPullesCardProps> = ({
-  data,
+  query,
   onClick,
 
 }) => {
@@ -35,7 +35,7 @@ const LatestPullesCard: FC<LatestPullesCardProps> = ({
           },
         }}
       >
-        <Typography variant="text-md-medium">{data.text}</Typography>
+        <Typography variant="text-md-medium">{query}</Typography>
       </Paper>
   
   );

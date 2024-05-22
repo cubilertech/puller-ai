@@ -9,6 +9,7 @@ import { toastTimeout } from "@/utils/constants";
 import { submitPromptPayload, Prompt } from "@/utils/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
+// import { useRouter } from "next/router";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
 
@@ -19,7 +20,7 @@ export const useSubmitPrompt = (
   const dispatch = useAppDispatch();
   async function submit(data: submitPromptPayload): Promise<Prompt | null> {
     try {
-       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
+      const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
       const res = await axios({
         url: `${backendUrl}/v0/query/prompt`,
         method: "POST",
@@ -44,11 +45,13 @@ export const useSubmitPrompt = (
     onSuccess: async (data) => {
       // dispatch(UpdateIsLoadingRequest(false));
       const id = data?.id?.includes("#") ? data?.id?.split("#")?.[1] : data?.id;
-      setTimeout(() => {
-        router.push(`/request?id=${id}`);
-      }, 1000);
+      router.push( '/request', { param: { id: id } });
+      // router.push(`/request?id=${id}`, `/request?id=${id}`, { shallow: true});
+      // setTimeout(() => {
+      //   router.push(`/request?id=${id}`);
+      // }, 1000);
       // await new Promise((resolve) => setTimeout(resolve, 1000));
-      dispatch(UpdateCurrentPage("validate"));
+      // dispatch(UpdateCurrentPage("validate"));
       // dispatch(UpdateIsLoadingRequest(false));
     },
     onError: (error: any) => {
@@ -143,7 +146,7 @@ export const useGetSinglePrompt = (promptId: string) => {
       toast.error(error?.response?.data?.message ?? (error.message as string));
       setTimeout(() => {
         router.push("/request");
-        dispatch(UpdateCurrentPage('create'));
+        dispatch(UpdateCurrentPage("create"));
       }, toastTimeout);
       console.error("Network error:", error);
       return null;
