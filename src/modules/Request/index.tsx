@@ -16,7 +16,10 @@ import { Prompt } from "@/utils/types";
 import { ResponseArea } from "@/components/ResponseArea";
 import { QueryComponent } from "@/components/QuaryComponent";
 import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
-import { getCurrentPage } from "@/libs/redux/features/isLoadingRequest";
+import {
+  UpdatePromptValue,
+  getCurrentPage,
+} from "@/libs/redux/features/isLoadingRequest";
 import { motion } from "framer-motion";
 import { Loader } from "@/components/Loader";
 import { useSearchParams } from "next/navigation";
@@ -109,6 +112,7 @@ const RequestPage: FC = () => {
     submitPrompt({ message: query });
     dispatch(setSubmitPromptLoading(true));
     dispatch(setLoadingText("Processing"));
+    dispatch(UpdatePromptValue(query));
   };
 
   const handleUpdate = () => {
