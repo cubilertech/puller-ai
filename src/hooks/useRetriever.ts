@@ -76,7 +76,7 @@ export const useGetAllApps = () => {
 
 export const useUpdateAppStatus = () => {
   //   const dispatch = useAppDispatch();
-  async function submit(data: appUpdatePayload): Promise<App[] | null> {
+  async function submit(data: appUpdatePayload): Promise<ConnectItem[] | null | undefined> {
     try {
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
       const res = await axios({
@@ -117,25 +117,19 @@ export const useCreateRetriever = () => {
   ): Promise<Retriever | null> {
     try {
       const formData = new FormData();
-      if (data.images) {
-        if (data.images && data.images.length > 0) {
-          data.images.forEach((file) => {
-            formData.append("image", file);
-          });
-        }
-      }
+
       formData.append("title", data.title);
 
-      if (data.description && data.description.length > 0) {
-        data.description.forEach((description) => {
-          formData.append("description", description);
-        });
-      }
+      formData.append("files", JSON.stringify(data.files.map(file => ({ description: file.description }))));
+      data.files.forEach((file, index) => {
+        formData.append(`image${index}`, file.file);
+      });
 
-      // formData.append("description", data.description);
+      formData.append("description", data.description);
       formData.append("status", data.status);
       // formData.append("icon", data.icon);
 
+      console.log(data, formData, "payload");
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
       const res = await axios({
         url: `${backendUrl}/v0/retriever`,
@@ -151,6 +145,7 @@ export const useCreateRetriever = () => {
       } else {
         return null;
       }
+      // return null;
     } catch (error) {
       console.error("Network error:", error);
       return null;

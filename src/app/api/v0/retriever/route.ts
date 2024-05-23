@@ -3,7 +3,7 @@ import retrieversList from "@/utils/ApiData/retriever.json";
 import path, { join } from "path";
 import { mkdir, stat, writeFile } from "fs/promises";
 import mime from "mime";
-import fs from "fs";
+import { promises as fsPromises } from "fs";
 
 export async function GET(req: any, res: any) {
   try {
@@ -15,14 +15,13 @@ export async function GET(req: any, res: any) {
     });
   }
 }
-
 export async function POST(req: NextRequest) {
   const formData = await req.formData();
 
   const title = (formData.get("title") as string) || null;
-  const description = (formData.get("description") as string) || null;
   const status = formData.get("status") as string;
-  const images = formData.getAll("image") as File[];
+  const description = formData.get("description") as string;
+  const filesData = JSON.parse(formData.get("files") as string); // Parsing the stringified files data
 
   const relativeUploadDir = `/uploads/${new Date(Date.now())
     .toLocaleDateString("id-ID", {
@@ -53,9 +52,12 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const fileUrls = [];
+    const fileRecords = [];
 
-    for (const image of images) {
+    for (let i = 0; i < filesData.length; i++) {
+      const fileData = filesData[i];
+      const image = formData.get(`image${i}`) as File;
+
       const buffer = Buffer.from(await image.arrayBuffer());
       const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
       const filename = `${image.name.replace(
@@ -64,11 +66,15 @@ export async function POST(req: NextRequest) {
       )}-${uniqueSuffix}.${mime.getExtension(image.type)}`;
       await writeFile(`${uploadDir}/${filename}`, buffer);
       const fileUrl = `${relativeUploadDir}/${filename}`;
-      fileUrls.push(fileUrl);
+
+      fileRecords.push({
+        image: fileUrl,
+        description: fileData.description,
+      });
     }
 
     // Get the absolute path to the data.json file
-    const filePath = path.join(
+    const filePath = join(
       process.cwd(),
       "src",
       "utils",
@@ -76,16 +82,16 @@ export async function POST(req: NextRequest) {
       "retriever.json"
     );
     // Read the JSON file
-    const list = JSON.parse(fs.readFileSync(filePath, "utf8"));
+    const list = JSON.parse(await fsPromises.readFile(filePath, "utf8"));
     list.push({
       icon: "dataRoom",
       status: status ?? "live",
       title,
-      description: description ?? "",
-      images: fileUrls,
+      files: fileRecords,
+      description: description,
     });
     // Write the updated data back to the JSON file
-    fs.writeFileSync(filePath, JSON.stringify(list, null, 2), "utf8");
+    await fsPromises.writeFile(filePath, JSON.stringify(list, null, 2), "utf8");
 
     return NextResponse.json(list);
   } catch (e) {

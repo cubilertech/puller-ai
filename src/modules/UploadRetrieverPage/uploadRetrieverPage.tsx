@@ -8,7 +8,7 @@ import { Paper } from "@/components/Paper";
 import { useCreateRetriever } from "@/hooks/useRetriever";
 import { AlertModal } from "@/modals/AlertModal";
 import { isPilotMode } from "@/utils/constants";
-import { StatusTypes } from "@/utils/types";
+import { Files, StatusTypes } from "@/utils/types";
 import { Box, Input, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
@@ -21,9 +21,10 @@ const UploadRetrieverPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const [fileData, setFileData] = useState<
-    { image: File; description: string }[]
+    Files[]
   >([]);
   const [name, setName] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const {
@@ -34,8 +35,8 @@ const UploadRetrieverPage = () => {
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
-      const newFiles = Array.from(event.target.files).map((image) => ({
-        image,
+      const newFiles = Array.from(event.target.files).map((file) => ({
+        file,
         description: "",
       }));
       setFileData((prevFileData) => [...prevFileData, ...newFiles]);
@@ -52,7 +53,9 @@ const UploadRetrieverPage = () => {
   const handleNameInput = (event: ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
   };
-
+  const handleDescriptionInput = (event: ChangeEvent<HTMLInputElement>) => {
+    setDescription(event.target.value);
+  };
   const handleUploadDocs = () => {
     if (isPilotMode) {
       setIsOpenAlert(true);
@@ -73,10 +76,10 @@ const UploadRetrieverPage = () => {
         toast.warning("Please Upload Files.");
       } else {
         CreateRetriever({
-          status: StatusTypes.needPermissions,
-          description: fileData.map((data) => data.description),
-          images: fileData.map((data) => data.image),
           title: name,
+          status: StatusTypes.needPermissions,
+          files: fileData,
+          description: description,
         });
         console.log(
           fileData,
@@ -151,6 +154,26 @@ const UploadRetrieverPage = () => {
                   }}
                 />
               </Box>
+                 {/* Description Label & Input */}
+                 <Box
+                display={"flex"}
+                flexDirection={"column"}
+                alignItems={"flex-start"}
+                gap={"0.5rem"}
+              >
+                <Typography variant="text-sm-medium">Description</Typography>
+                <Input
+                  disableUnderline
+                  fullWidth
+                  onChange={handleDescriptionInput}
+                  placeholder="Enter Description"
+                  sx={{
+                    borderRadius: "5px",
+                    padding: "0.5rem 1rem",
+                    border: "2px solid rgba(196, 196, 196, 0.6)",
+                  }}
+                />
+              </Box>
 
               {/* Upload Area */}
               <Box
@@ -206,8 +229,8 @@ const UploadRetrieverPage = () => {
                   {fileData.map((data, index) => (
                     <UploadBox
                       key={index}
-                      name={data.image.name}
-                      size={data.image.size}
+                      name={data.file.name}
+                      size={data.file.size}
                       inputValue={data.description}
                       handleChangeInput={handleDescriptionChange(index)}
                     />

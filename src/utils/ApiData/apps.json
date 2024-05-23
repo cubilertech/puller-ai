@@ -9,13 +9,13 @@
     "id": "2",
     "image": "/Images/blank-square.svg",
     "name": "Amazon Redshift",
-    "isConnected": true
+    "isConnected": false
   },
   {
     "id": "3",
     "image": "/Images/blank-square.svg",
     "name": "Snowflake",
-    "isConnected": true
+    "isConnected": false
   },
   {
     "id": "4",
