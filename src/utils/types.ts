@@ -226,6 +226,6 @@ export interface appUpdatePayload {
 export interface createRetrieverPayload {
   status: StatusTypes;
   title: string;
-  description: string;
+  description: string[];
   images?: File[];
 }

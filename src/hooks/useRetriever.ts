@@ -116,25 +116,31 @@ export const useCreateRetriever = () => {
     data: createRetrieverPayload
   ): Promise<Retriever | null> {
     try {
-
       const formData = new FormData();
-    if (data.images) {
-      if (data.images && data.images.length > 0) {
-        data.images.forEach(file => {
-          formData.append("image", file);
+      if (data.images) {
+        if (data.images && data.images.length > 0) {
+          data.images.forEach((file) => {
+            formData.append("image", file);
+          });
+        }
+      }
+      formData.append("title", data.title);
+
+      if (data.description && data.description.length > 0) {
+        data.description.forEach((description) => {
+          formData.append("description", description);
         });
       }
-    }
-    formData.append("title", data.title);
-    formData.append("description", data.description);
-    formData.append("status", data.status);
-    // formData.append("icon", data.icon);
+
+      // formData.append("description", data.description);
+      formData.append("status", data.status);
+      // formData.append("icon", data.icon);
 
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
       const res = await axios({
         url: `${backendUrl}/v0/retriever`,
         method: "POST",
-        data:formData,
+        data: formData,
         headers: {
           // "Content-Type": "application/json",
           "Content-Type": "multipart/form-data",

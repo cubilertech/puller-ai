@@ -5,7 +5,6 @@ import { Icon } from "@/components/Icon";
 import { Loader } from "@/components/Loader";
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
-import { UploadBox } from "@/components/UplaodBox";
 import { useCreateRetriever } from "@/hooks/useRetriever";
 import { AlertModal } from "@/modals/AlertModal";
 import { isPilotMode } from "@/utils/constants";
@@ -15,13 +14,15 @@ import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import FeedbackPage from "../FeedbackPage/feedbackPage";
 import { toast } from "react-toastify";
+import { UploadBox } from "@/components/UplaodBox";
 
 const UploadRetrieverPage = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenAlert, setIsOpenAlert] = useState(false);
-  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-  const [description, setDescription] = useState<string>("");
+  const [fileData, setFileData] = useState<
+    { image: File; description: string }[]
+  >([]);
   const [name, setName] = useState<string>("");
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -33,21 +34,23 @@ const UploadRetrieverPage = () => {
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
-      const newFiles = Array.from(event.target.files);
-      setSelectedFiles((prevFiles) => [...prevFiles, ...newFiles]);
+      const newFiles = Array.from(event.target.files).map((image) => ({
+        image,
+        description: "",
+      }));
+      setFileData((prevFileData) => [...prevFileData, ...newFiles]);
     }
   };
 
-  const handleDescriptionInput = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.value) {
-      setDescription(event.target.value);
-    }
-  };
+  const handleDescriptionChange =
+    (index: number) => (event: ChangeEvent<HTMLInputElement>) => {
+      const newFileData = [...fileData];
+      newFileData[index].description = event.target.value;
+      setFileData(newFileData);
+    };
 
   const handleNameInput = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.value) {
-      setName(event.target.value);
-    }
+    setName(event.target.value);
   };
 
   const handleUploadDocs = () => {
@@ -66,27 +69,26 @@ const UploadRetrieverPage = () => {
     } else {
       if (name === "") {
         toast.warning("Please Enter Name.");
-      } else if (selectedFiles.length === 0) {
+      } else if (fileData.length === 0) {
         toast.warning("Please Upload Files.");
-      } else if (name && selectedFiles.length > 0) {
+      } else {
         CreateRetriever({
           status: StatusTypes.needPermissions,
-          description: description,
-          images: selectedFiles,
+          description: fileData.map((data) => data.description),
+          images: fileData.map((data) => data.image),
           title: name,
         });
-        console.log(selectedFiles, "selectedFiles");
+        console.log(
+          fileData,
+          fileData.map((data) => data.description)
+        );
       }
     }
   };
 
   useEffect(() => {
-    if (selectedFiles.length > 0) {
-      setIsOpen(true);
-    } else {
-      setIsOpen(false);
-    }
-  }, [selectedFiles, RetrieverCreatedSuccess]);
+    setIsOpen(fileData.length > 0);
+  }, [fileData, RetrieverCreatedSuccess]);
 
   return (
     <>
@@ -201,13 +203,13 @@ const UploadRetrieverPage = () => {
                     mb: 8,
                   }}
                 >
-                  {selectedFiles.map((file, index) => (
+                  {fileData.map((data, index) => (
                     <UploadBox
                       key={index}
-                      name={file.name}
-                      size={file.size}
-                      inputValue={description}
-                      handleChangeInput={handleDescriptionInput}
+                      name={data.image.name}
+                      size={data.image.size}
+                      inputValue={data.description}
+                      handleChangeInput={handleDescriptionChange(index)}
                     />
                   ))}
                 </Box>
