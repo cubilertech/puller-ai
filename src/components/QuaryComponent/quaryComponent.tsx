@@ -71,8 +71,8 @@ const QueryComponent: FC<QueryComponentProps> = ({
             ) : (
               <Typography
                 className="animated-genrated-text"
-                variant="text-xs-regular"
-                color={palette.color.gray[300]}
+                variant="text-sm-regular"
+                color={palette.color.gray[175]}
                 style={{
                   whiteSpace: "nowrap",
                   overflow: "hidden",
