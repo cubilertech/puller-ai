@@ -1,5 +1,6 @@
 import { getBackendURL } from "@/utils/common";
 import {
+  ConnectItem,
   Retriever,
   appUpdatePayload,
   createRetrieverPayload,
@@ -14,7 +15,7 @@ export const useGetAllRetriever = () => {
     try {
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
       const res = await axios({
-        url: `${backendUrl}/v0/query/retriever`,
+        url: `${backendUrl}/v0/retriever`,
         method: "get",
         headers: {
           accept: "application/json",
@@ -42,11 +43,11 @@ export const useGetAllRetriever = () => {
 };
 
 export const useGetAllApps = () => {
-  async function submit(): Promise<App[] | null> {
+  async function submit(): Promise<ConnectItem[] | null> {
     try {
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
       const res = await axios({
-        url: `${backendUrl}/v0/query/retriever/apps`,
+        url: `${backendUrl}/v0/retriever/apps`,
         method: "get",
         headers: {
           accept: "application/json",
@@ -75,11 +76,11 @@ export const useGetAllApps = () => {
 
 export const useUpdateAppStatus = () => {
   //   const dispatch = useAppDispatch();
-  async function submit(data: appUpdatePayload): Promise<App[] | null> {
+  async function submit(data: appUpdatePayload): Promise<ConnectItem[] | null | undefined> {
     try {
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
       const res = await axios({
-        url: `${backendUrl}/v0/query/retriever/apps/${data.id}`,
+        url: `${backendUrl}/v0/retriever/apps/${data.id}`,
         method: "put",
         data,
         headers: {
@@ -115,21 +116,25 @@ export const useCreateRetriever = () => {
     data: createRetrieverPayload
   ): Promise<Retriever | null> {
     try {
-
       const formData = new FormData();
-    if (data.image) {
-      formData.append("image", data.image);
-    }
-    formData.append("title", data.title);
-    formData.append("description", data.description);
-    formData.append("status", data.status);
-    // formData.append("icon", data.icon);
 
+      formData.append("title", data.title);
+
+      formData.append("files", JSON.stringify(data.files.map(file => ({ description: file.description }))));
+      data.files.forEach((file, index) => {
+        formData.append(`image${index}`, file.file);
+      });
+
+      formData.append("description", data.description);
+      formData.append("status", data.status);
+      // formData.append("icon", data.icon);
+
+      console.log(data, formData, "payload");
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
       const res = await axios({
         url: `${backendUrl}/v0/retriever`,
         method: "POST",
-        data:formData,
+        data: formData,
         headers: {
           // "Content-Type": "application/json",
           "Content-Type": "multipart/form-data",
@@ -140,6 +145,7 @@ export const useCreateRetriever = () => {
       } else {
         return null;
       }
+      // return null;
     } catch (error) {
       console.error("Network error:", error);
       return null;

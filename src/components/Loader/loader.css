@@ -47,6 +47,7 @@
   white-space: nowrap;
   min-width: 10rem;
   margin-left: 2.3rem;
+  color: white;
 }
 @keyframes typing2 {
   0% {
@@ -74,6 +75,7 @@
   white-space: nowrap;
   min-width: 10rem;
   margin-left: 3.1rem;
+  color: white;
 }
 
 .loader-container {

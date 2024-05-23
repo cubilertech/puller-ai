@@ -29,6 +29,7 @@ export interface UserProps {
 }
 
 export interface ConnectItem {
+  id: string;
   image: string;
   name: string;
   isConnected: boolean;
@@ -206,6 +207,7 @@ export type Retriever = {
   icon: string;
   status: string;
   title: string;
+  description: string;
   files: [
     {
       description: string;
@@ -226,13 +228,14 @@ export interface appUpdatePayload {
   status: boolean;
 }
 
+export type Files = {
+  description: string;
+  file: File;
+};
+
 export interface createRetrieverPayload {
-  status: string;
+  status: StatusTypes;
   title: string;
-  files: [
-    {
-      description: string;
-      url?: string;
-    },
-  ];
+  files: Files[];
+  description: string;
 }

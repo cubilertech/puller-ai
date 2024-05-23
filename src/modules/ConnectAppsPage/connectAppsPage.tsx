@@ -9,33 +9,75 @@ import { CONNECT_APP_DATA } from "@/utils/data";
 import { Input } from "@/components/Input";
 import { palette } from "@/theme/Palette";
 import { AlertModal } from "@/modals/AlertModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { isPilotMode } from "@/utils/constants";
 import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
 import {
   getConnectQuery,
   updateConnectQuery,
 } from "@/libs/redux/features/searchbar";
+import { useGetAllApps, useUpdateAppStatus } from "@/hooks/useRetriever";
+import { Loader } from "@/components/Loader";
+import { ConnectItem } from "@/utils/types";
 
 const ConnectAppsPage = () => {
   const query = useAppSelector(getConnectQuery);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [isOpenAlert, setIsOpenAlert] = useState(false);
+  const [loadingCardId, setLoadingCardId] = useState<string | null>(null);
+  const [data, setData] = useState<ConnectItem[] | null | undefined>(null);
+
+  const {
+    data: connectApps,
+    refetch: connectAppRefetch,
+    isLoading: loadingApps,
+    isSuccess: isSuccessApps,
+  } = useGetAllApps();
+  const {
+    data: appStatusData,
+    mutate: updateAppStatus,
+    isSuccess: appStatusUpdated,
+    isLoading: loadingStatusUpdate,
+  } = useUpdateAppStatus();
 
   const handleCreateRetriever = () => {
     if (isPilotMode) {
       setIsOpenAlert(true);
-    } else router.push("/retrievers/feedback");
-  };
-  const handleCardConnect = () => {
-    if (isPilotMode) {
-      setIsOpenAlert(true);
+    } else {
+      router.push("/retrievers/upload");
     }
   };
-  const filteredData = CONNECT_APP_DATA.filter((item) =>
+
+  const handleCardConnect = (item: ConnectItem) => {
+    if (isPilotMode) {
+      setIsOpenAlert(true);
+    } else {
+      setLoadingCardId(item.id);
+      updateAppStatus({ id: item.id, status: !item.isConnected });
+    }
+  };
+
+  const filteredData = data?.filter((item) =>
     item.name.toLowerCase().includes(query.toLowerCase())
   );
+
+  useEffect(() => {
+    if (appStatusUpdated && appStatusData) {
+      setData(appStatusData);
+    }
+  }, [appStatusUpdated, appStatusData]);
+
+  useEffect(() => {
+    if (isSuccessApps && connectApps) {
+      setData(connectApps);
+    }
+  }, [isSuccessApps, connectApps]);
+
+  useEffect(() => {
+    connectAppRefetch();
+  }, [connectAppRefetch]);
+
   return (
     <Box
       sx={{
@@ -48,7 +90,6 @@ const ConnectAppsPage = () => {
     >
       <PageHeader title="Connect App" />
 
-      {/* Table */}
       <Paper
         variant="light-border"
         sx={{
@@ -57,7 +98,6 @@ const ConnectAppsPage = () => {
           flexDirection: "column",
         }}
       >
-        {/* Topbar */}
         <Box
           sx={{
             background: palette.linearGradient.gray,
@@ -84,7 +124,7 @@ const ConnectAppsPage = () => {
               height: "44",
             }}
             label="Create Retriever"
-            onClick={() => handleCreateRetriever()}
+            onClick={handleCreateRetriever}
           />
         </Box>
 
@@ -95,7 +135,19 @@ const ConnectAppsPage = () => {
             scrollbarWidth: "none",
           }}
         >
-          {filteredData.length <= 0 ? (
+          {loadingApps ? (
+            <Box
+              sx={{
+                width: "100%",
+                height: "100%",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Loader type="Loading" variant="simple" isLoading={loadingApps} />
+            </Box>
+          ) : filteredData && filteredData.length <= 0 ? (
             <Typography
               variant="text-lg-bold"
               sx={{
@@ -107,14 +159,15 @@ const ConnectAppsPage = () => {
                 alignItems: "center",
               }}
             >
-              No Connect Data
+              No Connect Apps
             </Typography>
           ) : (
-            filteredData.map((item, index) => (
+            filteredData?.map((item, index) => (
               <ConnectCard
                 key={index}
                 item={item}
-                onClick={() => handleCardConnect()}
+                isLoading={loadingCardId === item.id && loadingStatusUpdate}
+                onClick={() => handleCardConnect(item)}
               />
             ))
           )}

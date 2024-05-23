@@ -2,8 +2,14 @@ import { Box, Typography, useMediaQuery } from "@mui/material";
 import { Paper } from "../Paper";
 import { Icon } from "../Icon";
 import { Divider } from "../Divider";
+import { FC } from "react";
 
-const UploadCard = () => {
+interface UploadCardProps {
+  name?: string;
+  size?: number;
+}
+
+const UploadCard: FC<UploadCardProps> = ({ name, size }) => {
   const isMobile = useMediaQuery("(max-width: 1200px)");
   return (
     <Paper
@@ -22,9 +28,7 @@ const UploadCard = () => {
         Nullam pulvinar sit amet risus pretium auctor. Etiam quis massa
         pulvinar, aliquam quam vitae, tempus sem. Donec elementum pulvinar odio.
       </Typography>
-      <Divider
-        type={"light"}
-      />
+      <Divider type={"light"} />
       <Box
         display={"flex"}
         justifyContent={"space-between"}
@@ -46,14 +50,22 @@ const UploadCard = () => {
 
           <Typography
             variant={isMobile ? "text-xs-medium" : "text-sm-medium"}
-            sx={{ minWidth: "80px", wordWrap: "break-word" }}
+            sx={{
+              minWidth: "80px",
+              maxWidth: "140px",
+              wordWrap: "break-word",
+              whiteSpace: "nowrap",
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              display: "block",
+            }}
           >
-            Cl_insight_2021.pdf
+            {name ? name : "Cl_insight_2021.pdf"}
           </Typography>
         </Box>
 
         <Typography variant={isMobile ? "text-xs-medium" : "text-sm-medium"}>
-          (10mb)
+          ({size ? (size / 1024 / 1024).toFixed(2) : 24}mb)
         </Typography>
       </Box>
     </Paper>

@@ -3,7 +3,7 @@
     "id": "1",
     "image": "/Images/blank-square.svg",
     "name": "dbt Core",
-    "isConnected": false
+    "isConnected": true
   },
   {
     "id": "2",
@@ -15,12 +15,12 @@
     "id": "3",
     "image": "/Images/blank-square.svg",
     "name": "Snowflake",
-    "isConnected": true
+    "isConnected": false
   },
   {
     "id": "4",
     "image": "/Images/blank-square.svg",
     "name": "Amazon Redshift",
-    "isConnected": false
+    "isConnected": true
   }
 ]
