@@ -26,43 +26,58 @@ const ConnectAppsPage = () => {
   const router = useRouter();
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const [loadingCardId, setLoadingCardId] = useState<string | null>(null);
+  const [data, setData] = useState<ConnectItem[] | null | undefined>(null);
 
   const {
-    data: ConnectApps,
-    refetch: ConnectAppRefetch,
-    isLoading: LoadingApps,
+    data: connectApps,
+    refetch: connectAppRefetch,
+    isLoading: loadingApps,
     isSuccess: isSuccessApps,
   } = useGetAllApps();
   const {
-    mutate: UpdateAppStatus,
-    isSuccess: AppStatusUpdated,
-    isLoading: LoadingStatusUpdate,
+    data: appStatusData,
+    mutate: updateAppStatus,
+    isSuccess: appStatusUpdated,
+    isLoading: loadingStatusUpdate,
   } = useUpdateAppStatus();
+
   const handleCreateRetriever = () => {
     if (isPilotMode) {
       setIsOpenAlert(true);
-    } else router.push("/retrievers/upload");
+    } else {
+      router.push("/retrievers/upload");
+    }
   };
+
   const handleCardConnect = (item: ConnectItem) => {
     if (isPilotMode) {
       setIsOpenAlert(true);
     } else {
       setLoadingCardId(item.id);
-      UpdateAppStatus({ id: item.id, status: !item.isConnected });
+      updateAppStatus({ id: item.id, status: !item.isConnected });
     }
   };
-  const filteredData = ConnectApps?.filter((item) =>
+
+  const filteredData = data?.filter((item) =>
     item.name.toLowerCase().includes(query.toLowerCase())
   );
+
   useEffect(() => {
-    if (AppStatusUpdated) {
-      ConnectAppRefetch();
+    if (appStatusUpdated && appStatusData) {
+      setData(appStatusData);
     }
-  }, [AppStatusUpdated, ConnectAppRefetch]);
+  }, [appStatusUpdated, appStatusData]);
+
   useEffect(() => {
-    ConnectAppRefetch();
-  }, [ConnectAppRefetch]);
-  console.log(LoadingApps, "LoadingApps");
+    if (isSuccessApps && connectApps) {
+      setData(connectApps);
+    }
+  }, [isSuccessApps, connectApps]);
+
+  useEffect(() => {
+    connectAppRefetch();
+  }, [connectAppRefetch]);
+
   return (
     <Box
       sx={{
@@ -75,7 +90,6 @@ const ConnectAppsPage = () => {
     >
       <PageHeader title="Connect App" />
 
-      {/* Table */}
       <Paper
         variant="light-border"
         sx={{
@@ -84,7 +98,6 @@ const ConnectAppsPage = () => {
           flexDirection: "column",
         }}
       >
-        {/* Topbar */}
         <Box
           sx={{
             background: palette.linearGradient.gray,
@@ -111,7 +124,7 @@ const ConnectAppsPage = () => {
               height: "44",
             }}
             label="Create Retriever"
-            onClick={() => handleCreateRetriever()}
+            onClick={handleCreateRetriever}
           />
         </Box>
 
@@ -122,7 +135,7 @@ const ConnectAppsPage = () => {
             scrollbarWidth: "none",
           }}
         >
-          {LoadingApps ? (
+          {loadingApps ? (
             <Box
               sx={{
                 width: "100%",
@@ -132,7 +145,7 @@ const ConnectAppsPage = () => {
                 alignItems: "center",
               }}
             >
-              <Loader type="Loading" variant="simple" isLoading={LoadingApps} />
+              <Loader type="Loading" variant="simple" isLoading={loadingApps} />
             </Box>
           ) : filteredData && filteredData.length <= 0 ? (
             <Typography
@@ -153,7 +166,7 @@ const ConnectAppsPage = () => {
               <ConnectCard
                 key={index}
                 item={item}
-                isLoading={loadingCardId === item.id && LoadingStatusUpdate}
+                isLoading={loadingCardId === item.id && loadingStatusUpdate}
                 onClick={() => handleCardConnect(item)}
               />
             ))

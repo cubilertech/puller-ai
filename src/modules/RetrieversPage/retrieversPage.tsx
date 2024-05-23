@@ -5,7 +5,6 @@ import { RetriverCard } from "@/components/RetriverCard";
 import { useGetAllRetriever } from "@/hooks/useRetriever";
 import { AlertModal } from "@/modals/AlertModal";
 import { isPilotMode } from "@/utils/constants";
-import { RETRIEVER_DATA } from "@/utils/data";
 import { RetrieverIconsTypes, StatusTypes } from "@/utils/types";
 import { Box } from "@mui/material";
 import { useEffect, useState } from "react";

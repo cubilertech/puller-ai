@@ -4,48 +4,107 @@
     "status": "live",
     "title": "Snowflake 1",
     "description": "Retrievers 1 bot will help to gather Retrievers 1 bot will help to gather in...",
-    "image": []
+    "files": [
+      {
+        "image": "",
+        "description": ""
+      }
+    ]
   },
   {
     "icon": "snowflake",
     "status": "live",
     "title": "Snowflake 3",
     "description": "Retrievers 1 bot will help to gather Retrievers 1 bot will help to gather in...",
-    "image": []
+    "files": [
+      {
+        "image": "",
+        "description": ""
+      }
+    ]
   },
   {
     "icon": "segment",
     "status": "live",
     "title": "Segment",
     "description": "Retrievers 1 bot will help to gather Retrievers 1 bot will help to gather in...",
-    "image": []
+    "files": [
+      {
+        "image": "",
+        "description": ""
+      }
+    ]
   },
   {
     "icon": "lytics",
     "status": "live",
     "title": "Lytics",
     "description": "Retrievers 1 bot will help to gather Retrievers 1 bot will help to gather in...",
-    "image": []
+    "files": [
+      {
+        "image": "",
+        "description": ""
+      }
+    ]
   },
   {
     "icon": "dataRoom",
     "status": "live",
     "title": "Data room 1",
     "description": "Retrievers 1 bot will help to gather Retrievers 1 bot will help to gather in...",
-    "image": []
+    "files": [
+      {
+        "image": "",
+        "description": ""
+      }
+    ]
   },
   {
     "icon": "snowflake",
     "status": "live",
     "title": "Snowflake 2",
     "description": "Retrievers 1 bot will help to gather Retrievers 1 bot will help to gather in...",
-    "image": []
+    "files": [
+      {
+        "image": "",
+        "description": ""
+      }
+    ]
   },
   {
     "icon": "dataRoom",
     "status": "live",
     "title": "test",
-    "description": "Description text",
-    "image": ["/uploads/21-05-2024/7n4rk8-1716272031472-216849206.gif"]
+    "description": "Retrievers 1 bot will help to gather Retrievers 1 bot will help to gather in...",
+    "files": [
+      {
+        "description": "Description text",
+        "url": "/uploads/21-05-2024/7n4rk8-1716272031472-216849206.gif"
+      }
+    ]
+  },
+  {
+    "icon": "dataRoom",
+    "status": "needPermissions",
+    "title": "name 2",
+    "description": "Retrievers 1 bot will help to gather Retrievers 1 bot will help to gather in...",
+    "files": [
+      {
+        "image": "/uploads/23-05-2024/loader_2-1716448840538-960102191.gif",
+        "description": "asdasd"
+      }
+    ]
+  },
+  {
+    "icon": "dataRoom",
+    "status": "needPermissions",
+    "title": "Name",
+    "files": [
+      {
+        "image": "/uploads/23-05-2024/loader_2-1716451583144-678685820.gif",
+        "description": "dasd"
+      }
+    ],
+    "description": "description"
   }
 ]

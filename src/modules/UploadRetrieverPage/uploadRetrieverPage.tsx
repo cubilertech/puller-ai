@@ -5,24 +5,26 @@ import { Icon } from "@/components/Icon";
 import { Loader } from "@/components/Loader";
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
-import { UploadBox } from "@/components/UplaodBox";
 import { useCreateRetriever } from "@/hooks/useRetriever";
 import { AlertModal } from "@/modals/AlertModal";
 import { isPilotMode } from "@/utils/constants";
-import { StatusTypes } from "@/utils/types";
+import { Files, StatusTypes } from "@/utils/types";
 import { Box, Input, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import FeedbackPage from "../FeedbackPage/feedbackPage";
 import { toast } from "react-toastify";
+import { UploadBox } from "@/components/UplaodBox";
 
 const UploadRetrieverPage = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenAlert, setIsOpenAlert] = useState(false);
-  const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-  const [description, setDescription] = useState<string>("");
+  const [fileData, setFileData] = useState<
+    Files[]
+  >([]);
   const [name, setName] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const {
@@ -33,23 +35,27 @@ const UploadRetrieverPage = () => {
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
-      const newFiles = Array.from(event.target.files);
-      setSelectedFiles((prevFiles) => [...prevFiles, ...newFiles]);
+      const newFiles = Array.from(event.target.files).map((file) => ({
+        file,
+        description: "",
+      }));
+      setFileData((prevFileData) => [...prevFileData, ...newFiles]);
     }
   };
 
-  const handleDescriptionInput = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.value) {
-      setDescription(event.target.value);
-    }
-  };
+  const handleDescriptionChange =
+    (index: number) => (event: ChangeEvent<HTMLInputElement>) => {
+      const newFileData = [...fileData];
+      newFileData[index].description = event.target.value;
+      setFileData(newFileData);
+    };
 
   const handleNameInput = (event: ChangeEvent<HTMLInputElement>) => {
-    if (event.target.value) {
-      setName(event.target.value);
-    }
+    setName(event.target.value);
   };
-
+  const handleDescriptionInput = (event: ChangeEvent<HTMLInputElement>) => {
+    setDescription(event.target.value);
+  };
   const handleUploadDocs = () => {
     if (isPilotMode) {
       setIsOpenAlert(true);
@@ -66,27 +72,26 @@ const UploadRetrieverPage = () => {
     } else {
       if (name === "") {
         toast.warning("Please Enter Name.");
-      } else if (selectedFiles.length === 0) {
+      } else if (fileData.length === 0) {
         toast.warning("Please Upload Files.");
-      } else if (name && selectedFiles.length > 0) {
+      } else {
         CreateRetriever({
-          status: StatusTypes.needPermissions,
-          description: description,
-          images: selectedFiles,
           title: name,
+          status: StatusTypes.needPermissions,
+          files: fileData,
+          description: description,
         });
-        console.log(selectedFiles, "selectedFiles");
+        console.log(
+          fileData,
+          fileData.map((data) => data.description)
+        );
       }
     }
   };
 
   useEffect(() => {
-    if (selectedFiles.length > 0) {
-      setIsOpen(true);
-    } else {
-      setIsOpen(false);
-    }
-  }, [selectedFiles, RetrieverCreatedSuccess]);
+    setIsOpen(fileData.length > 0);
+  }, [fileData, RetrieverCreatedSuccess]);
 
   return (
     <>
@@ -149,6 +154,26 @@ const UploadRetrieverPage = () => {
                   }}
                 />
               </Box>
+                 {/* Description Label & Input */}
+                 <Box
+                display={"flex"}
+                flexDirection={"column"}
+                alignItems={"flex-start"}
+                gap={"0.5rem"}
+              >
+                <Typography variant="text-sm-medium">Description</Typography>
+                <Input
+                  disableUnderline
+                  fullWidth
+                  onChange={handleDescriptionInput}
+                  placeholder="Enter Description"
+                  sx={{
+                    borderRadius: "5px",
+                    padding: "0.5rem 1rem",
+                    border: "2px solid rgba(196, 196, 196, 0.6)",
+                  }}
+                />
+              </Box>
 
               {/* Upload Area */}
               <Box
@@ -201,13 +226,13 @@ const UploadRetrieverPage = () => {
                     mb: 8,
                   }}
                 >
-                  {selectedFiles.map((file, index) => (
+                  {fileData.map((data, index) => (
                     <UploadBox
                       key={index}
-                      name={file.name}
-                      size={file.size}
-                      inputValue={description}
-                      handleChangeInput={handleDescriptionInput}
+                      name={data.file.name}
+                      size={data.file.size}
+                      inputValue={data.description}
+                      handleChangeInput={handleDescriptionChange(index)}
                     />
                   ))}
                 </Box>
