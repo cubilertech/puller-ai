@@ -45,7 +45,11 @@
     "icon": "dataRoom",
     "status": "live",
     "title": "test",
+    "files":[
+    {
     "description": "Description text",
-    "image": ["/uploads/21-05-2024/7n4rk8-1716272031472-216849206.gif"]
+    "url": "/uploads/21-05-2024/7n4rk8-1716272031472-216849206.gif"
+    }
+    ]
   }
 ]

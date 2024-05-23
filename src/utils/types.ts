@@ -206,8 +206,12 @@ export type Retriever = {
   icon: string;
   status: string;
   title: string;
-  description: string;
-  image?: Array<string>;
+  files: [
+    {
+      description: string;
+      url?: string;
+    },
+  ];
 };
 
 export type App = {
@@ -215,7 +219,7 @@ export type App = {
   image: string;
   name: string;
   isConnected: boolean;
-}
+};
 
 export interface appUpdatePayload {
   id: string;
@@ -225,6 +229,10 @@ export interface appUpdatePayload {
 export interface createRetrieverPayload {
   status: string;
   title: string;
-  description: string;
-  image?: string;
-};
+  files: [
+    {
+      description: string;
+      url?: string;
+    },
+  ];
+}
