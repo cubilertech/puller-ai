@@ -5,7 +5,7 @@ import { palette } from "@/theme/Palette";
 import { CreateInputAreaComponent } from "@/components/inputArea";
 import { OptionsBar } from "@/components/optionsBar";
 import "./panelArea.css";
-import { useSubmitPrompt } from "@/hooks/usePrompt";
+import { useGetAllPrompt, useSubmitPrompt } from "@/hooks/usePrompt";
 import { isPilotMode } from "@/utils/constants";
 import { AlertModal } from "@/modals/AlertModal";
 import { ResponseArea } from "@/components/ResponseArea";
@@ -56,6 +56,7 @@ const PannelArea: FC<PannelAreaProps> = ({
     dispatch(UpdateConsoleMessages(message));
     // setConsoleMessage(message);
   });
+  const { data: Prompts, refetch: refetchAllPrompt } = useGetAllPrompt();
 
   const handleAvailable = async () => {
     await submitPrompt({ message: prompt });
@@ -79,12 +80,23 @@ const PannelArea: FC<PannelAreaProps> = ({
       setIsOpenAlert(true);
     }
   };
-  const handleLatestPulls = async (text: string) => {
+  const handleLatestPulls = async (text: string | undefined) => {
     // setPrompt(text);
-    await submitPrompt({ message: text });
-    await dispatch(UpdateIsLoadingPrompt(true));
-    // await dispatch(UpdateIsLoadingRequest(true));
-    await dispatch(UpdatePromptValue(text));
+    if (text) {
+      await submitPrompt({ message: text });
+      await dispatch(UpdateIsLoadingPrompt(true));
+      // await dispatch(UpdateIsLoadingRequest(true));
+      await dispatch(UpdatePromptValue(text));
+    }
+  };
+  const filterDisplayedPrompts = () => {
+    if (Prompts && Prompts?.length > 0) {
+      const displayedPrompts =
+        Prompts?.length > 5 ? Prompts?.slice(0, 5) : Prompts ?? [];
+      return displayedPrompts;
+    } else {
+      return LatestPullsData;
+    }
   };
   useEffect(() => {
     if (submitPromptError) {
@@ -92,6 +104,12 @@ const PannelArea: FC<PannelAreaProps> = ({
       dispatch(UpdateCurrentPage("create"));
     }
   }, [submitPromptError]);
+  useEffect(() => {
+    if (CurrentPage === "create") {
+      refetchAllPrompt();
+    }
+    filterDisplayedPrompts();
+  }, [refetchAllPrompt]);
 
   return (
     <>
@@ -169,20 +187,20 @@ const PannelArea: FC<PannelAreaProps> = ({
                   }}
                 >
                   {LatestPullsData.map((item, i) => (
-                    <motion.div
-                      key={`motion-div-${i}`}
-                      animate={{ y: [-240, 0] }}
-                      transition={{
-                        duration: i === 0 ? 1 : i,
-                        ease: "easeInOut",
-                      }}
-                    >
+                    // <motion.div
+                    //   key={`motion-div-${i}`}
+                    //   animate={{ y: [-240, 0] }}
+                    //   transition={{
+                    //     duration: i === 0 ? 1 : i,
+                    //     ease: "easeInOut",
+                    //   }}
+                    // >
                       <LatestPullesCard
                         key={i}
-                        data={item}
-                        onClick={() => handleLatestPulls(item.text)}
+                        query={item.query}
+                        onClick={() => handleLatestPulls(item.query)}
                       />
-                    </motion.div>
+                    // </motion.div>
                   ))}
                 </Box>
               </Box>

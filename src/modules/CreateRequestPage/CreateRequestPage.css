@@ -1,0 +1,109 @@
+@keyframes fallingEffect {
+  from {
+    transform: scale(0.5);
+    opacity: 0; /* Start invisible */
+  }
+  to {
+    transform: scale(1);
+    opacity: 1; /* Fade in */
+  }
+}
+@keyframes fallingEffect2 {
+  from {
+    transform: scale(0.5);
+    opacity: 0; /* Start invisible */
+  }
+  to {
+    transform: scale(1);
+    opacity: 1; /* Fade in */
+  }
+}
+@keyframes LeftToCenterEffect {
+  from {
+    left: -500px; /* Start from above the viewport */
+    opacity: 0; /* Start invisible */
+  }
+  to {
+    left: 0; /* End at the original position */
+    opacity: 1; /* Fade in */
+  }
+}
+
+@keyframes RightToCenterEffect {
+  from {
+    right: -200px; /* Start from above the viewport */
+    opacity: 0; /* Start invisible */
+  }
+  to {
+    right: 0; /* End at the original position */
+    opacity: 1; /* Fade in */
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.5s ease forwards; /* Apply the animation */
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+.slide-out {
+  animation: slideOut 0.5s ease forwards; /* Apply the closing animation */
+}
+
+textarea::placeholder {
+  font-style: italic;
+}
+
+.animated-text {
+  font-size: 50px !important;
+  font-weight: 500 !important;
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-image: linear-gradient(
+    to top left,
+    #ad00fe 10%,
+    #00e0ee 50%,
+    #ad00fe 100%
+  );
+  background-size: 200% 100%;
+  /* animation: animate-gradient 5s linear infinite; */
+
+  clip-path: rect(0px, 100%, 100%, 0px); /* Initial clip (entire text) */
+  animation: revealTextLeftToRight 1.2s forwards;
+}
+
+@keyframes animate-gradient {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 200% 100%;
+  }
+}
+
+@keyframes revealTextLeftToRight {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    clip-path: rect(0px, 0px, 100%, 0px); /* Reveal from left to right */
+  }
+}

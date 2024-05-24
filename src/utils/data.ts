@@ -586,18 +586,18 @@ export const SideBar_Data: SidebarItem[] = [
 
 export const LatestPullsData = [
   {
-    text: "Get me the most loyal customers who have placed at least two orders",
+    query: "Get me the most loyal customers who have placed at least two orders",
   },
   {
-    text: "Get me the latest 100 orders",
+    query: "Get me the latest 100 orders",
   },
   {
-    text: "Please get all stripe payments data",
+    query: "Please get all stripe payments data",
   },
   {
-    text: "Find the 20 largest payments",
+    query: "Find the 20 largest payments",
   },
   {
-    text: "Find the fifty most expensive orders",
+    query: "Find the fifty most expensive orders",
   },
 ];

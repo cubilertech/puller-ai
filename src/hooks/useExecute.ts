@@ -1,3 +1,4 @@
+import { setSubmitExecuteLoading } from "@/libs/redux/features/globalLoadings";
 import {
   UpdateCurrentPage,
   UpdateIsLoadingRequest,
@@ -40,8 +41,11 @@ export const useSubmitExecute = () => {
     onSuccess: async (data) => {
       const id = data?.id?.includes("#") ? data?.id?.split("#")?.[1] : data?.id;
       router.push(`/request/results/${id}`);
-      await new Promise((resolve) => setTimeout(resolve, 1000)); 
-      dispatch(UpdateIsLoadingRequest(false));
+      setTimeout(()=>{
+          dispatch(setSubmitExecuteLoading(false));
+      },2000);
+      // await new Promise((resolve) => setTimeout(resolve, 1000)); 
+      // dispatch(UpdateIsLoadingRequest(false));
     },
     onError: (error: any) => {
       dispatch(UpdateCurrentPage("create"));

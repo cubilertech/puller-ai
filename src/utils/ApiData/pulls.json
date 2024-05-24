@@ -1,1 +1,54 @@
-[]
+[
+  {
+    "query": "Could you get the top 10 performing SKUs by region for the last quarter?",
+    "description": "This query looks at the Sales by Region for [ Brand ] and filters for sales in the last quarter and groups by region and SKU. It then calculates the total revenue, total units sold, and average profit margin for each SKU within each region. Finally it orders the results by total revenue in descending order and returns only the top 10 SKUs.",
+    "id": "query#1234567890",
+    "sql": "SELECT TOP 10 r.region, s.sku, SUM(s.revenue) AS total_revenue, SUM(s.units_sold) AS total_units_sold, AVG(s.profit_margin) AS avg_profit_margin FROM sales s JOIN region r ON s.region_id = r.id WHERE s.sale_date >= DATEADD(quarter, -1, GETDATE()) GROUP BY r.region, s.sku ORDER BY total_revenue DESC;",
+    "target": "",
+    "graph": [],
+    "variables": [],
+    "observations": "In the last quarter, the top 10 SKUs for [Brand] generated a combined total revenue of $2.5 million, with the highest contributions from the North and West regions, accounting for $1.2 million and $900,000 respectively. These SKUs achieved significant sales volumes, with the top SKU selling 15,000 units, and maintained an average profit margin of 25%, suggesting both high demand and profitability.",
+    "notes": [
+      "Broad Sales Overview: The data covers last quarter sales for all SKUs across multiple regions, providing a broad view of performance. Analyzing monthly sales trends could reveal important seasonal patterns.",
+      "Demographic Insights: Investigating customer demographics could help identify key buyer segments and improve targeted marketing. This demographic analysis can be particularly useful for tailoring regional strategies.",
+      "Impact of Marketing: Evaluating regional marketing efforts could provide insights into their impact on sales. For example, a 15% sales increase in the West region coincided with a recent ad campaign.",
+      "Quarterly Growth Analysis: Comparing current performance with previous quarters can help identify growth trends. Sales grew by 10% compared to the previous quarter, highlighting consistent growth.",
+      "Inventory Turnover Insights: Exploring inventory turnover rates alongside sales data can provide a fuller picture of SKU performance. High turnover rates might indicate strong demand and efficient inventory management"
+    ],
+    "columns": [
+      "Region",
+      "Product",
+      "Revenue",
+      "Units Sold",
+      "Profit Margin"
+    ],
+    "rows": [
+      {
+        "Region": "North",
+        "Product": "Product A",
+        "Revenue": "$50,000",
+        "Units Sold": 500,
+        "Profit Margin": "25%"
+      },
+      {
+        "Region": "North",
+        "Product": "Product B",
+        "Revenue": "$30,000",
+        "Units Sold": 300,
+        "Profit Margin": "20%"
+      }
+    ],
+    "results": [
+      {
+        "bytes": 3778,
+        "database": "helical-math-378821",
+        "duration": 3.0252435207366943,
+        "message": "CREATE TABLE (29.0 rows, 3.7 KiB processed)",
+        "rows": 29,
+        "schema": "shop",
+        "table": "loyalty",
+        "url": "https://console.cloud.google.com/bigquery?p=helical-math-378821&d=shop&t=loyalty"
+      }
+    ]
+  }
+]

@@ -12,7 +12,7 @@ import {
   Typography,
 } from "@mui/material";
 import { Button } from "../Button";
-import { ArrowUpward } from "@mui/icons-material";
+import { ArrowUpward, KeyboardArrowDown, KeyboardArrowUp } from "@mui/icons-material";
 import { Icon } from "../Icon";
 import { TableHead } from "../TableHead";
 import { TABLEDATA } from "@/utils/constants";
@@ -119,7 +119,7 @@ const DataTable = () => {
             <>
               <Button
                 onClick={handleButtonClick}
-                endIcon={<ArrowUpward />}
+                endIcon={<KeyboardArrowUp />}
                 variant="outlined"
                 size="small"
               >

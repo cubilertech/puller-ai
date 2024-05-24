@@ -21,6 +21,8 @@ import "./customNode.css";
 import { Prompt, Variable } from "@/utils/types";
 import { Button } from "@/components/Button";
 import { Loader } from "@/components/Loader";
+import { setSubmitValidateLoading } from "@/libs/redux/features/globalLoadings";
+import { useAppDispatch } from "@/libs/redux/hooks";
 
 const dagreGraph = new dagre.graphlib.Graph();
 dagreGraph.setDefaultEdgeLabel(() => ({}));
@@ -115,6 +117,7 @@ const GraphModal2 = ({ prompt, validatePrompt }: props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [variables, setVariables] = useState(prompt?.variables ?? []);
   const variablesInitialArray = prompt?.variables ?? [];
+  const dispatch = useAppDispatch();
   // useEffect(()=>{
 
   const initialNodes2 = getNodes(prompt);
@@ -200,6 +203,7 @@ const GraphModal2 = ({ prompt, validatePrompt }: props) => {
       prompt: prompt?.id,
       variables: variables,
     });
+    dispatch(setSubmitValidateLoading(true));
   };
 
   const nodeTypes = useMemo(() => {

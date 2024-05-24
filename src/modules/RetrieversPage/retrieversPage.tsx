@@ -25,6 +25,10 @@ const RetrieversPage = () => {
   useEffect(() => {
     FetchRetrievers();
   }, [FetchRetrievers]);
+
+  // Sort the array based on the timestamp in descending order
+  const sortedItems = Retrievers?.sort((a, b) => b.timestamp - a.timestamp);
+
   return (
     <Box
       sx={{
@@ -74,7 +78,7 @@ const RetrieversPage = () => {
             scrollbarWidth: "none",
           }}
         >
-          {Retrievers?.map((card, i) => (
+          {sortedItems?.map((card, i) => (
             <RetriverCard
               description={card.description}
               icon={card.icon as RetrieverIconsTypes}

@@ -51,3 +51,11 @@ export async function GET(req: any, res: any) {
     });
   }
 }
+
+// function formatText(text: string) {
+//   // Remove all spaces
+//   let noSpaces = text.replace(/\s+/g, "");
+//   // Convert to lowercase
+//   let lowerCaseText = noSpaces.toLowerCase();
+//   return lowerCaseText;
+// }
