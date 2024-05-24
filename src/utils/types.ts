@@ -140,7 +140,16 @@ export interface Prompt {
   target: string;
   variables: Variable[];
   query?: string;
+  observations?: string;
+  notes?:Array<string>;
+  columns?:Array<string>;
+  rows?:Array<any>;
+  results?: any[];
 }
+
+export type PromptsList = {
+  [key: string]: Prompt;
+};
 
 export interface submitExecutePayload {
   prompt: string;

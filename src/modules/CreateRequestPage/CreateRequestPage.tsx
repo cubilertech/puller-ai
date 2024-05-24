@@ -9,6 +9,7 @@ import { getConsoleMessages, getIsLoadingPrompt } from "@/libs/redux/features/is
 const CreateRequestPage = () => {
   const ConsoleMessages = useAppSelector(getConsoleMessages);
   const isLoadingPrompt = useAppSelector(getIsLoadingPrompt);
+  // console.log('Can you retrieve a list of products with current inventory levels below the threshold for reorder, as well as the last date inventory levels were at or above threshold. Include the reorder quantity as well.'.replace(/ /g, '').toLowerCase(),'result');
   return (
     <>
       {isLoadingPrompt ? (
