@@ -21,6 +21,7 @@ export async function POST(req: NextRequest) {
   const title = (formData.get("title") as string) || null;
   const status = formData.get("status") as string;
   const description = formData.get("description") as string;
+  const timestamp = formData.get("timestamp") as string;
   const filesData = JSON.parse(formData.get("files") as string); // Parsing the stringified files data
 
   const relativeUploadDir = `/uploads/${new Date(Date.now())
@@ -89,6 +90,7 @@ export async function POST(req: NextRequest) {
       title,
       files: fileRecords,
       description: description,
+      timestamp: timestamp,
     });
     // Write the updated data back to the JSON file
     await fsPromises.writeFile(filePath, JSON.stringify(list, null, 2), "utf8");

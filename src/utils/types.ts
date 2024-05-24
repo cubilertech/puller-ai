@@ -208,6 +208,7 @@ export type Retriever = {
   status: string;
   title: string;
   description: string;
+  timestamp: number;
   files: [
     {
       description: string;
@@ -238,4 +239,5 @@ export interface createRetrieverPayload {
   title: string;
   files: Files[];
   description: string;
+  timestamp: number;
 }

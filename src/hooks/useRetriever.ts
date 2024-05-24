@@ -127,7 +127,7 @@ export const useCreateRetriever = () => {
 
       formData.append("description", data.description);
       formData.append("status", data.status);
-      // formData.append("icon", data.icon);
+      formData.append("timestamp", data.timestamp.toString());
 
       console.log(data, formData, "payload");
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
