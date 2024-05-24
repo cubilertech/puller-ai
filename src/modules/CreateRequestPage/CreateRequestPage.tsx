@@ -50,7 +50,6 @@ const CreateRequestPage: FC<Props> = ({
                   {
                     label: "Request History",
                     variant: "request-history",
-                    href: "/request/recent",
                   },
                 ]
               : undefined

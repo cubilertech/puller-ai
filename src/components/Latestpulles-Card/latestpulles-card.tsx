@@ -27,7 +27,7 @@ const LatestPullesCard: FC<LatestPullesCardProps> = ({
           maxWidth: "320px",
           minWidth: "280px",
           margin: 0,
-          padding: 3,
+          padding: "22px",
           ":hover": {
             background: palette.linearGradient.darkBlue,
             cursor: "pointer",

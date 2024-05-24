@@ -6,22 +6,25 @@ import { SingleCardDomyData } from "@/utils/data";
 import { RequestsCard } from "../RecentRequestes-Card";
 import { AlertModal } from "@/modals/AlertModal";
 import { isPilotMode } from "@/utils/constants";
-import { useState } from "react";
+import { FC, useState } from "react";
+interface NotesListProps {
+  List?: string[];
+}
 
-const NotesList = () => {
-  const route = useRouter();
+const NotesList: FC<NotesListProps> = ({ List }) => {
   const [isOpenAlert, setIsOpenAlert] = useState(false);
 
   const handleOpenNotes = () => {
     if (isPilotMode) {
       setIsOpenAlert(true);
-    } else route.push("/request/recent");
+    } else;
   };
   const handleCard = () => {
     if (isPilotMode) {
       setIsOpenAlert(true);
-    } else route.push("/request/preview");
+    } else;
   };
+  const ListData = List && List.length ? List : SingleCardDomyData;
   return (
     <Box
       sx={{
@@ -55,11 +58,10 @@ const NotesList = () => {
           mt: 2,
         }}
       >
-        {SingleCardDomyData.map((item, i) => (
+        {ListData.map((item, i) => (
           <Box mr={-10} width={"100%"} key={i}>
             <RequestsCard
-              title={item.title}
-              discription={item.discription}
+              text={item}
               onClick={() => handleCard()}
             />
           </Box>

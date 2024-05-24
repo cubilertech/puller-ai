@@ -22,7 +22,7 @@ import {
 } from "@/libs/redux/features/isLoadingRequest";
 import { motion } from "framer-motion";
 import { Loader } from "@/components/Loader";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import CreateRequestPage from "../CreateRequestPage/CreateRequestPage";
 import { Icon } from "@/components/Icon";
 import {
@@ -76,15 +76,18 @@ const RequestPage: FC = () => {
   const [query, setQuery] = useState("");
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
-
+  const router = useRouter();
   const CurrentPage = useAppSelector(getCurrentPage);
   const consoleMessage = useAppSelector(getLoadingText);
   const submitPromptLoading = useAppSelector(getSubmitPromptLoading);
   const submitExecuteLoading = useAppSelector(getSubmitExecuteLoading);
   const submitValidateLoading = useAppSelector(getSubmitValidateLoading);
   const [isOpenSelectBar, setIsOpenSelectBar] = useState(false);
-  const { mutate: submitExecute, isLoading: isLoadingExecute } =
-    useSubmitExecute();
+  const {
+    mutate: submitExecute,
+    isLoading: isLoadingExecute,
+    isSuccess: isSuccessExecute,
+  } = useSubmitExecute();
   const {
     data: validatedPrompt,
     mutate: submitValidate,
@@ -153,6 +156,11 @@ const RequestPage: FC = () => {
     setLoading(false);
     refetchAllPrompt();
   }, []);
+  useEffect(() => {
+    if (isSuccessExecute) {
+      router.push(`/request/results/${id}`);
+    }
+  }, [isSuccessExecute]);
   const content = {
     response: prompt?.description as string,
     original:

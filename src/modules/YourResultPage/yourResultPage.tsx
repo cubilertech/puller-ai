@@ -4,6 +4,7 @@ import { NotesList } from "@/components/NotesList";
 import { PageHeader } from "@/components/PageHeader";
 import { ResultCard } from "@/components/ResultCard";
 import { useGetSingleExecute } from "@/hooks/useExecute";
+import { useGetSinglePrompt } from "@/hooks/usePrompt";
 // import { getActiveRequest } from "@/libs/redux/features/activeRequest";
 // import { useAppSelector } from "@/libs/redux/hooks";
 import { RESULTS_DATA } from "@/utils/data";
@@ -18,7 +19,7 @@ interface Props {
 const YourResultsPage: FC<Props> = ({ id }) => {
   const [fadeIn, setFadeIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const { data, refetch: refetchSignleExecute } = useGetSingleExecute(id);
+  const { data, refetch: refetchSignleExecute } = useGetSinglePrompt(id);
   useEffect(() => {
     if (data && data?.status === "complete") {
       setIsLoading(false);
@@ -28,7 +29,8 @@ const YourResultsPage: FC<Props> = ({ id }) => {
       refetchSignleExecute();
     }
   }, [data, refetchSignleExecute]);
-
+  const imageUrl =
+    data?.results && data.results[0]?.url ? data.results[0].url : "";
   return (
     <>
       {isLoading ? (
@@ -53,7 +55,7 @@ const YourResultsPage: FC<Props> = ({ id }) => {
             mt: 1,
             opacity: fadeIn ? 1 : 0,
             transition: "opacity 1s ease",
-            px: 0.5
+            px: 0.5,
           }}
         >
           <PageHeader title="Your Results" />
@@ -62,10 +64,15 @@ const YourResultsPage: FC<Props> = ({ id }) => {
             <ResultCard
               data={{
                 ...RESULTS_DATA,
-                fileLink: (data?.results[0]?.url as string) ?? "",
+                id: data?.id ?? "",
+                observations:
+                  data?.observations !== ""
+                    ? data?.observations
+                    : RESULTS_DATA.observations,
+                fileLink: imageUrl,
               }}
             />
-            <NotesList />
+            <NotesList List={data?.notes} />
           </Box>
         </Box>
       )}
