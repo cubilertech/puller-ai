@@ -53,6 +53,7 @@ const success = {
 };
 
 const gray = {
+  750: "#6C7278",
   700: "rgb(52,51,65)",
   650: "#425459",
   600: "rgb(91,93,107)",
@@ -109,6 +110,7 @@ export const palette = {
   mode: "dark" as PaletteMode,
   primary: {
     main: "#5D92FE",
+    light: "#54A6FF",
   },
   brand: {
     main: "#7F56D9",
