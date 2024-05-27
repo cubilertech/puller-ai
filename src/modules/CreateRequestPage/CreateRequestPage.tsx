@@ -40,6 +40,7 @@ const CreateRequestPage: FC<Props> = ({
       setIsOpenAlert(true);
     }
   };
+  const CompanyName = localStorage.getItem("companyName");
   return (
     <>
       <Box sx={{ px: 2, pt: 1, m: "auto" }}>
@@ -71,7 +72,7 @@ const CreateRequestPage: FC<Props> = ({
           <Box sx={{ display: "flex", flexDirection: "column", gap: 5 }}>
             <Box sx={{ display: "flex", flexDirection: "column" }}>
               <Typography className="animated-text animated-left-right-text">
-                Hello, Abdul{" "}
+                Hello, {CompanyName ? CompanyName : "Name"}{" "}
               </Typography>
               <Typography
                 sx={{
