@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import pullsList from "@/utils/ApiData/pulls.json";
-import { generateRandom10DigitNumber } from "@/utils/common";
+import { generateRandom10DigitNumber, getResultOfPrompt } from "@/utils/common";
 import path from "path";
 import fs from "fs";
 import examplePromptsList from "@/utils/examplePrompts.json";
@@ -8,6 +8,10 @@ import dummyPrompt from "@/utils/dummyPrompt.json";
 import { Prompt, PromptsList } from "@/utils/types";
 export async function POST(req: any, res: any) {
   try {
+    const host =
+      req.headers["x-forwarded-host"] || req.headers.host || "localhost:3000";
+    const protocol = req.headers["x-forwarded-proto"] || "http"; // This header is often set by proxies
+    const baseUrl = `${protocol}://${host}`;
     const { message } = await req.json();
     const formattedMessage = message.replace(/ /g, "").toLowerCase();
     let prompt = (examplePromptsList as PromptsList)[formattedMessage];
@@ -28,6 +32,8 @@ export async function POST(req: any, res: any) {
     const list = JSON.parse(fs.readFileSync(filePath, "utf8"));
     const alreadyExist = list.find((item: Prompt) => item.id === prompt.id);
     if (prompt && !alreadyExist) {
+      let result = getResultOfPrompt(prompt.id, baseUrl);
+      prompt.results = result;
       list.push(prompt);
       // Write the updated data back to the JSON file
       fs.writeFileSync(filePath, JSON.stringify(list, null, 2), "utf8");

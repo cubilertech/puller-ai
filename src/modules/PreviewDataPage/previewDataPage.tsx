@@ -64,7 +64,7 @@ const PreviewDataPage: FC<PreviewDataPageProps> = ({ id }) => {
               scrollbarWidth: "none",
             }}
           >
-            <Summary heading="Summary" description={DUMMY_SUMMARY} />
+            <Summary heading="Summary" description={PromptData?.description as string} />
 
             <Paper variant="light-border">
               <DataTable data={PromptData as Prompt} />

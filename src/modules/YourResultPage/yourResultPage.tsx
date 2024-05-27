@@ -31,6 +31,12 @@ const YourResultsPage: FC<Props> = ({ id }) => {
   }, [data, refetchSignleExecute]);
   const imageUrl =
     data?.results && data.results[0]?.url ? data.results[0].url : "";
+  const date = new Date();
+  const formattedDate = date.toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  });
   return (
     <>
       {isLoading ? (
@@ -64,6 +70,18 @@ const YourResultsPage: FC<Props> = ({ id }) => {
             <ResultCard
               data={{
                 ...RESULTS_DATA,
+                fileTimestamps: formattedDate ?? RESULTS_DATA.fileTimestamps,
+                fileStructured:
+                  data?.results && data?.results[0]
+                    ? data.results[0].database
+                    : RESULTS_DATA.fileStructured,
+                main_discription: data?.description
+                  ? data?.description
+                  : RESULTS_DATA.main_discription,
+                fileSize:
+                  data?.results && data?.results[0].bytes
+                    ? data?.results[0].bytes
+                    : RESULTS_DATA.fileSize,
                 id: data?.id ?? "",
                 observations:
                   data?.observations !== ""
