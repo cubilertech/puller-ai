@@ -26,7 +26,8 @@ const CreateRequestPage: FC<Props> = ({
 }) => {
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const promptList = useMemo(() => {
-    return isPilotMode ? LatestPullsData : list ? list : [];
+    // return isPilotMode ? LatestPullsData : list ? list : [];
+    return LatestPullsData;
   }, [list]);
 
   const handlePrompt = () => {
@@ -61,7 +62,7 @@ const CreateRequestPage: FC<Props> = ({
             pt: isPilotMode ? "55px" : 2,
             width: "100%",
             m: "auto",
-            height: isPilotMode ? "calc(100vh - 120px)":  "calc(100vh - 150px)",
+            height: isPilotMode ? "calc(100vh - 120px)" : "calc(100vh - 150px)",
             display: "flex",
             justifyContent: "space-between",
             flexDirection: "column",

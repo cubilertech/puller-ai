@@ -465,18 +465,18 @@ export const SideBar_Data: SidebarItem[] = [
 export const LatestPullsData = [
   {
     query:
-      "Get me the most loyal customers who have placed at least two orders",
+      "Could you get the top 10 performing SKUs by region for the last quarter?",
   },
   {
-    query: "Get me the latest 100 orders",
+    query:
+      "I’d like a table that shows me the average order value of our products compared to the average order value of the rest of category each quarter for the last 4 quarters.",
   },
   {
-    query: "Please get all stripe payments data",
+    query:
+      "Can you retrieve a list of products with current inventory levels below the threshold for reorder, as well as the last date inventory levels were at or above threshold. Include the reorder quantity as well.",
   },
   {
-    query: "Find the 20 largest payments",
-  },
-  {
-    query: "Find the fifty most expensive orders",
+    query:
+      "Show me the daily unit and dollar sales volume in all stores in region X for any product that has Star Technology for the last week. Compare that the daily unit and dollar sales volume of all other products in Region X over the same time period.",
   },
 ];

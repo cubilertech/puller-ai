@@ -132,8 +132,8 @@
         "url": "/examplePromptsCSV/example2.csv"
       }]
   },
-  "getlistof100customersorderdate.":  {
-    "query": "Get list of 100 customers order date.",
+  "getlistof100customersorderdate":  {
+    "query": "Get list of 100 customers order date",
     "description": "A list of customers with their first order date, last order date, and order count, along with any additional information from the merged shop data, for customers who have made 2 or more orders.",
     "graph": [],
     "id": "query#1234567894",

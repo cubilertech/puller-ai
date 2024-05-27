@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { Button } from "@/components/Button";
 import { Paper } from "@/components/Paper";
 import { Logo } from "@/components/logo";
@@ -40,7 +40,12 @@ const LoginPage = () => {
     event.preventDefault();
     formik.handleSubmit();
   };
-
+  useEffect(() => {
+    const CompanyName = localStorage.getItem("companyName");
+    if (CompanyName) {
+      router.push("/request");
+    }
+  }, []);
   return (
     <Box p={"2%"} height={"100vh"}>
       <Box
