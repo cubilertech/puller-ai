@@ -1,6 +1,8 @@
+"use client"
 import { palette } from "@/theme/Palette";
 import { MenuItemType } from "@/utils/types";
 import { MenuItem, Menu as MuiMenu } from "@mui/material";
+import { useRouter } from "next/navigation";
 import { FC } from "react";
 
 interface MenuProps {
@@ -11,6 +13,7 @@ interface MenuProps {
 }
 
 const Menu: FC<MenuProps> = ({ open, menuItems, anchorEl, onClose }) => {
+  const router = useRouter()
   return (
     <MuiMenu
       sx={{
@@ -43,7 +46,16 @@ const Menu: FC<MenuProps> = ({ open, menuItems, anchorEl, onClose }) => {
       }}
     >
       {menuItems.map((item, index) => (
-        <MenuItem key={index} value={item.value}>
+        <MenuItem
+          key={index}
+          value={item.value}
+          onClick={() => {
+            if (item.text && item.text === "Logout") {
+              localStorage.removeItem("companyName");
+              router.push("/")
+            }
+          }}
+        >
           {item.text}
         </MenuItem>
       ))}

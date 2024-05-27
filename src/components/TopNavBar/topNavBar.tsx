@@ -8,7 +8,7 @@ import CustomLink from "../Link/link";
 import NotificationIconButton from "@/common/notificationIconButton/notificationIconButton";
 import CustomButton from "@/common/CustomButtons/CustomButtons";
 import { AlertModal } from "@/modals/AlertModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const TopNavBar = () => {
   const route = usePathname();
@@ -27,6 +27,12 @@ const TopNavBar = () => {
       setIsOpenAlert(true);
     }
   };
+  useEffect(() => {
+    const companyName = localStorage.getItem('companyName');
+    if(!companyName) {
+      router.push("/")
+    }
+  }, [])
 
   return (
     <>
