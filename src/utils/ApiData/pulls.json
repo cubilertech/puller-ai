@@ -15,6 +15,7 @@
       "Quarterly Growth Analysis: Comparing current performance with previous quarters can help identify growth trends. Sales grew by 10% compared to the previous quarter, highlighting consistent growth.",
       "Inventory Turnover Insights: Exploring inventory turnover rates alongside sales data can provide a fuller picture of SKU performance. High turnover rates might indicate strong demand and efficient inventory management"
     ],
+    "status": "complete",
     "columns": [
       "Region",
       "Product",
