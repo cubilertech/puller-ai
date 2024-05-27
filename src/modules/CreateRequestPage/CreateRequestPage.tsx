@@ -25,7 +25,6 @@ const CreateRequestPage: FC<Props> = ({
   submitPromptLoading,
 }) => {
   const [isOpenAlert, setIsOpenAlert] = useState(false);
-
   const promptList = useMemo(() => {
     return isPilotMode ? LatestPullsData : list ? list : [];
   }, [list]);
@@ -52,7 +51,6 @@ const CreateRequestPage: FC<Props> = ({
                   {
                     label: "Request History",
                     variant: "request-history",
-                    href: "/request/recent",
                   },
                 ]
               : undefined

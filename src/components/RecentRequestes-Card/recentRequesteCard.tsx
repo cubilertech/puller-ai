@@ -4,16 +4,19 @@ import { Box, Typography } from "@mui/material";
 import { Icon } from "../Icon";
 
 interface RequestsCardProps {
-  title: string;
-  discription: string;
+  text: string;
   onClick?: () => void;
 }
 
-const RequestsCard: FC<RequestsCardProps> = ({
-  title,
-  discription,
-  onClick,
-}) => {
+const RequestsCard: FC<RequestsCardProps> = ({ text, onClick }) => {
+  const colonIndex = text.indexOf(":");
+  const title = text.substring(0, colonIndex).trim();
+  const description = text.substring(colonIndex + 1).trim();
+
+  const result = {
+    title: title,
+    description: description,
+  };
   return (
     <Paper
       onClick={onClick}
@@ -35,7 +38,7 @@ const RequestsCard: FC<RequestsCardProps> = ({
             alignItems: "center",
           }}
         >
-          <Typography variant="text-md-semibold">{title}</Typography>
+          <Typography variant="text-md-semibold">{result.title}</Typography>
           <Icon icon="outlinedBookMark" width={24} height={24} />
         </Box>
 
@@ -50,7 +53,7 @@ const RequestsCard: FC<RequestsCardProps> = ({
             WebkitBoxOrient: "vertical",
           }}
         >
-          {discription}
+          {result.description}
         </Typography>
       </Box>
     </Paper>

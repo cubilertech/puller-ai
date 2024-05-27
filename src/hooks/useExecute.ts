@@ -39,8 +39,7 @@ export const useSubmitExecute = () => {
   return useMutation({
     mutationFn: submit,
     onSuccess: async (data) => {
-      const id = data?.id?.includes("#") ? data?.id?.split("#")?.[1] : data?.id;
-      router.push(`/request/results/${id}`);
+    
       setTimeout(()=>{
           dispatch(setSubmitExecuteLoading(false));
       },2000);

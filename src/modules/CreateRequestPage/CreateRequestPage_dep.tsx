@@ -27,7 +27,6 @@ const CreateRequestPage = () => {
                     {
                       label: "Request History",
                       variant: "request-history",
-                      href: "/request/recent",
                     },
                   ]
                 : undefined

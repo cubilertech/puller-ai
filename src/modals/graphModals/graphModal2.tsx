@@ -13,7 +13,7 @@ import dagre from "dagre";
 // import { initialNodes, initialEdges } from "./nodes-edges";
 
 import "reactflow/dist/style.css";
-import { Box, Modal } from "@mui/material";
+import { Box, Modal, Typography } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { Paper } from "@/components/Paper";
 import CustomNode from "./customNode";
@@ -23,6 +23,7 @@ import { Button } from "@/components/Button";
 import { Loader } from "@/components/Loader";
 import { setSubmitValidateLoading } from "@/libs/redux/features/globalLoadings";
 import { useAppDispatch } from "@/libs/redux/hooks";
+import { palette } from "@/theme/Palette";
 
 const dagreGraph = new dagre.graphlib.Graph();
 dagreGraph.setDefaultEdgeLabel(() => ({}));
@@ -213,6 +214,7 @@ const GraphModal2 = ({ prompt, validatePrompt }: props) => {
       ),
     };
   }, []);
+  console.log(prompt, "prompt");
 
   return (
     <Box sx={{ width: "100%", height: "calc(100vh - 298px)" }}>
@@ -236,7 +238,7 @@ const GraphModal2 = ({ prompt, validatePrompt }: props) => {
           >
             <Loader variant="simple" type="Loading" />
           </Box>
-        ) : (
+        ) : prompt.graph && prompt.graph.length ? (
           <ReactFlow
             nodeTypes={nodeTypes}
             nodes={nodes}
@@ -260,6 +262,23 @@ const GraphModal2 = ({ prompt, validatePrompt }: props) => {
             )}
             <Background />
           </ReactFlow>
+        ) : (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+              height: "100%",
+            }}
+          >
+            <Typography
+              variant="text-lg-regular"
+              color={palette.color.gray[500]}
+            >
+              No Graph Found
+            </Typography>
+          </Box>
         )}
       </Paper>
     </Box>
