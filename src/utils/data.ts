@@ -465,10 +465,6 @@ export const SideBar_Data: SidebarItem[] = [
 export const LatestPullsData = [
   {
     query:
-      "Could you get the top 10 performing SKUs by region for the last quarter?",
-  },
-  {
-    query:
       "I’d like a table that shows me the average order value of our products compared to the average order value of the rest of category each quarter for the last 4 quarters.",
   },
   {

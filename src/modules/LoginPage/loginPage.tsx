@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/Button";
 import { Paper } from "@/components/Paper";
 import { Logo } from "@/components/logo";
@@ -17,7 +17,9 @@ const LoginSchema = Yup.object().shape({
   // password: Yup.string().required("Password is required"),
 });
 
+
 const LoginPage = () => {
+  const [isLoading, setIsLoading] = useState(false)
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
@@ -30,6 +32,7 @@ const LoginPage = () => {
     onSubmit: (values) => {
       localStorage.setItem("companyName", values.companyName);
       router.push("/request");
+      setIsLoading(true)
     },
   });
   const handleButtonClick = (
@@ -170,6 +173,7 @@ const LoginPage = () => {
                 size="large"
                 fullWidth
                 label="Login"
+                disabled={isLoading}
                 onClick={handleButtonClick}
               />
             </Box>
