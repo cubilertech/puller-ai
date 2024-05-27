@@ -4,6 +4,7 @@ import validateRequestReducer from "./features/validateRequest";
 import checkboxReducer from "./features/checkbox";
 import searchbarReducer from "./features/searchbar";
 import LoadingRequestReducer from "./features/isLoadingRequest";
+import globalLoadingReducer from "./features/globalLoadings";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     checkbox: checkboxReducer,
     searchbar: searchbarReducer,
     LoadingRequest: LoadingRequestReducer,
+    globalLoading:globalLoadingReducer
   },
 });
 

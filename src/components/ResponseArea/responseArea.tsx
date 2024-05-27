@@ -30,7 +30,7 @@ const ResponseArea: FC<ResponseAreaProps> = ({
         sx={{
           border: `1px solid ${palette.color.gray[700]}`,
           height: "fit-content",
-          padding: 2,
+          padding: 1.2,
           gap: 1,
           pb: 5,
           m: 0,
@@ -88,11 +88,11 @@ const ResponseArea: FC<ResponseAreaProps> = ({
             mt: 1,
           }}
         >
-          <Box>
+          {/* <Box>
             <Box sx={{ transform: "scale(200%)", mt: 0.7 }}>
               <Icon icon="logoIcon" height={30} width={30} />
             </Box>
-          </Box>
+          </Box> */}
           {isLoading ? (
             <>
               <pre
@@ -121,12 +121,6 @@ const ResponseArea: FC<ResponseAreaProps> = ({
               component="p"
               className="animated-genrated-text"
             >
-              <Typography
-                variant={"display-xs-response-bold"}
-                sx={{ color: palette.base.white, overflow: "hidden" }}
-              >
-                Your Prompt response is here:{" "}
-              </Typography>
               {content?.response}
             </Typography>
           )}

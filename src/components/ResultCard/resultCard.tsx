@@ -20,22 +20,19 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
   const route = useRouter();
   const [isOpenAlert, setIsOpenAlert] = useState(false);
 
-  const handleOpen = () => {
+  const handleOpen = (id: string) => {
+    const withoutquery = id.replace("query#", "");
     if (isPilotMode) {
       setIsOpenAlert(true);
-    } else route.push("/request/recent");
+    } else route.push(`/request/preview/${withoutquery}`);
   };
   const handleAdvanced = () => {
     route.push("/advanced");
   };
   const handleDownload = () => {
-    const link = document.createElement("a");
-    link.href = data?.fileLink;
-    link.download = "download.txt";
-    link.target = "_blank";
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
+    if (isPilotMode) {
+      setIsOpenAlert(true);
+    } else route.push(data.fileLink as string);
   };
 
   return (
@@ -68,7 +65,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
               {data.main_title}
             </Typography>
             <Box sx={{ display: "flex", gap: 1 }}>
-              <Box width={"36px"} onClick={() => handleOpen()}>
+              <Box width={"36px"} onClick={() => handleOpen(data?.id)}>
                 <IconButton
                   icon="importIcon"
                   iconHeight={16}
@@ -77,7 +74,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
                 />
               </Box>
 
-              <Box width={"36px"} onClick={() => handleDownload()}>
+              <Box width={"36px"}>
                 <IconButton
                   icon="eyeIcon"
                   iconHeight={16}
@@ -111,7 +108,10 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
             <Box sx={{ display: "flex", gap: 1 }}>
               <Typography variant="text-sm-regular">File Size:</Typography>
               <Typography variant="text-sm-semibold">
-                {data.fileSize}
+                {typeof data.fileSize === "number"
+                  ? (data.fileSize / 1024 / 1024).toFixed(0)
+                  : "24"}
+                mb
               </Typography>
             </Box>
             <Box sx={{ display: "flex", gap: 1 }}>
@@ -139,10 +139,10 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
                 </CustomLink>
               </Typography>
             </Box>
-            <Box sx={{ display: "flex", gap: 1 }}>
+            {/* <Box sx={{ display: "flex", gap: 1 }}>
               <Typography variant="text-sm-regular">Sources:</Typography>
               <Typography variant="text-sm-semibold">{data.sources}</Typography>
-            </Box>
+            </Box> */}
           </Box>
           {/* Divider */}
           <Box py={2}>
@@ -159,7 +159,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
           >
             <Typography variant="text-md-semibold">{data.title}</Typography>
             <Typography variant="text-sm-regular">
-              {data.discription}
+              {data.observations}
             </Typography>
           </Box>
         </Box>
@@ -193,7 +193,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
                 fullWidth
                 size="large"
                 variant="outlined"
-                onClick={handleOpen}
+                onClick={() => handleDownload()}
               />
             </Box>
             <Box width={"242px"}>
