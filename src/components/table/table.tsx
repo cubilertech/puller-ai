@@ -141,8 +141,8 @@ const DataTable: FC<DataTableProps> = ({ data }) => {
           </Box>
           <Typography variant="text-xs-medium" color={"#C8C8C8"}>
             Showing {page * rowsPerPage + 1} to{" "}
-            {Math.min((page + 1) * rowsPerPage, TABLEDATA.length)} of{" "}
-            {TABLEDATA.length} entries
+            {Math.min((page + 1) * rowsPerPage, (data?.rows?.length ?? 0))} of{" "}
+            {(data?.rows?.length ?? 0)} entries
           </Typography>
         </Box>
 
@@ -198,13 +198,15 @@ const DataTable: FC<DataTableProps> = ({ data }) => {
             onClick={() => handlePageChange(page + 1)}
             label=""
             variant="text"
-            disabled={page === Math.ceil(TABLEDATA.length / rowsPerPage) - 1}
+            disabled={
+              page === Math.ceil((data?.rows?.length ?? 0) / rowsPerPage) - 1
+            }
             sx={{
               minWidth: 32,
               width: "32px !important ",
               height: "32px !important ",
               border:
-                page === Math.ceil(TABLEDATA.length / rowsPerPage) - 1
+                page === Math.ceil((data?.rows?.length ?? 0) / rowsPerPage) - 1
                   ? "1px solid rgba(225,225,225,0.4)"
                   : "1px solid white",
               ":hover": {
@@ -215,7 +217,9 @@ const DataTable: FC<DataTableProps> = ({ data }) => {
           >
             <Icon
               icon="paginationRight"
-              disabled={page === Math.ceil(TABLEDATA.length / rowsPerPage) - 1}
+              disabled={
+                page === Math.ceil((data?.rows?.length ?? 0) / rowsPerPage) - 1
+              }
             />
           </Button>
         </Box>

@@ -60,7 +60,7 @@ const SQL_Editor: FC<SQL_EditorProps> = ({ handleClose, code }) => {
         m: 0
       }}
     >
-      <Box
+      {/* <Box
         sx={{
           display: "flex",
           justifyContent: "space-between",
@@ -72,7 +72,7 @@ const SQL_Editor: FC<SQL_EditorProps> = ({ handleClose, code }) => {
         <Typography variant="display-xs-medium">SQL Editor</Typography>
        
       </Box>
-      <Divider variant="fullWidth" type="light" />
+      <Divider variant="fullWidth" type="light" /> */}
       <Box
         sx={{
           width: "100%",

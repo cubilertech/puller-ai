@@ -11,14 +11,22 @@ import { CustomLink } from "../Link";
 import { useRouter } from "next/navigation";
 import { AlertModal } from "@/modals/AlertModal";
 import { isPilotMode } from "@/utils/constants";
+import { palette } from "@/theme/Palette";
 
 interface ResultCardProps {
   data: CardData;
 }
 
+const overflowText = {
+  overflow: "hidden",
+  display: "-webkit-box",
+  WebkitLineClamp: 3,
+  WebkitBoxOrient: "vertical",
+};
 const ResultCard: FC<ResultCardProps> = ({ data }) => {
   const route = useRouter();
   const [isOpenAlert, setIsOpenAlert] = useState(false);
+  const [isOpendiscription, setIsOpendiscription] = useState(false);
 
   const handleOpen = (id: string) => {
     const withoutquery = id.replace("query#", "");
@@ -86,9 +94,19 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
           </Box>
           {/* Description */}
           <Box sx={{ maxWidth: "568px" }}>
-            <Typography variant="text-md-regular">
+            <Typography
+              variant="text-md-regular"
+              sx={isOpendiscription ? {} : overflowText}
+            >
               {data.main_discription}
             </Typography>
+            <span
+              onClick={() => setIsOpendiscription(!isOpendiscription)}
+              style={{ color: palette.primary.light, cursor: "pointer" }}
+            >
+              {" "}
+              {isOpendiscription ? "See less" : "See more"}
+            </span>
           </Box>
           {/* File info */}
           <Box
@@ -108,10 +126,10 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
             <Box sx={{ display: "flex", gap: 1 }}>
               <Typography variant="text-sm-regular">File Size:</Typography>
               <Typography variant="text-sm-semibold">
-                {typeof data.fileSize === "number"
+                {/* {typeof data.fileSize === "number"
                   ? (data.fileSize / 1024 / 1024).toFixed(0)
-                  : "24"}
-                mb
+                  : "24"} */}
+                {data.fileSize} B
               </Typography>
             </Box>
             <Box sx={{ display: "flex", gap: 1 }}>
@@ -145,7 +163,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
             </Box> */}
           </Box>
           {/* Divider */}
-          <Box py={2}>
+          <Box pb={2} pt={0}>
             <Divider variant="fullWidth" type="dark" />
           </Box>
           {/* Observations */}
@@ -171,7 +189,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
             textAlign: "end",
             justifyContent: "end",
             width: "100%",
-            height: "20%",
+            height: "15%",
           }}
         >
           {/* Divider */}
