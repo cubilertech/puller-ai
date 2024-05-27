@@ -20,7 +20,8 @@ const TopNavBar = () => {
     routeParts.includes("preview") ||
     routeParts.includes("connect") ||
     routeParts.includes("recent") ||
-    routeParts.includes("retriever-detail");
+    routeParts.includes("retriever-detail") ||
+    routeParts.includes("results");
 
   const handleClickAlerts = () => {
     if (isPilotMode) {
@@ -28,11 +29,11 @@ const TopNavBar = () => {
     }
   };
   useEffect(() => {
-    const companyName = localStorage.getItem('companyName');
-    if(!companyName) {
-      router.push("/")
+    const companyName = localStorage.getItem("companyName");
+    if (!companyName) {
+      router.push("/");
     }
-  }, [])
+  }, []);
 
   return (
     <>
