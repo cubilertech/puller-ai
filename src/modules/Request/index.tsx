@@ -117,6 +117,12 @@ const RequestPage: FC = () => {
     dispatch(setLoadingText("Processing"));
     dispatch(UpdatePromptValue(query));
   };
+  const handleLatestPrompt = (queryText: string) => {
+    submitPrompt({ message: queryText });
+    dispatch(setSubmitPromptLoading(true));
+    dispatch(setLoadingText("Processing"));
+    dispatch(UpdatePromptValue(queryText));
+  };
 
   const handleUpdate = () => {
     if (id) {
@@ -352,6 +358,7 @@ const RequestPage: FC = () => {
           list={allPrompt}
           setRequestQuery={setQuery}
           requestQuery={query}
+          handleLatestPrompt={handleLatestPrompt}
           handleSubmitPrompt={handleSubmitPrompt}
           submitPromptLoading={submitPromptLoading}
         />

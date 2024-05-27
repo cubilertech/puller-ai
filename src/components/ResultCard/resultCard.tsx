@@ -163,7 +163,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
             </Box> */}
           </Box>
           {/* Divider */}
-          <Box pb={2} pt={0}>
+          <Box py={2}>
             <Divider variant="fullWidth" type="dark" />
           </Box>
           {/* Observations */}

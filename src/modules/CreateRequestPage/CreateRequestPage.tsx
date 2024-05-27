@@ -16,6 +16,7 @@ interface Props {
   requestQuery: string;
   handleSubmitPrompt: any;
   submitPromptLoading: boolean;
+  handleLatestPrompt: any;
 }
 const CreateRequestPage: FC<Props> = ({
   list,
@@ -23,6 +24,7 @@ const CreateRequestPage: FC<Props> = ({
   requestQuery,
   handleSubmitPrompt,
   submitPromptLoading,
+  handleLatestPrompt,
 }) => {
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const promptList = useMemo(() => {
@@ -106,7 +108,7 @@ const CreateRequestPage: FC<Props> = ({
                   <LatestPullesCard
                     key={i}
                     query={item.query}
-                    onClick={() => setRequestQuery(item.query as string)}
+                    onClick={() => handleLatestPrompt(item.query as string)}
                   />
                 </motion.div>
               ))}
