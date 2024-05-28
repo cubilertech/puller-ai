@@ -30,7 +30,7 @@ const AppLayout = ({ children }: { children: ReactNode }) => {
               theme="dark"
             />
 
-            <TanstackProvider>{children}</TanstackProvider>
+            {children}
           </div>
         </div>
       </div>
