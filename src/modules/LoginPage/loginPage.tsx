@@ -61,7 +61,7 @@ const LoginPage = () => {
           height: "100%",
           justifyContent: "space-between",
           flexDirection: "row-reverse",
-          gap: 10,
+          gap: "40px",
         }}
       >
         {/* login side */}
@@ -259,11 +259,10 @@ const LoginPage = () => {
             <Typography
               variant="text-sm-medium"
               color={palette.color.gray[750]}
-              sx={{ ml: -3 }}
             >
               © 2024 Puller AI
             </Typography>
-            <Box sx={{ display: "flex", gap: 1.5, mr: -3 }}>
+            <Box sx={{ display: "flex", gap: 1.5,  }}>
               <CustomLink href="#" variant="simple">
                 Terms & Condition
               </CustomLink>
