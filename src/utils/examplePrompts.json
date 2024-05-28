@@ -54,7 +54,7 @@
     ],
     "status": "complete",
     "results":[{
-        "bytes": 116,
+        "bytes": 1.4,
         "database": "Prototype",
         "duration": 3.0252435207366943,
         "message": "CREATE TABLE (29.0 rows, 3.7 KiB processed)",
@@ -180,7 +180,7 @@
     ],
     "status": "complete",
     "results":[{
-        "bytes": 221,
+        "bytes": 2.1,
         "database": "Prototype",
         "duration": 3.0252435207366943,
         "message": "CREATE TABLE (29.0 rows, 3.7 KiB processed)",
@@ -233,7 +233,7 @@
     ],
     "status": "complete",
     "results":[{
-        "bytes": 104,
+        "bytes": 1,
         "database": "Prototype",
         "duration": 3.0252435207366943, 
         "message": "CREATE TABLE (29.0 rows, 3.7 KiB processed)",
@@ -280,7 +280,7 @@
     ],
     "status": "complete",
     "results":[{
-        "bytes": 226,
+        "bytes": 1.7,
         "database": "Prototype",
         "duration": 3.0252435207366943,
         "message": "CREATE TABLE (29.0 rows, 3.7 KiB processed)",
@@ -300,25 +300,42 @@
     "variables": [],
     "observations":"Over the past last order date, and order count, along with any additional information from the merged shop data, for customers who have made 2 or more orders.",
     "notes": [],
-    "columns": ["Item", "Quantity", "Price", "Supplier", "Last Purchase Date"],
+    "columns": ["Date", "Star Tech Units Sold", "Star Tech Dollar Sales", "Other Units Sold", "Other Dollar Sales", "Total Units Sold", "Total Dollar Sales", "Star Tech Units %", "Star Tech Dollar %"],
     "rows": [
-        {"Item": "Widget A", "Quantity": "100", "Price": "$5.99", "Supplier": "Supplier X", "Last Purchase Date": "2024-05-25"},
-        {"Item": "Gadget B", "Quantity": "50", "Price": "$12.50", "Supplier": "Supplier Y", "Last Purchase Date": "2024-05-24"},
-        {"Item": "Tool C", "Quantity": "200", "Price": "$8.75", "Supplier": "Supplier Z", "Last Purchase Date": "2024-05-22"},
-        {"Item": "Accessory D", "Quantity": "80", "Price": "$3.25", "Supplier": "Supplier X", "Last Purchase Date": "2024-05-20"},
-        {"Item": "Component E", "Quantity": "150", "Price": "$6.99", "Supplier": "Supplier Z", "Last Purchase Date": "2024-05-18"}
+      {"Date": "2023-05-15", "Star Tech Units Sold": "120", "Star Tech Dollar Sales": "$24,000", "Other Units Sold": "450", "Other Dollar Sales": "$90,000", "Total Units Sold": "570", "Total Dollar Sales": "$114,000", "Star Tech Units %": "21.05%", "Star Tech Dollar %": "21.05%"},
+      {"Date": "2023-05-16", "Star Tech Units Sold": "110", "Star Tech Dollar Sales": "$22,000", "Other Units Sold": "480", "Other Dollar Sales": "$96,000", "Total Units Sold": "590", "Total Dollar Sales": "$118,000", "Star Tech Units %": "18.64%", "Star Tech Dollar %": "18.64%"},
+      {"Date": "2023-05-17", "Star Tech Units Sold": "130", "Star Tech Dollar Sales": "$26,000", "Other Units Sold": "500", "Other Dollar Sales": "$100,000", "Total Units Sold": "630", "Total Dollar Sales": "$126,000", "Star Tech Units %": "20.63%", "Star Tech Dollar %": "20.63%"},
+      {"Date": "2023-05-18", "Star Tech Units Sold": "115", "Star Tech Dollar Sales": "$23,000", "Other Units Sold": "460", "Other Dollar Sales": "$92,000", "Total Units Sold": "575", "Total Dollar Sales": "$115,000", "Star Tech Units %": "20.00%", "Star Tech Dollar %": "20.00%"},
+      {"Date": "2023-05-19", "Star Tech Units Sold": "140", "Star Tech Dollar Sales": "$28,000", "Other Units Sold": "520", "Other Dollar Sales": "$104,000", "Total Units Sold": "660", "Total Dollar Sales": "$132,000", "Star Tech Units %": "21.21%", "Star Tech Dollar %": "21.21%"},
+      {"Date": "2023-05-20", "Star Tech Units Sold": "125", "Star Tech Dollar Sales": "$25,000", "Other Units Sold": "490", "Other Dollar Sales": "$98,000", "Total Units Sold": "615", "Total Dollar Sales": "$123,000", "Star Tech Units %": "20.33%", "Star Tech Dollar %": "20.33%"},
+      {"Date": "2023-05-21", "Star Tech Units Sold": "135", "Star Tech Dollar Sales": "$27,000", "Other Units Sold": "510", "Other Dollar Sales": "$102,000", "Total Units Sold": "645", "Total Dollar Sales": "$129,000", "Star Tech Units %": "20.93%", "Star Tech Dollar %": "20.93%"},
+      {"Date": "2023-05-22", "Star Tech Units Sold": "105", "Star Tech Dollar Sales": "$21,000", "Other Units Sold": "470", "Other Dollar Sales": "$94,000", "Total Units Sold": "575", "Total Dollar Sales": "$115,000", "Star Tech Units %": "18.26%", "Star Tech Dollar %": "18.26%"},
+      {"Date": "2023-05-23", "Star Tech Units Sold": "150", "Star Tech Dollar Sales": "$30,000", "Other Units Sold": "540", "Other Dollar Sales": "$108,000", "Total Units Sold": "690", "Total Dollar Sales": "$138,000", "Star Tech Units %": "21.74%", "Star Tech Dollar %": "21.74%"},
+      {"Date": "2023-05-24", "Star Tech Units Sold": "115", "Star Tech Dollar Sales": "$23,000", "Other Units Sold": "480", "Other Dollar Sales": "$96,000", "Total Units Sold": "595", "Total Dollar Sales": "$119,000", "Star Tech Units %": "19.33%", "Star Tech Dollar %": "19.33%"},
+      {"Date": "2023-05-25", "Star Tech Units Sold": "160", "Star Tech Dollar Sales": "$32,000", "Other Units Sold": "550", "Other Dollar Sales": "$110,000", "Total Units Sold": "710", "Total Dollar Sales": "$142,000", "Star Tech Units %": "22.54%", "Star Tech Dollar %": "22.54%"},
+      {"Date": "2023-05-26", "Star Tech Units Sold": "145", "Star Tech Dollar Sales": "$29,000", "Other Units Sold": "530", "Other Dollar Sales": "$106,000", "Total Units Sold": "675", "Total Dollar Sales": "$135,000", "Star Tech Units %": "21.48%", "Star Tech Dollar %": "21.48%"},
+      {"Date": "2023-05-27", "Star Tech Units Sold": "170", "Star Tech Dollar Sales": "$34,000", "Other Units Sold": "570", "Other Dollar Sales": "$114,000", "Total Units Sold": "740", "Total Dollar Sales": "$148,000", "Star Tech Units %": "22.97%", "Star Tech Dollar %": "22.97%"},
+      {"Date": "2023-05-28", "Star Tech Units Sold": "130", "Star Tech Dollar Sales": "$26,000", "Other Units Sold": "490", "Other Dollar Sales": "$98,000", "Total Units Sold": "620", "Total Dollar Sales": "$124,000", "Star Tech Units %": "20.97%", "Star Tech Dollar %": "20.97%"},
+      {"Date": "2023-05-29", "Star Tech Units Sold": "180", "Star Tech Dollar Sales": "$36,000", "Other Units Sold": "600", "Other Dollar Sales": "$120,000", "Total Units Sold": "780", "Total Dollar Sales": "$156,000", "Star Tech Units %": "23.08%", "Star Tech Dollar %": "23.08%"},
+      {"Date": "2023-05-30", "Star Tech Units Sold": "165", "Star Tech Dollar Sales": "$33,000", "Other Units Sold": "550", "Other Dollar Sales": "$110,000", "Total Units Sold": "715", "Total Dollar Sales": "$143,000", "Star Tech Units %": "23.08%", "Star Tech Dollar %": "23.08%"},
+      {"Date": "2023-05-31", "Star Tech Units Sold": "140", "Star Tech Dollar Sales": "$28,000", "Other Units Sold": "520", "Other Dollar Sales": "$104,000", "Total Units Sold": "660", "Total Dollar Sales": "$132,000", "Star Tech Units %": "21.21%", "Star Tech Dollar %": "21.21%"},
+      {"Date": "2023-06-01", "Star Tech Units Sold": "155", "Star Tech Dollar Sales": "$31,000", "Other Units Sold": "560", "Other Dollar Sales": "$112,000", "Total Units Sold": "715", "Total Dollar Sales": "$143,000", "Star Tech Units %": "21.68%", "Star Tech Dollar %": "21.68%"},
+      {"Date": "2023-06-02", "Star Tech Units Sold": "175", "Star Tech Dollar Sales": "$35,000", "Other Units Sold": "590", "Other Dollar Sales": "$118,000", "Total Units Sold": "765", "Total Dollar Sales": "$153,000", "Star Tech Units %": "22.88%", "Star Tech Dollar %": "22.88%"},
+      {"Date": "2023-06-03", "Star Tech Units Sold": "160", "Star Tech Dollar Sales": "$32,000", "Other Units Sold": "570", "Other Dollar Sales": "$114,000", "Total Units Sold": "730", "Total Dollar Sales": "$146,000", "Star Tech Units %": "21.92%", "Star Tech Dollar %": "21.92%"},
+      {"Date": "2023-06-04", "Star Tech Units Sold": "145", "Star Tech Dollar Sales": "$29,000", "Other Units Sold": "540", "Other Dollar Sales": "$108,000", "Total Units Sold": "685", "Total Dollar Sales": "$137,000", "Star Tech Units %": "21.17%", "Star Tech Dollar %": "21.17%"},
+      {"Date": "2023-06-05", "Star Tech Units Sold": "130", "Star Tech Dollar Sales": "$26,000", "Other Units Sold": "500", "Other Dollar Sales": "$100,000", "Total Units Sold": "630", "Total Dollar Sales": "$126,000", "Star Tech Units %": "20.63%", "Star Tech Dollar %": "20.63%"}
     ],
     "status": "complete",
     "results": [
       {
-        "bytes": 125,
+        "bytes": 1.7,
         "database": "Prototype",
         "duration": 3.0252435207366943,
         "message": "CREATE TABLE (29.0 rows, 3.7 KiB processed)",
         "rows": 29,
         "schema": "shop",
         "table": "loyalty",
-        "url": "/examplePromptsCSV/example4.csv"
+        "url": "/examplePromptsCSV/example2.csv"
       }
     ]
   }

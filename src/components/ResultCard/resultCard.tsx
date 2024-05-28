@@ -129,7 +129,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
                 {/* {typeof data.fileSize === "number"
                   ? (data.fileSize / 1024 / 1024).toFixed(0)
                   : "24"} */}
-                {data.fileSize} Bytes
+                {data.fileSize} KB
               </Typography>
             </Box>
             <Box sx={{ display: "flex", gap: 1 }}>

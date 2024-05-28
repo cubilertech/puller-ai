@@ -1,1 +1,674 @@
-[]
+[
+  {
+    "query": "Show me the daily unit and dollar sales volume in all stores in region X for any product that has Star Technology for the last week. Compare that the daily unit and dollar sales volume of all other products in Region X over the same time period.",
+    "description": " The query calculates and compares daily unit and dollar sales volumes for 'Star Technology' products and other products in Region X over the last week. First, it filters sales_data for 'Star Technology' products in Region X from the last week, grouping by date to calculate total order value and units sold. Then, it Filters sales_data for all other products in Region X from the last week, grouping by date to calculate total order value and units sold. Finally, it Joins star_sales and other_sales on sale date, and calculates total and percentage sales volumes for both categories. The result is a table showing daily sales volumes for 'Star Technology' products versus “all other” products in Region X, allowing for performance comparison over the past week.",
+    "id": "query#1234567893",
+    "sql": "WITH star_sales AS (SELECT EXTRACT(DAY FROM sale_date) AS sale_day, EXTRACT(MONTH FROM sale_date) AS sale_month, EXTRACT(YEAR FROM sale_date) AS sale_year, product_id, SUM(order_value) AS daily_order_value, SUM(units_sold) AS daily_units_sold FROM sales_data WHERE product_category LIKE '%Star Technology%' AND region = 'X' AND sale_date >= CURRENT_DATE - INTERVAL '1 week' GROUP BY EXTRACT(DAY FROM sale_date), EXTRACT(MONTH FROM sale_date), EXTRACT(YEAR FROM sale_date), product_id), other_sales AS (SELECT EXTRACT(DAY FROM sale_date) AS sale_day, EXTRACT(MONTH FROM sale_date) AS sale_month, EXTRACT(YEAR FROM sale_date) AS sale_year, product_id, SUM(order_value) AS daily_order_value, SUM(units_sold) AS daily_units_sold FROM sales_data WHERE product_category NOT LIKE '%Star Technology%' AND region = 'X' AND sale_date >= CURRENT_DATE - INTERVAL '1 week' GROUP BY EXTRACT(DAY FROM sale_date), EXTRACT(MONTH FROM sale_date), EXTRACT(YEAR FROM sale_date), product_id) SELECT s.sale_day, s.sale_month    ",
+    "target": "",
+    "graph": [],
+    "variables": [],
+    "observations": "Over the past w'url: /examplePromptsCSV/example1.csv'eek in Region X, 'Star Technology' products generated a total revenue of $50,000 and sold 500 units, while all other products achieved $70,000 in revenue with 700 units sold. The top-selling day was Thursday, with 'Star Technology' products accounting for 40% of total sales volume",
+    "notes": [
+      "Daily Sales Trends: To evaluate comparative sales on a day over day basis. Calculate the average daily revenue and units sold for each product category. For example, the average daily revenue in the last day for 'Star Technology' products was $7,143, and for 'all other' products was $10,000.",
+      "Product Performance Comparison: We recommend comparing the average daily revenue and units sold between 'Star Technology' products and 'all other' products to assess performance, but excluding products that were new during the evaluation period. For instance, 'all other' products may have a higher average daily revenue per unit sold compared to 'Star Technology' products due to new product volume, so the comparison could mislead.",
+      "Seasonal Variations: Calculate the percentage change in sales volume from the previous week to identify any significant seasonal variations. For example, sales volume increased by 20% compared to the previous week, and we see similar lifts year on year, this potentially indicates a seasonal spike in demand.",
+      "Promotional Analysis: Determine the impact of promotions by calculating the percentage increase in sales volume or revenue during the promotional period. For instance, sales volume increased by 30% during the latest promotion, which suggests a successful campaign.",
+      "Customer Preferences: A ratio analysis between all other products and Star Technology products could help uncover customer Preferences. It may be worth reviewing consumer insights trends from the CI_2023 retriever for additional context."
+    ],
+    "columns": [
+      "Date",
+      "Star Tech Units Sold",
+      "Star Tech Dollar Sales",
+      "Other Units Sold",
+      "Other Dollar Sales",
+      "Total Units Sold",
+      "Total Dollar Sales",
+      "Star Tech Units %",
+      "Star Tech Dollar %"
+    ],
+    "rows": [
+      {
+        "Date": "2023-05-15",
+        "Star Tech Units Sold": "120",
+        "Star Tech Dollar Sales": "$24,000",
+        "Other Units Sold": "450",
+        "Other Dollar Sales": "$90,000",
+        "Total Units Sold": "570",
+        "Total Dollar Sales": "$114,000",
+        "Star Tech Units %": "21.05%",
+        "Star Tech Dollar %": "21.05%"
+      },
+      {
+        "Date": "2023-05-16",
+        "Star Tech Units Sold": "110",
+        "Star Tech Dollar Sales": "$22,000",
+        "Other Units Sold": "480",
+        "Other Dollar Sales": "$96,000",
+        "Total Units Sold": "590",
+        "Total Dollar Sales": "$118,000",
+        "Star Tech Units %": "18.64%",
+        "Star Tech Dollar %": "18.64%"
+      },
+      {
+        "Date": "2023-05-17",
+        "Star Tech Units Sold": "130",
+        "Star Tech Dollar Sales": "$26,000",
+        "Other Units Sold": "500",
+        "Other Dollar Sales": "$100,000",
+        "Total Units Sold": "630",
+        "Total Dollar Sales": "$126,000",
+        "Star Tech Units %": "20.63%",
+        "Star Tech Dollar %": "20.63%"
+      },
+      {
+        "Date": "2023-05-18",
+        "Star Tech Units Sold": "115",
+        "Star Tech Dollar Sales": "$23,000",
+        "Other Units Sold": "460",
+        "Other Dollar Sales": "$92,000",
+        "Total Units Sold": "575",
+        "Total Dollar Sales": "$115,000",
+        "Star Tech Units %": "20.00%",
+        "Star Tech Dollar %": "20.00%"
+      },
+      {
+        "Date": "2023-05-19",
+        "Star Tech Units Sold": "140",
+        "Star Tech Dollar Sales": "$28,000",
+        "Other Units Sold": "520",
+        "Other Dollar Sales": "$104,000",
+        "Total Units Sold": "660",
+        "Total Dollar Sales": "$132,000",
+        "Star Tech Units %": "21.21%",
+        "Star Tech Dollar %": "21.21%"
+      },
+      {
+        "Date": "2023-05-20",
+        "Star Tech Units Sold": "125",
+        "Star Tech Dollar Sales": "$25,000",
+        "Other Units Sold": "490",
+        "Other Dollar Sales": "$98,000",
+        "Total Units Sold": "615",
+        "Total Dollar Sales": "$123,000",
+        "Star Tech Units %": "20.33%",
+        "Star Tech Dollar %": "20.33%"
+      },
+      {
+        "Date": "2023-05-21",
+        "Star Tech Units Sold": "135",
+        "Star Tech Dollar Sales": "$27,000",
+        "Other Units Sold": "510",
+        "Other Dollar Sales": "$102,000",
+        "Total Units Sold": "645",
+        "Total Dollar Sales": "$129,000",
+        "Star Tech Units %": "20.93%",
+        "Star Tech Dollar %": "20.93%"
+      },
+      {
+        "Date": "2023-05-22",
+        "Star Tech Units Sold": "105",
+        "Star Tech Dollar Sales": "$21,000",
+        "Other Units Sold": "470",
+        "Other Dollar Sales": "$94,000",
+        "Total Units Sold": "575",
+        "Total Dollar Sales": "$115,000",
+        "Star Tech Units %": "18.26%",
+        "Star Tech Dollar %": "18.26%"
+      },
+      {
+        "Date": "2023-05-23",
+        "Star Tech Units Sold": "150",
+        "Star Tech Dollar Sales": "$30,000",
+        "Other Units Sold": "540",
+        "Other Dollar Sales": "$108,000",
+        "Total Units Sold": "690",
+        "Total Dollar Sales": "$138,000",
+        "Star Tech Units %": "21.74%",
+        "Star Tech Dollar %": "21.74%"
+      },
+      {
+        "Date": "2023-05-24",
+        "Star Tech Units Sold": "115",
+        "Star Tech Dollar Sales": "$23,000",
+        "Other Units Sold": "480",
+        "Other Dollar Sales": "$96,000",
+        "Total Units Sold": "595",
+        "Total Dollar Sales": "$119,000",
+        "Star Tech Units %": "19.33%",
+        "Star Tech Dollar %": "19.33%"
+      },
+      {
+        "Date": "2023-05-25",
+        "Star Tech Units Sold": "160",
+        "Star Tech Dollar Sales": "$32,000",
+        "Other Units Sold": "550",
+        "Other Dollar Sales": "$110,000",
+        "Total Units Sold": "710",
+        "Total Dollar Sales": "$142,000",
+        "Star Tech Units %": "22.54%",
+        "Star Tech Dollar %": "22.54%"
+      },
+      {
+        "Date": "2023-05-26",
+        "Star Tech Units Sold": "145",
+        "Star Tech Dollar Sales": "$29,000",
+        "Other Units Sold": "530",
+        "Other Dollar Sales": "$106,000",
+        "Total Units Sold": "675",
+        "Total Dollar Sales": "$135,000",
+        "Star Tech Units %": "21.48%",
+        "Star Tech Dollar %": "21.48%"
+      },
+      {
+        "Date": "2023-05-27",
+        "Star Tech Units Sold": "170",
+        "Star Tech Dollar Sales": "$34,000",
+        "Other Units Sold": "570",
+        "Other Dollar Sales": "$114,000",
+        "Total Units Sold": "740",
+        "Total Dollar Sales": "$148,000",
+        "Star Tech Units %": "22.97%",
+        "Star Tech Dollar %": "22.97%"
+      },
+      {
+        "Date": "2023-05-28",
+        "Star Tech Units Sold": "130",
+        "Star Tech Dollar Sales": "$26,000",
+        "Other Units Sold": "490",
+        "Other Dollar Sales": "$98,000",
+        "Total Units Sold": "620",
+        "Total Dollar Sales": "$124,000",
+        "Star Tech Units %": "20.97%",
+        "Star Tech Dollar %": "20.97%"
+      },
+      {
+        "Date": "2023-05-29",
+        "Star Tech Units Sold": "180",
+        "Star Tech Dollar Sales": "$36,000",
+        "Other Units Sold": "600",
+        "Other Dollar Sales": "$120,000",
+        "Total Units Sold": "780",
+        "Total Dollar Sales": "$156,000",
+        "Star Tech Units %": "23.08%",
+        "Star Tech Dollar %": "23.08%"
+      },
+      {
+        "Date": "2023-05-30",
+        "Star Tech Units Sold": "165",
+        "Star Tech Dollar Sales": "$33,000",
+        "Other Units Sold": "550",
+        "Other Dollar Sales": "$110,000",
+        "Total Units Sold": "715",
+        "Total Dollar Sales": "$143,000",
+        "Star Tech Units %": "23.08%",
+        "Star Tech Dollar %": "23.08%"
+      },
+      {
+        "Date": "2023-05-31",
+        "Star Tech Units Sold": "140",
+        "Star Tech Dollar Sales": "$28,000",
+        "Other Units Sold": "520",
+        "Other Dollar Sales": "$104,000",
+        "Total Units Sold": "660",
+        "Total Dollar Sales": "$132,000",
+        "Star Tech Units %": "21.21%",
+        "Star Tech Dollar %": "21.21%"
+      },
+      {
+        "Date": "2023-06-01",
+        "Star Tech Units Sold": "155",
+        "Star Tech Dollar Sales": "$31,000",
+        "Other Units Sold": "560",
+        "Other Dollar Sales": "$112,000",
+        "Total Units Sold": "715",
+        "Total Dollar Sales": "$143,000",
+        "Star Tech Units %": "21.68%",
+        "Star Tech Dollar %": "21.68%"
+      },
+      {
+        "Date": "2023-06-02",
+        "Star Tech Units Sold": "175",
+        "Star Tech Dollar Sales": "$35,000",
+        "Other Units Sold": "590",
+        "Other Dollar Sales": "$118,000",
+        "Total Units Sold": "765",
+        "Total Dollar Sales": "$153,000",
+        "Star Tech Units %": "22.88%",
+        "Star Tech Dollar %": "22.88%"
+      },
+      {
+        "Date": "2023-06-03",
+        "Star Tech Units Sold": "160",
+        "Star Tech Dollar Sales": "$32,000",
+        "Other Units Sold": "570",
+        "Other Dollar Sales": "$114,000",
+        "Total Units Sold": "730",
+        "Total Dollar Sales": "$146,000",
+        "Star Tech Units %": "21.92%",
+        "Star Tech Dollar %": "21.92%"
+      },
+      {
+        "Date": "2023-06-04",
+        "Star Tech Units Sold": "145",
+        "Star Tech Dollar Sales": "$29,000",
+        "Other Units Sold": "540",
+        "Other Dollar Sales": "$108,000",
+        "Total Units Sold": "685",
+        "Total Dollar Sales": "$137,000",
+        "Star Tech Units %": "21.17%",
+        "Star Tech Dollar %": "21.17%"
+      },
+      {
+        "Date": "2023-06-05",
+        "Star Tech Units Sold": "130",
+        "Star Tech Dollar Sales": "$26,000",
+        "Other Units Sold": "500",
+        "Other Dollar Sales": "$100,000",
+        "Total Units Sold": "630",
+        "Total Dollar Sales": "$126,000",
+        "Star Tech Units %": "20.63%",
+        "Star Tech Dollar %": "20.63%"
+      }
+    ],
+    "status": "complete",
+    "results": [
+      {
+        "bytes": 226,
+        "database": "Prototype",
+        "duration": 3.0252435207366943,
+        "message": "CREATE TABLE (29.0 rows, 3.7 KiB processed)",
+        "rows": 29,
+        "schema": "shop",
+        "table": "loyalty",
+        "url": "http://localhost:3000/examplePromptsCSV/example2.csv"
+      }
+    ]
+  },
+  {
+    "query": "Could you get the top 10 performing SKUs by region for the last quarter?",
+    "description": "This query looks at the Sales by Region for [ Brand ] and filters for sales in the last quarter and groups by region and SKU. It then calculates the total revenue, total units sold, and average profit margin for each SKU within each region. Finally it orders the results by total revenue in descending order and returns only the top 10 SKUs.",
+    "id": "query#1234567890",
+    "sql": "SELECT TOP 10 r.region, s.sku, SUM(s.revenue) AS total_revenue, SUM(s.units_sold) AS total_units_sold, AVG(s.profit_margin) AS avg_profit_margin FROM sales s JOIN region r ON s.region_id = r.id WHERE s.sale_date >= DATEADD(quarter, -1, GETDATE()) GROUP BY r.region, s.sku ORDER BY total_revenue DESC;",
+    "target": "",
+    "graph": [],
+    "variables": [],
+    "observations": "In the last quarter, the top 10 SKUs for [Brand] generated a combined total revenue of $2.5 million, with the highest contributions from the North and West regions, accounting for $1.2 million and $900,000 respectively. These SKUs achieved significant sales volumes, with the top SKU selling 15,000 units, and maintained an average profit margin of 25%, suggesting both high demand and profitability.",
+    "notes": [
+      "Broad Sales Overview: The data covers last quarter sales for all SKUs across multiple regions, providing a broad view of performance. Analyzing monthly sales trends could reveal important seasonal patterns.",
+      "Demographic Insights: Investigating customer demographics could help identify key buyer segments and improve targeted marketing. This demographic analysis can be particularly useful for tailoring regional strategies.",
+      "Impact of Marketing: Evaluating regional marketing efforts could provide insights into their impact on sales. For example, a 15% sales increase in the West region coincided with a recent ad campaign.",
+      "Quarterly Growth Analysis: Comparing current performance with previous quarters can help identify growth trends. Sales grew by 10% compared to the previous quarter, highlighting consistent growth.",
+      "Inventory Turnover Insights: Exploring inventory turnover rates alongside sales data can provide a fuller picture of SKU performance. High turnover rates might indicate strong demand and efficient inventory management"
+    ],
+    "columns": [
+      "Region",
+      "Product",
+      "Revenue",
+      "Units Sold",
+      "Profit Margin"
+    ],
+    "rows": [
+      {
+        "Region": "North",
+        "Product": "Product A",
+        "Revenue": "$62,500",
+        "Units Sold": 550,
+        "Profit Margin": "30%"
+      },
+      {
+        "Region": "South",
+        "Product": "Product B",
+        "Revenue": "$45,000",
+        "Units Sold": 400,
+        "Profit Margin": "22%"
+      },
+      {
+        "Region": "East",
+        "Product": "Product C",
+        "Revenue": "$70,000",
+        "Units Sold": 650,
+        "Profit Margin": "28%"
+      },
+      {
+        "Region": "West",
+        "Product": "Product D",
+        "Revenue": "$80,000",
+        "Units Sold": 700,
+        "Profit Margin": "25%"
+      },
+      {
+        "Region": "North",
+        "Product": "Product E",
+        "Revenue": "$55,000",
+        "Units Sold": 450,
+        "Profit Margin": "20%"
+      },
+      {
+        "Region": "South",
+        "Product": "Product F",
+        "Revenue": "$42,000",
+        "Units Sold": 350,
+        "Profit Margin": "18%"
+      },
+      {
+        "Region": "East",
+        "Product": "Product G",
+        "Revenue": "$65,000",
+        "Units Sold": 600,
+        "Profit Margin": "26%"
+      },
+      {
+        "Region": "West",
+        "Product": "Product H",
+        "Revenue": "$75,000",
+        "Units Sold": 550,
+        "Profit Margin": "24%"
+      },
+      {
+        "Region": "North",
+        "Product": "Product I",
+        "Revenue": "$57,500",
+        "Units Sold": 500,
+        "Profit Margin": "23%"
+      },
+      {
+        "Region": "South",
+        "Product": "Product J",
+        "Revenue": "$40,000",
+        "Units Sold": 300,
+        "Profit Margin": "15%"
+      },
+      {
+        "Region": "East",
+        "Product": "Product K",
+        "Revenue": "$75,000",
+        "Units Sold": 650,
+        "Profit Margin": "21%"
+      },
+      {
+        "Region": "West",
+        "Product": "Product L",
+        "Revenue": "$85,000",
+        "Units Sold": 750,
+        "Profit Margin": "27%"
+      },
+      {
+        "Region": "North",
+        "Product": "Product M",
+        "Revenue": "$60,000",
+        "Units Sold": 550,
+        "Profit Margin": "19%"
+      },
+      {
+        "Region": "South",
+        "Product": "Product N",
+        "Revenue": "$50,000",
+        "Units Sold": 400,
+        "Profit Margin": "24%"
+      },
+      {
+        "Region": "East",
+        "Product": "Product O",
+        "Revenue": "$80,000",
+        "Units Sold": 700,
+        "Profit Margin": "29%"
+      },
+      {
+        "Region": "West",
+        "Product": "Product P",
+        "Revenue": "$90,000",
+        "Units Sold": 800,
+        "Profit Margin": "17%"
+      },
+      {
+        "Region": "North",
+        "Product": "Product Q",
+        "Revenue": "$65,000",
+        "Units Sold": 600,
+        "Profit Margin": "28%"
+      },
+      {
+        "Region": "South",
+        "Product": "Product R",
+        "Revenue": "$55,000",
+        "Units Sold": 500,
+        "Profit Margin": "16%"
+      },
+      {
+        "Region": "East",
+        "Product": "Product S",
+        "Revenue": "$85,000",
+        "Units Sold": 750,
+        "Profit Margin": "25%"
+      },
+      {
+        "Region": "West",
+        "Product": "Product T",
+        "Revenue": "$95,000",
+        "Units Sold": 850,
+        "Profit Margin": "22%"
+      },
+      {
+        "Region": "North",
+        "Product": "Product U",
+        "Revenue": "$70,000",
+        "Units Sold": 650,
+        "Profit Margin": "20%"
+      },
+      {
+        "Region": "South",
+        "Product": "Product V",
+        "Revenue": "$60,000",
+        "Units Sold": 550,
+        "Profit Margin": "26%"
+      },
+      {
+        "Region": "East",
+        "Product": "Product W",
+        "Revenue": "$90,000",
+        "Units Sold": 800,
+        "Profit Margin": "17%"
+      },
+      {
+        "Region": "West",
+        "Product": "Product X",
+        "Revenue": "$100,000",
+        "Units Sold": 900,
+        "Profit Margin": "30%"
+      },
+      {
+        "Region": "North",
+        "Product": "Product Y",
+        "Revenue": "$75,000",
+        "Units Sold": 700,
+        "Profit Margin": "18%"
+      },
+      {
+        "Region": "South",
+        "Product": "Product Z",
+        "Revenue": "$65,000",
+        "Units Sold": 600,
+        "Profit Margin": "27%"
+      },
+      {
+        "Region": "East",
+        "Product": "Product AA",
+        "Revenue": "$95,000",
+        "Units Sold": 850,
+        "Profit Margin": "23%"
+      },
+      {
+        "Region": "West",
+        "Product": "Product BB",
+        "Revenue": "$105,000",
+        "Units Sold": 950,
+        "Profit Margin": "21%"
+      },
+      {
+        "Region": "North",
+        "Product": "Product CC",
+        "Revenue": "$80,000",
+        "Units Sold": 750,
+        "Profit Margin": "16%"
+      },
+      {
+        "Region": "South",
+        "Product": "Product DD",
+        "Revenue": "$70,000",
+        "Units Sold": 650,
+        "Profit Margin": "29%"
+      },
+      {
+        "Region": "East",
+        "Product": "Product EE",
+        "Revenue": "$100,000",
+        "Units Sold": 900,
+        "Profit Margin": "19%"
+      },
+      {
+        "Region": "West",
+        "Product": "Product FF",
+        "Revenue": "$110,000",
+        "Units Sold": 1000,
+        "Profit Margin": "24%"
+      },
+      {
+        "Region": "North",
+        "Product": "Product GG",
+        "Revenue": "$85,000",
+        "Units Sold": 800,
+        "Profit Margin": "20%"
+      },
+      {
+        "Region": "South",
+        "Product": "Product HH",
+        "Revenue": "$75,000",
+        "Units Sold": 700,
+        "Profit Margin": "25%"
+      },
+      {
+        "Region": "East",
+        "Product": "Product II",
+        "Revenue": "$105,000",
+        "Units Sold": 950,
+        "Profit Margin": "22%"
+      },
+      {
+        "Region": "West",
+        "Product": "Product JJ",
+        "Revenue": "$115,000",
+        "Units Sold": 1050,
+        "Profit Margin": "17%"
+      },
+      {
+        "Region": "North",
+        "Product": "Product KK",
+        "Revenue": "$90,000",
+        "Units Sold": 850,
+        "Profit Margin": "26%"
+      },
+      {
+        "Region": "South",
+        "Product": "Product LL",
+        "Revenue": "$80,000",
+        "Units Sold": 750,
+        "Profit Margin": "20%"
+      },
+      {
+        "Region": "East",
+        "Product": "Product MM",
+        "Revenue": "$110,000",
+        "Units Sold": 1000,
+        "Profit Margin": "18%"
+      },
+      {
+        "Region": "West",
+        "Product": "Product NN",
+        "Revenue": "$120,000",
+        "Units Sold": 1100,
+        "Profit Margin": "27%"
+      }
+    ],
+    "status": "complete",
+    "results": [
+      {
+        "bytes": 116,
+        "database": "Prototype",
+        "duration": 3.0252435207366943,
+        "message": "CREATE TABLE (29.0 rows, 3.7 KiB processed)",
+        "rows": 29,
+        "schema": "shop",
+        "table": "loyalty",
+        "url": "http://localhost:3000/examplePromptsCSV/example1.csv"
+      }
+    ]
+  },
+  {
+    "query": "Get list of 100 customers order date",
+    "description": "A list of customers with their first order date, last order date, and order count, along with any additional information from the merged shop data, for customers who have made 2 or more orders.",
+    "graph": [],
+    "id": "query#1234567894",
+    "sql": "select * from `dbt-tutorial`.jaffle_shop.customers\nselect * from `dbt-tutorial`.jaffle_shop.orders\nwith\n    customers as (\n        select id as customer_id, first_name, last_name from `helical-math-378821`.`shop`.`customers`\n    ),\n    orders as (\n        select id as order_id, user_id as customer_id, order_date, status\n        from `helical-math-378821`.`shop`.`orders`\n    ),\n    customer_orders as (\n        select\n            customer_id,\n            min(order_date) as first_order_date,\n            max(order_date) as last_order_date,\n            count(order_id) as order_count\n        from orders\n        group by 1\n    ),\n    final as (\n        select\n            customers.customer_id,\n            customers.first_name,\n            customers.last_name,\n            customer_orders.first_order_date,\n            customer_orders.last_order_date,\n            coalesce(customer_orders.order_count, 0) as order_count\n        from customers\n        left join customer_orders using (customer_id)\n    )\nselect *\nfrom final\nselect * from `helical-math-378821`.`shop`.`merge`\nwhere order_count >= 2.0",
+    "target": "model.dbt_tutorial.loyalty",
+    "variables": [],
+    "observations": "Over the past last order date, and order count, along with any additional information from the merged shop data, for customers who have made 2 or more orders.",
+    "notes": [],
+    "columns": [
+      "Item",
+      "Quantity",
+      "Price",
+      "Supplier",
+      "Last Purchase Date"
+    ],
+    "rows": [
+      {
+        "Item": "Widget A",
+        "Quantity": "100",
+        "Price": "$5.99",
+        "Supplier": "Supplier X",
+        "Last Purchase Date": "2024-05-25"
+      },
+      {
+        "Item": "Gadget B",
+        "Quantity": "50",
+        "Price": "$12.50",
+        "Supplier": "Supplier Y",
+        "Last Purchase Date": "2024-05-24"
+      },
+      {
+        "Item": "Tool C",
+        "Quantity": "200",
+        "Price": "$8.75",
+        "Supplier": "Supplier Z",
+        "Last Purchase Date": "2024-05-22"
+      },
+      {
+        "Item": "Accessory D",
+        "Quantity": "80",
+        "Price": "$3.25",
+        "Supplier": "Supplier X",
+        "Last Purchase Date": "2024-05-20"
+      },
+      {
+        "Item": "Component E",
+        "Quantity": "150",
+        "Price": "$6.99",
+        "Supplier": "Supplier Z",
+        "Last Purchase Date": "2024-05-18"
+      }
+    ],
+    "status": "complete",
+    "results": [
+      {
+        "bytes": 125,
+        "database": "Prototype",
+        "duration": 3.0252435207366943,
+        "message": "CREATE TABLE (29.0 rows, 3.7 KiB processed)",
+        "rows": 29,
+        "schema": "shop",
+        "table": "loyalty",
+        "url": "http://localhost:3000/examplePromptsCSV/example4.csv"
+      }
+    ]
+  }
+]
