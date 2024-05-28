@@ -4,7 +4,6 @@ import { NextResponse } from "next/server";
 
 export async function GET(req: any, res: any) {
   try {
-
     // Path to your JSON files (replace with your actual paths)
     const filePathRetriever = join(
       process.cwd(),
@@ -13,6 +12,12 @@ export async function GET(req: any, res: any) {
       "ApiData",
       "retriever.json"
     );
+    const filePathDummyRetriever = join(
+      process.cwd(),
+      "src",
+      "utils",
+      "dummyRetrievers.json"
+    );
     const filePathPulls = join(
       process.cwd(),
       "src",
@@ -20,8 +25,16 @@ export async function GET(req: any, res: any) {
       "ApiData",
       "pulls.json" // Assuming this is a different file
     );
+    const dummyRetrieverContent = await fsPromises.readFile(
+      filePathDummyRetriever,
+      "utf8"
+    );
     // Write the updated data back to the JSON files
-    await fsPromises.writeFile(filePathRetriever, JSON.stringify([]), "utf8");
+    await fsPromises.writeFile(
+      filePathRetriever,
+      dummyRetrieverContent,
+      "utf8"
+    );
     await fsPromises.writeFile(filePathPulls, JSON.stringify([]), "utf8");
 
     // Send a successful response
