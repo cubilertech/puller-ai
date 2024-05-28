@@ -46,26 +46,26 @@ export async function POST(req: NextRequest) {
   // }
 
   try {
-    const fileRecords = [];
+    const fileRecords: any = [];
 
-    for (let i = 0; i < filesData.length; i++) {
-      const fileData = filesData[i];
-      const image = formData.get(`image${i}`) as File;
+    // for (let i = 0; i < filesData.length; i++) {
+    //   const fileData = filesData[i];
+    //   const image = formData.get(`image${i}`) as File;
 
-      const buffer = Buffer.from(await image.arrayBuffer());
-      const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-      const filename = `${image.name.replace(
-        /\.[^/.]+$/,
-        ""
-      )}-${uniqueSuffix}.${mime.getExtension(image.type)}`;
-      await writeFile(`${uploadDir}/${filename}`, buffer);
-      const fileUrl = `${uploadDir}/${filename}`;
+    //   const buffer = Buffer.from(await image.arrayBuffer());
+    //   const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+    //   const filename = `${image.name.replace(
+    //     /\.[^/.]+$/,
+    //     ""
+    //   )}-${uniqueSuffix}.${mime.getExtension(image.type)}`;
+    //   await writeFile(`${uploadDir}/${filename}`, buffer);
+    //   const fileUrl = `${uploadDir}/${filename}`;
 
-      fileRecords.push({
-        image: fileUrl,
-        description: fileData.description,
-      });
-    }
+    //   fileRecords.push({
+    //     image: fileUrl,
+    //     description: fileData.description,
+    //   });
+    // }
 
     // Get the absolute path to the data.json file
     const filePath = join(
