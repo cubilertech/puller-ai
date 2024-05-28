@@ -112,7 +112,7 @@ const LoginPage = () => {
                   </Typography>
                 ) : null}
               </Box>
-              {/* <Box sx={{ mt: 1 }}>
+              <Box sx={{ mt: 1 }}>
                 <Typography variant="text-sm-medium">Email</Typography>
                 <Input
                   disableUnderline
@@ -131,7 +131,7 @@ const LoginPage = () => {
                 {formik.errors.email && formik.touched.email ? (
                   <Typography color="error">{formik.errors.email}</Typography>
                 ) : null}
-              </Box> */}
+              </Box>
               <Box sx={{ mt: 1 }}>
                 <Typography variant="text-sm-medium">Password</Typography>
                 <Input
@@ -201,7 +201,7 @@ const LoginPage = () => {
                   onClick={handleButtonClick}
                 />
               </Box>
-              <Box
+              {/* <Box
                 sx={{
                   display: "flex",
                   alignItems: "flex-start",
@@ -223,7 +223,7 @@ const LoginPage = () => {
               </Box>
               <Box sx={{ width: "100%" }}>
                 <CustomButton variant="google-login" text="Login with Google" />
-              </Box>
+              </Box> */}
               <Box
                 sx={{
                   textAlign: "center",

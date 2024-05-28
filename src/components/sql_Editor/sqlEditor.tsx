@@ -77,7 +77,7 @@ const SQL_Editor: FC<SQL_EditorProps> = ({ handleClose, code }) => {
         sx={{
           width: "100%",
           mt: 1,
-          height: "calc(100vh  - 394px)",
+          height: "calc(100vh  - 354px)",
         }}
       >
         {/* Display formatted code with line numbers   */}
