@@ -129,7 +129,6 @@ export const useCreateRetriever = () => {
       formData.append("status", data.status);
       formData.append("timestamp", data.timestamp.toString());
 
-      console.log(data, formData, "payload");
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
       const res = await axios({
         url: `${backendUrl}/v0/retriever`,

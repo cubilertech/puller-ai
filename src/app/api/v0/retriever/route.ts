@@ -24,33 +24,26 @@ export async function POST(req: NextRequest) {
   const timestamp = formData.get("timestamp") as string;
   const filesData = JSON.parse(formData.get("files") as string); // Parsing the stringified files data
 
-  const relativeUploadDir = `/uploads/${new Date(Date.now())
-    .toLocaleDateString("id-ID", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    })
-    .replace(/\//g, "-")}`;
+ 
+  const uploadDir = join(process.cwd(), "public");
 
-  const uploadDir = join(process.cwd(), "public", relativeUploadDir);
-
-  try {
-    await stat(uploadDir);
-  } catch (e: any) {
-    if (e.code === "ENOENT") {
-      // This is for checking if the directory exists (ENOENT : Error No Entry)
-      await mkdir(uploadDir, { recursive: true });
-    } else {
-      console.error(
-        "Error while trying to create directory when uploading a file\n",
-        e
-      );
-      return NextResponse.json(
-        { error: "Something went wrong." },
-        { status: 500 }
-      );
-    }
-  }
+  // try {
+  //   await stat(uploadDir);
+  // } catch (e: any) {
+  //   if (e.code === "ENOENT") {
+  //     // This is for checking if the directory exists (ENOENT : Error No Entry)
+  //     await mkdir(uploadDir, { recursive: true });
+  //   } else {
+  //     console.error(
+  //       "Error while trying to create directory when uploading a file\n",
+  //       e
+  //     );
+  //     return NextResponse.json(
+  //       { error: "Something went wrong." },
+  //       { status: 500 }
+  //     );
+  //   }
+  // }
 
   try {
     const fileRecords = [];
@@ -66,7 +59,7 @@ export async function POST(req: NextRequest) {
         ""
       )}-${uniqueSuffix}.${mime.getExtension(image.type)}`;
       await writeFile(`${uploadDir}/${filename}`, buffer);
-      const fileUrl = `${relativeUploadDir}/${filename}`;
+      const fileUrl = `${uploadDir}/${filename}`;
 
       fileRecords.push({
         image: fileUrl,
