@@ -14,15 +14,24 @@ interface TableHeadProps {
 
 const TableHead: FC<TableHeadProps> = ({ columns }) => {
   return (
-    <MuiTableHead>
+    <MuiTableHead sx={{ bgcolor: "transparent", bg: "transparent" }}>
       <TableRow>
         {columns?.map((column) => (
-          <TableCell key={column} sx={{ border: "none" }}>
+          <TableCell
+            key={column}
+            sx={{
+              border: "none",
+              backgroundColor: "#2a3a4b",
+              borderRadius: "10px",
+            }}
+          >
             <Box
               sx={{
                 display: "flex",
                 justifyContent: "flex-start",
                 gap: "10px",
+                fontWeight: "bold",
+                // color={"#32384e"}
               }}
             >
               {column} <Icon icon="arrowDown" width={12} height={12} />

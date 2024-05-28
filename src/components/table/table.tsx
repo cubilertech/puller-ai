@@ -60,8 +60,16 @@ const DataTable: FC<DataTableProps> = ({ data }) => {
       }}
     >
       {data && data.rows?.length ? (
-        <TableContainer>
-          <Table>
+        <TableContainer
+          sx={{
+            maxHeight: "calc(100vh - 270px)", // Adjust height based on your needs
+            overflowY: "auto",
+            scrollbarWidth: "none", // Enable vertical scrolling
+          }}
+        >
+          <Table stickyHeader sx={{".MuiTable-stickyHeader": {
+              bgcolor: "transparent"
+            }}}>
             <TableHead columns={data?.columns as string[]} />
             <TableBody>
               {data?.rows
@@ -141,8 +149,8 @@ const DataTable: FC<DataTableProps> = ({ data }) => {
           </Box>
           <Typography variant="text-xs-medium" color={"#C8C8C8"}>
             Showing {page * rowsPerPage + 1} to{" "}
-            {Math.min((page + 1) * rowsPerPage, (data?.rows?.length ?? 0))} of{" "}
-            {(data?.rows?.length ?? 0)} entries
+            {Math.min((page + 1) * rowsPerPage, data?.rows?.length ?? 0)} of{" "}
+            {data?.rows?.length ?? 0} entries
           </Typography>
         </Box>
 
