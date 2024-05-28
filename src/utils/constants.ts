@@ -48,6 +48,7 @@ export const icons = {
   roundCheckbox: "/Images/Icons/round-check-box.svg",
   topbarIcon: "/Images/Icons/topbar-icon.svg",
   alertLoader: "/Images/alert-loader.gif",
+  googleLogo: "/Images/logos/google.svg",
 };
 
 export const PagesType = {

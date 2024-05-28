@@ -184,6 +184,12 @@ const CustomButton: FC<buttonProps> = ({
           <Typography variant="text-sm-semibold">{text}</Typography>
         </Box>
       );
+      case "google-login":
+        return (
+          <Button variant="contained" sx={{bg: "white !important", bgcolor: "white", color: "black"}} fullWidth size="large">
+           <Typography variant="text-md-bold" sx={{display: "flex",gap: 1}}><Icon icon="googleLogo" /> {text}</Typography>
+          </Button>
+        );
   }
 };
 

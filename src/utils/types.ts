@@ -78,7 +78,8 @@ export type CustomButtonVariants =
   | "rounded-SQL"
   | "smallbutton"
   | "round"
-  | "request-history";
+  | "request-history"
+  | "google-login";
 
 export type ButtonVariants = "outlined" | "contained" | "text";
 
