@@ -4,7 +4,7 @@ import { Button } from "../Button";
 import { Icon } from "../Icon";
 import { FC } from "react";
 import { CustomInput } from "@/modules/PannelArea/input";
-import { isPilotMode } from "@/utils/constants";
+import { isDemoMode, isPilotMode } from "@/utils/constants";
 import { Tooltip } from "../Tooltip";
 import { Divider } from "../Divider";
 
@@ -123,32 +123,34 @@ const InputAreaComponent: FC<InputAreaComponentPorps> = ({
               </Box>
             </Box>
           ) : ( */}
-          <Tooltip
-            variant="info"
-            title={
-              isPilotMode
-                ? "This Feature is not available in Private Beta"
-                : ""
-            }
-          >
-            <Box width={163}>
-              <Button
-                size="medium"
-                variant="outlined"
-                label="Manage Sources"
-                disabled={isPilotMode ? true : isLoading}
-                fullWidth
-                endIcon={
-                  <Icon
-                    icon="minus"
-                    height={2}
-                    width={8}
-                    disabled={isPilotMode ? true : isLoading}
-                  />
-                }
-              />
-            </Box>
-          </Tooltip>
+          {isPilotMode ? (
+            <Tooltip
+              variant="info"
+              title={
+                isPilotMode
+                  ? "This Feature is not available in Private Beta"
+                  : ""
+              }
+            >
+              <Box width={163}>
+                <Button
+                  size="medium"
+                  variant="outlined"
+                  label="Manage Sources"
+                  disabled={isPilotMode ? true : isLoading}
+                  fullWidth
+                  endIcon={
+                    <Icon
+                      icon="minus"
+                      height={2}
+                      width={8}
+                      disabled={isPilotMode ? true : isLoading}
+                    />
+                  }
+                />
+              </Box>
+            </Tooltip>
+          ): <Box></Box>}
           {/* )} */}
 
           {isLoading ? (
