@@ -220,7 +220,7 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
                 )}
               </Box>
             )}
-            <table>
+            {/* <table>
               <thead><tr>{prompt?.columns?.map((data)=><th style={{border:'1px solid red'}}>{data}</th>)}</tr></thead>
               <tbody>
                 {prompt?.rows?.map((row)=>
@@ -229,7 +229,7 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
                 </tr>
               )}
               </tbody>
-            </table>
+            </table> */}
           </Box>
         </motion.div>
       )}

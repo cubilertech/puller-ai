@@ -10,13 +10,13 @@ import { Loader } from "@/components/Loader";
 import { Prompt } from "@/utils/types";
 
 interface PreviewDataPageProps {
-  id: string;
+  id?: string;
 }
 
 const PreviewDataPage: FC<PreviewDataPageProps> = ({ id }) => {
   const [fadeIn, setFadeIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const { data: PromptData, refetch: refetchSignleExecute } = useGetSinglePrompt(id);
+  const { data: PromptData, refetch: refetchSignleExecute } = useGetSinglePrompt(id as string);
   useEffect(() => {
     if (PromptData && PromptData?.status === "complete") {
       setIsLoading(false);
