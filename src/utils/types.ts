@@ -9,6 +9,7 @@ export interface ActiveTypeProps {
 }
 
 export interface CardData {
+  id: string;
   main_title: string;
   main_discription: string;
   fileType: string;
@@ -19,8 +20,8 @@ export interface CardData {
   fileCaveatsURL: string;
   sources: string;
   title: string;
-  discription: string;
-  fileLink: string;
+  observations?: string;
+  fileLink?: string;
 }
 
 export interface UserProps {
@@ -77,7 +78,8 @@ export type CustomButtonVariants =
   | "rounded-SQL"
   | "smallbutton"
   | "round"
-  | "request-history";
+  | "request-history"
+  | "google-login";
 
 export type ButtonVariants = "outlined" | "contained" | "text";
 
@@ -140,7 +142,17 @@ export interface Prompt {
   target: string;
   variables: Variable[];
   query?: string;
+  observations?: string;
+  notes?: Array<string>;
+  columns?: Array<string>;
+  rows?: Array<any>;
+  results?: any[];
+  status?: string;
 }
+
+export type PromptsList = {
+  [key: string]: Prompt;
+};
 
 export interface submitExecutePayload {
   prompt: string;
@@ -208,6 +220,7 @@ export type Retriever = {
   status: string;
   title: string;
   description: string;
+  timestamp: number;
   files: [
     {
       description: string;
@@ -238,4 +251,5 @@ export interface createRetrieverPayload {
   title: string;
   files: Files[];
   description: string;
+  timestamp: number;
 }

@@ -6,7 +6,7 @@ import { ButtonTextTransforms } from "@/utils/types";
 interface ButtonProps {
   size?: "small" | "medium" | "large";
   label?: string;
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void | undefined;
+  onClick?: (() => void) | ((event: React.MouseEvent<HTMLButtonElement>) => void | undefined);
   variant: "contained" | "outlined" | "text";
   disabled?: boolean;
   fullWidth?: boolean;

@@ -1,3 +1,4 @@
+import { setSubmitValidateLoading } from "@/libs/redux/features/globalLoadings";
 import { UpdateIsLoadingRequest } from "@/libs/redux/features/isLoadingRequest";
 import { useAppDispatch } from "@/libs/redux/hooks";
 import { getBackendURL } from "@/utils/common";
@@ -32,7 +33,10 @@ export const useSubmitValidate = () => {
   return useMutation({
     mutationFn: submit,
     onSuccess: (data) => {
-      dispatch(UpdateIsLoadingRequest(false));
+      // dispatch(UpdateIsLoadingRequest(false));
+      setTimeout(()=>{
+        dispatch(setSubmitValidateLoading(false));
+      },500);
       toast.success('Variables updated successfully.');
       
     },

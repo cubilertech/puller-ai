@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import {
   Box,
   Menu,
@@ -12,20 +12,29 @@ import {
   Typography,
 } from "@mui/material";
 import { Button } from "../Button";
-import { ArrowUpward } from "@mui/icons-material";
+import {
+  ArrowUpward,
+  KeyboardArrowDown,
+  KeyboardArrowUp,
+} from "@mui/icons-material";
 import { Icon } from "../Icon";
 import { TableHead } from "../TableHead";
 import { TABLEDATA } from "@/utils/constants";
+import { Prompt } from "@/utils/types";
+import { palette } from "@/theme/Palette";
 
-const DataTable = () => {
+interface DataTableProps {
+  data: Prompt;
+}
+
+const DataTable: FC<DataTableProps> = ({ data }) => {
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(13);
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const [activePage, setActivePage] = useState<number>(0);
-  const totalPages = Math.ceil(TABLEDATA.length / rowsPerPage);
-
+  const totalPages = Math.ceil((data?.rows?.length || 0) / rowsPerPage);
   const handlePageChange = (page: number) => {
     setActivePage(page);
     setPage(page);
@@ -50,56 +59,47 @@ const DataTable = () => {
         scrollbarWidth: "none",
       }}
     >
-      <TableContainer>
-        <Table>
-          <TableHead />
-          <TableBody>
-            {TABLEDATA.slice(
-              page * rowsPerPage,
-              page * rowsPerPage + rowsPerPage
-            ).map((item) => (
-              <TableRow key={item.id}>
-                <TableCell
-                  sx={{
-                    border: "none",
-                  }}
-                >
-                  {item.id}
-                </TableCell>
-                <TableCell
-                  sx={{
-                    border: "none",
-                  }}
-                >
-                  {item.email}
-                </TableCell>
-                <TableCell
-                  sx={{
-                    border: "none",
-                  }}
-                >
-                  {item.lastInteract}
-                </TableCell>
-                <TableCell
-                  sx={{
-                    border: "none",
-                  }}
-                >
-                  {item.timestamp}
-                </TableCell>
-                <TableCell
-                  sx={{
-                    border: "none",
-                  }}
-                >
-                  {item.totalTxns}
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-
+      {data && data.rows?.length ? (
+        <TableContainer
+          sx={{
+            maxHeight: "calc(100vh - 270px)", // Adjust height based on your needs
+            overflowY: "auto",
+            scrollbarWidth: "none", // Enable vertical scrolling
+          }}
+        >
+          <Table stickyHeader sx={{".MuiTable-stickyHeader": {
+              bgcolor: "transparent"
+            }}}>
+            <TableHead columns={data?.columns as string[]} />
+            <TableBody>
+              {data?.rows
+                ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+                .map((row, rowIndex) => (
+                  <TableRow key={rowIndex}>
+                    {data.columns?.map((column, colIndex) => (
+                      <TableCell key={colIndex} sx={{ border: "none" }}>
+                        {row[column as keyof typeof row]}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      ) : (
+        <Typography
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            width: "100%",
+            height: "100%",
+            color: palette.color.gray[500],
+          }}
+        >
+          no Table Data Found
+        </Typography>
+      )}
       <Box
         sx={{
           display: "flex",
@@ -119,7 +119,7 @@ const DataTable = () => {
             <>
               <Button
                 onClick={handleButtonClick}
-                endIcon={<ArrowUpward />}
+                endIcon={<KeyboardArrowUp />}
                 variant="outlined"
                 size="small"
               >
@@ -149,8 +149,8 @@ const DataTable = () => {
           </Box>
           <Typography variant="text-xs-medium" color={"#C8C8C8"}>
             Showing {page * rowsPerPage + 1} to{" "}
-            {Math.min((page + 1) * rowsPerPage, TABLEDATA.length)} of{" "}
-            {TABLEDATA.length} entries
+            {Math.min((page + 1) * rowsPerPage, data?.rows?.length ?? 0)} of{" "}
+            {data?.rows?.length ?? 0} entries
           </Typography>
         </Box>
 
@@ -206,13 +206,15 @@ const DataTable = () => {
             onClick={() => handlePageChange(page + 1)}
             label=""
             variant="text"
-            disabled={page === Math.ceil(TABLEDATA.length / rowsPerPage) - 1}
+            disabled={
+              page === Math.ceil((data?.rows?.length ?? 0) / rowsPerPage) - 1
+            }
             sx={{
               minWidth: 32,
               width: "32px !important ",
               height: "32px !important ",
               border:
-                page === Math.ceil(TABLEDATA.length / rowsPerPage) - 1
+                page === Math.ceil((data?.rows?.length ?? 0) / rowsPerPage) - 1
                   ? "1px solid rgba(225,225,225,0.4)"
                   : "1px solid white",
               ":hover": {
@@ -223,7 +225,9 @@ const DataTable = () => {
           >
             <Icon
               icon="paginationRight"
-              disabled={page === Math.ceil(TABLEDATA.length / rowsPerPage) - 1}
+              disabled={
+                page === Math.ceil((data?.rows?.length ?? 0) / rowsPerPage) - 1
+              }
             />
           </Button>
         </Box>

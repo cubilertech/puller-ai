@@ -37,8 +37,7 @@ const RecentRequestPage: FC = () => {
           <CustomLink href="/request/preview" key={index}>
             <RequestsCard
               key={index}
-              title={item.title}
-              discription={item.discription}
+              text={item}
             />
           </CustomLink>
         ))}

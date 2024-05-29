@@ -23,7 +23,7 @@ const Summary: FC<Summary> = ({ heading, description }) => {
         whiteSpace: "pre-wrap",
       }}
     >
-      <Typography variant="text-md-semibold"> {heading} </Typography>
+      <Typography variant="text-lg-semibold"> {heading} </Typography>
       <br />
       <Typography
         sx={{
@@ -32,7 +32,7 @@ const Summary: FC<Summary> = ({ heading, description }) => {
           fontFamily: "Inter",
         }}
         component={"pre"}
-        variant="text-xxs-regular"
+        variant="text-sm-regular"
       >
         {description}
       </Typography>

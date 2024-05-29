@@ -8,7 +8,7 @@ import CustomLink from "../Link/link";
 import NotificationIconButton from "@/common/notificationIconButton/notificationIconButton";
 import CustomButton from "@/common/CustomButtons/CustomButtons";
 import { AlertModal } from "@/modals/AlertModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const TopNavBar = () => {
   const route = usePathname();
@@ -20,13 +20,20 @@ const TopNavBar = () => {
     routeParts.includes("preview") ||
     routeParts.includes("connect") ||
     routeParts.includes("recent") ||
-    routeParts.includes("retriever-detail");
+    routeParts.includes("retriever-detail") ||
+    routeParts.includes("results");
 
   const handleClickAlerts = () => {
     if (isPilotMode) {
       setIsOpenAlert(true);
     }
   };
+  useEffect(() => {
+    const companyName = localStorage.getItem("companyName");
+    if (!companyName) {
+      router.push("/");
+    }
+  }, []);
 
   return (
     <>
@@ -41,7 +48,7 @@ const TopNavBar = () => {
           bgcolor: palette.opacity.lightBlue,
         }}
       >
-        <Box sx={{ ml: 4 }}>
+        <Box>
           {isBack ? (
             <Box onClick={() => router.back()}>
               <Typography

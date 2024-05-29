@@ -20,9 +20,7 @@ const UploadRetrieverPage = () => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenAlert, setIsOpenAlert] = useState(false);
-  const [fileData, setFileData] = useState<
-    Files[]
-  >([]);
+  const [fileData, setFileData] = useState<Files[]>([]);
   const [name, setName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const fileInputRef = useRef<HTMLInputElement | null>(null);
@@ -80,6 +78,7 @@ const UploadRetrieverPage = () => {
           status: StatusTypes.needPermissions,
           files: fileData,
           description: description,
+          timestamp: Date.now(),
         });
         console.log(
           fileData,
@@ -154,8 +153,8 @@ const UploadRetrieverPage = () => {
                   }}
                 />
               </Box>
-                 {/* Description Label & Input */}
-                 <Box
+              {/* Description Label & Input */}
+              <Box
                 display={"flex"}
                 flexDirection={"column"}
                 alignItems={"flex-start"}

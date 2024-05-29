@@ -1,10 +1,9 @@
-import AppLayout from "@/common/appLayout/appLayout";
-import CreateRequestPage from "@/modules/CreateRequestPage/CreateRequestPage";
+import { LoginPage } from "@/modules/LoginPage";
 
 export default function Home() {
   return (
-    <AppLayout>
-      <CreateRequestPage />
-    </AppLayout>
+    <>
+      <LoginPage />
+    </>
   );
 }
