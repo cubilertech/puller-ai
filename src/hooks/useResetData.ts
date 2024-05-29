@@ -9,7 +9,7 @@ export const useResetData = () => {
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
       const res = await axios({
         url: `${backendUrl}/reset`,
-        method: "get",
+        method: "put",
       
       });
       if (res.status === 200) {

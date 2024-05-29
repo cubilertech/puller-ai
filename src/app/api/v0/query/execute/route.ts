@@ -2,10 +2,12 @@ import { generateRandom10DigitNumber } from "@/utils/common";
 import { NextResponse } from "next/server";
 import path from "path";
 import fs from "fs";
-import executesList from "@/utils/ApiData/executes.json";
+import clientPromise from "@/libs/mongodb/connection";
 
 export async function POST(req: any, res: any) {
   try {
+    const client = await clientPromise;
+    const db = client.db("demo_mode");
     const id = generateRandom10DigitNumber();
     const payload = {
       id: `run#${id}`,
@@ -53,19 +55,7 @@ export async function POST(req: any, res: any) {
       ],
       status: "complete",
     };
-    // Get the absolute path to the data.json file
-    const filePath = path.join(
-      process.cwd(),
-      "src",
-      "utils",
-      "ApiData",
-      "executes.json"
-    );
-    // Read the JSON file
-    const list = JSON.parse(fs.readFileSync(filePath, "utf8"));
-    list.push(payload);
-    // Write the updated data back to the JSON file
-    fs.writeFileSync(filePath, JSON.stringify(list, null, 2), "utf8");
+    await db.collection('executes').insertOne(payload);
     return NextResponse.json(payload);
   } catch (error) {
     console.error(error);
@@ -80,6 +70,9 @@ export async function POST(req: any, res: any) {
 
 export async function GET(req: any, res: any) {
   try {
+    const client = await clientPromise;
+    const db = client.db("demo_mode");
+    const executesList = await db.collection("executes").find({}).toArray();
     return NextResponse.json(executesList);
   } catch (error) {
     console.error(error);

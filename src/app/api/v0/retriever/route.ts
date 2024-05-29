@@ -1,12 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
-import retrieversList from "@/utils/ApiData/retriever.json";
-import path, { join } from "path";
-import { mkdir, stat, writeFile } from "fs/promises";
 import mime from "mime";
-import { promises as fsPromises } from "fs";
+import clientPromise from "@/libs/mongodb/connection";
 
 export async function GET(req: any, res: any) {
   try {
+    const client = await clientPromise;
+    const db = client.db("demo_mode");
+    const retrieversList = await db.collection("retrievers").find({}).toArray();
     return NextResponse.json(retrieversList);
   } catch (error) {
     console.error(error);
@@ -24,8 +24,7 @@ export async function POST(req: NextRequest) {
   const timestamp = formData.get("timestamp") as string;
   const filesData = JSON.parse(formData.get("files") as string); // Parsing the stringified files data
 
- 
-  const uploadDir = join(process.cwd(), "public");
+  // const uploadDir = join(process.cwd(), "public");
 
   // try {
   //   await stat(uploadDir);
@@ -46,38 +45,30 @@ export async function POST(req: NextRequest) {
   // }
 
   try {
+    const client = await clientPromise;
+    const db = client.db("demo_mode");
     const fileRecords: any = [];
 
-    // for (let i = 0; i < filesData.length; i++) {
-    //   const fileData = filesData[i];
-    //   const image = formData.get(`image${i}`) as File;
+    for (let i = 0; i < filesData.length; i++) {
+      const fileData = filesData[i];
+      const image = formData.get(`image${i}`) as File;
 
-    //   const buffer = Buffer.from(await image.arrayBuffer());
-    //   const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-    //   const filename = `${image.name.replace(
-    //     /\.[^/.]+$/,
-    //     ""
-    //   )}-${uniqueSuffix}.${mime.getExtension(image.type)}`;
-    //   await writeFile(`${uploadDir}/${filename}`, buffer);
-    //   const fileUrl = `${uploadDir}/${filename}`;
+      // const buffer = Buffer.from(await image.arrayBuffer());
+      const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+      const filename = `${image.name.replace(
+        /\.[^/.]+$/,
+        ""
+      )}-${uniqueSuffix}.${mime.getExtension(image.type)}`;
+      // await writeFile(`${uploadDir}/${filename}`, buffer);
+      // const fileUrl = `${uploadDir}/${filename}`;
 
-    //   fileRecords.push({
-    //     image: fileUrl,
-    //     description: fileData.description,
-    //   });
-    // }
+      fileRecords.push({
+        image: filename,
+        description: fileData.description,
+      });
+    }
 
-    // Get the absolute path to the data.json file
-    const filePath = join(
-      process.cwd(),
-      "src",
-      "utils",
-      "ApiData",
-      "retriever.json"
-    );
-    // Read the JSON file
-    const list = JSON.parse(await fsPromises.readFile(filePath, "utf8"));
-    list.push({
+    const result = await db.collection("retrievers").insertOne({
       icon: "dataRoom",
       status: status ?? "live",
       title,
@@ -85,10 +76,8 @@ export async function POST(req: NextRequest) {
       description: description,
       timestamp: timestamp,
     });
-    // Write the updated data back to the JSON file
-    await fsPromises.writeFile(filePath, JSON.stringify(list, null, 2), "utf8");
 
-    return NextResponse.json(list);
+    return NextResponse.json(result);
   } catch (e) {
     console.error("Error while trying to upload a file\n", e);
     return NextResponse.json(
