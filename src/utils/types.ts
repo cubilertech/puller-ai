@@ -196,7 +196,10 @@ export interface Variable {
   model: string;
   name: string;
   type: string;
-  value: number;
+  value: number | string;
+  detail?: string;
+  discription?: string;
+  selectData?: string[];
   a?: string;
   c?: string;
   e?: string;
@@ -252,4 +255,9 @@ export interface createRetrieverPayload {
   files: Files[];
   description: string;
   timestamp: number;
+}
+
+export interface UpdateVariables {
+  type: string;
+  id: string;
 }

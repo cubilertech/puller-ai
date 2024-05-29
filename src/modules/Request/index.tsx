@@ -12,7 +12,12 @@ import {
 import { palette } from "@/theme/Palette";
 import { SQL_Editor } from "@/components/sql_Editor";
 import { useSubmitValidate } from "@/hooks/useValidate";
-import { Prompt } from "@/utils/types";
+import {
+  OptionsBarVariants,
+  Prompt,
+  UpdateVariables,
+  Variable,
+} from "@/utils/types";
 import { ResponseArea } from "@/components/ResponseArea";
 import { QueryComponent } from "@/components/QuaryComponent";
 import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
@@ -33,7 +38,10 @@ import {
   setLoadingText,
   setSubmitExecuteLoading,
   setSubmitPromptLoading,
+  setSubmitValidateLoading,
 } from "@/libs/redux/features/globalLoadings";
+import { getVariables, setVariables } from "@/libs/redux/features/variables";
+import { OptionsBar } from "@/components/optionsBar";
 
 const SkeletonLoader = () => {
   return (
@@ -71,18 +79,22 @@ const RequestPage: FC = () => {
   const [CurrentType, setCurrentType] = useState<"text" | "graph" | "SQL">(
     "text"
   );
+  const [VariableId, setVariableId] = useState<string>("");
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState("");
   const searchParams = useSearchParams();
   const id = searchParams.get("id");
   const router = useRouter();
-  const CurrentPage = useAppSelector(getCurrentPage);
+  const variables = useAppSelector(getVariables);
+  // const CurrentPage = useAppSelector(getCurrentPage);
   const consoleMessage = useAppSelector(getLoadingText);
   const submitPromptLoading = useAppSelector(getSubmitPromptLoading);
   const submitExecuteLoading = useAppSelector(getSubmitExecuteLoading);
   const submitValidateLoading = useAppSelector(getSubmitValidateLoading);
   const [isOpenSelectBar, setIsOpenSelectBar] = useState(false);
+  const [SelectBarVarient, setSelectBarVarient] =
+    useState<OptionsBarVariants | null>(null);
   const {
     mutate: submitExecute,
     isLoading: isLoadingExecute,
@@ -130,7 +142,11 @@ const RequestPage: FC = () => {
       dispatch(setSubmitExecuteLoading(true));
     }
   };
+
   const prompt = useMemo(() => {
+    if (submitValidateSuccess) {
+      dispatch(setSubmitValidateLoading(false));
+    }
     if (submitValidateSuccess && validatedPrompt) {
       return validatedPrompt;
     } else {
@@ -140,7 +156,31 @@ const RequestPage: FC = () => {
   const handleOpenGraph = () => {
     setCurrentType("graph");
   };
+  const UpdateVariables = () => {
+    if (prompt?.id) {
+      submitValidate({ prompt: prompt?.id, variables: variables });
+      dispatch(setSubmitValidateLoading(true));
+    }
+  };
+  console.log(SelectBarVarient, "SelectBarVarient");
 
+  const handleUpdateVariable = (value?: UpdateVariables) => {
+    if (value) {
+      console.log("Updated value:", value);
+      // Add your logic here to handle the updated value
+      setVariableId(value.id);
+      setIsOpenSelectBar(true);
+      if (value.type === "numeric" || value.type === "String") {
+        setSelectBarVarient("input");
+      } else if (value.type === "select_single") {
+        setSelectBarVarient("round-checkbox");
+      } else {
+        setSelectBarVarient(null);
+      }
+    }
+    dispatch(setVariables(prompt?.variables as Variable[]));
+    console.log(SelectBarVarient, "SelectBarVarient");
+  };
   const handleOpenSQL_Editor = () => {
     setCurrentType("SQL");
   };
@@ -149,6 +189,7 @@ const RequestPage: FC = () => {
   };
   const handleCloseSelectBar = () => {
     setIsOpenSelectBar(false);
+    setSelectBarVarient(null);
   };
   // const handleOpenSelectBar = () => {
   //   setIsOpenSelectBar(true);
@@ -254,57 +295,43 @@ const RequestPage: FC = () => {
                 },
               ]}
             />
-            {submitValidateLoading ? (
-              <Box
-                sx={{
-                  display: "flex",
-                  width: isOpenSelectBar
-                    ? { lg: "76%", md: "70%", xs: "60%" }
-                    : "100%",
-                  height: "calc(100vh - 156px)",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                  overflowX: "hidden",
-                  transition: "width 0.5s ease",
-                  mt: 1,
-                }}
-              >
-                <ResponseArea isLoading={submitValidateLoading} />
+            <Box
+              sx={{ display: "flex", gap: 0.5, width: "100%", height: "100%" }}
+            >
+              {submitValidateLoading ? (
+                <Box
+                  sx={{
+                    display: "flex",
+                    width: isOpenSelectBar
+                      ? { lg: "76%", md: "70%", xs: "60%" }
+                      : "100%",
+                    height: "calc(100vh - 156px)",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                    overflowX: "hidden",
+                    transition: "width 0.5s ease",
+                    mt: 1,
+                  }}
+                >
+                  <ResponseArea isLoading={submitValidateLoading} />
 
-                <QueryComponent isLoading={submitValidateLoading} />
-              </Box>
-            ) : (
-              <Box
-                sx={{
-                  height: "calc(100vh - 150px)",
-                  width: "100%",
-                  m: "auto",
-                  pt: 2,
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                }}
-              >
-                {CurrentType === "SQL" ? (
-                  <Box
-                    sx={{
-                      margin: 0,
-                      width: "100%",
-                      borderRadius: "10px",
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
-                      animation: "fallingEffect 0.8s ease forwards",
-                      position: "relative",
-                      zIndex: 10,
-                      opacity: 1,
-                      mb: 2,
-                    }}
-                  >
-                    <SQL_Editor code={prompt?.sql ?? "Select * from test;"} />
-                  </Box>
-                ) : CurrentType === "graph" ? (
-                  prompt && (
+                  <QueryComponent isLoading={submitValidateLoading} />
+                </Box>
+              ) : (
+                <Box
+                  sx={{
+                    height: "calc(100vh - 150px)",
+                    width: isOpenSelectBar
+                      ? { lg: "76%", md: "70%", xs: "60%" }
+                      : "100%",
+                    m: "auto",
+                    pt: 2,
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "space-between",
+                  }}
+                >
+                  {CurrentType === "SQL" ? (
                     <Box
                       sx={{
                         margin: 0,
@@ -313,40 +340,76 @@ const RequestPage: FC = () => {
                         display: "flex",
                         justifyContent: "center",
                         alignItems: "center",
-                        animation: "fallingEffect2 0.8s ease forwards",
+                        animation: "fallingEffect 0.8s ease forwards",
                         position: "relative",
                         zIndex: 10,
                         opacity: 1,
-                        mb: 3,
+                        mb: 2,
                       }}
                     >
-                      <GraphModal2
+                      <SQL_Editor code={prompt?.sql ?? "Select * from test;"} />
+                    </Box>
+                  ) : CurrentType === "graph" ? (
+                    prompt && (
+                      <Box
+                        sx={{
+                          margin: 0,
+                          width: "100%",
+                          borderRadius: "10px",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          animation: "fallingEffect2 0.8s ease forwards",
+                          position: "relative",
+                          zIndex: 10,
+                          opacity: 1,
+                          mb: 3,
+                        }}
+                      >
+                        <GraphModal2
+                          prompt={prompt as Prompt}
+                          validatePrompt={submitValidate}
+                        />
+                      </Box>
+                    )
+                  ) : (
+                    <Box
+                      sx={{
+                        width: "100%",
+                      }}
+                    >
+                      <ResponseArea
                         prompt={prompt as Prompt}
-                        validatePrompt={submitValidate}
+                        handleUpdate={handleUpdateVariable}
+                        isLoading={singlePromptLoading}
                       />
                     </Box>
-                  )
-                ) : (
-                  <Box
-                    sx={{
-                      width: "100%",
-                    }}
-                  >
-                    <ResponseArea
-                      content={content}
-                      // handleUpdate={handleUpdate ? () => handleUpdate() : undefined}
-                      isLoading={singlePromptLoading}
-                    />
-                  </Box>
-                )}
+                  )}
 
-                <QueryComponent
-                  content={content}
-                  isLoading={submitExecuteLoading}
-                  handleUpdate={handleUpdate}
-                />
-              </Box>
-            )}
+                  <QueryComponent
+                    content={content}
+                    isLoading={submitExecuteLoading}
+                    handleUpdate={handleUpdate}
+                  />
+                </Box>
+              )}
+              {isOpenSelectBar && (
+                <Box
+                  sx={{
+                    height: "calc(100vh - 160px)",
+                    mt: 1,
+                    width: "calc(100vw - 79vw)",
+                  }}
+                >
+                  <OptionsBar
+                    handleUpdate={UpdateVariables}
+                    variant={SelectBarVarient as OptionsBarVariants}
+                    variableId={VariableId}
+                    close={handleCloseSelectBar}
+                  />
+                </Box>
+              )}
+            </Box>
           </Box>
         </motion.div>
       ) : !id &&
