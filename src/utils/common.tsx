@@ -245,11 +245,7 @@ export const replaceIdWithVariableInDiscription = (
                   type: variable.type,
                   id: placeholder,
                 };
-                const replacement = (
-                  <span key={i}>
-                    {value}
-                  </span>
-                );
+                const replacement = <span key={i}>{value}</span>;
                 return [...acc, replacement, text];
               },
               [] as Array<string | JSX.Element>
@@ -271,8 +267,133 @@ export const UpdateData = (variables: Variable[], prompt: string) => {
   switch (prompt) {
     case "query#1234567891": {
       const SQl_Discriptipn = {
-        description: `This query first calculates the total order value and number of orders for each product from the Sales DB and for the category (minus our products) from the Category DB for each quarter, using sales database. It then calculates the average order value for our products and the rest of category for each quarter, and returns the results for the most recent [${variables?.[0]?.id}] quarters.`,
-        sql: `WITH product_sales AS ( SELECT EXTRACT(QUARTER FROM sale_date) AS sale_quarter, EXTRACT(YEAR FROM sale_date) AS sale_year, product_id, SUM(order_value) AS total_order_value, COUNT(DISTINCT order_id) AS num_orders FROM sales_data WHERE product_id IN (SELECT product_id FROM product_db WHERE brand = 'our_brand') GROUP BY EXTRACT(QUARTER FROM sale_date), EXTRACT(YEAR FROM sale_date), product_id ), category_sales AS ( SELECT EXTRACT(QUARTER FROM sale_date) AS sale_quarter, EXTRACT(YEAR FROM sale_date) AS sale_year, category_id, SUM(order_value) AS total_order_value, COUNT(DISTINCT order_id) AS num_orders FROM sales_data WHERE product_id NOT IN (SELECT product_id FROM product_db WHERE brand = 'our_brand') AND category_id IN (SELECT category_id FROM product_db WHERE brand = 'our_brand') GROUP BY EXTRACT(QUARTER FROM sale_date), EXTRACT(YEAR FROM sale_date), category_id ) SELECT p.sale_quarter, p.sale_year, AVG(p.total_order_value / p.num_orders) AS avg_order_value, AVG(c.total_order_value / c.num_orders) AS avg_category_order_value FROM product_sales p JOIN category_sales c ON p.sale_quarter = c.sale_quarter AND p.sale_year = c.sale_year WHERE p.sale_quarter IN ( SELECT EXTRACT(QUARTER FROM sale_date) FROM sales_data WHERE EXTRACT(YEAR FROM sale_date) = EXTRACT(YEAR FROM CURRENT_DATE) ORDER BY sale_date DESC LIMIT ${variables?.[0]?.value} ) GROUP BY p.sale_quarter, p.sale_year ORDER BY p.sale_quarter DESC`,
+        description: `This query first calculates the total order value and number of orders for each product from the Sales DB and for the category (minus our products) from the Category DB for each quarter, using sales database. It then calculates the [${variables?.[0].id}] for our products and the rest of category for each quarter, and returns the results for [${variables?.[1].id}] [${variables?.[2].id}] quarters.`,
+        sql: `WITH
+        product_sales AS (
+          SELECT
+            EXTRACT(
+              QUARTER
+              FROM
+                sale_date
+            ) AS sale_quarter,
+            EXTRACT(
+              YEAR
+              FROM
+                sale_date
+            ) AS sale_year,
+            product_id,
+            SUM(order_value) AS total_order_value,
+            COUNT(DISTINCT order_id) AS num_orders
+          FROM
+            sales_data
+          WHERE
+            product_id IN (
+              SELECT
+                product_id
+              FROM
+                product_db
+              WHERE
+                brand = 'our_brand'
+            )
+          GROUP BY
+            EXTRACT(
+              QUARTER
+              FROM
+                sale_date
+            ),
+            EXTRACT(
+              YEAR
+              FROM
+                sale_date
+            ),
+            product_id
+        ),
+        category_sales AS (
+          SELECT
+            EXTRACT(
+              QUARTER
+              FROM
+                sale_date
+            ) AS sale_quarter,
+            EXTRACT(
+              YEAR
+              FROM
+                sale_date
+            ) AS sale_year,
+            category_id,
+            SUM(order_value) AS total_order_value,
+            COUNT(DISTINCT order_id) AS num_orders
+          FROM
+            sales_data
+          WHERE
+            product_id NOT IN(
+              SELECT
+                product_id
+              FROM
+                product_db
+              WHERE
+                brand = 'our_brand'
+            )
+            AND category_id IN (
+              SELECT
+                category_id
+              FROM
+                product_db
+              WHERE
+                brand = 'our_brand'
+            )
+          GROUP BY
+            EXTRACT(
+              QUARTER
+              FROM
+                sale_date
+            ),
+            EXTRACT(
+              YEAR
+              FROM
+                sale_date
+            ),
+            category_id
+        )
+      SELECT
+        p.sale_quarter,
+        p.sale_year,
+        AVG(p.total_order_value / p.num_orders) AS avg_order_value,
+        AVG(c.total_order_value / c.num_orders) AS avg_category_order_value
+      FROM
+        product_sales p
+        JOIN category_sales c ON p.sale_quarter = c.sale_quarter
+        AND p.sale_year = c.sale_year
+      WHERE
+        p.sale_quarter IN (
+          SELECT
+            EXTRACT(
+              QUARTER
+              FROM
+                sale_date
+            )
+          FROM
+            sales_data
+          WHERE
+            EXTRACT(
+              YEAR
+              FROM
+                sale_date
+            ) = EXTRACT(
+              YEAR
+              FROM
+                CURRENT_DATE
+            )
+          ORDER BY
+            sale_date DESC
+          LIMIT
+            ${variables?.[2].value}
+        )
+      GROUP BY
+        p.sale_quarter,
+        p.sale_year
+      ORDER BY
+        p.sale_quarter DESC;`,
       };
       return SQl_Discriptipn;
     }
@@ -281,7 +402,6 @@ export const UpdateData = (variables: Variable[], prompt: string) => {
       //   'Total Revenue': ' SUM(s.revenue) AS total_revenue',
       //   'Total Units Sold': ' SUM(s.units_sold) AS total_units_sold',
       //   'Avg Profit Margin': 'AVG(s.profit_margin) AS avg_profit_margin'
-
       // }
       const SQl_Discriptipn = {
         description: `This query looks at the Sales by Region for [ Brand ] and filters for sales [${variables?.[0]?.id}] and groups by region and SKU. It then calculates the [${variables?.[1]?.id}] margin for each SKU within each region. Finally it orders the results by total revenue in descending order and returns only the top [${variables?.[2]?.id}] SKUs.`,
@@ -295,6 +415,113 @@ export const UpdateData = (variables: Variable[], prompt: string) => {
         sql: `SELECT Products.ID, Products.Product, Products.Description, Products.Price, Products.Category, Products.Supplier, Goods.Stock, Goods.ReorderLevel, MAX(CASE WHEN Goods.Stock >= Products.ReorderLevel THEN Goods.Date END) AS LastDateAboveThreshold FROM Products INNER JOIN Goods ON Products.ID = Goods.ProdID WHERE Goods.Stock < Products.ReorderLevel GROUP BY Products.ID, Products.Product, Products.Description, Products.Price, Products.Category, Products.Supplier, Goods.Stock, Goods.ReorderLevel;`,
       };
       return SQl_Discriptipn;
+    }
+    case "query#1234567893": {
+      const SQl_Discriptipn = {
+        description: ` The query calculates and compares daily unit and dollar sales volumes for '[${variables?.[0]?.id}]' products and other products in [${variables?.[1]?.id}] over the [${variables?.[2]?.id}]. First, it filters sales_data for 'Star Technology' products in Region X from the last week, grouping by date to calculate total order value and units sold. Then, it Filters sales_data for all other products in Region X from the last week, grouping by date to calculate total order value and units sold. Finally, it Joins star_sales and other_sales on sale date, and calculates total and [${variables?.[3]?.id}] for both categories. The result is a table showing daily sales volumes for 'Star Technology' products versus “all other” products in Region X, allowing for performance comparison over the past week.`,
+        sql: `WITH
+        star_sales AS (
+          SELECT
+            EXTRACT(
+              DAY
+              FROM
+                sale_date
+            ) AS sale_day,
+            EXTRACT(
+              MONTH
+              FROM
+                sale_date
+            ) AS sale_month,
+            EXTRACT(
+              YEAR
+              FROM
+                sale_date
+            ) AS sale_year,
+            product_id,
+            SUM(order_value) AS daily_order_value,
+            SUM(units_sold) AS daily_units_sold
+          FROM
+            sales_data
+          WHERE
+            product_category LIKE '%Star Technology%'
+            AND region = 'X'
+            AND sale_date >= CURRENT_DATE - INTERVAL '1 week'
+          GROUP BY
+            EXTRACT(
+              DAY
+              FROM
+                sale_date
+            ),
+            EXTRACT(
+              MONTH
+              FROM
+                sale_date
+            ),
+            EXTRACT(
+              YEAR
+              FROM
+                sale_date
+            ),
+            product_id
+        ),
+        other_sales AS (
+          SELECT
+            EXTRACT(
+              DAY
+              FROM
+                sale_date
+            ) AS sale_day,
+            EXTRACT(
+              MONTH
+              FROM
+                sale_date
+            ) AS sale_month,
+            EXTRACT(
+              YEAR
+              FROM
+                sale_date
+            ) AS sale_year,
+            product_id,
+            SUM(order_value) AS daily_order_value,
+            SUM(units_sold) AS daily_units_sold
+          FROM
+            sales_data
+          WHERE
+            product_category NOT LIKE '%Star Technology%'
+            AND region = 'X'
+            AND sale_date >= CURRENT_DATE - INTERVAL '1 week'
+          GROUP BY
+            EXTRACT(
+              DAY
+              FROM
+                sale_date
+            ),
+            EXTRACT(
+              MONTH
+              FROM
+                sale_date
+            ),
+            EXTRACT(
+              YEAR
+              FROM
+                sale_date
+            ),
+            product_id
+        )
+      SELECT
+        s.sale_day,
+        s.sale_month
+        `,
+      };
+      return SQl_Discriptipn;
+    }
+    case "query#1234567894": {
+      const SQl_Discriptipn = {
+        description:
+          `A list of customers with their first order date, last order date, and order count, along with any additional information from the merged shop data, for customers who have made [${variables?.[0]?.id}] or more orders.`,
+        sql: `select * from 'dbt-tutorial'.jaffle_shop.customers\nselect * from 'dbt-tutorial'.jaffle_shop.orders\nwith\n    customers as (\n        select id as customer_id, first_name, last_name from 'helical-math-378821'.'shop'.'customers'\n    ),\n    orders as (\n        select id as order_id, user_id as customer_id, order_date, status\n        from 'helical-math-378821'.'shop'.'orders'\n    ),\n    customer_orders as (\n        select\n            customer_id,\n            min(order_date) as first_order_date,\n            max(order_date) as last_order_date,\n            count(order_id) as order_count\n        from orders\n        group by 1\n    ),\n    final as (\n        select\n            customers.customer_id,\n            customers.first_name,\n            customers.last_name,\n            customer_orders.first_order_date,\n            customer_orders.last_order_date,\n            coalesce(customer_orders.order_count, 0) as order_count\n        from customers\n        left join customer_orders using (customer_id)\n    )\nselect *\nfrom final\nselect * from 'helical-math-378821'.'shop'.'merge'\nwhere order_count >= 2.0`,
+      };
+      return SQl_Discriptipn
     }
     default:
       const SQl_Discriptipn = {
