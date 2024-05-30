@@ -87,7 +87,6 @@ const OptionsBar: FC<optionbarProps> = ({
       dispatch(toggleCheckbox({ index }));
     }
   };
-  console.log(selectedItems, "selectedItems");
   // const handleUpdateVariable = () => {
   //   dispatch(updateValue(selectedItems));
   // };
@@ -337,6 +336,7 @@ const OptionsBar: FC<optionbarProps> = ({
                 }}
               >
                 <Button
+                  disabled={selectedItems === "" ? true : false}
                   label="Update"
                   variant="contained"
                   onClick={handleUpdate}

@@ -187,15 +187,19 @@ const GraphModal2 = ({ prompt, validatePrompt }: props) => {
         return node;
       }
     });
-    const combined: Variable[] = updatedNodes.reduce((acc: any, item) => {
-      if (item.data.variables) {
-        acc.push(...item.data.variables);
-      }
-      return acc;
-    }, []);
+    // const combined: Variable[] = updatedNodes.reduce((acc: any, item) => {
+    //   if (item.data.variables) {
+    //     acc.push(...item.data.variables);
+    //   }
+    //   return acc;
+    // }, []);
+    const newArray = variables;
+    const index = newArray.findIndex((item)=>item.model === updatedPrompt.id);
+    if(index >= 0){
+      newArray[index].value = Number(updatedPrompt.variables?.[0]?.value);
+    }
 
-    // console.log(updatedNodes, "updates nodes after variable change");
-    setVariables(combined);
+    setVariables(newArray);
     setNodes(updatedNodes);
   };
 

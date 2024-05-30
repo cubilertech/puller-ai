@@ -398,27 +398,123 @@ export const UpdateData = (variables: Variable[], prompt: string) => {
       return SQl_Discriptipn;
     }
     case "query#1234567890": {
-      // const revenue_txt : any = {
-      //   'Total Revenue': ' SUM(s.revenue) AS total_revenue',
-      //   'Total Units Sold': ' SUM(s.units_sold) AS total_units_sold',
-      //   'Avg Profit Margin': 'AVG(s.profit_margin) AS avg_profit_margin'
-      // }
+      const revenue_txt = (value: any) => {
+        const formattedMessage = value.replace(/ /g, "").toLowerCase();
+        switch (formattedMessage) {
+          case "totalrevenue":
+            return "SUM(s.revenue) AS total_revenue";
+          case "totalunitssold":
+            return "SUM(s.units_sold) AS total_units_sold";
+          case "avgprofitmargin":
+            return "AVG(s.profit_margin) AS avg_profit_margin";
+          default:
+            return "";
+        }
+      };
+      const total_Desc = (value: any) => {
+        const formattedMessage = value.replace(/ /g, "").toLowerCase();
+        switch (formattedMessage) {
+          case "totalrevenue":
+            return "total_revenue";
+          case "totalunitssold":
+            return "total_units_sold";
+          case "avgprofitmargin":
+            return "avg_profit_margin";
+          default:
+            return "";
+        }
+      };
       const SQl_Discriptipn = {
         description: `This query looks at the Sales by Region for [ Brand ] and filters for sales [${variables?.[0]?.id}] and groups by region and SKU. It then calculates the [${variables?.[1]?.id}] margin for each SKU within each region. Finally it orders the results by total revenue in descending order and returns only the top [${variables?.[2]?.id}] SKUs.`,
-        sql: `SELECT TOP ${variables?.[2]?.value} r.region, s.sku, SUM(s.revenue) AS total_revenue, FROM sales s JOIN region r ON s.region_id = r.id WHERE s.sale_date >= DATEADD(quarter, -1, GETDATE()) GROUP BY r.region, s.sku ORDER BY total_revenue DESC;`,
+        sql: `SELECT TOP ${variables?.[2]?.value} r.region, s.sku, ${revenue_txt(variables?.[1]?.value)}, FROM sales s JOIN region r ON s.region_id = r.id WHERE s.sale_date >= DATEADD(quarter, -1, GETDATE()) GROUP BY r.region, s.sku ORDER BY ${total_Desc(variables?.[1]?.value)} DESC;`,
       };
       return SQl_Discriptipn;
     }
     case "query#1234567892": {
+      const product_category = (value: any) => {
+        const formattedMessage = value.replace(/ /g, "").toLowerCase();
+        switch (formattedMessage) {
+          case "ontheprodidfield":
+          case "prodid":
+            return "ProdID";
+          case "product_id_old":
+            return "Product_ID_OLD";
+          case "productaltnum":
+            return "ProductALTNUM";
+          default:
+            return "";
+        }
+      };
       const SQl_Discriptipn = {
         description: `This query joins the Products table with [${variables?.[0]?.id}] [${variables?.[1]?.id}], and filters for products where the current stock level is below the reorder level. [${variables?.[2]?.id}] Finally, it includes the reorder level and the current stock level in the result set. \nNote that the Goods table is a table that stores the stock in and out for each product, with separate fields for the quantity and the date. The Stock field is calculated as the difference between the In and Out fields, and the ReorderLevel field is a threshold value that triggers a reorder when the stock level falls below it.`,
-        sql: `SELECT Products.ID, Products.Product, Products.Description, Products.Price, Products.Category, Products.Supplier, Goods.Stock, Goods.ReorderLevel, MAX(CASE WHEN Goods.Stock >= Products.ReorderLevel THEN Goods.Date END) AS LastDateAboveThreshold FROM Products INNER JOIN Goods ON Products.ID = Goods.ProdID WHERE Goods.Stock < Products.ReorderLevel GROUP BY Products.ID, Products.Product, Products.Description, Products.Price, Products.Category, Products.Supplier, Goods.Stock, Goods.ReorderLevel;`,
+        sql: `SELECT
+        Products.ID,
+        Products.Product,
+        Products.Description,
+        Products.Price,
+        Products.Category,
+        Products.Supplier,
+        Goods.Stock,
+        Goods.ReorderLevel,
+        MAX(
+          CASE
+            WHEN Goods.Stock >= Products.ReorderLevel THEN Goods.Date
+          END
+        ) AS LastDateAboveThreshold
+      FROM
+        Products
+        INNER JOIN Goods ON Products.ID = Goods.${product_category(variables?.[1]?.value)}
+      WHERE
+        Goods.Stock < Products.ReorderLevel
+      GROUP BY
+        Products.ID,
+        Products.Product,
+        Products.Description,
+        Products.Price,
+        Products.Category,
+        Products.Supplier,
+        Goods.Stock,
+        Goods.ReorderLevel;`,
       };
       return SQl_Discriptipn;
     }
     case "query#1234567893": {
+      const region_x = (value: any) => {
+        const formattedMessage = value.replace(/ /g, "").toLowerCase();
+        switch (formattedMessage) {
+          case "regionn":
+            return "N";
+          case "regiono":
+            return "O";
+          case "regionp":
+            return "P";
+          case "regionq":
+            return "Q";
+          case "regionr":
+            return "R";
+          case "regions":
+            return "S";
+          case "regiont":
+            return "T";
+          case "regionu":
+            return "U";
+          case "regionv":
+            return "V";
+          case "regionw":
+            return "W";
+          case "regionx":
+            return "X";
+          case "regiony":
+            return "Y";
+          case "regionz":
+            return "Z";
+          default:
+            return "";
+        }
+      };
+
       const SQl_Discriptipn = {
-        description: ` The query calculates and compares daily unit and dollar sales volumes for '[${variables?.[0]?.id}]' products and other products in [${variables?.[1]?.id}] over the [${variables?.[2]?.id}]. First, it filters sales_data for 'Star Technology' products in Region X from the last week, grouping by date to calculate total order value and units sold. Then, it Filters sales_data for all other products in Region X from the last week, grouping by date to calculate total order value and units sold. Finally, it Joins star_sales and other_sales on sale date, and calculates total and [${variables?.[3]?.id}] for both categories. The result is a table showing daily sales volumes for 'Star Technology' products versus “all other” products in Region X, allowing for performance comparison over the past week.`,
+        description: ` The query calculates and compares daily unit and dollar sales volumes for '[${variables?.[0]?.id}]' products and other products in [${variables?.[1]?.id}] over the [${variables?.[2]?.id}]. First, it filters sales_data for '[${variables?.[0]?.id}]' products in [${variables?.[1]?.id}] from the last week, grouping by date to calculate total order value and units sold. Then, it Filters sales_data for all other products in [${variables?.[1]?.id}] from the last week, grouping by date to calculate total order value and units sold. Finally, it Joins star_sales and other_sales on sale date, and calculates total and [${variables?.[3]?.id}] for both categories. The result is a table showing daily sales volumes for '[${variables?.[0]?.id}]' products versus “all other” products in [${variables?.[1]?.id}], allowing for performance comparison over the past week.`,
         sql: `WITH
         star_sales AS (
           SELECT
@@ -443,9 +539,9 @@ export const UpdateData = (variables: Variable[], prompt: string) => {
           FROM
             sales_data
           WHERE
-            product_category LIKE '%Star Technology%'
-            AND region = 'X'
-            AND sale_date >= CURRENT_DATE - INTERVAL '1 week'
+            product_category LIKE '%${variables?.[0]?.value}%'
+            AND region = '${region_x(variables?.[1]?.value)}'
+            AND sale_date >= CURRENT_DATE - INTERVAL '${region_x(variables?.[2]?.value)}'
           GROUP BY
             EXTRACT(
               DAY
@@ -487,9 +583,9 @@ export const UpdateData = (variables: Variable[], prompt: string) => {
           FROM
             sales_data
           WHERE
-            product_category NOT LIKE '%Star Technology%'
-            AND region = 'X'
-            AND sale_date >= CURRENT_DATE - INTERVAL '1 week'
+            product_category NOT LIKE '%${variables?.[0]?.value}%'
+            AND region = '${region_x(variables?.[1]?.value)}'
+            AND sale_date >= CURRENT_DATE - INTERVAL '${region_x(variables?.[2]?.value)}'
           GROUP BY
             EXTRACT(
               DAY
@@ -517,11 +613,10 @@ export const UpdateData = (variables: Variable[], prompt: string) => {
     }
     case "query#1234567894": {
       const SQl_Discriptipn = {
-        description:
-          `A list of customers with their first order date, last order date, and order count, along with any additional information from the merged shop data, for customers who have made [${variables?.[0]?.id}] or more orders.`,
-        sql: `select * from 'dbt-tutorial'.jaffle_shop.customers\nselect * from 'dbt-tutorial'.jaffle_shop.orders\nwith\n    customers as (\n        select id as customer_id, first_name, last_name from 'helical-math-378821'.'shop'.'customers'\n    ),\n    orders as (\n        select id as order_id, user_id as customer_id, order_date, status\n        from 'helical-math-378821'.'shop'.'orders'\n    ),\n    customer_orders as (\n        select\n            customer_id,\n            min(order_date) as first_order_date,\n            max(order_date) as last_order_date,\n            count(order_id) as order_count\n        from orders\n        group by 1\n    ),\n    final as (\n        select\n            customers.customer_id,\n            customers.first_name,\n            customers.last_name,\n            customer_orders.first_order_date,\n            customer_orders.last_order_date,\n            coalesce(customer_orders.order_count, 0) as order_count\n        from customers\n        left join customer_orders using (customer_id)\n    )\nselect *\nfrom final\nselect * from 'helical-math-378821'.'shop'.'merge'\nwhere order_count >= 2.0`,
+        description: `A list of customers with their first order date, last order date, and order count, along with any additional information from the merged shop data, for customers who have made [${variables?.[0]?.id}] or more orders.`,
+        sql: `with customers as (select id as customer_id, first_name, last_name from \`helical-math-378821\`.\`shop\`.\`customers\`), orders as (select id as order_id, user_id as customer_id, order_date, status from \`helical-math-378821\`.\`shop\`.\`orders\`), customer_orders as (select customer_id, min(order_date) as first_order_date, max(order_date) as last_order_date, count(order_id) as order_count from orders group by 1), final as (select customers.customer_id, customers.first_name, customers.last_name, customer_orders.first_order_date, customer_orders.last_order_date, coalesce(customer_orders.order_count, 0) as order_count from customers left join customer_orders using (customer_id)) select * from final where order_count >= ${variables?.[0]?.value}`,
       };
-      return SQl_Discriptipn
+      return SQl_Discriptipn;
     }
     default:
       const SQl_Discriptipn = {
