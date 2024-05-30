@@ -87,7 +87,6 @@ const OptionsBar: FC<optionbarProps> = ({
       dispatch(toggleCheckbox({ index }));
     }
   };
-  console.log(selectedItems, "selectedItems");
   // const handleUpdateVariable = () => {
   //   dispatch(updateValue(selectedItems));
   // };
