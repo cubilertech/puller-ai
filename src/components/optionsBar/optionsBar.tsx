@@ -337,6 +337,7 @@ const OptionsBar: FC<optionbarProps> = ({
                 }}
               >
                 <Button
+                  disabled={selectedItems === "" ? true : false}
                   label="Update"
                   variant="contained"
                   onClick={handleUpdate}

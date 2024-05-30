@@ -174,6 +174,8 @@ const RequestPage: FC = () => {
         setSelectBarVarient("input");
       } else if (value.type === "select_single") {
         setSelectBarVarient("round-checkbox");
+      } else if (value.type === "select_multi") {
+        setSelectBarVarient("square-checkbox");
       } else {
         setSelectBarVarient(null);
       }
