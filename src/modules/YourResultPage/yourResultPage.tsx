@@ -5,12 +5,14 @@ import { PageHeader } from "@/components/PageHeader";
 import { ResultCard } from "@/components/ResultCard";
 import { useGetSingleExecute } from "@/hooks/useExecute";
 import { useGetSinglePrompt } from "@/hooks/usePrompt";
+import { replaceIdWithVariableInDiscription } from "@/utils/common";
 // import { getActiveRequest } from "@/libs/redux/features/activeRequest";
 // import { useAppSelector } from "@/libs/redux/hooks";
 import { RESULTS_DATA } from "@/utils/data";
+import { Prompt } from "@/utils/types";
 import { Box } from "@mui/material";
 // import { useParams } from "next/navigation";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 
 interface Props {
   id: string;
@@ -37,6 +39,9 @@ const YourResultsPage: FC<Props> = ({ id }) => {
     month: "short",
     year: "numeric",
   });
+  const discription = useMemo(() => {
+    return replaceIdWithVariableInDiscription(data as Prompt)
+  }, [data])
   return (
     <>
       {isLoading ? (
@@ -75,8 +80,8 @@ const YourResultsPage: FC<Props> = ({ id }) => {
                   data?.results && data?.results[0]
                     ? data.results[0].database
                     : RESULTS_DATA.fileStructured,
-                main_discription: data?.description
-                  ? data?.description
+                main_discription: discription
+                  ? discription
                   : RESULTS_DATA.main_discription,
                 fileSize:
                   data?.results && data?.results[0].bytes

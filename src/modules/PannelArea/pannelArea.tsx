@@ -153,11 +153,11 @@ const PannelArea: FC<PannelAreaProps> = ({
           >
             {content ? (
               <div>
-                <ResponseArea
+                {/* <ResponseArea
                   content={content}
                   // handleUpdate={handleUpdate ? () => handleUpdate() : undefined}
                   isLoading={isLoading}
-                />
+                /> */}
               </div>
             ) : (
               <Box sx={{ display: "flex", flexDirection: "column", gap: 5 }}>

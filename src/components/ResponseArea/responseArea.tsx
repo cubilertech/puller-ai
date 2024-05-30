@@ -1,27 +1,31 @@
 import { palette } from "@/theme/Palette";
 import { Box, Skeleton, Typography } from "@mui/material";
-import { Button } from "../Button";
-import { FC } from "react";
+import { FC, useMemo } from "react";
 import { Paper } from "../Paper";
-import { CustomLink } from "../Link";
 import "./responseArea.css";
-import { Icon } from "../Icon";
-import { motion } from "framer-motion";
+import { Prompt, UpdateVariables } from "@/utils/types";
+import { replaceIdWithVariable } from "@/utils/common";
 
 interface ResponseAreaProps {
-  content?: {
-    response: string;
-    original: string;
-  };
-  // handleUpdate?: () => void;
+  prompt?: Prompt;
+  handleUpdate?: (value: UpdateVariables) => void;
   isLoading?: boolean;
 }
 
 const ResponseArea: FC<ResponseAreaProps> = ({
-  content,
-  // handleUpdate,
+  prompt,
+  handleUpdate,
   isLoading,
 }) => {
+  const responseTxt = useMemo(() => {
+    const handleClickVariable = (value: UpdateVariables) => {
+      // Perform action when a variable value is clicked
+      if (handleUpdate) {
+        handleUpdate(value);
+      }
+    };
+    return replaceIdWithVariable(prompt as Prompt, handleClickVariable);
+  }, [prompt]);
   return (
     <>
       {/* response discription */}
@@ -118,10 +122,10 @@ const ResponseArea: FC<ResponseAreaProps> = ({
                 textAlign: "start",
                 color: palette.base.white,
               }}
-              component="p"
+              component="div"
               className="animated-genrated-text"
             >
-              {content?.response}
+              {responseTxt}
             </Typography>
           )}
         </Box>

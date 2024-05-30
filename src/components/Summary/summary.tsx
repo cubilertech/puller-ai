@@ -4,7 +4,7 @@ import { FC } from "react";
 
 interface Summary {
   heading: string;
-  description: string;
+  description: string | JSX.Element;
 }
 
 const Summary: FC<Summary> = ({ heading, description }) => {

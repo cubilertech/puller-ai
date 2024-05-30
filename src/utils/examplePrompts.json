@@ -1,12 +1,37 @@
 {
   "couldyougetthetop10performingskusbyregionforthelastquarter?": {
     "query": "Could you get the top 10 performing SKUs by region for the last quarter?",
-    "description":"This query looks at the Sales by Region for [ Brand ] and filters for sales in the last quarter and groups by region and SKU. It then calculates the total revenue, total units sold, and average profit margin for each SKU within each region. Finally it orders the results by total revenue in descending order and returns only the top 10 SKUs.",
+    "description":"This query looks at the Sales by Region for [ Brand ] and filters for sales [quarter_last] and groups by region and SKU. It then calculates the [revenue_txt] for each SKU within each region. Finally it orders the results by total revenue in descending order and returns only the top [top_skus_number] SKUs.",
     "id":"query#1234567890",
     "sql":"SELECT TOP 10 r.region, s.sku, SUM(s.revenue) AS total_revenue, SUM(s.units_sold) AS total_units_sold, AVG(s.profit_margin) AS avg_profit_margin FROM sales s JOIN region r ON s.region_id = r.id WHERE s.sale_date >= DATEADD(quarter, -1, GETDATE()) GROUP BY r.region, s.sku ORDER BY total_revenue DESC;",
     "target":"",
     "graph":[],
-    "variables":[],
+    "variables":[
+      {
+      "id": "quarter_last",
+      "model": "",
+      "name": "last_quarter",
+      "type": "String",
+      "value": "in the last quarter",
+      "detail": "The last quarter refers to the most recent complete calendar quarter ending Mar 31 2024",
+      "discription":  "Choose target period end date, inclusive."
+    },
+     {
+      "id": "revenue_txt",
+      "model": "",
+      "name": "revenue",
+      "type": "select_single",
+      "value": "Total Revenue",
+      "discription": "Choose how to rank SKUs",
+      "selectData": ["Total Revenue", "Total Units Sold", "Avg Profit Margin"]
+    },
+    {
+      "id": "top_skus_number",
+      "model": "",
+      "name": "top_skus",
+      "type": "numeric",
+      "value": 10
+    }],
     "observations":"In the last quarter, the top 10 SKUs for [Brand] generated a combined total revenue of $2.5 million, with the highest contributions from the North and West regions, accounting for $1.2 million and $900,000 respectively. These SKUs achieved significant sales volumes, with the top SKU selling 15,000 units, and maintained an average profit margin of 25%, suggesting both high demand and profitability.",
     "notes":["Broad Sales Overview: The data covers last quarter sales for all SKUs across multiple regions, providing a broad view of performance. Analyzing monthly sales trends could reveal important seasonal patterns.","Demographic Insights: Investigating customer demographics could help identify key buyer segments and improve targeted marketing. This demographic analysis can be particularly useful for tailoring regional strategies.","Impact of Marketing: Evaluating regional marketing efforts could provide insights into their impact on sales. For example, a 15% sales increase in the West region coincided with a recent ad campaign.","Quarterly Growth Analysis: Comparing current performance with previous quarters can help identify growth trends. Sales grew by 10% compared to the previous quarter, highlighting consistent growth.","Inventory Turnover Insights: Exploring inventory turnover rates alongside sales data can provide a fuller picture of SKU performance. High turnover rates might indicate strong demand and efficient inventory management"],
     "columns": ["Region", "Product", "Revenue", "Units Sold", "Profit Margin"],
@@ -192,12 +217,39 @@
   },
   "canyouretrievealistofproductswithcurrentinventorylevelsbelowthethresholdforreorder,aswellasthelastdateinventorylevelswereatorabovethreshold.includethereorderquantityaswell.": {
     "query": "Can you retrieve a list of products with current inventory levels below the threshold for reorder, as well as the last date inventory levels were at or above threshold. Include the reorder quantity as well.",
-    "description":"This query joins the Products table with the Goods table on the ProdID field, and filters for products where the current stock level is below the reorder level. It then calculates the last date the inventory levels were at or above the threshold using a conditional aggregate function. Finally, it includes the reorder level and the current stock level in the result set. \nNote that the Goods table is a table that stores the stock in and out for each product, with separate fields for the quantity and the date. The Stock field is calculated as the difference between the In and Out fields, and the ReorderLevel field is a threshold value that triggers a reorder when the stock level falls below it.",
+    "description":"This query joins the Products table with [goods_table_field] [prodID_field], and filters for products where the current stock level is below the reorder level. [inventory_levels_threshold] Finally, it includes the reorder level and the current stock level in the result set. \nNote that the Goods table is a table that stores the stock in and out for each product, with separate fields for the quantity and the date. The Stock field is calculated as the difference between the In and Out fields, and the ReorderLevel field is a threshold value that triggers a reorder when the stock level falls below it.",
     "id":"query#1234567892",
     "sql":"SELECT Products.ID, Products.Product, Products.Description, Products.Price, Products.Category, Products.Supplier, Goods.Stock, Goods.ReorderLevel, MAX(CASE WHEN Goods.Stock >= Products.ReorderLevel THEN Goods.Date END) AS LastDateAboveThreshold FROM Products INNER JOIN Goods ON Products.ID = Goods.ProdID WHERE Goods.Stock < Products.ReorderLevel GROUP BY Products.ID, Products.Product, Products.Description, Products.Price, Products.Category, Products.Supplier, Goods.Stock, Goods.ReorderLevel;",
     "target":"",
     "graph":[],
-    "variables":[],
+    "variables":[
+      {
+        "id": "goods_table_field",
+        "model": "",
+        "name": "Goods_table",
+        "type": "String_hover",
+        "value": "the Goods table ",
+        "detail": "Note that the Goods table is a table that stores the stock in and out for each product, with separate fields for the quantity and the date. The Stock field is calculated as the difference between the In and Out fields, and the ReorderLevel field is a threshold value that triggers a reorder when the stock level falls below it."
+      },  
+      {
+        "id": "prodID_field",
+        "model": "",
+        "name": "ProdID_field",
+        "type": "select_single",
+        "value": "on the ProdID field",
+        "detail": "Product ID refers to the 'ProdID' field",
+        "discription": "Choose Your Product",
+        "selectData": ["ProdID", "Product_ID_OLD", "ProductALTNUM"]
+      },
+      {
+        "id": "inventory_levels_threshold",
+        "model": "",
+        "name": "Inventory_Levels_Threshold",
+        "type": "String_hover",
+        "value": "It then calculates the last date the inventory levels were at or above the threshold.",
+        "detail": "This calculation uses a conditional aggregate function"
+      }
+    ],
     "observations":"This query identifies 50 products with current stock levels below the reorder threshold. The last date inventory levels were at or above the threshold was two weeks ago on average. Reorder levels range from 100 to 500 units, while current stock levels range from 20 to 450 units.",
     "notes":["Data Context: The Goods table facilitates accurate inventory management by tracking stock in and out for each product.","Replenishment Efficiency: Average time taken to replenish stock levels after reaching the threshold provides insights into inventory management efficiency (averaging 14 days).","Inventory Variation: Notable differences exist in reorder and current stock levels among products, with reorder levels ranging from 100 to 500 units and current stock levels ranging from 20 to 450 units.","Irregular Replenishments: Some products may experience sporadic or irregular stock replenishments, possibly due to supplier constraints or seasonal demand fluctuations.","Optimization Opportunities: With an average of 50 products requiring reordering each week, it's evident that inventory management strategies need refinement to minimize stockouts and ensure optimal inventory levels."],
     "columns": ["Product", "Current Stock", "Reorder Level", "Reorder Quantity", "Last in Stock Date"],

@@ -5,6 +5,7 @@ import checkboxReducer from "./features/checkbox";
 import searchbarReducer from "./features/searchbar";
 import LoadingRequestReducer from "./features/isLoadingRequest";
 import globalLoadingReducer from "./features/globalLoadings";
+import variableReducer from "./features/variables";
 
 export const store = configureStore({
   reducer: {
@@ -13,8 +14,12 @@ export const store = configureStore({
     checkbox: checkboxReducer,
     searchbar: searchbarReducer,
     LoadingRequest: LoadingRequestReducer,
-    globalLoading:globalLoadingReducer
+    globalLoading: globalLoadingReducer,
+    variableUpdate: variableReducer, // Correct position and comma
   },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+
+export default store;
