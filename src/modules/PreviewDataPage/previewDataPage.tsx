@@ -2,12 +2,13 @@ import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
 import { Box } from "@mui/material";
 import DataTable from "@/components/table/table";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import { Summary } from "@/components/Summary";
 import { DUMMY_SUMMARY } from "@/utils/constants";
 import { useGetSinglePrompt } from "@/hooks/usePrompt";
 import { Loader } from "@/components/Loader";
 import { Prompt } from "@/utils/types";
+import { replaceIdWithVariableInDiscription } from "@/utils/common";
 
 interface PreviewDataPageProps {
   id?: string;
@@ -16,7 +17,8 @@ interface PreviewDataPageProps {
 const PreviewDataPage: FC<PreviewDataPageProps> = ({ id }) => {
   const [fadeIn, setFadeIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const { data: PromptData, refetch: refetchSignleExecute } = useGetSinglePrompt(id as string);
+  const { data: PromptData, refetch: refetchSignleExecute } =
+    useGetSinglePrompt(id as string);
   useEffect(() => {
     if (PromptData && PromptData?.status === "complete") {
       setIsLoading(false);
@@ -26,6 +28,9 @@ const PreviewDataPage: FC<PreviewDataPageProps> = ({ id }) => {
       refetchSignleExecute();
     }
   }, [PromptData, refetchSignleExecute]);
+  const discription = useMemo(() => {
+    return replaceIdWithVariableInDiscription(PromptData as Prompt);
+  }, [PromptData]);
   return (
     <>
       {isLoading ? (
@@ -64,7 +69,7 @@ const PreviewDataPage: FC<PreviewDataPageProps> = ({ id }) => {
               scrollbarWidth: "none",
             }}
           >
-            <Summary heading="Summary" description={PromptData?.description as string} />
+            <Summary heading="Summary" description={discription} />
 
             <Paper variant="light-border">
               <DataTable data={PromptData as Prompt} />

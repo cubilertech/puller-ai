@@ -11,7 +11,7 @@ export interface ActiveTypeProps {
 export interface CardData {
   id: string;
   main_title: string;
-  main_discription: string;
+  main_discription: string | JSX.Element;
   fileType: string;
   fileSize: string;
   fileStructured: string;

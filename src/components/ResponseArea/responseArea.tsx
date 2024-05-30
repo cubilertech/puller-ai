@@ -20,7 +20,6 @@ const ResponseArea: FC<ResponseAreaProps> = ({
   const responseTxt = useMemo(() => {
     const handleClickVariable = (value: UpdateVariables) => {
       // Perform action when a variable value is clicked
-      console.log(`Clicked value: ${value}`);
       if (handleUpdate) {
         handleUpdate(value);
       }

@@ -1,41 +1,16 @@
-import { join } from "path";
-import { promises as fsPromises } from "fs";
 import { NextResponse } from "next/server";
+import clientPromise from "@/libs/mongodb/connection";
+import dummyRetrievers from "@/utils/dummyRetrievers.json";
 
-export async function GET(req: any, res: any) {
+export async function PUT(req: any, res: any) {
   try {
-    // Path to your JSON files (replace with your actual paths)
-    const filePathRetriever = join(
-      process.cwd(),
-      "src",
-      "utils",
-      "ApiData",
-      "retriever.json"
-    );
-    const filePathDummyRetriever = join(
-      process.cwd(),
-      "src",
-      "utils",
-      "dummyRetrievers.json"
-    );
-    const filePathPulls = join(
-      process.cwd(),
-      "src",
-      "utils",
-      "ApiData",
-      "pulls.json" // Assuming this is a different file
-    );
-    const dummyRetrieverContent = await fsPromises.readFile(
-      filePathDummyRetriever,
-      "utf8"
-    );
-    // Write the updated data back to the JSON files
-    await fsPromises.writeFile(
-      filePathRetriever,
-      dummyRetrieverContent,
-      "utf8"
-    );
-    await fsPromises.writeFile(filePathPulls, JSON.stringify([]), "utf8");
+    const client = await clientPromise;
+    const db = client.db("demo_mode");
+    await db.collection("pulls").deleteMany({});
+    await db.collection("retrievers").deleteMany({});
+
+    // Insert records from the JSON file into the 'retrievers' collection
+    await db.collection("retrievers").insertMany(dummyRetrievers);
 
     // Send a successful response
     return NextResponse.json({ message: "JSON files emptied successfully" });

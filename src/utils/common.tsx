@@ -203,8 +203,71 @@ export const replaceIdWithVariable = (
   );
 };
 
-export const UpdateData = (variables: Variable[], prompt: string) => {
+export const replaceIdWithVariableInDiscription = (
+  prompt: Prompt
+): JSX.Element => {
+  if (!prompt || !prompt.description) {
+    return (
+      <div>
+        <p>No description available</p>
+      </div>
+    );
+  }
 
+  if (!prompt.variables || prompt.variables.length === 0) {
+    return (
+      <div>
+        <p>{prompt.description}</p>
+      </div>
+    );
+  }
+
+  let parts: Array<string | JSX.Element> = [prompt.description];
+
+  for (const variable of prompt.variables) {
+    const placeholder = variable.id;
+    const value = variable.value;
+
+    if (
+      typeof placeholder === "string" &&
+      (typeof value === "string" || typeof value === "number")
+    ) {
+      const placeholderRegex = new RegExp(
+        `\\[${escapeRegExp(placeholder)}\\]`,
+        "g"
+      );
+      parts = parts.flatMap((part) =>
+        typeof part === "string"
+          ? part.split(placeholderRegex).reduce(
+              (acc, text, i) => {
+                if (i === 0) return [text];
+                const values: UpdateVariables = {
+                  type: variable.type,
+                  id: placeholder,
+                };
+                const replacement = (
+                  <span key={i}>
+                    {value}
+                  </span>
+                );
+                return [...acc, replacement, text];
+              },
+              [] as Array<string | JSX.Element>
+            )
+          : [part]
+      );
+    }
+  }
+
+  return (
+    <div>
+      {parts.map((part, index) => (
+        <Fragment key={index}>{part}</Fragment>
+      ))}
+    </div>
+  );
+};
+export const UpdateData = (variables: Variable[], prompt: string) => {
   switch (prompt) {
     case "query#1234567891": {
       const SQl_Discriptipn = {
@@ -235,8 +298,8 @@ export const UpdateData = (variables: Variable[], prompt: string) => {
     }
     default:
       const SQl_Discriptipn = {
-        description: `This query first calculates the total order value and number of orders for each product from the Sales DB and for the category (minus our products) from the Category DB for each quarter, using sales database. It then calculates the average order value for our products and the rest of category for each quarter, and returns the results for the most recent [${variables?.[0]?.id}] quarters.`,
-        sql: `WITH product_sales AS ( SELECT EXTRACT(QUARTER FROM sale_date) AS sale_quarter, EXTRACT(YEAR FROM sale_date) AS sale_year, product_id, SUM(order_value) AS total_order_value, COUNT(DISTINCT order_id) AS num_orders FROM sales_data WHERE product_id IN (SELECT product_id FROM product_db WHERE brand = 'our_brand') GROUP BY EXTRACT(QUARTER FROM sale_date), EXTRACT(YEAR FROM sale_date), product_id ), category_sales AS ( SELECT EXTRACT(QUARTER FROM sale_date) AS sale_quarter, EXTRACT(YEAR FROM sale_date) AS sale_year, category_id, SUM(order_value) AS total_order_value, COUNT(DISTINCT order_id) AS num_orders FROM sales_data WHERE product_id NOT IN (SELECT product_id FROM product_db WHERE brand = 'our_brand') AND category_id IN (SELECT category_id FROM product_db WHERE brand = 'our_brand') GROUP BY EXTRACT(QUARTER FROM sale_date), EXTRACT(YEAR FROM sale_date), category_id ) SELECT p.sale_quarter, p.sale_year, AVG(p.total_order_value / p.num_orders) AS avg_order_value, AVG(c.total_order_value / c.num_orders) AS avg_category_order_value FROM product_sales p JOIN category_sales c ON p.sale_quarter = c.sale_quarter AND p.sale_year = c.sale_year WHERE p.sale_quarter IN ( SELECT EXTRACT(QUARTER FROM sale_date) FROM sales_data WHERE EXTRACT(YEAR FROM sale_date) = EXTRACT(YEAR FROM CURRENT_DATE) ORDER BY sale_date DESC LIMIT ${variables?.[0]?.value} ) GROUP BY p.sale_quarter, p.sale_year ORDER BY p.sale_quarter DESC`,
+        description: `Show me a list of customers with their first order date, last order date, and order count, along with any additional information from the merged shop data, for customers who have made ${variables?.[0]?.value} or more orders.`,
+        sql: `select * from \`dbt-tutorial\`.jaffle_shop.customers\nselect * from \`dbt-tutorial\`.jaffle_shop.orders\nwith\n    customers as (\n        select id as customer_id, first_name, last_name from \`helical-math-378821\`.\`shop\`.\`customers\`\n    ),\n    orders as (\n        select id as order_id, user_id as customer_id, order_date, status\n        from \`helical-math-378821\`.\`shop\`.\`orders\`\n    ),\n    customer_orders as (\n        select\n            customer_id,\n            min(order_date) as first_order_date,\n            max(order_date) as last_order_date,\n            count(order_id) as order_count\n        from orders\n        group by 1\n    ),\n    final as (\n        select\n            customers.customer_id,\n            customers.first_name,\n            customers.last_name,\n            customer_orders.first_order_date,\n            customer_orders.last_order_date,\n            coalesce(customer_orders.order_count, 0) as order_count\n        from customers\n        left join customer_orders using (customer_id)\n    )\nselect *\nfrom final\nselect * from \`helical-math-378821\`.\`shop\`.\`merge\`\nwhere order_count >= ${variables?.[0]?.value}.0`,
       };
       return SQl_Discriptipn;
   }

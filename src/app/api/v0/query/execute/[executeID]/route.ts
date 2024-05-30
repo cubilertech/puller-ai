@@ -1,13 +1,15 @@
 import { NextResponse } from "next/server";
-import executesList from "@/utils/ApiData/executes.json";
+import clientPromise from "@/libs/mongodb/connection";
 
 export async function GET(
   req: any,
   { params }: { params: { executeID: string } }
 ) {
   try {
+    const client = await clientPromise;
+    const db = client.db("demo_mode");
     const { executeID } = params;
-    const record = executesList.find((item) => item.id === executeID);
+    const record = await db.collection("executes").findOne({ id: executeID });
     if (!record) {
       return NextResponse.json(
         { message: "Invalid execute ID." },
