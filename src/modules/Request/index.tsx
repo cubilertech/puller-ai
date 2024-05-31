@@ -259,7 +259,7 @@ const RequestPage: FC = () => {
           animate={{ opacity: [0, 1] }}
           transition={{ duration: 0.4, ease: "easeInOut" }}
         >
-          <Box sx={{ px: 2, pt: 1, m: "auto" }}>
+          <Box sx={{ px: 2, pt: 1, m: "auto", overflow: "hidden" }}>
             <PageHeader
               title="Validate Request"
               buttons={[
@@ -324,13 +324,14 @@ const RequestPage: FC = () => {
                   sx={{
                     height: "calc(100vh - 150px)",
                     width: isOpenSelectBar
-                      ? { lg: "76%", md: "70%", xs: "60%" }
+                      ? { lg: "76%", md: "72%", xs: "60%" }
                       : "100%",
                     m: "auto",
                     pt: 2,
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-between",
+                    transition: "0.2s ease"
                   }}
                 >
                   {CurrentType === "SQL" ? (
@@ -400,16 +401,22 @@ const RequestPage: FC = () => {
                   sx={{
                     height: "calc(100vh - 160px)",
                     mt: 1,
-                    width: "calc(100vw - 79vw)",
+                    width: "23.8%",
                   }}
                 >
-                  <OptionsBar
-                    PromptId={prompt?.id as string}
-                    submitValidate={submitValidate}
-                    variant={SelectBarVarient as OptionsBarVariants}
-                    variableId={VariableId}
-                    close={handleCloseSelectBar}
-                  />
+                  <motion.div
+                   initial={{ opacity: 0, x: 400 }}
+                   animate={{ opacity: 1, x: 0 }}
+                   transition={{ duration: 0.4, ease: "easeInOut" }}
+                  >
+                    <OptionsBar
+                      PromptId={prompt?.id as string}
+                      submitValidate={submitValidate}
+                      variant={SelectBarVarient as OptionsBarVariants}
+                      variableId={VariableId}
+                      close={handleCloseSelectBar}
+                    />
+                  </motion.div>
                 </Box>
               )}
             </Box>

@@ -347,6 +347,9 @@ const OptionsBar: FC<optionbarProps> = ({
                   display: "flex",
                   flexDirection: "column",
                   gap: "0.5rem",
+                  maxHeight: "calc(100vh - 380px)",
+                  overflowY: "auto",
+                  scrollbarWidth: "none",
                 }}
               >
                 {renderCheckboxes()}
