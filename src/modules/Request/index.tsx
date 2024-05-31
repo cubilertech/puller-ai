@@ -123,17 +123,19 @@ const RequestPage: FC = () => {
     isLoading: allPromptLoading,
   } = useGetAllPrompt();
 
-  const handleSubmitPrompt = () => {
-    submitPrompt({ message: query });
+  const handleSubmitPrompt = async () => {
+    await submitPrompt({ message: query });
     dispatch(setSubmitPromptLoading(true));
     dispatch(setLoadingText("Processing"));
     dispatch(UpdatePromptValue(query));
+    setQuery("");
   };
-  const handleLatestPrompt = (queryText: string) => {
-    submitPrompt({ message: queryText });
+  const handleLatestPrompt = async (queryText: string) => {
+    await submitPrompt({ message: queryText });
     dispatch(setSubmitPromptLoading(true));
     dispatch(setLoadingText("Processing"));
     dispatch(UpdatePromptValue(queryText));
+    setQuery("");
   };
 
   const handleUpdate = () => {
@@ -215,6 +217,23 @@ const RequestPage: FC = () => {
     original:
       "Can I get data to understand how Flyease technology products have been performing this past year? I want to be able to pivot by SKU or by store, to understand transactional data by week.",
   };
+  useEffect(() => {
+    if (
+      !id &&
+      !submitPromptLoading &&
+      !submitExecuteLoading &&
+      !submitValidateLoading &&
+      !loading
+    ) {
+      setIsOpenSelectBar(false);
+    }
+  }, [
+    id,
+    submitPromptLoading,
+    submitExecuteLoading,
+    submitValidateLoading,
+    loading,
+  ]);
 
   return (
     <>
@@ -331,7 +350,7 @@ const RequestPage: FC = () => {
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-between",
-                    transition: "0.2s ease"
+                    transition: "0.2s ease",
                   }}
                 >
                   {CurrentType === "SQL" ? (
@@ -405,9 +424,9 @@ const RequestPage: FC = () => {
                   }}
                 >
                   <motion.div
-                   initial={{ opacity: 0, x: 400 }}
-                   animate={{ opacity: 1, x: 0 }}
-                   transition={{ duration: 0.4, ease: "easeInOut" }}
+                    initial={{ opacity: 0, x: 300 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, ease: "easeInOut" }}
                   >
                     <OptionsBar
                       PromptId={prompt?.id as string}

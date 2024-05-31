@@ -221,55 +221,65 @@ const OptionsBar: FC<optionbarProps> = ({
                   />
                 </Box>
               </Box>
+
               <Typography color={palette.base.white} variant="text-sm-regular">
                 {findVariableById?.discription
                   ? findVariableById.discription
                   : "Enter any number you want to update"}
               </Typography>
-              {findVariableById?.type === "numeric" ? (
-                <Input
-                  disableUnderline
-                  fullWidth
-                  type="number"
-                  onChange={(e) => HandleInputChange(e.target.value)}
-                  value={InputValue}
-                  placeholder="Enter Number you want to update"
-                  sx={{
-                    borderRadius: "5px",
-                    padding: "0.5rem 1rem",
-                    border: "2px solid rgba(196, 196, 196, 0.6)",
-                    mt: 0.5,
-                    width: "100%",
-                  }}
-                />
-              ) : (
-                <Paper
-                  variant="dark-border"
-                  sx={{
-                    minHeight: "10rem",
-                    padding: "0.5rem 1rem",
-                    display: "flex",
-                    maxHeight: "15rem",
-                    margin: 0,
-                    border: `2px solid ${palette.opacity.darkerGray}`,
-                  }}
-                >
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  width: "100%",
+                  height: "calc(100vh - 365px)",
+                }}
+              >
+                {findVariableById?.type === "numeric" ? (
                   <Input
-                    onChange={(e) => HandleInputChange(e.target.value)}
-                    sx={{
-                      boxSizing: "border-box",
-                      minHeight: "100%",
-                      alignItems: "flex-start",
-                      overflowY: "auto",
-                    }}
-                    value={InputValue}
-                    multiline
-                    fullWidth
                     disableUnderline
-                    autoFocus
+                    fullWidth
+                    type="number"
+                    onChange={(e) => HandleInputChange(e.target.value)}
+                    value={InputValue}
+                    placeholder="Enter Number you want to update"
+                    sx={{
+                      borderRadius: "5px",
+                      padding: "0.5rem 1rem",
+                      border: "2px solid rgba(196, 196, 196, 0.6)",
+                      mt: 0.5,
+                      width: "100%",
+                    }}
                   />
-                </Paper>
-              )}
+                ) : (
+                  <Paper
+                    variant="dark-border"
+                    sx={{
+                      minHeight: "10rem",
+                      padding: "0.5rem 1rem",
+                      display: "flex",
+                      maxHeight: "15rem",
+                      margin: 0,
+                      border: `2px solid ${palette.opacity.darkerGray}`,
+                    }}
+                  >
+                    <Input
+                      onChange={(e) => HandleInputChange(e.target.value)}
+                      sx={{
+                        boxSizing: "border-box",
+                        minHeight: "100%",
+                        alignItems: "flex-start",
+                        overflowY: "auto",
+                      }}
+                      value={InputValue}
+                      multiline
+                      fullWidth
+                      disableUnderline
+                      autoFocus
+                    />
+                  </Paper>
+                )}
+              </Box>
             </Box>
 
             <Box>
@@ -347,7 +357,7 @@ const OptionsBar: FC<optionbarProps> = ({
                   display: "flex",
                   flexDirection: "column",
                   gap: "0.5rem",
-                  maxHeight: "calc(100vh - 380px)",
+                  height: "calc(100vh - 380px)",
                   overflowY: "auto",
                   scrollbarWidth: "none",
                 }}
