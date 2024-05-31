@@ -60,12 +60,13 @@ const DataTable: FC<DataTableProps> = ({ data }) => {
         const cols = ["Region","Product"];
         const selectVar = data?.variables?.find((item)=>item.id === 'revenue_txt');
         if(selectVar){
-          if([selectVar.value].includes('Total Units Sold ')){
+          const val = (selectVar.value as string).toLowerCase();
+          if(val.includes('units')){
             cols.push('Units Sold');
-          }else if([selectVar.value].includes('Avg Profit Margin ')){
+          }else if(val.includes('margin')){
             cols.push('Profit Margin');
           }
-          else if([selectVar.value].includes('Total Revenue ')){
+          else if(val.includes('revenue')){
             cols.push('Revenue');
           }
         } 
