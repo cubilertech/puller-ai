@@ -11,27 +11,28 @@ import { OptionsBarVariants } from "@/utils/types";
 import { palette } from "@/theme/Palette";
 import { Icon } from "../Icon";
 import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
-import {
-  setCheckedItems,
-  toggleCheckbox,
-} from "@/libs/redux/features/checkbox";
 import { getVariables, updateVariable } from "@/libs/redux/features/variables";
+import { setSubmitValidateLoading } from "@/libs/redux/features/globalLoadings";
 
 interface optionbarProps {
   variant: OptionsBarVariants;
   variableId?: string;
   close?: () => void | undefined;
-  handleUpdate?: () => void;
+  submitValidate: (data: any) => void;
+  PromptId: string;
 }
 
 const OptionsBar: FC<optionbarProps> = ({
   variant,
   variableId,
   close,
-  handleUpdate,
+  submitValidate,
+  PromptId,
 }) => {
   const dispatch = useAppDispatch();
   const variables = useAppSelector(getVariables);
+  const [checkedItems, setCheckedItems] = useState<boolean[]>([]);
+  const [selectedItems, setSelectedItems] = useState<string>("");
 
   const [InputValue, setInputValue] = useState<string | number>("");
   const findVariableById = useMemo(() => {
@@ -43,17 +44,47 @@ const OptionsBar: FC<optionbarProps> = ({
     }
     return variableById;
   }, [variables, variableId]);
+
   const HandleInputChange = (value: any) => {
     setInputValue(value);
 
     dispatch(updateVariable({ id: variableId as string, value: value }));
   };
-  const checkedItems = useAppSelector((state: any) => state.checkbox);
-  const [selectedItems, setSelectedItems] = useState<string>("");
 
   useEffect(() => {
     if (findVariableById?.selectData) {
-      const updatedSelectedItems = findVariableById?.selectData
+      if (variant === "round-checkbox") {
+        const formattedValue = findVariableById.value
+          .toString()
+          .replace(/ /g, "");
+
+        const matchIndex = findVariableById.selectData.findIndex(
+          (item) => item.replace(/ /g, "") === formattedValue
+        );
+        console.log(
+          matchIndex,
+          "data",
+          findVariableById.selectData,
+          findVariableById.value
+        );
+        const initialCheckedItems = findVariableById.selectData.map(
+          (_, index) => index === (matchIndex !== -1 ? matchIndex : 0)
+        );
+
+        setCheckedItems(initialCheckedItems);
+        setSelectedItems(
+          findVariableById.selectData[matchIndex !== -1 ? matchIndex : 0]
+        );
+      } else {
+        const initialCheckedItems = findVariableById.selectData.map(() => true);
+        setCheckedItems(initialCheckedItems);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    if (findVariableById?.selectData) {
+      const updatedSelectedItems = findVariableById.selectData
         .filter((_, index) => checkedItems[index])
         .map((item) => item + " ")
         .join("");
@@ -65,33 +96,75 @@ const OptionsBar: FC<optionbarProps> = ({
         })
       );
     }
-  }, [checkedItems]);
+  }, [checkedItems, findVariableById]);
 
-  const handleItemClick = (item: string, index: number) => {
-    if (variant === "round-checkbox" && findVariableById?.selectData) {
-      // If it's a round-checkbox, only one item can be selected
-      const updatedCheckedItems = findVariableById?.selectData.map(
+  const handleSquareCheckboxClick = (index: number) => {
+    const updatedCheckedItems = [...checkedItems];
+    updatedCheckedItems[index] = !updatedCheckedItems[index];
+    setCheckedItems(updatedCheckedItems);
+  };
+
+  const handleRoundCheckboxClick = (item: string, index: number) => {
+    if (findVariableById?.selectData) {
+      const updatedCheckedItems = findVariableById.selectData.map(
         (_, i) => i === index
       );
-      dispatch(setCheckedItems(updatedCheckedItems));
+      setCheckedItems(updatedCheckedItems);
       setSelectedItems(item + " ");
-    } else {
-      // For square-checkbox, multiple items can be selected
-      let updatedSelectedItems;
-      if (selectedItems.includes(item)) {
-        updatedSelectedItems = selectedItems.replace(`${item} `, "");
-      } else {
-        updatedSelectedItems = selectedItems + `${item} `;
-      }
-      setSelectedItems(updatedSelectedItems);
-      dispatch(toggleCheckbox({ index }));
     }
   };
-  // const handleUpdateVariable = () => {
-  //   dispatch(updateValue(selectedItems));
-  // };
 
-  // if (variant === "input")
+  const renderCheckboxes = () => {
+    if (findVariableById?.selectData) {
+      return findVariableById?.selectData.map((item: string, index: number) => (
+        <label
+          key={index}
+          onClick={() => {
+            variant === "round-checkbox"
+              ? handleRoundCheckboxClick(item, index)
+              : handleSquareCheckboxClick(index);
+          }}
+        >
+          <Paper
+            variant="light-border"
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              padding: "0 0.5rem 0 1rem",
+              borderRadius: "5px",
+            }}
+          >
+            <Typography variant="text-md-regular">{item}</Typography>
+            <Checkbox
+              checked={!!checkedItems[index]}
+              sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
+              icon={
+                variant === "round-checkbox" ? <CircleOutlined /> : undefined
+              }
+              checkedIcon={
+                variant === "round-checkbox" ? (
+                  <Icon icon="roundCheckbox" width={18} height={18} />
+                ) : (
+                  <Icon icon="squareCheckbox" width={18} height={18} />
+                )
+              }
+            />
+          </Paper>
+        </label>
+      ));
+    }
+  };
+
+  console.log(selectedItems, "selectedItems", variables);
+
+  const handleUpdate = () => {
+    if (PromptId) {
+      submitValidate({ prompt: PromptId, variables: variables });
+      dispatch(setSubmitValidateLoading(true));
+    }
+  };
+
   switch (variant) {
     case "input":
       return (
@@ -266,64 +339,17 @@ const OptionsBar: FC<optionbarProps> = ({
               </Typography>
               <Typography color={palette.base.white} variant="text-sm-regular">
                 {findVariableById?.discription
-                  ? findVariableById?.discription
-                  : "Chose your Data"}
+                  ? findVariableById.discription
+                  : "Please select any of the given data"}
               </Typography>
-
               <Box
                 sx={{
                   display: "flex",
                   flexDirection: "column",
-                  gap: "10px",
+                  gap: "0.5rem",
                 }}
               >
-                {findVariableById?.selectData
-                  ? findVariableById?.selectData.map((item, index) => (
-                      <label
-                        key={index}
-                        onClick={() => handleItemClick(item, index)}
-                      >
-                        <Paper
-                          variant="light-border"
-                          sx={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "space-between",
-                            padding: "0 0.5rem 0 1rem",
-                            borderRadius: "5px",
-                          }}
-                        >
-                          <Typography variant="text-md-regular">
-                            {item}
-                          </Typography>
-                          <Checkbox
-                            checked={!!checkedItems[index]}
-                            sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
-                            icon={
-                              variant === "round-checkbox" ? (
-                                <CircleOutlined />
-                              ) : undefined
-                            }
-                            checkedIcon={
-                              variant === "round-checkbox" ? (
-                                <Icon
-                                  icon="roundCheckbox"
-                                  width={18}
-                                  height={18}
-                                />
-                              ) : (
-                                <Icon
-                                  icon="squareCheckbox"
-                                  width={18}
-                                  height={18}
-                                />
-                              )
-                            }
-                          />
-                        </Paper>
-                      </label>
-                    ))
-                  : ""}
+                {renderCheckboxes()}
               </Box>
             </Box>
             <Box>
@@ -336,10 +362,10 @@ const OptionsBar: FC<optionbarProps> = ({
                 }}
               >
                 <Button
-                  disabled={selectedItems === "" ? true : false}
+                  onClick={handleUpdate}
+                  sx={{ height: "38px !important" }}
                   label="Update"
                   variant="contained"
-                  onClick={handleUpdate}
                 />
               </Box>
             </Box>
@@ -347,206 +373,209 @@ const OptionsBar: FC<optionbarProps> = ({
         </Box>
       );
   }
-
-  // else
-  //   return (
-  //     <Box
-  //       sx={{
-  //         width: "100%",
-  //         height: "100%",
-  //         display: "flex",
-  //         flexDirection: "column",
-  //         justifyContent: "space-between",
-  //       }}
-  //     >
-  //       <Paper
-  //         variant="dark-border"
-  //         sx={{
-  //           display: "flex",
-  //           flexDirection: "column",
-  //           padding: "1rem",
-  //           minHeight: "calc(100vh - 200px)",
-  //           justifyContent: "space-between",
-  //         }}
-  //       >
-  //         {(variant === "square-checkbox" || variant === "round-checkbox") && (
-  //           <Box
-  //             sx={{
-  //               display: "flex",
-  //               flexDirection: "column",
-  //               gap: "1rem",
-  //             }}
-  //           >
-  //             <Typography
-  //               color={palette.base.white}
-  //               variant="text-md-regular"
-  //               sx={{ display: "flex", justifyContent: "space-between" }}
-  //             >
-  //               Data Type{" "}
-  //               <Box onClick={close}>
-  //                 <CloseIcon
-  //                   sx={{
-  //                     ":hover": {
-  //                       cursor: "pointer",
-  //                     },
-  //                   }}
-  //                 />
-  //               </Box>
-  //             </Typography>
-  //             <Typography color={palette.base.white} variant="text-sm-regular">
-  //               “TXN_SZNAL” table . This query uses a table
-  //               called Transactions that contains the following columns:
-  //             </Typography>
-
-  //             <Box
-  //               sx={{
-  //                 display: "flex",
-  //                 flexDirection: "column",
-  //                 gap: "10px",
-  //               }}
-  //             >
-  //               {OPTIONBAR_DATA.map((item, index) => (
-  //                 <label
-  //                   key={index}
-  //                   onClick={() => handleItemClick(item, index)}
-  //                 >
-  //                   <Paper
-  //                     variant="light-border"
-  //                     sx={{
-  //                       display: "flex",
-  //                       alignItems: "center",
-  //                       justifyContent: "space-between",
-  //                       padding: "0 0.5rem 0 1rem",
-  //                       borderRadius: "5px",
-  //                     }}
-  //                   >
-  //                     <Typography variant="text-md-regular">{item}</Typography>
-  //                     <Checkbox
-  //                       checked={!!checkedItems[index]}
-  //                       sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
-  //                       icon={
-  //                         variant === "round-checkbox" ? (
-  //                           <CircleOutlined />
-  //                         ) : undefined
-  //                       }
-  //                       checkedIcon={
-  //                         variant === "round-checkbox" ? (
-  //                           <Icon icon="roundCheckbox" width={18} height={18} />
-  //                         ) : (
-  //                           <Icon
-  //                             icon="squareCheckbox"
-  //                             width={18}
-  //                             height={18}
-  //                           />
-  //                         )
-  //                       }
-  //                     />
-  //                   </Paper>
-  //                 </label>
-  //               ))}
-  //             </Box>
-  //           </Box>
-  //         )}
-
-  //         {variant === "dropdown" && (
-  //           <Box
-  //             sx={{
-  //               display: "flex",
-  //               flexDirection: "column",
-  //               gap: "1rem",
-  //             }}
-  //           >
-  //             <Typography
-  //               color={palette.base.white}
-  //               variant="text-md-regular"
-  //               sx={{ display: "flex", justifyContent: "space-between" }}
-  //             >
-  //               Data Type{" "}
-  //               <Box onClick={close}>
-  //                 <CloseIcon
-  //                   sx={{
-  //                     ":hover": {
-  //                       cursor: "pointer",
-  //                     },
-  //                   }}
-  //                 />
-  //               </Box>
-  //             </Typography>
-  //             <Typography color={palette.base.white} variant="text-sm-regular">
-  //               “TXN_SZNAL” table . This query uses a table
-  //               called Transactions that contains the following columns:
-  //             </Typography>
-
-  //             <DropdownSelect />
-  //           </Box>
-  //         )}
-
-  //         {variant === "options-dropdown" && (
-  //           <Box
-  //             sx={{
-  //               display: "flex",
-  //               flexDirection: "column",
-  //               gap: "1rem",
-  //             }}
-  //           >
-  //             <Typography
-  //               color={palette.base.white}
-  //               variant="text-md-regular"
-  //               sx={{ display: "flex", justifyContent: "space-between" }}
-  //             >
-  //               Data Type{" "}
-  //               <Box onClick={close}>
-  //                 <CloseIcon
-  //                   sx={{
-  //                     ":hover": {
-  //                       cursor: "pointer",
-  //                     },
-  //                   }}
-  //                 />
-  //               </Box>
-  //             </Typography>
-  //             <Typography color={palette.base.white} variant="text-sm-regular">
-  //               “TXN_SZNAL” table . This query uses a table
-  //               called Transactions that contains the following columns:
-  //             </Typography>
-
-  //             <Box
-  //               mt={"1rem"}
-  //               display={"flex"}
-  //               flexDirection={"column"}
-  //               gap={"10px"}
-  //             >
-  //               <Typography variant="text-sm">And</Typography>
-  //               <DropdownSelect />
-  //               <DropdownSelect />
-  //               <DropdownSelect />
-  //               <Typography variant="text-sm">OR</Typography>
-  //               <DropdownSelect />
-  //               <DropdownSelect />
-  //               <DropdownSelect />
-  //             </Box>
-  //           </Box>
-  //         )}
-
-  //         <Box>
-  //           <Divider type="light" />
-  //           <Box
-  //             sx={{
-  //               display: "flex",
-  //               justifyContent: "flex-end",
-  //               mt: "1rem",
-  //             }}
-  //           >
-  //             <Button
-  //               label="Update"
-  //               variant="contained"
-  //               onClick={() => handleUpdateVariable()}
-  //             />
-  //           </Box>
-  //         </Box>
-  //       </Paper>
-  //     </Box>
-  //   );
 };
 
 export default OptionsBar;
+
+// else
+//   return (
+//     <Box
+//       sx={{
+//         width: "100%",
+//         height: "100%",
+//         display: "flex",
+//         flexDirection: "column",
+//         justifyContent: "space-between",
+//       }}
+//     >
+//       <Paper
+//         variant="dark-border"
+//         sx={{
+//           display: "flex",
+//           flexDirection: "column",
+//           padding: "1rem",
+//           minHeight: "calc(100vh - 200px)",
+//           justifyContent: "space-between",
+//         }}
+//       >
+//         {(variant === "square-checkbox" || variant === "round-checkbox") && (
+//           <Box
+//             sx={{
+//               display: "flex",
+//               flexDirection: "column",
+//               gap: "1rem",
+//             }}
+//           >
+//             <Typography
+//               color={palette.base.white}
+//               variant="text-md-regular"
+//               sx={{ display: "flex", justifyContent: "space-between" }}
+//             >
+//               Data Type{" "}
+//               <Box onClick={close}>
+//                 <CloseIcon
+//                   sx={{
+//                     ":hover": {
+//                       cursor: "pointer",
+//                     },
+//                   }}
+//                 />
+//               </Box>
+//             </Typography>
+//             <Typography color={palette.base.white} variant="text-sm-regular">
+//               “TXN_SZNAL” table . This query uses a table
+//               called Transactions that contains the following columns:
+//             </Typography>
+
+//             <Box
+//               sx={{
+//                 display: "flex",
+//                 flexDirection: "column",
+//                 gap: "10px",
+//               }}
+//             >
+//               {OPTIONBAR_DATA.map((item, index) => (
+//                 <label
+//                   key={index}
+//                   onClick={() => handleItemClick(item, index)}
+//                 >
+//                   <Paper
+//                     variant="light-border"
+//                     sx={{
+//                       display: "flex",
+//                       alignItems: "center",
+//                       justifyContent: "space-between",
+//                       padding: "0 0.5rem 0 1rem",
+//                       borderRadius: "5px",
+//                     }}
+//                   >
+//                     <Typography variant="text-md-regular">{item}</Typography>
+//                     <Checkbox
+//                       checked={!!checkedItems[index]}
+//                       sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
+//                       icon={
+//                         variant === "round-checkbox" ? (
+//                           <CircleOutlined />
+//                         ) : undefined
+//                       }
+//                       checkedIcon={
+//                         variant === "round-checkbox" ? (
+//                           <Icon icon="roundCheckbox" width={18} height={18} />
+//                         ) : (
+//                           <Icon
+//                             icon="squareCheckbox"
+//                             width={18}
+//                             height={18}
+//                           />
+//                         )
+//                       }
+//                     />
+//                   </Paper>
+//                 </label>
+//               ))}
+//             </Box>
+//           </Box>
+//         )}
+
+//         {variant === "dropdown" && (
+//           <Box
+//             sx={{
+//               display: "flex",
+//               flexDirection: "column",
+//               gap: "1rem",
+//             }}
+//           >
+//             <Typography
+//               color={palette.base.white}
+//               variant="text-md-regular"
+//               sx={{ display: "flex", justifyContent: "space-between" }}
+//             >
+//               Data Type{" "}
+//               <Box onClick={close}>
+//                 <CloseIcon
+//                   sx={{
+//                     ":hover": {
+//                       cursor: "pointer",
+//                     },
+//                   }}
+//                 />
+//               </Box>
+//             </Typography>
+//             <Typography color={palette.base.white} variant="text-sm-regular">
+//               “TXN_SZNAL” table . This query uses a table
+//               called Transactions that contains the following columns:
+//             </Typography>
+
+//             <DropdownSelect />
+//           </Box>
+//         )}
+
+//         {variant === "options-dropdown" && (
+//           <Box
+//             sx={{
+//               display: "flex",
+//               flexDirection: "column",
+//               gap: "1rem",
+//             }}
+//           >
+//             <Typography
+//               color={palette.base.white}
+//               variant="text-md-regular"
+//               sx={{ display: "flex", justifyContent: "space-between" }}
+//             >
+//               Data Type{" "}
+//               <Box onClick={close}>
+//                 <CloseIcon
+//                   sx={{
+//                     ":hover": {
+//                       cursor: "pointer",
+//                     },
+//                   }}
+//                 />
+//               </Box>
+//             </Typography>
+//             <Typography color={palette.base.white} variant="text-sm-regular">
+//               “TXN_SZNAL” table . This query uses a table
+//               called Transactions that contains the following columns:
+//             </Typography>
+
+//             <Box
+//               mt={"1rem"}
+//               display={"flex"}
+//               flexDirection={"column"}
+//               gap={"10px"}
+//             >
+//               <Typography variant="text-sm">And</Typography>
+//               <DropdownSelect />
+//               <DropdownSelect />
+//               <DropdownSelect />
+//               <Typography variant="text-sm">OR</Typography>
+//               <DropdownSelect />
+//               <DropdownSelect />
+//               <DropdownSelect />
+//             </Box>
+//           </Box>
+//         )}
+
+//         <Box>
+//           <Divider type="light" />
+//           <Box
+//             sx={{
+//               display: "flex",
+//               justifyContent: "flex-end",
+//               mt: "1rem",
+//             }}
+//           >
+//             <Button
+//               label="Update"
+//               variant="contained"
+//               onClick={() => handleUpdateVariable()}
+//             />
+//           </Box>
+//         </Box>
+//       </Paper>
+//     </Box>
+//   );
+// };
+
+// export default OptionsBar;

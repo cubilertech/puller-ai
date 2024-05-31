@@ -156,12 +156,12 @@ const RequestPage: FC = () => {
   const handleOpenGraph = () => {
     setCurrentType("graph");
   };
-  const UpdateVariables = () => {
-    if (prompt?.id) {
-      submitValidate({ prompt: prompt?.id, variables: variables });
-      dispatch(setSubmitValidateLoading(true));
-    }
-  };
+  // const UpdateVariables = () => {
+  //   if (prompt?.id) {
+  //     submitValidate({ prompt: prompt?.id, variables: variables });
+  //     dispatch(setSubmitValidateLoading(true));
+  //   }
+  // };
   console.log(SelectBarVarient, "SelectBarVarient");
 
   const handleUpdateVariable = (value?: UpdateVariables) => {
@@ -404,7 +404,8 @@ const RequestPage: FC = () => {
                   }}
                 >
                   <OptionsBar
-                    handleUpdate={UpdateVariables}
+                    PromptId={prompt?.id as string}
+                    submitValidate={submitValidate}
                     variant={SelectBarVarient as OptionsBarVariants}
                     variableId={VariableId}
                     close={handleCloseSelectBar}

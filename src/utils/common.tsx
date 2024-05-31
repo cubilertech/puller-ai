@@ -446,7 +446,7 @@ export const UpdateData = (variables: Variable[], prompt: string) => {
         }
       };
       const SQl_Discriptipn = {
-        description: `This query joins the Products table with [${variables?.[0]?.id}] [${variables?.[1]?.id}], and filters for products where the current stock level is below the reorder level. [${variables?.[2]?.id}] Finally, it includes the reorder level and the current stock level in the result set. \nNote that the Goods table is a table that stores the stock in and out for each product, with separate fields for the quantity and the date. The Stock field is calculated as the difference between the In and Out fields, and the ReorderLevel field is a threshold value that triggers a reorder when the stock level falls below it.`,
+        description: `This query joins the Products table with [${variables?.[0]?.id}] on the [${variables?.[1]?.id}] field, and filters for products where the current stock level is below the reorder level. [${variables?.[2]?.id}] Finally, it includes the reorder level and the current stock level in the result set. \nNote that the Goods table is a table that stores the stock in and out for each product, with separate fields for the quantity and the date. The Stock field is calculated as the difference between the In and Out fields, and the ReorderLevel field is a threshold value that triggers a reorder when the stock level falls below it.`,
         sql: `SELECT
         Products.ID,
         Products.Product,
