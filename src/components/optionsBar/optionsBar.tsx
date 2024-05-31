@@ -80,7 +80,7 @@ const OptionsBar: FC<optionbarProps> = ({
         setCheckedItems(initialCheckedItems);
       }
     }
-  }, []);
+  }, [variant]);
 
   useEffect(() => {
     if (findVariableById?.selectData) {
