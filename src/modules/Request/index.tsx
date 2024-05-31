@@ -42,6 +42,7 @@ import {
 } from "@/libs/redux/features/globalLoadings";
 import { getVariables, setVariables } from "@/libs/redux/features/variables";
 import { OptionsBar } from "@/components/optionsBar";
+import SelectionTextEditor from "@/components/SelectionTextEditor";
 
 const SkeletonLoader = () => {
   return (
@@ -79,6 +80,14 @@ const RequestPage: FC = () => {
   const [CurrentType, setCurrentType] = useState<"text" | "graph" | "SQL">(
     "text"
   );
+  const [textSelected, setTextSelected] = useState<string>("");
+  const [selectionIndices, setSelectionIndices] = useState({
+    start: 0,
+    end: 0,
+  });
+  const [isEditingText, setIsEditingText] = useState(false);
+  const [description, setDescription] = useState("");
+
   const [VariableId, setVariableId] = useState<string>("");
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
@@ -150,6 +159,7 @@ const RequestPage: FC = () => {
     if (submitValidateSuccess && validatedPrompt) {
       return validatedPrompt;
     } else {
+      setDescription(singlePrompt?.description as string);
       return singlePrompt;
     }
   }, [singlePrompt, submitValidateSuccess]);
@@ -214,6 +224,34 @@ const RequestPage: FC = () => {
     response: prompt?.description as string,
     original:
       "Can I get data to understand how Flyease technology products have been performing this past year? I want to be able to pivot by SKU or by store, to understand transactional data by week.",
+  };
+
+  const handleMouseUp = () => {
+    const selection = window.getSelection();
+    if (selection && selection.toString().length > 0) {
+      const range = selection.getRangeAt(0);
+      const start = range.startOffset;
+      const end = range.endOffset;
+      setTextSelected(selection.toString());
+      setIsEditingText(true);
+      // setSelectedText(selection.toString());
+      // handleTextSelection(selection.toString());
+      setSelectionIndices({ start, end });
+    }
+  };
+  console.log(textSelected, "text", selectionIndices, "indices");
+
+  const handleUpdateText = () => {
+    if (textSelected.trim().length > 0) {
+    let str = description;
+    const updatedParagraph =
+      str.slice(0, selectionIndices.start) +
+      textSelected +
+      str.slice(selectionIndices.end);
+    setDescription(updatedParagraph);
+    setIsEditingText(false);
+    console.log(updatedParagraph, "updated", selectionIndices, "indices");
+    }
   };
 
   return (
@@ -315,7 +353,10 @@ const RequestPage: FC = () => {
                     mt: 1,
                   }}
                 >
-                  <ResponseArea isLoading={submitValidateLoading} />
+                  <ResponseArea
+                    isLoading={submitValidateLoading}
+                    handleMouseUp={() => {}}
+                  />
 
                   <QueryComponent isLoading={submitValidateLoading} />
                 </Box>
@@ -323,7 +364,7 @@ const RequestPage: FC = () => {
                 <Box
                   sx={{
                     height: "calc(100vh - 150px)",
-                    width: isOpenSelectBar
+                    width: isOpenSelectBar || isEditingText
                       ? { lg: "76%", md: "70%", xs: "60%" }
                       : "100%",
                     m: "auto",
@@ -381,9 +422,12 @@ const RequestPage: FC = () => {
                       }}
                     >
                       <ResponseArea
-                        prompt={prompt as Prompt}
+                        prompt={
+                          { ...prompt, description: description } as Prompt
+                        }
                         handleUpdate={handleUpdateVariable}
                         isLoading={singlePromptLoading}
+                        handleMouseUp={handleMouseUp}
                       />
                     </Box>
                   )}
@@ -408,6 +452,22 @@ const RequestPage: FC = () => {
                     variant={SelectBarVarient as OptionsBarVariants}
                     variableId={VariableId}
                     close={handleCloseSelectBar}
+                  />
+                </Box>
+              )}
+              {isEditingText && (
+                <Box
+                  sx={{
+                    height: "calc(100vh - 160px)",
+                    mt: 1,
+                    width: "calc(100vw - 79vw)",
+                  }}
+                >
+                  <SelectionTextEditor
+                    text={textSelected}
+                    setText={setTextSelected}
+                    close={() => setIsEditingText(false)}
+                    handleSubmit={handleUpdateText}
                   />
                 </Box>
               )}

@@ -1,6 +1,6 @@
 import { palette } from "@/theme/Palette";
 import { Box, Skeleton, Typography } from "@mui/material";
-import { FC, useMemo } from "react";
+import { FC , useMemo } from "react";
 import { Paper } from "../Paper";
 import "./responseArea.css";
 import { Prompt, UpdateVariables } from "@/utils/types";
@@ -10,12 +10,14 @@ interface ResponseAreaProps {
   prompt?: Prompt;
   handleUpdate?: (value: UpdateVariables) => void;
   isLoading?: boolean;
+  handleMouseUp: () => void;
 }
 
 const ResponseArea: FC<ResponseAreaProps> = ({
   prompt,
   handleUpdate,
   isLoading,
+  handleMouseUp,
 }) => {
   const responseTxt = useMemo(() => {
     const handleClickVariable = (value: UpdateVariables) => {
@@ -124,6 +126,7 @@ const ResponseArea: FC<ResponseAreaProps> = ({
               }}
               component="div"
               className="animated-genrated-text"
+              onMouseUp={handleMouseUp}
             >
               {responseTxt}
             </Typography>
