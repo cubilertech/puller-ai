@@ -1,4 +1,4 @@
-import { Fragment, useMemo } from "react";
+import { Fragment } from "react";
 import { MODES } from "./constants";
 import { Prompt, UpdateVariables, Variable } from "./types";
 import { Tooltip } from "@/components/Tooltip";
@@ -160,6 +160,8 @@ export const replaceIdWithVariable = (
                   type: variable.type,
                   id: placeholder,
                 };
+                const SelectedVariableId = localStorage.getItem("variableId");
+
                 const replacement = variable.detail ? (
                   variable.type === "String_hover" ? (
                     <Tooltip variant="info" description={variable.detail}>
@@ -168,7 +170,11 @@ export const replaceIdWithVariable = (
                   ) : (
                     <Tooltip variant="info" description={variable.detail}>
                       <span
-                        className="updateValue"
+                        className={
+                          SelectedVariableId === placeholder
+                            ? "selected-value"
+                            : "updateValue"
+                        }
                         onClick={() => handleClickVariable(values)}
                       >
                         {value}
@@ -178,7 +184,11 @@ export const replaceIdWithVariable = (
                 ) : (
                   <span
                     key={i}
-                    className="updateValue"
+                    className={
+                      SelectedVariableId === placeholder
+                        ? "selected-value"
+                        : "updateValue"
+                    }
                     onClick={() => handleClickVariable(values)}
                   >
                     {value}

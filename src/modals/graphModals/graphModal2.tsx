@@ -194,8 +194,8 @@ const GraphModal2 = ({ prompt, validatePrompt }: props) => {
     //   return acc;
     // }, []);
     const newArray = variables;
-    const index = newArray.findIndex((item)=>item.model === updatedPrompt.id);
-    if(index >= 0){
+    const index = newArray.findIndex((item) => item.model === updatedPrompt.id);
+    if (index >= 0) {
       newArray[index].value = Number(updatedPrompt.variables?.[0]?.value);
     }
 

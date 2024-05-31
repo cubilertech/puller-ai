@@ -170,6 +170,7 @@ const RequestPage: FC = () => {
     if (value) {
       console.log("Updated value:", value);
       // Add your logic here to handle the updated value
+      localStorage.setItem("variableId", value.id);
       setVariableId(value.id);
       setIsOpenSelectBar(true);
       if (value.type === "numeric" || value.type === "String") {
@@ -194,6 +195,7 @@ const RequestPage: FC = () => {
   const handleCloseSelectBar = () => {
     setIsOpenSelectBar(false);
     setSelectBarVarient(null);
+    localStorage.removeItem("variableId");
   };
   // const handleOpenSelectBar = () => {
   //   setIsOpenSelectBar(true);
@@ -206,6 +208,7 @@ const RequestPage: FC = () => {
   useEffect(() => {
     setLoading(false);
     refetchAllPrompt();
+    localStorage.removeItem("variableId");
   }, []);
   useEffect(() => {
     if (isSuccessExecute) {
@@ -225,6 +228,7 @@ const RequestPage: FC = () => {
       !submitValidateLoading &&
       !loading
     ) {
+      localStorage.removeItem("variableId");
       setIsOpenSelectBar(false);
     }
   }, [
