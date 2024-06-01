@@ -9,6 +9,7 @@ import Divider from "@/components/Divider/divider";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coy } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { format } from "sql-formatter";
+import { replaceBrandName } from "@/utils/common";
 
 interface SQL_EditorProps {
   handleClose?: () => void | undefined;
@@ -19,7 +20,12 @@ const SQL_Editor: FC<SQL_EditorProps> = ({ handleClose, code }) => {
   const [formattedCode, setFormattedCode] = useState<string>("");
 
   useEffect(() => {
-    if (code) setFormattedCode(format(code, { language: "mysql" }));
+    if (code)
+      setFormattedCode(
+        format(replaceBrandName({ description: code as string }), {
+          language: "mysql",
+        })
+      );
   }, [code]);
   const customCoyStyle = {
     ...coy,

@@ -1,29 +1,25 @@
-Product,Current Stock,Reorder Level,Reorder Quantity,Last in Stock Date
-Product A,250,50,200,2023-05-15
-Product B,180,40,160,2023-04-20
-Product C,300,60,240,2023-06-10
-Product D,220,45,175,2023-05-05
-Product E,280,55,225,2023-07-01
-Product F,190,35,155,2023-04-25
-Product G,270,50,220,2023-05-20
-Product H,260,55,205,2023-07-05
-Product I,200,40,160,2023-04-30
-Product J,240,60,180,2023-06-15
-Product K,290,50,240,2023-05-25
-Product L,210,45,165,2023-05-10
-Product M,230,35,195,2023-04-15
-Product N,270,55,215,2023-07-10
-Product O,250,50,200,2023-05-20
-Product P,180,40,160,2023-04-25
-Product Q,300,60,240,2023-06-20
-Product R,220,45,175,2023-05-15
-Product S,280,55,225,2023-07-05
-Product T,190,35,155,2023-04-30
-Product U,270,50,220,2023-05-25
-Product V,260,55,205,2023-06-10
-Product W,200,40,160,2023-05-01
-Product X,240,60,180,2023-06-15
-Product Y,290,50,240,2023-05-30
-Product Z,210,45,165,2023-05-10
-Product AA,230,35,195,2023-04-20
-Product BB,270,55,215,2023-07-10
+ID,Product,Description,Price,Category,Supplier,Stock,ReorderLevel,LastDateAboveThreshold
+1,Product A,High-quality smartphone with advanced features,12.76,Electronics,Trailblazers,4,11,2024-05-16
+2,Product B,Durable basketball for outdoor play,67.29,Sports,Fashion Fair,4,6,2024-05-25
+3,Product C,Stylish and comfortable home sofa,25.17,Homeware,Acme Inc.,4,17,2024-05-03
+4,Product D,Trendy summer dress,88.13,Clothing,Cozy Home,6,13,2024-05-13
+5,Product E,Modern and sleek kitchen toaster,38.38,Homeware,Tech Labs,3,16,2024-05-26
+6,Product F,Noise-canceling wireless headphones,24.53,Electronics,Fashion Fair,5,10,2024-05-24
+7,Product G,Professional quality tennis racket,57.49,Sports,Tech Labs,5,14,2024-05-04
+8,Product H,Inspirational self-help book,42.59,Books,Trailblazers,2,8,2024-05-15
+9,Product I,Interactive and educational toy for kids,11.89,Toys,Fashion Fair,8,12,2024-05-10
+10,Product J,4K Ultra HD Smart TV,34.99,Electronics,Tech Labs,6,15,2024-05-20
+11,Product K,Comfortable and stylish men’s jacket,23.77,Clothing,Cozy Home,7,9,2024-05-14
+12,Product L,Bestselling mystery novel,59.99,Books,Acme Inc.,3,7,2024-05-07
+13,Product M,Decorative ceramic vase,18.75,Homeware,Trailblazers,9,11,2024-05-30
+14,Product N,High-performance laptop,72.15,Electronics,Fashion Fair,4,12,2024-05-11
+15,Product O,Water-resistant sports watch,15.29,Sports,Tech Labs,5,10,2024-05-29
+16,Product P,Colorful building blocks for toddlers,27.49,Toys,Cozy Home,6,14,2024-05-08
+17,Product Q,Comprehensive world atlas,37.89,Books,Acme Inc.,7,9,2024-05-22
+18,Product R,Soft and absorbent bath towels,20.99,Homeware,Trailblazers,3,8,2024-05-12
+19,Product S,Stylish and comfortable women's sweater,65.75,Clothing,Fashion Fair,5,13,2024-05-18
+20,Product T,Ergonomic office chair,48.15,Sports,Tech Labs,4,11,2024-05-21
+21,Product U,Popular science fiction novel,29.99,Books,Acme Inc.,2,10,2024-05-23
+22,Product V,Remote-controlled toy car,22.79,Toys,Trailblazers,5,12,2024-05-19
+23,Product W,Wireless gaming mouse,16.45,Electronics,Tech Labs,7,11,2024-05-05
+

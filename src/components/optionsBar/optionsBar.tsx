@@ -208,7 +208,7 @@ const OptionsBar: FC<optionbarProps> = ({
                   color={palette.base.white}
                   variant="text-md-regular"
                 >
-                  Seasonal Transactions
+                  Update Variable
                 </Typography>
                 <Box onClick={close}>
                   <CloseIcon
