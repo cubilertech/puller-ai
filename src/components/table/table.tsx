@@ -47,31 +47,36 @@ const DataTable: FC<DataTableProps> = ({ data }) => {
     setAnchorEl(null);
   };
 
-  const rows = useMemo(()=>{
-     const selectVar = data?.variables?.find((item)=>item.id === 'top_skus_number');
-     if(data && selectVar && Number(selectVar.value)){
-      return data?.rows?.slice(0,Number(selectVar.value));
-     }else{
-        return data?.rows;
-     }
-  },[data]);
+  const rows = useMemo(() => {
+    const selectVar = data?.variables?.find(
+      (item) => item.id === "top_skus_number"
+    );
+    if (data && selectVar && Number(selectVar.value)) {
+      return data?.rows?.slice(0, Number(selectVar.value));
+    } else {
+      return data?.rows;
+    }
+  }, [data]);
 
-  const columns = useMemo(()=>{
-        const cols = ["Region","Product"];
-        const selectVar = data?.variables?.find((item)=>item.id === 'revenue_txt');
-        if(selectVar){
-          const val = (selectVar.value as string).toLowerCase();
-          if(val.includes('units')){
-            cols.push('Units Sold');
-          }else if(val.includes('margin')){
-            cols.push('Profit Margin');
-          }
-          else if(val.includes('revenue')){
-            cols.push('Revenue');
-          }
-        } 
-        return cols;
-  },[data]);
+  const columns = useMemo(() => {
+    if (data.id === "query#1234567890") {
+      const cols = ["Region", "Product"];
+      const selectVar = data?.variables?.find(
+        (item) => item.id === "revenue_txt"
+      );
+      if (selectVar) {
+        const val = (selectVar.value as string).toLowerCase();
+        if (val.includes("units")) {
+          cols.push("Units Sold");
+        } else if (val.includes("margin")) {
+          cols.push("Profit Margin");
+        } else if (val.includes("revenue")) {
+          cols.push("Revenue");
+        }
+      }
+      return cols;
+    } else return data.columns;
+  }, [data]);
 
   const totalPages = Math.ceil((rows?.length || 0) / rowsPerPage);
 
@@ -94,9 +99,14 @@ const DataTable: FC<DataTableProps> = ({ data }) => {
             scrollbarWidth: "none", // Enable vertical scrolling
           }}
         >
-          <Table stickyHeader sx={{".MuiTable-stickyHeader": {
-              bgcolor: "transparent"
-            }}}>
+          <Table
+            stickyHeader
+            sx={{
+              ".MuiTable-stickyHeader": {
+                bgcolor: "transparent",
+              },
+            }}
+          >
             <TableHead columns={columns as string[]} />
             <TableBody>
               {rows
@@ -233,9 +243,7 @@ const DataTable: FC<DataTableProps> = ({ data }) => {
             onClick={() => handlePageChange(page + 1)}
             label=""
             variant="text"
-            disabled={
-              page === Math.ceil((rows?.length ?? 0) / rowsPerPage) - 1
-            }
+            disabled={page === Math.ceil((rows?.length ?? 0) / rowsPerPage) - 1}
             sx={{
               minWidth: 32,
               width: "32px !important ",
