@@ -247,6 +247,7 @@ export interface appUpdatePayload {
 export type Files = {
   description: string;
   file: File;
+  context: string
 };
 
 export interface createRetrieverPayload {
