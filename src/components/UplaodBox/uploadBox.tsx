@@ -9,6 +9,7 @@ const data = [1, 2, 3];
 interface UplaodBoxProps {
   name?: string;
   size?: number;
+  context?: string;
   handleChangeInput: (event: ChangeEvent<HTMLInputElement>) => void;
   inputValue: string;
 }
@@ -16,6 +17,7 @@ interface UplaodBoxProps {
 const UploadBox: FC<UplaodBoxProps> = ({
   name,
   size,
+  context,
   inputValue,
   handleChangeInput,
 }) => {
@@ -35,12 +37,7 @@ const UploadBox: FC<UplaodBoxProps> = ({
           variant="light-border"
         >
           <Typography variant="text-xxs-regular" mb={1}>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sit
-            amet justo ipsum. Sed accumsan quam vitae est varius fringilla.
-            Pellentesque placerat vestibulum lorem sed porta. Nullam mattis
-            tristique iaculis. Nullam pulvinar sit amet risus pretium auctor.
-            Etiam quis massa pulvinar, aliquam quam vitae, tempus sem. Donec
-            elementum pulvinar odio.
+            {context}
           </Typography>
           <Divider type={"light"} />
           <Box

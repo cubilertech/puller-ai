@@ -11,7 +11,7 @@ export async function POST(req: any, res: any) {
   try {
     const client = await clientPromise;
     const db = client.db('demo_mode');
-    const host =
+    const host = process.env.NEXT_PUBLIC_BASE_URL ||
       req.headers["x-forwarded-host"] || req.headers.host || "localhost:3000";
     const protocol = req.headers["x-forwarded-proto"] || "http"; // This header is often set by proxies
     const baseUrl = `${protocol}://${host}`;
