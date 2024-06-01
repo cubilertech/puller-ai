@@ -335,7 +335,6 @@ const RequestPage: FC = () => {
                     justifyContent: "space-between",
                     overflowX: "hidden",
                     transition: "width 0.5s ease",
-                    mt: 1,
                   }}
                 >
                   <ResponseArea isLoading={submitValidateLoading} />
@@ -350,7 +349,6 @@ const RequestPage: FC = () => {
                       ? { lg: "76%", md: "72%", xs: "60%" }
                       : "100%",
                     m: "auto",
-                    pt: 2,
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-between",
@@ -371,6 +369,7 @@ const RequestPage: FC = () => {
                         zIndex: 10,
                         opacity: 1,
                         mb: 2,
+                        pt: 1
                       }}
                     >
                       <SQL_Editor code={prompt?.sql ?? "Select * from test;"} />
@@ -390,6 +389,7 @@ const RequestPage: FC = () => {
                           zIndex: 10,
                           opacity: 1,
                           mb: 3,
+                          pt: 1
                         }}
                       >
                         <GraphModal2

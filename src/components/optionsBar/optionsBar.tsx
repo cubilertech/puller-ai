@@ -172,7 +172,6 @@ const OptionsBar: FC<optionbarProps> = ({
           sx={{
             width: "100%",
             height: "100%",
-            ml: "1rem",
             overflow: "auto",
             scrollbarWidth: "none",
           }}
@@ -183,10 +182,10 @@ const OptionsBar: FC<optionbarProps> = ({
               display: "flex",
               flexDirection: "column",
               padding: "1rem",
-              height: "98.8%",
+              minHeight: "calc(100vh - 195px)",
               justifyContent: "space-between",
-              overflow: "auto",
-              scrollbarWidth: "none",
+              m: 0,
+              ml: 0.5,
             }}
           >
             <Box
@@ -320,8 +319,10 @@ const OptionsBar: FC<optionbarProps> = ({
               display: "flex",
               flexDirection: "column",
               padding: "1rem",
-              minHeight: "calc(100vh - 200px)",
+              minHeight: "calc(100vh - 195px)",
               justifyContent: "space-between",
+              m: 0,
+              ml: 0.5,
             }}
           >
             <Box

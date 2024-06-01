@@ -112,10 +112,25 @@ export const getResultOfPrompt = (id: string, baseUrl: string) => {
   }
 };
 
-// Utility function to escape special characters in a string for use in a regular expression
 function escapeRegExp(string: string): string {
   return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
 }
+function escapePercentage(string: string): string {
+  return string.replace(/[%]/g, ""); // Remove only "%" signs
+}
+
+export const replaceBrandName = (prompt: { description: string }): string => {
+  const placeholder = "%Brand%";
+  let value = localStorage.getItem("companyName") ?? "Puller AI";
+  
+  // Remove % from the company name
+  value = escapePercentage(value);
+
+  // Split the description by the placeholder and join with the value
+  const newDescription = prompt.description.split(placeholder).join(value);
+
+  return newDescription;
+};
 
 export const replaceIdWithVariable = (
   prompt: Prompt,
@@ -136,8 +151,8 @@ export const replaceIdWithVariable = (
       </div>
     );
   }
-
-  let parts: Array<string | JSX.Element> = [prompt.description];
+  const discriptipn = replaceBrandName(prompt);
+  let parts: Array<string | JSX.Element> = [discriptipn];
 
   for (const variable of prompt.variables) {
     const placeholder = variable.id;
@@ -231,8 +246,9 @@ export const replaceIdWithVariableInDiscription = (
       </div>
     );
   }
+  const discriptipn = replaceBrandName(prompt);
 
-  let parts: Array<string | JSX.Element> = [prompt.description];
+  let parts: Array<string | JSX.Element> = [discriptipn];
 
   for (const variable of prompt.variables) {
     const placeholder = variable.id;
