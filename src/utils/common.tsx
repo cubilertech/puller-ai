@@ -37,7 +37,7 @@ export const getResultOfPrompt = (id: string, baseUrl: string) => {
           rows: 29,
           schema: "shop",
           table: "loyalty",
-          url: `${baseUrl}/examplePromptsCSV/example1.csv`,
+          url: `${baseUrl}/example1.csv`,
         },
       ];
     case "query#1234567891": {
@@ -50,7 +50,7 @@ export const getResultOfPrompt = (id: string, baseUrl: string) => {
           rows: 29,
           schema: "shop",
           table: "loyalty",
-          url: `${baseUrl}/examplePromptsCSV/example4.csv`,
+          url: `${baseUrl}/example4.csv`,
         },
       ];
     }
@@ -64,7 +64,7 @@ export const getResultOfPrompt = (id: string, baseUrl: string) => {
           rows: 29,
           schema: "shop",
           table: "loyalty",
-          url: `${baseUrl}/examplePromptsCSV/example3.csv`,
+          url: `${baseUrl}/example3.csv`,
         },
       ];
     }
@@ -78,7 +78,7 @@ export const getResultOfPrompt = (id: string, baseUrl: string) => {
           rows: 29,
           schema: "shop",
           table: "loyalty",
-          url: `${baseUrl}/examplePromptsCSV/example2.csv`,
+          url: `${baseUrl}/example2.csv`,
         },
       ];
     }
@@ -92,7 +92,7 @@ export const getResultOfPrompt = (id: string, baseUrl: string) => {
           rows: 29,
           schema: "shop",
           table: "loyalty",
-          url: `${baseUrl}/examplePromptsCSV/example4.csv`,
+          url: `${baseUrl}/example4.csv`,
         },
       ];
     }
@@ -106,7 +106,7 @@ export const getResultOfPrompt = (id: string, baseUrl: string) => {
           rows: 29,
           schema: "shop",
           table: "loyalty",
-          url: `${baseUrl}/examplePromptsCSV/dummy.csv`,
+          url: `${baseUrl}/dummy.csv`,
         },
       ];
   }
@@ -122,7 +122,7 @@ function escapePercentage(string: string): string {
 export const replaceBrandName = (prompt: { description: string }): string => {
   const placeholder = "%Brand%";
   let value = localStorage.getItem("companyName") ?? "Puller AI";
-  
+
   // Remove % from the company name
   value = escapePercentage(value);
 
@@ -319,7 +319,7 @@ export const UpdateData = (variables: Variable[], prompt: string) => {
               FROM
                 product_db
               WHERE
-                brand = 'our_brand'
+                brand = '%Brand%'
             )
           GROUP BY
             EXTRACT(
@@ -358,7 +358,7 @@ export const UpdateData = (variables: Variable[], prompt: string) => {
               FROM
                 product_db
               WHERE
-                brand = 'our_brand'
+                brand = '%Brand%'
             )
             AND category_id IN (
               SELECT
@@ -366,7 +366,7 @@ export const UpdateData = (variables: Variable[], prompt: string) => {
               FROM
                 product_db
               WHERE
-                brand = 'our_brand'
+                brand = '%Brand%'
             )
           GROUP BY
             EXTRACT(
@@ -451,7 +451,7 @@ export const UpdateData = (variables: Variable[], prompt: string) => {
         }
       };
       const SQl_Discriptipn = {
-        description: `This query looks at the Sales by Region for [ Brand ] and filters for sales [${variables?.[0]?.id}] and groups by region and SKU. It then calculates the [${variables?.[1]?.id}] margin for each SKU within each region. Finally it orders the results by total revenue in descending order and returns only the top [${variables?.[2]?.id}] SKUs.`,
+        description: `This query looks at the Sales by Region for %Brand% and filters for sales [${variables?.[0]?.id}] and groups by region and SKU. It then calculates the [${variables?.[1]?.id}] margin for each SKU within each region. Finally it orders the results by total revenue in descending order and returns only the top [${variables?.[2]?.id}] SKUs.`,
         sql: `SELECT TOP ${variables?.[2]?.value} r.region, s.sku, ${revenue_txt(variables?.[1]?.value)}, FROM sales s JOIN region r ON s.region_id = r.id WHERE s.sale_date >= DATEADD(quarter, -1, GETDATE()) GROUP BY r.region, s.sku ORDER BY ${total_Desc(variables?.[1]?.value)} DESC;`,
       };
       return SQl_Discriptipn;

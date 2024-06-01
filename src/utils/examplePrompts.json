@@ -87,7 +87,7 @@
         "rows": 29,
         "schema": "shop",
         "table": "loyalty",
-        "url": "/examplePromptsCSV/example1.csv"
+        "url": "/example1.csv"
       }]
   },
   "i’dlikeatablethatshowsmetheaverageordervalueofourproductscomparedtotheaverageordervalueoftherestofcategoryeachquarterforthelast4quarters.":{
@@ -311,7 +311,7 @@
         "rows": 29,
         "schema": "shop",
         "table": "loyalty",
-        "url": "/examplePromptsCSV/example4.csv"
+        "url": "/example4.csv"
       }]
   },
   "canyouretrievealistofproductswithcurrentinventorylevelsbelowthethresholdforreorder,aswellasthelastdateinventorylevelswereatorabovethreshold.includethereorderquantityaswell.": {
@@ -628,7 +628,7 @@
         "rows": 29,
         "schema": "shop",
         "table": "loyalty",
-        "url": "/examplePromptsCSV/example3.csv"
+        "url": "/example3.csv"
       }]
   },
   "showmethedailyunitanddollarsalesvolumeinallstoresinregionxforanyproductthathasstartechnologyforthelastweek.comparethatthedailyunitanddollarsalesvolumeofallotherproductsinregionxoverthesametimeperiod.": {
@@ -674,7 +674,7 @@
     "detail": "This calculation will show Star Technology product sales as a percentage of all other sales."
   }
 ],
-    "observations":"Over the past w'url: /examplePromptsCSV/example1.csv'eek in Region X, 'Star Technology' products generated a total revenue of $50,000 and sold 500 units, while all other products achieved $70,000 in revenue with 700 units sold. The top-selling day was Thursday, with 'Star Technology' products accounting for 40% of total sales volume",
+    "observations":"Over the past w'url: /example1.csv'eek in Region X, 'Star Technology' products generated a total revenue of $50,000 and sold 500 units, while all other products achieved $70,000 in revenue with 700 units sold. The top-selling day was Thursday, with 'Star Technology' products accounting for 40% of total sales volume",
     "notes":["Daily Sales Trends: To evaluate comparative sales on a day over day basis. Calculate the average daily revenue and units sold for each product category. For example, the average daily revenue in the last day for 'Star Technology' products was $7,143, and for 'all other' products was $10,000.","Product Performance Comparison: We recommend comparing the average daily revenue and units sold between 'Star Technology' products and 'all other' products to assess performance, but excluding products that were new during the evaluation period. For instance, 'all other' products may have a higher average daily revenue per unit sold compared to 'Star Technology' products due to new product volume, so the comparison could mislead.","Seasonal Variations: Calculate the percentage change in sales volume from the previous week to identify any significant seasonal variations. For example, sales volume increased by 20% compared to the previous week, and we see similar lifts year on year, this potentially indicates a seasonal spike in demand.","Promotional Analysis: Determine the impact of promotions by calculating the percentage increase in sales volume or revenue during the promotional period. For instance, sales volume increased by 30% during the latest promotion, which suggests a successful campaign.","Customer Preferences: A ratio analysis between all other products and Star Technology products could help uncover customer Preferences. It may be worth reviewing consumer insights trends from the CI_2023 retriever for additional context."],
     "columns": ["Date", "Star Tech Units Sold", "Star Tech Dollar Sales", "Other Units Sold", "Other Dollar Sales", "Total Units Sold", "Total Dollar Sales", "Star Tech Units %", "Star Tech Dollar %"],
     "rows": [
@@ -710,7 +710,7 @@
         "rows": 29,
         "schema": "shop",
         "table": "loyalty",
-        "url": "/examplePromptsCSV/example2.csv"
+        "url": "/example2.csv"
       }]
   },
   "getlistof100customersorderdate":  {
@@ -767,7 +767,7 @@
         "rows": 29,
         "schema": "shop",
         "table": "loyalty",
-        "url": "/examplePromptsCSV/example2.csv"
+        "url": "/example2.csv"
       }
     ]
   }
