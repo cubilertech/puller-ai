@@ -21,7 +21,7 @@ const SettingPage = () => {
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
-      companyName: localStorage.getItem("companyName") || "Puller",
+      companyName: "",
     },
     validationSchema: LoginSchema,
     onSubmit: (values) => {
