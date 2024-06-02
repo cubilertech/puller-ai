@@ -1,7 +1,7 @@
 {
   "couldyougetthetop10performingskusbyregionforthelastquarter?": {
     "query": "Could you get the top 10 performing SKUs by region for the last quarter?",
-    "description":"This query looks at the Sales by Region for [ Brand ] and filters for sales in the [quarter_last] and groups by region and SKU. It then calculates the [revenue_txt] for each SKU within each region. Finally it orders the results by total revenue in descending order and returns only the top [top_skus_number] SKUs.",
+    "description":"This query looks at the Sales by Region for %Brand% and filters for sales in the [quarter_last] and groups by region and SKU. It then calculates the [revenue_txt] for each SKU within each region. Finally it orders the results by total revenue in descending order and returns only the top [top_skus_number] SKUs.",
     "id":"query#1234567890",
     "sql":"SELECT TOP 10 r.region, s.sku, SUM(s.revenue) AS total_revenue, FROM sales s JOIN region r ON s.region_id = r.id WHERE s.sale_date >= DATEADD(quarter, -1, GETDATE()) GROUP BY r.region, s.sku ORDER BY total_revenue DESC;",
     "target":"",
@@ -33,7 +33,7 @@
       "type": "numeric",
       "value": 10
     }],
-    "observations":"In the last quarter, the top 10 SKUs for [Brand] generated a combined total revenue of $2.5 million, with the highest contributions from the North and West regions, accounting for $1.2 million and $900,000 respectively. These SKUs achieved significant sales volumes, with the top SKU selling 15,000 units, and maintained an average profit margin of 25%, suggesting both high demand and profitability.",
+    "observations":"In the last quarter, the top 10 SKUs for %Brand% generated a combined total revenue of $2.5 million, with the highest contributions from the North and West regions, accounting for $1.2 million and $900,000 respectively. These SKUs achieved significant sales volumes, with the top SKU selling 15,000 units, and maintained an average profit margin of 25%, suggesting both high demand and profitability.",
     "notes":["Broad Sales Overview: The data covers last quarter sales for all SKUs across multiple regions, providing a broad view of performance. Analyzing monthly sales trends could reveal important seasonal patterns.","Demographic Insights: Investigating customer demographics could help identify key buyer segments and improve targeted marketing. This demographic analysis can be particularly useful for tailoring regional strategies.","Impact of Marketing: Evaluating regional marketing efforts could provide insights into their impact on sales. For example, a 15% sales increase in the West region coincided with a recent ad campaign.","Quarterly Growth Analysis: Comparing current performance with previous quarters can help identify growth trends. Sales grew by 10% compared to the previous quarter, highlighting consistent growth.","Inventory Turnover Insights: Exploring inventory turnover rates alongside sales data can provide a fuller picture of SKU performance. High turnover rates might indicate strong demand and efficient inventory management"],
     "columns": ["Region", "Product", "Revenue", "Units Sold", "Profit Margin"],
     "rows": [
@@ -87,14 +87,14 @@
         "rows": 29,
         "schema": "shop",
         "table": "loyalty",
-        "url": "/examplePromptsCSV/example1.csv"
+        "url": "/example1.csv"
       }]
   },
   "i’dlikeatablethatshowsmetheaverageordervalueofourproductscomparedtotheaverageordervalueoftherestofcategoryeachquarterforthelast4quarters.":{
     "query":"I’d like a table that shows me the average order value of our products compared to the average order value of the rest of category each quarter for the last 4 quarters.",
-    "description":"This query first calculates the total order value and number of orders for each product from the Sales DB and for the category (minus our products) from the Category DB for each quarter, using sales database. It then calculates the [average_value] for our products and the rest of category for each quarter, and returns the results for [most_recent] [four_quarters] quarters.",
+    "description":"This query first calculates the total order value and number of orders for each product from the Sales DB and for the category (minus our products) from the Category DB for each quarter, using sales database. It then calculates the [average_value] for our products and the rest of category for each quarter, and returns the results for most recent [four_quarters] quarters.",
     "id":"query#1234567891",
-    "sql":"WITH product_sales AS ( SELECT EXTRACT(QUARTER FROM sale_date) AS sale_quarter, EXTRACT(YEAR FROM sale_date) AS sale_year, product_id, SUM(order_value) AS total_order_value, COUNT(DISTINCT order_id) AS num_orders FROM sales_data WHERE product_id IN (SELECT product_id FROM product_db WHERE brand = 'our_brand') GROUP BY EXTRACT(QUARTER FROM sale_date), EXTRACT(YEAR FROM sale_date), product_id ), category_sales AS ( SELECT EXTRACT(QUARTER FROM sale_date) AS sale_quarter, EXTRACT(YEAR FROM sale_date) AS sale_year, category_id, SUM(order_value) AS total_order_value, COUNT(DISTINCT order_id) AS num_orders FROM sales_data WHERE product_id NOT IN (SELECT product_id FROM product_db WHERE brand = 'our_brand') AND category_id IN (SELECT category_id FROM product_db WHERE brand = 'our_brand') GROUP BY EXTRACT(QUARTER FROM sale_date), EXTRACT(YEAR FROM sale_date), category_id ) SELECT p.sale_quarter, p.sale_year, AVG(p.total_order_value / p.num_orders) AS avg_order_value, AVG(c.total_order_value / c.num_orders) AS avg_category_order_value FROM product_sales p JOIN category_sales c ON p.sale_quarter = c.sale_quarter AND p.sale_year = c.sale_year WHERE p.sale_quarter IN ( SELECT EXTRACT(QUARTER FROM sale_date) FROM sales_data WHERE EXTRACT(YEAR FROM sale_date) = EXTRACT(YEAR FROM CURRENT_DATE) ORDER BY sale_date DESC LIMIT 4 ) GROUP BY p.sale_quarter, p.sale_year ORDER BY p.sale_quarter DESC;",
+    "sql":"WITH product_sales AS ( SELECT EXTRACT(QUARTER FROM sale_date) AS sale_quarter, EXTRACT(YEAR FROM sale_date) AS sale_year, product_id, SUM(order_value) AS total_order_value, COUNT(DISTINCT order_id) AS num_orders FROM sales_data WHERE product_id IN (SELECT product_id FROM product_db WHERE brand = '%Brand%') GROUP BY EXTRACT(QUARTER FROM sale_date), EXTRACT(YEAR FROM sale_date), product_id ), category_sales AS ( SELECT EXTRACT(QUARTER FROM sale_date) AS sale_quarter, EXTRACT(YEAR FROM sale_date) AS sale_year, category_id, SUM(order_value) AS total_order_value, COUNT(DISTINCT order_id) AS num_orders FROM sales_data WHERE product_id NOT IN (SELECT product_id FROM product_db WHERE brand = '%Brand%') AND category_id IN (SELECT category_id FROM product_db WHERE brand = '%Brand%') GROUP BY EXTRACT(QUARTER FROM sale_date), EXTRACT(YEAR FROM sale_date), category_id ) SELECT p.sale_quarter, p.sale_year, AVG(p.total_order_value / p.num_orders) AS avg_order_value, AVG(c.total_order_value / c.num_orders) AS avg_category_order_value FROM product_sales p JOIN category_sales c ON p.sale_quarter = c.sale_quarter AND p.sale_year = c.sale_year WHERE p.sale_quarter IN ( SELECT EXTRACT(QUARTER FROM sale_date) FROM sales_data WHERE EXTRACT(YEAR FROM sale_date) = EXTRACT(YEAR FROM CURRENT_DATE) ORDER BY sale_date DESC LIMIT 4 ) GROUP BY p.sale_quarter, p.sale_year ORDER BY p.sale_quarter DESC;",
     "target":"",
     "graph":[
         {
@@ -149,78 +149,159 @@
         "name": "Average_Value",
         "type": "numeric",
         "value": 4,
-        "discription": "Choose target period end date, inclusive."
+        "discription": "Choose the most recent N quarters"
       }
     ],
     "observations":"In the most recent four quarters, our products generated a total revenue of $10 million across all regions, with an average order value of $300. Comparatively, the rest of the category contributed $20 million in revenue with an average order value of $200.",
     "notes":["Quarterly Revenue Trends: Analyzing quarterly revenue trends can help identify seasonal patterns or fluctuations in consumer demand.","Profit Margin Analysis: Calculate the average profit margin for our products and compare it with the category average to assess profitability.","Geographical Performance: Assess sales performance by region, calculating the percentage increase in revenue by region compared to the previous quarter. We’re seeing up to 20% increases in certain regions which is greater than what we’d expect this year.","Promotional Impact: Evaluate the ROI for recent promotional activities by calculating the percentage increase in revenue attributed to promotions. The average promotional lift for this time period is 15%, which is 1.5% less than previous year.","Customer Segmentation: Segment customers based on purchasing behavior to target marketing efforts effectively using Puller AI’s advanced analytics module."],
-    "columns": ["Product", "Current Stock", "Reorder Level", "Reorder Quantity", "Last in Stock Date"],
-    "rows": [
-        {"Product": "Product A", "Current Stock": "250", "Reorder Level": "50", "Reorder Quantity": "200", "Last in Stock Date": "2023-05-15"},
-        {"Product": "Product B", "Current Stock": "134", "Reorder Level": "75", "Reorder Quantity": "100", "Last in Stock Date": "2023-05-14"},
-        {"Product": "Product C", "Current Stock": "78", "Reorder Level": "30", "Reorder Quantity": "50", "Last in Stock Date": "2023-05-13"},
-        {"Product": "Product D", "Current Stock": "567", "Reorder Level": "100", "Reorder Quantity": "300", "Last in Stock Date": "2023-05-12"},
-        {"Product": "Product E", "Current Stock": "98", "Reorder Level": "20", "Reorder Quantity": "60", "Last in Stock Date": "2023-05-11"},
-        {"Product": "Product F", "Current Stock": "220", "Reorder Level": "45", "Reorder Quantity": "150", "Last in Stock Date": "2023-05-10"},
-        {"Product": "Product G", "Current Stock": "400", "Reorder Level": "80", "Reorder Quantity": "250", "Last in Stock Date": "2023-05-09"},
-        {"Product": "Product H", "Current Stock": "123", "Reorder Level": "55", "Reorder Quantity": "90", "Last in Stock Date": "2023-05-08"},
-        {"Product": "Product I", "Current Stock": "87", "Reorder Level": "35", "Reorder Quantity": "75", "Last in Stock Date": "2023-05-07"},
-        {"Product": "Product J", "Current Stock": "210", "Reorder Level": "60", "Reorder Quantity": "170", "Last in Stock Date": "2023-05-06"},
-        {"Product": "Product K", "Current Stock": "345", "Reorder Level": "120", "Reorder Quantity": "220", "Last in Stock Date": "2023-05-05"},
-        {"Product": "Product L", "Current Stock": "56", "Reorder Level": "25", "Reorder Quantity": "80", "Last in Stock Date": "2023-05-04"},
-        {"Product": "Product M", "Current Stock": "198", "Reorder Level": "70", "Reorder Quantity": "140", "Last in Stock Date": "2023-05-03"},
-        {"Product": "Product N", "Current Stock": "270", "Reorder Level": "90", "Reorder Quantity": "200", "Last in Stock Date": "2023-05-02"},
-        {"Product": "Product O", "Current Stock": "312", "Reorder Level": "110", "Reorder Quantity": "250", "Last in Stock Date": "2023-05-01"},
-        {"Product": "Product P", "Current Stock": "147", "Reorder Level": "60", "Reorder Quantity": "100", "Last in Stock Date": "2023-04-30"},
-        {"Product": "Product Q", "Current Stock": "89", "Reorder Level": "40", "Reorder Quantity": "70", "Last in Stock Date": "2023-04-29"},
-        {"Product": "Product R", "Current Stock": "354", "Reorder Level": "130", "Reorder Quantity": "210", "Last in Stock Date": "2023-04-28"},
-        {"Product": "Product S", "Current Stock": "120", "Reorder Level": "50", "Reorder Quantity": "90", "Last in Stock Date": "2023-04-27"},
-        {"Product": "Product T", "Current Stock": "403", "Reorder Level": "95", "Reorder Quantity": "220", "Last in Stock Date": "2023-04-26"},
-        {"Product": "Product U", "Current Stock": "258", "Reorder Level": "75", "Reorder Quantity": "180", "Last in Stock Date": "2023-04-25"},
-        {"Product": "Product V", "Current Stock": "68", "Reorder Level": "30", "Reorder Quantity": "50", "Last in Stock Date": "2023-04-24"},
-        {"Product": "Product W", "Current Stock": "320", "Reorder Level": "100", "Reorder Quantity": "200", "Last in Stock Date": "2023-04-23"},
-        {"Product": "Product X", "Current Stock": "153", "Reorder Level": "65", "Reorder Quantity": "110", "Last in Stock Date": "2023-04-22"},
-        {"Product": "Product Y", "Current Stock": "290", "Reorder Level": "85", "Reorder Quantity": "190", "Last in Stock Date": "2023-04-21"},
-        {"Product": "Product Z", "Current Stock": "410", "Reorder Level": "120", "Reorder Quantity": "230", "Last in Stock Date": "2023-04-20"},
-        {"Product": "Product AA", "Current Stock": "75", "Reorder Level": "40", "Reorder Quantity": "70", "Last in Stock Date": "2023-04-19"},
-        {"Product": "Product AB", "Current Stock": "205", "Reorder Level": "80", "Reorder Quantity": "160", "Last in Stock Date": "2023-04-18"},
-        {"Product": "Product AC", "Current Stock": "333", "Reorder Level": "105", "Reorder Quantity": "240", "Last in Stock Date": "2023-04-17"},
-        {"Product": "Product AD", "Current Stock": "162", "Reorder Level": "60", "Reorder Quantity": "120", "Last in Stock Date": "2023-04-16"},
-        {"Product": "Product AE", "Current Stock": "56", "Reorder Level": "20", "Reorder Quantity": "50", "Last in Stock Date": "2023-04-15"},
-        {"Product": "Product AF", "Current Stock": "298", "Reorder Level": "90", "Reorder Quantity": "180", "Last in Stock Date": "2023-04-14"},
-        {"Product": "Product AG", "Current Stock": "142", "Reorder Level": "50", "Reorder Quantity": "110", "Last in Stock Date": "2023-04-13"},
-        {"Product": "Product AH", "Current Stock": "415", "Reorder Level": "130", "Reorder Quantity": "230", "Last in Stock Date": "2023-04-12"},
-        {"Product": "Product AI", "Current Stock": "105", "Reorder Level": "45", "Reorder Quantity": "90", "Last in Stock Date": "2023-04-11"},
-        {"Product": "Product AJ", "Current Stock": "275", "Reorder Level": "80", "Reorder Quantity": "170", "Last in Stock Date": "2023-04-10"},
-        {"Product": "Product AK", "Current Stock": "324", "Reorder Level": "100", "Reorder Quantity": "210", "Last in Stock Date": "2023-04-09"},
-        {"Product": "Product AL", "Current Stock": "184", "Reorder Level": "70", "Reorder Quantity": "140", "Last in Stock Date": "2023-04-08"},
-        {"Product": "Product AM", "Current Stock": "62", "Reorder Level": "25", "Reorder Quantity": "60", "Last in Stock Date": "2023-04-07"},
-        {"Product": "Product AN", "Current Stock": "376", "Reorder Level": "120", "Reorder Quantity": "220", "Last in Stock Date": "2023-04-06"},
-        {"Product": "Product AO", "Current Stock": "212", "Reorder Level": "85", "Reorder Quantity": "160", "Last in Stock Date": "2023-04-05"},
-        {"Product": "Product AP", "Current Stock": "330", "Reorder Level": "110", "Reorder Quantity": "240", "Last in Stock Date": "2023-04-04"},
-        {"Product": "Product AQ", "Current Stock": "193", "Reorder Level": "65", "Reorder Quantity": "130", "Last in Stock Date": "2023-04-03"},
-        {"Product": "Product AR", "Current Stock": "86", "Reorder Level": "35", "Reorder Quantity": "75", "Last in Stock Date": "2023-04-02"},
-        {"Product": "Product AS", "Current Stock": "401", "Reorder Level": "100", "Reorder Quantity": "220", "Last in Stock Date": "2023-04-01"},
-        {"Product": "Product AT", "Current Stock": "147", "Reorder Level": "55", "Reorder Quantity": "100", "Last in Stock Date": "2023-03-31"},
-        {"Product": "Product AU", "Current Stock": "270", "Reorder Level": "80", "Reorder Quantity": "180", "Last in Stock Date": "2023-03-30"},
-        {"Product": "Product AV", "Current Stock": "318", "Reorder Level": "110", "Reorder Quantity": "210", "Last in Stock Date": "2023-03-29"},
-        {"Product": "Product AW", "Current Stock": "169", "Reorder Level": "70", "Reorder Quantity": "140", "Last in Stock Date": "2023-03-28"},
-        {"Product": "Product AX", "Current Stock": "55", "Reorder Level": "30", "Reorder Quantity": "60", "Last in Stock Date": "2023-03-27"},
-        {"Product": "Product AY", "Current Stock": "384", "Reorder Level": "120", "Reorder Quantity": "230", "Last in Stock Date": "2023-03-26"},
-        {"Product": "Product AZ", "Current Stock": "213", "Reorder Level": "85", "Reorder Quantity": "170", "Last in Stock Date": "2023-03-25"},
-        {"Product": "Product BA", "Current Stock": "326", "Reorder Level": "110", "Reorder Quantity": "220", "Last in Stock Date": "2023-03-24"},
-        {"Product": "Product BB", "Current Stock": "174", "Reorder Level": "65", "Reorder Quantity": "130", "Last in Stock Date": "2023-03-23"},
-        {"Product": "Product BC", "Current Stock": "58", "Reorder Level": "25", "Reorder Quantity": "50", "Last in Stock Date": "2023-03-22"},
-        {"Product": "Product BD", "Current Stock": "390", "Reorder Level": "120", "Reorder Quantity": "240", "Last in Stock Date": "2023-03-21"},
-        {"Product": "Product BE", "Current Stock": "231", "Reorder Level": "90", "Reorder Quantity": "180", "Last in Stock Date": "2023-03-20"},
-        {"Product": "Product BF", "Current Stock": "308", "Reorder Level": "100", "Reorder Quantity": "210", "Last in Stock Date": "2023-03-19"},
-        {"Product": "Product BG", "Current Stock": "194", "Reorder Level": "65", "Reorder Quantity": "130", "Last in Stock Date": "2023-03-18"},
-        {"Product": "Product BH", "Current Stock": "67", "Reorder Level": "30", "Reorder Quantity": "60", "Last in Stock Date": "2023-03-17"},
-        {"Product": "Product BI", "Current Stock": "378", "Reorder Level": "120", "Reorder Quantity": "220", "Last in Stock Date": "2023-03-16"},
-        {"Product": "Product BJ", "Current Stock": "222", "Reorder Level": "85", "Reorder Quantity": "160", "Last in Stock Date": "2023-03-15"},
-        {"Product": "Product BK", "Current Stock": "340", "Reorder Level": "110", "Reorder Quantity": "240", "Last in Stock Date": "2023-03-14"},
-        {"Product": "Product BL", "Current Stock": "172", "Reorder Level": "65", "Reorder Quantity": "130", "Last in Stock Date": "2023-03-13"}
+    "columns": [
+      "Quarter",
+      "Total Order Value (Sales DB)",
+      "Number of Orders (Sales DB)",
+      "Average Order Value (Sales DB)",
+      "Category Total Order Value (Category DB)",
+      "Category Number of Orders (Category DB)",
+      "Category Average Order Value (Category DB)"
     ],
+    "rows": 
+    [
+      {
+          "Quarter": 4,
+          "Total Order Value (Sales DB)": 150.00,
+          "Number of Orders (Sales DB)": 1,
+          "Average Order Value (Sales DB)": 150.00,
+          "Category Total Order Value (Category DB)": 250.00,
+          "Category Number of Orders (Category DB)": 1,
+          "Category Average Order Value (Category DB)": 250.00
+      },
+      {
+          "Quarter": 4,
+          "Total Order Value (Sales DB)": 200.00,
+          "Number of Orders (Sales DB)": 1,
+          "Average Order Value (Sales DB)": 200.00,
+          "Category Total Order Value (Category DB)": 350.00,
+          "Category Number of Orders (Category DB)": 1,
+          "Category Average Order Value (Category DB)": 350.00
+      },
+      {
+          "Quarter": 4,
+          "Total Order Value (Sales DB)": 250.00,
+          "Number of Orders (Sales DB)": 1,
+          "Average Order Value (Sales DB)": 250.00,
+          "Category Total Order Value (Category DB)": 400.00,
+          "Category Number of Orders (Category DB)": 1,
+          "Category Average Order Value (Category DB)": 400.00
+      },
+      {
+          "Quarter": 4,
+          "Total Order Value (Sales DB)": 300.00,
+          "Number of Orders (Sales DB)": 1,
+          "Average Order Value (Sales DB)": 300.00,
+          "Category Total Order Value (Category DB)": 450.00,
+          "Category Number of Orders (Category DB)": 1,
+          "Category Average Order Value (Category DB)": 450.00
+      },
+      {
+        "Quarter": 4,
+        "Total Order Value (Sales DB)": 1050.00,
+        "Number of Orders (Sales DB)": 1,
+        "Average Order Value (Sales DB)": 1050.00,
+        "Category Total Order Value (Category DB)": 1200.00,
+        "Category Number of Orders (Category DB)": 1,
+        "Category Average Order Value (Category DB)": 1200.00
+    },
+    {
+        "Quarter": 4,
+        "Total Order Value (Sales DB)": 1100.00,
+        "Number of Orders (Sales DB)": 1,
+        "Average Order Value (Sales DB)": 1100.00,
+        "Category Total Order Value (Category DB)": 1250.00,
+        "Category Number of Orders (Category DB)": 1,
+        "Category Average Order Value (Category DB)": 1250.00
+    },
+    {
+        "Quarter": 4,
+        "Total Order Value (Sales DB)": 1150.00,
+        "Number of Orders (Sales DB)": 1,
+        "Average Order Value (Sales DB)": 1150.00,
+        "Category Total Order Value (Category DB)": 1300.00,
+        "Category Number of Orders (Category DB)": 1,
+        "Category Average Order Value (Category DB)": 1300.00
+    },
+    {
+        "Quarter": 4,
+        "Total Order Value (Sales DB)": 1200.00,
+        "Number of Orders (Sales DB)": 1,
+        "Average Order Value (Sales DB)": 1200.00,
+        "Category Total Order Value (Category DB)": 1350.00,
+        "Category Number of Orders (Category DB)": 1,
+        "Category Average Order Value (Category DB)": 1350.00
+    },
+    {
+        "Quarter": 4,
+        "Total Order Value (Sales DB)": 1250.00,
+        "Number of Orders (Sales DB)": 1,
+        "Average Order Value (Sales DB)": 1250.00,
+        "Category Total Order Value (Category DB)": 1400.00,
+        "Category Number of Orders (Category DB)": 1,
+        "Category Average Order Value (Category DB)": 1400.00
+    },
+    {
+        "Quarter": 4,
+        "Total Order Value (Sales DB)": 1300.00,
+        "Number of Orders (Sales DB)": 1,
+        "Average Order Value (Sales DB)": 1300.00,
+        "Category Total Order Value (Category DB)": 1450.00,
+        "Category Number of Orders (Category DB)": 1,
+        "Category Average Order Value (Category DB)": 1450.00
+    },
+    {
+        "Quarter": 4,
+        "Total Order Value (Sales DB)": 1350.00,
+        "Number of Orders (Sales DB)": 1,
+        "Average Order Value (Sales DB)": 1350.00,
+        "Category Total Order Value (Category DB)": 1500.00,
+        "Category Number of Orders (Category DB)": 1,
+        "Category Average Order Value (Category DB)": 1500.00
+    },
+    {
+        "Quarter": 4,
+        "Total Order Value (Sales DB)": 1400.00,
+        "Number of Orders (Sales DB)": 1,
+        "Average Order Value (Sales DB)": 1400.00,
+        "Category Total Order Value (Category DB)": 1550.00,
+        "Category Number of Orders (Category DB)": 1,
+        "Category Average Order Value (Category DB)": 1550.00
+    },
+    {
+        "Quarter": 4,
+        "Total Order Value (Sales DB)": 1450.00,
+        "Number of Orders (Sales DB)": 1,
+        "Average Order Value (Sales DB)": 1450.00,
+        "Category Total Order Value (Category DB)": 1600.00,
+        "Category Number of Orders (Category DB)": 1,
+        "Category Average Order Value (Category DB)": 1600.00
+    },
+    {
+        "Quarter": 4,
+        "Total Order Value (Sales DB)": 1500.00,
+        "Number of Orders (Sales DB)": 1,
+        "Average Order Value (Sales DB)": 1500.00,
+        "Category Total Order Value (Category DB)": 1650.00,
+        "Category Number of Orders (Category DB)": 1,
+        "Category Average Order Value (Category DB)": 1650.00
+    },
+    {
+        "Quarter": 4,
+        "Total Order Value (Sales DB)": 1550.00,
+        "Number of Orders (Sales DB)": 1,
+        "Average Order Value (Sales DB)": 1550.00,
+        "Category Total Order Value (Category DB)": 1700.00,
+        "Category Number of Orders (Category DB)": 1,
+        "Category Average Order Value (Category DB)": 1700.00
+    }
+    ]
+  , 
     "status": "complete",
     "results":[{
         "bytes": 2.1,
@@ -230,12 +311,12 @@
         "rows": 29,
         "schema": "shop",
         "table": "loyalty",
-        "url": "/examplePromptsCSV/example4.csv"
+        "url": "/example4.csv"
       }]
   },
   "canyouretrievealistofproductswithcurrentinventorylevelsbelowthethresholdforreorder,aswellasthelastdateinventorylevelswereatorabovethreshold.includethereorderquantityaswell.": {
     "query": "Can you retrieve a list of products with current inventory levels below the threshold for reorder, as well as the last date inventory levels were at or above threshold. Include the reorder quantity as well.",
-    "description":"This query joins the Products table with [goods_table_field] [prodID_field], and filters for products where the current stock level is below the reorder level. [inventory_levels_threshold] Finally, it includes the reorder level and the current stock level in the result set. \nNote that the Goods table is a table that stores the stock in and out for each product, with separate fields for the quantity and the date. The Stock field is calculated as the difference between the In and Out fields, and the ReorderLevel field is a threshold value that triggers a reorder when the stock level falls below it.",
+    "description":"This query joins the Products table with [goods_table_field] on the [prodID_field] field, and filters for products where the current stock level is below the reorder level. [inventory_levels_threshold] Finally, it includes the reorder level and the current stock level in the result set. \nNote that the Goods table is a table that stores the stock in and out for each product, with separate fields for the quantity and the date. The Stock field is calculated as the difference between the In and Out fields, and the ReorderLevel field is a threshold value that triggers a reorder when the stock level falls below it.",
     "id":"query#1234567892",
     "sql":"SELECT Products.ID, Products.Product, Products.Description, Products.Price, Products.Category, Products.Supplier, Goods.Stock, Goods.ReorderLevel, MAX(CASE WHEN Goods.Stock >= Products.ReorderLevel THEN Goods.Date END) AS LastDateAboveThreshold FROM Products INNER JOIN Goods ON Products.ID = Goods.ProdID WHERE Goods.Stock < Products.ReorderLevel GROUP BY Products.ID, Products.Product, Products.Description, Products.Price, Products.Category, Products.Supplier, Goods.Stock, Goods.ReorderLevel;",
     "target":"",
@@ -254,7 +335,7 @@
         "model": "",
         "name": "ProdID_field",
         "type": "select_single",
-        "value": "on the ProdID field",
+        "value": "ProdID",
         "detail": "Product ID refers to the 'ProdID' field",
         "discription": "Choose Your Product",
         "selectData": ["ProdID", "Product_ID_OLD", "ProductALTNUM"]
@@ -270,37 +351,274 @@
     ],
     "observations":"This query identifies 50 products with current stock levels below the reorder threshold. The last date inventory levels were at or above the threshold was two weeks ago on average. Reorder levels range from 100 to 500 units, while current stock levels range from 20 to 450 units.",
     "notes":["Data Context: The Goods table facilitates accurate inventory management by tracking stock in and out for each product.","Replenishment Efficiency: Average time taken to replenish stock levels after reaching the threshold provides insights into inventory management efficiency (averaging 14 days).","Inventory Variation: Notable differences exist in reorder and current stock levels among products, with reorder levels ranging from 100 to 500 units and current stock levels ranging from 20 to 450 units.","Irregular Replenishments: Some products may experience sporadic or irregular stock replenishments, possibly due to supplier constraints or seasonal demand fluctuations.","Optimization Opportunities: With an average of 50 products requiring reordering each week, it's evident that inventory management strategies need refinement to minimize stockouts and ensure optimal inventory levels."],
-    "columns": ["Product", "Current Stock", "Reorder Level", "Reorder Quantity", "Last in Stock Date"],
-    "rows": [
-      {"Product": "Product A", "Current Stock": "250", "Reorder Level": "50", "Reorder Quantity": "200", "Last in Stock Date": "2023-05-15"},
-      {"Product": "Product B", "Current Stock": "180", "Reorder Level": "40", "Reorder Quantity": "160", "Last in Stock Date": "2023-04-20"},
-      {"Product": "Product C", "Current Stock": "300", "Reorder Level": "60", "Reorder Quantity": "240", "Last in Stock Date": "2023-06-10"},
-      {"Product": "Product D", "Current Stock": "220", "Reorder Level": "45", "Reorder Quantity": "175", "Last in Stock Date": "2023-05-05"},
-      {"Product": "Product E", "Current Stock": "280", "Reorder Level": "55", "Reorder Quantity": "225", "Last in Stock Date": "2023-07-01"},
-      {"Product": "Product F", "Current Stock": "190", "Reorder Level": "35", "Reorder Quantity": "155", "Last in Stock Date": "2023-04-25"},
-      {"Product": "Product G", "Current Stock": "270", "Reorder Level": "50", "Reorder Quantity": "220", "Last in Stock Date": "2023-05-20"},
-      {"Product": "Product H", "Current Stock": "260", "Reorder Level": "55", "Reorder Quantity": "205", "Last in Stock Date": "2023-07-05"},
-      {"Product": "Product I", "Current Stock": "200", "Reorder Level": "40", "Reorder Quantity": "160", "Last in Stock Date": "2023-04-30"},
-      {"Product": "Product J", "Current Stock": "240", "Reorder Level": "60", "Reorder Quantity": "180", "Last in Stock Date": "2023-06-15"},
-      {"Product": "Product K", "Current Stock": "290", "Reorder Level": "50", "Reorder Quantity": "240", "Last in Stock Date": "2023-05-25"},
-      {"Product": "Product L", "Current Stock": "210", "Reorder Level": "45", "Reorder Quantity": "165", "Last in Stock Date": "2023-05-10"},
-      {"Product": "Product M", "Current Stock": "230", "Reorder Level": "35", "Reorder Quantity": "195", "Last in Stock Date": "2023-04-15"},
-      {"Product": "Product N", "Current Stock": "270", "Reorder Level": "55", "Reorder Quantity": "215", "Last in Stock Date": "2023-07-10"},
-      {"Product": "Product O", "Current Stock": "250", "Reorder Level": "50", "Reorder Quantity": "200", "Last in Stock Date": "2023-05-20"},
-      {"Product": "Product P", "Current Stock": "180", "Reorder Level": "40", "Reorder Quantity": "160", "Last in Stock Date": "2023-04-25"},
-      {"Product": "Product Q", "Current Stock": "300", "Reorder Level": "60", "Reorder Quantity": "240", "Last in Stock Date": "2023-06-20"},
-      {"Product": "Product R", "Current Stock": "220", "Reorder Level": "45", "Reorder Quantity": "175", "Last in Stock Date": "2023-05-15"},
-      {"Product": "Product S", "Current Stock": "280", "Reorder Level": "55", "Reorder Quantity": "225", "Last in Stock Date": "2023-07-05"},
-      {"Product": "Product T", "Current Stock": "190", "Reorder Level": "35", "Reorder Quantity": "155", "Last in Stock Date": "2023-04-30"},
-      {"Product": "Product U", "Current Stock": "270", "Reorder Level": "50", "Reorder Quantity": "220", "Last in Stock Date": "2023-05-25"},
-      {"Product": "Product V", "Current Stock": "260", "Reorder Level": "55", "Reorder Quantity": "205", "Last in Stock Date": "2023-06-10"},
-      {"Product": "Product W", "Current Stock": "200", "Reorder Level": "40", "Reorder Quantity": "160", "Last in Stock Date": "2023-05-01"},
-      {"Product": "Product X", "Current Stock": "240", "Reorder Level": "60", "Reorder Quantity": "180", "Last in Stock Date": "2023-06-15"},
-      {"Product": "Product Y", "Current Stock": "290", "Reorder Level": "50", "Reorder Quantity": "240", "Last in Stock Date": "2023-05-30"},
-      {"Product": "Product Z", "Current Stock": "210", "Reorder Level": "45", "Reorder Quantity": "165", "Last in Stock Date": "2023-05-10"},
-      {"Product": "Product AA", "Current Stock": "230", "Reorder Level": "35", "Reorder Quantity": "195", "Last in Stock Date": "2023-04-20"},
-      {"Product": "Product BB", "Current Stock": "270", "Reorder Level": "55", "Reorder Quantity": "215", "Last in Stock Date": "2023-07-10"}
-    ],
+    "columns": [
+      "ID",
+      "Product",
+      "Description",
+      "Price",
+      "Category",
+      "Supplier",
+      "Stock",
+      "ReorderLevel",
+      "LastDateAboveThreshold"
+  ],
+  "rows": 
+  [
+    {
+        "ID": 1,
+        "Product": "Product A",
+        "Description": "High-quality smartphone with advanced features",
+        "Price": 12.76,
+        "Category": "Electronics",
+        "Supplier": "Trailblazers",
+        "Stock": 4,
+        "ReorderLevel": 11,
+        "LastDateAboveThreshold": "2024-05-16"
+    },
+    {
+        "ID": 2,
+        "Product": "Product B",
+        "Description": "Durable basketball for outdoor play",
+        "Price": 67.29,
+        "Category": "Sports",
+        "Supplier": "Fashion Fair",
+        "Stock": 4,
+        "ReorderLevel": 6,
+        "LastDateAboveThreshold": "2024-05-25"
+    },
+    {
+        "ID": 3,
+        "Product": "Product C",
+        "Description": "Stylish and comfortable home sofa",
+        "Price": 25.17,
+        "Category": "Homeware",
+        "Supplier": "Acme Inc.",
+        "Stock": 4,
+        "ReorderLevel": 17,
+        "LastDateAboveThreshold": "2024-05-03"
+    },
+    {
+        "ID": 4,
+        "Product": "Product D",
+        "Description": "Trendy summer dress",
+        "Price": 88.13,
+        "Category": "Clothing",
+        "Supplier": "Cozy Home",
+        "Stock": 6,
+        "ReorderLevel": 13,
+        "LastDateAboveThreshold": "2024-05-13"
+    },
+    {
+        "ID": 5,
+        "Product": "Product E",
+        "Description": "Modern and sleek kitchen toaster",
+        "Price": 38.38,
+        "Category": "Homeware",
+        "Supplier": "Tech Labs",
+        "Stock": 3,
+        "ReorderLevel": 16,
+        "LastDateAboveThreshold": "2024-05-26"
+    },
+    {
+        "ID": 6,
+        "Product": "Product F",
+        "Description": "Noise-canceling wireless headphones",
+        "Price": 24.53,
+        "Category": "Electronics",
+        "Supplier": "Fashion Fair",
+        "Stock": 5,
+        "ReorderLevel": 10,
+        "LastDateAboveThreshold": "2024-05-24"
+    },
+    {
+        "ID": 7,
+        "Product": "Product G",
+        "Description": "Professional quality tennis racket",
+        "Price": 57.49,
+        "Category": "Sports",
+        "Supplier": "Tech Labs",
+        "Stock": 5,
+        "ReorderLevel": 14,
+        "LastDateAboveThreshold": "2024-05-04"
+    },
+    {
+        "ID": 8,
+        "Product": "Product H",
+        "Description": "Inspirational self-help book",
+        "Price": 42.59,
+        "Category": "Books",
+        "Supplier": "Trailblazers",
+        "Stock": 2,
+        "ReorderLevel": 8,
+        "LastDateAboveThreshold": "2024-05-15"
+    },
+    {
+        "ID": 9,
+        "Product": "Product I",
+        "Description": "Interactive and educational toy for kids",
+        "Price": 11.89,
+        "Category": "Toys",
+        "Supplier": "Fashion Fair",
+        "Stock": 8,
+        "ReorderLevel": 12,
+        "LastDateAboveThreshold": "2024-05-10"
+    },
+    {
+        "ID": 10,
+        "Product": "Product J",
+        "Description": "4K Ultra HD Smart TV",
+        "Price": 34.99,
+        "Category": "Electronics",
+        "Supplier": "Tech Labs",
+        "Stock": 6,
+        "ReorderLevel": 15,
+        "LastDateAboveThreshold": "2024-05-20"
+    },
+    {
+        "ID": 11,
+        "Product": "Product K",
+        "Description": "Comfortable and stylish men’s jacket",
+        "Price": 23.77,
+        "Category": "Clothing",
+        "Supplier": "Cozy Home",
+        "Stock": 7,
+        "ReorderLevel": 9,
+        "LastDateAboveThreshold": "2024-05-14"
+    },
+    {
+        "ID": 12,
+        "Product": "Product L",
+        "Description": "Bestselling mystery novel",
+        "Price": 59.99,
+        "Category": "Books",
+        "Supplier": "Acme Inc.",
+        "Stock": 3,
+        "ReorderLevel": 7,
+        "LastDateAboveThreshold": "2024-05-07"
+    },
+    {
+        "ID": 13,
+        "Product": "Product M",
+        "Description": "Decorative ceramic vase",
+        "Price": 18.75,
+        "Category": "Homeware",
+        "Supplier": "Trailblazers",
+        "Stock": 9,
+        "ReorderLevel": 11,
+        "LastDateAboveThreshold": "2024-05-30"
+    },
+    {
+        "ID": 14,
+        "Product": "Product N",
+        "Description": "High-performance laptop",
+        "Price": 72.15,
+        "Category": "Electronics",
+        "Supplier": "Fashion Fair",
+        "Stock": 4,
+        "ReorderLevel": 12,
+        "LastDateAboveThreshold": "2024-05-11"
+    },
+    {
+        "ID": 15,
+        "Product": "Product O",
+        "Description": "Water-resistant sports watch",
+        "Price": 15.29,
+        "Category": "Sports",
+        "Supplier": "Tech Labs",
+        "Stock": 5,
+        "ReorderLevel": 10,
+        "LastDateAboveThreshold": "2024-05-29"
+    },
+    {
+        "ID": 16,
+        "Product": "Product P",
+        "Description": "Colorful building blocks for toddlers",
+        "Price": 27.49,
+        "Category": "Toys",
+        "Supplier": "Cozy Home",
+        "Stock": 6,
+        "ReorderLevel": 14,
+        "LastDateAboveThreshold": "2024-05-08"
+    },
+    {
+        "ID": 17,
+        "Product": "Product Q",
+        "Description": "Comprehensive world atlas",
+        "Price": 37.89,
+        "Category": "Books",
+        "Supplier": "Acme Inc.",
+        "Stock": 7,
+        "ReorderLevel": 9,
+        "LastDateAboveThreshold": "2024-05-22"
+    },
+    {
+        "ID": 18,
+        "Product": "Product R",
+        "Description": "Soft and absorbent bath towels",
+        "Price": 20.99,
+        "Category": "Homeware",
+        "Supplier": "Trailblazers",
+        "Stock": 3,
+        "ReorderLevel": 8,
+        "LastDateAboveThreshold": "2024-05-12"
+    },
+    {
+        "ID": 19,
+        "Product": "Product S",
+        "Description": "Stylish and comfortable women's sweater",
+        "Price": 65.75,
+        "Category": "Clothing",
+        "Supplier": "Fashion Fair",
+        "Stock": 5,
+        "ReorderLevel": 13,
+        "LastDateAboveThreshold": "2024-05-18"
+    },
+    {
+        "ID": 20,
+        "Product": "Product T",
+        "Description": "Ergonomic office chair",
+        "Price": 48.15,
+        "Category": "Sports",
+        "Supplier": "Tech Labs",
+        "Stock": 4,
+        "ReorderLevel": 11,
+        "LastDateAboveThreshold": "2024-05-21"
+    },
+    {
+        "ID": 21,
+        "Product": "Product U",
+        "Description": "Popular science fiction novel",
+        "Price": 29.99,
+        "Category": "Books",
+        "Supplier": "Acme Inc.",
+        "Stock": 2,
+        "ReorderLevel": 10,
+        "LastDateAboveThreshold": "2024-05-23"
+    },
+    {
+        "ID": 22,
+        "Product": "Product V",
+        "Description": "Remote-controlled toy car",
+        "Price": 22.79,
+        "Category": "Toys",
+        "Supplier": "Trailblazers",
+        "Stock": 5,
+        "ReorderLevel": 12,
+        "LastDateAboveThreshold": "2024-05-19"
+    },
+    {
+        "ID": 23,
+        "Product": "Product W",
+        "Description": "Wireless gaming mouse",
+        "Price": 16.45,
+        "Category": "Electronics",
+        "Supplier": "Tech Labs",
+        "Stock": 7,
+        "ReorderLevel": 11,
+        "LastDateAboveThreshold": "2024-05-05"
+    }]
+
+ ,
     "status": "complete",
     "results":[{
         "bytes": 1,
@@ -310,7 +628,7 @@
         "rows": 29,
         "schema": "shop",
         "table": "loyalty",
-        "url": "/examplePromptsCSV/example3.csv"
+        "url": "/example3.csv"
       }]
   },
   "showmethedailyunitanddollarsalesvolumeinallstoresinregionxforanyproductthathasstartechnologyforthelastweek.comparethatthedailyunitanddollarsalesvolumeofallotherproductsinregionxoverthesametimeperiod.": {
@@ -328,7 +646,7 @@
       "type": "select_multi",
       "value": "Star Technology",
       "detail": "Includes any SKU that with product with attributes 'STAR_int' 'Star group' or 'New_Star_SKU'.",
-      "selectData": ["STAR_int", "Star group", "New_Star_SKU"]
+      "selectData": ["STAR_int", "Star_group", "New_Star_SKU"]
     },
   {
     "id": "region_x",
@@ -356,7 +674,7 @@
     "detail": "This calculation will show Star Technology product sales as a percentage of all other sales."
   }
 ],
-    "observations":"Over the past w'url: /examplePromptsCSV/example1.csv'eek in Region X, 'Star Technology' products generated a total revenue of $50,000 and sold 500 units, while all other products achieved $70,000 in revenue with 700 units sold. The top-selling day was Thursday, with 'Star Technology' products accounting for 40% of total sales volume",
+    "observations":"Over the past w'url: /example1.csv'eek in Region X, 'Star Technology' products generated a total revenue of $50,000 and sold 500 units, while all other products achieved $70,000 in revenue with 700 units sold. The top-selling day was Thursday, with 'Star Technology' products accounting for 40% of total sales volume",
     "notes":["Daily Sales Trends: To evaluate comparative sales on a day over day basis. Calculate the average daily revenue and units sold for each product category. For example, the average daily revenue in the last day for 'Star Technology' products was $7,143, and for 'all other' products was $10,000.","Product Performance Comparison: We recommend comparing the average daily revenue and units sold between 'Star Technology' products and 'all other' products to assess performance, but excluding products that were new during the evaluation period. For instance, 'all other' products may have a higher average daily revenue per unit sold compared to 'Star Technology' products due to new product volume, so the comparison could mislead.","Seasonal Variations: Calculate the percentage change in sales volume from the previous week to identify any significant seasonal variations. For example, sales volume increased by 20% compared to the previous week, and we see similar lifts year on year, this potentially indicates a seasonal spike in demand.","Promotional Analysis: Determine the impact of promotions by calculating the percentage increase in sales volume or revenue during the promotional period. For instance, sales volume increased by 30% during the latest promotion, which suggests a successful campaign.","Customer Preferences: A ratio analysis between all other products and Star Technology products could help uncover customer Preferences. It may be worth reviewing consumer insights trends from the CI_2023 retriever for additional context."],
     "columns": ["Date", "Star Tech Units Sold", "Star Tech Dollar Sales", "Other Units Sold", "Other Dollar Sales", "Total Units Sold", "Total Dollar Sales", "Star Tech Units %", "Star Tech Dollar %"],
     "rows": [
@@ -392,7 +710,7 @@
         "rows": 29,
         "schema": "shop",
         "table": "loyalty",
-        "url": "/examplePromptsCSV/example2.csv"
+        "url": "/example2.csv"
       }]
   },
   "getlistof100customersorderdate":  {
@@ -449,7 +767,7 @@
         "rows": 29,
         "schema": "shop",
         "table": "loyalty",
-        "url": "/examplePromptsCSV/example2.csv"
+        "url": "/example2.csv"
       }
     ]
   }

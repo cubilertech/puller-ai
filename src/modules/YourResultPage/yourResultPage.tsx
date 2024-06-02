@@ -5,7 +5,10 @@ import { PageHeader } from "@/components/PageHeader";
 import { ResultCard } from "@/components/ResultCard";
 import { useGetSingleExecute } from "@/hooks/useExecute";
 import { useGetSinglePrompt } from "@/hooks/usePrompt";
-import { replaceIdWithVariableInDiscription } from "@/utils/common";
+import {
+  replaceBrandName,
+  replaceIdWithVariableInDiscription,
+} from "@/utils/common";
 // import { getActiveRequest } from "@/libs/redux/features/activeRequest";
 // import { useAppSelector } from "@/libs/redux/hooks";
 import { RESULTS_DATA } from "@/utils/data";
@@ -40,8 +43,8 @@ const YourResultsPage: FC<Props> = ({ id }) => {
     year: "numeric",
   });
   const discription = useMemo(() => {
-    return replaceIdWithVariableInDiscription(data as Prompt)
-  }, [data])
+    return replaceIdWithVariableInDiscription(data as Prompt);
+  }, [data]);
   return (
     <>
       {isLoading ? (
@@ -90,7 +93,9 @@ const YourResultsPage: FC<Props> = ({ id }) => {
                 id: data?.id ?? "",
                 observations:
                   data?.observations !== ""
-                    ? data?.observations
+                    ? replaceBrandName({
+                        description: data?.observations as string,
+                      })
                     : RESULTS_DATA.observations,
                 fileLink: imageUrl,
               }}

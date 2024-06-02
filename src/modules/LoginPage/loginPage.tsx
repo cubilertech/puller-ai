@@ -91,7 +91,7 @@ const LoginPage = () => {
             {/* Formik Form */}
             <form onSubmit={formik.handleSubmit}>
               <Box sx={{ mt: 2.4 }}>
-                <Typography variant="text-sm-medium">Company Name</Typography>
+                <Typography variant="text-sm-medium">Brand Name</Typography>
                 <Input
                   disableUnderline
                   fullWidth
@@ -262,7 +262,7 @@ const LoginPage = () => {
             >
               © 2024 Puller AI
             </Typography>
-            <Box sx={{ display: "flex", gap: 1.5,  }}>
+            <Box sx={{ display: "flex", gap: 1.5 }}>
               <CustomLink href="#" variant="simple">
                 Terms & Condition
               </CustomLink>
@@ -295,9 +295,9 @@ const LoginPage = () => {
           <Box
             sx={{
               position: "absolute",
-              top: { xl: "80px",lg:"120px", md: "140px"},
+              top: { xl: "80px", lg: "120px", md: "140px" },
               transform: "scale(180%)",
-              opacity: 0.1
+              opacity: 0.1,
             }}
           >
             <Icon icon="logoIcon" width={1000} />
@@ -311,8 +311,8 @@ const LoginPage = () => {
               justifyContent: "center",
               alignItems: "center",
               background:
-              "linear-gradient(143deg, rgba(255, 255, 255, 0.15) -3.54%, rgba(114, 114, 114, 0.17) 95.15%)",
-            backdropFilter: "blur(0px)",
+                "linear-gradient(143deg, rgba(255, 255, 255, 0.15) -3.54%, rgba(114, 114, 114, 0.17) 95.15%)",
+              backdropFilter: "blur(0px)",
             }}
           >
             <Icon icon="logo" width={500} />

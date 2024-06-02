@@ -1,5 +1,5 @@
 "use client";
-import React, { FC, useState } from "react";
+import React, { FC, useMemo, useState } from "react";
 import {
   Box,
   Menu,
@@ -34,7 +34,6 @@ const DataTable: FC<DataTableProps> = ({ data }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const [activePage, setActivePage] = useState<number>(0);
-  const totalPages = Math.ceil((data?.rows?.length || 0) / rowsPerPage);
   const handlePageChange = (page: number) => {
     setActivePage(page);
     setPage(page);
@@ -48,6 +47,39 @@ const DataTable: FC<DataTableProps> = ({ data }) => {
     setAnchorEl(null);
   };
 
+  const rows = useMemo(() => {
+    const selectVar = data?.variables?.find(
+      (item) => item.id === "top_skus_number"
+    );
+    if (data && selectVar && Number(selectVar.value)) {
+      return data?.rows?.slice(0, Number(selectVar.value));
+    } else {
+      return data?.rows;
+    }
+  }, [data]);
+
+  const columns = useMemo(() => {
+    if (data.id === "query#1234567890") {
+      const cols = ["Region", "Product"];
+      const selectVar = data?.variables?.find(
+        (item) => item.id === "revenue_txt"
+      );
+      if (selectVar) {
+        const val = (selectVar.value as string).toLowerCase();
+        if (val.includes("units")) {
+          cols.push("Units Sold");
+        } else if (val.includes("margin")) {
+          cols.push("Profit Margin");
+        } else if (val.includes("revenue")) {
+          cols.push("Revenue");
+        }
+      }
+      return cols;
+    } else return data.columns;
+  }, [data]);
+
+  const totalPages = Math.ceil((rows?.length || 0) / rowsPerPage);
+
   return (
     <Box
       sx={{
@@ -59,7 +91,7 @@ const DataTable: FC<DataTableProps> = ({ data }) => {
         scrollbarWidth: "none",
       }}
     >
-      {data && data.rows?.length ? (
+      {rows && rows?.length ? (
         <TableContainer
           sx={{
             maxHeight: "calc(100vh - 270px)", // Adjust height based on your needs
@@ -67,16 +99,21 @@ const DataTable: FC<DataTableProps> = ({ data }) => {
             scrollbarWidth: "none", // Enable vertical scrolling
           }}
         >
-          <Table stickyHeader sx={{".MuiTable-stickyHeader": {
-              bgcolor: "transparent"
-            }}}>
-            <TableHead columns={data?.columns as string[]} />
+          <Table
+            stickyHeader
+            sx={{
+              ".MuiTable-stickyHeader": {
+                bgcolor: "transparent",
+              },
+            }}
+          >
+            <TableHead columns={columns as string[]} />
             <TableBody>
-              {data?.rows
+              {rows
                 ?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row, rowIndex) => (
                   <TableRow key={rowIndex}>
-                    {data.columns?.map((column, colIndex) => (
+                    {columns?.map((column, colIndex) => (
                       <TableCell key={colIndex} sx={{ border: "none" }}>
                         {row[column as keyof typeof row]}
                       </TableCell>
@@ -149,8 +186,8 @@ const DataTable: FC<DataTableProps> = ({ data }) => {
           </Box>
           <Typography variant="text-xs-medium" color={"#C8C8C8"}>
             Showing {page * rowsPerPage + 1} to{" "}
-            {Math.min((page + 1) * rowsPerPage, data?.rows?.length ?? 0)} of{" "}
-            {data?.rows?.length ?? 0} entries
+            {Math.min((page + 1) * rowsPerPage, rows?.length ?? 0)} of{" "}
+            {rows?.length ?? 0} entries
           </Typography>
         </Box>
 
@@ -206,15 +243,13 @@ const DataTable: FC<DataTableProps> = ({ data }) => {
             onClick={() => handlePageChange(page + 1)}
             label=""
             variant="text"
-            disabled={
-              page === Math.ceil((data?.rows?.length ?? 0) / rowsPerPage) - 1
-            }
+            disabled={page === Math.ceil((rows?.length ?? 0) / rowsPerPage) - 1}
             sx={{
               minWidth: 32,
               width: "32px !important ",
               height: "32px !important ",
               border:
-                page === Math.ceil((data?.rows?.length ?? 0) / rowsPerPage) - 1
+                page === Math.ceil((rows?.length ?? 0) / rowsPerPage) - 1
                   ? "1px solid rgba(225,225,225,0.4)"
                   : "1px solid white",
               ":hover": {
@@ -226,7 +261,7 @@ const DataTable: FC<DataTableProps> = ({ data }) => {
             <Icon
               icon="paginationRight"
               disabled={
-                page === Math.ceil((data?.rows?.length ?? 0) / rowsPerPage) - 1
+                page === Math.ceil((rows?.length ?? 0) / rowsPerPage) - 1
               }
             />
           </Button>
