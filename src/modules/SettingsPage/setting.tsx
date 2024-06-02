@@ -14,8 +14,6 @@ import { CustomLink } from "@/components/Link";
 // Validation schema for the form
 const LoginSchema = Yup.object().shape({
   companyName: Yup.string().required("Company Name is required"),
-  // email: Yup.string().email("Invalid email").required("Email is required"),
-  // password: Yup.string().required("Password is required"),
 });
 
 const SettingPage = () => {
@@ -24,9 +22,6 @@ const SettingPage = () => {
   const formik = useFormik({
     initialValues: {
       companyName: "",
-      email: "",
-      password: "",
-      rememberMe: false,
     },
     validationSchema: LoginSchema,
     onSubmit: (values) => {
@@ -71,7 +66,7 @@ const SettingPage = () => {
           </Box>
           <Paper
             variant="light-bg-border"
-            sx={{ width: "100%", px: "40px", pt : "40px", pb: "25px" }}
+            sx={{ width: "100%", px: "40px", pt: "40px", pb: "25px" }}
           >
             <Typography variant="h4">Login</Typography>
             <Typography component={"p"} variant="text-md-medium" sx={{ mt: 2 }}>
@@ -102,50 +97,8 @@ const SettingPage = () => {
                   </Typography>
                 ) : null}
               </Box>
-              {/* <Box sx={{ mt: 1 }}>
-                <Typography variant="text-sm-medium">Email</Typography>
-                <Input
-                  disableUnderline
-                  fullWidth
-                  name="email"
-                  onChange={formik.handleChange}
-                  value={formik.values.email}
-                  placeholder="Enter email"
-                  sx={{
-                    borderRadius: "5px",
-                    padding: "0.5rem 1rem",
-                    border: "2px solid rgba(196, 196, 196, 0.6)",
-                    mt: 0.5,
-                  }}
-                />
-                {formik.errors.email && formik.touched.email ? (
-                  <Typography color="error">{formik.errors.email}</Typography>
-                ) : null}
-              </Box>
-              <Box sx={{ mt: 1 }}>
-                <Typography variant="text-sm-medium">Password</Typography>
-                <Input
-                  disableUnderline
-                  fullWidth
-                  name="password"
-                  type="password"
-                  onChange={formik.handleChange}
-                  value={formik.values.password}
-                  placeholder="Enter password"
-                  sx={{
-                    borderRadius: "5px",
-                    padding: "0.5rem 1rem",
-                    border: "2px solid rgba(196, 196, 196, 0.6)",
-                    mt: 0.5,
-                  }}
-                />
-                {formik.errors.password && formik.touched.password ? (
-                  <Typography color="error">
-                    {formik.errors.password}
-                  </Typography>
-                ) : null}
-              </Box> */}
-              <Box
+
+              {/* <Box
                 sx={{
                   display: "flex",
                   width: "100%",
@@ -180,7 +133,7 @@ const SettingPage = () => {
                     Forgot Password
                   </Typography>
                 </Box>
-              </Box>
+              </Box> */}
               <Box sx={{ width: "100%", mt: 2 }}>
                 <Button
                   variant="contained"
@@ -214,7 +167,7 @@ const SettingPage = () => {
               <Box sx={{ width: "100%" }}>
                 <CustomButton variant="google-login" text="Login with Google" />
               </Box> */}
-              <Box
+              {/* <Box
                 sx={{
                   textAlign: "center",
                   display: "flex",
@@ -235,7 +188,7 @@ const SettingPage = () => {
                 >
                   Register Here
                 </CustomLink>
-              </Box>
+              </Box> */}
             </form>
           </Paper>
           <Box

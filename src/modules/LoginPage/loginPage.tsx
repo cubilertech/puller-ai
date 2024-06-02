@@ -16,7 +16,7 @@ import { CustomLink } from "@/components/Link";
 
 // Validation schema for the form
 const LoginSchema = Yup.object().shape({
-  companyName: Yup.string().required("Company Name is required"),
+  // companyName: Yup.string().required("Company Name is required"),
   // email: Yup.string().email("Invalid email").required("Email is required"),
   // password: Yup.string().required("Password is required"),
 });
@@ -26,14 +26,15 @@ const LoginPage = () => {
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
-      companyName: "",
+      // companyName: "",
       email: "",
       password: "",
       rememberMe: false,
     },
     validationSchema: LoginSchema,
     onSubmit: (values) => {
-      localStorage.setItem("companyName", values.companyName);
+      // localStorage.setItem("companyName", values.companyName);
+      localStorage.setItem("companyName", "Puller AI");
       router.push("/request");
       setIsLoading(true);
     },
@@ -46,12 +47,6 @@ const LoginPage = () => {
     event.preventDefault();
     formik.handleSubmit();
   };
-  useEffect(() => {
-    const CompanyName = localStorage.getItem("companyName");
-    if (CompanyName) {
-      router.push("/request");
-    }
-  }, []);
   return (
     <Box p={"2%"} height={"100vh"}>
       <Box
@@ -90,7 +85,7 @@ const LoginPage = () => {
 
             {/* Formik Form */}
             <form onSubmit={formik.handleSubmit}>
-              <Box sx={{ mt: 2.4 }}>
+              {/* <Box sx={{ mt: 2.4 }}>
                 <Typography variant="text-sm-medium">Brand Name</Typography>
                 <Input
                   disableUnderline
@@ -111,8 +106,8 @@ const LoginPage = () => {
                     {formik.errors.companyName}
                   </Typography>
                 ) : null}
-              </Box>
-              <Box sx={{ mt: 1 }}>
+              </Box> */}
+              <Box sx={{ mt: 2.4 }}>
                 <Typography variant="text-sm-medium">Email</Typography>
                 <Input
                   disableUnderline
@@ -201,7 +196,7 @@ const LoginPage = () => {
                   onClick={handleButtonClick}
                 />
               </Box>
-              {/* <Box
+              <Box
                 sx={{
                   display: "flex",
                   alignItems: "flex-start",
@@ -223,7 +218,7 @@ const LoginPage = () => {
               </Box>
               <Box sx={{ width: "100%" }}>
                 <CustomButton variant="google-login" text="Login with Google" />
-              </Box> */}
+              </Box>
               <Box
                 sx={{
                   textAlign: "center",

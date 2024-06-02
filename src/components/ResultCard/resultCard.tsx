@@ -17,7 +17,7 @@ interface ResultCardProps {
   data: CardData;
 }
 
-const overflowText = {
+ const overflowText = {
   overflow: "hidden",
   display: "-webkit-box",
   WebkitLineClamp: 3,
