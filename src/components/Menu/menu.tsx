@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { palette } from "@/theme/Palette";
 import { MenuItemType } from "@/utils/types";
 import { MenuItem, Menu as MuiMenu } from "@mui/material";
@@ -13,7 +13,7 @@ interface MenuProps {
 }
 
 const Menu: FC<MenuProps> = ({ open, menuItems, anchorEl, onClose }) => {
-  const router = useRouter()
+  const router = useRouter();
   return (
     <MuiMenu
       sx={{
@@ -51,8 +51,8 @@ const Menu: FC<MenuProps> = ({ open, menuItems, anchorEl, onClose }) => {
           value={item.value}
           onClick={() => {
             if (item.text && item.text === "Logout") {
-              localStorage.removeItem("companyName");
-              router.push("/")
+              // localStorage.removeItem("companyName");
+              router.push("/");
             }
           }}
         >
