@@ -170,7 +170,7 @@ export const replaceIdWithVariable = (
 
   for (const variable of prompt.variables) {
     const placeholder = variable.id;
-    const value = variable.txt;
+    const value = variable.value;
 
     if (
       typeof placeholder === "string" &&
@@ -266,7 +266,7 @@ export const replaceIdWithVariableInDiscription = (
 
   for (const variable of prompt.variables) {
     const placeholder = variable.id;
-    const value = variable.txt;
+    const value = variable.value;
 
     if (
       typeof placeholder === "string" &&

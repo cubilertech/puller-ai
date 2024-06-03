@@ -683,6 +683,7 @@
     "name": "Percentage_Volumes",
     "type": "String_hover",
     "value": "percentage sales volumes",
+    "txt": "percentage sales volumes",
     "detail": "This calculation will show Star Technology product sales as a percentage of all other sales."
   }
 ],
