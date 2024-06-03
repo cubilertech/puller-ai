@@ -20,7 +20,7 @@ interface ResultCardProps {
  const overflowText = {
   overflow: "hidden",
   display: "-webkit-box",
-  WebkitLineClamp: 3,
+  WebkitLineClamp: 2,
   WebkitBoxOrient: "vertical",
 };
 const ResultCard: FC<ResultCardProps> = ({ data }) => {
