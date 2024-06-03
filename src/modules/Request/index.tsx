@@ -1,6 +1,6 @@
 "use client";
 import { Box, Skeleton } from "@mui/material";
-import React, { FC, useEffect, useMemo, useState } from "react";
+import React, { FC, useEffect, useMemo, useRef, useState } from "react";
 import { PageHeader } from "@/components/PageHeader";
 import { useSubmitExecute } from "@/hooks/useExecute";
 import GraphModal2 from "@/modals/graphModals/graphModal2";
@@ -243,16 +243,26 @@ const RequestPage: FC = () => {
 
   const handleUpdateText = () => {
     if (textSelected.trim().length > 0) {
-    let str = description;
-    const updatedParagraph =
-      str.slice(0, selectionIndices.start) +
-      textSelected +
-      str.slice(selectionIndices.end);
-    setDescription(updatedParagraph);
-    setIsEditingText(false);
-    console.log(updatedParagraph, "updated", selectionIndices, "indices");
+      let str = description;
+      const updatedParagraph =
+        str.slice(0, selectionIndices.start) +
+        textSelected +
+        str.slice(selectionIndices.end);
+      setDescription(updatedParagraph);
+      setIsEditingText(false);
     }
   };
+
+  useEffect(() => {
+    if (
+      !isEditingText &&
+      selectionIndices.start > 0 &&
+      selectionIndices.end > 0
+    ) {
+      setSelectionIndices({ start: 0, end: 0 });
+      setTextSelected("");
+    }
+  }, [isEditingText]);
 
   return (
     <>
@@ -364,9 +374,10 @@ const RequestPage: FC = () => {
                 <Box
                   sx={{
                     height: "calc(100vh - 150px)",
-                    width: isOpenSelectBar || isEditingText
-                      ? { lg: "76%", md: "70%", xs: "60%" }
-                      : "100%",
+                    width:
+                      isOpenSelectBar || isEditingText
+                        ? { lg: "76%", md: "70%", xs: "60%" }
+                        : "100%",
                     m: "auto",
                     pt: 2,
                     display: "flex",
@@ -428,6 +439,10 @@ const RequestPage: FC = () => {
                         handleUpdate={handleUpdateVariable}
                         isLoading={singlePromptLoading}
                         handleMouseUp={handleMouseUp}
+                        isEditingText={isEditingText}
+                        textSelected={textSelected}
+                        indiceEnd={selectionIndices.end}
+                        indiceStart={selectionIndices.start}
                       />
                     </Box>
                   )}

@@ -1,6 +1,6 @@
 import { palette } from "@/theme/Palette";
 import { Box, Skeleton, Typography } from "@mui/material";
-import { FC , useMemo } from "react";
+import { FC, useMemo } from "react";
 import { Paper } from "../Paper";
 import "./responseArea.css";
 import { Prompt, UpdateVariables } from "@/utils/types";
@@ -11,6 +11,10 @@ interface ResponseAreaProps {
   handleUpdate?: (value: UpdateVariables) => void;
   isLoading?: boolean;
   handleMouseUp: () => void;
+  isEditingText?: boolean;
+  textSelected?: string;
+  indiceStart?: number;
+  indiceEnd?: number;
 }
 
 const ResponseArea: FC<ResponseAreaProps> = ({
@@ -18,6 +22,10 @@ const ResponseArea: FC<ResponseAreaProps> = ({
   handleUpdate,
   isLoading,
   handleMouseUp,
+  isEditingText,
+  textSelected,
+  indiceStart,
+  indiceEnd,
 }) => {
   const responseTxt = useMemo(() => {
     const handleClickVariable = (value: UpdateVariables) => {
@@ -116,7 +124,7 @@ const ResponseArea: FC<ResponseAreaProps> = ({
             </>
           ) : (
             <Typography
-              variant={"display-xs-response"}
+              variant="display-xs-response"
               sx={{
                 width: "98%",
                 pr: 5,
@@ -128,7 +136,15 @@ const ResponseArea: FC<ResponseAreaProps> = ({
               className="animated-genrated-text"
               onMouseUp={handleMouseUp}
             >
-              {responseTxt}
+              {isEditingText ? (
+                <>
+                  {prompt?.description?.slice(0, indiceStart ?? 0)}
+                  <span style={{ background: "#7a8089" }}>{textSelected}</span>
+                  {prompt?.description?.slice(indiceEnd ?? 0)}
+                </>
+              ) : (
+                responseTxt
+              )}
             </Typography>
           )}
         </Box>

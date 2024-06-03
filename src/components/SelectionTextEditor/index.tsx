@@ -56,7 +56,7 @@ const SelectionTextEditor: FC<Props> = ({ close, setText, text, handleSubmit }) 
             }}
           >
             <Typography color={palette.base.white} variant="text-md-regular">
-              Seasonal Transactions
+              Edit
             </Typography>
             <Box onClick={close}>
               <CloseIcon
@@ -69,7 +69,7 @@ const SelectionTextEditor: FC<Props> = ({ close, setText, text, handleSubmit }) 
             </Box>
           </Box>
           <Typography color={palette.base.white} variant="text-sm-regular">
-            Enter any number you want to update
+            Enter updated value
           </Typography>
 
           <Paper
