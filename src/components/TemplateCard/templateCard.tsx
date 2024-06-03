@@ -2,7 +2,7 @@ import { Box, Typography } from "@mui/material";
 import Image from "next/image";
 // import { Icon } from "../Icon";
 import { Paper } from "../Paper";
-import { FC } from "react";
+import { FC, useMemo } from "react";
 import { Prompt } from "@/utils/types";
 import { useRouter } from "next/navigation";
 import { useAppDispatch } from "@/libs/redux/hooks";
@@ -11,6 +11,10 @@ import {
   UpdateIsLoadingRequest,
   UpdatePromptValue,
 } from "@/libs/redux/features/isLoadingRequest";
+import {
+  replaceBrandName,
+  replaceIdWithVariableInDiscription,
+} from "@/utils/common";
 
 interface TemplateCardProps {
   card: Prompt;
@@ -27,6 +31,14 @@ const TemplateCard: FC<TemplateCardProps> = ({ card, index }) => {
     dispatch(UpdateIsLoadingRequest(true));
     dispatch(UpdatePromptValue(card.query));
   };
+  const discription = useMemo(() => {
+    const replaceBrand = replaceBrandName({ description: card.description });
+    return replaceIdWithVariableInDiscription({
+      ...card,
+      description: replaceBrand,
+    } as Prompt);
+  }, [card]);
+  console.log(discription, "discription")
   return (
     <Box
       key={index}
@@ -60,8 +72,16 @@ const TemplateCard: FC<TemplateCardProps> = ({ card, index }) => {
           {/* Description */}
           <Box display={"flex"} flexDirection={"column"}>
             <Typography variant="text-md-regular">Template {id}</Typography>
-            <Typography variant="text-xs-regular">
-              {card.description}
+            <Typography
+              variant="text-xs-regular"
+              sx={{
+                overflow: "hidden",
+                display: "-webkit-box",
+                WebkitLineClamp: 3,
+                WebkitBoxOrient: "vertical",
+              }}
+            >
+              {discription}
             </Typography>
             {/* <Typography variant="text-xs-regular">
               {card.subHeading2}

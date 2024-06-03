@@ -42,7 +42,7 @@ const AlertCard: FC<alertCardProps> = ({
           }}
           className="alert-card"
         >
-          <Divider type="dark" />
+          <Divider type="dark"  sx={{borderColor: "#393939"}}/>
           {/* Layout Container for user notification */}
           <Box
             padding={"1rem"}

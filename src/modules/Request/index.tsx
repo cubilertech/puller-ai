@@ -132,17 +132,19 @@ const RequestPage: FC = () => {
     isLoading: allPromptLoading,
   } = useGetAllPrompt();
 
-  const handleSubmitPrompt = () => {
-    submitPrompt({ message: query });
+  const handleSubmitPrompt = async () => {
+    await submitPrompt({ message: query });
     dispatch(setSubmitPromptLoading(true));
     dispatch(setLoadingText("Processing"));
     dispatch(UpdatePromptValue(query));
+    setQuery("");
   };
-  const handleLatestPrompt = (queryText: string) => {
-    submitPrompt({ message: queryText });
+  const handleLatestPrompt = async (queryText: string) => {
+    await submitPrompt({ message: queryText });
     dispatch(setSubmitPromptLoading(true));
     dispatch(setLoadingText("Processing"));
     dispatch(UpdatePromptValue(queryText));
+    setQuery("");
   };
 
   const handleUpdate = () => {
@@ -166,18 +168,19 @@ const RequestPage: FC = () => {
   const handleOpenGraph = () => {
     setCurrentType("graph");
   };
-  const UpdateVariables = () => {
-    if (prompt?.id) {
-      submitValidate({ prompt: prompt?.id, variables: variables });
-      dispatch(setSubmitValidateLoading(true));
-    }
-  };
+  // const UpdateVariables = () => {
+  //   if (prompt?.id) {
+  //     submitValidate({ prompt: prompt?.id, variables: variables });
+  //     dispatch(setSubmitValidateLoading(true));
+  //   }
+  // };
   console.log(SelectBarVarient, "SelectBarVarient");
 
   const handleUpdateVariable = (value?: UpdateVariables) => {
     if (value) {
       console.log("Updated value:", value);
       // Add your logic here to handle the updated value
+      localStorage.setItem("variableId", value.id);
       setVariableId(value.id);
       setIsOpenSelectBar(true);
       if (value.type === "numeric" || value.type === "String") {
@@ -202,6 +205,7 @@ const RequestPage: FC = () => {
   const handleCloseSelectBar = () => {
     setIsOpenSelectBar(false);
     setSelectBarVarient(null);
+    localStorage.removeItem("variableId");
   };
   // const handleOpenSelectBar = () => {
   //   setIsOpenSelectBar(true);
@@ -214,6 +218,7 @@ const RequestPage: FC = () => {
   useEffect(() => {
     setLoading(false);
     refetchAllPrompt();
+    localStorage.removeItem("variableId");
   }, []);
   useEffect(() => {
     if (isSuccessExecute) {
@@ -225,6 +230,24 @@ const RequestPage: FC = () => {
     original:
       "Can I get data to understand how Flyease technology products have been performing this past year? I want to be able to pivot by SKU or by store, to understand transactional data by week.",
   };
+  useEffect(() => {
+    if (
+      !id &&
+      !submitPromptLoading &&
+      !submitExecuteLoading &&
+      !submitValidateLoading &&
+      !loading
+    ) {
+      localStorage.removeItem("variableId");
+      setIsOpenSelectBar(false);
+    }
+  }, [
+    id,
+    submitPromptLoading,
+    submitExecuteLoading,
+    submitValidateLoading,
+    loading,
+  ]);
 
   const handleMouseUp = () => {
     const selection = window.getSelection();
@@ -307,7 +330,7 @@ const RequestPage: FC = () => {
           animate={{ opacity: [0, 1] }}
           transition={{ duration: 0.4, ease: "easeInOut" }}
         >
-          <Box sx={{ px: 2, pt: 1, m: "auto" }}>
+          <Box sx={{ px: 2, pt: 1, m: "auto", overflow: "hidden" }}>
             <PageHeader
               title="Validate Request"
               buttons={[
@@ -360,7 +383,6 @@ const RequestPage: FC = () => {
                     justifyContent: "space-between",
                     overflowX: "hidden",
                     transition: "width 0.5s ease",
-                    mt: 1,
                   }}
                 >
                   <ResponseArea
@@ -379,10 +401,10 @@ const RequestPage: FC = () => {
                         ? { lg: "76%", md: "70%", xs: "60%" }
                         : "100%",
                     m: "auto",
-                    pt: 2,
                     display: "flex",
                     flexDirection: "column",
                     justifyContent: "space-between",
+                    transition: "0.2s ease",
                   }}
                 >
                   {CurrentType === "SQL" ? (
@@ -399,6 +421,7 @@ const RequestPage: FC = () => {
                         zIndex: 10,
                         opacity: 1,
                         mb: 2,
+                        pt: 1
                       }}
                     >
                       <SQL_Editor code={prompt?.sql ?? "Select * from test;"} />
@@ -418,6 +441,7 @@ const RequestPage: FC = () => {
                           zIndex: 10,
                           opacity: 1,
                           mb: 3,
+                          pt: 1
                         }}
                       >
                         <GraphModal2
@@ -459,15 +483,22 @@ const RequestPage: FC = () => {
                   sx={{
                     height: "calc(100vh - 160px)",
                     mt: 1,
-                    width: "calc(100vw - 79vw)",
+                    width: "23.8%",
                   }}
                 >
-                  <OptionsBar
-                    handleUpdate={UpdateVariables}
-                    variant={SelectBarVarient as OptionsBarVariants}
-                    variableId={VariableId}
-                    close={handleCloseSelectBar}
-                  />
+                  <motion.div
+                    initial={{ opacity: 0, x: 300 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.4, ease: "easeInOut" }}
+                  >
+                    <OptionsBar
+                      PromptId={prompt?.id as string}
+                      submitValidate={submitValidate}
+                      variant={SelectBarVarient as OptionsBarVariants}
+                      variableId={VariableId}
+                      close={handleCloseSelectBar}
+                    />
+                  </motion.div>
                 </Box>
               )}
               {isEditingText && (

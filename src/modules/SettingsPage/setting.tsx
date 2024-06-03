@@ -4,37 +4,28 @@ import { Button } from "@/components/Button";
 import { Paper } from "@/components/Paper";
 import { Logo } from "@/components/logo";
 import { palette } from "@/theme/Palette";
-import { CheckBox, CircleOutlined } from "@mui/icons-material";
 import { Box, Checkbox, Input, Typography } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/navigation";
 import { Icon } from "@/components/Icon";
-import { Divider } from "@/components/Divider";
-import CustomButton from "@/common/CustomButtons/CustomButtons";
 import { CustomLink } from "@/components/Link";
 
 // Validation schema for the form
 const LoginSchema = Yup.object().shape({
-  // companyName: Yup.string().required("Company Name is required"),
-  // email: Yup.string().email("Invalid email").required("Email is required"),
-  // password: Yup.string().required("Password is required"),
+  companyName: Yup.string().required("Company Name is required"),
 });
 
-const LoginPage = () => {
+const SettingPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
-      // companyName: "",
-      email: "",
-      password: "",
-      rememberMe: false,
+      companyName: "",
     },
     validationSchema: LoginSchema,
     onSubmit: (values) => {
-      // localStorage.setItem("companyName", values.companyName);
-      localStorage.setItem("companyName", "Puller AI");
+      localStorage.setItem("companyName", values.companyName);
       router.push("/request");
       setIsLoading(true);
     },
@@ -54,8 +45,7 @@ const LoginPage = () => {
           display: "flex",
           width: "100%",
           height: "100%",
-          justifyContent: "space-between",
-          flexDirection: "row-reverse",
+          justifyContent: "center",
           gap: "40px",
         }}
       >
@@ -78,14 +68,11 @@ const LoginPage = () => {
             variant="light-bg-border"
             sx={{ width: "100%", px: "40px", pt: "40px", pb: "25px" }}
           >
-            <Typography variant="h4">Login</Typography>
-            <Typography component={"p"} variant="text-md-medium" sx={{ mt: 2 }}>
-              Provide your credentials to get started
-            </Typography>
+            <Typography variant="h4">Settings</Typography>
 
             {/* Formik Form */}
             <form onSubmit={formik.handleSubmit}>
-              {/* <Box sx={{ mt: 2.4 }}>
+              <Box sx={{ mt: 2.4 }}>
                 <Typography variant="text-sm-medium">Brand Name</Typography>
                 <Input
                   disableUnderline
@@ -106,51 +93,9 @@ const LoginPage = () => {
                     {formik.errors.companyName}
                   </Typography>
                 ) : null}
-              </Box> */}
-              <Box sx={{ mt: 2.4 }}>
-                <Typography variant="text-sm-medium">Email</Typography>
-                <Input
-                  disableUnderline
-                  fullWidth
-                  name="email"
-                  onChange={formik.handleChange}
-                  value={formik.values.email}
-                  placeholder="Enter email"
-                  sx={{
-                    borderRadius: "5px",
-                    padding: "0.5rem 1rem",
-                    border: "2px solid rgba(196, 196, 196, 0.6)",
-                    mt: 0.5,
-                  }}
-                />
-                {formik.errors.email && formik.touched.email ? (
-                  <Typography color="error">{formik.errors.email}</Typography>
-                ) : null}
               </Box>
-              <Box sx={{ mt: 1 }}>
-                <Typography variant="text-sm-medium">Password</Typography>
-                <Input
-                  disableUnderline
-                  fullWidth
-                  name="password"
-                  type="password"
-                  onChange={formik.handleChange}
-                  value={formik.values.password}
-                  placeholder="Enter password"
-                  sx={{
-                    borderRadius: "5px",
-                    padding: "0.5rem 1rem",
-                    border: "2px solid rgba(196, 196, 196, 0.6)",
-                    mt: 0.5,
-                  }}
-                />
-                {formik.errors.password && formik.touched.password ? (
-                  <Typography color="error">
-                    {formik.errors.password}
-                  </Typography>
-                ) : null}
-              </Box>
-              <Box
+
+              {/* <Box
                 sx={{
                   display: "flex",
                   width: "100%",
@@ -185,18 +130,18 @@ const LoginPage = () => {
                     Forgot Password
                   </Typography>
                 </Box>
-              </Box>
+              </Box> */}
               <Box sx={{ width: "100%", mt: 2 }}>
                 <Button
                   variant="contained"
                   size="large"
                   fullWidth
-                  label="Login"
+                  label="Update"
                   disabled={isLoading}
                   onClick={handleButtonClick}
                 />
               </Box>
-              <Box
+              {/* <Box
                 sx={{
                   display: "flex",
                   alignItems: "flex-start",
@@ -218,8 +163,8 @@ const LoginPage = () => {
               </Box>
               <Box sx={{ width: "100%" }}>
                 <CustomButton variant="google-login" text="Login with Google" />
-              </Box>
-              <Box
+              </Box> */}
+              {/* <Box
                 sx={{
                   textAlign: "center",
                   display: "flex",
@@ -240,7 +185,7 @@ const LoginPage = () => {
                 >
                   Register Here
                 </CustomLink>
-              </Box>
+              </Box> */}
             </form>
           </Paper>
           <Box
@@ -275,47 +220,9 @@ const LoginPage = () => {
             </Box>
           </Box>
         </Box>
-        {/* image logo side */}
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "centers",
-            width: "60%",
-            height: "100%",
-            position: "relative",
-            overflow: "hidden",
-          }}
-        >
-          <Box
-            sx={{
-              position: "absolute",
-              top: { xl: "80px", lg: "120px", md: "140px" },
-              transform: "scale(180%)",
-              opacity: 0.1,
-            }}
-          >
-            <Icon icon="logoIcon" width={1000} />
-          </Box>
-          <Paper
-            variant="light-border"
-            sx={{
-              width: "100%",
-              height: "100%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              background:
-                "linear-gradient(143deg, rgba(255, 255, 255, 0.15) -3.54%, rgba(114, 114, 114, 0.17) 95.15%)",
-              backdropFilter: "blur(0px)",
-            }}
-          >
-            <Icon icon="logo" width={500} />
-          </Paper>
-        </Box>
       </Box>
     </Box>
   );
 };
 
-export default LoginPage;
+export default SettingPage;

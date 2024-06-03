@@ -118,6 +118,8 @@ const GraphModal2 = ({ prompt, validatePrompt }: props) => {
   const [isLoading, setIsLoading] = useState(true);
   const [variables, setVariables] = useState(prompt?.variables ?? []);
   const variablesInitialArray = prompt?.variables ?? [];
+  const [isDirty, setIsDirty] = useState(false);
+
   const dispatch = useAppDispatch();
   // useEffect(()=>{
 
@@ -194,13 +196,14 @@ const GraphModal2 = ({ prompt, validatePrompt }: props) => {
     //   return acc;
     // }, []);
     const newArray = variables;
-    const index = newArray.findIndex((item)=>item.model === updatedPrompt.id);
-    if(index >= 0){
+    const index = newArray.findIndex((item) => item.model === updatedPrompt.id);
+    if (index >= 0) {
       newArray[index].value = Number(updatedPrompt.variables?.[0]?.value);
     }
 
-    setVariables(newArray);
+    setVariables([...newArray]);
     setNodes(updatedNodes);
+    setIsDirty(true);
   };
 
   const handleSubmit = () => {
@@ -218,7 +221,6 @@ const GraphModal2 = ({ prompt, validatePrompt }: props) => {
       ),
     };
   }, []);
-  console.log(prompt, "prompt");
 
   return (
     <Box sx={{ width: "100%", height: "calc(100vh - 298px)" }}>
@@ -254,8 +256,7 @@ const GraphModal2 = ({ prompt, validatePrompt }: props) => {
             fitView
           >
             <Controls />
-            {JSON.stringify(variablesInitialArray) !==
-              JSON.stringify(variables) && (
+            {isDirty && (
               <Panel position="bottom-right">
                 <Button
                   variant="contained"

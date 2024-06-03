@@ -31,11 +31,31 @@ const UploadRetrieverPage = () => {
     isLoading: CreatingRetriever,
   } = useCreateRetriever();
 
+  const getFileContext = (name: string) => {
+    const fileContextByName: any = {
+      "consumer insights":
+        "Detailed analysis of consumer demographics, buying patterns, and preferences.",
+      "Category sales":
+        "Breakdown of sales figures by product category, including monthly and annual trends.",
+      "regional analysis":
+        "Comprehensive report on sales performance, market share, and growth in various regions.",
+      "Customer retention":
+        "Data on customer retention rates, reasons for churn, and strategies for improving loyalty.",
+      "consumer insights new":
+        "Latest insights into consumer behavior, including recent trends, survey results, and feedback analysis.",
+    };
+    return (
+      fileContextByName[name] ||
+      "Detailed analysis of consumer demographics, buying patterns, and preferences."
+    );
+  };
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const newFiles = Array.from(event.target.files).map((file) => ({
         file,
         description: "",
+        context:
+          (file.name && getFileContext(file.name?.split(".")[0])) || file.name,
       }));
       setFileData((prevFileData) => [...prevFileData, ...newFiles]);
     }
@@ -230,6 +250,7 @@ const UploadRetrieverPage = () => {
                       key={index}
                       name={data.file.name}
                       size={data.file.size}
+                      context={data?.context}
                       inputValue={data.description}
                       handleChangeInput={handleDescriptionChange(index)}
                     />

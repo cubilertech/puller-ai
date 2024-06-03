@@ -214,11 +214,11 @@ const PannelArea: FC<PannelAreaProps> = ({
                 width: { lg: "26%", md: "38%", sm: "40%" },
               }}
             >
-              <OptionsBar
+              {/* <OptionsBar
                 close={handleCloseSelectBar}
                 variant="square-checkbox"
                 // handleUpdate={handleUpdate ? () => handleUpdate() : undefined}
-              />
+              /> */}
             </Box>
           )}
         </Box>

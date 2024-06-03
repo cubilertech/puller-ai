@@ -15,9 +15,14 @@
 }
 .updateValue {
   border-radius: 2px;
+  cursor: pointer;
 }
 .updateValue_hover {
   border-radius: 2px;
+  /* cursor: pointer; */
+}
+.selected-value {
+  background: #7a8089;
 }
 .updateValue:hover {
   background: #7a8089;

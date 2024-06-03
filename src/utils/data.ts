@@ -143,22 +143,6 @@ export const ALERT_DATA = [
   },
   {
     image: "/Images/avatar-2.svg",
-    name: "Darcel Ballentine",
-    product: "Pattern Top with Knot ",
-    price: 210.98,
-    time: "30 mins ago",
-    type: "user",
-  },
-  {
-    image: "/Images/avatar-2.svg",
-    name: "Darcel Ballentine",
-    product: "Pattern Top with Knot ",
-    price: 210.98,
-    time: "30 mins ago",
-    type: "user",
-  },
-  {
-    image: "/Images/avatar-2.svg",
     product: "Pattern Top with Knot ",
     name: "Darcel Ballentine",
     price: 210.98,

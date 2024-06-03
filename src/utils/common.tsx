@@ -1,4 +1,4 @@
-import { Fragment, useMemo } from "react";
+import { Fragment } from "react";
 import { MODES } from "./constants";
 import { Prompt, UpdateVariables, Variable } from "./types";
 import { Tooltip } from "@/components/Tooltip";
@@ -37,7 +37,7 @@ export const getResultOfPrompt = (id: string, baseUrl: string) => {
           rows: 29,
           schema: "shop",
           table: "loyalty",
-          url: `${baseUrl}/examplePromptsCSV/example1.csv`,
+          url: `${baseUrl}/example1.csv`,
         },
       ];
     case "query#1234567891": {
@@ -50,7 +50,7 @@ export const getResultOfPrompt = (id: string, baseUrl: string) => {
           rows: 29,
           schema: "shop",
           table: "loyalty",
-          url: `${baseUrl}/examplePromptsCSV/example4.csv`,
+          url: `${baseUrl}/example4.csv`,
         },
       ];
     }
@@ -64,7 +64,7 @@ export const getResultOfPrompt = (id: string, baseUrl: string) => {
           rows: 29,
           schema: "shop",
           table: "loyalty",
-          url: `${baseUrl}/examplePromptsCSV/example3.csv`,
+          url: `${baseUrl}/example3.csv`,
         },
       ];
     }
@@ -78,7 +78,7 @@ export const getResultOfPrompt = (id: string, baseUrl: string) => {
           rows: 29,
           schema: "shop",
           table: "loyalty",
-          url: `${baseUrl}/examplePromptsCSV/example2.csv`,
+          url: `${baseUrl}/example2.csv`,
         },
       ];
     }
@@ -92,7 +92,7 @@ export const getResultOfPrompt = (id: string, baseUrl: string) => {
           rows: 29,
           schema: "shop",
           table: "loyalty",
-          url: `${baseUrl}/examplePromptsCSV/example4.csv`,
+          url: `${baseUrl}/example4.csv`,
         },
       ];
     }
@@ -106,16 +106,31 @@ export const getResultOfPrompt = (id: string, baseUrl: string) => {
           rows: 29,
           schema: "shop",
           table: "loyalty",
-          url: `${baseUrl}/examplePromptsCSV/dummy.csv`,
+          url: `${baseUrl}/dummy.csv`,
         },
       ];
   }
 };
 
-// Utility function to escape special characters in a string for use in a regular expression
 function escapeRegExp(string: string): string {
   return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
 }
+function escapePercentage(string: string): string {
+  return string.replace(/[%]/g, ""); // Remove only "%" signs
+}
+
+export const replaceBrandName = (prompt: { description: string }): string => {
+  const placeholder = "%Brand%";
+  let value = localStorage.getItem("companyName") ?? "Puller";
+
+  // Remove % from the company name
+  value = escapePercentage(value);
+
+  // Split the description by the placeholder and join with the value
+  const newDescription = prompt.description.split(placeholder).join(value);
+
+  return newDescription;
+};
 
 export const replaceIdWithVariable = (
   prompt: Prompt,
@@ -136,8 +151,8 @@ export const replaceIdWithVariable = (
       </div>
     );
   }
-
-  let parts: Array<string | JSX.Element> = [prompt.description];
+  const discriptipn = replaceBrandName(prompt);
+  let parts: Array<string | JSX.Element> = [discriptipn];
 
   for (const variable of prompt.variables) {
     const placeholder = variable.id;
@@ -160,6 +175,8 @@ export const replaceIdWithVariable = (
                   type: variable.type,
                   id: placeholder,
                 };
+                const SelectedVariableId = localStorage.getItem("variableId");
+
                 const replacement = variable.detail ? (
                   variable.type === "String_hover" ? (
                     <Tooltip variant="info" description={variable.detail}>
@@ -168,7 +185,11 @@ export const replaceIdWithVariable = (
                   ) : (
                     <Tooltip variant="info" description={variable.detail}>
                       <span
-                        className="updateValue"
+                        className={
+                          SelectedVariableId === placeholder
+                            ? "selected-value"
+                            : "updateValue"
+                        }
                         onClick={() => handleClickVariable(values)}
                       >
                         {value}
@@ -178,7 +199,11 @@ export const replaceIdWithVariable = (
                 ) : (
                   <span
                     key={i}
-                    className="updateValue"
+                    className={
+                      SelectedVariableId === placeholder
+                        ? "selected-value"
+                        : "updateValue"
+                    }
                     onClick={() => handleClickVariable(values)}
                   >
                     {value}
@@ -221,8 +246,9 @@ export const replaceIdWithVariableInDiscription = (
       </div>
     );
   }
+  const discriptipn = replaceBrandName(prompt);
 
-  let parts: Array<string | JSX.Element> = [prompt.description];
+  let parts: Array<string | JSX.Element> = [discriptipn];
 
   for (const variable of prompt.variables) {
     const placeholder = variable.id;
@@ -293,7 +319,7 @@ export const UpdateData = (variables: Variable[], prompt: string) => {
               FROM
                 product_db
               WHERE
-                brand = 'our_brand'
+                brand = '%Brand%'
             )
           GROUP BY
             EXTRACT(
@@ -332,7 +358,7 @@ export const UpdateData = (variables: Variable[], prompt: string) => {
               FROM
                 product_db
               WHERE
-                brand = 'our_brand'
+                brand = '%Brand%'
             )
             AND category_id IN (
               SELECT
@@ -340,7 +366,7 @@ export const UpdateData = (variables: Variable[], prompt: string) => {
               FROM
                 product_db
               WHERE
-                brand = 'our_brand'
+                brand = '%Brand%'
             )
           GROUP BY
             EXTRACT(
@@ -425,7 +451,7 @@ export const UpdateData = (variables: Variable[], prompt: string) => {
         }
       };
       const SQl_Discriptipn = {
-        description: `This query looks at the Sales by Region for [ Brand ] and filters for sales [${variables?.[0]?.id}] and groups by region and SKU. It then calculates the [${variables?.[1]?.id}] margin for each SKU within each region. Finally it orders the results by total revenue in descending order and returns only the top [${variables?.[2]?.id}] SKUs.`,
+        description: `This query looks at the Sales by Region for %Brand% and filters for sales [${variables?.[0]?.id}] and groups by region and SKU. It then calculates the [${variables?.[1]?.id}] margin for each SKU within each region. Finally it orders the results by total revenue in descending order and returns only the top [${variables?.[2]?.id}] SKUs.`,
         sql: `SELECT TOP ${variables?.[2]?.value} r.region, s.sku, ${revenue_txt(variables?.[1]?.value)}, FROM sales s JOIN region r ON s.region_id = r.id WHERE s.sale_date >= DATEADD(quarter, -1, GETDATE()) GROUP BY r.region, s.sku ORDER BY ${total_Desc(variables?.[1]?.value)} DESC;`,
       };
       return SQl_Discriptipn;
@@ -446,7 +472,7 @@ export const UpdateData = (variables: Variable[], prompt: string) => {
         }
       };
       const SQl_Discriptipn = {
-        description: `This query joins the Products table with [${variables?.[0]?.id}] [${variables?.[1]?.id}], and filters for products where the current stock level is below the reorder level. [${variables?.[2]?.id}] Finally, it includes the reorder level and the current stock level in the result set. \nNote that the Goods table is a table that stores the stock in and out for each product, with separate fields for the quantity and the date. The Stock field is calculated as the difference between the In and Out fields, and the ReorderLevel field is a threshold value that triggers a reorder when the stock level falls below it.`,
+        description: `This query joins the Products table with [${variables?.[0]?.id}] on the [${variables?.[1]?.id}] field, and filters for products where the current stock level is below the reorder level. [${variables?.[2]?.id}] Finally, it includes the reorder level and the current stock level in the result set. \nNote that the Goods table is a table that stores the stock in and out for each product, with separate fields for the quantity and the date. The Stock field is calculated as the difference between the In and Out fields, and the ReorderLevel field is a threshold value that triggers a reorder when the stock level falls below it.`,
         sql: `SELECT
         Products.ID,
         Products.Product,

@@ -27,6 +27,7 @@ const ResponseArea: FC<ResponseAreaProps> = ({
   indiceStart,
   indiceEnd,
 }) => {
+  const SelectedVariableId = localStorage.getItem("variableId");
   const responseTxt = useMemo(() => {
     const handleClickVariable = (value: UpdateVariables) => {
       // Perform action when a variable value is clicked
@@ -35,7 +36,7 @@ const ResponseArea: FC<ResponseAreaProps> = ({
       }
     };
     return replaceIdWithVariable(prompt as Prompt, handleClickVariable);
-  }, [prompt]);
+  }, [prompt, SelectedVariableId]);
   return (
     <>
       {/* response discription */}

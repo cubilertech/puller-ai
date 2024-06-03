@@ -30,9 +30,9 @@ const TopNavBar = () => {
   };
   useEffect(() => {
     const companyName = localStorage.getItem("companyName");
-    if (!companyName) {
-      router.push("/");
-    }
+    // if (!companyName) {
+    //   router.push("/");
+    // }
   }, []);
 
   return (

@@ -11,10 +11,10 @@ export async function POST(req: any, res: any) {
   try {
     const client = await clientPromise;
     const db = client.db('demo_mode');
-    const host =
+    const host = 
       req.headers["x-forwarded-host"] || req.headers.host || "localhost:3000";
     const protocol = req.headers["x-forwarded-proto"] || "http"; // This header is often set by proxies
-    const baseUrl = `${protocol}://${host}`;
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || `${protocol}://${host}`;
     const { message } = await req.json();
     const formattedMessage = message.replace(/ /g, "").toLowerCase();
     let prompt = (examplePromptsList as PromptsList)[formattedMessage];

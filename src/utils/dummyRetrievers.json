@@ -16,17 +16,41 @@
     "timestamp": "1716915131599"
   },
   {
-    "icon": "dbtCore",
-    "status": "blocked",
-    "title": "Segment",
+    "icon": "snowflake",
+    "status": "live",
+    "title": "Nielsen",
     "files": [],
     "description": "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
     "timestamp": "1716915131599"
   },
   {
-    "icon": "cpu",
-    "status": "blocked",
-    "title": "Clickstream",
+    "icon": "snowflake",
+    "status": "live",
+    "title": "Snowflake 3",
+    "files": [],
+    "description": "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+    "timestamp": "1716915131599"
+  },
+  {
+    "icon": "clReport",
+    "status": "live",
+    "title": "Data Room 1",
+    "files": [],
+    "description": "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+    "timestamp": "1716915131599"
+  },
+  {
+    "icon": "clReport",
+    "status": "live",
+    "title": "CI Report ‘23",
+    "files": [],
+    "description": "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+    "timestamp": "1716915131599"
+  },
+  {
+    "icon": "sfCrm",
+    "status": "live",
+    "title": "SF CRM",
     "files": [],
     "description": "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
     "timestamp": "1716915131599"
@@ -34,7 +58,7 @@
   {
     "icon": "live",
     "status": "issues",
-    "title": "PowerBI Linku",
+    "title": "PowerBI Link",
     "files": [],
     "description": "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
     "timestamp": "1716915131599"
@@ -48,7 +72,31 @@
     "timestamp": "1716915131599"
   },
   {
-    "icon": "snowflake",
+    "icon": "googleAnalytics",
+    "status": "issues",
+    "title": "Google Analytics",
+    "files": [],
+    "description": "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+    "timestamp": "1716915131599"
+  },
+  {
+    "icon": "dbtCore",
+    "status": "blocked",
+    "title": "Segment",
+    "files": [],
+    "description": "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+    "timestamp": "1716915131599"
+  },
+  {
+    "icon": "nielsen",
+    "status": "blocked",
+    "title": "Clickstream",
+    "files": [],
+    "description": "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+    "timestamp": "1716915131599"
+  },
+  {
+    "icon": "lytics",
     "status": "needPermissions",
     "title": "Lytics",
     "files": [],
@@ -56,9 +104,65 @@
     "timestamp": "1716915131599"
   },
   {
+    "icon": "nielsen",
+    "status": "needPermissions",
+    "title": "Transact POS",
+    "files": [],
+    "description": "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+    "timestamp": "1716915131599"
+  },
+  {
+    "icon": "nielsen",
+    "status": "needPermissions",
+    "title": "Transact POS",
+    "files": [],
+    "description": "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+    "timestamp": "1716915131599"
+  },
+  {
+    "icon": "lytics",
+    "status": "needPermissions",
+    "title": "PowerBI Link",
+    "files": [],
+    "description": "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+    "timestamp": "1716915131599"
+  },
+  {
     "icon": "snowflake",
-    "status": "live",
+    "status": "needPermissions",
+    "title": "Snowflake 2",
+    "files": [],
+    "description": "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+    "timestamp": "1716915131599"
+  },
+  {
+    "icon": "snowflake",
+    "status": "needPermissions",
+    "title": "Snowflake 1",
+    "files": [],
+    "description": "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+    "timestamp": "1716915131599"
+  },
+  {
+    "icon": "clReport",
+    "status": "needPermissions",
+    "title": "IRI Panel",
+    "files": [],
+    "description": "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+    "timestamp": "1716915131599"
+  },
+  {
+    "icon": "nielsen",
+    "status": "needPermissions",
     "title": "Nielsen",
+    "files": [],
+    "description": "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
+    "timestamp": "1716915131599"
+  },
+  {
+    "icon": "sfCrm",
+    "status": "needPermissions",
+    "title": "Segment",
     "files": [],
     "description": "Retrievers 1 bot will help to gether Retrievers 1 bot will help to gether in...",
     "timestamp": "1716915131599"
