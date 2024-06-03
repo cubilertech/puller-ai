@@ -42,9 +42,9 @@ const YourResultsPage: FC<Props> = ({ id }) => {
     month: "short",
     year: "numeric",
   });
-  const discription = useMemo(() => {
-    return replaceIdWithVariableInDiscription(data as Prompt);
-  }, [data]);
+  // const discription = useMemo(() => {
+  //   return replaceIdWithVariableInDiscription(data as Prompt);
+  // }, [data]);
   return (
     <>
       {isLoading ? (
@@ -83,8 +83,8 @@ const YourResultsPage: FC<Props> = ({ id }) => {
                   data?.results && data?.results[0]
                     ? data.results[0].database
                     : RESULTS_DATA.fileStructured,
-                main_discription: discription
-                  ? discription
+                main_discription: data?.query
+                  ? data?.query
                   : RESULTS_DATA.main_discription,
                 fileSize:
                   data?.results && data?.results[0].bytes

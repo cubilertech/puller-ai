@@ -208,7 +208,7 @@ const OptionsBar: FC<optionbarProps> = ({
                   color={palette.base.white}
                   variant="text-md-regular"
                 >
-                  Update Variable
+                  Swap Variable
                 </Typography>
                 <Box onClick={close}>
                   <CloseIcon
@@ -291,6 +291,7 @@ const OptionsBar: FC<optionbarProps> = ({
                 }}
               >
                 <Button
+                  disabled={selectedItems === "" ? true : false}
                   onClick={handleUpdate}
                   sx={{ height: "38px !important" }}
                   label="Update"
@@ -337,7 +338,7 @@ const OptionsBar: FC<optionbarProps> = ({
                 variant="text-md-regular"
                 sx={{ display: "flex", justifyContent: "space-between" }}
               >
-                Select Data{" "}
+                Swap Variable{" "}
                 <Box onClick={close}>
                   <CloseIcon
                     sx={{
@@ -376,6 +377,7 @@ const OptionsBar: FC<optionbarProps> = ({
                 }}
               >
                 <Button
+                  disabled={selectedItems === "" ? true : false}
                   onClick={handleUpdate}
                   sx={{ height: "38px !important" }}
                   label="Update"

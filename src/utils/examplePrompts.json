@@ -13,6 +13,7 @@
       "name": "last_quarter",
       "type": "select_single",
       "value": "last quarter",
+      "txt": "last quarter",
       "detail": "The last quarter refers to the most recent complete calendar quarter ending Mar 31 2024",
       "discription":  "Choose target period end date, inclusive.",
       "selectData": ["First quarter", "Second quarter", "Third quarter","Last Quarter"]
@@ -23,6 +24,7 @@
       "name": "revenue",
       "type": "select_single",
       "value": "total revenue",
+      "txt": "total revenue",
       "discription": "Choose how to rank SKUs",
       "selectData": ["Total Revenue", "Total Units Sold", "Avg Profit Margin"]
     },
@@ -31,7 +33,8 @@
       "model": "",
       "name": "top_skus",
       "type": "numeric",
-      "value": 10
+      "value": 10,
+      "txt": 10
     }],
     "observations":"In the last quarter, the top 10 SKUs for %Brand% generated a combined total revenue of $2.5 million, with the highest contributions from the North and West regions, accounting for $1.2 million and $900,000 respectively. These SKUs achieved significant sales volumes, with the top SKU selling 15,000 units, and maintained an average profit margin of 25%, suggesting both high demand and profitability.",
     "notes":["Broad Sales Overview: The data covers last quarter sales for all SKUs across multiple regions, providing a broad view of performance. Analyzing monthly sales trends could reveal important seasonal patterns.","Demographic Insights: Investigating customer demographics could help identify key buyer segments and improve targeted marketing. This demographic analysis can be particularly useful for tailoring regional strategies.","Impact of Marketing: Evaluating regional marketing efforts could provide insights into their impact on sales. For example, a 15% sales increase in the West region coincided with a recent ad campaign.","Quarterly Growth Analysis: Comparing current performance with previous quarters can help identify growth trends. Sales grew by 10% compared to the previous quarter, highlighting consistent growth.","Inventory Turnover Insights: Exploring inventory turnover rates alongside sales data can provide a fuller picture of SKU performance. High turnover rates might indicate strong demand and efficient inventory management"],
@@ -133,6 +136,7 @@
         "name": "Average_Value",
         "type": "String_hover",
         "value": "average order value",
+        "txt": "average order value",
         "detail": "Average order value calculated by dividing Total Order Value by Number of Orders."
       },
       {
@@ -141,6 +145,7 @@
         "name": "Most_Recent",
         "type": "String_hover",
         "value": "the most recent",
+        "txt": "the most recent",
         "detail": "The most recent four quarters refers whole calendar quarters, ending March 31, 2024."
       },
       {
@@ -149,6 +154,7 @@
         "name": "Average_Value",
         "type": "numeric",
         "value": 4,
+        "txt": 4,
         "discription": "Choose the most recent N quarters"
       }
     ],
@@ -328,6 +334,7 @@
         "name": "Goods_table",
         "type": "String_hover",
         "value": "the Goods table ",
+        "txt": "the Goods table ",
         "detail": "Note that the Goods table is a table that stores the stock in and out for each product, with separate fields for the quantity and the date. The Stock field is calculated as the difference between the In and Out fields, and the ReorderLevel field is a threshold value that triggers a reorder when the stock level falls below it."
       },  
       {
@@ -336,6 +343,7 @@
         "name": "ProdID_field",
         "type": "select_single",
         "value": "ProdID",
+        "txt": "ProdID",
         "detail": "Product ID refers to the 'ProdID' field",
         "discription": "Choose Your Product",
         "selectData": ["ProdID", "Product_ID_OLD", "ProductALTNUM"]
@@ -346,6 +354,7 @@
         "name": "Inventory_Levels_Threshold",
         "type": "String_hover",
         "value": "It then calculates the last date the inventory levels were at or above the threshold.",
+        "txt": "It then calculates the last date the inventory levels were at or above the threshold.",
         "detail": "This calculation uses a conditional aggregate function"
       }
     ],
@@ -645,6 +654,7 @@
       "name": "Star_Technology",
       "type": "select_multi",
       "value": "Star Technology",
+      "txt": "Star Technology",
       "detail": "Includes any SKU that with product with attributes 'STAR_int' 'Star group' or 'New_Star_SKU'.",
       "selectData": ["STAR_int", "Star_group", "New_Star_SKU"]
     },
@@ -654,6 +664,7 @@
     "name": "Region_X",
     "type": "select_single",
     "value": "Region X",
+    "txt": "Region X",
     "selectData": ["Region N", "Region O", "Region P", "Region Q", "Region R", "Region S", "Region T", "Region U", "Region V", "Region W", "Region X", "Region Y", "Region Z"]
   },
   {
@@ -662,6 +673,7 @@
     "name": "last_week",
     "type": "select_single",
     "value": "last week",
+    "txt": "last week",
     "detail": "The last week means the most recent complete week ending May 31 2024",
     "selectData": ["First Week", "Last Week"]
   },
@@ -713,6 +725,93 @@
         "url": "/example2.csv"
       }]
   },
+  "canyoupullacustomerlistfromsegmentbasedonmembershipinwawa’sloyaltyprogramandwhethertheymadeapurchaseoraredemptioninthepastweek?dothesamepullfromlytics,thenmergethetwolistsanddedupe.iwanttoseetotaltransactionsandlastinteractiontimestampsbycustomer,customeridandemailaddress.": {
+    "query": "Can you pull a customer list from Segment based on membership in Wawa’s loyalty program and whether they made a purchase or a redemption in the past week? Do the same pull from Lytics, then merge the two lists and dedupe. I want to see total transactions and last interaction timestamps by customer, customer ID and email address.",
+    "description": "This query first selects distinct customer IDs, email addresses, and [last_interaction] timestamps from both the Segment and Lytics tables, and sums up the total transactions from both tables. It then filters the results based on membership in Wawa's loyalty program and whether a purchase or redemption was made in the past week. Finally, it merges the two lists.",
+    "id": "query#1234567895",
+    "sql": "SELECT DISTINCT s.customer_id, s.email, s.last_interaction_timestamp, COALESCE(s.total_transactions, 0) + COALESCE(l.total_transactions, 0) AS total_transactions FROM (SELECT customer_id, email, MAX(last_interaction_timestamp) AS last_interaction_timestamp, COUNT(*) AS total_transactions FROM Segment WHERE loyalty_status = 'Wawa Rewards Member' AND (purchase_date >= DATE_SUB(CURRENT_DATE(), INTERVAL 1 WEEK) OR redemption_date >= DATE_SUB(CURRENT_DATE(), INTERVAL 1 WEEK)) GROUP BY customer_id, email) s LEFT JOIN (SELECT customer_id, email, MAX(last_interaction_timestamp) AS last_interaction_timestamp, COUNT(*) AS total_transactions FROM Lytics WHERE loyalty_program = 'Wawa' AND (purchase_date >= DATE_SUB(CURRENT_DATE(), INTERVAL 1 WEEK) OR redemption_date >= DATE_SUB(CURRENT_DATE(), INTERVAL 1 WEEK)) GROUP BY customer_id, email) l ON s.customer_id = l.customer_id AND s.email = l.email;",
+    "target": "model.dbt_tutorial.loyalty",
+    "variables": [
+        {
+          "id": "last_interaction",
+          "model": "",
+          "name": "Last_Interaction",
+          "type": "select_multi",
+          "value": "last interaction",
+          "txt": "last interaction",
+          "detail": "Examines ‘TXN_EVENT’ table and ‘SIGN_UP’ events and chooses the most recent timestamp for a given CID.",
+          "discription": "Choose a different variable(s) for desired “last interaction” events from the following choices:",
+          "selectData": ["HELP_TICKET_CREATE", "SIGN_UP", "TXN_EVENT", "SITE_LOGIN"]
+        }
+    ],
+    "graph": [],
+    "observations":"Overall, there are 553 customers that fit all the requirements, we’ve identified 17 possible duplicates and eliminated them from the list. These users on average have a basket size of $13.24 and are at least 0.7 years in tenure as part of Wawa’s Rewards program. ",
+    "notes": [
+      "Note on Rows: A colleague has remarked the data from at least one of your sources as having an issue for two weeks in the desired coverage period. This note indicates that the data may not be accurate, but is still reliable within a margin of error. This was caused by a corrupt upload that had to be manually overridden by a team member.",
+      "Consider Pivot Table: We’ve formatted the data so that it can be used in a Sheets app like Excel or Google Sheets optimized to allow for pivot tables against objectives like product ID and store ID. Would you like to see the data weekly instead of cumulatively over the last 52 weeks?",
+      "Quick Comp vs Last Week: Week over week performance of customers fitting these criteria indicate that this latest batch of customers are more tenured and more likely to have larger basket sizes than the same list last week. 15% of the customers on this list are the same as customers from last week’s pull of the same criteria. "
+    ],
+    "columns": ["Customer ID", "Email", "Last Interact", "Timestamp", "Total Txns"],
+    "rows": [
+        {"Customer ID": "#LWIL02001", "Email": "user1@example.com", "Last Interact": "01684578601", "Timestamp": "3/11/2024", "Total Txns": 230000},
+        {"Customer ID": "#LWIL02002", "Email": "user2@example.com", "Last Interact": "01684578602", "Timestamp": "3/11/2024", "Total Txns": 190000},
+        {"Customer ID": "#LWIL02003", "Email": "user3@example.com", "Last Interact": "01684578603", "Timestamp": "3/10/2024", "Total Txns": 210000},
+        {"Customer ID": "#LWIL02004", "Email": "user4@example.com", "Last Interact": "01684578604", "Timestamp": "3/10/2024", "Total Txns": 220000},
+        {"Customer ID": "#LWIL02005", "Email": "user5@example.com", "Last Interact": "01684578605", "Timestamp": "3/10/2024", "Total Txns": 240000},
+        {"Customer ID": "#LWIL02006", "Email": "user6@example.com", "Last Interact": "01684578606", "Timestamp": "3/10/2024", "Total Txns": 250000},
+        {"Customer ID": "#LWIL02007", "Email": "user7@example.com", "Last Interact": "01684578607", "Timestamp": "3/10/2024", "Total Txns": 260000},
+        {"Customer ID": "#LWIL02008", "Email": "user8@example.com", "Last Interact": "01684578608", "Timestamp": "3/10/2024", "Total Txns": 270000},
+        {"Customer ID": "#LWIL02009", "Email": "user9@example.com", "Last Interact": "01684578609", "Timestamp": "3/10/2024", "Total Txns": 280000},
+        {"Customer ID": "#LWIL02010", "Email": "user10@example.com", "Last Interact": "01684578610", "Timestamp": "3/10/2024", "Total Txns": 290000},
+        {"Customer ID": "#LWIL02011", "Email": "user11@example.com", "Last Interact": "01684578611", "Timestamp": "3/10/2024", "Total Txns": 300000},
+        {"Customer ID": "#LWIL02012", "Email": "user12@example.com", "Last Interact": "01684578612", "Timestamp": "3/10/2024", "Total Txns": 310000},
+        {"Customer ID": "#LWIL02013", "Email": "user13@example.com", "Last Interact": "01684578613", "Timestamp": "3/10/2024", "Total Txns": 320000},
+        {"Customer ID": "#LWIL02014", "Email": "user14@example.com", "Last Interact": "01684578614", "Timestamp": "3/10/2024", "Total Txns": 330000},
+        {"Customer ID": "#LWIL02015", "Email": "user15@example.com", "Last Interact": "01684578615", "Timestamp": "3/10/2024", "Total Txns": 340000},
+        {"Customer ID": "#LWIL02016", "Email": "user16@example.com", "Last Interact": "01684578616", "Timestamp": "3/10/2024", "Total Txns": 350000},
+        {"Customer ID": "#LWIL02017", "Email": "user17@example.com", "Last Interact": "01684578617", "Timestamp": "3/10/2024", "Total Txns": 360000},
+        {"Customer ID": "#LWIL02018", "Email": "user18@example.com", "Last Interact": "01684578618", "Timestamp": "3/10/2024", "Total Txns": 370000},
+        {"Customer ID": "#LWIL02019", "Email": "user19@example.com", "Last Interact": "01684578619", "Timestamp": "3/10/2024", "Total Txns": 380000},
+        {"Customer ID": "#LWIL02020", "Email": "user20@example.com", "Last Interact": "01684578620", "Timestamp": "3/10/2024", "Total Txns": 390000},
+        {"Customer ID": "#LWIL02021", "Email": "user21@example.com", "Last Interact": "01684578621", "Timestamp": "3/10/2024", "Total Txns": 400000},
+        {"Customer ID": "#LWIL02022", "Email": "user22@example.com", "Last Interact": "01684578622", "Timestamp": "3/10/2024", "Total Txns": 410000},
+        {"Customer ID": "#LWIL02023", "Email": "user23@example.com", "Last Interact": "01684578623", "Timestamp": "3/10/2024", "Total Txns": 420000},
+        {"Customer ID": "#LWIL02024", "Email": "user24@example.com", "Last Interact": "01684578624", "Timestamp": "3/10/2024", "Total Txns": 430000},
+        {"Customer ID": "#LWIL02025", "Email": "user25@example.com", "Last Interact": "01684578625", "Timestamp": "3/10/2024", "Total Txns": 440000},
+        {"Customer ID": "#LWIL02026", "Email": "user26@example.com", "Last Interact": "01684578626", "Timestamp": "3/10/2024", "Total Txns": 450000},
+        {"Customer ID": "#LWIL02027", "Email": "user27@example.com", "Last Interact": "01684578627", "Timestamp": "3/10/2024", "Total Txns": 460000},
+        {"Customer ID": "#LWIL02028", "Email": "user28@example.com", "Last Interact": "01684578628", "Timestamp": "3/10/2024", "Total Txns": 470000},
+        {"Customer ID": "#LWIL02029", "Email": "user29@example.com", "Last Interact": "01684578629", "Timestamp": "3/10/2024", "Total Txns": 480000},
+        {"Customer ID": "#LWIL02030", "Email": "user30@example.com", "Last Interact": "01684578630", "Timestamp": "3/10/2024", "Total Txns": 490000},
+        {"Customer ID": "#LWIL02031", "Email": "user31@example.com", "Last Interact": "01684578631", "Timestamp": "3/10/2024", "Total Txns": 500000},
+        {"Customer ID": "#LWIL02032", "Email": "user32@example.com", "Last Interact": "01684578632", "Timestamp": "3/10/2024", "Total Txns": 510000},
+        {"Customer ID": "#LWIL02033", "Email": "user33@example.com", "Last Interact": "01684578633", "Timestamp": "3/10/2024", "Total Txns": 520000},
+        {"Customer ID": "#LWIL02034", "Email": "user34@example.com", "Last Interact": "01684578634", "Timestamp": "3/10/2024", "Total Txns": 530000},
+        {"Customer ID": "#LWIL02035", "Email": "user35@example.com", "Last Interact": "01684578635", "Timestamp": "3/10/2024", "Total Txns": 540000},
+        {"Customer ID": "#LWIL02036", "Email": "user36@example.com", "Last Interact": "01684578636", "Timestamp": "3/10/2024", "Total Txns": 550000},
+        {"Customer ID": "#LWIL02037", "Email": "user37@example.com", "Last Interact": "01684578637", "Timestamp": "3/10/2024", "Total Txns": 560000},
+        {"Customer ID": "#LWIL02038", "Email": "user38@example.com", "Last Interact": "01684578638", "Timestamp": "3/10/2024", "Total Txns": 570000},
+        {"Customer ID": "#LWIL02039", "Email": "user39@example.com", "Last Interact": "01684578639", "Timestamp": "3/10/2024", "Total Txns": 580000},
+        {"Customer ID": "#LWIL02040", "Email": "user40@example.com", "Last Interact": "01684578640", "Timestamp": "3/10/2024", "Total Txns": 590000},
+        {"Customer ID": "#LWIL02041", "Email": "user41@example.com", "Last Interact": "01684578641", "Timestamp": "3/10/2024", "Total Txns": 600000},
+        {"Customer ID": "#LWIL02042", "Email": "user42@example.com", "Last Interact": "01684578642", "Timestamp": "3/10/2024", "Total Txns": 610000},
+        {"Customer ID": "#LWIL02043", "Email": "user43@example.com", "Last Interact": "01684578643", "Timestamp": "3/10/2024", "Total Txns": 620000},
+        {"Customer ID": "#LWIL02044", "Email": "user44@example.com", "Last Interact": "01684578644", "Timestamp": "3/10/2024", "Total Txns": 630000}
+    ],
+    "status": "complete",
+    "results": [
+      {
+        "bytes": 2.6,
+        "database": "Prototype",
+        "duration": 3.0252435207366943,
+        "message": "CREATE TABLE (29.0 rows, 3.7 KiB processed)",
+        "rows": 44,
+        "schema": "shop",
+        "table": "loyalty",
+        "url": "/example5.csv"
+      }
+    ]
+  },
   "getlistof100customersorderdate":  {
     "query": "Get list of 100 customers order date",
     "description": "A list of customers with their first order date, last order date, and order count, along with any additional information from the merged shop data, for customers who have made [orders_number] or more orders.",
@@ -726,6 +825,7 @@
           "name": "Orders_Number",
           "type": "numeric",
           "value": 2,
+          "txt": 2,
           "discription": "Chose Number of Orders."
         } 
     ],

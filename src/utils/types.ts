@@ -200,6 +200,7 @@ export interface Variable {
   detail?: string;
   discription?: string;
   selectData?: string[];
+  txt?: string | number;
   a?: string;
   c?: string;
   e?: string;
@@ -247,7 +248,7 @@ export interface appUpdatePayload {
 export type Files = {
   description: string;
   file: File;
-  context: string
+  context: string;
 };
 
 export interface createRetrieverPayload {

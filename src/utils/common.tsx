@@ -96,6 +96,20 @@ export const getResultOfPrompt = (id: string, baseUrl: string) => {
         },
       ];
     }
+    case "query#1234567895": {
+      return [
+        {
+          bytes: 2.6,
+          database: "Prototype",
+          duration: 3.0252435207366943,
+          message: "CREATE TABLE (29.0 rows, 3.7 KiB processed)",
+          rows: 44,
+          schema: "shop",
+          table: "loyalty",
+          url: `${baseUrl}/example5.csv`,
+        },
+      ];
+    }
     default:
       return [
         {
@@ -156,7 +170,7 @@ export const replaceIdWithVariable = (
 
   for (const variable of prompt.variables) {
     const placeholder = variable.id;
-    const value = variable.value;
+    const value = variable.txt;
 
     if (
       typeof placeholder === "string" &&
@@ -252,7 +266,7 @@ export const replaceIdWithVariableInDiscription = (
 
   for (const variable of prompt.variables) {
     const placeholder = variable.id;
-    const value = variable.value;
+    const value = variable.txt;
 
     if (
       typeof placeholder === "string" &&
@@ -641,6 +655,59 @@ export const UpdateData = (variables: Variable[], prompt: string) => {
       const SQl_Discriptipn = {
         description: `A list of customers with their first order date, last order date, and order count, along with any additional information from the merged shop data, for customers who have made [${variables?.[0]?.id}] or more orders.`,
         sql: `with customers as (select id as customer_id, first_name, last_name from \`helical-math-378821\`.\`shop\`.\`customers\`), orders as (select id as order_id, user_id as customer_id, order_date, status from \`helical-math-378821\`.\`shop\`.\`orders\`), customer_orders as (select customer_id, min(order_date) as first_order_date, max(order_date) as last_order_date, count(order_id) as order_count from orders group by 1), final as (select customers.customer_id, customers.first_name, customers.last_name, customer_orders.first_order_date, customer_orders.last_order_date, coalesce(customer_orders.order_count, 0) as order_count from customers left join customer_orders using (customer_id)) select * from final where order_count >= ${variables?.[0]?.value}`,
+      };
+      return SQl_Discriptipn;
+    }
+    case "query#1234567895": {
+      const last_interaction_timestamp = (value: any) => {
+        const formattedMessage = value.replace(/ /g, "").toLowerCase();
+        console.log(formattedMessage, "formattedMessage", value);
+        if (formattedMessage === "lastinteraction") {
+          return "last_interaction_timestamp";
+        } else return value;
+      };
+      const SQl_Discriptipn = {
+        description: `This query first selects distinct customer IDs, email addresses, and [${variables?.[0]?.id}] timestamps from both the Segment and Lytics tables, and sums up the total transactions from both tables. It then filters the results based on membership in Wawa's loyalty program and whether a purchase or redemption was made in the past week. Finally, it merges the two lists.`,
+        sql: `SELECT DISTINCT 
+        s.customer_id,
+        s.email,
+        s.${last_interaction_timestamp(variables?.[0]?.value)},
+        COALESCE(s.total_transactions, 0) + COALESCE(l.total_transactions, 0) AS total_transactions
+    FROM 
+        (
+            SELECT 
+                customer_id,
+                email,
+                MAX(${last_interaction_timestamp(variables?.[0]?.value)}) AS ${last_interaction_timestamp(variables?.[0]?.value)},
+                COUNT(*) AS total_transactions
+            FROM 
+                Segment
+            WHERE 
+                loyalty_status = 'Wawa Rewards Member' 
+                AND (purchase_date >= DATE_SUB(CURRENT_DATE(), INTERVAL 1 WEEK) OR redemption_date >= DATE_SUB(CURRENT_DATE(), INTERVAL 1 WEEK))
+            GROUP BY 
+                customer_id,
+                email
+        ) s
+    LEFT JOIN 
+        (
+            SELECT 
+                customer_id,
+                email,
+                MAX(${last_interaction_timestamp(variables?.[0]?.value)}) AS ${last_interaction_timestamp(variables?.[0]?.value)},
+                COUNT(*) AS total_transactions
+            FROM 
+                Lytics
+            WHERE 
+                loyalty_program = 'Wawa' 
+                AND (purchase_date >= DATE_SUB(CURRENT_DATE(), INTERVAL 1 WEEK) OR redemption_date >= DATE_SUB(CURRENT_DATE(), INTERVAL 1 WEEK))
+            GROUP BY 
+                customer_id,
+                email
+        ) l
+    ON 
+        s.customer_id = l.customer_id 
+        AND s.email = l.email;`,
       };
       return SQl_Discriptipn;
     }
