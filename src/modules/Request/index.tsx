@@ -1,6 +1,6 @@
 "use client";
 import { Box, Skeleton } from "@mui/material";
-import React, { FC, useEffect, useMemo, useState } from "react";
+import React, { FC, useEffect, useMemo, useRef, useState } from "react";
 import { PageHeader } from "@/components/PageHeader";
 import { useSubmitExecute } from "@/hooks/useExecute";
 import GraphModal2 from "@/modals/graphModals/graphModal2";
@@ -42,6 +42,7 @@ import {
 } from "@/libs/redux/features/globalLoadings";
 import { getVariables, setVariables } from "@/libs/redux/features/variables";
 import { OptionsBar } from "@/components/optionsBar";
+import SelectionTextEditor from "@/components/SelectionTextEditor";
 
 const SkeletonLoader = () => {
   return (
@@ -79,6 +80,14 @@ const RequestPage: FC = () => {
   const [CurrentType, setCurrentType] = useState<"text" | "graph" | "SQL">(
     "text"
   );
+  const [textSelected, setTextSelected] = useState<string>("");
+  const [selectionIndices, setSelectionIndices] = useState({
+    start: 0,
+    end: 0,
+  });
+  const [isEditingText, setIsEditingText] = useState(false);
+  const [description, setDescription] = useState("");
+
   const [VariableId, setVariableId] = useState<string>("");
   const dispatch = useAppDispatch();
   const [loading, setLoading] = useState(true);
@@ -152,6 +161,7 @@ const RequestPage: FC = () => {
     if (submitValidateSuccess && validatedPrompt) {
       return validatedPrompt;
     } else {
+      setDescription(singlePrompt?.description as string);
       return singlePrompt;
     }
   }, [singlePrompt, submitValidateSuccess]);
@@ -164,7 +174,7 @@ const RequestPage: FC = () => {
   //     dispatch(setSubmitValidateLoading(true));
   //   }
   // };
-  console.log(SelectBarVarient, "SelectBarVarient");
+  // console.log(SelectBarVarient, "SelectBarVarient");
 
   const handleUpdateVariable = (value?: UpdateVariables) => {
     if (value) {
@@ -238,6 +248,44 @@ const RequestPage: FC = () => {
     submitValidateLoading,
     loading,
   ]);
+
+  const handleMouseUp = () => {
+    const selection = window.getSelection();
+    if (selection && selection.toString().length > 0) {
+      const range = selection.getRangeAt(0);
+      const start = range.startOffset;
+      const end = range.endOffset;
+      setTextSelected(selection.toString());
+      setIsEditingText(true);
+      // setSelectedText(selection.toString());
+      // handleTextSelection(selection.toString());
+      setSelectionIndices({ start, end });
+    }
+  };
+  // console.log(textSelected, "text", selectionIndices, "indices");
+
+  const handleUpdateText = () => {
+    if (textSelected.trim().length > 0) {
+      let str = description;
+      const updatedParagraph =
+        str.slice(0, selectionIndices.start) +
+        textSelected +
+        str.slice(selectionIndices.end);
+      setDescription(updatedParagraph);
+      setIsEditingText(false);
+    }
+  };
+
+  useEffect(() => {
+    if (
+      !isEditingText &&
+      selectionIndices.start > 0 &&
+      selectionIndices.end > 0
+    ) {
+      setSelectionIndices({ start: 0, end: 0 });
+      setTextSelected("");
+    }
+  }, [isEditingText]);
 
   return (
     <>
@@ -337,7 +385,10 @@ const RequestPage: FC = () => {
                     transition: "width 0.5s ease",
                   }}
                 >
-                  <ResponseArea isLoading={submitValidateLoading} />
+                  <ResponseArea
+                    isLoading={submitValidateLoading}
+                    handleMouseUp={() => {}}
+                  />
 
                   <QueryComponent isLoading={submitValidateLoading} />
                 </Box>
@@ -345,9 +396,10 @@ const RequestPage: FC = () => {
                 <Box
                   sx={{
                     height: "calc(100vh - 150px)",
-                    width: isOpenSelectBar
-                      ? { lg: "76%", md: "72%", xs: "60%" }
-                      : "100%",
+                    width:
+                      isOpenSelectBar || isEditingText
+                        ? { lg: "76%", md: "70%", xs: "60%" }
+                        : "100%",
                     m: "auto",
                     display: "flex",
                     flexDirection: "column",
@@ -405,9 +457,16 @@ const RequestPage: FC = () => {
                       }}
                     >
                       <ResponseArea
-                        prompt={prompt as Prompt}
+                        prompt={
+                          { ...prompt, description: description } as Prompt
+                        }
                         handleUpdate={handleUpdateVariable}
                         isLoading={singlePromptLoading}
+                        handleMouseUp={handleMouseUp}
+                        isEditingText={isEditingText}
+                        textSelected={textSelected}
+                        indiceEnd={selectionIndices.end}
+                        indiceStart={selectionIndices.start}
                       />
                     </Box>
                   )}
@@ -440,6 +499,22 @@ const RequestPage: FC = () => {
                       close={handleCloseSelectBar}
                     />
                   </motion.div>
+                </Box>
+              )}
+              {isEditingText && (
+                <Box
+                  sx={{
+                    height: "calc(100vh - 160px)",
+                    mt: 1,
+                    width: "calc(100vw - 79vw)",
+                  }}
+                >
+                  <SelectionTextEditor
+                    text={textSelected}
+                    setText={setTextSelected}
+                    close={() => setIsEditingText(false)}
+                    handleSubmit={handleUpdateText}
+                  />
                 </Box>
               )}
             </Box>

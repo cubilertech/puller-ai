@@ -148,7 +148,7 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
                   mt: 1,
                 }}
               >
-                <ResponseArea isLoading={submitValidateLoading} />
+                <ResponseArea isLoading={submitValidateLoading} handleMouseUp={()=>{}}/>
 
                 <QueryComponent isLoading={submitValidateLoading} />
               </Box>
