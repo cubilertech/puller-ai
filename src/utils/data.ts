@@ -451,8 +451,8 @@ export const LatestPullsData = [
     query:
       "Show me the daily unit and dollar sales volume in all stores in region X for any product that has Star Technology for the last week. Compare that the daily unit and dollar sales volume of all other products in Region X over the same time period.",
   },
-  {
-    query: 
-    "Can you pull a customer list from Segment based on membership in Wawa’s loyalty program and whether they made a purchase or a redemption in the past week? Do the same pull from Lytics, then merge the two lists and dedupe. I want to see total transactions and last interaction timestamps by customer, customer ID and email address.",
-  }
+  // {
+  //   query: 
+  //   "Can you pull a customer list from Segment based on membership in Wawa’s loyalty program and whether they made a purchase or a redemption in the past week? Do the same pull from Lytics, then merge the two lists and dedupe. I want to see total transactions and last interaction timestamps by customer, customer ID and email address.",
+  // }
 ];
