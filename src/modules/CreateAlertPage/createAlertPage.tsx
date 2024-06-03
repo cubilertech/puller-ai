@@ -59,7 +59,7 @@ const CreateAlertPage = () => {
                 multiline
                 fullWidth
                 disableUnderline
-                placeholder="Type your data request (prompt) here..."
+                placeholder="Simply write what you’d be alerted about here (prompt)."
                 sx={{
                   boxSizing: "border-box",
                   minHeight: "7rem",
