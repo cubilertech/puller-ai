@@ -25,10 +25,13 @@ interface Props {
 const YourResultsPage: FC<Props> = ({ id }) => {
   const [fadeIn, setFadeIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const singleExecute = useGetSingleExecute(id);
+  const singlePrompt = useGetSinglePrompt(id);
+  
   const { data, refetch: refetchSignleExecute } =
     CURRENT_MODE === MODES.PILOT
-      ? useGetSingleExecute(id)
-      : useGetSinglePrompt(id);
+      ? singleExecute
+      : singlePrompt;
   useEffect(() => {
     if (data && data?.status === "complete") {
       setIsLoading(false);
