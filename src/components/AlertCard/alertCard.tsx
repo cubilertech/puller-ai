@@ -52,11 +52,11 @@ const AlertCard: FC<alertCardProps> = ({
           >
             <Image src={avatar} alt="avatar" width={48} height={48} />
             <Box display={"flex"} flexDirection={"column"}>
-              <Typography variant="text-md-regular">
-                <Typography variant="text-md-semibold">{name} </Typography>
+              <Typography variant="text-sm-regular">
+                <Typography variant="text-sm-semibold">{name} </Typography>
                 {description}
                 {product && (
-                  <Typography variant="text-md-semibold">
+                  <Typography variant="text-sm-semibold">
                     {" "}
                     {product}{" "}
                   </Typography>
@@ -65,14 +65,14 @@ const AlertCard: FC<alertCardProps> = ({
                 {price && (
                   <>
                     <span>totaling</span>
-                    <Typography variant="text-md-semibold">
+                    <Typography variant="text-sm-semibold">
                       {" "}
                       ${price}
                     </Typography>
                   </>
                 )}
               </Typography>
-              <Typography variant="text-sm">{time}</Typography>
+              <Typography variant="text-xs-regular" sx={{mt: 1}}>{time}</Typography>
             </Box>
           </Box>
         </Box>
@@ -100,7 +100,7 @@ const AlertCard: FC<alertCardProps> = ({
           >
             <Image src={avatar} alt="avatar" width={48} height={48} />
             <Box display={"flex"} flexDirection={"column"} gap={"0.5rem"}>
-              <Typography variant="text-md-semibold">{description}</Typography>
+              <Typography variant="text-sm-semibold">{description}</Typography>
               <Box
                 sx={{
                   width: 368,
@@ -119,7 +119,7 @@ const AlertCard: FC<alertCardProps> = ({
                   label="Explore Machine Segmentation Results for Last Week"
                 />
               </Box>
-              <Typography variant="text-sm">{time}</Typography>
+              <Typography variant="text-xs-regular">{time}</Typography>
             </Box>
           </Box>
         </Box>
