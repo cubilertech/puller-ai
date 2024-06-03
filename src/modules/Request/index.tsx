@@ -174,7 +174,7 @@ const RequestPage: FC = () => {
   //     dispatch(setSubmitValidateLoading(true));
   //   }
   // };
-  console.log(SelectBarVarient, "SelectBarVarient");
+  // console.log(SelectBarVarient, "SelectBarVarient");
 
   const handleUpdateVariable = (value?: UpdateVariables) => {
     if (value) {
@@ -262,7 +262,7 @@ const RequestPage: FC = () => {
       setSelectionIndices({ start, end });
     }
   };
-  console.log(textSelected, "text", selectionIndices, "indices");
+  // console.log(textSelected, "text", selectionIndices, "indices");
 
   const handleUpdateText = () => {
     if (textSelected.trim().length > 0) {
