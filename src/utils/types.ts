@@ -162,6 +162,9 @@ export interface Query {
   id: string;
   status: string;
   results: any[];
+  query?: string;
+  observations?: string;
+  notes?: string[],
 }
 
 export interface Client {

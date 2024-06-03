@@ -9,6 +9,7 @@ import {
   replaceBrandName,
   replaceIdWithVariableInDiscription,
 } from "@/utils/common";
+import { CURRENT_MODE, MODES } from "@/utils/constants";
 // import { getActiveRequest } from "@/libs/redux/features/activeRequest";
 // import { useAppSelector } from "@/libs/redux/hooks";
 import { RESULTS_DATA } from "@/utils/data";
@@ -24,7 +25,10 @@ interface Props {
 const YourResultsPage: FC<Props> = ({ id }) => {
   const [fadeIn, setFadeIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const { data, refetch: refetchSignleExecute } = useGetSinglePrompt(id);
+  const { data, refetch: refetchSignleExecute } =
+    CURRENT_MODE === MODES.PILOT
+      ? useGetSingleExecute(id)
+      : useGetSinglePrompt(id);
   useEffect(() => {
     if (data && data?.status === "complete") {
       setIsLoading(false);

@@ -32,7 +32,7 @@ const SideNavbar = () => {
   const dispatch = useAppDispatch();
   const drawerWidth = 234;
   const handleAlert = (link: string) => {
-    const isAlert = link === "alerts" ? true : false;
+    const isAlert = link === "/alerts" ? true : false;
     const isRequest = link === "/request" ? true : false;
     if (isPilotMode && isAlert) {
       setIsOpenAlert(true);
