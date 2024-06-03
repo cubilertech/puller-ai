@@ -291,7 +291,7 @@ const OptionsBar: FC<optionbarProps> = ({
                 }}
               >
                 <Button
-                  disabled={selectedItems === "" ? true : false}
+                  // disabled={selectedItems === "" ? true : false}
                   onClick={handleUpdate}
                   sx={{ height: "38px !important" }}
                   label="Update"
