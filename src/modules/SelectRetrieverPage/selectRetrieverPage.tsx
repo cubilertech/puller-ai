@@ -1,11 +1,13 @@
+"use client"
 import { PageHeader } from "@/components/PageHeader";
-
 import { RetriverCard } from "@/components/RetriverCard";
 import { RETRIEVER_DATA } from "@/utils/data";
 import { RetrieverIconsTypes } from "@/utils/types";
 import { Box } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 const SelectRetrieverPage = () => {
+  const router = useRouter()
   return (
     <Box
       sx={{
@@ -49,6 +51,7 @@ const SelectRetrieverPage = () => {
             icon={card.icon as RetrieverIconsTypes}
             status={card.status}
             title={card.title}
+            onClick={() => router.push("/alerts/retriever-detail")}
             key={i}
           />
         ))}

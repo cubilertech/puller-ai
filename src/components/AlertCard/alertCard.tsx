@@ -42,7 +42,7 @@ const AlertCard: FC<alertCardProps> = ({
           }}
           className="alert-card"
         >
-          <Divider type="dark"  sx={{borderColor: "#393939"}}/>
+          <Divider type="dark" sx={{ borderColor: "#393939" }} />
           {/* Layout Container for user notification */}
           <Box
             padding={"1rem"}
@@ -52,14 +52,27 @@ const AlertCard: FC<alertCardProps> = ({
           >
             <Image src={avatar} alt="avatar" width={48} height={48} />
             <Box display={"flex"} flexDirection={"column"}>
-              <Typography variant="text-md-regular">
-                <Typography variant="text-md-semibold">{name} </Typography>
-                placed a new order for
-                <Typography variant="text-md-semibold"> {product} </Typography>
-                totaling
-                <Typography variant="text-md-semibold"> ${price}</Typography>
+              <Typography variant="text-sm-regular">
+                <Typography variant="text-sm-semibold">{name} </Typography>
+                {description}
+                {product && (
+                  <Typography variant="text-sm-semibold">
+                    {" "}
+                    {product}{" "}
+                  </Typography>
+                )}
+
+                {price && (
+                  <>
+                    <span>totaling</span>
+                    <Typography variant="text-sm-semibold">
+                      {" "}
+                      ${price}
+                    </Typography>
+                  </>
+                )}
               </Typography>
-              <Typography variant="text-sm">{time}</Typography>
+              <Typography variant="text-xs-regular" sx={{mt: 1}}>{time}</Typography>
             </Box>
           </Box>
         </Box>
@@ -87,10 +100,10 @@ const AlertCard: FC<alertCardProps> = ({
           >
             <Image src={avatar} alt="avatar" width={48} height={48} />
             <Box display={"flex"} flexDirection={"column"} gap={"0.5rem"}>
-              <Typography variant="text-md-semibold">{description}</Typography>
+              <Typography variant="text-sm-semibold">{description}</Typography>
               <Box
                 sx={{
-                  width: 170,
+                  width: 368,
                   height: "32px !important",
                 }}
               >
@@ -98,15 +111,15 @@ const AlertCard: FC<alertCardProps> = ({
                   sx={{
                     minHeight: 32,
                     height: "32px !important",
-                    minWidth: 170,
-
+                    minWidth: 368,
                     p: 0,
+                    fontSize: "12px !important"
                   }}
                   variant="outlined"
-                  label="Explore segmentation"
+                  label="Explore Machine Segmentation Results for Last Week"
                 />
               </Box>
-              <Typography variant="text-sm">{time}</Typography>
+              <Typography variant="text-xs-regular">{time}</Typography>
             </Box>
           </Box>
         </Box>

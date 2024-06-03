@@ -166,9 +166,9 @@ const CustomButton: FC<buttonProps> = ({
               minWidth: 20,
               width: "20px !important",
               height: "20px !important",
+              fontSize: "10px !important",
               ":hover": {
                 borderRadius: "100%",
-
                 backgroundColor: palette.color.gray[500],
               },
             }}

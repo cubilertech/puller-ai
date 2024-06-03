@@ -11,22 +11,21 @@ import { CustomLink } from "../Link";
 import { useRouter } from "next/navigation";
 import { AlertModal } from "@/modals/AlertModal";
 import { isPilotMode } from "@/utils/constants";
-import { palette } from "@/theme/Palette";
 
 interface ResultCardProps {
   data: CardData;
 }
 
- const overflowText = {
-  overflow: "hidden",
-  display: "-webkit-box",
-  WebkitLineClamp: 2,
-  WebkitBoxOrient: "vertical",
-};
+//  const overflowText = {
+//   overflow: "hidden",
+//   display: "-webkit-box",
+//   WebkitLineClamp: 2,
+//   WebkitBoxOrient: "vertical",
+// };
 const ResultCard: FC<ResultCardProps> = ({ data }) => {
   const route = useRouter();
   const [isOpenAlert, setIsOpenAlert] = useState(false);
-  const [isOpendiscription, setIsOpendiscription] = useState(false);
+  // const [isOpendiscription, setIsOpendiscription] = useState(false);
 
   const handleOpen = (id: string) => {
     const withoutquery = id.replace("query#", "");
@@ -96,17 +95,17 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
           <Box sx={{ maxWidth: "568px" }}>
             <Typography
               variant="text-md-regular"
-              sx={isOpendiscription ? {} : overflowText}
+              // sx={isOpendiscription ? {} : overflowText}
             >
               {data.main_discription}
             </Typography>
-            <span
+            {/* <span
               onClick={() => setIsOpendiscription(!isOpendiscription)}
               style={{ color: palette.primary.light, cursor: "pointer" }}
             >
               {" "}
               {isOpendiscription ? "See less" : "See more"}
-            </span>
+            </span> */}
           </Box>
           {/* File info */}
           <Box

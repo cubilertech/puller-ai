@@ -475,14 +475,14 @@ export const UpdateData = (variables: Variable[], prompt: string) => {
         const formattedMessage = value.replace(/ /g, "").toLowerCase();
         switch (formattedMessage) {
           case "ontheprodidfield":
-          case "prodid":
-            return "ProdID";
+          case "productid":
+            return "ProductID";
           case "product_id_old":
             return "Product_ID_OLD";
           case "productaltnum":
             return "ProductALTNUM";
           default:
-            return "";
+            return "ProductID";
         }
       };
       const SQl_Discriptipn = {

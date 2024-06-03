@@ -20,7 +20,7 @@ const AlertsPage = () => {
       sx={{
         padding: "1.5rem 1rem",
         display: "flex",
-        flexDirection: "column",
+      flexDirection: "column",
         gap: "2rem",
         height: "100%",
       }}
@@ -120,9 +120,9 @@ const AlertsPage = () => {
         <Box
           sx={{
             height: "90%",
-            borderRadius: "10px",
             overflow: "hidden",
             overflowY: "auto",
+            borderRadius: "12px",
             scrollbarWidth: "none",
           }}
         >
