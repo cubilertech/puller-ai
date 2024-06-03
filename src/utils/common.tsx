@@ -476,13 +476,13 @@ export const UpdateData = (variables: Variable[], prompt: string) => {
         switch (formattedMessage) {
           case "ontheprodidfield":
           case "productid":
-            return "ProductID";
+            return "Product ID";
           case "product_id_old":
             return "Product_ID_OLD";
           case "productaltnum":
             return "ProductALTNUM";
           default:
-            return "ProductID";
+            return "Product ID";
         }
       };
       const SQl_Discriptipn = {

@@ -324,7 +324,7 @@
     "query": "Can you retrieve a list of products with current inventory levels below the threshold for reorder, as well as the last date inventory levels were at or above threshold. Include the reorder quantity as well.",
     "description":"This query joins the Products table with [goods_table_field] on the [prodID_field] field, and filters for products where the current stock level is below the reorder level. [inventory_levels_threshold] Finally, it includes the reorder level and the current stock level in the result set. \nNote that the Goods table is a table that stores the stock in and out for each product, with separate fields for the quantity and the date. The Stock field is calculated as the difference between the In and Out fields, and the ReorderLevel field is a threshold value that triggers a reorder when the stock level falls below it.",
     "id":"query#1234567892",
-    "sql":"SELECT Products.ID, Products.Product, Products.Description, Products.Price, Products.Category, Products.Supplier, Goods.Stock, Goods.ReorderLevel, MAX(CASE WHEN Goods.Stock >= Products.ReorderLevel THEN Goods.Date END) AS LastDateAboveThreshold FROM Products INNER JOIN Goods ON Products.ID = Goods.ProductID WHERE Goods.Stock < Products.ReorderLevel GROUP BY Products.ID, Products.Product, Products.Description, Products.Price, Products.Category, Products.Supplier, Goods.Stock, Goods.ReorderLevel;",
+    "sql":"SELECT Products.ID, Products.Product, Products.Description, Products.Price, Products.Category, Products.Supplier, Goods.Stock, Goods.ReorderLevel, MAX(CASE WHEN Goods.Stock >= Products.ReorderLevel THEN Goods.Date END) AS LastDateAboveThreshold FROM Products INNER JOIN Goods ON Products.ID = Goods.Product ID WHERE Goods.Stock < Products.ReorderLevel GROUP BY Products.ID, Products.Product, Products.Description, Products.Price, Products.Category, Products.Supplier, Goods.Stock, Goods.ReorderLevel;",
     "target":"",
     "graph":[],
     "variables":[
@@ -342,11 +342,11 @@
         "model": "",
         "name": "ProdID_field",
         "type": "select_single",
-        "value": "ProductID",
-        "txt": "ProductID",
-        "detail": "Product ID refers to the 'ProductID' field",
+        "value": "Product ID",
+        "txt": "Product ID",
+        "detail": "Product ID refers to the 'Product ID' field",
         "discription": "Choose Your Product",
-        "selectData": ["ProductID", "Product_ID_OLD", "ProductALTNUM"]
+        "selectData": ["Product ID", "Product_ID_OLD", "ProductALTNUM"]
       },
       {
         "id": "inventory_levels_threshold",
