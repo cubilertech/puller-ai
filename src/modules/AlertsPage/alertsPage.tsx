@@ -20,7 +20,7 @@ const AlertsPage = () => {
       sx={{
         padding: "1.5rem 1rem",
         display: "flex",
-        flexDirection: "column",
+      flexDirection: "column",
         gap: "2rem",
         height: "100%",
       }}
