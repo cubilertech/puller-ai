@@ -342,11 +342,11 @@
         "model": "",
         "name": "ProdID_field",
         "type": "select_single",
-        "value": "ProdID",
-        "txt": "ProdID",
-        "detail": "Product ID refers to the 'ProdID' field",
+        "value": "ProductID",
+        "txt": "ProductID",
+        "detail": "Product ID refers to the 'ProductID' field",
         "discription": "Choose Your Product",
-        "selectData": ["ProdID", "Product_ID_OLD", "ProductALTNUM"]
+        "selectData": ["ProductID", "Product_ID_OLD", "ProductALTNUM"]
       },
       {
         "id": "inventory_levels_threshold",

@@ -17,7 +17,7 @@ const LatestPullesCard: FC<LatestPullesCardProps> = ({ query, onClick }) => {
       variant="dark-border"
       sx={{
         border: `1px solid ${palette.color.gray[700]}`,
-        height: "190px",
+        height: "240px",
         width: "100%",
         maxWidth: "320px",
         minWidth: "280px",
@@ -32,10 +32,10 @@ const LatestPullesCard: FC<LatestPullesCardProps> = ({ query, onClick }) => {
       <Typography
         variant="text-md-medium"
         sx={{
-          overflow: "hidden",
-          display: "-webkit-box",
-          WebkitLineClamp: 6,
-          WebkitBoxOrient: "vertical",
+          // overflow: "hidden",
+          // display: "-webkit-box",
+          // WebkitLineClamp: 6,
+          // WebkitBoxOrient: "vertical",
         }}
       >
         {query}
