@@ -50,7 +50,7 @@ const CreateAlertPage = () => {
                 padding: "0.5rem 1rem",
                 display: "flex",
                 maxHeight: "15rem",
-                background: "transparent !important ",
+                background: "transparent !important",
                 border: `2px solid ${palette.opacity.gray} !important`,
                 borderRadius: "5px",
               }}
