@@ -135,7 +135,7 @@ function escapePercentage(string: string): string {
 
 export const replaceBrandName = (prompt: { description: string }): string => {
   const placeholder = "%Brand%";
-  let value = localStorage.getItem("companyName") ?? "Puller AI";
+  let value = localStorage.getItem("companyName") ?? "Puller";
 
   // Remove % from the company name
   value = escapePercentage(value);

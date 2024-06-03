@@ -68,15 +68,12 @@ const SettingPage = () => {
             variant="light-bg-border"
             sx={{ width: "100%", px: "40px", pt: "40px", pb: "25px" }}
           >
-            <Typography variant="h4">Login</Typography>
-            <Typography component={"p"} variant="text-md-medium" sx={{ mt: 2 }}>
-              Provide your credentials to get started
-            </Typography>
+            <Typography variant="h4">Settings</Typography>
 
             {/* Formik Form */}
             <form onSubmit={formik.handleSubmit}>
               <Box sx={{ mt: 2.4 }}>
-                <Typography variant="text-sm-medium">Company Name</Typography>
+                <Typography variant="text-sm-medium">Brand Name</Typography>
                 <Input
                   disableUnderline
                   fullWidth
