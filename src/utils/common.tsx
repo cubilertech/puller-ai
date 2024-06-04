@@ -146,6 +146,23 @@ export const replaceBrandName = (prompt: { description: string }): string => {
   return newDescription;
 };
 
+export const getFormatedDescription = (prompt: Prompt): string => {
+  if (!prompt.variables || prompt.variables.length === 0) {
+    return prompt.description;
+  }
+
+  let newDescription = prompt.description;
+
+  prompt.variables.forEach(variable => {
+    const placeholder = escapeRegExp(variable.id);
+    const value = variable.value;
+    const regex = new RegExp(`\\[${placeholder}\\]`, 'g');
+    newDescription = newDescription.replace(regex, value.toString());
+  });
+
+  return newDescription;
+};
+
 export const replaceIdWithVariable = (
   prompt: Prompt,
   handleClickVariable: (value: UpdateVariables) => void
