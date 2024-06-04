@@ -13,7 +13,7 @@ import {
 } from "@/libs/redux/features/isLoadingRequest";
 import {
   replaceBrandName,
-  replaceIdWithVariableInDiscription,
+  replaceIdWithVariableInDescription,
 } from "@/utils/common";
 
 interface TemplateCardProps {
@@ -31,14 +31,14 @@ const TemplateCard: FC<TemplateCardProps> = ({ card, index }) => {
     dispatch(UpdateIsLoadingRequest(true));
     dispatch(UpdatePromptValue(card.query));
   };
-  const discription = useMemo(() => {
+  const description = useMemo(() => {
     const replaceBrand = replaceBrandName({ description: card.description });
-    return replaceIdWithVariableInDiscription({
+    return replaceIdWithVariableInDescription({
       ...card,
       description: replaceBrand,
     } as Prompt);
   }, [card]);
-  console.log(discription, "discription")
+  console.log(description, "description")
   return (
     <Box
       key={index}
@@ -81,7 +81,7 @@ const TemplateCard: FC<TemplateCardProps> = ({ card, index }) => {
                 WebkitBoxOrient: "vertical",
               }}
             >
-              {discription}
+              {description}
             </Typography>
             {/* <Typography variant="text-xs-regular">
               {card.subHeading2}

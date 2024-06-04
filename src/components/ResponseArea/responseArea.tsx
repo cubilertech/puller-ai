@@ -39,7 +39,7 @@ const ResponseArea: FC<ResponseAreaProps> = ({
   }, [prompt, SelectedVariableId]);
   return (
     <>
-      {/* response discription */}
+      {/* response description */}
       <Paper
         variant="dark-border"
         sx={{

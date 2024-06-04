@@ -7,7 +7,7 @@ import { useGetSingleExecute } from "@/hooks/useExecute";
 import { useGetSinglePrompt } from "@/hooks/usePrompt";
 import {
   replaceBrandName,
-  replaceIdWithVariableInDiscription,
+  replaceIdWithVariableInDescription,
 } from "@/utils/common";
 import { CURRENT_MODE, MODES } from "@/utils/constants";
 // import { getActiveRequest } from "@/libs/redux/features/activeRequest";
@@ -90,9 +90,9 @@ const YourResultsPage: FC<Props> = ({ id }) => {
                   data?.results && data?.results[0]
                     ? data.results[0].database
                     : RESULTS_DATA.fileStructured,
-                main_discription: data?.query
+                main_description: data?.query
                   ? data?.query
-                  : RESULTS_DATA.main_discription,
+                  : RESULTS_DATA.main_description,
                 fileSize:
                   data?.results && data?.results[0].bytes
                     ? data?.results[0].bytes

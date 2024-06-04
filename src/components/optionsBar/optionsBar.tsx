@@ -222,8 +222,8 @@ const OptionsBar: FC<optionbarProps> = ({
               </Box>
 
               <Typography color={palette.base.white} variant="text-sm-regular">
-                {findVariableById?.discription
-                  ? findVariableById.discription
+                {findVariableById?.description
+                  ? findVariableById.description
                   : "Enter any number you want to update"}
               </Typography>
               <Box
@@ -350,8 +350,8 @@ const OptionsBar: FC<optionbarProps> = ({
                 </Box>
               </Typography>
               <Typography color={palette.base.white} variant="text-sm-regular">
-                {findVariableById?.discription
-                  ? findVariableById.discription
+                {findVariableById?.description
+                  ? findVariableById.description
                   : "Please select any of the given data"}
               </Typography>
               <Box

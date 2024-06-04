@@ -11,7 +11,7 @@ export interface ActiveTypeProps {
 export interface CardData {
   id: string;
   main_title: string;
-  main_discription: string | JSX.Element;
+  main_description: string | JSX.Element;
   fileType: string;
   fileSize: string;
   fileStructured: string;
@@ -201,7 +201,7 @@ export interface Variable {
   type: string;
   value: number | string;
   detail?: string;
-  discription?: string;
+  description?: string;
   selectData?: string[];
   txt?: string | number;
   a?: string;

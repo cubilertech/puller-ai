@@ -97,7 +97,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
               variant="text-md-regular"
               // sx={isOpendiscription ? {} : overflowText}
             >
-              {data.main_discription}
+              {data.main_description}
             </Typography>
             {/* <span
               onClick={() => setIsOpendiscription(!isOpendiscription)}

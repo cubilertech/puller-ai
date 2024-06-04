@@ -8,7 +8,7 @@ import { DUMMY_SUMMARY } from "@/utils/constants";
 import { useGetSinglePrompt } from "@/hooks/usePrompt";
 import { Loader } from "@/components/Loader";
 import { Prompt } from "@/utils/types";
-import { replaceIdWithVariableInDiscription } from "@/utils/common";
+import { replaceIdWithVariableInDescription } from "@/utils/common";
 
 interface PreviewDataPageProps {
   id?: string;
@@ -28,8 +28,8 @@ const PreviewDataPage: FC<PreviewDataPageProps> = ({ id }) => {
       refetchSignleExecute();
     }
   }, [PromptData, refetchSignleExecute]);
-  const discription = useMemo(() => {
-    return replaceIdWithVariableInDiscription(PromptData as Prompt);
+  const description = useMemo(() => {
+    return replaceIdWithVariableInDescription(PromptData as Prompt);
   }, [PromptData]);
   return (
     <>
@@ -69,7 +69,7 @@ const PreviewDataPage: FC<PreviewDataPageProps> = ({ id }) => {
               scrollbarWidth: "none",
             }}
           >
-            <Summary heading="Summary" description={discription} />
+            <Summary heading="Summary" description={description} />
 
             <Paper variant="light-border">
               <DataTable data={PromptData as Prompt} />

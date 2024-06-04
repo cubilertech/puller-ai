@@ -242,7 +242,7 @@ export const replaceIdWithVariable = (
   );
 };
 
-export const replaceIdWithVariableInDiscription = (
+export const replaceIdWithVariableInDescription = (
   prompt: Prompt
 ): JSX.Element => {
   if (!prompt || !prompt.description) {

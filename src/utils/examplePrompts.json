@@ -15,7 +15,7 @@
       "value": "last quarter",
       "txt": "last quarter",
       "detail": "The last quarter refers to the most recent complete calendar quarter ending Mar 31 2024",
-      "discription":  "Choose target period end date, inclusive.",
+      "description":  "Choose target period end date, inclusive.",
       "selectData": ["First quarter", "Second quarter", "Third quarter","Last Quarter"]
     },
      {
@@ -25,7 +25,7 @@
       "type": "select_single",
       "value": "total revenue",
       "txt": "total revenue",
-      "discription": "Choose how to rank SKUs",
+      "description": "Choose how to rank SKUs",
       "selectData": ["Total Revenue", "Total Units Sold", "Avg Profit Margin"]
     },
     {
@@ -155,7 +155,7 @@
         "type": "numeric",
         "value": 4,
         "txt": 4,
-        "discription": "Choose the most recent N quarters"
+        "description": "Choose the most recent N quarters"
       }
     ],
     "observations":"In the most recent four quarters, our products generated a total revenue of $10 million across all regions, with an average order value of $300. Comparatively, the rest of the category contributed $20 million in revenue with an average order value of $200.",
@@ -345,7 +345,7 @@
         "value": "Product ID",
         "txt": "Product ID",
         "detail": "Product ID refers to the 'Product ID' field",
-        "discription": "Choose Your Product",
+        "description": "Choose Your Product",
         "selectData": ["Product ID", "Product_ID_OLD", "ProductALTNUM"]
       },
       {
@@ -741,7 +741,7 @@
           "value": "last interaction",
           "txt": "last interaction",
           "detail": "Examines ‘TXN_EVENT’ table and ‘SIGN_UP’ events and chooses the most recent timestamp for a given CID.",
-          "discription": "Choose a different variable(s) for desired “last interaction” events from the following choices:",
+          "description": "Choose a different variable(s) for desired “last interaction” events from the following choices:",
           "selectData": ["HELP_TICKET_CREATE", "SIGN_UP", "TXN_EVENT", "SITE_LOGIN"]
         }
     ],
@@ -827,7 +827,7 @@
           "type": "numeric",
           "value": 2,
           "txt": 2,
-          "discription": "Chose Number of Orders."
+          "description": "Chose Number of Orders."
         } 
     ],
     "graph": [],
