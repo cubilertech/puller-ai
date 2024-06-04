@@ -25,9 +25,13 @@ const QueryComponent: FC<QueryComponentProps> = ({
   isLoading,
   handleUpdate,
 }) => {
+  const companyName = localStorage.getItem("companyName");
   const isLoadingPage = useAppSelector(getIsLoadingRequest);
   const PromptValue = useAppSelector(getPromptValue);
-  const replaceBrand = replaceBrandName({description: PromptValue})
+  const replaceBrand = replaceBrandName(
+    { description: PromptValue },
+    companyName as string
+  );
   return (
     <Box display={"flex"} flexDirection={"column"} gap={"1rem"}>
       {/* origninal text */}
@@ -108,7 +112,7 @@ const QueryComponent: FC<QueryComponentProps> = ({
           <Typography variant="text-sm" color={palette.color.gray[300]}>
             {
               " This query is estimated to take <1 min for the first X and <1 mb for the second X."
-            } {" "}
+            }{" "}
             <span style={{ textDecoration: "underline" }}>
               <CustomLink color="#90919b" variant="simple" href="#">
                 Need to optimize?

@@ -5,10 +5,6 @@ import { PageHeader } from "@/components/PageHeader";
 import { ResultCard } from "@/components/ResultCard";
 import { useGetSingleExecute } from "@/hooks/useExecute";
 import { useGetSinglePrompt } from "@/hooks/usePrompt";
-import {
-  replaceBrandName,
-  replaceIdWithVariableInDescription,
-} from "@/utils/common";
 import { CURRENT_MODE, MODES } from "@/utils/constants";
 // import { getActiveRequest } from "@/libs/redux/features/activeRequest";
 // import { useAppSelector } from "@/libs/redux/hooks";
@@ -27,11 +23,9 @@ const YourResultsPage: FC<Props> = ({ id }) => {
   const [isLoading, setIsLoading] = useState(true);
   const singleExecute = useGetSingleExecute(id);
   const singlePrompt = useGetSinglePrompt(id);
-  
+
   const { data, refetch: refetchSignleExecute } =
-    CURRENT_MODE === MODES.PILOT
-      ? singleExecute
-      : singlePrompt;
+    CURRENT_MODE === MODES.PILOT ? singleExecute : singlePrompt;
   useEffect(() => {
     if (data && data?.status === "complete") {
       setIsLoading(false);
@@ -49,10 +43,6 @@ const YourResultsPage: FC<Props> = ({ id }) => {
     month: "short",
     year: "numeric",
   });
-  const discription = useMemo(() => {
-    return replaceBrandName({description: data?.query as string})
-    // return replaceIdWithVariableInDiscription(data as Prompt);
-  }, [data]);
   return (
     <>
       {isLoading ? (
@@ -91,8 +81,8 @@ const YourResultsPage: FC<Props> = ({ id }) => {
                   data?.results && data?.results[0]
                     ? data.results[0].database
                     : RESULTS_DATA.fileStructured,
-                main_description: discription
-                  ? discription
+                main_description: data?.query
+                  ? data?.query
                   : RESULTS_DATA.main_description,
                 fileSize:
                   data?.results && data?.results[0].bytes
@@ -101,9 +91,7 @@ const YourResultsPage: FC<Props> = ({ id }) => {
                 id: data?.id ?? "",
                 observations:
                   data?.observations !== ""
-                    ? replaceBrandName({
-                        description: data?.observations as string,
-                      })
+                    ? data?.observations
                     : RESULTS_DATA.observations,
                 fileLink: imageUrl,
               }}

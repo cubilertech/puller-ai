@@ -19,6 +19,7 @@ const PreviewDataPage: FC<PreviewDataPageProps> = ({ id }) => {
   const [isLoading, setIsLoading] = useState(true);
   const { data: PromptData, refetch: refetchSignleExecute } =
     useGetSinglePrompt(id as string);
+  const companyName = localStorage.getItem("companyName");
   useEffect(() => {
     if (PromptData && PromptData?.status === "complete") {
       setIsLoading(false);
@@ -29,7 +30,10 @@ const PreviewDataPage: FC<PreviewDataPageProps> = ({ id }) => {
     }
   }, [PromptData, refetchSignleExecute]);
   const description = useMemo(() => {
-    return replaceIdWithVariableInDescription(PromptData as Prompt);
+    return replaceIdWithVariableInDescription(
+      PromptData as Prompt,
+      companyName as string
+    );
   }, [PromptData]);
   return (
     <>

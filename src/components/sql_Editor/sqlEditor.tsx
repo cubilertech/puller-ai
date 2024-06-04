@@ -18,13 +18,19 @@ interface SQL_EditorProps {
 
 const SQL_Editor: FC<SQL_EditorProps> = ({ handleClose, code }) => {
   const [formattedCode, setFormattedCode] = useState<string>("");
-
+  const companyName = localStorage.getItem("companyName");
   useEffect(() => {
     if (code)
       setFormattedCode(
-        format(replaceBrandName({ description: code as string }), {
-          language: "mysql",
-        })
+        format(
+          replaceBrandName(
+            { description: code as string },
+            companyName as string
+          ),
+          {
+            language: "mysql",
+          }
+        )
       );
   }, [code]);
   const customCoyStyle = {
@@ -63,7 +69,7 @@ const SQL_Editor: FC<SQL_EditorProps> = ({ handleClose, code }) => {
         padding: 3,
         overflow: "hidden",
         width: "100%",
-        m: 0
+        m: 0,
       }}
     >
       {/* <Box

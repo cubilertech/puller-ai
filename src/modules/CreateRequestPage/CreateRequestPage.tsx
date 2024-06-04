@@ -4,13 +4,11 @@ import { isDemoMode, isPilotMode } from "@/utils/constants";
 import { palette } from "@/theme/Palette";
 import { FC, useMemo, useState } from "react";
 import { Prompt } from "@/utils/types";
-import { LatestPullesCard } from "@/components/Latestpulles-Card";
-import { motion } from "framer-motion";
 import { CreateInputAreaComponent } from "@/components/inputArea";
 import { AlertModal } from "@/modals/AlertModal";
 import "./CreateRequestPage.css";
 import { LatestPullsData } from "@/utils/data";
-import { replaceBrandName } from "@/utils/common";
+import { PromptList } from "@/components/PromptList";
 interface Props {
   list: Prompt[] | null | undefined;
   setRequestQuery: (query: string) => void;
@@ -98,24 +96,7 @@ const CreateRequestPage: FC<Props> = ({
                 scrollbarWidth: "none",
               }}
             >
-              {promptList.map((item, i) => {
-                const replaceBrand = replaceBrandName({description: item.query})
-                return (
-                <motion.div
-                  key={`motion-div-${i}`}
-                  animate={{ opacity: [0, 1] }}
-                  transition={{
-                    duration: i === 0 ? 0.5 : i,
-                    ease: "easeInOut",
-                  }}
-                >
-                  <LatestPullesCard
-                    key={i}
-                    query={replaceBrand}
-                    onClick={() => handleLatestPrompt(item.query as string)}
-                  />
-                </motion.div>
-)})}
+              {promptList.map((item, i) => <PromptList key={`list-${i}`} item={item} index={i} handleLatestPrompt={handleLatestPrompt} />)}
             </Box>
           </Box>
 

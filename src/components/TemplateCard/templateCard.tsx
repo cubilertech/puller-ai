@@ -31,12 +31,16 @@ const TemplateCard: FC<TemplateCardProps> = ({ card, index }) => {
     dispatch(UpdateIsLoadingRequest(true));
     dispatch(UpdatePromptValue(card.query));
   };
+  const companyName = localStorage.getItem("companyName")
   const description = useMemo(() => {
-    const replaceBrand = replaceBrandName({ description: card.description });
+    const replaceBrand = replaceBrandName({ description: card.description }, companyName as string);
     return replaceIdWithVariableInDescription({
       ...card,
       description: replaceBrand,
-    } as Prompt);
+      
+    } as Prompt,
+    companyName as string,
+  );
   }, [card]);
   console.log(description, "description")
   return (
