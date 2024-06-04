@@ -257,6 +257,8 @@ const RequestPage: FC = () => {
       const end = range.endOffset;
       setTextSelected(selection.toString());
       setIsEditingText(true);
+      setIsOpenSelectBar(false);
+      localStorage.removeItem("variableId");
       // setSelectedText(selection.toString());
       // handleTextSelection(selection.toString());
       setSelectionIndices({ start, end });
@@ -421,7 +423,7 @@ const RequestPage: FC = () => {
                         zIndex: 10,
                         opacity: 1,
                         mb: 2,
-                        pt: 1
+                        pt: 1,
                       }}
                     >
                       <SQL_Editor code={prompt?.sql ?? "Select * from test;"} />
@@ -441,7 +443,7 @@ const RequestPage: FC = () => {
                           zIndex: 10,
                           opacity: 1,
                           mb: 3,
-                          pt: 1
+                          pt: 1,
                         }}
                       >
                         <GraphModal2

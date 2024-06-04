@@ -141,7 +141,7 @@ export const replaceBrandName = (prompt: { description: string }): string => {
   value = escapePercentage(value);
 
   // Split the description by the placeholder and join with the value
-  const newDescription = prompt.description.split(placeholder).join(value);
+  const newDescription = prompt?.description?.split(placeholder).join(value);
 
   return newDescription;
 };
