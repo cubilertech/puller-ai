@@ -23,6 +23,7 @@ const Tooltip: FC<TooltipProps> = ({
       return (
         <MuiTooltip
           placement="top"
+          open
           title={
             <Box
               sx={{
