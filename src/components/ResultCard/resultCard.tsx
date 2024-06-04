@@ -1,5 +1,5 @@
 "use client";
-import { FC, useState } from "react";
+import { FC, useMemo, useState } from "react";
 import { Paper } from "../Paper";
 import { Box, Typography } from "@mui/material";
 import { CardData } from "@/utils/types";
@@ -11,6 +11,7 @@ import { CustomLink } from "../Link";
 import { useRouter } from "next/navigation";
 import { AlertModal } from "@/modals/AlertModal";
 import { isPilotMode } from "@/utils/constants";
+import { replaceBrandName } from "@/utils/common";
 
 interface ResultCardProps {
   data: CardData;
@@ -41,6 +42,16 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
       setIsOpenAlert(true);
     } else route.push(data.fileLink as string);
   };
+  const companyName = localStorage.getItem("companyName");
+
+  const discription = useMemo(() => {
+    return replaceBrandName({ description: data?.main_description as string }, companyName as string);
+    // return replaceIdWithVariableInDiscription(data as Prompt);
+  }, [data]);
+  const observations = useMemo(() => {
+    return replaceBrandName({ description: data?.observations as string }, companyName as string);
+    // return replaceIdWithVariableInDiscription(data as Prompt);
+  }, [data]);
 
   return (
     <Box width={"80%"} height={"100%"}>
@@ -97,7 +108,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
               variant="text-md-regular"
               // sx={isOpendiscription ? {} : overflowText}
             >
-              {data.main_description}
+              {discription}
             </Typography>
             {/* <span
               onClick={() => setIsOpendiscription(!isOpendiscription)}
@@ -176,7 +187,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
           >
             <Typography variant="text-md-semibold">{data.title}</Typography>
             <Typography variant="text-sm-regular">
-              {data.observations}
+              {observations}
             </Typography>
           </Box>
         </Box>

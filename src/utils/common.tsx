@@ -133,15 +133,18 @@ function escapePercentage(string: string): string {
   return string.replace(/[%]/g, ""); // Remove only "%" signs
 }
 
-export const replaceBrandName = (prompt: { description: string }): string => {
+export const replaceBrandName = (prompt: { description: string }, brand = 'Puller'): string => {
   const placeholder = "%Brand%";
-  let value = localStorage.getItem("companyName") ?? "Puller";
+  // let value = 
+  // // localStorage.getItem("companyName")
+  // // ?? 
+  // "Puller";
 
   // Remove % from the company name
-  value = escapePercentage(value);
+  brand = escapePercentage(brand);
 
   // Split the description by the placeholder and join with the value
-  const newDescription = prompt?.description?.split(placeholder).join(value);
+  const newDescription = prompt?.description?.split(placeholder).join(brand);
 
   return newDescription;
 };
@@ -168,7 +171,8 @@ export const getFormatedDescription = (prompt: Prompt): string => {
 
 export const replaceIdWithVariable = (
   prompt: Prompt,
-  handleClickVariable: (value: UpdateVariables) => void
+  handleClickVariable: (value: UpdateVariables) => void,
+  brand = 'Puller'
 ): JSX.Element => {
   if (!prompt || !prompt.description) {
     return (
@@ -185,7 +189,7 @@ export const replaceIdWithVariable = (
       </div>
     );
   }
-  const discriptipn = replaceBrandName(prompt);
+  const discriptipn = replaceBrandName(prompt,brand);
   let parts: Array<string | JSX.Element> = [discriptipn];
 
   for (const variable of prompt.variables) {
@@ -263,7 +267,8 @@ export const replaceIdWithVariable = (
 };
 
 export const replaceIdWithVariableInDescription = (
-  prompt: Prompt
+  prompt: Prompt,
+  brand = "Puller"
 ): JSX.Element => {
   if (!prompt || !prompt.description) {
     return (
@@ -280,7 +285,7 @@ export const replaceIdWithVariableInDescription = (
       </div>
     );
   }
-  const discriptipn = replaceBrandName(prompt);
+  const discriptipn = replaceBrandName(prompt, brand);
 
   let parts: Array<string | JSX.Element> = [discriptipn];
 
