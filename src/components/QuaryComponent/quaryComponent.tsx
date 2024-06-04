@@ -9,6 +9,7 @@ import {
   getIsLoadingRequest,
   getPromptValue,
 } from "@/libs/redux/features/isLoadingRequest";
+import { replaceBrandName } from "@/utils/common";
 
 interface QueryComponentProps {
   content?: {
@@ -26,6 +27,7 @@ const QueryComponent: FC<QueryComponentProps> = ({
 }) => {
   const isLoadingPage = useAppSelector(getIsLoadingRequest);
   const PromptValue = useAppSelector(getPromptValue);
+  const replaceBrand = replaceBrandName({description: PromptValue})
   return (
     <Box display={"flex"} flexDirection={"column"} gap={"1rem"}>
       {/* origninal text */}
@@ -80,7 +82,7 @@ const QueryComponent: FC<QueryComponentProps> = ({
                   maxWidth: "100%",
                 }}
               >
-                {PromptValue ? PromptValue : content?.original}
+                {replaceBrand ? replaceBrand : content?.original}
               </Typography>
             )}
           </Box>
@@ -104,8 +106,9 @@ const QueryComponent: FC<QueryComponentProps> = ({
           <Skeleton style={{ width: "90%", margin: "auto" }} />
         ) : (
           <Typography variant="text-sm" color={palette.color.gray[300]}>
-            This query is estimated to take X minutes and will be approximately
-            X size.
+            {
+              " This query is estimated to take <1 min for the first X and <1 mb for the second X."
+            } {" "}
             <span style={{ textDecoration: "underline" }}>
               <CustomLink color="#90919b" variant="simple" href="#">
                 Need to optimize?
