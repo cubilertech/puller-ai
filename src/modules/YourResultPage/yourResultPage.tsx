@@ -49,9 +49,10 @@ const YourResultsPage: FC<Props> = ({ id }) => {
     month: "short",
     year: "numeric",
   });
-  // const discription = useMemo(() => {
-  //   return replaceIdWithVariableInDiscription(data as Prompt);
-  // }, [data]);
+  const discription = useMemo(() => {
+    return replaceBrandName({description: data?.query as string})
+    // return replaceIdWithVariableInDiscription(data as Prompt);
+  }, [data]);
   return (
     <>
       {isLoading ? (
@@ -90,8 +91,8 @@ const YourResultsPage: FC<Props> = ({ id }) => {
                   data?.results && data?.results[0]
                     ? data.results[0].database
                     : RESULTS_DATA.fileStructured,
-                main_description: data?.query
-                  ? data?.query
+                main_description: discription
+                  ? discription
                   : RESULTS_DATA.main_description,
                 fileSize:
                   data?.results && data?.results[0].bytes

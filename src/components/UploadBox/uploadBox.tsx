@@ -4,9 +4,7 @@ import { Paper } from "../Paper";
 import { Divider } from "../Divider";
 import { Icon } from "../Icon";
 
-const data = [1, 2, 3];
-
-interface UplaodBoxProps {
+interface UploadBoxProps {
   name?: string;
   size?: number;
   context?: string;
@@ -14,7 +12,7 @@ interface UplaodBoxProps {
   inputValue: string;
 }
 
-const UploadBox: FC<UplaodBoxProps> = ({
+const UploadBox: FC<UploadBoxProps> = ({
   name,
   size,
   context,

@@ -441,18 +441,18 @@ export const SideBar_Data: SidebarItem[] = [
 export const LatestPullsData = [
   {
     query:
-      "I’d like a table that shows me the average order value of our products compared to the average order value of the rest of category each quarter for the last 4 quarters.",
+      "I’d like a table that shows me the average order value of %Brand% products compared to the average order value of the rest of category each quarter for the last 4 quarters.",
   },
   {
     query:
-      "Can you retrieve a list of products with current inventory levels below the threshold for reorder, as well as the last date inventory levels were at or above threshold. Include the reorder quantity as well.",
+      "Can you retrieve a list of products with current inventory levels below %Brand% threshold for reorder, as well as the last date inventory levels were at or above threshold. Include the reorder quantity as well.",
   },
   {
     query:
-      "Show me the daily unit and dollar sales volume in all stores in region X for any product that has Star Technology for the last week. Compare that the daily unit and dollar sales volume of all other products in Region X over the same time period.",
+      "Show me the daily unit and dollar sales volume in all stores in region X for any product that has %Brand% Technology for the last week. Compare that the daily unit and dollar sales volume of all other products in region X over the same time period.",
   },
-  // {
-  //   query: 
-  //   "Can you pull a customer list from Segment based on membership in Wawa’s loyalty program and whether they made a purchase or a redemption in the past week? Do the same pull from Lytics, then merge the two lists and dedupe. I want to see total transactions and last interaction timestamps by customer, customer ID and email address.",
-  // }
+  {
+    query: 
+    "Can you pull a customer list from Segment based on membership in %Brand% loyalty program and whether they made a purchase or a redemption in the past week? Do the same pull from Lytics, then merge the two lists and dedupe. I want to see total transactions and last interaction timestamps by customer, customer ID and email address.",
+  }
 ];

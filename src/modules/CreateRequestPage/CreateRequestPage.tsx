@@ -10,6 +10,7 @@ import { CreateInputAreaComponent } from "@/components/inputArea";
 import { AlertModal } from "@/modals/AlertModal";
 import "./CreateRequestPage.css";
 import { LatestPullsData } from "@/utils/data";
+import { replaceBrandName } from "@/utils/common";
 interface Props {
   list: Prompt[] | null | undefined;
   setRequestQuery: (query: string) => void;
@@ -97,7 +98,9 @@ const CreateRequestPage: FC<Props> = ({
                 scrollbarWidth: "none",
               }}
             >
-              {promptList.map((item, i) => (
+              {promptList.map((item, i) => {
+                const replaceBrand = replaceBrandName({description: item.query})
+                return (
                 <motion.div
                   key={`motion-div-${i}`}
                   animate={{ opacity: [0, 1] }}
@@ -108,11 +111,11 @@ const CreateRequestPage: FC<Props> = ({
                 >
                   <LatestPullesCard
                     key={i}
-                    query={item.query}
+                    query={replaceBrand}
                     onClick={() => handleLatestPrompt(item.query as string)}
                   />
                 </motion.div>
-              ))}
+)})}
             </Box>
           </Box>
 

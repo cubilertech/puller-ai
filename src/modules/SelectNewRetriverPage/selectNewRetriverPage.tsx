@@ -52,7 +52,7 @@ const SelectNewRetriverPage = () => {
           </CustomLink>
           <RectangleCard
             icon="upload"
-            title="Uplaod Data"
+            title="Upload Data"
             onClick={() => router.push("/retrievers/upload")}
           />
         </Box>

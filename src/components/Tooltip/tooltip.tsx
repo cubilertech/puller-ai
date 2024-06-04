@@ -31,10 +31,17 @@ const Tooltip: FC<TooltipProps> = ({
                 gap: "0.5rem",
               }}
             >
-              <Typography variant="text-md-regular" color={palette.base.white}>
-                {title}
-              </Typography>
-              <Typography variant="text-sm">{description}</Typography>
+              {title && (
+                <Typography
+                  variant="text-md-regular"
+                  color={palette.base.white}
+                >
+                  {title}
+                </Typography>
+              )}
+              {description && (
+                <Typography variant="text-sm">{description}</Typography>
+              )}
             </Box>
           }
           {...props}

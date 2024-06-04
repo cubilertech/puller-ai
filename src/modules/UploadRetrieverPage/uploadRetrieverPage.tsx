@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import FeedbackPage from "../FeedbackPage/feedbackPage";
 import { toast } from "react-toastify";
-import { UploadBox } from "@/components/UplaodBox";
+import { UploadBox } from "@/components/UploadBox";
 
 const UploadRetrieverPage = () => {
   const router = useRouter();

@@ -4,7 +4,7 @@ import { FC, useMemo } from "react";
 import { Paper } from "../Paper";
 import "./responseArea.css";
 import { Prompt, UpdateVariables } from "@/utils/types";
-import { replaceIdWithVariable } from "@/utils/common";
+import { getFormatedDescription, replaceIdWithVariable } from "@/utils/common";
 
 interface ResponseAreaProps {
   prompt?: Prompt;
@@ -35,8 +35,13 @@ const ResponseArea: FC<ResponseAreaProps> = ({
         handleUpdate(value);
       }
     };
+
     return replaceIdWithVariable(prompt as Prompt, handleClickVariable);
   }, [prompt, SelectedVariableId]);
+
+  const FormatedDescription = useMemo(() => {
+    return getFormatedDescription(prompt as Prompt);
+  }, [isEditingText]);
   return (
     <>
       {/* response description */}
@@ -139,9 +144,9 @@ const ResponseArea: FC<ResponseAreaProps> = ({
             >
               {isEditingText ? (
                 <>
-                  {prompt?.description?.slice(0, indiceStart ?? 0)}
+                  {FormatedDescription?.slice(0, indiceStart ?? 0)}
                   <span style={{ background: "#7a8089" }}>{textSelected}</span>
-                  {prompt?.description?.slice(indiceEnd ?? 0)}
+                  {FormatedDescription?.slice(indiceEnd ?? 0)}
                 </>
               ) : (
                 responseTxt

@@ -51,8 +51,22 @@ const DataTable: FC<DataTableProps> = ({ data }) => {
     const selectVar = data?.variables?.find(
       (item) => item.id === "top_skus_number"
     );
+
     if (data && selectVar && Number(selectVar.value)) {
       return data?.rows?.slice(0, Number(selectVar.value));
+    } else if (data.id === "query#1234567891") {
+      const selectVar = data?.variables?.find(
+        (item) => item.id === "four_quarters"
+      );
+      if (data && selectVar?.value) {
+        const modifiedR = data?.rows?.map((item) => {
+          return {
+            ...item,
+            Quarter: selectVar?.value,
+          };
+        });
+        return modifiedR;
+      }
     } else {
       return data?.rows;
     }
