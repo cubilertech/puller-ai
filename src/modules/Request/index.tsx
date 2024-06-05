@@ -43,6 +43,7 @@ import {
 import { getVariables, setVariables } from "@/libs/redux/features/variables";
 import { OptionsBar } from "@/components/optionsBar";
 import SelectionTextEditor from "@/components/SelectionTextEditor";
+import { isDemoMode } from "@/utils/constants";
 
 const SkeletonLoader = () => {
   return (
@@ -221,7 +222,7 @@ const RequestPage: FC = () => {
     localStorage.removeItem("variableId");
   }, []);
   useEffect(() => {
-    if (isSuccessExecute) {
+    if (isSuccessExecute && isDemoMode) {
       router.push(`/request/results/${id}`);
     }
   }, [isSuccessExecute]);

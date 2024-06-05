@@ -1,4 +1,5 @@
 import { getBackendURL } from "@/utils/common";
+import { MODES } from "@/utils/constants";
 import {
   ConnectItem,
   Retriever,
@@ -13,7 +14,7 @@ import { toast } from "react-toastify";
 export const useGetAllRetriever = () => {
   async function submit(): Promise<Retriever[] | null> {
     try {
-      const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
+      const backendUrl = getBackendURL(MODES.DEMO as string);
       const res = await axios({
         url: `${backendUrl}/v0/retriever`,
         method: "get",
@@ -45,7 +46,7 @@ export const useGetAllRetriever = () => {
 export const useGetAllApps = () => {
   async function submit(): Promise<ConnectItem[] | null> {
     try {
-      const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
+      const backendUrl = getBackendURL(MODES.DEMO as string);
       const res = await axios({
         url: `${backendUrl}/v0/retriever/apps`,
         method: "get",
@@ -78,7 +79,7 @@ export const useUpdateAppStatus = () => {
   //   const dispatch = useAppDispatch();
   async function submit(data: appUpdatePayload): Promise<ConnectItem[] | null | undefined> {
     try {
-      const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
+      const backendUrl = getBackendURL(MODES.DEMO as string);
       const res = await axios({
         url: `${backendUrl}/v0/retriever/apps/${data.id}`,
         method: "put",
@@ -129,7 +130,7 @@ export const useCreateRetriever = () => {
       formData.append("status", data.status);
       formData.append("timestamp", data.timestamp.toString());
 
-      const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
+      const backendUrl = getBackendURL(MODES.DEMO as string);
       const res = await axios({
         url: `${backendUrl}/v0/retriever`,
         method: "POST",

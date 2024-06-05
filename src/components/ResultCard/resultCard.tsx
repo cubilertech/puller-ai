@@ -42,9 +42,21 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
       setIsOpenAlert(true);
     } else route.push(data.fileLink as string);
   };
+  const handleDownloadGoogle = () => {
+    if(isPilotMode){
+       const url = data.fileLink as string;
+       const anchor = document.createElement('a');
+       anchor.href = url;
+       anchor.target = '_blank'; // Open in a new tab
+       document.body.appendChild(anchor);
+       anchor.click();
+       // Remove the anchor from the document
+       document.body.removeChild(anchor);
+    }
+  }
   const companyName = localStorage.getItem("companyName");
 
-  const discription = useMemo(() => {
+  const description = useMemo(() => {
     return replaceBrandName({ description: data?.main_description as string }, companyName as string);
     // return replaceIdWithVariableInDiscription(data as Prompt);
   }, [data]);
@@ -92,7 +104,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
                 />
               </Box>
 
-              <Box width={"36px"}>
+              <Box width={"36px"} onClick={() => handleDownloadGoogle()}>
                 <IconButton
                   icon="eyeIcon"
                   iconHeight={16}
@@ -108,7 +120,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
               variant="text-md-regular"
               // sx={isOpendiscription ? {} : overflowText}
             >
-              {discription}
+              {description}
             </Typography>
             {/* <span
               onClick={() => setIsOpendiscription(!isOpendiscription)}
