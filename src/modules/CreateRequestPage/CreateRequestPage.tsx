@@ -26,10 +26,15 @@ const CreateRequestPage: FC<Props> = ({
   handleLatestPrompt,
 }) => {
   const [isOpenAlert, setIsOpenAlert] = useState(false);
+  console.log(list, "list")
   const promptList = useMemo(() => {
-    // return isPilotMode ? LatestPullsData : list ? list : [];
-    return LatestPullsData;
-  }, [list]);
+    if (!isDemoMode) {
+      // Return the first 4 items from LatestPullsData if isDemoMode is true
+      return list ? list.slice(0, 4) : [];
+    }
+    // Return list if it exists, otherwise return an empty array
+    return LatestPullsData ? LatestPullsData : [];
+  }, [isDemoMode, list, LatestPullsData]);
 
   const handlePrompt = () => {
     if (isPilotMode) {

@@ -251,18 +251,20 @@ const RequestPage: FC = () => {
   ]);
 
   const handleMouseUp = () => {
-    const selection = window.getSelection();
-    if (selection && selection.toString().length > 0) {
-      const range = selection.getRangeAt(0);
-      const start = range.startOffset;
-      const end = range.endOffset;
-      setTextSelected(selection.toString());
-      setIsEditingText(true);
-      setIsOpenSelectBar(false);
-      localStorage.removeItem("variableId");
-      // setSelectedText(selection.toString());
-      // handleTextSelection(selection.toString());
-      setSelectionIndices({ start, end });
+    if (isDemoMode) {
+      const selection = window.getSelection();
+      if (selection && selection.toString().length > 0) {
+        const range = selection.getRangeAt(0);
+        const start = range.startOffset;
+        const end = range.endOffset;
+        setTextSelected(selection.toString());
+        setIsEditingText(true);
+        setIsOpenSelectBar(false);
+        localStorage.removeItem("variableId");
+        // setSelectedText(selection.toString());
+        // handleTextSelection(selection.toString());
+        setSelectionIndices({ start, end });
+      }
     }
   };
   // console.log(textSelected, "text", selectionIndices, "indices");
