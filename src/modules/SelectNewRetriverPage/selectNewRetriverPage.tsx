@@ -39,8 +39,8 @@ const SelectNewRetriverPage = () => {
             onClick={() => router.push("/retrievers/connect")}
           />
           <CustomLink
-            href="https://your-api-url.com"
-            target="_blank"
+            href={isPilotMode ? "" : "https://your-api-url.com"}
+            target={isPilotMode ? "" : "_blank"}
             ref={linkRef}
             style={{ width: "100%" }}
           >

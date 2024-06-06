@@ -381,7 +381,7 @@ export const RESULTS_DATA = {
   main_description:
     "Can I get data to understand how Flyease technology products have been performing this past year? I want to be able to pivot by SKU or by store, to understand transactional data by week.",
   fileType: "CSV",
-  fileSize: "23 mb",
+  fileSize: "2.3",
   fileStructured: "Prototype",
   fileTimestamps: "20 Feb, 2024",
   fileCaveats: "Caveat by",
