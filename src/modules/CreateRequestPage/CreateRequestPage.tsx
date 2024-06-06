@@ -29,16 +29,16 @@ const CreateRequestPage: FC<Props> = ({
   const promptList = useMemo(() => {
     if (!isDemoMode) {
       if (list) {
-        const uniqueMessages = new Set<string>();
-        const filteredList = list.filter((item) => {
-          if (!uniqueMessages.has(item.message as string)) {
-            uniqueMessages.add(item.message as string);
-            return true;
-          }
-          return false;
-        });
+        // const uniqueMessages = new Set<string>();
+        // const filteredList = list.filter((item) => {
+        //   if (!uniqueMessages.has(item.message as string)) {
+        //     uniqueMessages.add(item.message as string);
+        //     return true;
+        //   }
+        //   return false;
+        // });
         // Return the first 4 items from the filtered list
-        return filteredList.slice(0, 4);
+        return list.slice(0, 4);
       }
       return [];
     }

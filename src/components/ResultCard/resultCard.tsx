@@ -29,7 +29,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
   // const [isOpendiscription, setIsOpendiscription] = useState(false);
 
   const handleOpen = (id: string) => {
-    const withoutquery = id.replace("query#", "");
+    const withoutquery = id?.replace("query#", "");
     if (isPilotMode) {
       setIsOpenAlert(true);
     } else route.push(`/request/preview/${withoutquery}`);
