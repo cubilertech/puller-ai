@@ -1,4 +1,5 @@
 import { getBackendURL } from "@/utils/common";
+import { MODES } from "@/utils/constants";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "react-toastify";
@@ -6,7 +7,7 @@ import { toast } from "react-toastify";
 export const useResetData = () => {
   async function submit(): Promise<any> {
     try {
-      const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
+      const backendUrl = getBackendURL(MODES.DEMO as string);
       const res = await axios({
         url: `${backendUrl}/reset`,
         method: "put",

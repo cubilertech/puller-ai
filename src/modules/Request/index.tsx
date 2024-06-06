@@ -43,6 +43,7 @@ import {
 import { getVariables, setVariables } from "@/libs/redux/features/variables";
 import { OptionsBar } from "@/components/optionsBar";
 import SelectionTextEditor from "@/components/SelectionTextEditor";
+import { isDemoMode } from "@/utils/constants";
 
 const SkeletonLoader = () => {
   return (
@@ -221,7 +222,7 @@ const RequestPage: FC = () => {
     localStorage.removeItem("variableId");
   }, []);
   useEffect(() => {
-    if (isSuccessExecute) {
+    if (isSuccessExecute && isDemoMode) {
       router.push(`/request/results/${id}`);
     }
   }, [isSuccessExecute]);
@@ -250,18 +251,20 @@ const RequestPage: FC = () => {
   ]);
 
   const handleMouseUp = () => {
-    const selection = window.getSelection();
-    if (selection && selection.toString().length > 0) {
-      const range = selection.getRangeAt(0);
-      const start = range.startOffset;
-      const end = range.endOffset;
-      setTextSelected(selection.toString());
-      setIsEditingText(true);
-      setIsOpenSelectBar(false);
-      localStorage.removeItem("variableId");
-      // setSelectedText(selection.toString());
-      // handleTextSelection(selection.toString());
-      setSelectionIndices({ start, end });
+    if (isDemoMode) {
+      const selection = window.getSelection();
+      if (selection && selection.toString().length > 0) {
+        const range = selection.getRangeAt(0);
+        const start = range.startOffset;
+        const end = range.endOffset;
+        setTextSelected(selection.toString());
+        setIsEditingText(true);
+        setIsOpenSelectBar(false);
+        localStorage.removeItem("variableId");
+        // setSelectedText(selection.toString());
+        // handleTextSelection(selection.toString());
+        setSelectionIndices({ start, end });
+      }
     }
   };
   // console.log(textSelected, "text", selectionIndices, "indices");

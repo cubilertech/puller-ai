@@ -5,6 +5,7 @@ import {
 } from "@/libs/redux/features/isLoadingRequest";
 import { useAppDispatch } from "@/libs/redux/hooks";
 import { getBackendURL } from "@/utils/common";
+import { isPilotMode } from "@/utils/constants";
 import { submitExecutePayload, Query } from "@/utils/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -39,11 +40,12 @@ export const useSubmitExecute = () => {
   return useMutation({
     mutationFn: submit,
     onSuccess: async (data) => {
-    
-      setTimeout(()=>{
-          dispatch(setSubmitExecuteLoading(false));
-      },2000);
-      // await new Promise((resolve) => setTimeout(resolve, 1000)); 
+      const id = data?.id; // "run#1717580893"
+      const formatedId = id?.replace(/^run#/, "");
+      if (isPilotMode) {
+        router.push(`/request/results/${formatedId}`);
+      }
+      // await new Promise((resolve) => setTimeout(resolve, 1000));
       // dispatch(UpdateIsLoadingRequest(false));
     },
     onError: (error: any) => {

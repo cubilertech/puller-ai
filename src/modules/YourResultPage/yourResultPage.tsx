@@ -5,7 +5,9 @@ import { PageHeader } from "@/components/PageHeader";
 import { ResultCard } from "@/components/ResultCard";
 import { useGetSingleExecute } from "@/hooks/useExecute";
 import { useGetSinglePrompt } from "@/hooks/usePrompt";
-import { CURRENT_MODE, MODES } from "@/utils/constants";
+import { setSubmitExecuteLoading } from "@/libs/redux/features/globalLoadings";
+import { useAppDispatch } from "@/libs/redux/hooks";
+import { isPilotMode } from "@/utils/constants";
 // import { getActiveRequest } from "@/libs/redux/features/activeRequest";
 // import { useAppSelector } from "@/libs/redux/hooks";
 import { RESULTS_DATA } from "@/utils/data";
@@ -23,9 +25,10 @@ const YourResultsPage: FC<Props> = ({ id }) => {
   const [isLoading, setIsLoading] = useState(true);
   const singleExecute = useGetSingleExecute(id);
   const singlePrompt = useGetSinglePrompt(id);
-
-  const { data, refetch: refetchSignleExecute } =
-    CURRENT_MODE === MODES.PILOT ? singleExecute : singlePrompt;
+  const dispatch = useAppDispatch();
+  const { data, refetch: refetchSignleExecute } = isPilotMode
+    ? singleExecute
+    : singlePrompt;
   useEffect(() => {
     if (data && data?.status === "complete") {
       setIsLoading(false);
@@ -43,6 +46,10 @@ const YourResultsPage: FC<Props> = ({ id }) => {
     month: "short",
     year: "numeric",
   });
+  useEffect(() => {
+    dispatch(setSubmitExecuteLoading(false));
+  }, []);
+  console.log(imageUrl, "imageUrl");
   return (
     <>
       {isLoading ? (
@@ -81,18 +88,17 @@ const YourResultsPage: FC<Props> = ({ id }) => {
                   data?.results && data?.results[0]
                     ? data.results[0].database
                     : RESULTS_DATA.fileStructured,
-                main_description: data?.query
-                  ? data?.query
+                main_description: data?.message
+                  ? data?.message
                   : RESULTS_DATA.main_description,
                 fileSize:
                   data?.results && data?.results[0].bytes
                     ? data?.results[0].bytes
                     : RESULTS_DATA.fileSize,
                 id: data?.id ?? "",
-                observations:
-                  data?.observations !== ""
-                    ? data?.observations
-                    : RESULTS_DATA.observations,
+                observations: data?.observations
+                  ? data?.observations
+                  : RESULTS_DATA.observations,
                 fileLink: imageUrl,
               }}
             />

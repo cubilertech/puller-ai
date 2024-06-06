@@ -141,7 +141,7 @@ export interface Prompt {
   sql: string;
   target: string;
   variables: Variable[];
-  query?: string;
+  message?: string;
   observations?: string;
   notes?: Array<string>;
   columns?: Array<string>;
@@ -162,7 +162,7 @@ export interface Query {
   id: string;
   status: string;
   results: any[];
-  query?: string;
+  message?: string;
   observations?: string;
   notes?: string[],
 }

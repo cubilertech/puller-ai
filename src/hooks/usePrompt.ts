@@ -172,11 +172,11 @@ export const useGetSinglePrompt = (promptId: string) => {
         return null;
       }
     } catch (error: any) {
-      toast.error(error?.response?.data?.message ?? (error.message as string));
-      setTimeout(() => {
-        router.push("/request");
-        dispatch(UpdateCurrentPage("create"));
-      }, toastTimeout);
+      // toast.error(error?.response?.data?.message ?? (error.message as string));
+      // setTimeout(() => {
+      //   router.push("/request");
+      //   dispatch(UpdateCurrentPage("create"));
+      // }, toastTimeout);
       console.error("Network error:", error);
       return null;
     }

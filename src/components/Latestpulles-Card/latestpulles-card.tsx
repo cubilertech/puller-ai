@@ -17,29 +17,22 @@ const LatestPullesCard: FC<LatestPullesCardProps> = ({ query, onClick }) => {
       variant="dark-border"
       sx={{
         border: `1px solid ${palette.color.gray[700]}`,
-        height: "308px",
+        height: { lg: "308px", xs: "220px" },
+        minHeight: "240px",
         width: "100%",
         maxWidth: "320px",
         minWidth: "280px",
         margin: 0,
         padding: "22px",
+        overflow: "auto",
+        scrollbarWidth: "none",
         ":hover": {
           background: palette.linearGradient.darkBlue,
           cursor: "pointer",
         },
       }}
     >
-      <Typography
-        variant="text-md-medium"
-        sx={{
-          // overflow: "hidden",
-          // display: "-webkit-box",
-          // WebkitLineClamp: 6,
-          // WebkitBoxOrient: "vertical",
-        }}
-      >
-        {query}
-      </Typography>
+      <Typography variant="text-md-medium">{query}</Typography>
     </Paper>
   );
 };

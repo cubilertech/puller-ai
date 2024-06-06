@@ -12,7 +12,7 @@ interface Props {
 export const PromptList: FC<Props> = ({ item, handleLatestPrompt, index }) => {
   const companyName = localStorage.getItem("companyName");
   const replaceBrand = replaceBrandName(
-    { description: item.query },
+    { description: item.message },
     companyName as string
   );
   return (
@@ -27,7 +27,7 @@ export const PromptList: FC<Props> = ({ item, handleLatestPrompt, index }) => {
       <LatestPullesCard
         key={index}
         query={replaceBrand}
-        onClick={() => handleLatestPrompt(item.query as string)}
+        onClick={() => handleLatestPrompt(item.message as string)}
       />
     </motion.div>
   );
