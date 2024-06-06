@@ -1,6 +1,6 @@
 import { palette } from "@/theme/Palette";
 import { Paper } from "../Paper";
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { FC } from "react";
 import { LatestPullesCardDataProps } from "@/utils/types";
 import { motion } from "framer-motion";
@@ -17,22 +17,26 @@ const LatestPullesCard: FC<LatestPullesCardProps> = ({ query, onClick }) => {
       variant="dark-border"
       sx={{
         border: `1px solid ${palette.color.gray[700]}`,
-        height: { lg: "308px", xs: "220px" },
-        minHeight: "240px",
-        width: "100%",
-        maxWidth: "320px",
-        minWidth: "280px",
+        height: { lg: "258px", xs: "220px" },
+        width: { lg: "320px", xs: "280px" },
         margin: 0,
         padding: "22px",
-        overflow: "auto",
-        scrollbarWidth: "none",
         ":hover": {
           background: palette.linearGradient.darkBlue,
           cursor: "pointer",
         },
       }}
     >
-      <Typography variant="text-md-medium">{query}</Typography>
+      <Box
+        sx={{
+          width: "100%",
+          height: "100%",
+          overflow: "auto",
+          scrollbarWidth: "none",
+        }}
+      >
+        <Typography variant="text-md-medium">{query}</Typography>
+      </Box>
     </Paper>
   );
 };
