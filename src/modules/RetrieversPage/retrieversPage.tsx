@@ -21,7 +21,6 @@ const RetrieversPage = () => {
     isLoading: LoadingRetrivers,
     refetch: FetchRetrievers,
   } = useGetAllRetriever();
-  console.log(Retrievers, "Retrievers");
   useEffect(() => {
     FetchRetrievers();
   }, [FetchRetrievers]);

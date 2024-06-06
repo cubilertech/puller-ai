@@ -100,10 +100,10 @@ const UploadRetrieverPage = () => {
           description: description,
           timestamp: Date.now(),
         });
-        console.log(
-          fileData,
-          fileData.map((data) => data.description)
-        );
+        // console.log(
+        //   fileData,
+        //   fileData.map((data) => data.description)
+        // );
       }
     }
   };
