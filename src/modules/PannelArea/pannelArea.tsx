@@ -186,7 +186,7 @@ const PannelArea: FC<PannelAreaProps> = ({
                     scrollbarWidth: "none",
                   }}
                 >
-                  {LatestPullsData.map((item, i) => (
+                  {/* {LatestPullsData.map((item, i) => (
                     // <motion.div
                     //   key={`motion-div-${i}`}
                     //   animate={{ y: [-240, 0] }}
@@ -201,7 +201,7 @@ const PannelArea: FC<PannelAreaProps> = ({
                         onClick={() => handleLatestPulls(item.query)}
                       />
                     // </motion.div>
-                  ))}
+                  ))} */}
                 </Box>
               </Box>
             )}

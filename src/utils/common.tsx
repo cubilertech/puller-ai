@@ -686,7 +686,6 @@ export const UpdateData = (variables: Variable[], prompt: string) => {
     case "query#1234567895": {
       const last_interaction_timestamp = (value: any) => {
         const formattedMessage = value.replace(/ /g, "").toLowerCase();
-        console.log(formattedMessage, "formattedMessage", value);
         if (formattedMessage === "lastinteraction") {
           return "last_interaction_timestamp";
         } else return value;

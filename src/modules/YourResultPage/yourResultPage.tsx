@@ -49,7 +49,6 @@ const YourResultsPage: FC<Props> = ({ id }) => {
   useEffect(() => {
     dispatch(setSubmitExecuteLoading(false));
   }, []);
-  console.log(imageUrl, "imageUrl");
   return (
     <>
       {isLoading ? (

@@ -26,7 +26,6 @@ const CreateRequestPage: FC<Props> = ({
   handleLatestPrompt,
 }) => {
   const [isOpenAlert, setIsOpenAlert] = useState(false);
-  console.log(list, "list");
   const promptList = useMemo(() => {
     if (!isDemoMode) {
       if (list) {

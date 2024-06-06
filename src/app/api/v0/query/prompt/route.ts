@@ -21,7 +21,7 @@ export async function POST(req: any, res: any) {
     if (!prompt) {
       const id = generateRandom10DigitNumber();
       prompt = { ...dummyPrompt };
-      (prompt.id = `query#${id}`), (prompt.query = message);
+      (prompt.id = `query#${id}`), (prompt.message = message);
     }
 
     const document = await db.collection('pulls').findOne({ id: prompt.id });

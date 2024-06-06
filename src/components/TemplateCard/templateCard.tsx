@@ -29,7 +29,7 @@ const TemplateCard: FC<TemplateCardProps> = ({ card, index }) => {
     router.push(`/request?id=${id}`);
     dispatch(UpdateCurrentPage("validate"));
     dispatch(UpdateIsLoadingRequest(true));
-    dispatch(UpdatePromptValue(card.query));
+    dispatch(UpdatePromptValue(card.message));
   };
   const companyName = localStorage.getItem("companyName")
   const description = useMemo(() => {
@@ -42,7 +42,6 @@ const TemplateCard: FC<TemplateCardProps> = ({ card, index }) => {
     companyName as string,
   );
   }, [card]);
-  console.log(description, "description")
   return (
     <Box
       key={index}

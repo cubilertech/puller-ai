@@ -61,12 +61,7 @@ const OptionsBar: FC<optionbarProps> = ({
         const matchIndex = findVariableById.selectData.findIndex(
           (item) => item.replace(/ /g, "") === formattedValue
         );
-        console.log(
-          matchIndex,
-          "data",
-          findVariableById.selectData,
-          findVariableById.value
-        );
+       
         const initialCheckedItems = findVariableById.selectData.map(
           (_, index) => index === (matchIndex !== -1 ? matchIndex : 0)
         );
@@ -156,7 +151,6 @@ const OptionsBar: FC<optionbarProps> = ({
     }
   };
 
-  console.log(selectedItems, "selectedItems", variables);
 
   const handleUpdate = () => {
     if (PromptId) {

@@ -195,7 +195,6 @@ const RequestPage: FC = () => {
       }
     }
     dispatch(setVariables(prompt?.variables as Variable[]));
-    console.log(SelectBarVarient, "SelectBarVarient");
   };
   const handleOpenSQL_Editor = () => {
     setCurrentType("SQL");
