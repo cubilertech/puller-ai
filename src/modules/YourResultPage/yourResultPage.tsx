@@ -39,7 +39,9 @@ const YourResultsPage: FC<Props> = ({ id }) => {
     }
   }, [data, refetchSignleExecute]);
   const imageUrl =
-    data?.results && data.results[0]?.url ? data.results[0].url : "";
+    data?.results && data.results[data.results.length - 1]?.url
+      ? data.results[data.results.length - 1].url
+      : "";
   const date = new Date();
   const formattedDate = date.toLocaleDateString("en-GB", {
     day: "2-digit",

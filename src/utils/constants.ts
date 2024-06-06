@@ -211,3 +211,4 @@ export const isPilotMode = CURRENT_MODE === MODES.PILOT;
 export const isDemoMode = CURRENT_MODE === MODES.DEMO;
 
 export const toastTimeout = 5000;
+  
