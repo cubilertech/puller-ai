@@ -109,6 +109,7 @@ const CreateRequestPage: FC<Props> = ({
                 gap: 2,
                 overflow: "auto",
                 scrollbarWidth: "none",
+                height: "calc(100vh - 650px)",
               }}
             >
               {promptList.map((item, i) => (

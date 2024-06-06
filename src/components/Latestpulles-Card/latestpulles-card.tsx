@@ -18,9 +18,7 @@ const LatestPullesCard: FC<LatestPullesCardProps> = ({ query, onClick }) => {
       sx={{
         border: `1px solid ${palette.color.gray[700]}`,
         height: "308px",
-        width: "100%",
-        maxWidth: "320px",
-        minWidth: "280px",
+        width: "320px",
         margin: 0,
         padding: "22px",
         ":hover": {
