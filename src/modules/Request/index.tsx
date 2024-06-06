@@ -43,7 +43,7 @@ import {
 import { getVariables, setVariables } from "@/libs/redux/features/variables";
 import { OptionsBar } from "@/components/optionsBar";
 import SelectionTextEditor from "@/components/SelectionTextEditor";
-import { isDemoMode } from "@/utils/constants";
+import { isDemoMode, isPilotMode } from "@/utils/constants";
 
 const SkeletonLoader = () => {
   return (
@@ -131,6 +131,7 @@ const RequestPage: FC = () => {
     data: allPrompt,
     refetch: refetchAllPrompt,
     isLoading: allPromptLoading,
+    isSuccess: isSuccessAllPrompt,
   } = useGetAllPrompt();
 
   const handleSubmitPrompt = async () => {
@@ -216,7 +217,9 @@ const RequestPage: FC = () => {
     }
   }, [submitValidateLoading]);
   useEffect(() => {
-    setLoading(false);
+    if (isDemoMode) {
+      setLoading(false);
+    }
     refetchAllPrompt();
     localStorage.removeItem("variableId");
   }, []);
@@ -224,7 +227,10 @@ const RequestPage: FC = () => {
     if (isSuccessExecute && isDemoMode) {
       router.push(`/request/results/${id}`);
     }
-  }, [isSuccessExecute]);
+    if (isSuccessAllPrompt && isPilotMode) {
+      setLoading(false);
+    }
+  }, [isSuccessExecute, isSuccessAllPrompt]);
   const content = {
     response: prompt?.description as string,
     original:

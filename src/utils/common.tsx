@@ -127,10 +127,10 @@ export const getResultOfPrompt = (id: string, baseUrl: string) => {
 };
 
 function escapeRegExp(string: string): string {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
+  return string?.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $& means the whole matched string
 }
 function escapePercentage(string: string): string {
-  return string.replace(/[%]/g, ""); // Remove only "%" signs
+  return string?.replace(/[%]/g, ""); // Remove only "%" signs
 }
 
 export const replaceBrandName = (prompt: { description: string }, brand = 'Puller'): string => {
@@ -163,7 +163,7 @@ export const getFormatedDescription = (prompt: Prompt): string => {
     const placeholder = escapeRegExp(variable.id);
     const value = variable.value;
     const regex = new RegExp(`\\[${placeholder}\\]`, "g");
-    newDescription = newDescription.replace(regex, value.toString());
+    newDescription = newDescription?.replace(regex, value.toString());
   });
 
   return newDescription;
@@ -464,7 +464,7 @@ export const UpdateData = (variables: Variable[], prompt: string) => {
     }
     case "query#1234567890": {
       const revenue_txt = (value: any) => {
-        const formattedMessage = value.replace(/ /g, "").toLowerCase();
+        const formattedMessage = value?.replace(/ /g, "").toLowerCase();
         switch (formattedMessage) {
           case "totalrevenue":
             return "SUM(s.revenue) AS total_revenue";
@@ -477,7 +477,7 @@ export const UpdateData = (variables: Variable[], prompt: string) => {
         }
       };
       const total_Desc = (value: any) => {
-        const formattedMessage = value.replace(/ /g, "").toLowerCase();
+        const formattedMessage = value?.replace(/ /g, "").toLowerCase();
         switch (formattedMessage) {
           case "totalrevenue":
             return "total_revenue";
@@ -497,7 +497,7 @@ export const UpdateData = (variables: Variable[], prompt: string) => {
     }
     case "query#1234567892": {
       const product_category = (value: any) => {
-        const formattedMessage = value.replace(/ /g, "").toLowerCase();
+        const formattedMessage = value?.replace(/ /g, "").toLowerCase();
         switch (formattedMessage) {
           case "ontheprodidfield":
           case "productid":
@@ -545,7 +545,7 @@ export const UpdateData = (variables: Variable[], prompt: string) => {
     }
     case "query#1234567893": {
       const region_x = (value: any) => {
-        const formattedMessage = value.replace(/ /g, "").toLowerCase();
+        const formattedMessage = value?.replace(/ /g, "").toLowerCase();
         switch (formattedMessage) {
           case "regionn":
             return "N";
@@ -685,7 +685,7 @@ export const UpdateData = (variables: Variable[], prompt: string) => {
     }
     case "query#1234567895": {
       const last_interaction_timestamp = (value: any) => {
-        const formattedMessage = value.replace(/ /g, "").toLowerCase();
+        const formattedMessage = value?.replace(/ /g, "").toLowerCase();
         if (formattedMessage === "lastinteraction") {
           return "last_interaction_timestamp";
         } else return value;

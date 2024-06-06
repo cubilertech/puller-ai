@@ -54,12 +54,12 @@ const OptionsBar: FC<optionbarProps> = ({
   useEffect(() => {
     if (findVariableById?.selectData) {
       if (variant === "round-checkbox") {
-        const formattedValue = findVariableById.value
+        const formattedValue = findVariableById?.value
           .toString()
           .replace(/ /g, "");
 
         const matchIndex = findVariableById.selectData.findIndex(
-          (item) => item.replace(/ /g, "") === formattedValue
+          (item) => item?.replace(/ /g, "") === formattedValue
         );
        
         const initialCheckedItems = findVariableById.selectData.map(

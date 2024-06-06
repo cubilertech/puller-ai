@@ -14,7 +14,7 @@ const TopNavBar = () => {
   const route = usePathname();
   const router = useRouter();
   const [isOpenAlert, setIsOpenAlert] = useState(false);
-  const routeParts = route.replace(/^\//, "").split("/");
+  const routeParts = route?.replace(/^\//, "").split("/");
   const firstRoute = routeParts[0];
   const isBack =
     routeParts.includes("preview") ||

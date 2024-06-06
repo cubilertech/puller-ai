@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
 
       // const buffer = Buffer.from(await image.arrayBuffer());
       const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-      const filename = `${image.name.replace(
+      const filename = `${image?.name?.replace(
         /\.[^/.]+$/,
         ""
       )}-${uniqueSuffix}.${mime.getExtension(image.type)}`;

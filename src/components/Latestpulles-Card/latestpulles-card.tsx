@@ -17,7 +17,7 @@ const LatestPullesCard: FC<LatestPullesCardProps> = ({ query, onClick }) => {
       variant="dark-border"
       sx={{
         border: `1px solid ${palette.color.gray[700]}`,
-        height: { lg: "258px", xs: "220px" },
+        height: { lg: "240px", xs: "200px" },
         width: { lg: "320px", xs: "280px" },
         margin: 0,
         padding: "22px",
@@ -35,7 +35,7 @@ const LatestPullesCard: FC<LatestPullesCardProps> = ({ query, onClick }) => {
           scrollbarWidth: "none",
         }}
       >
-        <Typography variant="text-md-medium">{query}</Typography>
+        <Typography variant="text-sm-medium">{query}</Typography>
       </Box>
     </Paper>
   );
