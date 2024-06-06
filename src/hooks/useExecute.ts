@@ -40,9 +40,6 @@ export const useSubmitExecute = () => {
   return useMutation({
     mutationFn: submit,
     onSuccess: async (data) => {
-      setTimeout(() => {
-        dispatch(setSubmitExecuteLoading(false));
-      }, 2000);
       const id = data?.id; // "run#1717580893"
       const formatedId = id?.replace(/^run#/, "");
       if (isPilotMode) {

@@ -162,7 +162,7 @@ export interface Query {
   id: string;
   status: string;
   results: any[];
-  query?: string;
+  message?: string;
   observations?: string;
   notes?: string[],
 }
