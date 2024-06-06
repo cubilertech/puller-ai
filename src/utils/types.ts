@@ -141,7 +141,7 @@ export interface Prompt {
   sql: string;
   target: string;
   variables: Variable[];
-  query?: string;
+  message?: string;
   observations?: string;
   notes?: Array<string>;
   columns?: Array<string>;

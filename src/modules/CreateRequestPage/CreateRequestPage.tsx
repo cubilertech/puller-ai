@@ -26,14 +26,24 @@ const CreateRequestPage: FC<Props> = ({
   handleLatestPrompt,
 }) => {
   const [isOpenAlert, setIsOpenAlert] = useState(false);
-  console.log(list, "list")
+  console.log(list, "list");
   const promptList = useMemo(() => {
     if (!isDemoMode) {
-      // Return the first 4 items from LatestPullsData if isDemoMode is true
-      return list ? list.slice(0, 4) : [];
+      if (list) {
+        const uniqueMessages = new Set<string>();
+        const filteredList = list.filter((item) => {
+          if (!uniqueMessages.has(item.message as string)) {
+            uniqueMessages.add(item.message as string);
+            return true;
+          }
+          return false;
+        });
+        // Return the first 4 items from the filtered list
+        return filteredList.slice(0, 4);
+      }
+      return [];
     }
-    // Return list if it exists, otherwise return an empty array
-    return LatestPullsData ? LatestPullsData : [];
+    return LatestPullsData ? LatestPullsData.slice(0, 4) : [];
   }, [isDemoMode, list, LatestPullsData]);
 
   const handlePrompt = () => {
@@ -101,7 +111,14 @@ const CreateRequestPage: FC<Props> = ({
                 scrollbarWidth: "none",
               }}
             >
-              {promptList.map((item, i) => <PromptList key={`list-${i}`} item={item} index={i} handleLatestPrompt={handleLatestPrompt} />)}
+              {promptList.map((item, i) => (
+                <PromptList
+                  key={`list-${i}`}
+                  item={item}
+                  index={i}
+                  handleLatestPrompt={handleLatestPrompt}
+                />
+              ))}
             </Box>
           </Box>
 
