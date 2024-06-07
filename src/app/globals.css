@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
+/* @font-face {
   font-family: "Inter";
   src: url("/static/Inter-Black.ttf") format("truetype");
   font-weight: 900;
@@ -63,10 +63,10 @@
   src: url("/static/Inter-Thin.ttf") format("truetype");
   font-weight: 100;
   font-style: normal;
-}
+} */
 
 body {
-  font-family: "Inter", sans-serif;
+  /* font-family: "Inter", sans-serif; */
   color: black;
   background:
     linear-gradient(41.16deg, #ad00fe -4.78%, #00e0ee 100%),
@@ -79,14 +79,6 @@ body {
   width: 100vw;
   height: 100vh;
   overflow: auto;
-}
-@font-face {
-  font-family: "YourFontName";
-  src:
-    url("/fonts/YourFontName.woff2") format("woff2"),
-    url("/fonts/YourFontName.woff") format("woff");
-  font-weight: normal;
-  font-style: normal;
 }
 
 :root {
