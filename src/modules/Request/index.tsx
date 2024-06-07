@@ -161,12 +161,13 @@ const RequestPage: FC = () => {
       dispatch(setSubmitValidateLoading(false));
     }
     if (submitValidateSuccess && validatedPrompt) {
+      if (isPilotMode) setDescription(validatedPrompt?.description as string);
       return validatedPrompt;
     } else {
       setDescription(singlePrompt?.description as string);
       return singlePrompt;
     }
-  }, [singlePrompt, submitValidateSuccess]);
+  }, [singlePrompt, validatedPrompt, submitValidateSuccess]);
   const handleOpenGraph = () => {
     setCurrentType("graph");
   };
@@ -234,6 +235,7 @@ const RequestPage: FC = () => {
   const content = {
     response: prompt?.description as string,
     original:
+      prompt?.message ||
       "Can I get data to understand how Flyease technology products have been performing this past year? I want to be able to pivot by SKU or by store, to understand transactional data by week.",
   };
   useEffect(() => {

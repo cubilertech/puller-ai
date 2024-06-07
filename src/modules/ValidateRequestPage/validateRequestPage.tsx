@@ -13,10 +13,14 @@ import { Prompt } from "@/utils/types";
 import { ResponseArea } from "@/components/ResponseArea";
 import { QueryComponent } from "@/components/QuaryComponent";
 import { useAppSelector } from "@/libs/redux/hooks";
-import { getConsoleMessages, getCurrentPage, getIsLoadingPrompt } from "@/libs/redux/features/isLoadingRequest";
+import {
+  getConsoleMessages,
+  getCurrentPage,
+  getIsLoadingPrompt,
+} from "@/libs/redux/features/isLoadingRequest";
 import { motion } from "framer-motion";
 import { Loader } from "@/components/Loader";
-interface Props { 
+interface Props {
   id: string;
 }
 const ValidateRequestPage: FC<Props> = ({ id }) => {
@@ -48,7 +52,7 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
     } else {
       return singlePrompt;
     }
-  }, [singlePrompt, submitValidateSuccess]);
+  }, [singlePrompt, validatedPrompt, submitValidateSuccess]);
   const handleOpenGraph = () => {
     setCurrentType("graph");
   };
@@ -148,7 +152,10 @@ const ValidateRequestPage: FC<Props> = ({ id }) => {
                   mt: 1,
                 }}
               >
-                <ResponseArea isLoading={submitValidateLoading} handleMouseUp={()=>{}}/>
+                <ResponseArea
+                  isLoading={submitValidateLoading}
+                  handleMouseUp={() => {}}
+                />
 
                 <QueryComponent isLoading={submitValidateLoading} />
               </Box>
