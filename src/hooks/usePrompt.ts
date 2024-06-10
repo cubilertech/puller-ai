@@ -1,4 +1,7 @@
-import { setLoadingText, setSubmitPromptLoading } from "@/libs/redux/features/globalLoadings";
+import {
+  setLoadingText,
+  setSubmitPromptLoading,
+} from "@/libs/redux/features/globalLoadings";
 import {
   UpdateCurrentPage,
   UpdateIsLoadingPrompt,
@@ -21,16 +24,16 @@ export const useSubmitPrompt = (
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  
+
   const createQueryString = useCallback(
     (name: string, value: string) => {
-      const params = new URLSearchParams(searchParams.toString())
-      params.set(name, value)
- 
-      return params.toString()
+      const params = new URLSearchParams(searchParams.toString());
+      params.set(name, value);
+
+      return params.toString();
     },
     [searchParams]
-  )
+  );
   const dispatch = useAppDispatch();
   async function submit(data: submitPromptPayload): Promise<Prompt | null> {
     try {
@@ -59,20 +62,20 @@ export const useSubmitPrompt = (
     onSuccess: async (data) => {
       // dispatch(UpdateIsLoadingRequest(false));
       const id = data?.id?.includes("#") ? data?.id?.split("#")?.[1] : data?.id;
-      setTimeout(()=>{
+      setTimeout(() => {
         dispatch(setLoadingText("Generating SQL"));
-      setTimeout(()=>{
-        dispatch(setLoadingText("Preparing Graph"));
-        router.push(pathname + '?' + createQueryString('id', id as string));
-        setTimeout(()=>{
-          // dispatch(UpdateIsLoadingPrompt(false));
-          // setTimeout(()=>{
-          dispatch(setLoadingText("Finalizing"));
-           dispatch(setSubmitPromptLoading(false));
-          // },1000);
-        },1000);
-      },1000);
-    },1000);
+        setTimeout(() => {
+          dispatch(setLoadingText("Preparing Graph"));
+          router.push(pathname + "?" + createQueryString("id", id as string));
+          setTimeout(() => {
+            // dispatch(UpdateIsLoadingPrompt(false));
+            // setTimeout(()=>{
+            dispatch(setLoadingText("Finalizing"));
+            dispatch(setSubmitPromptLoading(false));
+            // },1000);
+          }, 1000);
+        }, 1000);
+      }, 1000);
       // router.push({ href: '/request', query: { id: id  } });
       // router.push( '/request', { param: { id: id } });
       // router.push(`/request?id=${id}`, `/request?id=${id}`, { shallow: true});
@@ -223,6 +226,37 @@ export const useGetAllPrompt = () => {
 
   return useQuery({
     queryKey: ["all-prompt"],
+    queryFn: submit,
+    enabled: false,
+    refetchInterval: 60_000,
+    // placeholderData: [],
+  });
+};
+export const useGetNewTimeStampPrompt = (timeStamp: number) => {
+  async function submit(): Promise<Prompt[] | null> {
+    try {
+      const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
+      const res = await axios({
+        url: `${backendUrl}/v0/query/prompt?start=${timeStamp}`,
+        method: "get",
+        headers: {
+          accept: "application/json",
+        },
+      });
+      if (res.status === 200) {
+        return res.data;
+      } else {
+        return null;
+      }
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message ?? (error.message as string));
+      console.error("Network error:", error);
+      return null;
+    }
+  }
+
+  return useQuery({
+    queryKey: ["timeStamp-prompt"], // Include timeStamp in the queryKey
     queryFn: submit,
     enabled: false,
     refetchInterval: 60_000,

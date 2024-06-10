@@ -9,9 +9,8 @@ export const useResetData = () => {
     try {
       const backendUrl = getBackendURL(MODES.DEMO as string);
       const res = await axios({
-        url: `${backendUrl}/reset`,
+        url: `${backendUrl}/reset/`,
         method: "put",
-      
       });
       if (res.status === 200) {
         return res.data;

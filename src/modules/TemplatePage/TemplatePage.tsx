@@ -1,12 +1,19 @@
 "use client";
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
-import { Box, Menu, MenuItem, Typography } from "@mui/material";
+import {
+  Box,
+  Menu,
+  MenuItem,
+  Pagination,
+  Stack,
+  Typography,
+} from "@mui/material";
 import React, { useEffect, useMemo, useState } from "react";
 import { ACTIVE_TYPES } from "@/utils/constants";
 import { TemplateCardList } from "@/components/TemplateCardList";
 import { TemplateTopbar } from "@/components/TemplateTopbar";
-import { useGetAllPrompt } from "@/hooks/usePrompt";
+import { useGetAllPrompt, useGetNewTimeStampPrompt } from "@/hooks/usePrompt";
 import { Loader } from "@/components/Loader";
 import { Button } from "@/components/Button";
 import { Icon } from "@/components/Icon";
@@ -15,12 +22,17 @@ import { KeyboardArrowUp } from "@mui/icons-material";
 const TemplatePage = () => {
   const [isActive, setIsActive] = useState(ACTIVE_TYPES.PRIVATE);
   const [search, setSearch] = useState("");
-  const { data, isLoading, refetch } = useGetAllPrompt();
+  // const { data, isLoading, refetch } = useGetAllPrompt();
+
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(20);
   const [activePage, setActivePage] = useState<number>(0);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
+  let currectTimeStamp = Date.now();
+  const { data, refetch, isLoading } =
+    useGetNewTimeStampPrompt(currectTimeStamp);
+  console.log(currectTimeStamp, "currectTimeStamp");
   const pullsList = useMemo(() => {
     let result = data && isActive === ACTIVE_TYPES.PRIVATE ? data : [];
     if (search?.length) {
@@ -49,6 +61,18 @@ const TemplatePage = () => {
   }, [isActive, refetch]);
 
   const totalPages = Math.ceil((pullsList?.length || 0) / rowsPerPage);
+
+  const onPageChange = (pagenum : number) => {
+    let pullsListLength = pullsList.length;
+    let cTimeStamp = null;
+    if(pagenum < page){
+      cTimeStamp = pullsList.length > 0 ? pullsList[0].timestamp : currectTimeStamp;
+    }else{
+      cTimeStamp = pullsList.length > 0 ? pullsList[pullsListLength-1].timestamp : currectTimeStamp;
+    }
+    console.log(cTimeStamp);
+    setPage(pagenum)
+  }
 
   return (
     <Box
@@ -115,7 +139,7 @@ const TemplatePage = () => {
             }}
           >
             <Box>
-              <>
+              {/* <>
                 <Button
                   onClick={handleButtonClick}
                   endIcon={<KeyboardArrowUp />}
@@ -144,10 +168,10 @@ const TemplatePage = () => {
                     </MenuItem>
                   ))}
                 </Menu>
-              </>
+              </> */}
             </Box>
 
-            <Box
+            {/* <Box
               sx={{
                 display: "flex",
                 alignItems: "center",
@@ -225,7 +249,10 @@ const TemplatePage = () => {
                   }
                 />
               </Button>
-            </Box>
+            </Box> */}
+            <Stack spacing={2}>
+              <Pagination count={10} variant="outlined" shape="rounded" onChange={(e,pagenum) => onPageChange(pagenum)} />
+            </Stack>
           </Box>
         </Paper>
       </Box>

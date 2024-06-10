@@ -148,6 +148,7 @@ export interface Prompt {
   rows?: Array<any>;
   results?: any[];
   status?: string;
+  timestamp?: number
 }
 
 export type PromptsList = {
