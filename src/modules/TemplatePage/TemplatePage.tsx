@@ -67,7 +67,7 @@ const TemplatePage = () => {
           sx={{
             padding: "1.5rem",
             height: "100%",
-            paddingY: "1.2rem",
+            paddingTop: "1.2rem",
             display: "flex",
             flexDirection: "column",
             position: "relative",
@@ -108,13 +108,6 @@ const TemplatePage = () => {
 
           <Box
             sx={{
-              background:
-                "linear-gradient(143deg, rgb(54,37,72), rgb(29,46,61))",
-                // "#293848",
-              backdropFilter: "blur(20px)",
-              // position: "absolute",
-              // bottom: "0px",
-              // left: "0px",
               p: 2,
               display: "flex",
               justifyContent: "space-between",
