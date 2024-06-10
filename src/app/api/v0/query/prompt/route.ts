@@ -5,7 +5,7 @@ import { generateRandom10DigitNumber, getResultOfPrompt } from "@/utils/common";
 // import fs from "fs";
 import examplePromptsList from "@/utils/examplePrompts.json";
 import dummyPrompt from "@/utils/dummyPrompt.json";
-import { Prompt, PromptsList } from "@/utils/types";
+import { PromptsList } from "@/utils/types";
 import clientPromise from "@/libs/mongodb/connection";
 export async function POST(req: any, res: any) {
   try {
@@ -45,7 +45,8 @@ export async function GET(req: any, res: any) {
     const client = await clientPromise;
     const db = client.db('demo_mode');
     const data = await db.collection('pulls').find({}).toArray();
-    return NextResponse.json(data);
+    const reversedData = data.reverse();
+    return NextResponse.json(reversedData);
   } catch (error) {
     console.error(error);
     return NextResponse.json(error, {
