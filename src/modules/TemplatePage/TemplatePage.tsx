@@ -3,7 +3,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
 import { Box, Pagination, Stack } from "@mui/material";
 import React, { useEffect, useMemo, useState } from "react";
-import { ACTIVE_TYPES } from "@/utils/constants";
+import { ACTIVE_TYPES, isDemoMode } from "@/utils/constants";
 import { TemplateCardList } from "@/components/TemplateCardList";
 import { TemplateTopbar } from "@/components/TemplateTopbar";
 import { useGetNewTimeStampPrompt } from "@/hooks/usePrompt";
@@ -19,12 +19,14 @@ const TemplatePage = () => {
   const [activePage, setActivePage] = useState<number>(0);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [newTimeStamp, setNewTimeStamp] = useState<number | null>(null);
+  const [totalPages, setTotalPages] = useState<number>(10);
 
   const { data, refetch, isLoading, isRefetching } = useGetNewTimeStampPrompt(
     newTimeStamp ?? currectTimeStamp
   );
   const pullsList = useMemo(() => {
     let result = data && isActive === ACTIVE_TYPES.PRIVATE ? data : [];
+    // console.log("runing")
     if (search?.length) {
       result = result?.filter(
         (item) =>
@@ -32,8 +34,12 @@ const TemplatePage = () => {
           item?.description?.toLowerCase().includes(search)
       );
     }
+    setTotalPages(
+      isDemoMode ? Math.ceil((result?.length || 0) / 20) : 10
+    );
     return result;
   }, [data, isActive, search]);
+
   const handlePageChange = (page: number) => {
     setActivePage(page);
     setPage(page);
@@ -48,9 +54,8 @@ const TemplatePage = () => {
 
   useEffect(() => {
     refetch();
-  }, [isActive, refetch]);
+  }, []);
 
-  const totalPages = Math.ceil((pullsList?.length || 0) / rowsPerPage);
   // Initialize before onPageChange
 
   const onPageChange = (pagenum: number) => {
@@ -259,7 +264,7 @@ const TemplatePage = () => {
             <Stack spacing={2}>
               <Pagination
                 disabled={isRefetching}
-                count={10}
+                count={totalPages}
                 variant="outlined"
                 shape="rounded"
                 onChange={(e, pagenum) => onPageChange(pagenum)}
