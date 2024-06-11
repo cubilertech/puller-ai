@@ -1,38 +1,28 @@
 "use client";
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
-import {
-  Box,
-  Menu,
-  MenuItem,
-  Pagination,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Box, Pagination, Stack } from "@mui/material";
 import React, { useEffect, useMemo, useState } from "react";
 import { ACTIVE_TYPES } from "@/utils/constants";
 import { TemplateCardList } from "@/components/TemplateCardList";
 import { TemplateTopbar } from "@/components/TemplateTopbar";
-import { useGetAllPrompt, useGetNewTimeStampPrompt } from "@/hooks/usePrompt";
+import { useGetNewTimeStampPrompt } from "@/hooks/usePrompt";
 import { Loader } from "@/components/Loader";
-import { Button } from "@/components/Button";
-import { Icon } from "@/components/Icon";
-import { KeyboardArrowUp } from "@mui/icons-material";
 
 const TemplatePage = () => {
+  let currectTimeStamp = Date.now();
   const [isActive, setIsActive] = useState(ACTIVE_TYPES.PRIVATE);
   const [search, setSearch] = useState("");
-  // const { data, isLoading, refetch } = useGetAllPrompt();
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(20);
   const [activePage, setActivePage] = useState<number>(0);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [newTimeStamp, setNewTimeStamp] = useState<number | null>(null);
 
-  let currectTimeStamp = Date.now();
-  const { data, refetch, isLoading } =
-    useGetNewTimeStampPrompt(currectTimeStamp);
-  console.log(currectTimeStamp, "currectTimeStamp");
+  const { data, refetch, isLoading, isRefetching } = useGetNewTimeStampPrompt(
+    newTimeStamp ?? currectTimeStamp
+  );
   const pullsList = useMemo(() => {
     let result = data && isActive === ACTIVE_TYPES.PRIVATE ? data : [];
     if (search?.length) {
@@ -61,18 +51,31 @@ const TemplatePage = () => {
   }, [isActive, refetch]);
 
   const totalPages = Math.ceil((pullsList?.length || 0) / rowsPerPage);
+  // Initialize before onPageChange
 
-  const onPageChange = (pagenum : number) => {
+  const onPageChange = (pagenum: number) => {
+    let newTimeStamp = null;
     let pullsListLength = pullsList.length;
-    let cTimeStamp = null;
-    if(pagenum < page){
-      cTimeStamp = pullsList.length > 0 ? pullsList[0].timestamp : currectTimeStamp;
-    }else{
-      cTimeStamp = pullsList.length > 0 ? pullsList[pullsListLength-1].timestamp : currectTimeStamp;
+
+    if (pagenum < page) {
+      newTimeStamp =
+        pullsListLength > 0 ? pullsList[0].timestamp : currectTimeStamp;
+    } else {
+      newTimeStamp =
+        pullsListLength > 0
+          ? pullsList[pullsListLength - 1].timestamp
+          : currectTimeStamp;
     }
-    console.log(cTimeStamp);
-    setPage(pagenum)
-  }
+
+    console.log(newTimeStamp, "newTimeStamp");
+    setNewTimeStamp(newTimeStamp as number);
+    setPage(pagenum);
+  };
+  useEffect(() => {
+    if (newTimeStamp !== null) {
+      refetch();
+    }
+  }, [newTimeStamp]);
 
   return (
     <Box
@@ -123,10 +126,13 @@ const TemplatePage = () => {
           ) : (
             <TemplateCardList
               isActive={isActive}
-              pulls={pullsList?.slice(
-                page * rowsPerPage,
-                page * rowsPerPage + rowsPerPage
-              )}
+              pulls={
+                pullsList
+                //   ?.slice(
+                //   page * rowsPerPage,
+                //   page * rowsPerPage + rowsPerPage
+                // )
+              }
             />
           )}
 
@@ -251,7 +257,13 @@ const TemplatePage = () => {
               </Button>
             </Box> */}
             <Stack spacing={2}>
-              <Pagination count={10} variant="outlined" shape="rounded" onChange={(e,pagenum) => onPageChange(pagenum)} />
+              <Pagination
+                disabled={isRefetching}
+                count={10}
+                variant="outlined"
+                shape="rounded"
+                onChange={(e, pagenum) => onPageChange(pagenum)}
+              />
             </Stack>
           </Box>
         </Paper>

@@ -9,7 +9,7 @@ import {
 } from "@/libs/redux/features/isLoadingRequest";
 import { useAppDispatch } from "@/libs/redux/hooks";
 import { getBackendURL } from "@/utils/common";
-import { toastTimeout } from "@/utils/constants";
+import { isDemoMode, toastTimeout } from "@/utils/constants";
 import { submitPromptPayload, Prompt } from "@/utils/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -161,7 +161,9 @@ export const useGetSinglePrompt = (promptId: string) => {
   async function submit(promptId: string): Promise<Prompt | null> {
     try {
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
-      const encodedPromptId = encodeURIComponent(`query#${promptId}`);
+      const encodedPromptId = encodeURIComponent(
+        `${isDemoMode ? "query#" : ""}${promptId}`
+      );
       const res = await axios({
         url: `${backendUrl}/v0/query/prompt/${encodedPromptId}`,
         method: "GET",
