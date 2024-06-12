@@ -32,6 +32,7 @@ const DataTable: FC<DataTableProps> = ({ data }) => {
   const [rowsPerPage, setRowsPerPage] = useState(13);
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  
 
   const [activePage, setActivePage] = useState<number>(0);
   const handlePageChange = (page: number) => {

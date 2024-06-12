@@ -174,7 +174,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
               <Typography variant="text-sm-regular">File Caveats:</Typography>
               <Typography variant="text-sm-semibold">
                 {data.fileCaveats}{" "}
-                <CustomLink href="/" variant="border">
+                <CustomLink href="" variant="border">
                   See More
                 </CustomLink>
               </Typography>

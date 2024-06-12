@@ -11,7 +11,6 @@ export const useResetData = () => {
       const res = await axios({
         url: `${backendUrl}/reset`,
         method: "put",
-      
       });
       if (res.status === 200) {
         return res.data;

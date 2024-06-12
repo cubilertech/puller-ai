@@ -1,11 +1,9 @@
-import { setSubmitExecuteLoading } from "@/libs/redux/features/globalLoadings";
 import {
   UpdateCurrentPage,
-  UpdateIsLoadingRequest,
 } from "@/libs/redux/features/isLoadingRequest";
 import { useAppDispatch } from "@/libs/redux/hooks";
 import { getBackendURL } from "@/utils/common";
-import { isPilotMode } from "@/utils/constants";
+import { isDemoMode, isPilotMode } from "@/utils/constants";
 import { submitExecutePayload, Query } from "@/utils/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -61,7 +59,9 @@ export const useGetSingleExecute = (executeId: string) => {
   async function submit(executeId: string): Promise<Query | null> {
     try {
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
-      const encodedExecuteId = encodeURIComponent(`run#${executeId}`);
+      const encodedExecuteId = encodeURIComponent(
+        `${isDemoMode ? "run#" : ""}${executeId}`
+      );
       const res = await axios({
         url: `${backendUrl}/v0/query/execute/${encodedExecuteId}`,
         method: "get",

@@ -1,5 +1,4 @@
 import { setSubmitValidateLoading } from "@/libs/redux/features/globalLoadings";
-import { UpdateIsLoadingRequest } from "@/libs/redux/features/isLoadingRequest";
 import { useAppDispatch } from "@/libs/redux/hooks";
 import { getBackendURL } from "@/utils/common";
 import { Prompt, submitValidatePayload } from "@/utils/types";
