@@ -1,6 +1,6 @@
 "use client";
 import { Box, Skeleton } from "@mui/material";
-import React, { FC, useEffect, useMemo, useRef, useState } from "react";
+import React, { FC, useEffect, useMemo, useState } from "react";
 import { PageHeader } from "@/components/PageHeader";
 import { useSubmitExecute } from "@/hooks/useExecute";
 import GraphModal2 from "@/modals/graphModals/graphModal2";
@@ -23,7 +23,6 @@ import { QueryComponent } from "@/components/QuaryComponent";
 import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
 import {
   UpdatePromptValue,
-  getCurrentPage,
 } from "@/libs/redux/features/isLoadingRequest";
 import { motion } from "framer-motion";
 import { Loader } from "@/components/Loader";
@@ -151,7 +150,7 @@ const RequestPage: FC = () => {
 
   const handleUpdate = () => {
     if (id) {
-      submitExecute({ prompt: `query#${id}` });
+      submitExecute({ prompt: `${isDemoMode ? "query#" : ""}${id}` });
       dispatch(setSubmitExecuteLoading(true));
     }
   };
