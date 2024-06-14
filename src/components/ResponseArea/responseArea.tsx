@@ -37,7 +37,11 @@ const ResponseArea: FC<ResponseAreaProps> = ({
       }
     };
 
-    return replaceIdWithVariable(prompt as Prompt, handleClickVariable,companyName as string);
+    return replaceIdWithVariable(
+      prompt as Prompt,
+      handleClickVariable,
+      companyName as string
+    );
   }, [prompt, SelectedVariableId]);
 
   const FormatedDescription = useMemo(() => {
@@ -141,7 +145,7 @@ const ResponseArea: FC<ResponseAreaProps> = ({
               }}
               component="div"
               className="animated-genrated-text"
-              onMouseUp={handleMouseUp}
+              onMouseUp={isEditingText ? () => {} : handleMouseUp}
             >
               {isEditingText ? (
                 <>
