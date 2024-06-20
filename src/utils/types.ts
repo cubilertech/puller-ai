@@ -267,3 +267,8 @@ export interface UpdateVariables {
   type: string;
   id: string;
 }
+
+export interface List {
+  items: Prompt[];
+  total: number;
+}

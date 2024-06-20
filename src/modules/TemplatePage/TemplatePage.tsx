@@ -28,7 +28,7 @@ const TemplatePage = () => {
     ? getNewTimeStampePrompt
     : getAllPrompt;
   const pullsList = useMemo(() => {
-    let result = data && isActive === ACTIVE_TYPES.PRIVATE ? data : [];
+    let result = data && isActive === ACTIVE_TYPES.PRIVATE ? data?.items : [];
     // console.log("runing")
     if (search?.length) {
       result = result?.filter(
@@ -37,7 +37,11 @@ const TemplatePage = () => {
           item?.description?.toLowerCase().includes(search)
       );
     }
-    setTotalPages(isDemoMode ? Math.ceil((result?.length || 0) / 20) : 10);
+    setTotalPages(
+      isDemoMode
+        ? Math.ceil((result?.length || 0) / 20)
+        : Math.ceil((data?.total || 0) / 20)
+    );
     return result;
   }, [data, isActive, search]);
 
