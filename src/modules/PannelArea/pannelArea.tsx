@@ -89,15 +89,15 @@ const PannelArea: FC<PannelAreaProps> = ({
       await dispatch(UpdatePromptValue(text));
     }
   };
-  const filterDisplayedPrompts = () => {
-    if (Prompts && Prompts?.length > 0) {
-      const displayedPrompts =
-        Prompts?.length > 5 ? Prompts?.slice(0, 5) : Prompts ?? [];
-      return displayedPrompts;
-    } else {
-      return LatestPullsData;
-    }
-  };
+  // const filterDisplayedPrompts = () => {
+  //   if (Prompts && Prompts?.length > 0) {
+  //     const displayedPrompts =
+  //       Prompts?.length > 5 ? Prompts?.slice(0, 5) : Prompts ?? [];
+  //     return displayedPrompts;
+  //   } else {
+  //     return LatestPullsData;
+  //   }
+  // };
   useEffect(() => {
     if (submitPromptError) {
       dispatch(UpdateIsLoadingRequest(false));
@@ -108,7 +108,7 @@ const PannelArea: FC<PannelAreaProps> = ({
     if (CurrentPage === "create") {
       refetchAllPrompt();
     }
-    filterDisplayedPrompts();
+    // filterDisplayedPrompts();
   }, [refetchAllPrompt]);
 
   return (
