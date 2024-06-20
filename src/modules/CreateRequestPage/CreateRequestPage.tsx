@@ -3,14 +3,14 @@ import { Box, Typography } from "@mui/material";
 import { isDemoMode, isPilotMode } from "@/utils/constants";
 import { palette } from "@/theme/Palette";
 import { FC, useMemo, useState } from "react";
-import { Prompt } from "@/utils/types";
+import { List, Prompt } from "@/utils/types";
 import { CreateInputAreaComponent } from "@/components/inputArea";
 import { AlertModal } from "@/modals/AlertModal";
 import "./CreateRequestPage.css";
 import { LatestPullsData } from "@/utils/data";
 import { PromptList } from "@/components/PromptList";
 interface Props {
-  list: Prompt[] | null | undefined;
+  list: List | null | undefined;
   setRequestQuery: (query: string) => void;
   requestQuery: string;
   handleSubmitPrompt: any;
@@ -38,7 +38,7 @@ const CreateRequestPage: FC<Props> = ({
         //   return false;
         // });
         // Return the first 4 items from the filtered list
-        return list.slice(0, 4);
+        return list.items?.slice(0, 4);
       }
       return [];
     }
@@ -110,7 +110,7 @@ const CreateRequestPage: FC<Props> = ({
                 scrollbarWidth: "none",
               }}
             >
-              {promptList.map((item, i) => (
+              {promptList?.map((item, i) => (
                 <PromptList
                   key={`list-${i}`}
                   item={item}
@@ -122,7 +122,7 @@ const CreateRequestPage: FC<Props> = ({
           </Box>
 
           <CreateInputAreaComponent
-            handlePrompt={handlePrompt}
+            handlePrompt={handlePrompt} 
             handleSource={handleSource}
             handleValidate={handleSubmitPrompt}
             onChangeInput={(e) => setRequestQuery(e.target.value)}

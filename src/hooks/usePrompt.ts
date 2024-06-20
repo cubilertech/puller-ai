@@ -10,7 +10,7 @@ import {
 import { useAppDispatch } from "@/libs/redux/hooks";
 import { getBackendURL } from "@/utils/common";
 import { isDemoMode, toastTimeout } from "@/utils/constants";
-import { submitPromptPayload, Prompt } from "@/utils/types";
+import { submitPromptPayload, Prompt, List } from "@/utils/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 // import { useRouter } from "next/router";
@@ -204,7 +204,7 @@ export const useGetSinglePrompt = (promptId: string) => {
 };
 
 export const useGetAllPrompt = () => {
-  async function submit(): Promise<Prompt[] | null> {
+  async function submit(): Promise<List | null> {
     try {
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
       const res = await axios({
@@ -235,7 +235,7 @@ export const useGetAllPrompt = () => {
   });
 };
 export const useGetNewTimeStampPrompt = (timeStamp: number) => {
-  async function submit(): Promise<Prompt[] | null> {
+  async function submit(): Promise<List | null> {
     try {
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
       const res = await axios({
