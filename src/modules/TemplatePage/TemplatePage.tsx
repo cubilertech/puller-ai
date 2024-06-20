@@ -8,6 +8,7 @@ import { TemplateCardList } from "@/components/TemplateCardList";
 import { TemplateTopbar } from "@/components/TemplateTopbar";
 import { useGetAllPrompt, useGetNewTimeStampPrompt } from "@/hooks/usePrompt";
 import { Loader } from "@/components/Loader";
+import { Prompt } from "@/utils/types";
 
 const TemplatePage = () => {
   let currectTimeStamp = Date.now();
@@ -28,11 +29,19 @@ const TemplatePage = () => {
     ? getNewTimeStampePrompt
     : getAllPrompt;
   const pullsList = useMemo(() => {
-    let result = data && isActive === ACTIVE_TYPES.PRIVATE ? data?.items : [];
+    let result: Prompt[] = [];
+    if (data) {
+      if (Array.isArray(data)) {
+        result = data;
+      } else if ("items" in data) {
+        result = data.items;
+      }
+    }
+
     // console.log("runing")
     if (search?.length) {
       result = result?.filter(
-        (item) =>
+        (item: any) =>
           item?.id?.toLowerCase().includes(search) ||
           item?.description?.toLowerCase().includes(search)
       );
@@ -40,7 +49,7 @@ const TemplatePage = () => {
     setTotalPages(
       isDemoMode
         ? Math.ceil((result?.length || 0) / 20)
-        : Math.ceil((data?.total || 0) / 20)
+        : Math.ceil((data && 'total' in data ? data.total : 0 || 0) / 20)
     );
     return result;
   }, [data, isActive, search]);

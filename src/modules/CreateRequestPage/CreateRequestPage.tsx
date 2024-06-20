@@ -10,7 +10,7 @@ import "./CreateRequestPage.css";
 import { LatestPullsData } from "@/utils/data";
 import { PromptList } from "@/components/PromptList";
 interface Props {
-  list: List | null | undefined;
+  list: Prompt[] | List | null | undefined;
   setRequestQuery: (query: string) => void;
   requestQuery: string;
   handleSubmitPrompt: any;
@@ -28,7 +28,7 @@ const CreateRequestPage: FC<Props> = ({
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const promptList = useMemo(() => {
     if (!isDemoMode) {
-      if (list) {
+      if (list && "items" in list) {
         // const uniqueMessages = new Set<string>();
         // const filteredList = list.filter((item) => {
         //   if (!uniqueMessages.has(item.message as string)) {
@@ -122,7 +122,7 @@ const CreateRequestPage: FC<Props> = ({
           </Box>
 
           <CreateInputAreaComponent
-            handlePrompt={handlePrompt} 
+            handlePrompt={handlePrompt}
             handleSource={handleSource}
             handleValidate={handleSubmitPrompt}
             onChangeInput={(e) => setRequestQuery(e.target.value)}

@@ -204,7 +204,7 @@ export const useGetSinglePrompt = (promptId: string) => {
 };
 
 export const useGetAllPrompt = () => {
-  async function submit(): Promise<List | null> {
+  async function submit(): Promise<Prompt[] | null> {
     try {
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
       const res = await axios({
