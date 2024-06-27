@@ -186,7 +186,8 @@ const ConnectAppsPage = () => {
         </Box>
       </Paper>
       <ChangeNameModal
-        refetch={connectAppRefetch}
+        setData={setData}
+        // refetch={connectAppRefetch}
         SelectedData={SelectedCardData as ConnectItem}
         open={isOpenEditName}
         handleClose={() => setIsOpenEditName(false)}

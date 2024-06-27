@@ -1,5 +1,5 @@
 import { Box, CircularProgress, Modal, Typography } from "@mui/material";
-import React, { FC, useEffect } from "react";
+import React, { Dispatch, FC, SetStateAction, useEffect } from "react";
 import { TextField } from "@mui/material";
 import { useFormik } from "formik";
 import { Button } from "@/components/Button";
@@ -25,16 +25,23 @@ interface ChangeNameModalProps {
   open: boolean;
   handleClose: () => void;
   SelectedData: ConnectItem;
-  refetch: () => void;
+  // refetch: () => void;
+  setData: Dispatch<SetStateAction<ConnectItem[] | null | undefined>>;
 }
 
 const ChangeNameModal: FC<ChangeNameModalProps> = ({
   open,
   handleClose,
   SelectedData,
-  refetch,
+  // refetch,
+  setData,
 }) => {
-  const { mutate: updateAppName, isSuccess, isLoading } = useUpdateAppName();
+  const {
+    data: UpdatedNameData,
+    mutate: updateAppName,
+    isSuccess,
+    isLoading,
+  } = useUpdateAppName();
   const formik = useFormik({
     initialValues: {
       id: SelectedData?.id || "",
@@ -47,11 +54,11 @@ const ChangeNameModal: FC<ChangeNameModalProps> = ({
   });
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccess && UpdatedNameData) {
       handleClose();
-      refetch();
+      setData(UpdatedNameData);
     }
-  }, [isSuccess]);
+  }, [isSuccess, UpdatedNameData]);
 
   return (
     <Modal
