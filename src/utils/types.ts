@@ -148,7 +148,7 @@ export interface Prompt {
   rows?: Array<any>;
   results?: any[];
   status?: string;
-  timestamp?: number
+  timestamp?: number;
 }
 
 export type PromptsList = {
@@ -165,7 +165,7 @@ export interface Query {
   results: any[];
   message?: string;
   observations?: string;
-  notes?: string[],
+  notes?: string[];
 }
 
 export interface Client {
@@ -246,7 +246,8 @@ export type App = {
 
 export interface appUpdatePayload {
   id: string;
-  status: boolean;
+  status?: boolean;
+  name?: string;
 }
 
 export type Files = {
