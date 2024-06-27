@@ -1,11 +1,13 @@
 import { Box, CircularProgress, Modal, Typography } from "@mui/material";
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import { TextField } from "@mui/material";
 import { useFormik } from "formik";
 import { Button } from "@/components/Button";
 import { palette } from "@/theme/Palette";
 import { ConnectItem } from "@/utils/types";
 import { Paper } from "@/components/Paper";
+import { useUpdateAppName } from "@/hooks/useRetriever";
+import { Close } from "@mui/icons-material";
 
 const style = {
   position: "absolute",
@@ -22,18 +24,17 @@ const style = {
 interface ChangeNameModalProps {
   open: boolean;
   handleClose: () => void;
-  isLoading: boolean;
   SelectedData: ConnectItem;
-  updateData: (data: any) => void;
+  refetch: () => void;
 }
 
 const ChangeNameModal: FC<ChangeNameModalProps> = ({
   open,
   handleClose,
-  isLoading,
   SelectedData,
-  updateData,
+  refetch,
 }) => {
+  const { mutate: updateAppName, isSuccess, isLoading } = useUpdateAppName();
   const formik = useFormik({
     initialValues: {
       id: SelectedData?.id || "",
@@ -41,16 +42,21 @@ const ChangeNameModal: FC<ChangeNameModalProps> = ({
     },
     enableReinitialize: true,
     onSubmit: (values) => {
-      console.log(values);
-      updateData({ id: values.id, name: values.name });
-      // if (isSuccess) {
-        handleClose();
-      // }
+      updateAppName({ id: values.id, name: values.name });
     },
   });
 
+  useEffect(() => {
+    if (isSuccess) {
+      handleClose();
+      refetch();
+    }
+  }, [isSuccess]);
+
   return (
     <Modal
+      // autoFocus
+      disableAutoFocus
       open={open}
       onClose={handleClose}
       aria-labelledby="modal-modal-title"
@@ -68,13 +74,30 @@ const ChangeNameModal: FC<ChangeNameModalProps> = ({
             alignItems: "center",
             position: "relative",
             padding: 4,
+            pt: 2,
           }}
         >
-          <form onSubmit={formik.handleSubmit}>
-            <Typography variant="display-xs-semibold">Edit Name</Typography>
+          <form onSubmit={formik.handleSubmit} style={{ width: "100%" }}>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "center",
+                width: "100%",
+                pb: 2,
+              }}
+            >
+              <Typography variant="display-xs-semibold">
+                Edit App Name
+              </Typography>
+              <Close
+                sx={{ width: "20px", height: "20px", cursor: "pointer" }}
+                onClick={handleClose}
+              />
+            </Box>
             <TextField
               name="name"
-              label="Name"
+              placeholder="App Name"
               variant="outlined"
               fullWidth
               margin="normal"
@@ -91,7 +114,7 @@ const ChangeNameModal: FC<ChangeNameModalProps> = ({
             >
               <Button
                 variant="contained"
-                label="Submit"
+                label="Update"
                 disabled={
                   isLoading || formik.values.name === SelectedData?.name
                 }
@@ -105,7 +128,7 @@ const ChangeNameModal: FC<ChangeNameModalProps> = ({
                     position: "absolute",
                     top: 5.4,
                     zIndex: 5,
-                    left: 38,
+                    left: "46%",
                   }}
                   size={24}
                 />

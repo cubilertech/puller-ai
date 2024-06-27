@@ -75,7 +75,7 @@ export const useGetAllApps = () => {
   });
 };
 
-export const useUpdateApp = () => {
+export const useUpdateAppStatus = () => {
   //   const dispatch = useAppDispatch();
   async function submit(data: appUpdatePayload): Promise<ConnectItem[] | null | undefined> {
     try {
@@ -102,7 +102,42 @@ export const useUpdateApp = () => {
     mutationFn: submit,
     onSuccess: (data) => {
       // dispatch(UpdateIsLoadingRequest(false));
-      toast.success("App updated successfully.");
+      toast.success("App Status updated successfully.");
+    },
+    onError: (error: any) => {
+      toast.error(error?.response?.data?.message ?? (error.message as string));
+      console.log(error, "error in updating status");
+    },
+  });
+};
+export const useUpdateAppName = () => {
+  //   const dispatch = useAppDispatch();
+  async function submit(data: appUpdatePayload): Promise<ConnectItem[] | null | undefined> {
+    try {
+      const backendUrl = getBackendURL(MODES.DEMO as string);
+      const res = await axios({
+        url: `${backendUrl}/v0/retriever/apps/${data.id}`,
+        method: "put",
+        data,
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (res.status === 200) {
+        return res.data;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error("Network error:", error);
+      return null;
+    }
+  }
+  return useMutation({
+    mutationFn: submit,
+    onSuccess: (data) => {
+      // dispatch(UpdateIsLoadingRequest(false));
+      toast.success("App Name updated successfully.");
     },
     onError: (error: any) => {
       toast.error(error?.response?.data?.message ?? (error.message as string));
