@@ -43,7 +43,7 @@ const TemplatePage = () => {
     // console.log("runing")
     if (search?.length) {
       result = result?.filter(
-        (item) =>
+        (item: any) =>
           item?.id?.toLowerCase().includes(search) ||
           item?.description?.toLowerCase().includes(search)
       );
@@ -51,7 +51,7 @@ const TemplatePage = () => {
     setTotalPages(
       isDemoMode
         ? Math.ceil((result?.length || 0) / 20)
-        : Math.ceil((data?.total || 0) / 20)
+        : Math.ceil((data && 'total' in data ? data.total : 0 || 0) / 20)
     );
     return result;
   }, [data, isActive, search]);

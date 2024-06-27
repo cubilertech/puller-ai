@@ -22,6 +22,7 @@ import { ResponseArea } from "@/components/ResponseArea";
 import { QueryComponent } from "@/components/QuaryComponent";
 import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
 import {
+  UpdateIsLoadingPrompt,
   UpdatePromptValue,
 } from "@/libs/redux/features/isLoadingRequest";
 import { motion } from "framer-motion";
@@ -140,12 +141,18 @@ const RequestPage: FC = () => {
     dispatch(UpdatePromptValue(query));
     setQuery("");
   };
-  const handleLatestPrompt = async (queryText: string) => {
-    await submitPrompt({ message: queryText });
-    dispatch(setSubmitPromptLoading(true));
-    dispatch(setLoadingText("Processing"));
-    dispatch(UpdatePromptValue(queryText));
-    setQuery("");
+  const handleLatestPrompt = async (query: any) => {
+    if (isDemoMode && query?.message) {
+      await submitPrompt({ message: query?.message });
+      dispatch(setSubmitPromptLoading(true));
+      dispatch(setLoadingText("Processing"));
+      dispatch(UpdatePromptValue(query?.message));
+      setQuery("");
+    } else if (query?.id) {
+      await router.push(`request?id=${query?.id}`);
+      dispatch(UpdateIsLoadingPrompt(true));
+      // refetchPrompt();
+    }
   };
 
   const handleUpdate = () => {

@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 interface Props {
   index: number;
   item: any;
-  handleLatestPrompt: (val: string) => void;
+  handleLatestPrompt: (val: any) => void;
 }
 export const PromptList: FC<Props> = ({ item, handleLatestPrompt, index }) => {
   const companyName = localStorage.getItem("companyName");
@@ -27,7 +27,7 @@ export const PromptList: FC<Props> = ({ item, handleLatestPrompt, index }) => {
       <LatestPullesCard
         key={index}
         query={replaceBrand}
-        onClick={() => handleLatestPrompt(item.message as string)}
+        onClick={() => handleLatestPrompt(item)}
       />
     </motion.div>
   );

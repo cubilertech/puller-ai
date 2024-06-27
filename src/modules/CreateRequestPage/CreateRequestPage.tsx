@@ -30,7 +30,7 @@ const CreateRequestPage: FC<Props> = ({
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const promptList = useMemo(() => {
     if (!isDemoMode) {
-      if (list) {
+      if (list && "items" in list) {
         // const uniqueMessages = new Set<string>();
         // const filteredList = list.filter((item) => {
         //   if (!uniqueMessages.has(item.message as string)) {
