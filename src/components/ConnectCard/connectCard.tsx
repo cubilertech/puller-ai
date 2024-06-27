@@ -31,7 +31,17 @@ const ConnectCard: FC<ConnectCardProps> = ({
         <Box display={"flex"} py={"0.5rem"} justifyContent={"space-between"}>
           <Box display={"flex"} alignItems={"center"} gap={"1rem"}>
             <Image src={item?.image} alt="pic" width={37} height={37} />
-            <Typography variant="text-md-semibold" onClick={onNameClick}>
+            <Typography
+              variant="text-md-semibold"
+              onClick={onNameClick}
+              sx={{
+                ":hover": {
+                  cursor: "pointer",
+                  textDecoration: "underline",
+                  textDecorationColor: palette.color.gray[50],
+                },
+              }}
+            >
               {item.name}
             </Typography>
           </Box>

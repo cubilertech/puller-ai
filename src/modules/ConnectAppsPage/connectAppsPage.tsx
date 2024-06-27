@@ -15,7 +15,7 @@ import {
   getConnectQuery,
   updateConnectQuery,
 } from "@/libs/redux/features/searchbar";
-import { useGetAllApps, useUpdateApp } from "@/hooks/useRetriever";
+import { useGetAllApps, useUpdateAppStatus } from "@/hooks/useRetriever";
 import { Loader } from "@/components/Loader";
 import { ConnectItem } from "@/utils/types";
 import { ChangeNameModal } from "@/modals/changeNameModal";
@@ -39,10 +39,10 @@ const ConnectAppsPage = () => {
   } = useGetAllApps();
   const {
     data: appStatusData,
-    mutate: updateApp,
+    mutate: updateAppStatus,
     isSuccess: appStatusUpdated,
     isLoading: loadingAppUpdate,
-  } = useUpdateApp();
+  } = useUpdateAppStatus();
 
   const handleCreateRetriever = () => {
     if (isPilotMode) {
@@ -57,7 +57,7 @@ const ConnectAppsPage = () => {
       setIsOpenAlert(true);
     } else {
       setSelectedCardData(item);
-      updateApp({ id: item.id, status: !item.isConnected });
+      updateAppStatus({ id: item.id, status: !item.isConnected });
     }
   };
   const handleNameClick = (item: ConnectItem) => {
@@ -186,9 +186,8 @@ const ConnectAppsPage = () => {
         </Box>
       </Paper>
       <ChangeNameModal
+        refetch={connectAppRefetch}
         SelectedData={SelectedCardData as ConnectItem}
-        updateData={updateApp}
-        isLoading={loadingAppUpdate}
         open={isOpenEditName}
         handleClose={() => setIsOpenEditName(false)}
       />
