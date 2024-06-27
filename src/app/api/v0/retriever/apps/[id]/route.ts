@@ -3,7 +3,7 @@ import { Prompt, appUpdatePayload } from "@/utils/types";
 import clientPromise from "@/libs/mongodb/connection";
 export async function PUT(req: any, { params }: { params: { id: string } }) {
   try {
-    const { status }: appUpdatePayload = await req.json();
+    const { status, name }: appUpdatePayload = await req.json();
     const { id } = params;
     const client = await clientPromise;
     const db = client.db("demo_mode");
@@ -17,7 +17,12 @@ export async function PUT(req: any, { params }: { params: { id: string } }) {
         }
       );
     }
-    record.isConnected = status;
+    if (status !== undefined && status !== null) {
+      record.isConnected = status;
+    } else if (name) {
+      record.name = name;
+    }
+
     // save updated document
     const result = await db
       .collection("apps")
@@ -31,7 +36,7 @@ export async function PUT(req: any, { params }: { params: { id: string } }) {
         }
       );
     }
-    const appsList = await db.collection('apps').find({}).toArray();
+    const appsList = await db.collection("apps").find({}).toArray();
     return NextResponse.json(appsList);
   } catch (error) {
     console.error(error);

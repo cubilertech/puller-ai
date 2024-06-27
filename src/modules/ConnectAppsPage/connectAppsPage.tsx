@@ -5,7 +5,6 @@ import { Paper } from "@/components/Paper";
 import { Box, Typography } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { ConnectCard } from "@/components/ConnectCard";
-import { CONNECT_APP_DATA } from "@/utils/data";
 import { Input } from "@/components/Input";
 import { palette } from "@/theme/Palette";
 import { AlertModal } from "@/modals/AlertModal";
@@ -16,16 +15,20 @@ import {
   getConnectQuery,
   updateConnectQuery,
 } from "@/libs/redux/features/searchbar";
-import { useGetAllApps, useUpdateAppStatus } from "@/hooks/useRetriever";
+import { useGetAllApps, useUpdateApp } from "@/hooks/useRetriever";
 import { Loader } from "@/components/Loader";
 import { ConnectItem } from "@/utils/types";
+import { ChangeNameModal } from "@/modals/changeNameModal";
 
 const ConnectAppsPage = () => {
   const query = useAppSelector(getConnectQuery);
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [isOpenAlert, setIsOpenAlert] = useState(false);
-  const [loadingCardId, setLoadingCardId] = useState<string | null>(null);
+  const [isOpenEditName, setIsOpenEditName] = useState(false);
+  const [SelectedCardData, setSelectedCardData] = useState<ConnectItem | null>(
+    null
+  );
   const [data, setData] = useState<ConnectItem[] | null | undefined>(null);
 
   const {
@@ -36,10 +39,10 @@ const ConnectAppsPage = () => {
   } = useGetAllApps();
   const {
     data: appStatusData,
-    mutate: updateAppStatus,
+    mutate: updateApp,
     isSuccess: appStatusUpdated,
-    isLoading: loadingStatusUpdate,
-  } = useUpdateAppStatus();
+    isLoading: loadingAppUpdate,
+  } = useUpdateApp();
 
   const handleCreateRetriever = () => {
     if (isPilotMode) {
@@ -53,9 +56,13 @@ const ConnectAppsPage = () => {
     if (isPilotMode) {
       setIsOpenAlert(true);
     } else {
-      setLoadingCardId(item.id);
-      updateAppStatus({ id: item.id, status: !item.isConnected });
+      setSelectedCardData(item);
+      updateApp({ id: item.id, status: !item.isConnected });
     }
+  };
+  const handleNameClick = (item: ConnectItem) => {
+    setIsOpenEditName(true);
+    setSelectedCardData(item);
   };
 
   const filteredData = data?.filter((item) =>
@@ -166,13 +173,25 @@ const ConnectAppsPage = () => {
               <ConnectCard
                 key={index}
                 item={item}
-                isLoading={loadingCardId === item.id && loadingStatusUpdate}
+                onNameClick={() => handleNameClick(item)}
+                isLoading={
+                  ((SelectedCardData &&
+                    SelectedCardData.id === item.id) as boolean) &&
+                  loadingAppUpdate
+                }
                 onClick={() => handleCardConnect(item)}
               />
             ))
           )}
         </Box>
       </Paper>
+      <ChangeNameModal
+        SelectedData={SelectedCardData as ConnectItem}
+        updateData={updateApp}
+        isLoading={loadingAppUpdate}
+        open={isOpenEditName}
+        handleClose={() => setIsOpenEditName(false)}
+      />
       <AlertModal
         open={isOpenAlert}
         handleClose={() => setIsOpenAlert(false)}

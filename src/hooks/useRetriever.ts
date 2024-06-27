@@ -75,7 +75,7 @@ export const useGetAllApps = () => {
   });
 };
 
-export const useUpdateAppStatus = () => {
+export const useUpdateApp = () => {
   //   const dispatch = useAppDispatch();
   async function submit(data: appUpdatePayload): Promise<ConnectItem[] | null | undefined> {
     try {
@@ -102,7 +102,7 @@ export const useUpdateAppStatus = () => {
     mutationFn: submit,
     onSuccess: (data) => {
       // dispatch(UpdateIsLoadingRequest(false));
-      toast.success("App status updated successfully.");
+      toast.success("App updated successfully.");
     },
     onError: (error: any) => {
       toast.error(error?.response?.data?.message ?? (error.message as string));

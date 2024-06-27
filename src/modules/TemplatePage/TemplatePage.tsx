@@ -8,6 +8,7 @@ import { TemplateCardList } from "@/components/TemplateCardList";
 import { TemplateTopbar } from "@/components/TemplateTopbar";
 import { useGetAllPrompt, useGetNewTimeStampPrompt } from "@/hooks/usePrompt";
 import { Loader } from "@/components/Loader";
+import { Prompt } from "@/utils/types";
 
 const TemplatePage = () => {
   let currectTimeStamp = Date.now();
@@ -28,7 +29,17 @@ const TemplatePage = () => {
     ? getNewTimeStampePrompt
     : getAllPrompt;
   const pullsList = useMemo(() => {
-    let result = data && isActive === ACTIVE_TYPES.PRIVATE ? data?.items : [];
+    let result: Prompt[] = [];
+
+    if (data && isActive === ACTIVE_TYPES.PRIVATE) {
+      if (isDemoMode) {
+        // Ensure data is not null or undefined before casting
+        result = (data as unknown as Prompt[]) || [];
+      } else {
+        // Safely access items if data is not null or undefined
+        result = (data?.items as unknown as Prompt[]) || [];
+      }
+    }
     // console.log("runing")
     if (search?.length) {
       result = result?.filter(
