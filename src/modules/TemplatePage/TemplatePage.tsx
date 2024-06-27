@@ -30,14 +30,16 @@ const TemplatePage = () => {
     : getAllPrompt;
   const pullsList = useMemo(() => {
     let result: Prompt[] = [];
-    if (data) {
-      if (Array.isArray(data)) {
-        result = data;
-      } else if ("items" in data) {
-        result = data.items;
+
+    if (data && isActive === ACTIVE_TYPES.PRIVATE) {
+      if (isDemoMode) {
+        // Ensure data is not null or undefined before casting
+        result = (data as unknown as Prompt[]) || [];
+      } else {
+        // Safely access items if data is not null or undefined
+        result = (data?.items as unknown as Prompt[]) || [];
       }
     }
-
     // console.log("runing")
     if (search?.length) {
       result = result?.filter(

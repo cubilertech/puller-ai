@@ -204,7 +204,11 @@ export const useGetSinglePrompt = (promptId: string) => {
 };
 
 export const useGetAllPrompt = () => {
-  async function submit(): Promise<Prompt[] | null> {
+  const DemoMode = isDemoMode;
+  type DemoMode = typeof isDemoMode;
+  async function submit(): Promise<
+    DemoMode extends true ? Prompt[] : List | null
+  > {
     try {
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
       const res = await axios({
@@ -235,7 +239,11 @@ export const useGetAllPrompt = () => {
   });
 };
 export const useGetNewTimeStampPrompt = (timeStamp: number) => {
-  async function submit(): Promise<List | null> {
+  const DemoMode = isDemoMode;
+  type DemoMode = typeof isDemoMode;
+  async function submit(): Promise<
+    DemoMode extends true ? Prompt[] : List | null
+  > {
     try {
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
       const res = await axios({

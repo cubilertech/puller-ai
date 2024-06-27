@@ -9,8 +9,10 @@ import { AlertModal } from "@/modals/AlertModal";
 import "./CreateRequestPage.css";
 import { LatestPullsData } from "@/utils/data";
 import { PromptList } from "@/components/PromptList";
+const DemoMode = isDemoMode;
+type DemoMode = typeof isDemoMode;
 interface Props {
-  list: Prompt[] | List | null | undefined;
+  list: DemoMode extends true ? Prompt[] : List | null | undefined;
   setRequestQuery: (query: string) => void;
   requestQuery: string;
   handleSubmitPrompt: any;

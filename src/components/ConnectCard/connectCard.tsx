@@ -10,10 +10,16 @@ import "./connectCard.css";
 interface ConnectCardProps {
   item: ConnectItem;
   onClick?: () => void;
-  isLoading: boolean;
+  isLoading?: boolean;
+  onNameClick?: () => void;
 }
 
-const ConnectCard: FC<ConnectCardProps> = ({ item, onClick, isLoading }) => {
+const ConnectCard: FC<ConnectCardProps> = ({
+  item,
+  onClick,
+  isLoading,
+  onNameClick,
+}) => {
   return (
     <>
       <Box
@@ -25,7 +31,19 @@ const ConnectCard: FC<ConnectCardProps> = ({ item, onClick, isLoading }) => {
         <Box display={"flex"} py={"0.5rem"} justifyContent={"space-between"}>
           <Box display={"flex"} alignItems={"center"} gap={"1rem"}>
             <Image src={item?.image} alt="pic" width={37} height={37} />
-            <Typography variant="text-md-semibold">{item.name}</Typography>
+            <Typography
+              variant="text-md-semibold"
+              onClick={onNameClick}
+              sx={{
+                ":hover": {
+                  cursor: "pointer",
+                  textDecoration: "underline",
+                  textDecorationColor: palette.color.gray[50],
+                },
+              }}
+            >
+              {item.name}
+            </Typography>
           </Box>
           <Box
             sx={{ position: "relative" }}
