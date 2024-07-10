@@ -9,6 +9,8 @@ import { AlertModal } from "@/modals/AlertModal";
 import "./CreateRequestPage.css";
 import { LatestPullsData } from "@/utils/data";
 import { PromptList } from "@/components/PromptList";
+import { Paper } from "@/components/Paper";
+import { KeyboardArrowDown } from "@mui/icons-material";
 const DemoMode = isDemoMode;
 type DemoMode = typeof isDemoMode;
 interface Props {
@@ -27,6 +29,7 @@ const CreateRequestPage: FC<Props> = ({
   submitPromptLoading,
   handleLatestPrompt,
 }) => {
+  const [ShowPrompts, setShowPrompts] = useState(false);
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const promptList = useMemo(() => {
     if (!isDemoMode) {
@@ -101,25 +104,49 @@ const CreateRequestPage: FC<Props> = ({
                 Create a pull request to get started
               </Typography>
             </Box>
-
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "start",
-                width: "100%",
-                gap: 2,
-                overflow: "auto",
-                scrollbarWidth: "none",
-              }}
-            >
-              {promptList?.map((item, i) => (
-                <PromptList
-                  key={`list-${i}`}
-                  item={item}
-                  index={i}
-                  handleLatestPrompt={handleLatestPrompt}
+            <Box>
+              <Paper
+                onClick={() => setShowPrompts(!ShowPrompts)}
+                variant="light-bg-border"
+                sx={{
+                  display: "flex",
+                  gap: 1,
+                  width: "fit-content",
+                  py: 0.5,
+                  px: 1,
+                  margin: 0,
+                  mb: 2,
+                  cursor: "pointer",
+                  borderRadius: 2,
+                }}
+              >
+                <Typography variant="text-sm-regular">
+                  Sample Prompts{" "}
+                </Typography>
+                <KeyboardArrowDown
+                  className={ShowPrompts ? "arrow-up" : "arrow-down"}
                 />
-              ))}
+              </Paper>
+              <Box
+                className={ShowPrompts ? "open" : "close"}
+                sx={{
+                  display: "flex",
+                  justifyContent: "start",
+                  width: "100%",
+                  gap: 2,
+                  overflow: "auto",
+                  scrollbarWidth: "none",
+                }}
+              >
+                {promptList?.map((item, i) => (
+                  <PromptList
+                    key={`list-${i}`}
+                    item={item}
+                    index={i}
+                    handleLatestPrompt={handleLatestPrompt}
+                  />
+                ))}
+              </Box>
             </Box>
           </Box>
 

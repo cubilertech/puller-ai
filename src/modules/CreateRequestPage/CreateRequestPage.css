@@ -107,3 +107,23 @@ textarea::placeholder {
     clip-path: rect(0px, 0px, 100%, 0px); /* Reveal from left to right */
   }
 }
+.arrow-up {
+  width: 20px;
+  height: 20px;
+  transform: rotate(180deg);
+  transition: transform 0.3s;
+}
+
+.arrow-down {
+  width: 20px;
+  height: 20px;
+  transition: transform 0.3s;
+}
+.close {
+  height: 0px;
+  transition: 0.3s ease;
+}
+.open {
+  height: 255px;
+  transition:  0.3s ease;
+}

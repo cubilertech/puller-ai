@@ -2,8 +2,8 @@ import { palette } from "@/theme/Palette";
 import { Paper } from "../Paper";
 import { Box, Typography } from "@mui/material";
 import { FC } from "react";
-import { LatestPullesCardDataProps } from "@/utils/types";
-import { motion } from "framer-motion";
+// import { LatestPullesCardDataProps } from "@/utils/types";
+// import { motion } from "framer-motion";
 
 interface LatestPullesCardProps {
   query: string | undefined;
@@ -17,10 +17,10 @@ const LatestPullesCard: FC<LatestPullesCardProps> = ({ query, onClick }) => {
       variant="dark-border"
       sx={{
         border: `1px solid ${palette.color.gray[700]}`,
-        height: { lg: "240px", xs: "200px" },
+        height: { lg: "255px", xs: "210px" },
         width: { lg: "320px", xs: "280px" },
         margin: 0,
-        padding: "22px",
+        padding: "18px",
         ":hover": {
           background: palette.linearGradient.darkBlue,
           cursor: "pointer",

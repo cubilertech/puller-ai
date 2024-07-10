@@ -42,6 +42,7 @@ const ChangeNameModal: FC<ChangeNameModalProps> = ({
     isSuccess,
     isLoading,
   } = useUpdateAppName();
+
   const formik = useFormik({
     initialValues: {
       id: SelectedData?.id || "",
@@ -107,6 +108,7 @@ const ChangeNameModal: FC<ChangeNameModalProps> = ({
               placeholder="App Name"
               variant="outlined"
               fullWidth
+              autoFocus
               margin="normal"
               disabled={isLoading}
               value={formik.values.name}
