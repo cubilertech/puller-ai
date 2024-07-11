@@ -286,23 +286,21 @@ const RequestPage: FC = () => {
       const selection = window.getSelection();
       if (selection && selection.toString().length > 0) {
         const range = selection.getRangeAt(0);
-        let parentDiv: any = range.commonAncestorContainer;
+        let ancestor: any = range.commonAncestorContainer;
 
-        // Ensure we have an Element node to call closest on
-        if (parentDiv.nodeType === Node.TEXT_NODE) {
-          parentDiv = parentDiv.parentElement;
+        // Ensure we are working with an Element node
+        if (ancestor.nodeType === Node.TEXT_NODE) {
+          ancestor = ancestor.parentElement;
         }
 
-        if (parentDiv) {
-          parentDiv = parentDiv.closest("div");
-        }
+        const parentDiv = ancestor.closest("div");
 
         if (parentDiv) {
           let start = 0;
           let end = 0;
           let foundStart = false;
 
-          const traverseNodes = (node : any) => {
+          const traverseNodes = (node: any) => {
             if (node === range.startContainer) {
               start += range.startOffset;
               foundStart = true;
@@ -325,6 +323,9 @@ const RequestPage: FC = () => {
           };
 
           traverseNodes(parentDiv);
+
+          // Adjust end index to account for the selection length
+          end = start + selection.toString().length;
 
           setTextSelected(selection.toString());
           setIsEditingText(true);
