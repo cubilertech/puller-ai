@@ -263,23 +263,79 @@ const RequestPage: FC = () => {
     loading,
   ]);
 
+  // const handleMouseUp = () => {
+  //   if (isDemoMode) {
+  //     const selection = window.getSelection();
+  //     console.log(selection);
+  //     if (selection && selection.toString().length > 0) {
+  //       const range = selection.getRangeAt(0);
+  //       const start = range.startOffset;
+  //       const end = range.endOffset;
+  //       setTextSelected(selection.toString());
+  //       setIsEditingText(true);
+  //       setIsOpenSelectBar(false);
+  //       localStorage.removeItem("variableId");
+  //       // setSelectedText(selection.toString());
+  //       // handleTextSelection(selection.toString());
+  //       setSelectionIndices({ start, end });
+  //     }
+  //   }
+  // };
   const handleMouseUp = () => {
     if (isDemoMode) {
       const selection = window.getSelection();
       if (selection && selection.toString().length > 0) {
         const range = selection.getRangeAt(0);
-        const start = range.startOffset;
-        const end = range.endOffset;
-        setTextSelected(selection.toString());
-        setIsEditingText(true);
-        setIsOpenSelectBar(false);
-        localStorage.removeItem("variableId");
-        // setSelectedText(selection.toString());
-        // handleTextSelection(selection.toString());
-        setSelectionIndices({ start, end });
+        let parentDiv: any = range.commonAncestorContainer;
+
+        // Ensure we have an Element node to call closest on
+        if (parentDiv.nodeType === Node.TEXT_NODE) {
+          parentDiv = parentDiv.parentElement;
+        }
+
+        if (parentDiv) {
+          parentDiv = parentDiv.closest("div");
+        }
+
+        if (parentDiv) {
+          let start = 0;
+          let end = 0;
+          let foundStart = false;
+
+          const traverseNodes = (node : any) => {
+            if (node === range.startContainer) {
+              start += range.startOffset;
+              foundStart = true;
+            } else if (node === range.endContainer) {
+              end += range.endOffset;
+              return true; // Stop traversal
+            } else if (node.nodeType === Node.TEXT_NODE) {
+              if (!foundStart) {
+                start += node.textContent.length;
+              }
+              end += node.textContent.length;
+            } else if (node.nodeType === Node.ELEMENT_NODE) {
+              for (let child of node.childNodes) {
+                if (traverseNodes(child)) {
+                  return true; // Stop traversal
+                }
+              }
+            }
+            return false; // Continue traversal
+          };
+
+          traverseNodes(parentDiv);
+
+          setTextSelected(selection.toString());
+          setIsEditingText(true);
+          setIsOpenSelectBar(false);
+          localStorage.removeItem("variableId");
+          setSelectionIndices({ start, end });
+        }
       }
     }
   };
+
   // console.log(textSelected, "text", selectionIndices, "indices");
 
   const handleUpdateText = () => {
