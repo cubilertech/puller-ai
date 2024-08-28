@@ -153,7 +153,7 @@ export const replaceBrandName = (
   // Split the description by the placeholder and join with the value
   const newDescription = prompt?.description
     ?.split(placeholder)
-    .join(`${brand}`);
+    .join(brand);
 
   return newDescription;
 };
