@@ -73,7 +73,8 @@ interface props {
 
 const getNodes = (prompt: Prompt) => {
   const result = prompt?.graph?.map((item, index) => {
-    let variable = prompt?.variables.find((_item) => _item.model === item.id);
+    // let variable = prompt?.variables.find((_item) => _item.model === item.id);
+    let variables = prompt?.variables.filter((_item) => _item.model === item.id);
     return {
       id: item.id,
       // type:'input',
@@ -90,7 +91,7 @@ const getNodes = (prompt: Prompt) => {
         description: item.description,
         id: item.id,
         name: item.name,
-        variables: variable ? [variable] : [],
+        variables: variables ? variables : [],
       },
     };
   });
@@ -171,7 +172,7 @@ const GraphModal2 = ({ prompt, validatePrompt }: props) => {
   // console.log(nodes, "nodes");
   // console.log(edges, "edges");
 
-  const handleChange = (id: string, updatedPrompt: any) => {
+  const handleChange = (id: string, updatedPrompt: any, updatedVariable: any) => {
     const updatedNodes = nodes.map((node) => {
       // console.log("Processing node:", node);
       if (node.id == id) {
@@ -196,9 +197,9 @@ const GraphModal2 = ({ prompt, validatePrompt }: props) => {
     //   return acc;
     // }, []);
     const newArray = variables;
-    const index = newArray.findIndex((item) => item.model === updatedPrompt.id);
+    const index = newArray.findIndex((item) => item.id === updatedVariable.id);
     if (index >= 0) {
-      newArray[index].value = Number(updatedPrompt.variables?.[0]?.value);
+      newArray[index].value = newArray[index].type === 'int' ? Number(updatedVariable.value) : updatedVariable.value;
     }
 
     setVariables([...newArray]);

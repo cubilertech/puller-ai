@@ -10,7 +10,7 @@ type Data = Graph & { variables: Variable[] };
 interface Props {
   data: Data;
   isConnectable: boolean;
-  handleChange: (id: string, prompt: any) => void;
+  handleChange: (id: string, prompt: any, updatedVariable: {id:string,value:any}) => void;
 }
 const CustomNode: FC<Props> = ({ data, isConnectable, handleChange }) => {
   const [prompt, setPrompt] = useState(data);
@@ -32,7 +32,7 @@ const CustomNode: FC<Props> = ({ data, isConnectable, handleChange }) => {
       }
     });
     setPrompt({ ...prompt, variables: vars });
-    handleChange(data?.id, { ...prompt, variables: vars });
+    handleChange(data?.id, { ...prompt, variables: vars },{id,value:newValue});
   };
 
   return (
@@ -126,7 +126,13 @@ const CustomNode: FC<Props> = ({ data, isConnectable, handleChange }) => {
                   height: "25px", // Change this to your desired input height
                 },
               }}
-              type={item.type === "numeric" ? "number" : "text"}
+              type={
+                item.type === "int"
+                  ? "number"
+                  : item.type === "date"
+                    ? "date"
+                    : "text"
+              }
               key={`${prompt?.id}-variable-value-${index++}`}
               value={item.value}
               id={item?.id}
