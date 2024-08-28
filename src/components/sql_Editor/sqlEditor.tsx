@@ -1,11 +1,8 @@
 "use client";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { CSSProperties, FC, useEffect, useState } from "react";
 import "./style.css";
 import { Paper } from "@/components/Paper";
-import { Button } from "@/components/Button";
-import { Close } from "@mui/icons-material";
-import Divider from "@/components/Divider/divider";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coy } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { format } from "sql-formatter";
@@ -25,7 +22,8 @@ const SQL_Editor: FC<SQL_EditorProps> = ({ handleClose, code }) => {
         format(
           replaceBrandName(
             { description: code as string },
-            companyName as string
+            companyName as string,
+            true
           ),
           {
             language: "mysql",
