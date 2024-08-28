@@ -34,7 +34,7 @@ const LoginPage = () => {
     validationSchema: LoginSchema,
     onSubmit: (values) => {
       // localStorage.setItem("companyName", values.companyName);
-      localStorage.setItem("companyName", "Puller AI !");
+      localStorage.setItem("companyName", "Puller AI");
       router.push("/request");
       setIsLoading(true);
     },
