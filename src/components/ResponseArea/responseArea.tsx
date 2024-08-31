@@ -129,10 +129,9 @@ const ResponseArea: FC<ResponseAreaProps> = ({
             mt: 1,
             minHeight: "200px",
             position: "relative",
-            overflow: "hidden"
+            overflow: "hidden",
           }}
         >
-      
           <Box
             sx={{
               display: "flex",
@@ -140,13 +139,12 @@ const ResponseArea: FC<ResponseAreaProps> = ({
               alignItems: "flex-start",
               mt: 1,
               // pb: "42px",
-              height: {lg:"76%", xs: "60%"},
+              height: { lg: "76%", xs: "60%" },
               overflow: "auto",
               scrollbarWidth: "thin",
-              mb: 2
+              mb: 2,
             }}
           >
-           
             {isLoading ? (
               <>
                 <pre
@@ -194,46 +192,53 @@ const ResponseArea: FC<ResponseAreaProps> = ({
               </Typography>
             )}
           </Box>
-          <Box
-            sx={{
-              p: 1,
-              alignItems: "center",
-              display: "flex",
-              justifyContent: "space-between",
-              gap: 10,
-              border: "1px solid #969696",
-              borderRadius: "10px",
-              boxShadow: 10
-            }}
-          >
-            <Box sx={{ display: "flex", gap: 3, alignItems: "center" }}>
-              {/* <Typography variant="text-xs-bold">Query</Typography> */}
-              {isLoading || isLoadingPage ? (
-                <Skeleton style={{ width: "90%", margin: "auto" }} />
-              ) : (
-                <Typography
-                  className="animated-genrated-text"
-                  variant="text-sm-regular"
-                  color={palette.color.gray[175]}
-                  style={{
-                    maxWidth: "100%",
+          <Box sx={{ display: "flex", alignItems: "flex-end" }}>
+            <Box
+              sx={{
+                p: 1,
+                alignItems: "center",
+                display: "flex",
+                justifyContent: "space-between",
+                gap: 10,
+                border: "1px solid #969696",
+                borderRadius: "10px",
+                boxShadow: 10,
+              }}
+            >
+              <Box sx={{ display: "flex", gap: 3, alignItems: "center" }}>
+                {/* <Typography variant="text-xs-bold">Query</Typography> */}
+                {isLoading || isLoadingPage ? (
+                  <Skeleton style={{ width: "90%", margin: "auto" }} />
+                ) : (
+                  <Typography
+                    className="animated-genrated-text"
+                    variant="text-sm-regular"
+                    color={palette.color.gray[175]}
+                    style={{
+                      maxWidth: "100%",
+                      overflow: "hidden",
+                      display: "-webkit-box",
+                      WebkitLineClamp: 2, // Limits the text to 2 lines
+                      WebkitBoxOrient: "vertical",
+                      textOverflow: "ellipsis",
+                    }}
+                  >
+                    {replaceBrand ? replaceBrand : prompt?.message}
+                  </Typography>
+                )}
+              </Box>
+              <Box sx={{ width: "122px", position: "relative" }}>
+                <Button
+                  sx={{
+                    width: "122px",
+                    height: "38px !important",
                   }}
-                >
-                  {replaceBrand ? replaceBrand : prompt?.message}
-                </Typography>
-              )}
-            </Box>
-            <Box sx={{ width: "122px", position: "relative" }}>
-              <Button
-                sx={{
-                  width: "122px",
-                  height: "38px !important",
-                }}
-                disabled={isLoading ? isLoading : isLoadingPage}
-                onClick={handleUpdateQuery}
-                label="Run Query"
-                variant="contained"
-              />
+                  disabled={isLoading ? isLoading : isLoadingPage}
+                  onClick={handleUpdateQuery}
+                  label="Run Query"
+                  variant="contained"
+                />
+              </Box>
             </Box>
           </Box>
         </Paper>
