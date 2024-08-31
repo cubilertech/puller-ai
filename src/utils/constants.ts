@@ -49,6 +49,7 @@ export const icons = {
   topbarIcon: "/Images/Icons/topbar-icon.svg",
   alertLoader: "/Images/alert-loader.gif",
   googleLogo: "/Images/logos/google.svg",
+  emptyTableIcon: "/Images/no-data.svg",
 };
 
 export const PagesType = {
@@ -211,4 +212,3 @@ export const isPilotMode = CURRENT_MODE === MODES.PILOT;
 export const isDemoMode = CURRENT_MODE === MODES.DEMO;
 
 export const toastTimeout = 5000;
-  

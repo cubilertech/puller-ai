@@ -202,6 +202,41 @@ export const useGetSinglePrompt = (promptId: string) => {
     // placeholderData: [],
   });
 };
+export const useGetResponseTableData = (prompt: string) => {
+  const DemoMode = isDemoMode;
+  type DemoMode = typeof isDemoMode;
+  async function submit(): Promise<
+    DemoMode extends true ? Prompt[] : List | null
+  > {
+    try {
+      const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
+      const res = await axios({
+        url: `${backendUrl}/v0/query/preview`,
+
+        method: "post",
+        data: { prompt: prompt },
+        headers: {
+          accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      if (res.status === 200) {
+        return res.data;
+      } else {
+        return null;
+      }
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message ?? (error.message as string));
+      console.error("Network error:", error);
+      return null;
+    }
+  }
+
+  return useMutation({
+    mutationFn: submit,
+    // placeholderData: [],
+  });
+};
 
 export const useGetAllPrompt = () => {
   const DemoMode = isDemoMode;

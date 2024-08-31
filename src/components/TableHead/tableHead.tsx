@@ -14,14 +14,20 @@ interface TableHeadProps {
 
 const TableHead: FC<TableHeadProps> = ({ columns }) => {
   return (
-    <MuiTableHead sx={{ bgcolor: "transparent", bg: "transparent" }}>
-      <TableRow>
+    <MuiTableHead
+      sx={{
+        bgcolor: "transparent",
+        bg: "transparent",
+        borderBottom: "1px solid yellow !important",
+      }}
+    >
+      <TableRow sx={{ borderBottom: "1px solid yellow !important" }}>
         {columns?.map((column) => (
           <TableCell
             key={column}
             sx={{
               border: "none",
-              backgroundColor: "#2a3a4b",
+              backgroundColor: "transparent",
               borderRadius: "10px",
             }}
           >
@@ -31,7 +37,7 @@ const TableHead: FC<TableHeadProps> = ({ columns }) => {
                 justifyContent: "flex-start",
                 gap: "10px",
                 fontWeight: "bold",
-                // color={"#32384e"}
+                fontSize: "16px",
               }}
             >
               {column} <Icon icon="arrowDown" width={12} height={12} />

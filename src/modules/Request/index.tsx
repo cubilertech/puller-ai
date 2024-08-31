@@ -480,6 +480,7 @@ const RequestPage: FC = () => {
                     flexDirection: "column",
                     justifyContent: "space-between",
                     transition: "0.2s ease",
+                    position: "relative",
                   }}
                 >
                   {CurrentType === "SQL" ? (
@@ -542,15 +543,19 @@ const RequestPage: FC = () => {
                         textSelected={textSelected}
                         indiceEnd={selectionIndices.end}
                         indiceStart={selectionIndices.start}
+                        handleUpdateQuery={handleUpdate}
                       />
                     </Box>
                   )}
-
-                  <QueryComponent
-                    content={content}
-                    isLoading={submitExecuteLoading}
-                    handleUpdate={handleUpdate}
-                  />
+                  {CurrentType === "text" ? (
+                    ""
+                  ) : (
+                    <QueryComponent
+                      content={content}
+                      isLoading={submitExecuteLoading}
+                      handleUpdate={handleUpdate}
+                    />
+                  )}
                 </Box>
               )}
               {isOpenSelectBar && (
