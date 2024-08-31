@@ -92,7 +92,7 @@ const ResponseArea: FC<ResponseAreaProps> = ({
   }, [isEditingText]);
 
   useEffect(() => {
-    if (fetchOrMutate) {
+    if (fetchOrMutate && prompt?.id) {
       if (typeof fetchOrMutate === "function") {
         // Check if it's a mutation function (which requires specific arguments)
         if (CURRENT_MODE !== MODES.DEMO && "mutate" in selectedApi) {
@@ -104,7 +104,7 @@ const ResponseArea: FC<ResponseAreaProps> = ({
         }
       }
     }
-  }, [fetchOrMutate]);
+  }, [fetchOrMutate, prompt?.id]);
 
   return (
     <>
@@ -151,7 +151,8 @@ const ResponseArea: FC<ResponseAreaProps> = ({
                   style={{
                     width: "100%",
                     paddingRight: 50,
-                    margin: "auto",
+                    marginLeft: "auto",
+                    marginRight: "auto",
                     textAlign: "start",
                   }}
                 >
@@ -203,12 +204,26 @@ const ResponseArea: FC<ResponseAreaProps> = ({
                 border: "1px solid #969696",
                 borderRadius: "10px",
                 boxShadow: 10,
+                width: "100%",
               }}
             >
-              <Box sx={{ display: "flex", gap: 3, alignItems: "center" }}>
-                {/* <Typography variant="text-xs-bold">Query</Typography> */}
+              <Box
+                sx={{
+                  display: "flex",
+                  gap: 3,
+                  alignItems: "center",
+                  width: "100%",
+                }}
+              >
+                <Typography variant="text-xs-bold">Query</Typography>
                 {isLoading || isLoadingPage ? (
-                  <Skeleton style={{ width: "90%", margin: "auto" }} />
+                  <Skeleton
+                    style={{
+                      width: "90%",
+                      marginLeft: "auto",
+                      marginRight: "auto",
+                    }}
+                  />
                 ) : (
                   <Typography
                     className="animated-genrated-text"

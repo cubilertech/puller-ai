@@ -465,7 +465,11 @@ const RequestPage: FC = () => {
                     handleMouseUp={() => {}}
                   />
 
-                  <QueryComponent isLoading={submitValidateLoading} />
+                  {CurrentType === "text" ? (
+                    ""
+                  ) : (
+                    <QueryComponent isLoading={submitValidateLoading} />
+                  )}
                 </Box>
               ) : (
                 <Box
