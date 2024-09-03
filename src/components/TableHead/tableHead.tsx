@@ -19,6 +19,11 @@ const TableHead: FC<TableHeadProps> = ({ columns }) => {
         bgcolor: "transparent",
         bg: "transparent",
         borderBottom: "1px solid yellow !important",
+        position: "sticky",
+        top: 0,
+        // background: rgb(46,38,70);
+        background:
+          "linear-gradient(86deg, rgba(50,38,72, 1) 0%, rgba(35,41,64,1) 50%, rgba(25,48,60,1) 100%)",
       }}
     >
       <TableRow sx={{ borderBottom: "1px solid yellow !important" }}>

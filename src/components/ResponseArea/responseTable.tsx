@@ -21,7 +21,6 @@ const DataTable: FC<DataTableProps> = ({ data }) => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(9999999999);
 
-
   // Transform columns data into rows
   const rows = useMemo(() => {
     const rowCount = data?.columns[0]?.values?.length || 0;
@@ -66,6 +65,8 @@ const DataTable: FC<DataTableProps> = ({ data }) => {
             overflowY: "auto",
             scrollbarWidth: "none", // Enable vertical scrolling
           }}
+          className="table-container"
+          
         >
           <Table stickyHeader>
             <TableHead columns={columns} />

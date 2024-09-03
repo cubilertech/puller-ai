@@ -30,3 +30,99 @@
 .updateValue_hover:hover {
   background: #7a8089;
 }
+
+@keyframes rotateUp {
+  0% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes rotateDown {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
+/* Keyframe to expand the height */
+@keyframes expandHeight {
+  from {
+    height: 38px;
+    opacity: 1;
+  }
+  to {
+    height: 75px; /* Adjust this value based on the expected height */
+    opacity: 1;
+  }
+}
+
+/* Keyframe to collapse the height */
+@keyframes collapseHeight {
+  from {
+    height: 75px; /* Adjust this value to match the expanded height */
+    opacity: 1;
+  }
+  to {
+    height: 38px;
+    opacity: 1;
+  }
+}
+
+/* Class to expand text */
+.expand-height {
+  align-items: center;
+  display: flex;
+  overflow: auto;
+  animation: expandHeight 0.3s ease-in-out forwards;
+}
+
+/* Class to collapse text */
+.collapse-height {
+  animation: collapseHeight 0.3s ease-in-out forwards;
+  overflow: hidden; /* Corrected property */
+  display: -webkit-box; /* Proper flex display for truncation */
+  -webkit-line-clamp: 2; /* Limit text to 2 lines */
+  -webkit-box-orient: vertical; /* Correct syntax */
+  text-overflow: ellipsis; /* Show ellipsis for truncated text */
+  align-items: center;
+  /* padding-top: 1px; */
+}
+
+/* Keyframe to expand the height */
+@keyframes expandHeight-container {
+  from {
+    height: 50px; /* Adjust based on initial collapsed height */
+    opacity: 1;
+  }
+  to {
+    height: 110px; /* Adjust based on expanded height */
+    opacity: 1;
+  }
+}
+
+/* Keyframe to collapse the height */
+@keyframes collapseHeight-container {
+  from {
+    height: 110px; /* Adjust to match the expanded height */
+    opacity: 1;
+  }
+  to {
+    height: 50px; /* Adjust based on initial collapsed height */
+    opacity: 1;
+  }
+}
+
+/* Class to expand container */
+.expand-height-container {
+  animation: expandHeight-container 0.3s ease-in-out forwards;
+}
+
+/* Class to collapse container */
+.collapse-height-container {
+  animation: collapseHeight-container 0.3s ease-in-out forwards;
+}

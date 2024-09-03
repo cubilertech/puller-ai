@@ -107,6 +107,7 @@ const DataTable: FC<DataTableProps> = ({ data, isFilter }) => {
             overflowY: "auto",
             scrollbarWidth: "none", // Enable vertical scrolling
           }}
+          className={isFilter ? "table-container" : ""}
         >
           <Table
             stickyHeader
