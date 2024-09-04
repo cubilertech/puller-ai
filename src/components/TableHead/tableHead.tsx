@@ -17,23 +17,21 @@ const TableHead: FC<TableHeadProps> = ({ columns }) => {
     <MuiTableHead
       sx={{
         bgcolor: "transparent",
-        bg: "transparent",
-        borderBottom: "1px solid yellow !important",
         position: "sticky",
         top: 0,
         // background: rgb(46,38,70);
+        borderRadius: "0px !important",
         background:
           "linear-gradient(86deg, rgba(50,38,72, 1) 0%, rgba(35,41,64,1) 50%, rgba(25,48,60,1) 100%)",
       }}
     >
-      <TableRow sx={{ borderBottom: "1px solid yellow !important" }}>
+      <TableRow sx={{ borderRadius: "0px !important" }}>
         {columns?.map((column) => (
           <TableCell
             key={column}
             sx={{
               border: "none",
               backgroundColor: "transparent",
-              borderRadius: "10px",
             }}
           >
             <Box
