@@ -555,7 +555,7 @@ const RequestPage: FC = () => {
                         handleMouseUp={handleMouseUp}
                         isEditingText={isEditingText}
                         textSelected={textSelected}
-                        promptId={id}
+                        promptId={validateData?.id ?? id}
                         indiceEnd={selectionIndices.end}
                         indiceStart={selectionIndices.start}
                         handleUpdateQuery={handleUpdate}
