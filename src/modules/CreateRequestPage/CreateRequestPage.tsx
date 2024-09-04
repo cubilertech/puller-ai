@@ -2,7 +2,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { Box, Typography } from "@mui/material";
 import { isDemoMode, isPilotMode } from "@/utils/constants";
 import { palette } from "@/theme/Palette";
-import { FC, useMemo, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import { List, Prompt } from "@/utils/types";
 import { CreateInputAreaComponent } from "@/components/inputArea";
 import { AlertModal } from "@/modals/AlertModal";
@@ -20,6 +20,7 @@ interface Props {
   handleSubmitPrompt: any;
   submitPromptLoading: boolean;
   handleLatestPrompt: any;
+  refetch: () => void;
 }
 const CreateRequestPage: FC<Props> = ({
   list,
@@ -28,6 +29,7 @@ const CreateRequestPage: FC<Props> = ({
   handleSubmitPrompt,
   submitPromptLoading,
   handleLatestPrompt,
+  refetch
 }) => {
   const [ShowPrompts, setShowPrompts] = useState(false);
   const [isOpenAlert, setIsOpenAlert] = useState(false);
@@ -60,6 +62,9 @@ const CreateRequestPage: FC<Props> = ({
       setIsOpenAlert(true);
     }
   };
+  useEffect(() => {
+    refetch();
+  }, []);
   const CompanyName = localStorage.getItem("companyName");
   return (
     <>

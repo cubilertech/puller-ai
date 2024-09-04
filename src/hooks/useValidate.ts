@@ -4,10 +4,24 @@ import { getBackendURL } from "@/utils/common";
 import { Prompt, submitValidatePayload } from "@/utils/types";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useCallback } from "react";
 import { toast } from "react-toastify";
 
 export const useSubmitValidate = () => {
   const dispatch = useAppDispatch();
+  // const route = useRouter();
+  // const pathname = usePathname();
+  // const searchParams = useSearchParams();
+  // const createQueryString = useCallback(
+  //   (name: string, value: string) => {
+  //     const params = new URLSearchParams(searchParams.toString());
+  //     params.set(name, value);
+
+  //     return params.toString();
+  //   },
+  //   [searchParams]
+  // );
   async function submit(data: submitValidatePayload): Promise<Prompt | null> {
     try {
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
@@ -33,11 +47,16 @@ export const useSubmitValidate = () => {
     mutationFn: submit,
     onSuccess: (data) => {
       // dispatch(UpdateIsLoadingRequest(false));
-      setTimeout(()=>{
+      // route.replace("/request")
+      // if (data) {
+      //   const pathname = "/request";
+      //   route.replace(pathname + "?" + createQueryString("id", data?.id as string));
+      // }
+
+      setTimeout(() => {
         dispatch(setSubmitValidateLoading(false));
-      },500);
-      toast.success('Variables updated successfully.');
-      
+      }, 500);
+      toast.success("Variables updated successfully.");
     },
     onError: (error: any) => {
       toast.error(error?.response?.data?.message ?? (error.message as string));

@@ -103,6 +103,7 @@ const RequestPage: FC = () => {
   const submitExecuteLoading = useAppSelector(getSubmitExecuteLoading);
   const submitValidateLoading = useAppSelector(getSubmitValidateLoading);
   const [isOpenSelectBar, setIsOpenSelectBar] = useState(false);
+  const [validateData, setValidateData] = useState<Prompt | null>(null);
   const [SelectBarVarient, setSelectBarVarient] =
     useState<OptionsBarVariants | null>(null);
   const {
@@ -166,14 +167,16 @@ const RequestPage: FC = () => {
     if (submitValidateSuccess) {
       dispatch(setSubmitValidateLoading(false));
     }
-    if (submitValidateSuccess && validatedPrompt) {
-      if (isPilotMode) setDescription(validatedPrompt?.description as string);
-      return validatedPrompt;
+    if (submitValidateSuccess && validateData) {
+      // if (isPilotMode)
+      //   setDescription(validatedPrompt?.description as string);
+      return validateData;
     } else {
-      setDescription(singlePrompt?.description as string);
+      // setDescription(singlePrompt?.description as string);
       return singlePrompt;
     }
-  }, [singlePrompt, validatedPrompt, submitValidateSuccess]);
+  }, [singlePrompt, validateData, submitValidateSuccess]);
+
   const handleOpenGraph = () => {
     setCurrentType("graph");
   };
@@ -215,9 +218,18 @@ const RequestPage: FC = () => {
     setSelectBarVarient(null);
     localStorage.removeItem("variableId");
   };
-  // const handleOpenSelectBar = () => {
-  //   setIsOpenSelectBar(true);
-  // };
+  useEffect(() => {
+    if (submitValidateSuccess) {
+      setValidateData(validatedPrompt);
+    }
+  }, [submitValidateSuccess]);
+  useEffect(() => {
+    if (id) {
+      refetchPrompt();
+    } else if (!id && validateData) {
+      setValidateData(null);
+    }
+  }, [id]);
   useEffect(() => {
     if (submitValidateLoading) {
       setCurrentType("text");
@@ -537,14 +549,13 @@ const RequestPage: FC = () => {
                       }}
                     >
                       <ResponseArea
-                        prompt={
-                          { ...prompt, description: description } as Prompt
-                        }
+                        prompt={{ ...prompt } as Prompt}
                         handleUpdate={handleUpdateVariable}
                         isLoading={singlePromptLoading}
                         handleMouseUp={handleMouseUp}
                         isEditingText={isEditingText}
                         textSelected={textSelected}
+                        promptId={id}
                         indiceEnd={selectionIndices.end}
                         indiceStart={selectionIndices.start}
                         handleUpdateQuery={handleUpdate}
@@ -613,6 +624,7 @@ const RequestPage: FC = () => {
           list={allPrompt}
           setRequestQuery={setQuery}
           requestQuery={query}
+          refetch={refetchAllPrompt}
           handleLatestPrompt={handleLatestPrompt}
           handleSubmitPrompt={handleSubmitPrompt}
           submitPromptLoading={submitPromptLoading}

@@ -39,6 +39,7 @@ interface ResponseAreaProps {
   indiceStart?: number;
   indiceEnd?: number;
   handleUpdateQuery?: () => void;
+  promptId?: string;
 }
 
 const ResponseArea: FC<ResponseAreaProps> = ({
@@ -50,14 +51,14 @@ const ResponseArea: FC<ResponseAreaProps> = ({
   textSelected,
   indiceStart,
   indiceEnd,
+  promptId,
   handleUpdateQuery,
 }) => {
   const companyName = localStorage.getItem("companyName");
   const SelectedVariableId = localStorage.getItem("variableId");
   const isLoadingPage = useAppSelector(getIsLoadingRequest);
-  const PromptValue = useAppSelector(getPromptValue);
   const replaceBrand = replaceBrandName(
-    { description: PromptValue },
+    { description: prompt?.message as string },
     companyName as string
   );
   const [ShowQuery, setShowQuery] = useState(false);
@@ -65,12 +66,10 @@ const ResponseArea: FC<ResponseAreaProps> = ({
   const textRef = useRef<HTMLDivElement>(null);
 
   const DemoApi = useGetSinglePrompt(
-    CURRENT_MODE === MODES.DEMO
-      ? (prompt?.id?.substring(6) as string)
-      : (prompt?.id as string)
+    CURRENT_MODE === MODES.DEMO ? (promptId as string) : (promptId as string)
   );
 
-  const PilotApi = useGetResponseTableData(prompt?.id as string);
+  const PilotApi = useGetResponseTableData(promptId as string);
 
   // Select the appropriate API hook based on the mode
   const selectedApi = CURRENT_MODE !== MODES.DEMO ? PilotApi : DemoApi;
@@ -144,6 +143,7 @@ const ResponseArea: FC<ResponseAreaProps> = ({
       setIsPreviewLoading(false);
     } else setIsPreviewLoading(true);
   }, [isPreviewDataSucess]);
+
   const iconStyles = {
     transform: ShowQuery ? "rotate(0deg)" : "rotate(180deg)",
     animation: ShowQuery
