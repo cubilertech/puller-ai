@@ -5,7 +5,7 @@ import {
   TableHead as MuiTableHead,
 } from "@mui/material";
 // import { TableCell } from "../TableCell";
-import { Icon } from "../Icon";
+// import { Icon } from "../Icon";
 import { FC } from "react";
 
 interface TableHeadProps {
@@ -32,6 +32,7 @@ const TableHead: FC<TableHeadProps> = ({ columns }) => {
             sx={{
               border: "none",
               backgroundColor: "transparent",
+              padding: "10px"
             }}
           >
             <Box
@@ -43,7 +44,7 @@ const TableHead: FC<TableHeadProps> = ({ columns }) => {
                 fontSize: "16px",
               }}
             >
-              {column} <Icon icon="arrowDown" width={12} height={12} />
+              {column}
             </Box>
           </TableCell>
         ))}

@@ -27,6 +27,7 @@ import { CURRENT_MODE, MODES } from "@/utils/constants";
 import { DataTable as DataTableDemo } from "../table";
 import DataTable from "./responseTable";
 import { KeyboardArrowDown } from "@mui/icons-material";
+import { Loader } from "../Loader";
 
 interface ResponseAreaProps {
   prompt?: Prompt;
@@ -60,10 +61,14 @@ const ResponseArea: FC<ResponseAreaProps> = ({
     companyName as string
   );
   const [ShowQuery, setShowQuery] = useState(false);
-  const [isOverflowing, setIsOverflowing] = useState(false);
+  const [isPreviewLoading, setIsPreviewLoading] = useState(false);
   const textRef = useRef<HTMLDivElement>(null);
 
-  const DemoApi = useGetSinglePrompt(prompt?.id?.substring(6) as string);
+  const DemoApi = useGetSinglePrompt(
+    CURRENT_MODE === MODES.DEMO
+      ? (prompt?.id?.substring(6) as string)
+      : (prompt?.id as string)
+  );
 
   const PilotApi = useGetResponseTableData(prompt?.id as string);
 
@@ -71,7 +76,11 @@ const ResponseArea: FC<ResponseAreaProps> = ({
   const selectedApi = CURRENT_MODE !== MODES.DEMO ? PilotApi : DemoApi;
 
   // Destructure common properties
-  const { data: TableData, isLoading: isLoadingTableData } = selectedApi;
+  const {
+    data: TableData,
+    isLoading: isLoadingTableData,
+    isSuccess: isPreviewDataSucess,
+  } = selectedApi;
 
   // Check if `selectedApi` is a mutation or query to access specific functions
   const GetResponseTableData =
@@ -130,6 +139,11 @@ const ResponseArea: FC<ResponseAreaProps> = ({
     }
   }, [fetchOrMutate, prompt?.id]);
 
+  useEffect(() => {
+    if (isPreviewDataSucess) {
+      setIsPreviewLoading(false);
+    } else setIsPreviewLoading(true);
+  }, [isPreviewDataSucess]);
   const iconStyles = {
     transform: ShowQuery ? "rotate(0deg)" : "rotate(180deg)",
     animation: ShowQuery
@@ -269,7 +283,11 @@ const ResponseArea: FC<ResponseAreaProps> = ({
                     variant="text-sm-regular"
                     color={palette.color.gray[175]}
                     ref={textRef}
-                    sx={!isMultiLine ? { height: "auto !important" } : { scrollbarWidth: "none"}}
+                    sx={
+                      !isMultiLine
+                        ? { height: "auto !important" }
+                        : { scrollbarWidth: "none" }
+                    }
                     component={"span"}
                     // sx={ShowQuery ? styles.open : styles.closed}
                   >
@@ -325,16 +343,33 @@ const ResponseArea: FC<ResponseAreaProps> = ({
           <Box
             sx={{ height: "100%", overflow: "auto", scrollbarWidth: "none" }}
           >
-            {isLoadingTableData ? (
+            {isPreviewLoading ? (
               <Box
                 sx={{
                   minHeight: "240px",
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
+                  height: "100%",
                 }}
               >
-                <CircularProgress />
+                {/* <Loader type="Loading" variant="simple"  message="Fetching Data" /> */}
+                <Box
+                  sx={{
+                    display: "flex",
+                    gap: 2,
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <CircularProgress />
+                  <Typography
+                    sx={{ color: palette.color.gray[250], textAlign: "center" }}
+                  >
+                    Fetching Data...
+                  </Typography>
+                </Box>
               </Box>
             ) : CURRENT_MODE === MODES.DEMO && TableData ? (
               <Box>
