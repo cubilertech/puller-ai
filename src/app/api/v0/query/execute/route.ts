@@ -1,7 +1,5 @@
 import { generateRandom10DigitNumber } from "@/utils/common";
 import { NextResponse } from "next/server";
-import path from "path";
-import fs from "fs";
 import clientPromise from "@/libs/mongodb/connection";
 
 export async function POST(req: any, res: any) {

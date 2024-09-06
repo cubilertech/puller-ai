@@ -813,6 +813,100 @@
       }
     ]
   },
+  "canigetalistofuserswho'vepurchasedaticketandareeligibleforentryintotheeventbuthavenotopenedanemailfrom%brand%inthelast3days?": {
+    "message": "Can I get a list of users who've purchased a ticket and are eligible for entry into the event but have not opened an email from %Brand% in the last 3 days?",
+    "description": "This query finds all [user_hover] who have bought a ticket to an active event, but haven't opened an email from %Brand% [last_3_days] . It does this by combining data from the users, tickets, and events tables to identify users who have purchased a ticket and are [eligible_hover] to attend an event. Then, it checks if these users have opened an email from %Brand% in the last 3 days. If they haven't, they are included in the result list.",
+    "id": "query#1234567896",
+    "sql": "SELECT u.* FROM users u JOIN tickets t ON u.id = t.user_id JOIN events e ON t.event_id = e.id LEFT JOIN email_openings eo ON u.id = eo.user_id AND eo.email_subject = '%Brand%' AND eo.opened_at > DATE_SUB(CURRENT_DATE, INTERVAL 3 DAY) WHERE eo.user_id IS NULL AND t.status = 'purchased' AND e.status = 'active';",
+    "target": "",
+    "variables": [
+        {
+          "id": "user_hover",
+          "model": "",
+          "name": "User_Hover",
+          "type": "String_hover",
+          "value": "users",
+          "txt": "users",
+          "detail": "Users here are globally purchasers, email recipients, and event attendees."
+        },
+        {
+          "id": "last_3_days",
+          "model": "",
+          "name": "Last_3_Days",
+          "type": "String_hover",
+          "value": "in the last 3 days",
+          "txt": "in the last 3 days",
+          "detail": "Users must have opened an email, but not in the most recent three days starting September 9th 2024 inclusive."
+        },
+        {
+          "id": "eligible_hover",
+          "model": "",
+          "name": "Eligible_Hover",
+          "type": "String_hover",
+          "value": "eligible",
+          "txt": "eligible",
+          "detail": "Eligibility is determined by whether ticket purchased has access for the current date of request."
+        }
+    ],
+    "graph": [],
+    "observations":"Overall, there are 553 customers that fit all the requirements, we’ve identified 17 possible duplicates and eliminated them from the list. These users on average have a basket size of $13.24 and are at least 0.7 years in tenure as part of Wawa’s Rewards program. ",
+    "notes": [
+      "Note on Rows: A colleague has remarked the data from at least one of your sources as having an issue for two weeks in the desired coverage period. This note indicates that the data may not be accurate, but is still reliable within a margin of error. This was caused by a corrupt upload that had to be manually overridden by a team member.",
+      "Consider Pivot Table: We’ve formatted the data so that it can be used in a Sheets app like Excel or Google Sheets optimized to allow for pivot tables against objectives like product ID and store ID. Would you like to see the data weekly instead of cumulatively over the last 52 weeks?",
+      "Quick Comp vs Last Week: Week over week performance of customers fitting these criteria indicate that this latest batch of customers are more tenured and more likely to have larger basket sizes than the same list last week. 15% of the customers on this list are the same as customers from last week’s pull of the same criteria. "
+    ],
+    "columns": [
+      "UID",
+      "Email Address",
+      "Eligible (Y/N)",
+      "Last opened email date"
+    ],
+    "rows": [
+    {
+      "UID": 21,
+      "Email Address": "user21@example.com",
+      "Eligible (Y/N)": "Y",
+      "Last opened email date": "2024-09-03"
+    },
+    {
+      "UID": 22,
+      "Email Address": "user22@demo.com",
+      "Eligible (Y/N)": "N",
+      "Last opened email date": "2024-09-04"
+    },
+    {
+      "UID": 23,
+      "Email Address": "user23@demo.com",
+      "Eligible (Y/N)": "Y",
+      "Last opened email date": "2024-09-05"
+    },
+    {
+      "UID": 24,
+      "Email Address": "user24@example.com",
+      "Eligible (Y/N)": "N",
+      "Last opened email date": "2024-09-03"
+    },
+    {
+      "UID": 25,
+      "Email Address": "user25@email.com",
+      "Eligible (Y/N)": "Y",
+      "Last opened email date": "2024-09-04"
+    }
+  ],
+    "status": "complete",
+    "results": [
+      {
+        "bytes": 2.6,
+        "database": "Prototype",
+        "duration": 3.0252435207366943,
+        "message": "CREATE TABLE (29.0 rows, 3.7 KiB processed)",
+        "rows": 44,
+        "schema": "shop",
+        "table": "loyalty",
+        "url": "/example5.csv"
+      }
+    ]
+  },
   "getlistof100customersorderdate":  {
     "message": "Get list of 100 customers order date",
     "description": "A list of customers with their first order date, last order date, and order count, along with any additional information from the merged shop data, for customers who have made [orders_number] or more orders.",
