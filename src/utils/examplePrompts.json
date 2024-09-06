@@ -1,7 +1,7 @@
 {
   "canigetalistofuserswho'vepurchasedaticketandareeligibleforentryintotheeventbuthavenotopenedanemailfrom%brand%inthelast3days?": {
     "message": "Can I get a list of users who've purchased a ticket and are eligible for entry into the event but have not opened an email from %Brand% in the last 3 days?",
-    "description": "This query finds all [user_hover] who have bought a ticket to an active event, but haven't opened an email from %Brand% [last_3_days] . It does this by combining data from the users, tickets, and events tables to identify users who have purchased a ticket and are [eligible_hover] to attend an event. Then, it checks if these users have opened an email from %Brand% in the last 3 days. If they haven't, they are included in the result list.",
+    "description": "This query finds all [user_hover] who have bought a ticket to an active event, but haven't opened an email from %Brand% [last_3_days] . It does this by combining data from the users, tickets, and events tables to identify users who have purchased a ticket and are [eligible_hover] to attend an event. Then, it checks if these users have opened an email from %Brand% in the last [num_last_days] days. If they haven't, they are included in the result list.",
     "id": "query#1234567896",
     "sql": "SELECT u.* FROM users u JOIN tickets t ON u.id = t.user_id JOIN events e ON t.event_id = e.id LEFT JOIN email_openings eo ON u.id = eo.user_id AND eo.email_subject = '%Brand%' AND eo.opened_at > DATE_SUB(CURRENT_DATE, INTERVAL 3 DAY) WHERE eo.user_id IS NULL AND t.status = 'purchased' AND e.status = 'active';",
     "target": "",
@@ -32,7 +32,18 @@
           "value": "eligible",
           "txt": "eligible",
           "detail": "Eligibility is determined by whether ticket purchased has access for the current date of request."
-        }
+        },
+       
+          {
+            "id": "num_last_days",
+            "model": "",
+            "name": "num_last_days",
+            "type": "numeric",
+            "value": 3,
+            "txt": 3,
+            "description": "Chose Number of last days."
+          } 
+      
     ],
     "graph": [],
     "observations":"Roughly 85% of email recipients who also had access eligibility to the event, have opened an email in the last three days. This leaves around 8,500 users who have yet to open the app.",
