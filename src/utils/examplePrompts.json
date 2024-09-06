@@ -35,11 +35,13 @@
         }
     ],
     "graph": [],
-    "observations":"Overall, there are 553 customers that fit all the requirements, we’ve identified 17 possible duplicates and eliminated them from the list. These users on average have a basket size of $13.24 and are at least 0.7 years in tenure as part of Wawa’s Rewards program. ",
+    "observations":"Roughly 85% of email recipients who also had access eligibility to the event, have opened an email in the last three days. This leaves around 8,500 users who have yet to open the app.",
     "notes": [
-      "Note on Rows: A colleague has remarked the data from at least one of your sources as having an issue for two weeks in the desired coverage period. This note indicates that the data may not be accurate, but is still reliable within a margin of error. This was caused by a corrupt upload that had to be manually overridden by a team member.",
-      "Consider Pivot Table: We’ve formatted the data so that it can be used in a Sheets app like Excel or Google Sheets optimized to allow for pivot tables against objectives like product ID and store ID. Would you like to see the data weekly instead of cumulatively over the last 52 weeks?",
-      "Quick Comp vs Last Week: Week over week performance of customers fitting these criteria indicate that this latest batch of customers are more tenured and more likely to have larger basket sizes than the same list last week. 15% of the customers on this list are the same as customers from last week’s pull of the same criteria. "
+      "Check back frequently: This data set updates in near real time, consider checking this query again to see if the user set has changed as time goes by.",
+      "Snowflake table note: The query pulls from a table that is known to have null values which means “0”, according to your colleagues.",
+      "Similar request: Your request is similar to several other queries in your network, check them out now.",
+      "Automate your workflow: Are you building a list for an email campaign? Connect your campaign tool to automate this process for the future.",
+      "Personalization: Consider using cluster analysis to use AI to include more relevant attributes like in-event behavior, retail purchases, and ticket scans at entry."
     ],
     "columns": [
       "UID",
