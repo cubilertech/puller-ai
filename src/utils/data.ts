@@ -377,7 +377,7 @@ export const TEMPLATE_PRIVATE_DATA = Array.from({ length: 10 }, (_, index) => ({
 
 export const RESULTS_DATA = {
   id: "",
-  main_title: "Element X Performance by Store and SKU",
+  main_title: "Request Summary",
   main_description:
     "Can I get data to understand how Flyease technology products have been performing this past year? I want to be able to pivot by SKU or by store, to understand transactional data by week.",
   fileType: "CSV",
