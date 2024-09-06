@@ -151,9 +151,7 @@ export const replaceBrandName = (
   brand = escapePercentage(brand);
 
   // Split the description by the placeholder and join with the value
-  const newDescription = prompt?.description
-    ?.split(placeholder)
-    .join(brand);
+  const newDescription = prompt?.description?.split(placeholder).join(brand);
 
   return newDescription;
 };
@@ -339,6 +337,13 @@ export const replaceIdWithVariableInDescription = (
 };
 export const UpdateData = (variables: Variable[], prompt: string) => {
   switch (prompt) {
+    case "query#1234567896": {
+      const SQl_Discriptipn = {
+        description: `This query finds all [user_hover] who have bought a ticket to an active event, but haven't opened an email from %Brand% [last_3_days] . It does this by combining data from the users, tickets, and events tables to identify users who have purchased a ticket and are [eligible_hover] to attend an event. Then, it checks if these users have opened an email from %Brand% in the last [${variables[3]?.id}] days. If they haven't, they are included in the result list.`,
+        sql: `SELECT u.* FROM users u JOIN tickets t ON u.id = t.user_id JOIN events e ON t.event_id = e.id LEFT JOIN email_openings eo ON u.id = eo.user_id AND eo.email_subject = '%Brand%' AND eo.opened_at > DATE_SUB(CURRENT_DATE, INTERVAL ${variables[3]?.value} DAY) WHERE eo.user_id IS NULL AND t.status = 'purchased' AND e.status = 'active';`,
+      };
+      return SQl_Discriptipn;
+    }
     case "query#1234567891": {
       const SQl_Discriptipn = {
         description: `This query first calculates the total order value and number of orders for each product from the Sales DB and for the category (minus our products) from the Category DB for each quarter, using sales database. It then calculates the [${variables?.[0].id}] for our products and the rest of category for each quarter, and returns the results for [${variables?.[1].id}] [${variables?.[2].id}] quarters.`,

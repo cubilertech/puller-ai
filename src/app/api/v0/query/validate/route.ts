@@ -39,6 +39,7 @@ export async function POST(req: any, res: any) {
           status: 500,
         });
       }
+      record.id = record.id?.replace("query#", "");
       
       return NextResponse.json(record);
     } catch (error) {
