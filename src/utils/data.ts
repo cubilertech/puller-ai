@@ -440,9 +440,9 @@ export const SideBar_Data: SidebarItem[] = [
 
 export const LatestPullsData = [
   {
-    id: "1234567891",
+    id: "1234567896",
     message:
-      "I’d like a table that shows me the average order value of %Brand% products compared to the average order value of the rest of category each quarter for the last 4 quarters.",
+      "Can I get a list of users who've purchased a ticket and are eligible for entry into the event but have not opened an email from %Brand% in the last 3 days?",
   },
   {
     id: "1234567892",
