@@ -450,9 +450,9 @@ export const LatestPullsData = [
       "Can you retrieve a list of products with current inventory levels below %Brand% threshold for reorder, as well as the last date inventory levels were at or above threshold. Include the reorder quantity as well.",
   },
   {
-    id: "1234567893",
-    message:
-      "Show me the daily unit and dollar sales volume in all stores in region X for any product that has %Brand% Technology for the last week. Compare that the daily unit and dollar sales volume of all other products in region X over the same time period.",
+    id: "1234567891",
+    message:"I’d like a table that shows me the average order value of %Brand% products compared to the average order value of the rest of category each quarter for the last 4 quarters.",
+  
   },
   {
     id: "1234567895",
