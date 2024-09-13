@@ -10,18 +10,7 @@ import { toast } from "react-toastify";
 
 export const useSubmitValidate = () => {
   const dispatch = useAppDispatch();
-  // const route = useRouter();
-  // const pathname = usePathname();
-  // const searchParams = useSearchParams();
-  // const createQueryString = useCallback(
-  //   (name: string, value: string) => {
-  //     const params = new URLSearchParams(searchParams.toString());
-  //     params.set(name, value);
 
-  //     return params.toString();
-  //   },
-  //   [searchParams]
-  // );
   async function submit(data: submitValidatePayload): Promise<Prompt | null> {
     try {
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
@@ -33,12 +22,20 @@ export const useSubmitValidate = () => {
           "Content-Type": "application/json",
         },
       });
+      setTimeout(() => {
+        dispatch(setSubmitValidateLoading(false));
+      }, 500);
       if (res.status === 200) {
+        toast.success("Variables updated successfully.");
         return res.data;
       } else {
+      console.error("Network error:", res);
         return null;
       }
     } catch (error) {
+      setTimeout(() => {
+        dispatch(setSubmitValidateLoading(false));
+      }, 500);
       console.error("Network error:", error);
       return null;
     }
@@ -46,17 +43,6 @@ export const useSubmitValidate = () => {
   return useMutation({
     mutationFn: submit,
     onSuccess: (data) => {
-      // dispatch(UpdateIsLoadingRequest(false));
-      // route.replace("/request")
-      // if (data) {
-      //   const pathname = "/request";
-      //   route.replace(pathname + "?" + createQueryString("id", data?.id as string));
-      // }
-
-      setTimeout(() => {
-        dispatch(setSubmitValidateLoading(false));
-      }, 500);
-      toast.success("Variables updated successfully.");
     },
     onError: (error: any) => {
       toast.error(error?.response?.data?.message ?? (error.message as string));

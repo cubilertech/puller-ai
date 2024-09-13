@@ -1,13 +1,23 @@
 "use client";
-import { Box, SxProps, Typography } from "@mui/material";
+import {
+  Box,
+  MenuItem,
+  Skeleton,
+  SxProps,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { FC } from "react";
 import { Button } from "../Button";
 import { palette } from "@/theme/Palette";
 import CustomLink from "../Link/link";
 import CustomButton from "@/common/CustomButtons/CustomButtons";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import { ButtonVariants, CustomButtonVariants } from "@/utils/types";
+import { ButtonVariants, CustomButtonVariants, Model } from "@/utils/types";
 import { Tooltip } from "../Tooltip";
+import { CURRENT_MODE, MODES } from "@/utils/constants";
+import { useAppSelector } from "@/libs/redux/hooks";
+import { getSubmitValidateLoading } from "@/libs/redux/features/globalLoadings";
 
 interface ButtonProps {
   variant: CustomButtonVariants | ButtonVariants;
@@ -20,7 +30,10 @@ interface ButtonProps {
 
 interface PageHeaderProps {
   title: string;
+  selectedModel?: string;
   buttons?: ButtonProps[];
+  models?: Model[];
+  handleChangeModal?: (val: string) => void;
 }
 
 function isCustomVariant(variant: any): variant is CustomButtonVariants {
@@ -33,7 +46,14 @@ function isCustomVariant(variant: any): variant is CustomButtonVariants {
   );
 }
 
-const PageHeader: FC<PageHeaderProps> = ({ title, buttons }) => {
+const PageHeader: FC<PageHeaderProps> = ({
+  title,
+  buttons,
+  selectedModel,
+  models,
+  handleChangeModal,
+}) => {
+  const submitValidateLoading = useAppSelector(getSubmitValidateLoading);
   return (
     <>
       <Box
@@ -44,33 +64,60 @@ const PageHeader: FC<PageHeaderProps> = ({ title, buttons }) => {
           alignItems: "center",
         }}
       >
-        <Typography
-          variant="display-xs-medium"
-          color="white"
-          display={"flex"}
-          alignItems={"center"}
-          gap={1}
-        >
-          {title === "Retrievers" ? (
+        <Box sx={{display: "flex", gap: 2, alignItems:"center"}}>
+          <Typography
+            variant="display-xs-medium"
+            color="white"
+            display={"flex"}
+            alignItems={"center"}
+            gap={1}
+          >
+            {title === "Retrievers" ? (
+              <>
+                {title}{" "}
+                <Tooltip variant="status">
+                  <InfoOutlinedIcon
+                    sx={{
+                      color: palette.color.gray[150],
+                      ":hover": {
+                        color: palette.base.white,
+                      },
+                    }}
+                  />
+                </Tooltip>
+              </>
+            ) : title === "Create a Request" ? (
+              " "
+            ) : (
+              title
+            )}
+          </Typography>
+          {CURRENT_MODE === MODES.PILOT && title === "Validate Request" && (
             <>
-              {title}{" "}
-              <Tooltip variant="status">
-                <InfoOutlinedIcon
-                  sx={{
-                    color: palette.color.gray[150],
-                    ":hover": {
-                      color: palette.base.white,
-                    },
+              {submitValidateLoading ? (
+                <Skeleton style={{ width: "100px", margin: "0", height: 32 }} />
+              ) : (
+                <TextField
+                  select={true}
+                  label="Modal"
+                  value={selectedModel}
+                  size="small"
+                  variant="filled"
+                  onChange={(event) => {
+                    if (handleChangeModal)
+                      handleChangeModal(event.target.value);
                   }}
-                />
-              </Tooltip>
+                >
+                  {models?.map((model, index) => (
+                    <MenuItem key={index} value={model.id}>
+                      {model.name}
+                    </MenuItem>
+                  ))}
+                </TextField>
+              )}
             </>
-          ) : title === "Create a Request" ? (
-            " "
-          ) : (
-            title
           )}
-        </Typography>
+        </Box>
         <Box display={"flex"} gap={"0.5rem"}>
           {buttons?.map((button, index) =>
             button.href ? (

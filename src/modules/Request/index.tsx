@@ -44,6 +44,7 @@ import { getVariables, setVariables } from "@/libs/redux/features/variables";
 import { OptionsBar } from "@/components/optionsBar";
 import SelectionTextEditor from "@/components/SelectionTextEditor";
 import { isDemoMode, isPilotMode } from "@/utils/constants";
+import { useGetClientInfo } from "@/hooks/useMeta";
 
 const SkeletonLoader = () => {
   return (
@@ -104,6 +105,7 @@ const RequestPage: FC = () => {
   const submitValidateLoading = useAppSelector(getSubmitValidateLoading);
   const [isOpenSelectBar, setIsOpenSelectBar] = useState(false);
   const [validateData, setValidateData] = useState<Prompt | null>(null);
+  const [selectedModel,setSelectedModel] = useState('');
   const [SelectBarVarient, setSelectBarVarient] =
     useState<OptionsBarVariants | null>(null);
   const {
@@ -134,6 +136,10 @@ const RequestPage: FC = () => {
     isLoading: allPromptLoading,
     isSuccess: isSuccessAllPrompt,
   } = useGetAllPrompt();
+  const {
+    data: clientInfo,
+    refetch: refetchClientInfo,
+  } = useGetClientInfo();
 
   const handleSubmitPrompt = async () => {
     await submitPrompt({ message: query });
@@ -188,6 +194,19 @@ const RequestPage: FC = () => {
   // };
   // console.log(SelectBarVarient, "SelectBarVarient");
 
+
+  const metaModels = useMemo(()=>{
+    // const defaultModel = { depends: [], description: "table of tutorials loyalty", id: "model.dbt_tutorial.loyalty", name: "loyalty" };
+   return clientInfo && clientInfo.models?.length > 0 ? clientInfo.models : [];
+  },[clientInfo]);
+
+  const handleChangeModal = (val: any) => {
+    dispatch(setSubmitValidateLoading(true));
+    setSelectedModel(val);
+    submitValidate({ prompt: id as string,
+      variables: [], target:val});
+  }
+
   const handleUpdateVariable = (value?: UpdateVariables) => {
     if (value) {
       console.log("Updated value:", value);
@@ -240,6 +259,7 @@ const RequestPage: FC = () => {
       setLoading(false);
     }
     refetchAllPrompt();
+    refetchClientInfo();
     localStorage.removeItem("variableId");
   }, []);
   useEffect(() => {
@@ -274,6 +294,11 @@ const RequestPage: FC = () => {
     submitValidateLoading,
     loading,
   ]);
+  useEffect(()=>{
+    if(prompt){
+      setSelectedModel(prompt?.target);
+    }
+  },[prompt])
 
   // const handleMouseUp = () => {
   //   if (isDemoMode) {
@@ -419,6 +444,9 @@ const RequestPage: FC = () => {
         >
           <Box sx={{ px: 2, pt: 1, m: "auto", overflow: "hidden" }}>
             <PageHeader
+              models={metaModels}
+              handleChangeModal={handleChangeModal}
+              selectedModel={selectedModel}
               title="Validate Request"
               buttons={[
                 {

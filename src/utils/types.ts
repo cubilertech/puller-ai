@@ -176,11 +176,14 @@ export interface Client {
     type: string;
   };
   name: string;
+  models: any[];
+  variables: any[];
 }
 
 export interface submitValidatePayload {
   prompt: string;
   variables?: Variable[];
+  target?: string;
 }
 
 export type Graph = {
@@ -272,4 +275,11 @@ export interface UpdateVariables {
 export interface List {
   items: Prompt[];
   total: number;
+}
+
+export interface Model {
+  depends: any[],
+  description: string,
+  id: string,
+  name: string
 }
