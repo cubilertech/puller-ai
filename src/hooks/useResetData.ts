@@ -5,12 +5,16 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 export const useResetData = () => {
+  const token = localStorage.getItem("token");
   async function submit(): Promise<any> {
     try {
       const backendUrl = getBackendURL(MODES.DEMO as string);
       const res = await axios({
         url: `${backendUrl}/reset`,
         method: "put",
+        headers: {
+          "Authorization": `Bearer ${token}`
+        }
       });
       if (res.status === 200) {
         return res.data;

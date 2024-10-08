@@ -6,11 +6,13 @@ import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
+import { shallowEqual } from "react-redux";
 import { toast } from "react-toastify";
 
 export const useSubmitValidate = () => {
   const dispatch = useAppDispatch();
-
+  const router = useRouter();
+  const token = localStorage.getItem("token");
   async function submit(data: submitValidatePayload): Promise<Prompt | null> {
     try {
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
@@ -20,6 +22,7 @@ export const useSubmitValidate = () => {
         data,
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
       });
       setTimeout(() => {
@@ -29,7 +32,7 @@ export const useSubmitValidate = () => {
         toast.success("Variables updated successfully.");
         return res.data;
       } else {
-      console.error("Network error:", res);
+        console.error("Network error:", res);
         return null;
       }
     } catch (error) {
@@ -43,6 +46,9 @@ export const useSubmitValidate = () => {
   return useMutation({
     mutationFn: submit,
     onSuccess: (data) => {
+      // if (data?.id) {
+      //   router.replace(`/request?id=${data?.id}`);
+      // }
     },
     onError: (error: any) => {
       toast.error(error?.response?.data?.message ?? (error.message as string));

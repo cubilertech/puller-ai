@@ -4,6 +4,7 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 export const useGetClientInfo = () => {
+  const token = localStorage.getItem("token");
   async function submit(): Promise<Client | null> {
     try {
       const res = await axios({
@@ -11,6 +12,7 @@ export const useGetClientInfo = () => {
         method: "get",
         headers: {
           accept: "application/json",
+          "Authorization": `Bearer ${token}`
         },
       });
       if (res.status === 200) {
@@ -31,5 +33,6 @@ export const useGetClientInfo = () => {
   return useQuery(["client-info"], submit, {
     refetchInterval: 60_000,
     enabled: false,
+    keepPreviousData: false,
   });
 };

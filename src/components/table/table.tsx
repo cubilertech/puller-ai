@@ -23,7 +23,7 @@ interface DataTableProps {
   isFilter?: boolean;
 }
 
-const DataTable: FC<DataTableProps> = ({ data, isFilter }) => {
+const DataTable: FC<DataTableProps> = ({ data, isFilter = false }) => {
   const [page, setPage] = useState(0);
 
   const [rowsPerPage, setRowsPerPage] = useState(isFilter ? 9999999 : 13);
@@ -102,11 +102,11 @@ const DataTable: FC<DataTableProps> = ({ data, isFilter }) => {
     >
       {rows && rows?.length ? (
         <TableContainer
-          sx={{
+          sx={isFilter ? {
             maxHeight: "calc(100vh - 570px)", // Adjust height based on your needs
             overflowY: "auto",
             scrollbarWidth: "none", // Enable vertical scrolling
-          }}
+          } : {}}
           className={isFilter ? "table-container" : ""}
         >
           <Table

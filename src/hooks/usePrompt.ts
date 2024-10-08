@@ -35,6 +35,7 @@ export const useSubmitPrompt = (
     [searchParams]
   );
   const dispatch = useAppDispatch();
+  const token = localStorage.getItem("token");
   async function submit(data: submitPromptPayload): Promise<Prompt | null> {
     try {
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
@@ -44,6 +45,7 @@ export const useSubmitPrompt = (
         data,
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
         },
       });
       if (res.status === 200) {
@@ -158,6 +160,7 @@ export const useSubmitPrompt = (
 export const useGetSinglePrompt = (promptId: string) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const token = localStorage.getItem("token");
   async function submit(promptId: string): Promise<Prompt | null> {
     try {
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
@@ -169,6 +172,7 @@ export const useGetSinglePrompt = (promptId: string) => {
         method: "GET",
         headers: {
           accept: "application/json",
+          "Authorization": `Bearer ${token}`
         },
       });
       if (res.status === 200) {
@@ -203,6 +207,7 @@ export const useGetSinglePrompt = (promptId: string) => {
   });
 };
 export const useGetResponseTableData = (prompt: string) => {
+  const token = localStorage.getItem("token");
   const DemoMode = isDemoMode;
   type DemoMode = typeof isDemoMode;
   async function submit(): Promise<
@@ -218,6 +223,7 @@ export const useGetResponseTableData = (prompt: string) => {
         headers: {
           accept: "application/json",
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
         },
       });
       if (res.status === 200) {
@@ -239,6 +245,7 @@ export const useGetResponseTableData = (prompt: string) => {
 };
 
 export const useGetAllPrompt = () => {
+  const token = localStorage.getItem("token");
   const DemoMode = isDemoMode;
   type DemoMode = typeof isDemoMode;
   async function submit(): Promise<
@@ -251,6 +258,7 @@ export const useGetAllPrompt = () => {
         method: "get",
         headers: {
           accept: "application/json",
+          "Authorization": `Bearer ${token}`
         },
       });
       if (res.status === 200) {
@@ -274,6 +282,7 @@ export const useGetAllPrompt = () => {
   });
 };
 export const useGetNewTimeStampPrompt = (timeStamp: number) => {
+  const token = localStorage.getItem("token");
   const DemoMode = isDemoMode;
   type DemoMode = typeof isDemoMode;
   async function submit(): Promise<
@@ -286,6 +295,7 @@ export const useGetNewTimeStampPrompt = (timeStamp: number) => {
         method: "get",
         headers: {
           accept: "application/json",
+          "Authorization": `Bearer ${token}`
         },
       });
       if (res.status === 200) {

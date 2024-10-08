@@ -1,6 +1,4 @@
-import {
-  UpdateCurrentPage,
-} from "@/libs/redux/features/isLoadingRequest";
+import { UpdateCurrentPage } from "@/libs/redux/features/isLoadingRequest";
 import { useAppDispatch } from "@/libs/redux/hooks";
 import { getBackendURL } from "@/utils/common";
 import { isDemoMode, isPilotMode } from "@/utils/constants";
@@ -13,7 +11,7 @@ import { toast } from "react-toastify";
 export const useSubmitExecute = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-
+  const token = localStorage.getItem("token");
   async function submit(data: submitExecutePayload): Promise<Query | null> {
     try {
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
@@ -23,6 +21,7 @@ export const useSubmitExecute = () => {
         data,
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
         },
       });
       if (res.status === 200) {
@@ -56,6 +55,7 @@ export const useSubmitExecute = () => {
 
 export const useGetSingleExecute = (executeId: string) => {
   const router = useRouter();
+  const token = localStorage.getItem("token");
   async function submit(executeId: string): Promise<Query | null> {
     try {
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
@@ -67,6 +67,7 @@ export const useGetSingleExecute = (executeId: string) => {
         method: "get",
         headers: {
           accept: "application/json",
+          "Authorization": `Bearer ${token}`
         },
       });
       if (res.status === 200) {
@@ -93,6 +94,7 @@ export const useGetSingleExecute = (executeId: string) => {
 };
 
 export const useGetAllExecute = () => {
+  const token = localStorage.getItem("token");
   async function submit(): Promise<Query[] | null> {
     try {
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
@@ -101,6 +103,7 @@ export const useGetAllExecute = () => {
         method: "get",
         headers: {
           accept: "application/json",
+          "Authorization": `Bearer ${token}`
         },
       });
       if (res.status === 200) {

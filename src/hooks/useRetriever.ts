@@ -12,6 +12,7 @@ import App from "next/app";
 import { toast } from "react-toastify";
 
 export const useGetAllRetriever = () => {
+  const token = localStorage.getItem("token");
   async function submit(): Promise<Retriever[] | null> {
     try {
       const backendUrl = getBackendURL(MODES.DEMO as string);
@@ -20,6 +21,7 @@ export const useGetAllRetriever = () => {
         method: "get",
         headers: {
           accept: "application/json",
+          "Authorization": `Bearer ${token}`
         },
       });
       if (res.status === 200) {
@@ -44,6 +46,7 @@ export const useGetAllRetriever = () => {
 };
 
 export const useGetAllApps = () => {
+  const token = localStorage.getItem("token");
   async function submit(): Promise<ConnectItem[] | null> {
     try {
       const backendUrl = getBackendURL(MODES.DEMO as string);
@@ -52,6 +55,7 @@ export const useGetAllApps = () => {
         method: "get",
         headers: {
           accept: "application/json",
+          "Authorization": `Bearer ${token}`
         },
       });
       if (res.status === 200) {
@@ -77,6 +81,7 @@ export const useGetAllApps = () => {
 
 export const useUpdateAppStatus = () => {
   //   const dispatch = useAppDispatch();
+  const token = localStorage.getItem("token");
   async function submit(data: appUpdatePayload): Promise<ConnectItem[] | null | undefined> {
     try {
       const backendUrl = getBackendURL(MODES.DEMO as string);
@@ -86,6 +91,7 @@ export const useUpdateAppStatus = () => {
         data,
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
         },
       });
       if (res.status === 200) {
@@ -112,6 +118,7 @@ export const useUpdateAppStatus = () => {
 };
 export const useUpdateAppName = () => {
   //   const dispatch = useAppDispatch();
+  const token = localStorage.getItem("token");
   async function submit(data: appUpdatePayload): Promise<ConnectItem[] | null | undefined> {
     try {
       const backendUrl = getBackendURL(MODES.DEMO as string);
@@ -121,6 +128,7 @@ export const useUpdateAppName = () => {
         data,
         headers: {
           "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`
         },
       });
       if (res.status === 200) {
@@ -148,6 +156,7 @@ export const useUpdateAppName = () => {
 
 export const useCreateRetriever = () => {
   // const dispatch = useAppDispatch();
+  const token = localStorage.getItem("token");
   async function submit(
     data: createRetrieverPayload
   ): Promise<Retriever | null> {
@@ -173,6 +182,7 @@ export const useCreateRetriever = () => {
         headers: {
           // "Content-Type": "application/json",
           "Content-Type": "multipart/form-data",
+          "Authorization": `Bearer ${token}`
         },
       });
       if (res.status === 200) {
