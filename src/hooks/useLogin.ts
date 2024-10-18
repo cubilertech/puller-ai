@@ -1,6 +1,6 @@
 import { getBackendURL } from "@/utils/common";
-import { isPilotMode } from "@/utils/constants";
-import { useMutation } from "@tanstack/react-query";
+import { isClient, isPilotMode } from "@/utils/constants";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { toast } from "react-toastify";
@@ -12,7 +12,7 @@ export const useSubmitLogin = () => {
     try {
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
       const res = await axios({
-        url: `${backendUrl}/v0/login`,
+        url: `${backendUrl}/login`,
         method: "POST",
         data,
         headers: {
@@ -66,7 +66,7 @@ export const useSubmitNewPassword = () => {
     try {
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
       const res = await axios({
-        url: `${backendUrl}/v0/login/challenge`,
+        url: `${backendUrl}/login/challenge`,
         method: "POST",
         data,
         headers: {
@@ -96,5 +96,40 @@ export const useSubmitNewPassword = () => {
       toast.error(error?.response?.data?.message ?? (error.message as string));
       console.log(error, "error in validating request");
     },
+  });
+};
+
+export const useGetProjectsData = () => {
+  const token = isClient ? localStorage.getItem("token") : "";
+
+  async function submit() {
+    try {
+      const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
+      const res = await axios({
+        url: `${backendUrl}/org/demo/project`,
+        method: "get",
+        headers: {
+          accept: "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (res.status === 200) {
+        return res.data;
+      } else {
+        return null;
+      }
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message ?? (error.message as string));
+      console.error("Network error:", error);
+      return null;
+    }
+  }
+
+  return useQuery({
+    queryKey: ["projects"], // Include timeStamp in the queryKey
+    queryFn: submit,
+    enabled: false,
+    refetchInterval: 60_000,
+    // placeholderData: [],
   });
 };

@@ -1,18 +1,27 @@
+import { isClient, isPilotMode } from "@/utils/constants";
 import { Client } from "@/utils/types";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 
 export const useGetClientInfo = () => {
-  const token = localStorage.getItem("token");
+  const token = isClient ? localStorage.getItem("token") : "";
+  const searchParams = useSearchParams();
+  const projectId = searchParams.get("projectId");
+  const orgId = searchParams.get("orgId");
   async function submit(): Promise<Client | null> {
+    const backendUrl =
+      isPilotMode && projectId && orgId
+        ? `${process.env.NEXT_PUBLIC_BACKEND_URL}/v0/org/${orgId}/project/${projectId}`
+        : `${process.env.NEXT_PUBLIC_BACKEND_URL}/v0`;
     try {
       const res = await axios({
-        url: `${process.env.NEXT_PUBLIC_BACKEND_URL}/v0/meta`,
+        url: `${backendUrl}/meta`,
         method: "get",
         headers: {
           accept: "application/json",
-          "Authorization": `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
       });
       if (res.status === 200) {

@@ -119,7 +119,7 @@ const DataTable: FC<DataTableProps> = ({ data, isFilter = false }) => {
               },
             }}
           >
-            <TableHead columns={columns as string[]} />
+            <TableHead columns={columns as string[]} isFilter={isFilter}/>
 
             <TableBody>
               {rows

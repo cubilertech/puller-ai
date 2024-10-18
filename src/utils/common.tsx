@@ -3,14 +3,26 @@ import { MODES } from "./constants";
 import { Prompt, UpdateVariables, Variable } from "./types";
 import { Tooltip } from "@/components/Tooltip";
 
-export const getBackendURL = (appMode: string) => {
+export const getBackendURL = (
+  appMode: string,
+  projectId?: string,
+  orgId?: string,
+  isVo?: boolean
+) => {
   switch (appMode) {
     case MODES.PILOT:
-      return process.env.NEXT_PUBLIC_BACKEND_URL;
+      if (projectId && orgId) {
+        return `${process.env.NEXT_PUBLIC_BACKEND_URL}/v0/org/${orgId}/project/${projectId}`;
+      }
+      return `${process.env.NEXT_PUBLIC_BACKEND_URL}/v0`;
     case MODES.DEMO:
-      return process.env.NEXT_PUBLIC_DEMO_BACKEND_URL;
+      return isVo
+        ? process.env.NEXT_PUBLIC_DEMO_BACKEND_URL
+        : `${process.env.NEXT_PUBLIC_DEMO_BACKEND_URL}/v0`;
     default:
-      return process.env.NEXT_PUBLIC_DEMO_BACKEND_URL;
+      return isVo
+        ? process.env.NEXT_PUBLIC_DEMO_BACKEND_URL
+        : `${process.env.NEXT_PUBLIC_DEMO_BACKEND_URL}/v0`;
   }
 };
 

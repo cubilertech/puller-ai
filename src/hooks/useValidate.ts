@@ -1,23 +1,29 @@
 import { setSubmitValidateLoading } from "@/libs/redux/features/globalLoadings";
 import { useAppDispatch } from "@/libs/redux/hooks";
 import { getBackendURL } from "@/utils/common";
+import { isClient } from "@/utils/constants";
 import { Prompt, submitValidatePayload } from "@/utils/types";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback } from "react";
-import { shallowEqual } from "react-redux";
+import { useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 
 export const useSubmitValidate = () => {
   const dispatch = useAppDispatch();
-  const router = useRouter();
-  const token = localStorage.getItem("token");
+  const token = isClient ? localStorage.getItem("token") : "";
+  const searchParams = useSearchParams();
+  const projectId = searchParams.get("projectId");
+  const orgId = searchParams.get("orgId");
+
   async function submit(data: submitValidatePayload): Promise<Prompt | null> {
     try {
-      const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
+      const backendUrl = getBackendURL(
+        process.env.NEXT_PUBLIC_MODE as string,
+        projectId as string,
+        orgId as string
+      );
       const res = await axios({
-        url: `${backendUrl}/v0/query/validate`,
+        url: `${backendUrl}/query/validate`,
         method: "POST",
         data,
         headers: {

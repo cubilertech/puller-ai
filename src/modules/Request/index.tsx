@@ -95,6 +95,8 @@ const RequestPage: FC = () => {
   const [loading, setLoading] = useState(true);
   const [query, setQuery] = useState("");
   const searchParams = useSearchParams();
+  const projectId = searchParams.get("projectId");
+  const orgId = searchParams.get("orgId");
   const id = searchParams.get("id");
   const router = useRouter();
   const variables = useAppSelector(getVariables);
@@ -105,7 +107,7 @@ const RequestPage: FC = () => {
   const submitValidateLoading = useAppSelector(getSubmitValidateLoading);
   const [isOpenSelectBar, setIsOpenSelectBar] = useState(false);
   const [validateData, setValidateData] = useState<Prompt | null>(null);
-  const [selectedModel,setSelectedModel] = useState('');
+  const [selectedModel, setSelectedModel] = useState("");
   const [SelectBarVarient, setSelectBarVarient] =
     useState<OptionsBarVariants | null>(null);
   const {
@@ -136,10 +138,7 @@ const RequestPage: FC = () => {
     isLoading: allPromptLoading,
     isSuccess: isSuccessAllPrompt,
   } = useGetAllPrompt();
-  const {
-    data: clientInfo,
-    refetch: refetchClientInfo,
-  } = useGetClientInfo();
+  const { data: clientInfo, refetch: refetchClientInfo } = useGetClientInfo();
 
   const handleSubmitPrompt = async () => {
     await submitPrompt({ message: query });
@@ -156,7 +155,13 @@ const RequestPage: FC = () => {
       dispatch(UpdatePromptValue(query?.message));
       setQuery("");
     } else if (query?.id) {
-      await router.push(`request?id=${query?.id}`);
+      if (projectId && orgId) {
+        await router.push(
+          `request?id=${query?.id}&projectId=${projectId}&orgId=${orgId}`
+        );
+      } else {
+        await router.push(`request?id=${query?.id}`);
+      }
       dispatch(UpdateIsLoadingPrompt(true));
       // refetchPrompt();
     }
@@ -194,18 +199,16 @@ const RequestPage: FC = () => {
   // };
   // console.log(SelectBarVarient, "SelectBarVarient");
 
-
-  const metaModels = useMemo(()=>{
+  const metaModels = useMemo(() => {
     // const defaultModel = { depends: [], description: "table of tutorials loyalty", id: "model.dbt_tutorial.loyalty", name: "loyalty" };
-   return clientInfo && clientInfo.models?.length > 0 ? clientInfo.models : [];
-  },[clientInfo]);
+    return clientInfo && clientInfo.models?.length > 0 ? clientInfo.models : [];
+  }, [clientInfo]);
 
   const handleChangeModal = (val: any) => {
     dispatch(setSubmitValidateLoading(true));
     setSelectedModel(val);
-    submitValidate({ prompt: id as string,
-      variables: [], target:val});
-  }
+    submitValidate({ prompt: id as string, variables: [], target: val });
+  };
 
   const handleUpdateVariable = (value?: UpdateVariables) => {
     if (value) {
@@ -255,13 +258,17 @@ const RequestPage: FC = () => {
     }
   }, [submitValidateLoading]);
   useEffect(() => {
-    if (isDemoMode) {
+    if (isDemoMode || (!projectId && !orgId)) {
       setLoading(false);
     }
-    refetchAllPrompt();
-    refetchClientInfo();
+    if (projectId && orgId && isPilotMode) {
+      refetchAllPrompt();
+      refetchClientInfo();
+    } else if (isDemoMode) {
+      refetchAllPrompt();
+    }
     localStorage.removeItem("variableId");
-  }, []);
+  }, [projectId, orgId, isPilotMode, isDemoMode]);
   useEffect(() => {
     if (isSuccessExecute && isDemoMode) {
       router.push(`/request/results/${id}`);
@@ -294,11 +301,11 @@ const RequestPage: FC = () => {
     submitValidateLoading,
     loading,
   ]);
-  useEffect(()=>{
-    if(prompt){
+  useEffect(() => {
+    if (prompt) {
       setSelectedModel(prompt?.target);
     }
-  },[prompt])
+  }, [prompt]);
 
   // const handleMouseUp = () => {
   //   if (isDemoMode) {

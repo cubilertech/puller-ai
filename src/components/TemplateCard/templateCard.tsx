@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Paper } from "../Paper";
 import { FC, useMemo } from "react";
 import { Prompt } from "@/utils/types";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useAppDispatch } from "@/libs/redux/hooks";
 import {
   UpdateCurrentPage,
@@ -24,23 +24,34 @@ interface TemplateCardProps {
 const TemplateCard: FC<TemplateCardProps> = ({ card, index }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const searchParams = useSearchParams();
+  const projectId = searchParams.get("projectId");
+  const orgId = searchParams.get("orgId");
   const id = card?.id?.includes("#") ? card?.id?.split("#")?.[1] : card?.id;
   const handleClickTemplate = () => {
-    router.push(`/request?id=${id}`);
+    if (projectId && orgId) {
+      router.push(`/request?id=${id}&projectId=${projectId}&orgId=${orgId}`);
+    } else {
+      router.push(`/request?id=${id}`);
+    }
+
     dispatch(UpdateCurrentPage("validate"));
     dispatch(UpdateIsLoadingRequest(true));
     dispatch(UpdatePromptValue(card.message));
   };
-  const companyName = localStorage.getItem("companyName")
+  const companyName = localStorage.getItem("companyName");
   const description = useMemo(() => {
-    const replaceBrand = replaceBrandName({ description: card.description }, companyName as string);
-    return replaceIdWithVariableInDescription({
-      ...card,
-      description: replaceBrand,
-      
-    } as Prompt,
-    companyName as string,
-  );
+    const replaceBrand = replaceBrandName(
+      { description: card.description },
+      companyName as string
+    );
+    return replaceIdWithVariableInDescription(
+      {
+        ...card,
+        description: replaceBrand,
+      } as Prompt,
+      companyName as string
+    );
   }, [card]);
   return (
     <Box

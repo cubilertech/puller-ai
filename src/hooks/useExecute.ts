@@ -1,27 +1,35 @@
 import { UpdateCurrentPage } from "@/libs/redux/features/isLoadingRequest";
 import { useAppDispatch } from "@/libs/redux/hooks";
 import { getBackendURL } from "@/utils/common";
-import { isDemoMode, isPilotMode } from "@/utils/constants";
+import { isClient, isDemoMode, isPilotMode } from "@/utils/constants";
 import { submitExecutePayload, Query } from "@/utils/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 
 export const useSubmitExecute = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const token = localStorage.getItem("token");
+  const token = isClient ? localStorage.getItem("token") : "";
+  const searchParams = useSearchParams();
+  const projectId = searchParams.get("projectId");
+  const orgId = searchParams.get("orgId");
   async function submit(data: submitExecutePayload): Promise<Query | null> {
     try {
-      const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
+      const backendUrl = getBackendURL(
+        process.env.NEXT_PUBLIC_MODE as string,
+        projectId as string,
+        orgId as string,
+        true
+      );
       const res = await axios({
-        url: `${backendUrl}/v0/query/execute`,
+        url: `${backendUrl}/query/execute`,
         method: "POST",
         data,
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
       });
       if (res.status === 200) {
@@ -40,7 +48,13 @@ export const useSubmitExecute = () => {
       const id = data?.id; // "run#1717580893"
       const formatedId = id?.replace(/^run#/, "");
       if (isPilotMode) {
-        router.push(`/request/results/${formatedId}`);
+        if (projectId && orgId) {
+          router.push(
+            `/request/results/${formatedId}?projectId=${projectId}&orgId=${orgId}`
+          );
+        } else {
+          router.push(`/request/results/${formatedId}`);
+        }
       }
       // await new Promise((resolve) => setTimeout(resolve, 1000));
       // dispatch(UpdateIsLoadingRequest(false));
@@ -55,19 +69,27 @@ export const useSubmitExecute = () => {
 
 export const useGetSingleExecute = (executeId: string) => {
   const router = useRouter();
-  const token = localStorage.getItem("token");
+  const token = isClient ? localStorage.getItem("token") : "";
+  const searchParams = useSearchParams();
+  const projectId = searchParams.get("projectId");
+  const orgId = searchParams.get("orgId");
   async function submit(executeId: string): Promise<Query | null> {
     try {
-      const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
+      const backendUrl = getBackendURL(
+        process.env.NEXT_PUBLIC_MODE as string,
+        projectId as string,
+        orgId as string,
+        true
+      );
       const encodedExecuteId = encodeURIComponent(
         `${isDemoMode ? "run#" : ""}${executeId}`
       );
       const res = await axios({
-        url: `${backendUrl}/v0/query/execute/${encodedExecuteId}`,
+        url: `${backendUrl}/query/execute/${encodedExecuteId}`,
         method: "get",
         headers: {
           accept: "application/json",
-          "Authorization": `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
       });
       if (res.status === 200) {
@@ -94,16 +116,24 @@ export const useGetSingleExecute = (executeId: string) => {
 };
 
 export const useGetAllExecute = () => {
-  const token = localStorage.getItem("token");
+  const token = isClient ? localStorage.getItem("token") : "";
+  const searchParams = useSearchParams();
+  const projectId = searchParams.get("projectId");
+  const orgId = searchParams.get("orgId");
   async function submit(): Promise<Query[] | null> {
     try {
-      const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
+      const backendUrl = getBackendURL(
+        process.env.NEXT_PUBLIC_MODE as string,
+        projectId as string,
+        orgId as string,
+        true
+      );
       const res = await axios({
-        url: `${backendUrl}/v0/query/execute`,
+        url: `${backendUrl}/query/execute`,
         method: "get",
         headers: {
           accept: "application/json",
-          "Authorization": `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
       });
       if (res.status === 200) {

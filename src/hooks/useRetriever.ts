@@ -1,5 +1,5 @@
 import { getBackendURL } from "@/utils/common";
-import { MODES } from "@/utils/constants";
+import { isClient, MODES } from "@/utils/constants";
 import {
   ConnectItem,
   Retriever,
@@ -8,20 +8,19 @@ import {
 } from "@/utils/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import App from "next/app";
 import { toast } from "react-toastify";
 
 export const useGetAllRetriever = () => {
-  const token = localStorage.getItem("token");
+  const token = isClient ? localStorage.getItem("token") : "";
   async function submit(): Promise<Retriever[] | null> {
     try {
       const backendUrl = getBackendURL(MODES.DEMO as string);
       const res = await axios({
-        url: `${backendUrl}/v0/retriever`,
+        url: `${backendUrl}/retriever`,
         method: "get",
         headers: {
           accept: "application/json",
-          "Authorization": `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
       });
       if (res.status === 200) {
@@ -46,16 +45,16 @@ export const useGetAllRetriever = () => {
 };
 
 export const useGetAllApps = () => {
-  const token = localStorage.getItem("token");
+  const token = isClient ? localStorage.getItem("token") : "";
   async function submit(): Promise<ConnectItem[] | null> {
     try {
       const backendUrl = getBackendURL(MODES.DEMO as string);
       const res = await axios({
-        url: `${backendUrl}/v0/retriever/apps`,
+        url: `${backendUrl}/retriever/apps`,
         method: "get",
         headers: {
           accept: "application/json",
-          "Authorization": `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
       });
       if (res.status === 200) {
@@ -81,17 +80,19 @@ export const useGetAllApps = () => {
 
 export const useUpdateAppStatus = () => {
   //   const dispatch = useAppDispatch();
-  const token = localStorage.getItem("token");
-  async function submit(data: appUpdatePayload): Promise<ConnectItem[] | null | undefined> {
+  const token = isClient ? localStorage.getItem("token") : "";
+  async function submit(
+    data: appUpdatePayload
+  ): Promise<ConnectItem[] | null | undefined> {
     try {
       const backendUrl = getBackendURL(MODES.DEMO as string);
       const res = await axios({
-        url: `${backendUrl}/v0/retriever/apps/${data.id}`,
+        url: `${backendUrl}/retriever/apps/${data.id}`,
         method: "put",
         data,
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
       });
       if (res.status === 200) {
@@ -118,17 +119,19 @@ export const useUpdateAppStatus = () => {
 };
 export const useUpdateAppName = () => {
   //   const dispatch = useAppDispatch();
-  const token = localStorage.getItem("token");
-  async function submit(data: appUpdatePayload): Promise<ConnectItem[] | null | undefined> {
+  const token = isClient ? localStorage.getItem("token") : "";
+  async function submit(
+    data: appUpdatePayload
+  ): Promise<ConnectItem[] | null | undefined> {
     try {
       const backendUrl = getBackendURL(MODES.DEMO as string);
       const res = await axios({
-        url: `${backendUrl}/v0/retriever/apps/${data.id}`,
+        url: `${backendUrl}/retriever/apps/${data.id}`,
         method: "put",
         data,
         headers: {
           "Content-Type": "application/json",
-          "Authorization": `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
       });
       if (res.status === 200) {
@@ -156,7 +159,7 @@ export const useUpdateAppName = () => {
 
 export const useCreateRetriever = () => {
   // const dispatch = useAppDispatch();
-  const token = localStorage.getItem("token");
+  const token = isClient ? localStorage.getItem("token") : "";
   async function submit(
     data: createRetrieverPayload
   ): Promise<Retriever | null> {
@@ -165,7 +168,12 @@ export const useCreateRetriever = () => {
 
       formData.append("title", data.title);
 
-      formData.append("files", JSON.stringify(data.files.map(file => ({ description: file.description }))));
+      formData.append(
+        "files",
+        JSON.stringify(
+          data.files.map((file) => ({ description: file.description }))
+        )
+      );
       data.files.forEach((file, index) => {
         formData.append(`image${index}`, file.file);
       });
@@ -182,7 +190,7 @@ export const useCreateRetriever = () => {
         headers: {
           // "Content-Type": "application/json",
           "Content-Type": "multipart/form-data",
-          "Authorization": `Bearer ${token}`
+          Authorization: `Bearer ${token}`,
         },
       });
       if (res.status === 200) {

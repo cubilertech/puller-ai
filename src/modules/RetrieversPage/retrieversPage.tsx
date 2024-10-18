@@ -7,10 +7,14 @@ import { AlertModal } from "@/modals/AlertModal";
 import { isPilotMode } from "@/utils/constants";
 import { RetrieverIconsTypes, StatusTypes } from "@/utils/types";
 import { Box } from "@mui/material";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const RetrieversPage = () => {
   const [isOpenAlert, setIsOpenAlert] = useState(false);
+  const searchParams = useSearchParams();
+  const projectId = searchParams.get("projectId");
+  const orgId = searchParams.get("orgId");
   const handleSingleAlert = () => {
     if (isPilotMode) {
       setIsOpenAlert(true);
@@ -44,7 +48,10 @@ const RetrieversPage = () => {
           {
             label: "Create Retriever",
             variant: "outlined",
-            href: "/retrievers/new",
+            href:
+              projectId && orgId
+                ? `/retrievers/new?projectId=${projectId}&orgId=${orgId}`
+                : `/retrievers/new`,
             width: 220,
           },
         ]}
@@ -56,7 +63,7 @@ const RetrieversPage = () => {
             width: "100%",
             height: "80%",
             display: "flex",
-            justifyContent: "center", 
+            justifyContent: "center",
             alignItems: "center",
           }}
         >

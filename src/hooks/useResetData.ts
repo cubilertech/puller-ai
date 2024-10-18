@@ -1,20 +1,25 @@
 import { getBackendURL } from "@/utils/common";
-import { MODES } from "@/utils/constants";
+import { isClient, MODES } from "@/utils/constants";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { toast } from "react-toastify";
 
 export const useResetData = () => {
-  const token = localStorage.getItem("token");
+  const token = isClient ? localStorage.getItem("token") : "";
   async function submit(): Promise<any> {
     try {
-      const backendUrl = getBackendURL(MODES.DEMO as string);
+      const backendUrl = getBackendURL(
+        MODES.DEMO as string,
+        undefined,
+        undefined,
+        true
+      );
       const res = await axios({
         url: `${backendUrl}/reset`,
         method: "put",
         headers: {
-          "Authorization": `Bearer ${token}`
-        }
+          Authorization: `Bearer ${token}`,
+        },
       });
       if (res.status === 200) {
         return res.data;

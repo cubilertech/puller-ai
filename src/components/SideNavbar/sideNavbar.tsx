@@ -11,9 +11,8 @@ import {
 
 import MuiListItemButton from "@/theme/overrides/listItemButton";
 import { Icon } from "../Icon";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
 import { Logo } from "../logo";
 import { SideBar_Data } from "@/utils/data";
 import { palette } from "@/theme/Palette";
@@ -27,6 +26,9 @@ import { UpdateCurrentPage } from "@/libs/redux/features/isLoadingRequest";
 const SideNavbar = () => {
   const Route = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const projectId = searchParams.get("projectId");
+  const orgId = searchParams.get("orgId");
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const path = pathname.split("/")[1];
   const dispatch = useAppDispatch();
@@ -34,13 +36,19 @@ const SideNavbar = () => {
   const handleAlert = (link: string) => {
     const isAlert = link === "/alerts" ? true : false;
     const isRequest = link === "/request" ? true : false;
+
     if (isPilotMode && isAlert) {
       setIsOpenAlert(true);
     }
     if (isRequest) {
       dispatch(UpdateCurrentPage("create"));
     }
-    Route.push(isPilotMode && isAlert ? "#" : link);
+
+    if (projectId && orgId && isPilotMode && !isAlert) {
+      Route.push(`${link}?projectId=${projectId}&orgId=${orgId}`);
+    } else {
+      Route.push(isPilotMode && isAlert ? "#" : link);
+    }
   };
   return (
     <Box

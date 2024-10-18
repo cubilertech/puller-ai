@@ -4,15 +4,14 @@ import {
   TableRow,
   TableHead as MuiTableHead,
 } from "@mui/material";
-// import { TableCell } from "../TableCell";
-// import { Icon } from "../Icon";
 import { FC } from "react";
 
 interface TableHeadProps {
   columns: string[];
+  isFilter?: boolean;
 }
 
-const TableHead: FC<TableHeadProps> = ({ columns }) => {
+const TableHead: FC<TableHeadProps> = ({ columns, isFilter }) => {
   return (
     <MuiTableHead
       sx={{
@@ -21,8 +20,9 @@ const TableHead: FC<TableHeadProps> = ({ columns }) => {
         top: 0,
         // background: rgb(46,38,70);
         borderRadius: "0px !important",
-        background:
-          "linear-gradient(86deg, rgba(50,38,72, 1) 0%, rgba(35,41,64,1) 50%, rgba(25,48,60,1) 100%)",
+        background: isFilter
+          ? "linear-gradient(86deg, rgba(50,38,72, 1) 0%, rgba(35,41,64,1) 50%, rgba(25,48,60,1) 100%)"
+          : "",
       }}
     >
       <TableRow sx={{ borderRadius: "0px !important" }}>
@@ -32,7 +32,7 @@ const TableHead: FC<TableHeadProps> = ({ columns }) => {
             sx={{
               border: "none",
               backgroundColor: "transparent",
-              padding: "10px"
+              padding: "10px",
             }}
           >
             <Box
