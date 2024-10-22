@@ -186,6 +186,7 @@ const TopNavBar = () => {
                         <MenuItem
                           onClick={() => handleChangeProject(item)}
                           value={item?.id}
+                          key={item?.id}
                           sx={{ textTransform: "capitalize" }}
                         >
                           {item?.id}
