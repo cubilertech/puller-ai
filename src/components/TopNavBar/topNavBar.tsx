@@ -107,10 +107,10 @@ const TopNavBar = () => {
   }, [isFetchedProjects, ProjectsData]);
 
   useEffect(() => {
-    if (isPilotMode && !projectId && !orgId) {
+    if (isPilotMode) {
       refetchProjects();
     }
-  }, [refetchProjects, projectId, orgId]);
+  }, [refetchProjects]);
   return (
     <>
       <Box
