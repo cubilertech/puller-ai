@@ -3,6 +3,7 @@ import { palette } from "@/theme/Palette";
 import {
   Box,
   FormControl,
+  InputLabel,
   MenuItem,
   Select,
   SelectChangeEvent,
@@ -16,11 +17,7 @@ import {
   useRouter,
   useSearchParams,
 } from "next/navigation";
-import {
-  PagesType,
-  isClient,
-  isPilotMode,
-} from "@/utils/constants";
+import { PagesType, isClient, isPilotMode } from "@/utils/constants";
 import CustomLink from "../Link/link";
 import NotificationIconButton from "@/common/notificationIconButton/notificationIconButton";
 import CustomButton from "@/common/CustomButtons/CustomButtons";
@@ -169,9 +166,11 @@ const TopNavBar = () => {
               ) : (
                 <Box>
                   <FormControl sx={{ width: "200px" }}>
+                    <InputLabel>Projects</InputLabel>
                     <Select
                       value={selectedProjectId}
                       size="small"
+                      label="Projects"
                       onChange={handleChange}
                       renderValue={(value) => {
                         return (

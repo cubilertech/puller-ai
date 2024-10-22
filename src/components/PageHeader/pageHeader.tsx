@@ -99,7 +99,7 @@ const PageHeader: FC<PageHeaderProps> = ({
               ) : (
                 <TextField
                   select={true}
-                  // label="Modal"
+                  label="Modal"
                   value={selectedModel}
                   size="small"
                   variant="outlined"
