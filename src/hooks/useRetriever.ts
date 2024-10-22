@@ -184,7 +184,7 @@ export const useCreateRetriever = () => {
 
       const backendUrl = getBackendURL(MODES.DEMO as string);
       const res = await axios({
-        url: `${backendUrl}/v0/retriever`,
+        url: `${backendUrl}/retriever`,
         method: "POST",
         data: formData,
         headers: {

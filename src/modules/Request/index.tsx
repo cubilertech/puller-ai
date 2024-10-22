@@ -179,11 +179,11 @@ const RequestPage: FC = () => {
       dispatch(setSubmitValidateLoading(false));
     }
     if (submitValidateSuccess && validateData) {
-      // if (isPilotMode)
-      //   setDescription(validatedPrompt?.description as string);
       return validateData;
     } else {
-      // setDescription(singlePrompt?.description as string);
+      if (isDemoMode) {
+        setDescription(singlePrompt?.description as string);
+      }
       return singlePrompt;
     }
   }, [singlePrompt, validateData, submitValidateSuccess]);
@@ -584,7 +584,14 @@ const RequestPage: FC = () => {
                       }}
                     >
                       <ResponseArea
-                        prompt={{ ...prompt } as Prompt}
+                        prompt={
+                          {
+                            ...prompt,
+                            description: description
+                              ? description
+                              : prompt?.description,
+                          } as Prompt
+                        }
                         handleUpdate={handleUpdateVariable}
                         isLoading={
                           singlePromptLoading || isLoadingExecute ? true : false

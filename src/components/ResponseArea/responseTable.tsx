@@ -66,10 +66,9 @@ const DataTable: FC<DataTableProps> = ({ data }) => {
             scrollbarWidth: "none", // Enable vertical scrolling
           }}
           className="table-container"
-          
         >
           <Table stickyHeader>
-            <TableHead columns={columns} />
+            <TableHead columns={columns} isFilter />
             <TableBody>
               {rows
                 .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
