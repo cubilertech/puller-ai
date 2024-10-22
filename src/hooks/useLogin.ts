@@ -3,6 +3,7 @@ import { isClient, isPilotMode } from "@/utils/constants";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/navigation";
+import { idea } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { toast } from "react-toastify";
 
 export const useSubmitLogin = () => {
@@ -101,7 +102,7 @@ export const useSubmitNewPassword = () => {
 
 export const useGetProjectsData = () => {
   const token = isClient ? localStorage.getItem("token") : "";
-
+  const router = useRouter();
   async function submit() {
     try {
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
@@ -119,6 +120,17 @@ export const useGetProjectsData = () => {
         return null;
       }
     } catch (error: any) {
+      if (
+        (isPilotMode && error.code === "ERR_NETWORK") ||
+        (isPilotMode && error.code === 401)
+      ) {
+        document.cookie =
+          "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;"; // Expire the cookie
+
+        localStorage.removeItem("companyName");
+        localStorage.removeItem("token");
+        router.push("/");
+      }
       toast.error(error?.response?.data?.message ?? (error.message as string));
       console.error("Network error:", error);
       return null;

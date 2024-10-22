@@ -2,7 +2,7 @@ import { isClient, isPilotMode } from "@/utils/constants";
 import { Client } from "@/utils/types";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 
 export const useGetClientInfo = () => {
@@ -10,6 +10,7 @@ export const useGetClientInfo = () => {
   const searchParams = useSearchParams();
   const projectId = searchParams.get("projectId");
   const orgId = searchParams.get("orgId");
+  const router = useRouter();
   async function submit(): Promise<Client | null> {
     const backendUrl =
       isPilotMode && projectId && orgId
@@ -30,6 +31,17 @@ export const useGetClientInfo = () => {
         return null;
       }
     } catch (error: any) {
+      if (
+        (isPilotMode && error.code === "ERR_NETWORK") ||
+        (isPilotMode && error.code === 401)
+      ) {
+        document.cookie =
+          "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;"; // Expire the cookie
+
+        localStorage.removeItem("companyName");
+        localStorage.removeItem("token");
+        router.push("/");
+      }
       toast.error(error.message as string);
       // setTimeout(() => {
       //   router.push("/request");
