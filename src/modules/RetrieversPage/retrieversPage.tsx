@@ -4,7 +4,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { RetriverCard } from "@/components/RetriverCard";
 import { useGetAllRetriever } from "@/hooks/useRetriever";
 import { AlertModal } from "@/modals/AlertModal";
-import { isPilotMode } from "@/utils/constants";
+import { isDemoMode, isPilotMode } from "@/utils/constants";
 import { RetrieverIconsTypes, StatusTypes } from "@/utils/types";
 import { Box } from "@mui/material";
 import { useSearchParams } from "next/navigation";
@@ -23,11 +23,15 @@ const RetrieversPage = () => {
   const {
     data: Retrievers,
     isLoading: LoadingRetrivers,
-    refetch: FetchRetrievers,
+    refetch: retchRetrievers,
   } = useGetAllRetriever();
   useEffect(() => {
-    FetchRetrievers();
-  }, [FetchRetrievers]);
+    if (projectId && orgId && isPilotMode) {
+      retchRetrievers();
+    } else if (isDemoMode) {
+      retchRetrievers();
+    }
+  }, [projectId,orgId,retchRetrievers]);
 
   // Sort the array based on the timestamp in descending order
   const sortedItems = Retrievers?.sort((a, b) => b.timestamp - a.timestamp);

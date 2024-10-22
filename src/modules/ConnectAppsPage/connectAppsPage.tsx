@@ -3,13 +3,13 @@ import { Button } from "@/components/Button";
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
 import { Box, Typography } from "@mui/material";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ConnectCard } from "@/components/ConnectCard";
 import { Input } from "@/components/Input";
 import { palette } from "@/theme/Palette";
 import { AlertModal } from "@/modals/AlertModal";
 import { useEffect, useState } from "react";
-import { isPilotMode } from "@/utils/constants";
+import { isDemoMode, isPilotMode } from "@/utils/constants";
 import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
 import {
   getConnectQuery,
@@ -22,6 +22,9 @@ import { ChangeNameModal } from "@/modals/changeNameModal";
 
 const ConnectAppsPage = () => {
   const query = useAppSelector(getConnectQuery);
+  const searchParams = useSearchParams();
+  const projectId = searchParams.get("projectId");
+  const orgId = searchParams.get("orgId");
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [isOpenAlert, setIsOpenAlert] = useState(false);
@@ -82,9 +85,12 @@ const ConnectAppsPage = () => {
   }, [isSuccessApps, connectApps]);
 
   useEffect(() => {
-    connectAppRefetch();
-  }, [connectAppRefetch]);
-
+    if (projectId && orgId && isPilotMode) {
+      connectAppRefetch();
+    } else if (isDemoMode) {
+      connectAppRefetch();
+    }
+  }, [projectId, orgId, connectAppRefetch]);
   return (
     <Box
       sx={{

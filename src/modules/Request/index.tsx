@@ -586,7 +586,9 @@ const RequestPage: FC = () => {
                       <ResponseArea
                         prompt={{ ...prompt } as Prompt}
                         handleUpdate={handleUpdateVariable}
-                        isLoading={singlePromptLoading}
+                        isLoading={
+                          singlePromptLoading || isLoadingExecute ? true : false
+                        }
                         handleMouseUp={handleMouseUp}
                         isEditingText={isEditingText}
                         textSelected={textSelected}

@@ -9,16 +9,16 @@ import { TemplateTopbar } from "@/components/TemplateTopbar";
 import { useGetAllPrompt, useGetNewTimeStampPrompt } from "@/hooks/usePrompt";
 import { Loader } from "@/components/Loader";
 import { Prompt } from "@/utils/types";
+import { useSearchParams } from "next/navigation";
 
 const TemplatePage = () => {
   let currectTimeStamp = Date.now();
   const [isActive, setIsActive] = useState(ACTIVE_TYPES.PRIVATE);
   const [search, setSearch] = useState("");
-
+  const searchParams = useSearchParams();
+  const projectId = searchParams.get("projectId");
+  const orgId = searchParams.get("orgId");
   const [page, setPage] = useState(0);
-  // const [rowsPerPage, setRowsPerPage] = useState(20);
-  // const [activePage, setActivePage] = useState<number>(0);
-  // const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [newTimeStamp, setNewTimeStamp] = useState<number | null>(null);
   const [totalPages, setTotalPages] = useState<number>(10);
   const getAllPrompt = useGetAllPrompt();
@@ -51,7 +51,7 @@ const TemplatePage = () => {
     setTotalPages(
       isDemoMode
         ? Math.ceil((result?.length || 0) / 20)
-        : Math.ceil((data && 'total' in data ? data.total : 0 || 0) / 20)
+        : Math.ceil((data && "total" in data ? data.total : 0 || 0) / 20)
     );
     return result;
   }, [data, isActive, search]);
@@ -69,8 +69,12 @@ const TemplatePage = () => {
   // };
 
   useEffect(() => {
-    refetch();
-  }, []);
+    if (isPilotMode && projectId && orgId) {
+      refetch();
+    } else if (isDemoMode) {
+      refetch();
+    }
+  }, [projectId, orgId]);
 
   // Initialize before onPageChange
 
@@ -94,9 +98,13 @@ const TemplatePage = () => {
   };
   useEffect(() => {
     if (newTimeStamp !== null) {
-      refetch();
+      if (isPilotMode && projectId && orgId) {
+        refetch();
+      } else if (isDemoMode) {
+        refetch();
+      }
     }
-  }, [newTimeStamp]);
+  }, [newTimeStamp, projectId, orgId]);
 
   return (
     <Box

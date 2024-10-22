@@ -7,10 +7,10 @@ import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
 import { useCreateRetriever } from "@/hooks/useRetriever";
 import { AlertModal } from "@/modals/AlertModal";
-import { isPilotMode } from "@/utils/constants";
+import { currentPath, isClient, isPilotMode } from "@/utils/constants";
 import { Files, StatusTypes } from "@/utils/types";
 import { Box, Input, Typography } from "@mui/material";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import FeedbackPage from "../FeedbackPage/feedbackPage";
 import { toast } from "react-toastify";
@@ -18,6 +18,9 @@ import { UploadBox } from "@/components/UploadBox";
 
 const UploadRetrieverPage = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const projectId = searchParams.get("projectId");
+  const orgId = searchParams.get("orgId");
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const [fileData, setFileData] = useState<Files[]>([]);
@@ -265,7 +268,15 @@ const UploadRetrieverPage = () => {
                     label="Go Back"
                     variant="outlined"
                     fullWidth
-                    onClick={() => router.back()}
+                    onClick={() => {
+                      if (currentPath === "/retrievers/upload" && isPilotMode) {
+                        router.push(
+                          `/retrievers/new?projectId=${projectId}&orgId=${orgId}`
+                        );
+                      } else {
+                        router.back();
+                      }
+                    }}
                   />
                 </Box>
                 <Box width={242} height={44}>

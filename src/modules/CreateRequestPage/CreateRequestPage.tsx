@@ -44,20 +44,20 @@ const CreateRequestPage: FC<Props> = ({
   const searchParams = useSearchParams();
   const projectId = searchParams.get("projectId");
   const orgId = searchParams.get("orgId");
-  const router = useRouter();
+  // const router = useRouter();
   const [ShowPrompts, setShowPrompts] = useState(false);
   const [isOpenAlert, setIsOpenAlert] = useState(false);
-  const [globalLoadings, setGlobalLoadings] = useState(true);
-  const [selectedProjectId, setSelectedProjectId] = useState(
-    projectId ? projectId : ""
-  );
+  // const [globalLoadings, setGlobalLoadings] = useState(true);
+  // const [selectedProjectId, setSelectedProjectId] = useState(
+  //   projectId ? projectId : ""
+  // );
 
-  const {
-    data: ProjectsData,
-    refetch: refetchProjects,
-    isFetched: isFetchedProjects,
-    isFetching,
-  } = useGetProjectsData();
+  // const {
+  //   data: ProjectsData,
+  //   refetch: refetchProjects,
+  //   isFetched: isFetchedProjects,
+  //   isFetching,
+  // } = useGetProjectsData();
   const promptList = useMemo(() => {
     if (!isDemoMode) {
       if (list && "items" in list) {
@@ -77,13 +77,13 @@ const CreateRequestPage: FC<Props> = ({
     return LatestPullsData ? LatestPullsData.slice(0, 4) : [];
   }, [isDemoMode, list, LatestPullsData]);
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setSelectedProjectId(event.target.value as string);
-  };
+  // const handleChange = (event: SelectChangeEvent) => {
+  //   setSelectedProjectId(event.target.value as string);
+  // };
 
-  const handleChangeProject = (item: any) => {
-    router.replace(`/request?projectId=${item.id}&orgId=${item.org}`);
-  };
+  // const handleChangeProject = (item: any) => {
+  //   router.replace(`/request?projectId=${item.id}&orgId=${item.org}`);
+  // };
 
   const handlePrompt = () => {
     if (isPilotMode) {
@@ -97,23 +97,29 @@ const CreateRequestPage: FC<Props> = ({
   };
   useEffect(() => {
     if (isPilotMode) {
-      refetchProjects();
+      // refetchProjects();
     } else {
       refetch();
     }
   }, []);
 
-  useEffect(() => {
-    if (!projectId && !selectedProjectId && isFetchedProjects && isPilotMode) {
-      setSelectedProjectId(ProjectsData?.items[0]?.id);
-      router.push(
-        `/request?projectId=${ProjectsData?.items[0]?.id}&orgId=${ProjectsData?.items[0]?.org}`
-      );
-    }
-    if (isFetchedProjects) {
-      setGlobalLoadings(false);
-    }
-  }, [isFetchedProjects, ProjectsData]);
+  // useEffect(() => {
+  //   if (
+  //     !projectId &&
+  //     !selectedProjectId &&
+  //     isFetchedProjects &&
+  //     isPilotMode &&
+  //     ProjectsData?.items
+  //   ) {
+  //     setSelectedProjectId(ProjectsData?.items[0]?.id);
+  //     router.push(
+  //       `/request?projectId=${ProjectsData?.items[0]?.id}&orgId=${ProjectsData?.items[0]?.org}`
+  //     );
+  //   }
+  //   if (isFetchedProjects) {
+  //     setGlobalLoadings(false);
+  //   }
+  // }, [isFetchedProjects, ProjectsData]);
 
   const CompanyName = localStorage.getItem("companyName");
   return (
@@ -148,7 +154,7 @@ const CreateRequestPage: FC<Props> = ({
             position: "relative",
           }}
         >
-          {isPilotMode && (
+          {/* {isPilotMode && (
             <>
               {globalLoadings || isFetching ? (
                 <Box sx={{ width: "200px", position: "absolute", top: -10 }}>
@@ -189,7 +195,7 @@ const CreateRequestPage: FC<Props> = ({
                 </Box>
               )}
             </>
-          )}
+          )} */}
           <Box sx={{ display: "flex", flexDirection: "column", gap: 5 }}>
             <Box sx={{ display: "flex", flexDirection: "column" }}>
               <Typography className="animated-text animated-left-right-text">
