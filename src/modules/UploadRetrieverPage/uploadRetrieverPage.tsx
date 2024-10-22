@@ -7,7 +7,7 @@ import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
 import { useCreateRetriever } from "@/hooks/useRetriever";
 import { AlertModal } from "@/modals/AlertModal";
-import { currentPath, isClient, isPilotMode } from "@/utils/constants";
+import { isClient, isPilotMode } from "@/utils/constants";
 import { Files, StatusTypes } from "@/utils/types";
 import { Box, Input, Typography } from "@mui/material";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -21,6 +21,7 @@ const UploadRetrieverPage = () => {
   const searchParams = useSearchParams();
   const projectId = searchParams.get("projectId");
   const orgId = searchParams.get("orgId");
+  const currentPath = isClient ? window.location.pathname : "";
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const [fileData, setFileData] = useState<Files[]>([]);

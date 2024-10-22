@@ -61,7 +61,6 @@ export const PagesType = {
 };
 
 export const isClient = typeof window !== "undefined";
-export const currentPath = isClient ? window.location.pathname : "";
 
 export const ACTIVE_TYPES = {
   ALL: "all",

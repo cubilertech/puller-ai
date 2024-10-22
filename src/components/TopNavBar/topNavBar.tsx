@@ -18,7 +18,6 @@ import {
 } from "next/navigation";
 import {
   PagesType,
-  currentPath,
   isClient,
   isPilotMode,
 } from "@/utils/constants";
@@ -35,7 +34,7 @@ const TopNavBar = () => {
   const projectId = searchParams.get("projectId");
   const orgId = searchParams.get("orgId");
   const route = usePathname();
-
+  const currentPath = isClient ? window.location.pathname : "";
   const router = useRouter();
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const [selectedProjectId, setSelectedProjectId] = useState(

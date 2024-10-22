@@ -99,10 +99,11 @@ const PageHeader: FC<PageHeaderProps> = ({
               ) : (
                 <TextField
                   select={true}
-                  label="Modal"
+                  // label="Modal"
                   value={selectedModel}
                   size="small"
-                  variant="filled"
+                  variant="outlined"
+                  sx={{width: "200px"}}
                   onChange={(event) => {
                     if (handleChangeModal)
                       handleChangeModal(event.target.value);
