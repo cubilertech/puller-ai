@@ -1,3 +1,4 @@
+"use client";
 import React, { ReactNode } from "react";
 import { SideNavbar } from "@/components/SideNavbar";
 import "./appLayout.css";

@@ -1,11 +1,14 @@
 import AppLayout from "@/common/appLayout/appLayout";
 import RetrieverDetailPage from "@/modules/RetrieverDetailPage/retrieverDetailPage";
+import { Suspense } from "react";
 
 function Page() {
   return (
-    <AppLayout>
-      <RetrieverDetailPage />
-    </AppLayout>
+    <Suspense fallback={<div>Loading retriever detail page...</div>}>
+      <AppLayout>
+        <RetrieverDetailPage />
+      </AppLayout>
+    </Suspense>
   );
 }
 
