@@ -24,7 +24,7 @@ export const useSubmitExecute = () => {
         true
       );
       const res = await axios({
-        url: `${backendUrl}/query/execute`,
+        url: `${backendUrl}${isDemoMode ? "/execute" : "/query/execute"}`,
         method: "POST",
         data,
         headers: {
@@ -85,7 +85,7 @@ export const useGetSingleExecute = (executeId: string) => {
         `${isDemoMode ? "run#" : ""}${executeId}`
       );
       const res = await axios({
-        url: `${backendUrl}/query/execute/${encodedExecuteId}`,
+        url: `${backendUrl}${isDemoMode ? "/execute" : "/query/execute"}${encodedExecuteId}`,
         method: "get",
         headers: {
           accept: "application/json",
@@ -129,7 +129,7 @@ export const useGetAllExecute = () => {
         true
       );
       const res = await axios({
-        url: `${backendUrl}/query/execute`,
+        url: `${backendUrl}${isDemoMode ? "/execute" : "/query/execute"}`,
         method: "get",
         headers: {
           accept: "application/json",

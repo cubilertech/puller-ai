@@ -12,9 +12,11 @@ import {
   UpdatePromptValue,
 } from "@/libs/redux/features/isLoadingRequest";
 import {
+  formatDate,
   replaceBrandName,
   replaceIdWithVariableInDescription,
 } from "@/utils/common";
+import { isPilotMode } from "@/utils/constants";
 
 interface TemplateCardProps {
   card: Prompt;
@@ -30,7 +32,11 @@ const TemplateCard: FC<TemplateCardProps> = ({ card, index }) => {
   const id = card?.id?.includes("#") ? card?.id?.split("#")?.[1] : card?.id;
   const handleClickTemplate = () => {
     if (projectId && orgId) {
-      router.push(`/request?id=${id}&projectId=${projectId}&orgId=${orgId}`);
+      router.push(
+        `/request/results/${id}?projectId=${projectId}&orgId=${orgId}`
+      );
+    } else if (isPilotMode) {
+      router.push(`/request/results/${id}`);
     } else {
       router.push(`/request?id=${id}`);
     }
@@ -53,6 +59,11 @@ const TemplateCard: FC<TemplateCardProps> = ({ card, index }) => {
       companyName as string
     );
   }, [card]);
+
+  const formatedTimeStamp = isPilotMode
+    ? formatDate(card.timestamp as number)
+    : id;
+  const ModelName = isPilotMode ? card.target.split(".").pop() : "Template";
   return (
     <Box
       key={index}
@@ -85,7 +96,20 @@ const TemplateCard: FC<TemplateCardProps> = ({ card, index }) => {
           />
           {/* Description */}
           <Box display={"flex"} flexDirection={"column"}>
-            <Typography variant="text-md-regular">Template {id}</Typography>
+            <Typography
+              variant="text-md-regular"
+              sx={{ textTransform: "capitalize" }}
+            >
+              {ModelName}{" "}
+              <Typography
+                variant="text-sm-regular"
+                component={"span"}
+                sx={{ textTransform: "capitalize" }}
+              >
+                {formatedTimeStamp}
+              </Typography>
+            </Typography>
+
             <Typography
               variant="text-xs-regular"
               sx={{

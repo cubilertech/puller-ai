@@ -11,7 +11,6 @@ import { isPilotMode } from "@/utils/constants";
 // import { getActiveRequest } from "@/libs/redux/features/activeRequest";
 // import { useAppSelector } from "@/libs/redux/hooks";
 import { RESULTS_DATA } from "@/utils/data";
-import { Prompt } from "@/utils/types";
 import { Box } from "@mui/material";
 // import { useParams } from "next/navigation";
 import { FC, useEffect, useMemo, useState } from "react";
@@ -26,11 +25,13 @@ const YourResultsPage: FC<Props> = ({ id }) => {
   const singleExecute = useGetSingleExecute(id);
   const singlePrompt = useGetSinglePrompt(id);
   const dispatch = useAppDispatch();
-  const { data, refetch: refetchSignleExecute } = isPilotMode
-    ? singleExecute
-    : singlePrompt;
+  const { data, refetch: refetchSignleExecute } = singlePrompt;
   useEffect(() => {
     if (data && data?.status === "complete") {
+      setIsLoading(false);
+      // Trigger fade-in effect after component mounts
+      setFadeIn(true);
+    } else if (isPilotMode && data) {
       setIsLoading(false);
       // Trigger fade-in effect after component mounts
       setFadeIn(true);

@@ -1,7 +1,7 @@
 "use client";
 import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
-import { Box, Pagination, Stack } from "@mui/material";
+import { Box, Pagination, Stack, Typography } from "@mui/material";
 import React, { useEffect, useMemo, useState } from "react";
 import { ACTIVE_TYPES, isDemoMode, isPilotMode } from "@/utils/constants";
 import { TemplateCardList } from "@/components/TemplateCardList";
@@ -132,6 +132,7 @@ const TemplatePage = () => {
           variant="light-border"
         >
           {/* Topbar */}
+         
           <TemplateTopbar
             isActive={isActive}
             setIsActive={setIsActive}
