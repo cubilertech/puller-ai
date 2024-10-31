@@ -3,24 +3,41 @@ import { PageHeader } from "@/components/PageHeader";
 import { Paper } from "@/components/Paper";
 import { Box, Pagination, Stack, Typography } from "@mui/material";
 import React, { useEffect, useMemo, useState } from "react";
-import { ACTIVE_TYPES, isDemoMode, isPilotMode } from "@/utils/constants";
+import {
+  ACTIVE_TYPES,
+  isDemoMode,
+  isPilotMode,
+  PULLS_TYPES,
+} from "@/utils/constants";
 import { TemplateCardList } from "@/components/TemplateCardList";
 import { TemplateTopbar } from "@/components/TemplateTopbar";
 import { useGetAllPrompt, useGetNewTimeStampPrompt } from "@/hooks/usePrompt";
 import { Loader } from "@/components/Loader";
-import { Prompt } from "@/utils/types";
+import { Prompt, Query } from "@/utils/types";
 import { useSearchParams } from "next/navigation";
+import { useGetAllExecute } from "@/hooks/useExecute";
+import { idea } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 const TemplatePage = () => {
   let currectTimeStamp = Date.now();
-  const [isActive, setIsActive] = useState(ACTIVE_TYPES.PRIVATE);
+  const [isActive, setIsActive] = useState(PULLS_TYPES.PROMPTS);
   const [search, setSearch] = useState("");
   const searchParams = useSearchParams();
   const projectId = searchParams.get("projectId");
   const orgId = searchParams.get("orgId");
   const [page, setPage] = useState(0);
+  const [pagePulls, setPagePulls] = useState(0);
   const [newTimeStamp, setNewTimeStamp] = useState<number | null>(null);
+  const [newTimeStampPulls, setNewTimeStampPulls] = useState<number | null>(
+    null
+  );
   const [totalPages, setTotalPages] = useState<number>(10);
+  const [totalPagesPulls, setTotalPagesPulls] = useState<number>(10);
+  const {
+    data: allPulls,
+    refetch: refetchPulls,
+    isFetching,
+  } = useGetAllExecute(newTimeStampPulls ?? currectTimeStamp);
   const getAllPrompt = useGetAllPrompt();
   const getNewTimeStampePrompt = useGetNewTimeStampPrompt(
     newTimeStamp ?? currectTimeStamp
@@ -28,19 +45,16 @@ const TemplatePage = () => {
   const { data, refetch, isLoading, isRefetching } = isPilotMode
     ? getNewTimeStampePrompt
     : getAllPrompt;
-  const pullsList = useMemo(() => {
+  const promptsList = useMemo(() => {
     let result: Prompt[] = [];
 
-    if (data && isActive === ACTIVE_TYPES.PRIVATE) {
+    if (data && isActive === PULLS_TYPES.PROMPTS) {
       if (isDemoMode) {
-        // Ensure data is not null or undefined before casting
         result = (data as unknown as Prompt[]) || [];
       } else {
-        // Safely access items if data is not null or undefined
-        result = (data?.items as unknown as Prompt[]) || [];
+        result = (data?.items as Prompt[]) || [];
       }
     }
-    // console.log("runing")
     if (search?.length) {
       result = result?.filter(
         (item: any) =>
@@ -51,44 +65,39 @@ const TemplatePage = () => {
     setTotalPages(
       isDemoMode
         ? Math.ceil((result?.length || 0) / 20)
-        : Math.ceil((data && "total" in data ? data.total : 0 || 0) / 20)
+        : Math.ceil((data && "total" in data ? (data as any).total : 0) / 20)
     );
     return result;
   }, [data, isActive, search]);
 
-  // const handlePageChange = (page: number) => {
-  //   setActivePage(page);
-  //   setPage(page);
-  // };
-
-  // const handleClose = () => {
-  //   setAnchorEl(null);
-  // };
-  // const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-  //   setAnchorEl(event.currentTarget);
-  // };
-
   useEffect(() => {
     if (isPilotMode && projectId && orgId) {
       refetch();
+      refetchPulls();
     } else if (isDemoMode) {
       refetch();
     }
   }, [projectId, orgId]);
 
-  // Initialize before onPageChange
+  useEffect(() => {
+    if (allPulls && "total" in allPulls) {
+      setTotalPagesPulls(
+        Math.ceil((allPulls.total as number) / 20)
+      );
+    }
+  }, [allPulls]);
 
   const onPageChange = (pagenum: number) => {
     let newTimeStamp = null;
-    let pullsListLength = pullsList.length;
+    let promptsListLength = promptsList.length;
 
     if (pagenum < page) {
       newTimeStamp =
-        pullsListLength > 0 ? pullsList[0].timestamp : currectTimeStamp;
+        promptsListLength > 0 ? promptsList[0].timestamp : currectTimeStamp;
     } else {
       newTimeStamp =
-        pullsListLength > 0
-          ? pullsList[pullsListLength - 1].timestamp
+        promptsListLength > 0
+          ? promptsList[promptsListLength - 1].timestamp
           : currectTimeStamp;
     }
 
@@ -96,6 +105,26 @@ const TemplatePage = () => {
     setNewTimeStamp(newTimeStamp as number);
     setPage(pagenum);
   };
+
+  const onPageChangePulls = (pagenum: number) => {
+    let newTimeStamp = null;
+    let promptsListLength = allPulls?.items.length ?? 0;
+
+    if (pagenum < pagePulls) {
+      newTimeStamp =
+        promptsListLength > 0 ? allPulls?.items[0].timestamp : currectTimeStamp;
+    } else {
+      newTimeStamp =
+        promptsListLength > 0
+          ? allPulls?.items[promptsListLength - 1].timestamp
+          : currectTimeStamp;
+    }
+
+    console.log(newTimeStamp, "newTimeStamp");
+    setNewTimeStampPulls(newTimeStamp as number);
+    setPagePulls(pagenum);
+  };
+
   useEffect(() => {
     if (newTimeStamp !== null) {
       if (isPilotMode && projectId && orgId) {
@@ -104,7 +133,12 @@ const TemplatePage = () => {
         refetch();
       }
     }
-  }, [newTimeStamp, projectId, orgId]);
+    if (newTimeStampPulls !== null) {
+      if (isPilotMode) {
+        refetchPulls();
+      }
+    }
+  }, [newTimeStamp, newTimeStampPulls, projectId, orgId]);
 
   return (
     <Box
@@ -132,7 +166,7 @@ const TemplatePage = () => {
           variant="light-border"
         >
           {/* Topbar */}
-         
+
           <TemplateTopbar
             isActive={isActive}
             setIsActive={setIsActive}
@@ -156,13 +190,8 @@ const TemplatePage = () => {
           ) : (
             <TemplateCardList
               isActive={isActive}
-              pulls={
-                pullsList
-                //   ?.slice(
-                //   page * rowsPerPage,
-                //   page * rowsPerPage + rowsPerPage
-                // )
-              }
+              prompts={promptsList}
+              pulls={(allPulls?.items as Query[]) ?? []}
             />
           )}
 
@@ -175,16 +204,27 @@ const TemplatePage = () => {
             }}
           >
             <Box></Box>
-
-            <Stack spacing={2}>
-              <Pagination
-                disabled={isRefetching}
-                count={totalPages}
-                variant="outlined"
-                shape="rounded"
-                onChange={(e, pagenum) => onPageChange(pagenum)}
-              />
-            </Stack>
+            {isActive === PULLS_TYPES.PROMPTS ? (
+              <Stack spacing={2}>
+                <Pagination
+                  disabled={isRefetching}
+                  count={totalPages}
+                  variant="outlined"
+                  shape="rounded"
+                  onChange={(e, pagenum) => onPageChange(pagenum)}
+                />
+              </Stack>
+            ) : (
+              <Stack spacing={2}>
+                <Pagination
+                  disabled={isFetching}
+                  count={totalPagesPulls}
+                  variant="outlined"
+                  shape="rounded"
+                  onChange={(e, pagenum) => onPageChangePulls(pagenum)}
+                />
+              </Stack>
+            )}
           </Box>
         </Paper>
       </Box>

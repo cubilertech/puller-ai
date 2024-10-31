@@ -25,7 +25,9 @@ export const useSubmitLogin = () => {
       } else {
         return null;
       }
-    } catch (error) {
+    } catch (error: any) {
+      console.log(error, "error");
+      toast.error(error?.response?.data?.message ?? (error.message as string));
       console.error("Network error:", error);
       return null;
     }

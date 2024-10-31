@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { FC } from "react";
-import { ACTIVE_TYPES, isDemoMode } from "@/utils/constants";
+import { ACTIVE_TYPES, isDemoMode, PULLS_TYPES } from "@/utils/constants";
 import { Input } from "../Input";
 import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
 import { getSearchQuery, updateQuery } from "@/libs/redux/features/searchbar";
@@ -28,69 +28,65 @@ const TemplateTopbar: FC<TemplateTopbarProps> = ({
         height: "8%",
       }}
     >
-      {isDemoMode ? (
+      <Box
+        sx={{
+          display: "flex",
+        }}
+      >
         <Box
+          onClick={() => setIsActive(PULLS_TYPES.PULLS)}
           sx={{
+            width: "202px",
             display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            ":hover": {
+              cursor: "pointer",
+            },
           }}
         >
-          <Box
-            onClick={() => setIsActive(ACTIVE_TYPES.PUBLIC)}
-            sx={{
-              width: "202px",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              ":hover": {
-                cursor: "pointer",
-              },
-            }}
-          >
-            <Typography variant="text-md-regular">Public</Typography>
-            {isActive === "public" && (
-              <Box
-                sx={{
-                  background:
-                    "linear-gradient(to right, #AD00FE -140.78%, #00E0EE)",
-                  height: "1px",
-                  width: "100%",
-                  mt: "5px",
-                }}
-              />
-            )}
-          </Box>
-
-          <Box
-            onClick={() => setIsActive(ACTIVE_TYPES.PRIVATE)}
-            sx={{
-              textAlign: "center",
-              width: "202px",
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              ":hover": {
-                cursor: "pointer",
-              },
-            }}
-          >
-            <Typography variant="text-md-regular">Private</Typography>
-
+          <Typography variant="text-md-regular">Pulls</Typography>
+          {isActive === PULLS_TYPES.PULLS && (
             <Box
               sx={{
                 background:
-                  isActive === "private"
-                    ? "linear-gradient(to right, #AD00FE -140.78%, #00E0EE)"
-                    : "transparent",
+                  "linear-gradient(to right, #AD00FE -140.78%, #00E0EE)",
                 height: "1px",
                 width: "100%",
                 mt: "5px",
               }}
             />
-          </Box>
+          )}
         </Box>
-      ) : (
-        <Typography variant="h5">Pulls</Typography>
-      )}
+
+        <Box
+          onClick={() => setIsActive(PULLS_TYPES.PROMPTS)}
+          sx={{
+            textAlign: "center",
+            width: "202px",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            ":hover": {
+              cursor: "pointer",
+            },
+          }}
+        >
+          <Typography variant="text-md-regular">Prompts</Typography>
+
+          <Box
+            sx={{
+              background:
+                isActive === PULLS_TYPES.PROMPTS
+                  ? "linear-gradient(to right, #AD00FE -140.78%, #00E0EE)"
+                  : "transparent",
+              height: "1px",
+              width: "100%",
+              mt: "5px",
+            }}
+          />
+        </Box>
+      </Box>
 
       <Input
         value={search}

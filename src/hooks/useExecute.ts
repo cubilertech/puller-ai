@@ -2,7 +2,7 @@ import { UpdateCurrentPage } from "@/libs/redux/features/isLoadingRequest";
 import { useAppDispatch } from "@/libs/redux/hooks";
 import { getBackendURL } from "@/utils/common";
 import { isClient, isDemoMode, isPilotMode } from "@/utils/constants";
-import { submitExecutePayload, Query } from "@/utils/types";
+import { submitExecutePayload, Query, QueryData } from "@/utils/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -85,7 +85,7 @@ export const useGetSingleExecute = (executeId: string) => {
         `${isDemoMode ? "run#" : ""}${executeId}`
       );
       const res = await axios({
-        url: `${backendUrl}${isDemoMode ? "/execute" : "/query/execute"}${encodedExecuteId}`,
+        url: `${backendUrl}${isDemoMode ? "/execute" : "/query/execute"}/${encodedExecuteId}`,
         method: "get",
         headers: {
           accept: "application/json",
@@ -100,7 +100,11 @@ export const useGetSingleExecute = (executeId: string) => {
     } catch (error: any) {
       toast.error(error?.response?.data?.message ?? (error.message as string));
       setTimeout(() => {
-        router.push("/request");
+        if (projectId && orgId) {
+          router.push(`/request?projectId=${projectId}&orgId=${orgId}`);
+        } else {
+          router.push(`/request`);
+        }
       }, 5000);
       console.error("Network error:", error);
       return null;
@@ -115,12 +119,12 @@ export const useGetSingleExecute = (executeId: string) => {
   });
 };
 
-export const useGetAllExecute = () => {
+export const useGetAllExecute = (timestamp: any) => {
   const token = isClient ? localStorage.getItem("token") : "";
   const searchParams = useSearchParams();
   const projectId = searchParams.get("projectId");
   const orgId = searchParams.get("orgId");
-  async function submit(): Promise<Query[] | null> {
+  async function submit(): Promise<QueryData | null> {
     try {
       const backendUrl = getBackendURL(
         process.env.NEXT_PUBLIC_MODE as string,
@@ -129,7 +133,7 @@ export const useGetAllExecute = () => {
         true
       );
       const res = await axios({
-        url: `${backendUrl}${isDemoMode ? "/execute" : "/query/execute"}`,
+        url: `${backendUrl}${isDemoMode ? "/execute" : `/query/execute?start=${timestamp}`}`,
         method: "get",
         headers: {
           accept: "application/json",

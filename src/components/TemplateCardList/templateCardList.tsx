@@ -3,14 +3,22 @@ import { Box, Typography } from "@mui/material";
 import { FC } from "react";
 // import { TEMPLATE_PRIVATE_DATA, TEMPLATE_PUBLIC_DATA } from "@/utils/data";
 import { TemplateCard } from "../TemplateCard";
-import { Prompt } from "@/utils/types";
+import { Prompt, Query } from "@/utils/types";
 import { palette } from "@/theme/Palette";
+import { PULLS_TYPES } from "@/utils/constants";
+import TemplateCardPulls from "../TemplateCardPulls/templateCard";
 interface TemplateCardListProps {
   isActive: string;
-  pulls: Prompt[];
+  pulls: Query[];
+  prompts: Prompt[];
 }
 
-const TemplateCardList: FC<TemplateCardListProps> = ({ isActive, pulls }) => {
+const TemplateCardList: FC<TemplateCardListProps> = ({
+  isActive,
+  pulls,
+  prompts,
+}) => {
+  console.log(pulls, "pulls");
   return (
     <Box
       sx={{
@@ -19,7 +27,8 @@ const TemplateCardList: FC<TemplateCardListProps> = ({ isActive, pulls }) => {
         scrollbarWidth: "none",
       }}
     >
-      {pulls?.length <= 0 ? (
+      {(isActive === PULLS_TYPES.PULLS && pulls?.length <= 0) ||
+      (isActive === PULLS_TYPES.PROMPTS && prompts?.length <= 0) ? (
         <Typography
           sx={{
             color: palette.color.gray[500],
@@ -31,11 +40,15 @@ const TemplateCardList: FC<TemplateCardListProps> = ({ isActive, pulls }) => {
           }}
           variant="text-lg-regular"
         >
-          No {isActive} pulls available.
+          No {isActive} available.
         </Typography>
+      ) : isActive === PULLS_TYPES.PROMPTS ? (
+        prompts?.map((pull, index) => (
+          <TemplateCard key={index} index={index} card={pull} />
+        ))
       ) : (
         pulls?.map((pull, index) => (
-          <TemplateCard key={index} index={index} card={pull} />
+          <TemplateCardPulls key={index} index={index} card={pull} />
         ))
       )}
     </Box>

@@ -25,20 +25,18 @@ const YourResultsPage: FC<Props> = ({ id }) => {
   const singleExecute = useGetSingleExecute(id);
   const singlePrompt = useGetSinglePrompt(id);
   const dispatch = useAppDispatch();
-  const { data, refetch: refetchSignleExecute } = singlePrompt;
+  const { data, refetch: refetchSingleExecute } = isPilotMode
+    ? singleExecute
+    : singlePrompt;
   useEffect(() => {
     if (data && data?.status === "complete") {
       setIsLoading(false);
       // Trigger fade-in effect after component mounts
       setFadeIn(true);
-    } else if (isPilotMode && data) {
-      setIsLoading(false);
-      // Trigger fade-in effect after component mounts
-      setFadeIn(true);
     } else {
-      refetchSignleExecute();
+      refetchSingleExecute();
     }
-  }, [data, refetchSignleExecute]);
+  }, [data, refetchSingleExecute]);
   const imageUrl =
     data?.results && data.results[data.results.length - 1]?.url
       ? data.results[data.results.length - 1].url

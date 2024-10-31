@@ -3,7 +3,7 @@ import Image from "next/image";
 // import { Icon } from "../Icon";
 import { Paper } from "../Paper";
 import { FC, useMemo } from "react";
-import { Prompt } from "@/utils/types";
+import { Prompt, Query } from "@/utils/types";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAppDispatch } from "@/libs/redux/hooks";
 import {
@@ -11,30 +11,30 @@ import {
   UpdateIsLoadingRequest,
   UpdatePromptValue,
 } from "@/libs/redux/features/isLoadingRequest";
-import {
-  formatDate,
-  replaceBrandName,
-  replaceIdWithVariableInDescription,
-} from "@/utils/common";
+import { formatDate } from "@/utils/common";
 import { isPilotMode } from "@/utils/constants";
 
-interface TemplateCardProps {
-  card: Prompt;
+interface TemplateCardPullsProps {
+  card: Query;
   index: number;
 }
 
-const TemplateCard: FC<TemplateCardProps> = ({ card, index }) => {
+const TemplateCardPulls: FC<TemplateCardPullsProps> = ({ card, index }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const searchParams = useSearchParams();
   const projectId = searchParams.get("projectId");
   const orgId = searchParams.get("orgId");
-  const id = card?.id?.includes("#") ? card?.id?.split("#")?.[1] : card?.id;
+  const id = card?.prompt?.includes("#")
+    ? card?.prompt?.split("#")?.[1]
+    : card?.id;
   const handleClickTemplate = () => {
     if (projectId && orgId) {
-      router.push(`/request?id=${id}&projectId=${projectId}&orgId=${orgId}`);
+      router.push(
+        `/request/results/${id}?projectId=${projectId}&orgId=${orgId}`
+      );
     } else if (isPilotMode) {
-      router.push(`/request?id=${id}`);
+      router.push(`/request/results/${id}`);
     } else {
       router.push(`/request?id=${id}`);
     }
@@ -43,25 +43,11 @@ const TemplateCard: FC<TemplateCardProps> = ({ card, index }) => {
     dispatch(UpdateIsLoadingRequest(true));
     dispatch(UpdatePromptValue(card.message));
   };
-  const companyName = localStorage.getItem("companyName");
-  const description = useMemo(() => {
-    const replaceBrand = replaceBrandName(
-      { description: card.description },
-      companyName as string
-    );
-    return replaceIdWithVariableInDescription(
-      {
-        ...card,
-        description: replaceBrand,
-      } as Prompt,
-      companyName as string
-    );
-  }, [card]);
 
   const formatedTimeStamp = isPilotMode
     ? formatDate(card.timestamp as number)
     : id;
-  const ModelName = isPilotMode ? card.target.split(".").pop() : "Template";
+  const tableName = card.results[card.results.length - 1]?.table;
   return (
     <Box
       key={index}
@@ -98,7 +84,7 @@ const TemplateCard: FC<TemplateCardProps> = ({ card, index }) => {
               variant="text-md-regular"
               sx={{ textTransform: "capitalize" }}
             >
-              {ModelName}{" "}
+              {tableName}{" "}
               <Typography
                 variant="text-sm-regular"
                 component={"span"}
@@ -107,27 +93,11 @@ const TemplateCard: FC<TemplateCardProps> = ({ card, index }) => {
                 {formatedTimeStamp}
               </Typography>
             </Typography>
-
-            <Typography
-              variant="text-xs-regular"
-              sx={{
-                overflow: "hidden",
-                display: "-webkit-box",
-                WebkitLineClamp: 3,
-                WebkitBoxOrient: "vertical",
-              }}
-            >
-              {description}
-            </Typography>
-            {/* <Typography variant="text-xs-regular">
-              {card.subHeading2}
-            </Typography> */}
           </Box>
         </Box>
-        {/* <Icon icon="actions" width={42} height={24} /> */}
       </Paper>
     </Box>
   );
 };
 
-export default TemplateCard;
+export default TemplateCardPulls;
