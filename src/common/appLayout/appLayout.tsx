@@ -1,15 +1,17 @@
+"use client";
 import React, { ReactNode } from "react";
 import { SideNavbar } from "@/components/SideNavbar";
 import "./appLayout.css";
 import { TopNavBar } from "@/components/TopNavBar";
-import TanstackProvider from "@/providers/TanstackProvider";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { toastTimeout } from "@/utils/constants";
+import { isPilotMode, toastTimeout } from "@/utils/constants";
+import { CustomHooks } from "../../hooks/CustomHooks";
 
 const AppLayout = ({ children }: { children: ReactNode }) => {
   return (
     <div className="app-layout">
+      {isPilotMode && <CustomHooks />}
       <div className="sidebar">
         <SideNavbar />
       </div>

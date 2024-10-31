@@ -9,7 +9,7 @@ import {
 } from "@/libs/redux/features/isLoadingRequest";
 import { useAppDispatch } from "@/libs/redux/hooks";
 import { getBackendURL } from "@/utils/common";
-import { isDemoMode, toastTimeout } from "@/utils/constants";
+import { isClient, isDemoMode } from "@/utils/constants";
 import { submitPromptPayload, Prompt, List } from "@/utils/types";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -35,15 +35,23 @@ export const useSubmitPrompt = (
     [searchParams]
   );
   const dispatch = useAppDispatch();
+  const token = isClient ? localStorage.getItem("token") : "";
+  const projectId = searchParams.get("projectId");
+  const orgId = searchParams.get("orgId");
   async function submit(data: submitPromptPayload): Promise<Prompt | null> {
     try {
-      const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
+      const backendUrl = getBackendURL(
+        process.env.NEXT_PUBLIC_MODE as string,
+        projectId as string,
+        orgId as string
+      );
       const res = await axios({
-        url: `${backendUrl}/v0/query/prompt`,
+        url: `${backendUrl}/query/prompt`,
         method: "POST",
         data,
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
       });
       if (res.status === 200) {
@@ -156,19 +164,27 @@ export const useSubmitPrompt = (
 // };
 
 export const useGetSinglePrompt = (promptId: string) => {
-  const router = useRouter();
   const dispatch = useAppDispatch();
+  const token = isClient ? localStorage.getItem("token") : "";
+  const searchParams = useSearchParams();
+  const projectId = searchParams.get("projectId");
+  const orgId = searchParams.get("orgId");
   async function submit(promptId: string): Promise<Prompt | null> {
     try {
-      const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
+      const backendUrl = getBackendURL(
+        process.env.NEXT_PUBLIC_MODE as string,
+        projectId as string,
+        orgId as string
+      );
       const encodedPromptId = encodeURIComponent(
         `${isDemoMode ? "query#" : ""}${promptId}`
       );
       const res = await axios({
-        url: `${backendUrl}/v0/query/prompt/${encodedPromptId}`,
+        url: `${backendUrl}/query/prompt/${encodedPromptId}`,
         method: "GET",
         headers: {
           accept: "application/json",
+          Authorization: `Bearer ${token}`,
         },
       });
       if (res.status === 200) {
@@ -203,21 +219,30 @@ export const useGetSinglePrompt = (promptId: string) => {
   });
 };
 export const useGetResponseTableData = (prompt: string) => {
+  const token = isClient ? localStorage.getItem("token") : "";
   const DemoMode = isDemoMode;
   type DemoMode = typeof isDemoMode;
+  const searchParams = useSearchParams();
+  const projectId = searchParams.get("projectId");
+  const orgId = searchParams.get("orgId");
   async function submit(): Promise<
     DemoMode extends true ? Prompt[] : List | null
   > {
     try {
-      const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
+      const backendUrl = getBackendURL(
+        process.env.NEXT_PUBLIC_MODE as string,
+        projectId as string,
+        orgId as string
+      );
       const res = await axios({
-        url: `${backendUrl}/v0/query/preview`,
+        url: `${backendUrl}/query/preview`,
 
         method: "post",
         data: { prompt: prompt },
         headers: {
           accept: "application/json",
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
       });
       if (res.status === 200) {
@@ -239,18 +264,27 @@ export const useGetResponseTableData = (prompt: string) => {
 };
 
 export const useGetAllPrompt = () => {
+  const token = isClient ? localStorage.getItem("token") : "";
   const DemoMode = isDemoMode;
   type DemoMode = typeof isDemoMode;
+  const searchParams = useSearchParams();
+  const projectId = searchParams.get("projectId");
+  const orgId = searchParams.get("orgId");
   async function submit(): Promise<
     DemoMode extends true ? Prompt[] : List | null
   > {
     try {
-      const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
+      const backendUrl = getBackendURL(
+        process.env.NEXT_PUBLIC_MODE as string,
+        projectId as string,
+        orgId as string
+      );
       const res = await axios({
-        url: `${backendUrl}/v0/query/prompt`,
+        url: `${backendUrl}/query/prompt`,
         method: "get",
         headers: {
           accept: "application/json",
+          Authorization: `Bearer ${token}`,
         },
       });
       if (res.status === 200) {
@@ -274,18 +308,27 @@ export const useGetAllPrompt = () => {
   });
 };
 export const useGetNewTimeStampPrompt = (timeStamp: number) => {
+  const token = isClient ? localStorage.getItem("token") : "";
   const DemoMode = isDemoMode;
   type DemoMode = typeof isDemoMode;
+  const searchParams = useSearchParams();
+  const projectId = searchParams.get("projectId");
+  const orgId = searchParams.get("orgId");
   async function submit(): Promise<
     DemoMode extends true ? Prompt[] : List | null
   > {
     try {
-      const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
+      const backendUrl = getBackendURL(
+        process.env.NEXT_PUBLIC_MODE as string,
+        projectId as string,
+        orgId as string
+      );
       const res = await axios({
-        url: `${backendUrl}/v0/query/prompt?start=${timeStamp}`,
+        url: `${backendUrl}/query/prompt?start=${timeStamp}`,
         method: "get",
         headers: {
           accept: "application/json",
+          Authorization: `Bearer ${token}`,
         },
       });
       if (res.status === 200) {

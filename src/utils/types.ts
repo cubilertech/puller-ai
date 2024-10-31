@@ -161,11 +161,18 @@ export interface submitExecutePayload {
 
 export interface Query {
   id: string;
+  prompt?: string;
   status: string;
   results: any[];
   message?: string;
   observations?: string;
   notes?: string[];
+  timestamp?: number;
+}
+
+export interface QueryData {
+  items: Query[];
+  total: number;
 }
 
 export interface Client {
@@ -278,8 +285,8 @@ export interface List {
 }
 
 export interface Model {
-  depends: any[],
-  description: string,
-  id: string,
-  name: string
+  depends: any[];
+  description: string;
+  id: string;
+  name: string;
 }

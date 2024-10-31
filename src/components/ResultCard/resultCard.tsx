@@ -8,7 +8,7 @@ import { Button } from "../Button";
 import Divider from "../Divider/divider";
 import CustomButton from "@/common/CustomButtons/CustomButtons";
 import { CustomLink } from "../Link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { AlertModal } from "@/modals/AlertModal";
 import { isPilotMode } from "@/utils/constants";
 import { replaceBrandName } from "@/utils/common";
@@ -26,6 +26,9 @@ interface ResultCardProps {
 const ResultCard: FC<ResultCardProps> = ({ data }) => {
   const route = useRouter();
   const [isOpenAlert, setIsOpenAlert] = useState(false);
+  const searchParams = useSearchParams();
+  const projectId = searchParams.get("projectId");
+  const orgId = searchParams.get("orgId");
   // const [isOpendiscription, setIsOpendiscription] = useState(false);
 
   const handleOpen = (id: string) => {
@@ -35,7 +38,11 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
     } else route.push(`/request/preview/${withoutquery}`);
   };
   const handleAdvanced = () => {
-    route.push("/advanced");
+    if (projectId && orgId) {
+      route.push(`/advanced?projectId=${projectId}&orgId=${orgId}`);
+    } else {
+      route.push("/advanced");
+    }
   };
   const handleDownload = () => {
     if (isPilotMode) {
@@ -43,25 +50,31 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
     } else route.push(data.fileLink as string);
   };
   const handleDownloadGoogle = () => {
-    if(isPilotMode){
-       const url = data.fileLink as string;
-       const anchor = document.createElement('a');
-       anchor.href = url;
-       anchor.target = '_blank'; // Open in a new tab
-       document.body.appendChild(anchor);
-       anchor.click();
-       // Remove the anchor from the document
-       document.body.removeChild(anchor);
+    if (isPilotMode) {
+      const url = data.fileLink as string;
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.target = "_blank"; // Open in a new tab
+      document.body.appendChild(anchor);
+      anchor.click();
+      // Remove the anchor from the document
+      document.body.removeChild(anchor);
     }
-  }
+  };
   const companyName = localStorage.getItem("companyName");
 
   const description = useMemo(() => {
-    return replaceBrandName({ description: data?.main_description as string }, companyName as string);
+    return replaceBrandName(
+      { description: data?.main_description as string },
+      companyName as string
+    );
     // return replaceIdWithVariableInDiscription(data as Prompt);
   }, [data]);
   const observations = useMemo(() => {
-    return replaceBrandName({ description: data?.observations as string }, companyName as string);
+    return replaceBrandName(
+      { description: data?.observations as string },
+      companyName as string
+    );
     // return replaceIdWithVariableInDiscription(data as Prompt);
   }, [data]);
 
@@ -198,9 +211,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
             }}
           >
             <Typography variant="text-md-semibold">{data.title}</Typography>
-            <Typography variant="text-sm-regular">
-              {observations}
-            </Typography>
+            <Typography variant="text-sm-regular">{observations}</Typography>
           </Box>
         </Box>
 

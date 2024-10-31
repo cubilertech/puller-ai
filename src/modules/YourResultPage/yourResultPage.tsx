@@ -11,7 +11,6 @@ import { isPilotMode } from "@/utils/constants";
 // import { getActiveRequest } from "@/libs/redux/features/activeRequest";
 // import { useAppSelector } from "@/libs/redux/hooks";
 import { RESULTS_DATA } from "@/utils/data";
-import { Prompt } from "@/utils/types";
 import { Box } from "@mui/material";
 // import { useParams } from "next/navigation";
 import { FC, useEffect, useMemo, useState } from "react";
@@ -26,7 +25,7 @@ const YourResultsPage: FC<Props> = ({ id }) => {
   const singleExecute = useGetSingleExecute(id);
   const singlePrompt = useGetSinglePrompt(id);
   const dispatch = useAppDispatch();
-  const { data, refetch: refetchSignleExecute } = isPilotMode
+  const { data, refetch: refetchSingleExecute } = isPilotMode
     ? singleExecute
     : singlePrompt;
   useEffect(() => {
@@ -35,9 +34,9 @@ const YourResultsPage: FC<Props> = ({ id }) => {
       // Trigger fade-in effect after component mounts
       setFadeIn(true);
     } else {
-      refetchSignleExecute();
+      refetchSingleExecute();
     }
-  }, [data, refetchSignleExecute]);
+  }, [data, refetchSingleExecute]);
   const imageUrl =
     data?.results && data.results[data.results.length - 1]?.url
       ? data.results[data.results.length - 1].url

@@ -68,6 +68,11 @@ export const ACTIVE_TYPES = {
   PUBLIC: "public",
   PRIVATE: "private",
 };
+
+export const PULLS_TYPES = {
+  PULLS: "pulls",
+  PROMPTS: "prompts",
+};
 export const ICONS_TYPES = {
   LOGO: "logo",
   OUTLINEDBOOKMARK: "outlinedBookMark",

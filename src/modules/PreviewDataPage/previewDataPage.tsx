@@ -76,7 +76,7 @@ const PreviewDataPage: FC<PreviewDataPageProps> = ({ id }) => {
             <Summary heading="Summary" description={description} />
 
             <Paper variant="light-border">
-              <DataTable data={PromptData as Prompt} />
+              <DataTable data={PromptData as Prompt} isFilter={false} />
             </Paper>
           </Box>
         </Box>

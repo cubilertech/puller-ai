@@ -5,12 +5,14 @@ interface validateRequestState {
   value: {
     variable: string;
   };
+  username: string;
 }
 
 const initialState: validateRequestState = {
   value: {
     variable: "TXN_SZNAL table",
   },
+  username: "",
 };
 
 const validateRequest = createSlice({
@@ -20,11 +22,17 @@ const validateRequest = createSlice({
     updateValue: (state, action) => {
       state.value.variable = action.payload;
     },
+    updateUserName: (state, action) => {
+      state.username = action.payload;
+    },
   },
 });
 
 export const getValidateData = (state: RootState) =>
   state.validateRequest.value.variable;
 
-export const { updateValue } = validateRequest.actions;
+export const getUserName = (state: RootState) =>
+  state.validateRequest.username;
+
+export const { updateValue, updateUserName } = validateRequest.actions;
 export default validateRequest.reducer;

@@ -102,7 +102,8 @@ const PageHeader: FC<PageHeaderProps> = ({
                   label="Modal"
                   value={selectedModel}
                   size="small"
-                  variant="filled"
+                  variant="outlined"
+                  sx={{width: "200px"}}
                   onChange={(event) => {
                     if (handleChangeModal)
                       handleChangeModal(event.target.value);

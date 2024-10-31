@@ -1,6 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { FC } from "react";
-import { ACTIVE_TYPES } from "@/utils/constants";
+import { ACTIVE_TYPES, isDemoMode, PULLS_TYPES } from "@/utils/constants";
 import { Input } from "../Input";
 import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
 import { getSearchQuery, updateQuery } from "@/libs/redux/features/searchbar";
@@ -12,7 +12,12 @@ interface TemplateTopbarProps {
   setSearch: (val: string) => void;
 }
 
-const TemplateTopbar: FC<TemplateTopbarProps> = ({ isActive, setIsActive, search, setSearch }) => {
+const TemplateTopbar: FC<TemplateTopbarProps> = ({
+  isActive,
+  setIsActive,
+  search,
+  setSearch,
+}) => {
   return (
     <Box
       sx={{
@@ -29,7 +34,7 @@ const TemplateTopbar: FC<TemplateTopbarProps> = ({ isActive, setIsActive, search
         }}
       >
         <Box
-          onClick={() => setIsActive(ACTIVE_TYPES.PUBLIC)}
+          onClick={() => setIsActive(PULLS_TYPES.PULLS)}
           sx={{
             width: "202px",
             display: "flex",
@@ -40,8 +45,8 @@ const TemplateTopbar: FC<TemplateTopbarProps> = ({ isActive, setIsActive, search
             },
           }}
         >
-          <Typography variant="text-md-regular">Public</Typography>
-          {isActive === "public" && (
+          <Typography variant="text-md-regular">Pulls</Typography>
+          {isActive === PULLS_TYPES.PULLS && (
             <Box
               sx={{
                 background:
@@ -55,7 +60,7 @@ const TemplateTopbar: FC<TemplateTopbarProps> = ({ isActive, setIsActive, search
         </Box>
 
         <Box
-          onClick={() => setIsActive(ACTIVE_TYPES.PRIVATE)}
+          onClick={() => setIsActive(PULLS_TYPES.PROMPTS)}
           sx={{
             textAlign: "center",
             width: "202px",
@@ -67,12 +72,12 @@ const TemplateTopbar: FC<TemplateTopbarProps> = ({ isActive, setIsActive, search
             },
           }}
         >
-          <Typography variant="text-md-regular">Private</Typography>
+          <Typography variant="text-md-regular">Prompts</Typography>
 
           <Box
             sx={{
               background:
-                isActive === "private"
+                isActive === PULLS_TYPES.PROMPTS
                   ? "linear-gradient(to right, #AD00FE -140.78%, #00E0EE)"
                   : "transparent",
               height: "1px",
@@ -83,7 +88,16 @@ const TemplateTopbar: FC<TemplateTopbarProps> = ({ isActive, setIsActive, search
         </Box>
       </Box>
 
-      <Input value={search} onChange={(e)=>{setSearch(e.target.value)}} placeholder="Search..." icon="search" width={230} height={40} />
+      <Input
+        value={search}
+        onChange={(e) => {
+          setSearch(e.target.value);
+        }}
+        placeholder="Search..."
+        icon="search"
+        width={230}
+        height={40}
+      />
     </Box>
   );
 };

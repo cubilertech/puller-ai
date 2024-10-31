@@ -3,14 +3,26 @@ import { MODES } from "./constants";
 import { Prompt, UpdateVariables, Variable } from "./types";
 import { Tooltip } from "@/components/Tooltip";
 
-export const getBackendURL = (appMode: string) => {
+export const getBackendURL = (
+  appMode: string,
+  projectId?: string,
+  orgId?: string,
+  isVo?: boolean
+) => {
   switch (appMode) {
     case MODES.PILOT:
-      return process.env.NEXT_PUBLIC_BACKEND_URL;
+      if (projectId && orgId) {
+        return `${process.env.NEXT_PUBLIC_BACKEND_URL}/v0/org/${orgId}/project/${projectId}`;
+      }
+      return `${process.env.NEXT_PUBLIC_BACKEND_URL}/v0`;
     case MODES.DEMO:
-      return process.env.NEXT_PUBLIC_DEMO_BACKEND_URL;
+      return isVo
+        ? process.env.NEXT_PUBLIC_DEMO_BACKEND_URL
+        : `${process.env.NEXT_PUBLIC_DEMO_BACKEND_URL}/v0`;
     default:
-      return process.env.NEXT_PUBLIC_DEMO_BACKEND_URL;
+      return isVo
+        ? process.env.NEXT_PUBLIC_DEMO_BACKEND_URL
+        : `${process.env.NEXT_PUBLIC_DEMO_BACKEND_URL}/v0`;
   }
 };
 
@@ -132,6 +144,27 @@ function escapeRegExp(string: string): string {
 function escapePercentage(string: string): string {
   return string?.replace(/[%]/g, ""); // Remove only "%" signs
 }
+
+export function formatDate(timestamp: number) {
+  const date = new Date(timestamp * 1000); // Convert seconds to milliseconds
+  const day = date.getDate();
+  const month = date.toLocaleString('default', { month: 'long' });
+  const year = date.getFullYear();
+
+  // Function to add ordinal suffix
+  const getOrdinal = (day: number) => {
+    if (day > 3 && day < 21) return 'th';
+    switch (day % 10) {
+      case 1: return 'st';
+      case 2: return 'nd';
+      case 3: return 'rd';
+      default: return 'th';
+    }
+  };
+
+  return `${month} ${day}${getOrdinal(day)}, ${year}`;
+}
+
 
 export const replaceBrandName = (
   prompt: { description: string },

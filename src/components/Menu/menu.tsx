@@ -51,7 +51,11 @@ const Menu: FC<MenuProps> = ({ open, menuItems, anchorEl, onClose }) => {
           value={item.value}
           onClick={() => {
             if (item.text && item.text === "Logout") {
-              // localStorage.removeItem("companyName");
+              document.cookie =
+                "token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT;"; // Expire the cookie
+
+              localStorage.removeItem("companyName");
+              localStorage.removeItem("token");
               router.push("/");
             }
           }}

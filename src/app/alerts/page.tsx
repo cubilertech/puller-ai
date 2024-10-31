@@ -1,11 +1,14 @@
 import AppLayout from "@/common/appLayout/appLayout";
 import AlertsPage from "@/modules/AlertsPage/alertsPage";
+import { Suspense } from "react";
 
 function Page() {
   return (
-    <AppLayout>
-      <AlertsPage />
-    </AppLayout>
+    <Suspense fallback={<div>Loading alerts page...</div>}>
+      <AppLayout>
+        <AlertsPage />
+      </AppLayout>
+    </Suspense>
   );
 }
 

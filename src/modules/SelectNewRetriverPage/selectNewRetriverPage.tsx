@@ -1,16 +1,18 @@
 "use client";
 import { CustomLink } from "@/components/Link";
 import { PageHeader } from "@/components/PageHeader";
-
 import { RectangleCard } from "@/components/RectangleCard";
 import { AlertModal } from "@/modals/AlertModal";
 import { isPilotMode } from "@/utils/constants";
 import { Box } from "@mui/material";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useRef, useState } from "react";
 
 const SelectNewRetriverPage = () => {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const projectId = searchParams.get("projectId");
+  const orgId = searchParams.get("orgId");
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const linkRef = useRef<HTMLAnchorElement | null>(null);
   const handleApi = () => {
@@ -36,7 +38,13 @@ const SelectNewRetriverPage = () => {
           <RectangleCard
             icon="connectApps"
             title="Connect Apps"
-            onClick={() => router.push("/retrievers/connect")}
+            onClick={() =>
+              router.push(
+                projectId && orgId
+                  ? `/retrievers/connect?projectId=${projectId}&orgId=${orgId}`
+                  : "/retrievers/connect"
+              )
+            }
           />
           <CustomLink
             href={isPilotMode ? "" : "https://your-api-url.com"}
@@ -53,7 +61,13 @@ const SelectNewRetriverPage = () => {
           <RectangleCard
             icon="upload"
             title="Upload Data"
-            onClick={() => router.push("/retrievers/upload")}
+            onClick={() =>
+              router.push(
+                projectId && orgId
+                  ? `/retrievers/upload?projectId=${projectId}&orgId=${orgId}`
+                  : "/retrievers/upload"
+              )
+            }
           />
         </Box>
       </Box>
