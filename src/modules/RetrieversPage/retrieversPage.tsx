@@ -2,11 +2,13 @@
 import { Loader } from "@/components/Loader";
 import { PageHeader } from "@/components/PageHeader";
 import { RetriverCard } from "@/components/RetriverCard";
+import { useGetClientInfo } from "@/hooks/useMeta";
 import { useGetAllRetriever } from "@/hooks/useRetriever";
 import { AlertModal } from "@/modals/AlertModal";
 import { isDemoMode, isPilotMode } from "@/utils/constants";
 import { RetrieverIconsTypes, StatusTypes } from "@/utils/types";
 import { Box } from "@mui/material";
+import { useField } from "formik";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -15,6 +17,7 @@ const RetrieversPage = () => {
   const searchParams = useSearchParams();
   const projectId = searchParams.get("projectId");
   const orgId = searchParams.get("orgId");
+  const [isLoading, setIsLoading] = useState(true);
   const handleSingleAlert = () => {
     if (isPilotMode) {
       setIsOpenAlert(true);
@@ -22,20 +25,32 @@ const RetrieversPage = () => {
   };
   const {
     data: Retrievers,
-    isLoading: LoadingRetrivers,
+    isFetched: isFetchedRetrivers,
     refetch: retchRetrievers,
   } = useGetAllRetriever();
+  const {
+    data: MetaData,
+    refetch: refetchClient,
+    isFetched: isFetchedClients,
+  } = useGetClientInfo();
   useEffect(() => {
     if (projectId && orgId && isPilotMode) {
-      retchRetrievers();
+      refetchClient();
     } else if (isDemoMode) {
       retchRetrievers();
     }
-  }, [projectId,orgId,retchRetrievers]);
+  }, [projectId, orgId, retchRetrievers]);
+
+  useEffect(() => {
+    if (isFetchedRetrivers || isFetchedClients) {
+      setIsLoading(false);
+    }
+  }, [isFetchedRetrivers, isFetchedClients]);
 
   // Sort the array based on the timestamp in descending order
   const sortedItems = Retrievers?.sort((a, b) => b.timestamp - a.timestamp);
-
+  const clientData = MetaData?.connection;
+  console.log(MetaData, "MetaData");
   return (
     <Box
       sx={{
@@ -61,7 +76,7 @@ const RetrieversPage = () => {
         ]}
       />
       {/* Grid Layout */}
-      {LoadingRetrivers ? (
+      {isLoading ? (
         <Box
           sx={{
             width: "100%",
@@ -88,16 +103,30 @@ const RetrieversPage = () => {
             scrollbarWidth: "none",
           }}
         >
-          {sortedItems?.map((card, i) => (
+          {isDemoMode ? (
+            sortedItems?.map((card, i) => (
+              <RetriverCard
+                description={card.description}
+                icon={card.icon as RetrieverIconsTypes}
+                status={card.status as StatusTypes}
+                onClick={() => handleSingleAlert()}
+                title={card.title}
+                key={i}
+              />
+            ))
+          ) : (
             <RetriverCard
-              description={card.description}
-              icon={card.icon as RetrieverIconsTypes}
-              status={card.status as StatusTypes}
+              description={clientData?.type as string}
+              icon={"clickstream" as RetrieverIconsTypes}
+              status={
+                clientData?.status
+                  ? ("live" as StatusTypes)
+                  : ("blocked" as StatusTypes)
+              }
               onClick={() => handleSingleAlert()}
-              title={card.title}
-              key={i}
+              title={clientData?.schema as string}
             />
-          ))}
+          )}
         </Box>
       )}
       <AlertModal

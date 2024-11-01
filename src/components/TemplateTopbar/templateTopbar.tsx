@@ -1,9 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import { FC } from "react";
-import { ACTIVE_TYPES, isDemoMode, PULLS_TYPES } from "@/utils/constants";
+import { PULLS_TYPES } from "@/utils/constants";
 import { Input } from "../Input";
-import { useAppDispatch, useAppSelector } from "@/libs/redux/hooks";
-import { getSearchQuery, updateQuery } from "@/libs/redux/features/searchbar";
 
 interface TemplateTopbarProps {
   isActive: string;
@@ -72,7 +70,7 @@ const TemplateTopbar: FC<TemplateTopbarProps> = ({
             },
           }}
         >
-          <Typography variant="text-md-regular">Prompts</Typography>
+          <Typography variant="text-md-regular">Requests</Typography>
 
           <Box
             sx={{

@@ -268,7 +268,7 @@ const ResponseArea: FC<ResponseAreaProps> = ({
                   width: "100%",
                 }}
               >
-                <Typography variant="text-xs-bold">Orignial</Typography>
+                <Typography variant="text-xs-bold">Original</Typography>
                 {isLoading || isLoadingPage ? (
                   <Skeleton
                     style={{

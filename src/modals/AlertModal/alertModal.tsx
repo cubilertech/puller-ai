@@ -74,7 +74,7 @@ const AlertModal: FC<AlertModalProps> = ({ open, handleClose }) => {
                 This feature is not available in Private Beta.
               </Typography>
               <Box sx={{ width: 180, mt: 4, mx: "auto", mb: 5 }}>
-                <Button variant="contained" label="Contact US" fullWidth />
+                <Button variant="contained" label="Contact Us" fullWidth />
               </Box>
             </Box>
           </Paper>

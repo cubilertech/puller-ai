@@ -177,6 +177,8 @@ export interface QueryData {
 
 export interface Client {
   connection: {
+    database?: string;
+    schema?: string;
     dataset: string;
     project: string;
     status: true;

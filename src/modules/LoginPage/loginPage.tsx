@@ -5,7 +5,13 @@ import { Paper } from "@/components/Paper";
 import { Logo } from "@/components/logo";
 import { palette } from "@/theme/Palette";
 import { CheckBox, CircleOutlined } from "@mui/icons-material";
-import { Box, Checkbox, Input, Typography } from "@mui/material";
+import {
+  Box,
+  Checkbox,
+  CircularProgress,
+  Input,
+  Typography,
+} from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useRouter } from "next/navigation";
@@ -22,14 +28,14 @@ import { isPilotMode } from "@/utils/constants";
 const LoginSchema = Yup.object().shape({
   // companyName: Yup.string().required("Company Name is required"),
   // email: Yup.string().email("Invalid email").required("Email is required"),
-  username: Yup.string().required("username is required"),
-  password: Yup.string().required("Password is required"),
+  username: Yup.string().max(32).min(3).required("username is required"),
+  password: Yup.string().max(24).min(3).required("Password is required"),
 });
 
 const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const dispatch = useDispatch();
-  const { mutate, isSuccess, isError } = useSubmitLogin();
+  const { mutate, isSuccess, isError, data } = useSubmitLogin();
   const router = useRouter();
   const formik = useFormik({
     initialValues: {
@@ -65,10 +71,10 @@ const LoginPage = () => {
   };
 
   useEffect(() => {
-    if (isSuccess || isError) {
+    if ((isSuccess && data) || isError) {
       setIsLoading(false);
     }
-  }, [isSuccess, isError]);
+  }, [isSuccess, isError, data]);
 
   return (
     <Box p={"2%"} height={"100vh"}>
@@ -105,31 +111,33 @@ const LoginPage = () => {
             <Typography component={"p"} variant="text-md-medium" sx={{ mt: 2 }}>
               Provide your credentials to get started
             </Typography>
+            {isError && (
+              <Box
+                sx={{
+                  width: "100%",
+                  borderBorder: `2px solid ${palette.error[900]}`,
+                  background: palette.error[200],
+                  px: 2,
+                  py: 1,
+                  borderRadius: 1,
+                  mt: 1,
+                }}
+              >
+                <Typography color={palette.error[900]} variant="text-sm-bold">
+                  Alert Message
+                </Typography>
 
+                <Typography
+                  color={palette.error[600]}
+                  component={"p"}
+                  variant="text-sm-regular"
+                >
+                  Please enter currect Credentials
+                </Typography>
+              </Box>
+            )}
             {/* Formik Form */}
             <form onSubmit={formik.handleSubmit}>
-              {/* <Box sx={{ mt: 2.4 }}>
-                <Typography variant="text-sm-medium">Brand Name</Typography>
-                <Input
-                  disableUnderline
-                  fullWidth
-                  name="companyName"
-                  onChange={formik.handleChange}
-                  value={formik.values.companyName}
-                  placeholder="Enter company name"
-                  sx={{
-                    borderRadius: "5px",
-                    padding: "0.5rem 1rem",
-                    border: "2px solid rgba(196, 196, 196, 0.6)",
-                    mt: 0.5,
-                  }}
-                />
-                {formik.errors.companyName && formik.touched.companyName ? (
-                  <Typography color="error">
-                    {formik.errors.companyName}
-                  </Typography>
-                ) : null}
-              </Box> */}
               <Box sx={{ mt: 2.4 }}>
                 <Typography variant="text-sm-medium">User Name</Typography>
                 <Input
@@ -186,11 +194,8 @@ const LoginPage = () => {
               >
                 <Box sx={{ display: "flex", gap: 0.5, alignItems: "center" }}>
                   <Checkbox
-                    // checked={}
                     sx={{ "& .MuiSvgIcon-root": { fontSize: 18 } }}
-                    // icon={<CircleOutlined />}
                     checkedIcon={
-                      // <Icon icon="roundCheckbox" width={18} height={18} />
                       <Icon icon="squareCheckbox" width={18} height={18} />
                     }
                   />
@@ -211,7 +216,7 @@ const LoginPage = () => {
                   </Typography>
                 </Box>
               </Box>
-              <Box sx={{ width: "100%", mt: 2 }}>
+              <Box sx={{ width: "100%", mt: 2, position: "relative" }}>
                 <Button
                   variant="contained"
                   size="large"
@@ -220,6 +225,18 @@ const LoginPage = () => {
                   disabled={isLoading}
                   onClick={handleButtonClick}
                 />
+                {isLoading && (
+                  <CircularProgress
+                    sx={{
+                      position: "absolute",
+                      color: palette.base.white,
+                      top: 12,
+                      zIndex: 4,
+                      left: "47%",
+                    }}
+                    size={24}
+                  />
+                )}
               </Box>
               <Box
                 sx={{

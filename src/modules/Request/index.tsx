@@ -451,7 +451,7 @@ const RequestPage: FC = () => {
         >
           <Box sx={{ px: 2, pt: 1, m: "auto", overflow: "hidden" }}>
             <PageHeader
-              models={metaModels}
+              models={CurrentType === "graph" ? metaModels: undefined}
               handleChangeModal={handleChangeModal}
               selectedModel={selectedModel}
               title="Validate Request"
