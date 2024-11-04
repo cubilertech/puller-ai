@@ -44,7 +44,7 @@ const ContactUSP = () => {
     try {
       await sendEmail(values);
       resetForm();
-      // toast.success("Message sent successfully!");
+      toast.success("Message sent successfully!");
       router.back();
     } catch (error) {
       console.error("Error sending message:", error);
