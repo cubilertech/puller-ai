@@ -44,11 +44,11 @@ const ContactUSP = () => {
     try {
       await sendEmail(values);
       resetForm();
-      toast.success("Message sent successfully!");
+      // toast.success("Message sent successfully!");
       router.back();
     } catch (error) {
       console.error("Error sending message:", error);
-      toast.error("Failed to send message. Please try again.");
+      // toast.error("Failed to send message. Please try again.");
     }
   };
 
