@@ -64,6 +64,13 @@ export enum RetrieverIconsTypes {
   Clickstream = "clickstream",
   CPU = "cpu",
 }
+
+export interface FormValusContactForm {
+  name: string;
+  email: string;
+  message: string;
+}
+
 export enum StatusTypes {
   live = "live",
   blocked = "blocked",
@@ -177,6 +184,8 @@ export interface QueryData {
 
 export interface Client {
   connection: {
+    database?: string;
+    schema?: string;
     dataset: string;
     project: string;
     status: true;

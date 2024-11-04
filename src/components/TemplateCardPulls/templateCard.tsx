@@ -1,9 +1,8 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Chip, Typography } from "@mui/material";
 import Image from "next/image";
-// import { Icon } from "../Icon";
 import { Paper } from "../Paper";
-import { FC, useMemo } from "react";
-import { Prompt, Query } from "@/utils/types";
+import { FC } from "react";
+import { Query } from "@/utils/types";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useAppDispatch } from "@/libs/redux/hooks";
 import {
@@ -13,7 +12,6 @@ import {
 } from "@/libs/redux/features/isLoadingRequest";
 import { formatDate } from "@/utils/common";
 import { isPilotMode } from "@/utils/constants";
-
 interface TemplateCardPullsProps {
   card: Query;
   index: number;
@@ -78,6 +76,7 @@ const TemplateCardPulls: FC<TemplateCardPullsProps> = ({ card, index }) => {
             width={64}
             height={64}
           />
+
           {/* Description */}
           <Box display={"flex"} flexDirection={"column"}>
             <Typography
@@ -94,6 +93,27 @@ const TemplateCardPulls: FC<TemplateCardPullsProps> = ({ card, index }) => {
               </Typography>
             </Typography>
           </Box>
+        </Box>
+        <Box>
+          {/* <Box sx={{ display: "flex", alignItems: "center", height: "96%" }}>
+            <Chip
+              label={card.status}
+              sx={{
+                textTransform: "capitalize",
+                borderRadius: "4px",
+                fontSize: "12px",
+              }}
+              size="small"
+              variant="outlined"
+              color={
+                card.status === "complete"
+                  ? "success"
+                  : card.status === "pending"
+                    ? "warning"
+                    : "default"
+              }
+            />
+          </Box> */}
         </Box>
       </Paper>
     </Box>

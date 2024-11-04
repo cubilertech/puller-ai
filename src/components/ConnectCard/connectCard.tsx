@@ -12,6 +12,7 @@ interface ConnectCardProps {
   onClick?: () => void;
   isLoading?: boolean;
   onNameClick?: () => void;
+  disabled?: boolean;
 }
 
 const ConnectCard: FC<ConnectCardProps> = ({
@@ -19,6 +20,7 @@ const ConnectCard: FC<ConnectCardProps> = ({
   onClick,
   isLoading,
   onNameClick,
+  disabled,
 }) => {
   return (
     <>
@@ -50,7 +52,7 @@ const ConnectCard: FC<ConnectCardProps> = ({
             className={isLoading ? "looping-opacity" : "opacity-out"}
           >
             <Button
-              disabled={isLoading}
+              disabled={isLoading ?? disabled}
               variant={item.isConnected ? "contained" : "outlined"}
               label={
                 isLoading ? "" : item.isConnected ? "Connected" : "Connect"

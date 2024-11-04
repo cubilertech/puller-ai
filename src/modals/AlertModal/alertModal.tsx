@@ -4,6 +4,7 @@ import { palette } from "@/theme/Palette";
 import { Close } from "@mui/icons-material";
 import { Box, Modal, Typography } from "@mui/material";
 import Image from "next/image";
+import { useRouter, useSearchParams } from "next/navigation";
 import { FC } from "react";
 
 interface AlertModalProps {
@@ -25,6 +26,11 @@ const modalStyle = {
 };
 
 const AlertModal: FC<AlertModalProps> = ({ open, handleClose }) => {
+  const router = useRouter();
+  const handleContact = () => {
+    router.push(`/contact-us`);
+  };
+
   return (
     <>
       <Modal
@@ -74,7 +80,12 @@ const AlertModal: FC<AlertModalProps> = ({ open, handleClose }) => {
                 This feature is not available in Private Beta.
               </Typography>
               <Box sx={{ width: 180, mt: 4, mx: "auto", mb: 5 }}>
-                <Button variant="contained" label="Contact US" fullWidth />
+                <Button
+                  variant="contained"
+                  label="Contact Us"
+                  fullWidth
+                  onClick={handleContact}
+                />
               </Box>
             </Box>
           </Paper>

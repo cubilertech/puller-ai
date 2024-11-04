@@ -19,6 +19,7 @@ import { useGetAllApps, useUpdateAppStatus } from "@/hooks/useRetriever";
 import { Loader } from "@/components/Loader";
 import { ConnectItem } from "@/utils/types";
 import { ChangeNameModal } from "@/modals/changeNameModal";
+import { useGetClientInfo } from "@/hooks/useMeta";
 
 const ConnectAppsPage = () => {
   const query = useAppSelector(getConnectQuery);
@@ -27,6 +28,7 @@ const ConnectAppsPage = () => {
   const orgId = searchParams.get("orgId");
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const [isOpenEditName, setIsOpenEditName] = useState(false);
   const [SelectedCardData, setSelectedCardData] = useState<ConnectItem | null>(
@@ -37,7 +39,7 @@ const ConnectAppsPage = () => {
   const {
     data: connectApps,
     refetch: connectAppRefetch,
-    isLoading: loadingApps,
+    isFetching: loadingApps,
     isSuccess: isSuccessApps,
   } = useGetAllApps();
   const {
@@ -46,6 +48,11 @@ const ConnectAppsPage = () => {
     isSuccess: appStatusUpdated,
     isLoading: loadingAppUpdate,
   } = useUpdateAppStatus();
+  const {
+    data: MetaData,
+    refetch: refetchClient,
+    isFetching: isLoadingClient,
+  } = useGetClientInfo();
 
   const handleCreateRetriever = () => {
     if (isPilotMode) {
@@ -69,21 +76,41 @@ const ConnectAppsPage = () => {
   };
 
   const filteredData = data?.filter((item) =>
-    item.name.toLowerCase().includes(query.toLowerCase())
+    item?.name?.toLowerCase().includes(query.toLowerCase())
   );
-
+  const clientData = {
+    id: MetaData?.connection?.type as string,
+    image: "/Images/blank-square.svg" as string,
+    isConnected: true,
+    name: MetaData?.connection?.schema as string,
+  };
   useEffect(() => {
     if (appStatusUpdated && appStatusData) {
-      setData(appStatusData);
+      if (isPilotMode) {
+        setData([clientData, ...appStatusData]);
+      } else {
+        setData(appStatusData);
+      }
+      setIsLoading(false);
     }
   }, [appStatusUpdated, appStatusData]);
 
   useEffect(() => {
     if (isSuccessApps && connectApps) {
-      setData(connectApps);
+      if (isPilotMode) {
+        setData([clientData, ...connectApps]);
+      } else {
+        setData(connectApps);
+      }
+      setIsLoading(false);
     }
-  }, [isSuccessApps, connectApps]);
+  }, [isSuccessApps, connectApps, MetaData]);
 
+  useEffect(() => {
+    if (isPilotMode) {
+      refetchClient();
+    }
+  }, [refetchClient]);
   useEffect(() => {
     if (projectId && orgId && isPilotMode) {
       connectAppRefetch();
@@ -91,6 +118,7 @@ const ConnectAppsPage = () => {
       connectAppRefetch();
     }
   }, [projectId, orgId, connectAppRefetch]);
+  console.log(isLoading, loadingApps, isLoadingClient, "filteredData");
   return (
     <Box
       sx={{
@@ -148,7 +176,7 @@ const ConnectAppsPage = () => {
             scrollbarWidth: "none",
           }}
         >
-          {loadingApps ? (
+          {isLoading || loadingApps || isLoadingClient ? (
             <Box
               sx={{
                 width: "100%",
@@ -158,7 +186,11 @@ const ConnectAppsPage = () => {
                 alignItems: "center",
               }}
             >
-              <Loader type="Loading" variant="simple" isLoading={loadingApps} />
+              <Loader
+                type="Loading"
+                variant="simple"
+                isLoading={loadingApps || isLoadingClient || isLoading}
+              />
             </Box>
           ) : filteredData && filteredData.length <= 0 ? (
             <Typography
@@ -179,6 +211,11 @@ const ConnectAppsPage = () => {
               <ConnectCard
                 key={index}
                 item={item}
+                disabled={
+                  isPilotMode && MetaData?.connection && index === 0
+                    ? true
+                    : false
+                }
                 onNameClick={() => handleNameClick(item)}
                 isLoading={
                   ((SelectedCardData &&

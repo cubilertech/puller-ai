@@ -92,14 +92,14 @@ const PageHeader: FC<PageHeaderProps> = ({
               title
             )}
           </Typography>
-          {CURRENT_MODE === MODES.PILOT && title === "Validate Request" && (
+          {CURRENT_MODE === MODES.PILOT && title === "Validate Request" && models && (
             <>
               {submitValidateLoading ? (
                 <Skeleton style={{ width: "100px", margin: "0", height: 32 }} />
               ) : (
                 <TextField
                   select={true}
-                  label="Modal"
+                  label="Target"
                   value={selectedModel}
                   size="small"
                   variant="outlined"
