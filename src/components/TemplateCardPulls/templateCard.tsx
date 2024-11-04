@@ -95,11 +95,16 @@ const TemplateCardPulls: FC<TemplateCardPullsProps> = ({ card, index }) => {
           </Box>
         </Box>
         <Box>
-          <Box sx={{ display: "flex", alignItems: "center", height: "96%" }}>
+          {/* <Box sx={{ display: "flex", alignItems: "center", height: "96%" }}>
             <Chip
               label={card.status}
-              sx={{ textTransform: "capitalize", borderRadius: "4px", fontSize: "12px" }}
+              sx={{
+                textTransform: "capitalize",
+                borderRadius: "4px",
+                fontSize: "12px",
+              }}
               size="small"
+              variant="outlined"
               color={
                 card.status === "complete"
                   ? "success"
@@ -108,7 +113,7 @@ const TemplateCardPulls: FC<TemplateCardPullsProps> = ({ card, index }) => {
                     : "default"
               }
             />
-          </Box>
+          </Box> */}
         </Box>
       </Paper>
     </Box>

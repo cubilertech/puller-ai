@@ -6,7 +6,9 @@ import { ButtonTextTransforms } from "@/utils/types";
 interface ButtonProps {
   size?: "small" | "medium" | "large";
   label?: string;
-  onClick?: (() => void) | ((event: React.MouseEvent<HTMLButtonElement>) => void | undefined);
+  onClick?:
+    | (() => void)
+    | ((event: React.MouseEvent<HTMLButtonElement>) => void | undefined);
   variant: "contained" | "outlined" | "text";
   disabled?: boolean;
   fullWidth?: boolean;
@@ -15,6 +17,7 @@ interface ButtonProps {
   startIcon?: ReactNode;
   children?: ReactNode;
   sx?: SxProps;
+  type?: "button" | "submit" | "reset";
 }
 
 const Button: FC<ButtonProps> = ({
@@ -28,6 +31,7 @@ const Button: FC<ButtonProps> = ({
   endIcon,
   children,
   sx,
+  type = "button",
   ...props
 }) => {
   const buttonClass =
@@ -41,7 +45,7 @@ const Button: FC<ButtonProps> = ({
       <MuiButton
         {...props}
         size={size}
-        type="button"
+        type={type}
         onClick={onClick}
         variant={variant}
         disabled={disabled}

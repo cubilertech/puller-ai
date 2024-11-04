@@ -81,7 +81,7 @@ const ConnectAppsPage = () => {
   const clientData = {
     id: MetaData?.connection?.type as string,
     image: "/Images/blank-square.svg" as string,
-    isConnected: false,
+    isConnected: true,
     name: MetaData?.connection?.schema as string,
   };
   useEffect(() => {
