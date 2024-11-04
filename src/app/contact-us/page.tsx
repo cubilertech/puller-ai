@@ -3,23 +3,22 @@ import { Button } from "@/components/Button";
 import { Paper } from "@/components/Paper";
 import { KeyboardArrowLeftRounded } from "@mui/icons-material";
 import { Box, DialogActions, TextField, Typography } from "@mui/material";
+import { Field, Form, Formik, FormikHelpers } from "formik";
 import { useRouter } from "next/navigation";
 import React from "react";
-import { Formik, Form, Field, FormikHelpers } from "formik";
+import { toast, ToastContainer } from "react-toastify";
 import * as Yup from "yup";
-
-interface FormValues {
-  fullName: string;
-  email: string;
-  message: string;
-}
+import { FormValusContactForm } from "@/utils/types";
+import { sendEmail } from "@/utils/send-email";
+import { toastTimeout } from "@/utils/constants";
+import "react-toastify/dist/ReactToastify.css";
 
 const ContactUSP = () => {
   const router = useRouter();
 
   // Define validation schema with Yup
   const validationSchema = Yup.object({
-    fullName: Yup.string()
+    name: Yup.string()
       .required("Full name is required")
       .min(2, "Full name must be at least 2 characters"),
     email: Yup.string()
@@ -31,20 +30,24 @@ const ContactUSP = () => {
   });
 
   // Initial form values
-  const initialValues = {
-    fullName: "",
+  const initialValues: FormValusContactForm = {
+    name: "",
     email: "",
     message: "",
   };
 
   // Handle form submission
-  const handleSubmit = (
-    values: FormValues,
-    { resetForm }: FormikHelpers<FormValues>
+  const handleSubmit = async (
+    values: FormValusContactForm,
+    { resetForm }: FormikHelpers<FormValusContactForm>
   ) => {
-    console.log("Form submitted:", values);
-    // Perform any actions here, like sending data to an API
-    resetForm();
+    try {
+      await sendEmail(values);
+      resetForm();
+      router.back();
+    } catch (error) {
+      console.error("Error sending message:", error);
+    }
   };
 
   return (
@@ -57,6 +60,16 @@ const ContactUSP = () => {
         alignItems: "center",
       }}
     >
+      <ToastContainer
+        position="top-right"
+        autoClose={toastTimeout}
+        newestOnTop={false}
+        closeOnClick
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <Paper
         variant="light-border"
         sx={{ borderRadius: 2, p: 3, width: "500px" }}
@@ -71,8 +84,9 @@ const ContactUSP = () => {
 
         <Typography mt={1}>
           Please fill out the form with your details, and a member of our team
-          will get back to you as soon as possible.{" "}
+          will get back to you as soon as possible.
         </Typography>
+
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
@@ -81,31 +95,31 @@ const ContactUSP = () => {
           {({ errors, touched, isSubmitting }) => (
             <Form>
               <Box mt={3}>
-                <Box sx={{ display: "flex", gap: 2 }}>
-                  <Field
-                    as={TextField}
-                    name="fullName"
-                    label="First Name"
+                <Box>
+                  <Typography variant="text-xs-medium">Full Name</Typography>
+                  <TextField
+                    placeholder="Enter Full name"
+                    name="name"
                     fullWidth
-                    error={touched.fullName && Boolean(errors.fullName)}
-                    helperText={touched.fullName && errors.fullName}
+                    error={touched.name && Boolean(errors.name)}
+                    helperText={touched.name && errors.name}
                   />
                 </Box>
                 <Box mt={2}>
-                  <Field
-                    as={TextField}
+                  <Typography variant="text-xs-medium">Email</Typography>
+                  <TextField
+                    placeholder="Enter Email"
                     name="email"
-                    label="Email"
                     fullWidth
                     error={touched.email && Boolean(errors.email)}
                     helperText={touched.email && errors.email}
                   />
                 </Box>
                 <Box mt={2}>
-                  <Field
-                    as={TextField}
+                  <Typography variant="text-xs-medium">Message</Typography>
+                  <TextField
                     name="message"
-                    label="Message"
+                    placeholder="Enter your message"
                     fullWidth
                     multiline
                     rows={4}
@@ -117,6 +131,7 @@ const ContactUSP = () => {
 
               <DialogActions sx={{ mt: 3 }}>
                 <Button
+                  size="large"
                   type="submit"
                   variant="contained"
                   label="Submit"
