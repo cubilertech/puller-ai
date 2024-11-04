@@ -44,9 +44,11 @@ const ContactUSP = () => {
     try {
       await sendEmail(values);
       resetForm();
+      toast.success("Message sent successfully!");
       router.back();
     } catch (error) {
       console.error("Error sending message:", error);
+      // toast.error("Failed to send message. Please try again.");
     }
   };
 
@@ -82,10 +84,10 @@ const ContactUSP = () => {
           <Typography variant="display-xs-medium">Contact Us</Typography>
         </Box>
 
-        <Typography mt={1}>
+        {/* <Typography mt={1}>
           Please fill out the form with your details, and a member of our team
           will get back to you as soon as possible.
-        </Typography>
+        </Typography> */}
 
         <Formik
           initialValues={initialValues}
@@ -97,7 +99,8 @@ const ContactUSP = () => {
               <Box mt={3}>
                 <Box>
                   <Typography variant="text-xs-medium">Full Name</Typography>
-                  <TextField
+                  <Field
+                    as={TextField}
                     placeholder="Enter Full name"
                     name="name"
                     fullWidth
@@ -107,7 +110,8 @@ const ContactUSP = () => {
                 </Box>
                 <Box mt={2}>
                   <Typography variant="text-xs-medium">Email</Typography>
-                  <TextField
+                  <Field
+                    as={TextField}
                     placeholder="Enter Email"
                     name="email"
                     fullWidth
@@ -117,7 +121,8 @@ const ContactUSP = () => {
                 </Box>
                 <Box mt={2}>
                   <Typography variant="text-xs-medium">Message</Typography>
-                  <TextField
+                  <Field
+                    as={TextField}
                     name="message"
                     placeholder="Enter your message"
                     fullWidth

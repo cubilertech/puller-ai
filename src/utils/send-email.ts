@@ -1,4 +1,3 @@
-import { toast } from "react-toastify";
 import { FormValusContactForm } from "./types";
 
 export const sendEmail = async (data: FormValusContactForm) => {
@@ -10,9 +9,9 @@ export const sendEmail = async (data: FormValusContactForm) => {
   })
     .then((res) => res.json())
     .then((response) => {
-      toast.success(response.message);
+      // toast.success(response.message);
     })
     .catch((err) => {
-      toast.error(err);
+      // toast.error(err);
     });
 };

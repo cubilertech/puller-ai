@@ -211,11 +211,7 @@ const ConnectAppsPage = () => {
               <ConnectCard
                 key={index}
                 item={item}
-                disabled={
-                  isPilotMode && MetaData?.connection && index === 0
-                    ? true
-                    : false
-                }
+              
                 onNameClick={() => handleNameClick(item)}
                 isLoading={
                   ((SelectedCardData &&

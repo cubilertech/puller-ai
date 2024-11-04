@@ -27,7 +27,7 @@ export const useSubmitLogin = () => {
       }
     } catch (error: any) {
       console.log(error, "error");
-      toast.error(error?.response?.data?.message ?? (error.message as string));
+      // toast.error(error?.response?.data?.message ?? (error.message as string));
       console.error("Network error:", error);
       return null;
     }
@@ -56,7 +56,7 @@ export const useSubmitLogin = () => {
     },
     onError: (error: any) => {
       // dispatch(UpdateCurrentPage("create"));
-      toast.error(error?.response?.data?.message ?? (error.message as string));
+      // toast.error(error?.response?.data?.message ?? (error.message as string));
       console.log(error, "error in validating request");
     },
   });

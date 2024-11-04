@@ -123,16 +123,12 @@ const LoginPage = () => {
                   mt: 1,
                 }}
               >
-                <Typography color={palette.error[900]} variant="text-sm-bold">
-                  Alert Message
-                </Typography>
-
                 <Typography
                   color={palette.error[600]}
                   component={"p"}
                   variant="text-sm-regular"
                 >
-                  Please enter currect Credentials
+                  Please enter valid username or password
                 </Typography>
               </Box>
             )}
