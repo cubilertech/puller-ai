@@ -84,10 +84,10 @@ const ContactUSP = () => {
           <Typography variant="display-xs-medium">Contact Us</Typography>
         </Box>
 
-        <Typography mt={1}>
+        {/* <Typography mt={1}>
           Please fill out the form with your details, and a member of our team
           will get back to you as soon as possible.
-        </Typography>
+        </Typography> */}
 
         <Formik
           initialValues={initialValues}

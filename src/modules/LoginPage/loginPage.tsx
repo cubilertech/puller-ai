@@ -128,7 +128,7 @@ const LoginPage = () => {
                   component={"p"}
                   variant="text-sm-regular"
                 >
-                  Please enter valid Username or password
+                  Please enter valid username or password
                 </Typography>
               </Box>
             )}
