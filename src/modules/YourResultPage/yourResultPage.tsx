@@ -50,6 +50,7 @@ const YourResultsPage: FC<Props> = ({ id }) => {
   useEffect(() => {
     dispatch(setSubmitExecuteLoading(false));
   }, []);
+  console.log(data, "data");
   return (
     <>
       {isLoading ? (
@@ -102,7 +103,7 @@ const YourResultsPage: FC<Props> = ({ id }) => {
                 fileLink: imageUrl,
               }}
             />
-            <NotesList List={data?.notes} />
+            {/* <NotesList List={data?.notes} /> */}
           </Box>
         </Box>
       )}

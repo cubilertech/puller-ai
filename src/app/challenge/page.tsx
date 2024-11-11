@@ -16,7 +16,15 @@ import { getUserName } from "@/libs/redux/features/validateRequest";
 
 // Validation schema for the form
 const LoginSchema = Yup.object().shape({
-  password: Yup.string().required("Password is required"),
+  newPassword: Yup.string()
+    .required("New password is required")
+    .matches(
+      /^(?=.*[!@#$%^&*(),.?":{}|<>])(?=.*\d)[a-zA-Z\d!@#$%^&*(),.?":{}|<>]{7,}$/,
+      "New password must contain at least one special character, one number, and be greater than 6 characters"
+    ),
+  password: Yup.string()
+    .oneOf([Yup.ref("newPassword"), undefined], "Passwords must match")
+    .required("Password is required"),
 });
 
 const EnterPassowrd = () => {
@@ -28,6 +36,7 @@ const EnterPassowrd = () => {
       // companyName: "",
       username: UserName ?? "",
       password: "",
+      newPassword: "",
       rememberMe: false,
     },
     validationSchema: LoginSchema,
@@ -120,6 +129,29 @@ const EnterPassowrd = () => {
                 ) : null}
               </Box>
               <Box sx={{ mt: 1 }}>
+                <Typography variant="text-sm-medium">New Password</Typography>
+                <Input
+                  disableUnderline
+                  fullWidth
+                  name="newPassword"
+                  type="password"
+                  onChange={formik.handleChange}
+                  value={formik.values.newPassword}
+                  placeholder="Enter New Password"
+                  sx={{
+                    borderRadius: "5px",
+                    padding: "0.5rem 1rem",
+                    border: "2px solid rgba(196, 196, 196, 0.6)",
+                    mt: 0.5,
+                  }}
+                />
+                {formik.errors.newPassword && formik.touched.newPassword ? (
+                  <Typography color="error">
+                    {formik.errors.newPassword}
+                  </Typography>
+                ) : null}
+              </Box>
+              <Box sx={{ mt: 1 }}>
                 <Typography variant="text-sm-medium">
                   Confirm Password
                 </Typography>
@@ -130,7 +162,7 @@ const EnterPassowrd = () => {
                   type="password"
                   onChange={formik.handleChange}
                   value={formik.values.password}
-                  placeholder="Enter password"
+                  placeholder="Enter Confirm password"
                   sx={{
                     borderRadius: "5px",
                     padding: "0.5rem 1rem",

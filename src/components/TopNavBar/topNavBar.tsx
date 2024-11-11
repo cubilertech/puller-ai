@@ -2,6 +2,7 @@
 import { palette } from "@/theme/Palette";
 import {
   Box,
+  Button,
   FormControl,
   InputLabel,
   MenuItem,
@@ -24,6 +25,9 @@ import CustomButton from "@/common/CustomButtons/CustomButtons";
 import { AlertModal } from "@/modals/AlertModal";
 import { useEffect, useState } from "react";
 import { useGetProjectsData } from "@/hooks/useLogin";
+import { useGetClientInfo } from "@/hooks/useMeta";
+import Image from "next/image";
+import { Menu } from "../Menu";
 
 const TopNavBar = () => {
   const searchParams = useSearchParams();
@@ -33,6 +37,13 @@ const TopNavBar = () => {
   const route = usePathname();
   const currentPath = isClient ? window.location.pathname : "";
   const router = useRouter();
+
+  const {
+    data: clientData,
+    isLoading: clientIsLoading,
+    refetch: refetchClient,
+  } = useGetClientInfo();
+  const [openMenu, setOpenMenu] = useState(false);
   const [isOpenAlert, setIsOpenAlert] = useState(false);
   const [selectedProjectId, setSelectedProjectId] = useState(
     projectId ? projectId : ""
@@ -84,6 +95,12 @@ const TopNavBar = () => {
       router.back();
     }
   };
+  const handleMenuOpen = () => {
+    setOpenMenu(true);
+  };
+  const handleMenuClose = () => {
+    setOpenMenu(false);
+  };
 
   console.log(currentPath, "currentPath");
 
@@ -111,6 +128,11 @@ const TopNavBar = () => {
       refetchProjects();
     }
   }, [refetchProjects]);
+
+  useEffect(() => {
+    refetchClient();
+  }, [refetchClient]);
+
   return (
     <>
       <Box
@@ -221,9 +243,79 @@ const TopNavBar = () => {
             isNotice={isPilotMode ? false : true}
             onClick={() => handleClickAlerts()}
           />
-          <CustomButton
-            variant="select"
-            selectData={{ avatar: "/Images/Icons/avatar.svg", name: "Mav" }}
+
+          <Button
+            sx={{
+              borderRadius: "50px",
+              color: palette.base.white,
+              border: `none`,
+              background: `none !important`,
+              width: 82,
+              height: 48,
+              py: 1,
+              px: 1.2,
+              ":hover": {
+                border: `1px solid var(--vison-pro-stock, ${palette.base.white})`,
+                borderRadius: "50px !important",
+                background: `${palette.color.gray[300]} !important`,
+              },
+            }}
+            size="large"
+            variant="outlined"
+            onClick={handleMenuOpen}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "13px",
+              }}
+            >
+              {clientIsLoading ? (
+                <Skeleton
+                  sx={{
+                    width: "32px",
+                    height: "52px",
+                    borderRadius: "100%",
+                    m: "0px !important",
+                    p: 0,
+                  }}
+                />
+              ) : (
+                <Box
+                  sx={{
+                    borderRadius: "100%",
+                    width: "32px",
+                    height: "32px",
+                    background: palette.color.gray[100],
+                    display: "flex",
+                    textAlign: "center",
+                    alignItems: "center",
+                    p: 1.4,
+                  }}
+                >
+                  <Typography
+                    sx={{ textTransform: "uppercase", width: "fit-content" }}
+                  >
+                    {" "}
+                    {clientData?.name.charAt(0)}
+                  </Typography>
+                </Box>
+              )}
+              {/* <Typography variant="text-md-bold">{selectData?.name}</Typography> */}
+
+              <Icon icon="topbarIcon" width={11} height={11} />
+            </Box>
+          </Button>
+          <Menu
+            open={openMenu}
+            menuItems={[
+              {
+                text: "Logout",
+              },
+            ]}
+            onClose={handleMenuClose}
           />
         </Box>
       </Box>

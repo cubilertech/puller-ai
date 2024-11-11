@@ -79,7 +79,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
   }, [data]);
 
   return (
-    <Box width={"80%"} height={"100%"}>
+    <Box width={"100%"} height={"100%"}>
       <Paper
         variant="light-border"
         sx={{
