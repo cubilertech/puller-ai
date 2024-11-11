@@ -156,7 +156,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
           >
             <Box sx={{ display: "flex", gap: 1, mb: -0.6 }}>
               <Typography variant="text-sm-regular">File Type:</Typography>
-              <CustomButton variant="smallbutton" text="CSV" />
+              <CustomButton variant="smallbutton" text="Big Query" />
             </Box>
             <Box sx={{ display: "flex", gap: 1 }}>
               <Typography variant="text-sm-regular">File Size:</Typography>
@@ -183,7 +183,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
                 {data.fileTimestamps}
               </Typography>
             </Box>
-            <Box sx={{ display: "flex", gap: 1 }}>
+            {/* <Box sx={{ display: "flex", gap: 1 }}>
               <Typography variant="text-sm-regular">File Caveats:</Typography>
               <Typography variant="text-sm-semibold">
                 {data.fileCaveats}{" "}
@@ -191,7 +191,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
                   See More
                 </CustomLink>
               </Typography>
-            </Box>
+            </Box> */}
             {/* <Box sx={{ display: "flex", gap: 1 }}>
               <Typography variant="text-sm-regular">Sources:</Typography>
               <Typography variant="text-sm-semibold">{data.sources}</Typography>
@@ -238,7 +238,7 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
               pt: 2,
             }}
           >
-            <Box width={"242px"}>
+            {/* <Box width={"242px"}>
               <Button
                 label="Download Package"
                 fullWidth
@@ -246,14 +246,14 @@ const ResultCard: FC<ResultCardProps> = ({ data }) => {
                 variant="outlined"
                 onClick={() => handleDownload()}
               />
-            </Box>
+            </Box> */}
             <Box width={"242px"}>
               <Button
-                label="Advanced Actions"
+                label="View Source"
                 fullWidth
                 size="large"
                 variant="contained"
-                onClick={handleAdvanced}
+                onClick={() => handleDownloadGoogle()}
               />
             </Box>
           </Box>

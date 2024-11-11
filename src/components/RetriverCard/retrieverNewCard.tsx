@@ -145,13 +145,23 @@ const RetriverNewCard: FC<retriverCardProps> = ({
               <Typography variant="text-sm">
                 <span style={{ fontWeight: 500 }}> Models:</span>{" "}
                 {models?.map((item) => (
-                  <Chip label={item.name} sx={{ m: 0.2 }} size="small" />
+                  <Chip
+                    key={item.id}
+                    label={item.name}
+                    sx={{ m: 0.2 }}
+                    size="small"
+                  />
                 )) ?? "---"}
               </Typography>
               <Typography variant="text-sm">
                 <span style={{ fontWeight: 500 }}> variables:</span>{" "}
                 {variables?.map((item) => (
-                  <Chip label={item.name} size="small" sx={{ m: 0.2 }} />
+                  <Chip
+                    key={item.id}
+                    label={item.name}
+                    size="small"
+                    sx={{ m: 0.2 }}
+                  />
                 )) ?? "---"}
               </Typography>
             </Box>

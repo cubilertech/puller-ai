@@ -11,6 +11,7 @@ import { isPilotMode } from "@/utils/constants";
 // import { getActiveRequest } from "@/libs/redux/features/activeRequest";
 // import { useAppSelector } from "@/libs/redux/hooks";
 import { RESULTS_DATA } from "@/utils/data";
+import { Query } from "@/utils/types";
 import { Box } from "@mui/material";
 // import { useParams } from "next/navigation";
 import { FC, useEffect, useMemo, useState } from "react";
@@ -28,6 +29,10 @@ const YourResultsPage: FC<Props> = ({ id }) => {
   const { data, refetch: refetchSingleExecute } = isPilotMode
     ? singleExecute
     : singlePrompt;
+
+  const { data: PromptData, refetch: refetchPromptData, isFetching } = useGetSinglePrompt(
+    (data as Query)?.prompt ?? ""
+  );
   useEffect(() => {
     if (data && data?.status === "complete") {
       setIsLoading(false);
@@ -50,10 +55,17 @@ const YourResultsPage: FC<Props> = ({ id }) => {
   useEffect(() => {
     dispatch(setSubmitExecuteLoading(false));
   }, []);
+  useEffect(() => {
+    if ((data as Query)?.prompt) {
+      refetchPromptData();
+    }
+  }, [(data as Query)?.prompt]);
   console.log(data, "data");
+
+  const PrmomptFormatedData = (PromptData as Query) ?? (data as Query);
   return (
     <>
-      {isLoading ? (
+      {isLoading || isFetching ? (
         <Box
           sx={{
             width: "100%",
@@ -89,16 +101,16 @@ const YourResultsPage: FC<Props> = ({ id }) => {
                   data?.results && data?.results[0]
                     ? data.results[0].database
                     : RESULTS_DATA.fileStructured,
-                main_description: data?.message
-                  ? data?.message
+                main_description: PrmomptFormatedData?.message
+                  ? PrmomptFormatedData?.message
                   : RESULTS_DATA.main_description,
                 fileSize:
                   data?.results && data?.results[0].bytes
                     ? data?.results[0].bytes
                     : RESULTS_DATA.fileSize,
                 id: data?.id ?? "",
-                observations: data?.observations
-                  ? data?.observations
+                observations: PrmomptFormatedData.description
+                  ? PrmomptFormatedData?.description
                   : RESULTS_DATA.observations,
                 fileLink: imageUrl,
               }}

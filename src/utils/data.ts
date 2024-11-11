@@ -387,7 +387,7 @@ export const RESULTS_DATA = {
   fileCaveats: "Caveat by",
   fileCaveatsURL: "",
   sources: "From Passage",
-  title: "Key Observations",
+  title: "Description",
   observations:
     "Overall, the incremental performance of SKUs introduced within the past year have added 23% lift in Flyease tech product SKU transactions (sales). This was largely driven by the FYT2 product. This represents the strongest launch of a new product with Flyease since inception, masked in part by the decline of several older SKUs. Seasonality mirrored historical performance.",
 };
@@ -451,8 +451,8 @@ export const LatestPullsData = [
   },
   {
     id: "1234567891",
-    message:"I’d like a table that shows me the average order value of %Brand% products compared to the average order value of the rest of category each quarter for the last 4 quarters.",
-  
+    message:
+      "I’d like a table that shows me the average order value of %Brand% products compared to the average order value of the rest of category each quarter for the last 4 quarters.",
   },
   {
     id: "1234567895",
