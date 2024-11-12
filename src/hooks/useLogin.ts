@@ -3,8 +3,8 @@ import { isClient, isPilotMode } from "@/utils/constants";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { idea } from "react-syntax-highlighter/dist/esm/styles/hljs";
 import { toast } from "react-toastify";
+import { jwtDecode, JwtPayload } from "jwt-decode";
 
 export const useSubmitLogin = () => {
   const router = useRouter();
@@ -102,14 +102,20 @@ export const useSubmitNewPassword = () => {
   });
 };
 
+interface CustomJwtPayload extends JwtPayload {
+  "custom:org": string;
+}
+
 export const useGetProjectsData = () => {
   const token = isClient ? localStorage.getItem("token") : "";
   const router = useRouter();
+  const decodedData = jwtDecode<CustomJwtPayload>(token as string);
+  const org = decodedData["custom:org"];
   async function submit() {
     try {
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
       const res = await axios({
-        url: `${backendUrl}/org/demo/project`,
+        url: `${backendUrl}/org/${org ?? "demo"}/project`,
         method: "get",
         headers: {
           accept: "application/json",
