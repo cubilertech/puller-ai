@@ -16,7 +16,6 @@ import "react-toastify/dist/ReactToastify.css";
 const ContactUSP = () => {
   const router = useRouter();
 
-  // Define validation schema with Yup
   const validationSchema = Yup.object({
     name: Yup.string()
       .required("Full name is required")

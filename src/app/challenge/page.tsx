@@ -4,11 +4,17 @@ import { Button } from "@/components/Button";
 import { Paper } from "@/components/Paper";
 import { Logo } from "@/components/logo";
 import { palette } from "@/theme/Palette";
-import { Box, Checkbox, Input, Typography } from "@mui/material";
+import {
+  Box,
+  Input,
+  Typography,
+  IconButton,
+  InputAdornment,
+  CircularProgress,
+} from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useRouter } from "next/navigation";
-import { Icon } from "@/components/Icon";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { CustomLink } from "@/components/Link";
 import { useSubmitNewPassword } from "@/hooks/useLogin";
 import { useSelector } from "react-redux";
@@ -16,18 +22,30 @@ import { getUserName } from "@/libs/redux/features/validateRequest";
 
 // Validation schema for the form
 const LoginSchema = Yup.object().shape({
-  password: Yup.string().required("Password is required"),
+  newPassword: Yup.string()
+    .required("New password is required")
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{8,}$/,
+      "Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character"
+    ),
+  password: Yup.string()
+    .oneOf([Yup.ref("newPassword"), undefined], "Passwords must match")
+    .required("Password is required"),
 });
 
-const EnterPassowrd = () => {
+const EnterPassword = () => {
   const [isLoading, setIsLoading] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
   const UserName = useSelector(getUserName);
-  const { mutate, isSuccess } = useSubmitNewPassword();
+  const { mutate, isSuccess, isError, error } = useSubmitNewPassword();
+
   const formik = useFormik({
     initialValues: {
-      // companyName: "",
       username: UserName ?? "",
       password: "",
+      newPassword: "",
       rememberMe: false,
     },
     validationSchema: LoginSchema,
@@ -40,25 +58,20 @@ const EnterPassowrd = () => {
         challenge: challenge,
         response: { NEW_PASSWORD: values.password },
       });
-
       setIsLoading(true);
     },
   });
 
-  const handleButtonClick = (
-    event:
-      | React.MouseEvent<HTMLButtonElement>
-      | React.FormEvent<HTMLFormElement>
-  ) => {
+  const handleButtonClick = (event: any) => {
     event.preventDefault();
     formik.handleSubmit();
   };
 
   useEffect(() => {
-    if (isSuccess) {
+    if (isSuccess || isError) {
       setIsLoading(false);
     }
-  }, [isSuccess]);
+  }, [isSuccess, isError]);
 
   return (
     <Box p={"2%"} height={"100vh"}>
@@ -72,7 +85,6 @@ const EnterPassowrd = () => {
           gap: "40px",
         }}
       >
-        {/* login side */}
         <Box
           sx={{
             display: "flex",
@@ -120,6 +132,46 @@ const EnterPassowrd = () => {
                 ) : null}
               </Box>
               <Box sx={{ mt: 1 }}>
+                <Typography variant="text-sm-medium">New Password</Typography>
+                <Input
+                  disableUnderline
+                  fullWidth
+                  name="newPassword"
+                  type={showNewPassword ? "text" : "password"}
+                  onChange={formik.handleChange}
+                  value={formik.values.newPassword}
+                  placeholder="Enter New Password"
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() => setShowNewPassword((prev) => !prev)}
+                        edge="end"
+                        sx={{
+                          backgroundColor: "transparent",
+                          borderRadius: "100%",
+                          ":hover": {
+                            backgroundColor: "transparent",
+                          },
+                        }}
+                      >
+                        {showNewPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
+                  sx={{
+                    borderRadius: "5px",
+                    padding: "0.5rem 1rem",
+                    border: "2px solid rgba(196, 196, 196, 0.6)",
+                    mt: 0.5,
+                  }}
+                />
+                {formik.errors.newPassword && formik.touched.newPassword ? (
+                  <Typography color="error">
+                    {formik.errors.newPassword}
+                  </Typography>
+                ) : null}
+              </Box>
+              <Box sx={{ mt: 1 }}>
                 <Typography variant="text-sm-medium">
                   Confirm Password
                 </Typography>
@@ -127,10 +179,27 @@ const EnterPassowrd = () => {
                   disableUnderline
                   fullWidth
                   name="password"
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   onChange={formik.handleChange}
                   value={formik.values.password}
-                  placeholder="Enter password"
+                  placeholder="Enter Confirm password"
+                  endAdornment={
+                    <InputAdornment position="end">
+                      <IconButton
+                        onClick={() => setShowPassword((prev) => !prev)}
+                        edge="end"
+                        sx={{
+                          backgroundColor: "transparent",
+                          borderRadius: "100%",
+                          ":hover": {
+                            backgroundColor: "transparent",
+                          },
+                        }}
+                      >
+                        {showPassword ? <VisibilityOff /> : <Visibility />}
+                      </IconButton>
+                    </InputAdornment>
+                  }
                   sx={{
                     borderRadius: "5px",
                     padding: "0.5rem 1rem",
@@ -144,7 +213,7 @@ const EnterPassowrd = () => {
                   </Typography>
                 ) : null}
               </Box>
-              <Box sx={{ width: "100%", mt: 2 }}>
+              <Box sx={{ width: "100%", mt: 2, position: "relative" }}>
                 <Button
                   variant="contained"
                   size="large"
@@ -153,6 +222,18 @@ const EnterPassowrd = () => {
                   disabled={isLoading}
                   onClick={handleButtonClick}
                 />
+                {isLoading && (
+                  <CircularProgress
+                    sx={{
+                      position: "absolute",
+                      color: palette.base.white,
+                      top: 12,
+                      zIndex: 4,
+                      left: "47%",
+                    }}
+                    size={24}
+                  />
+                )}
               </Box>
 
               <Box
@@ -216,4 +297,4 @@ const EnterPassowrd = () => {
   );
 };
 
-export default EnterPassowrd;
+export default EnterPassword;

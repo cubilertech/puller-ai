@@ -203,13 +203,13 @@ const LoginPage = () => {
                   </Typography>
                 </Box>
                 <Box>
-                  <Typography
+                  {/* <Typography
                     variant="text-md-medium"
                     color={palette.primary.light}
                     sx={{ cursor: "pointer" }}
                   >
                     Forgot Password
-                  </Typography>
+                  </Typography> */}
                 </Box>
               </Box>
               <Box sx={{ width: "100%", mt: 2, position: "relative" }}>

@@ -173,6 +173,7 @@ export interface Query {
   results: any[];
   message?: string;
   observations?: string;
+  description?: string;
   notes?: string[];
   timestamp?: number;
 }

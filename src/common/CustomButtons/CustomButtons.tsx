@@ -47,7 +47,7 @@ const CustomButton: FC<buttonProps> = ({
               borderRadius: "5px",
               backgroundColor: palette.color.gray[250],
               height: "22px !important",
-              width: "40px !important",
+              width: "80px !important",
               pr: 0,
               pl: 0,
               pt: 1.2,

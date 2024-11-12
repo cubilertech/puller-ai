@@ -8,7 +8,7 @@ import { FC } from "react";
 interface MenuProps {
   open: boolean;
   menuItems: MenuItemType[];
-  anchorEl: Element | null;
+  anchorEl?: Element | null;
   onClose: () => void;
 }
 

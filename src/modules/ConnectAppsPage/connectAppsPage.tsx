@@ -211,7 +211,7 @@ const ConnectAppsPage = () => {
               <ConnectCard
                 key={index}
                 item={item}
-              
+                disabled
                 onNameClick={() => handleNameClick(item)}
                 isLoading={
                   ((SelectedCardData &&

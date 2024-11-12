@@ -2,6 +2,7 @@
 import { Loader } from "@/components/Loader";
 import { PageHeader } from "@/components/PageHeader";
 import { RetriverCard } from "@/components/RetriverCard";
+import RetriverNewCard from "@/components/RetriverCard/retrieverNewCard";
 import { useGetClientInfo } from "@/hooks/useMeta";
 import { useGetAllRetriever } from "@/hooks/useRetriever";
 import { AlertModal } from "@/modals/AlertModal";
@@ -49,7 +50,6 @@ const RetrieversPage = () => {
 
   // Sort the array based on the timestamp in descending order
   const sortedItems = Retrievers?.sort((a, b) => b.timestamp - a.timestamp);
-  const clientData = MetaData?.connection;
   console.log(MetaData, "MetaData");
   return (
     <Box
@@ -92,7 +92,7 @@ const RetrieversPage = () => {
         <Box
           sx={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, 210px)",
+            gridTemplateColumns: "repeat(auto-fit, 610px)",
             alignItems: "flex-start",
             justifyItems: "center",
             width: "100%",
@@ -103,30 +103,21 @@ const RetrieversPage = () => {
             scrollbarWidth: "none",
           }}
         >
-          {isDemoMode ? (
-            sortedItems?.map((card, i) => (
-              <RetriverCard
-                description={card.description}
-                icon={card.icon as RetrieverIconsTypes}
-                status={card.status as StatusTypes}
-                onClick={() => handleSingleAlert()}
-                title={card.title}
-                key={i}
-              />
-            ))
-          ) : (
-            <RetriverCard
-              description={clientData?.type as string}
-              icon={"clickstream" as RetrieverIconsTypes}
-              status={
-                clientData?.status
-                  ? ("live" as StatusTypes)
-                  : ("blocked" as StatusTypes)
-              }
-              onClick={() => handleSingleAlert()}
-              title={clientData?.schema as string}
-            />
-          )}
+          <RetriverNewCard
+            database={MetaData?.connection.database as string}
+            icon={"clickstream" as RetrieverIconsTypes}
+            models={MetaData?.models}
+            schema={MetaData?.connection?.schema}
+            variables={MetaData?.variables}
+            type={MetaData?.connection?.type}
+            status={
+              MetaData?.connection?.status
+                ? ("live" as StatusTypes)
+                : ("blocked" as StatusTypes)
+            }
+            onClick={() => handleSingleAlert()}
+            title={MetaData?.name as string}
+          />
         </Box>
       )}
       <AlertModal
