@@ -10,6 +10,7 @@ import {
   Typography,
   IconButton,
   InputAdornment,
+  CircularProgress,
 } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -212,7 +213,7 @@ const EnterPassword = () => {
                   </Typography>
                 ) : null}
               </Box>
-              <Box sx={{ width: "100%", mt: 2 }}>
+              <Box sx={{ width: "100%", mt: 2, position: "relative" }}>
                 <Button
                   variant="contained"
                   size="large"
@@ -221,6 +222,18 @@ const EnterPassword = () => {
                   disabled={isLoading}
                   onClick={handleButtonClick}
                 />
+                {isLoading && (
+                  <CircularProgress
+                    sx={{
+                      position: "absolute",
+                      color: palette.base.white,
+                      top: 12,
+                      zIndex: 4,
+                      left: "47%",
+                    }}
+                    size={24}
+                  />
+                )}
               </Box>
 
               <Box
