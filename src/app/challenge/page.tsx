@@ -38,7 +38,7 @@ const EnterPassword = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const UserName = useSelector(getUserName);
-  const { mutate, isSuccess, isError } = useSubmitNewPassword();
+  const { mutate, isSuccess, isError, error } = useSubmitNewPassword();
 
   const formik = useFormik({
     initialValues: {
@@ -70,7 +70,7 @@ const EnterPassword = () => {
     if (isSuccess || isError) {
       setIsLoading(false);
     }
-  }, [isSuccess]);
+  }, [isSuccess, isError]);
 
   return (
     <Box p={"2%"} height={"100vh"}>
