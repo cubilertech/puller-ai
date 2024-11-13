@@ -7,17 +7,40 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coy } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { format } from "sql-formatter";
 import { replaceBrandName } from "@/utils/common";
+import { useGetClientInfo } from "@/hooks/useMeta";
 
 interface SQL_EditorProps {
   handleClose?: () => void | undefined;
   code: string;
 }
+type type_lang =
+  | "bigquery"
+  | "db2"
+  | "db2i"
+  | "hive"
+  | "mariadb"
+  | "mysql"
+  | "n1ql"
+  | "plsql"
+  | "postgresql"
+  | "redshift"
+  | "singlestoredb"
+  | "snowflake"
+  | "spark"
+  | "sql"
+  | "sqlite"
+  | "tidb"
+  | "transactsql"
+  | "trino"
+  | "tsql"
+  | undefined;
 
 const SQL_Editor: FC<SQL_EditorProps> = ({ handleClose, code }) => {
   const [formattedCode, setFormattedCode] = useState<string>("");
   const companyName = localStorage.getItem("companyName");
+  const { data } = useGetClientInfo();
   useEffect(() => {
-    if (code)
+    if (code && data?.connection) {
       setFormattedCode(
         format(
           replaceBrandName(
@@ -25,12 +48,11 @@ const SQL_Editor: FC<SQL_EditorProps> = ({ handleClose, code }) => {
             companyName as string,
             true
           ),
-          {
-            language: "mysql",
-          }
+          { language: data.connection.type as type_lang }
         )
       );
-  }, [code]);
+    }
+  }, [code, data]);
   const customCoyStyle = {
     ...coy,
     'code[class*="language-"]': {
