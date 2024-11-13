@@ -109,8 +109,10 @@ interface CustomJwtPayload extends JwtPayload {
 export const useGetProjectsData = () => {
   const token = isClient ? localStorage.getItem("token") : "";
   const router = useRouter();
-  const decodedData = jwtDecode<CustomJwtPayload>(token as string);
-  const org = decodedData["custom:org"];
+
+  const decodedData =
+    token !== "" || token ? jwtDecode<CustomJwtPayload>(token as string) : null;
+  const org = decodedData !== null && decodedData["custom:org"];
   async function submit() {
     try {
       const backendUrl = getBackendURL(process.env.NEXT_PUBLIC_MODE as string);
