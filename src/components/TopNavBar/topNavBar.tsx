@@ -130,8 +130,10 @@ const TopNavBar = () => {
   }, [refetchProjects]);
 
   useEffect(() => {
-    refetchClient();
-  }, [refetchClient]);
+    if (!globalLoadings && projectId && orgId) {
+      refetchClient();
+    }
+  }, [refetchClient, globalLoadings]);
 
   return (
     <>
