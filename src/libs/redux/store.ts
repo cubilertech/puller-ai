@@ -6,6 +6,7 @@ import searchbarReducer from "./features/searchbar";
 import LoadingRequestReducer from "./features/isLoadingRequest";
 import globalLoadingReducer from "./features/globalLoadings";
 import variableReducer from "./features/variables";
+import ClientDataReducer from "./features/clientdata";
 
 export const store = configureStore({
   reducer: {
@@ -15,7 +16,8 @@ export const store = configureStore({
     searchbar: searchbarReducer,
     LoadingRequest: LoadingRequestReducer,
     globalLoading: globalLoadingReducer,
-    variableUpdate: variableReducer, // Correct position and comma
+    variableUpdate: variableReducer,
+    ClientData: ClientDataReducer, // Correct position and comma
   },
 });
 

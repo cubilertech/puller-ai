@@ -44,7 +44,8 @@ import { getVariables, setVariables } from "@/libs/redux/features/variables";
 import { OptionsBar } from "@/components/optionsBar";
 import SelectionTextEditor from "@/components/SelectionTextEditor";
 import { isDemoMode, isPilotMode } from "@/utils/constants";
-import { useGetClientInfo } from "@/hooks/useMeta";
+import { useSelector } from "react-redux";
+import { getClientData } from "@/libs/redux/features/clientdata";
 
 const SkeletonLoader = () => {
   return (
@@ -138,7 +139,7 @@ const RequestPage: FC = () => {
     isLoading: allPromptLoading,
     isSuccess: isSuccessAllPrompt,
   } = useGetAllPrompt();
-  const { data: clientInfo, refetch: refetchClientInfo } = useGetClientInfo();
+  const clientInfo = useSelector(getClientData);
 
   const handleSubmitPrompt = async () => {
     await submitPrompt({ message: query });
@@ -263,7 +264,7 @@ const RequestPage: FC = () => {
     }
     if (projectId && orgId && isPilotMode) {
       refetchAllPrompt();
-      refetchClientInfo();
+      // refetchClientInfo();
     } else if (isDemoMode) {
       refetchAllPrompt();
     }
@@ -451,7 +452,7 @@ const RequestPage: FC = () => {
         >
           <Box sx={{ px: 2, pt: 1, m: "auto", overflow: "hidden" }}>
             <PageHeader
-              models={CurrentType === "graph" ? metaModels: undefined}
+              models={CurrentType === "graph" ? metaModels : undefined}
               handleChangeModal={handleChangeModal}
               selectedModel={selectedModel}
               title="Validate Request"

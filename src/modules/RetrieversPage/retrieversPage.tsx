@@ -1,17 +1,16 @@
 "use client";
 import { Loader } from "@/components/Loader";
 import { PageHeader } from "@/components/PageHeader";
-import { RetriverCard } from "@/components/RetriverCard";
 import RetriverNewCard from "@/components/RetriverCard/retrieverNewCard";
-import { useGetClientInfo } from "@/hooks/useMeta";
 import { useGetAllRetriever } from "@/hooks/useRetriever";
+import { getClientData } from "@/libs/redux/features/clientdata";
 import { AlertModal } from "@/modals/AlertModal";
 import { isDemoMode, isPilotMode } from "@/utils/constants";
 import { RetrieverIconsTypes, StatusTypes } from "@/utils/types";
 import { Box } from "@mui/material";
-import { useField } from "formik";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 const RetrieversPage = () => {
   const [isOpenAlert, setIsOpenAlert] = useState(false);
@@ -29,28 +28,24 @@ const RetrieversPage = () => {
     isFetched: isFetchedRetrivers,
     refetch: retchRetrievers,
   } = useGetAllRetriever();
-  const {
-    data: MetaData,
-    refetch: refetchClient,
-    isFetched: isFetchedClients,
-  } = useGetClientInfo();
+  const MetaData = useSelector(getClientData);
   useEffect(() => {
     if (projectId && orgId && isPilotMode) {
-      refetchClient();
+      // refetchClient();
     } else if (isDemoMode) {
       retchRetrievers();
     }
   }, [projectId, orgId, retchRetrievers]);
 
   useEffect(() => {
-    if (isFetchedRetrivers || isFetchedClients) {
+    if (isFetchedRetrivers || MetaData?.connection) {
       setIsLoading(false);
     }
-  }, [isFetchedRetrivers, isFetchedClients]);
+  }, [isFetchedRetrivers, MetaData]);
 
   // Sort the array based on the timestamp in descending order
-  const sortedItems = Retrievers?.sort((a, b) => b.timestamp - a.timestamp);
-  console.log(MetaData, "MetaData");
+  // const sortedItems = Retrievers?.sort((a, b) => b.timestamp - a.timestamp);
+  // console.log(MetaData, "MetaData");
   return (
     <Box
       sx={{

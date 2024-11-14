@@ -7,8 +7,9 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coy } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { format } from "sql-formatter";
 import { replaceBrandName } from "@/utils/common";
-import { useGetClientInfo } from "@/hooks/useMeta";
 import { Loader } from "../Loader";
+import { useSelector } from "react-redux";
+import { getClientData } from "@/libs/redux/features/clientdata";
 
 interface SQL_EditorProps {
   handleClose?: () => void | undefined;
@@ -39,7 +40,7 @@ type type_lang =
 const SQL_Editor: FC<SQL_EditorProps> = ({ handleClose, code }) => {
   const [formattedCode, setFormattedCode] = useState<string>("");
   const companyName = localStorage.getItem("companyName");
-  const { data, refetch, isLoading, isFetching } = useGetClientInfo();
+  const data = useSelector(getClientData)
   useEffect(() => {
     if (code && data?.connection) {
       setFormattedCode(
@@ -83,13 +84,6 @@ const SQL_Editor: FC<SQL_EditorProps> = ({ handleClose, code }) => {
     },
   };
   const ref = useRef<boolean>(false);
-
-  useEffect(() => {
-    if (ref.current === false) {
-      refetch();
-    }
-    ref.current = true; // Update the ref to true
-  }, [refetch]);
   return (
     <Paper
       variant="dark-border"
@@ -114,7 +108,7 @@ const SQL_Editor: FC<SQL_EditorProps> = ({ handleClose, code }) => {
        
       </Box>
       <Divider variant="fullWidth" type="light" /> */}
-      {isLoading || isFetching ? (
+      {/* {isLoading || isFetching ? (
         <Box
           sx={{
             width: "100%",
@@ -127,7 +121,7 @@ const SQL_Editor: FC<SQL_EditorProps> = ({ handleClose, code }) => {
         >
           <Loader type="Loading" variant="simple" />
         </Box>
-      ) : (
+      ) : ( */}
         <Box
           sx={{
             width: "100%",
@@ -144,7 +138,7 @@ const SQL_Editor: FC<SQL_EditorProps> = ({ handleClose, code }) => {
             {formattedCode}
           </SyntaxHighlighter>
         </Box>
-      )}
+      {/* )} */}
     </Paper>
   );
 };

@@ -28,13 +28,17 @@ import { useGetProjectsData } from "@/hooks/useLogin";
 import { useGetClientInfo } from "@/hooks/useMeta";
 import Image from "next/image";
 import { Menu } from "../Menu";
+import { useDispatch, useSelector } from "react-redux";
+import { getClientData, setClientData } from "@/libs/redux/features/clientdata";
 
 const TopNavBar = () => {
   const searchParams = useSearchParams();
   const { id } = useParams();
+  const clientDataRedux = useSelector(getClientData);
   const projectId = searchParams.get("projectId");
   const orgId = searchParams.get("orgId");
   const route = usePathname();
+  const dispatch = useDispatch();
   const currentPath = isClient ? window.location.pathname : "";
   const router = useRouter();
 
@@ -130,8 +134,14 @@ const TopNavBar = () => {
   }, [refetchProjects]);
 
   useEffect(() => {
-    refetchClient();
-  }, [refetchClient]);
+    if (!clientDataRedux?.connection) {
+      console.log("called");
+      refetchClient();
+    }
+    if (!clientDataRedux) {
+      dispatch(setClientData(clientData));
+    }
+  }, [refetchClient, clientData, clientDataRedux]);
 
   return (
     <>
@@ -299,7 +309,7 @@ const TopNavBar = () => {
                     sx={{ textTransform: "uppercase", width: "fit-content" }}
                   >
                     {" "}
-                    {clientData?.name.charAt(0)}
+                    {clientDataRedux?.name.charAt(0)}
                   </Typography>
                 </Box>
               )}

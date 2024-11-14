@@ -19,7 +19,8 @@ import { useGetAllApps, useUpdateAppStatus } from "@/hooks/useRetriever";
 import { Loader } from "@/components/Loader";
 import { ConnectItem } from "@/utils/types";
 import { ChangeNameModal } from "@/modals/changeNameModal";
-import { useGetClientInfo } from "@/hooks/useMeta";
+import { useSelector } from "react-redux";
+import { getClientData } from "@/libs/redux/features/clientdata";
 
 const ConnectAppsPage = () => {
   const query = useAppSelector(getConnectQuery);
@@ -48,12 +49,7 @@ const ConnectAppsPage = () => {
     isSuccess: appStatusUpdated,
     isLoading: loadingAppUpdate,
   } = useUpdateAppStatus();
-  const {
-    data: MetaData,
-    refetch: refetchClient,
-    isFetching: isLoadingClient,
-  } = useGetClientInfo();
-
+  const MetaData = useSelector(getClientData);
   const handleCreateRetriever = () => {
     if (isPilotMode) {
       setIsOpenAlert(true);
@@ -106,11 +102,11 @@ const ConnectAppsPage = () => {
     }
   }, [isSuccessApps, connectApps, MetaData]);
 
-  useEffect(() => {
-    if (isPilotMode) {
-      refetchClient();
-    }
-  }, [refetchClient]);
+  // useEffect(() => {
+  //   if (isPilotMode) {
+  //     refetchClient();
+  //   }
+  // }, [refetchClient]);
   useEffect(() => {
     if (projectId && orgId && isPilotMode) {
       connectAppRefetch();
@@ -118,7 +114,7 @@ const ConnectAppsPage = () => {
       connectAppRefetch();
     }
   }, [projectId, orgId, connectAppRefetch]);
-  console.log(isLoading, loadingApps, isLoadingClient, "filteredData");
+  // console.log(isLoading, loadingApps, isLoadingClient, "filteredData");
   return (
     <Box
       sx={{
@@ -176,7 +172,7 @@ const ConnectAppsPage = () => {
             scrollbarWidth: "none",
           }}
         >
-          {isLoading || loadingApps || isLoadingClient ? (
+          {isLoading || loadingApps  ? (
             <Box
               sx={{
                 width: "100%",
@@ -189,7 +185,7 @@ const ConnectAppsPage = () => {
               <Loader
                 type="Loading"
                 variant="simple"
-                isLoading={loadingApps || isLoadingClient || isLoading}
+                isLoading={loadingApps || isLoading}
               />
             </Box>
           ) : filteredData && filteredData.length <= 0 ? (
