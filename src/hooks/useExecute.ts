@@ -39,7 +39,7 @@ export const useSubmitExecute = () => {
       }
     } catch (error) {
       console.error("Network error:", error);
-      return null;
+      throw error;
     }
   }
   return useMutation({
