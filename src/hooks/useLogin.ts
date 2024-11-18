@@ -111,7 +111,7 @@ export const useGetProjectsData = () => {
   const router = useRouter();
 
   const decodedData =
-    token !== "" || token ? jwtDecode<CustomJwtPayload>(token as string) : null;
+  token && token !== "" ? jwtDecode<CustomJwtPayload>(token as string) : null;
   const org = decodedData !== null && decodedData["custom:org"];
   async function submit() {
     try {
