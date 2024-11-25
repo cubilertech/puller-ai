@@ -97,7 +97,7 @@ const YourResultsPage: FC<Props> = ({ id }) => {
             />
           </Box>
         </Box>
-      ) : !isError ? (
+      ) : isError ? (
         <Box
           sx={{
             width: "100%",
