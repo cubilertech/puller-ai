@@ -51,10 +51,11 @@ const YourResultsPage: FC<Props> = ({ id }) => {
       setIsError(true);
       setFadeIn(true);
     } else {
-      refetchSingleExecute();
+      setTimeout(() => {
+        refetchSingleExecute();
+      }, 3000);
     }
   }, [data?.status, isFetchingExicute == false, refetchSingleExecute]);
-  console.log(data?.status, "data?.status");
 
   const imageUrl =
     data?.results && data.results[data.results.length - 1]?.url
@@ -96,7 +97,7 @@ const YourResultsPage: FC<Props> = ({ id }) => {
             />
           </Box>
         </Box>
-      ) : !isError ? (
+      ) : isError ? (
         <Box
           sx={{
             width: "100%",
