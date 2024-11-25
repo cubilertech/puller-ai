@@ -46,6 +46,12 @@ const TemplateCardPulls: FC<TemplateCardPullsProps> = ({ card, index }) => {
     ? formatDate(card.timestamp as number)
     : id;
   const tableName = card.results[card.results.length - 1]?.table;
+  const status =
+    card.status === "complete"
+      ? "completed"
+      : card.status === "pending"
+        ? "pending"
+        : "info";
   return (
     <Box
       key={index}
@@ -95,9 +101,9 @@ const TemplateCardPulls: FC<TemplateCardPullsProps> = ({ card, index }) => {
           </Box>
         </Box>
         <Box>
-          {/* <Box sx={{ display: "flex", alignItems: "center", height: "96%" }}>
+          <Box sx={{ display: "flex", alignItems: "center", height: "96%" }}>
             <Chip
-              label={card.status}
+              label={status}
               sx={{
                 textTransform: "capitalize",
                 borderRadius: "4px",
@@ -113,7 +119,7 @@ const TemplateCardPulls: FC<TemplateCardPullsProps> = ({ card, index }) => {
                     : "default"
               }
             />
-          </Box> */}
+          </Box>
         </Box>
       </Paper>
     </Box>

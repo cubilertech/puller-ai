@@ -98,7 +98,11 @@ export type ButtonTextTransforms =
 
 export type CustomLinkVariants = "border" | "simple";
 
-export type LoaderVariants = "simple" | "paper" | "pageLoader";
+export type LoaderVariants =
+  | "simple"
+  | "paper"
+  | "pageLoader"
+  | "pageLoader-results";
 
 export type LogoVariants = "login" | "default";
 

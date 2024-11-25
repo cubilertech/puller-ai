@@ -376,7 +376,7 @@ const ResponseArea: FC<ResponseAreaProps> = ({
                 <DataTableDemo data={TableData as Prompt} isFilter />
               </Box>
             ) : (
-              <DataTable data={TableData} />
+            <DataTable data={TableData} />
             )}
           </Box>
         </Paper>
