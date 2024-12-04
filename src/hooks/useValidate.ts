@@ -5,7 +5,7 @@ import { isClient } from "@/utils/constants";
 import { Prompt, submitValidatePayload } from "@/utils/types";
 import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 
 export const useSubmitValidate = () => {
@@ -14,6 +14,7 @@ export const useSubmitValidate = () => {
   const searchParams = useSearchParams();
   const projectId = searchParams.get("projectId");
   const orgId = searchParams.get("orgId");
+  const router = useRouter();
 
   async function submit(data: submitValidatePayload): Promise<Prompt | null> {
     try {
@@ -52,9 +53,11 @@ export const useSubmitValidate = () => {
   return useMutation({
     mutationFn: submit,
     onSuccess: (data) => {
-      // if (data?.id) {
-      //   router.replace(`/request?id=${data?.id}`);
-      // }
+      if (data?.id) {
+        router.replace(
+          `/request?id=${data?.id}&projectId=${projectId}&orgId=${orgId}`
+        );
+      }
     },
     onError: (error: any) => {
       toast.error(error?.response?.data?.message ?? (error.message as string));

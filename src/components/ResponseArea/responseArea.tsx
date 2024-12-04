@@ -167,7 +167,7 @@ const ResponseArea: FC<ResponseAreaProps> = ({
           variant="dark-border"
           sx={{
             border: `1px solid ${palette.color.gray[700]}`,
-            height: "50%",
+            height: !isPreviewLoading && TableData ? "50%" : "70%",
             padding: 1.2,
             gap: 1,
             m: 0,
@@ -175,6 +175,10 @@ const ResponseArea: FC<ResponseAreaProps> = ({
             minHeight: "200px",
             position: "relative",
             overflow: "hidden",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+            transition: "all 0.5s ease-in-out",
           }}
         >
           <Box
@@ -333,10 +337,11 @@ const ResponseArea: FC<ResponseAreaProps> = ({
           variant="dark-border"
           sx={{
             border: `1px solid ${palette.color.gray[700]}`,
-            height: "50%",
+            height: !isPreviewLoading && TableData ? "50%" : "30%",
             padding: 1.2,
             gap: 1,
             m: 0,
+            transition: "all 0.5s ease-in-out",
           }}
         >
           {" "}
@@ -346,7 +351,7 @@ const ResponseArea: FC<ResponseAreaProps> = ({
             {isPreviewLoading ? (
               <Box
                 sx={{
-                  minHeight: "240px",
+                  minHeight: "200px",
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
@@ -367,7 +372,7 @@ const ResponseArea: FC<ResponseAreaProps> = ({
                   <Typography
                     sx={{ color: palette.color.gray[250], textAlign: "center" }}
                   >
-                    Fetching Data...
+                    Generating Preview of Your Query...
                   </Typography>
                 </Box>
               </Box>
@@ -376,7 +381,7 @@ const ResponseArea: FC<ResponseAreaProps> = ({
                 <DataTableDemo data={TableData as Prompt} isFilter />
               </Box>
             ) : (
-            <DataTable data={TableData} />
+              <DataTable data={TableData} />
             )}
           </Box>
         </Paper>
