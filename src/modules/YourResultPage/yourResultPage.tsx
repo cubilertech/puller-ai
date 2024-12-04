@@ -135,7 +135,8 @@ const YourResultsPage: FC<Props> = ({ id }) => {
                 variant="text-sm-regular"
                 sx={{ color: palette.color.gray[300] }}
               >
-                We couldn’t complete your request
+                We couldn’t complete your request. Please contact support if the
+                issue persists
               </Typography>
             </Box>
           </Paper>
