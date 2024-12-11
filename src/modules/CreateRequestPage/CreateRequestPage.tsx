@@ -228,7 +228,7 @@ const CreateRequestPage: FC<Props> = ({
                 }}
               >
                 <Typography variant="text-sm-regular">
-                  Sample Prompts{" "}
+                  Recent Prompts
                 </Typography>
                 <KeyboardArrowDown
                   className={ShowPrompts ? "arrow-up" : "arrow-down"}
